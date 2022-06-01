@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{73AB2552-C7DB-493E-A5C6-9C16C931C85A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>KTA_Visor_DSClient</RootNamespace>
+    <AssemblyName>KTA-Visor-DSClient</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Falcon">
+      <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Falcon.dll</HintPath>
+    </Reference>
+    <Reference Include="Sdk.Core">
+      <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Sdk.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="components\basic\table\Table.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\basic\table\Table.Designer.cs">
+      <DependentUpon>Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="kernel\FalconBridge\AbstractResource.cs" />
+    <Compile Include="kernel\FalconBridge\FalconBridge.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\CameraService.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\dto\CameraUSBDeviceTObject.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\events\CameraConnectedEvt.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\DeviceIsNotFalconCameraException.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\CameraUSBDeviceFileNotFoundException.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\helpers\CameraHelper.cs" />
+    <Compile Include="kernel\Hardware\DeviceWatcher\DeviceWatcher.cs" />
+    <Compile Include="kernel\Hardware\Hardware.cs" />
+    <Compile Include="kernel\helper\FileSizeHelper.cs" />
+    <Compile Include="module\camera\views\CamerasView\CamerasView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\camera\views\CamerasView\CamerasView.Designer.cs">
+      <DependentUpon>CamerasView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="components\basic\table\Table.resx">
+      <DependentUpon>Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\camera\views\CamerasView\CamerasView.resx">
+      <DependentUpon>CamerasView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="module\auth\" />
+    <Folder Include="module\camera\dto\" />
+    <Folder Include="module\camera\entity\" />
+    <Folder Include="module\camera\exception\" />
+    <Folder Include="module\camera\helper\" />
+    <Folder Include="module\camera\repository\" />
+    <Folder Include="module\camera\service\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
