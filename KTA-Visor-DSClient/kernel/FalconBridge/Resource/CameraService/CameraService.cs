@@ -1,8 +1,11 @@
 ﻿using Falcon;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.helpers;
-using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device.dto;
+using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.repository;
+using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.USBCameraDevice;
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
+using KTA_Visor_DSClient.kernel.helper;
+using Sdk.Core.DevicesDetection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using USBKitcs;
+using USBKitcs.Main;
 
 namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
 {
@@ -25,7 +30,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
         /// <summary>
         /// 
         /// </summary>
-        private readonly FalconSdk sdk;
+        private FalconSdk sdk;
 
         /// <summary>
         /// 
@@ -36,92 +41,90 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
         /// <summary>
         /// 
         /// </summary>
-        private readonly List<CameraUSBDeviceTObject> cameras;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private bool allowListeningForConnection;
-
-        public CameraService(FalconSdk sdk)
-        {
-            this.sdk = sdk;
-            this.deviceWatcher = new Hardware.Hardware().deviceWatcher();
-            this.cameras = new List<CameraUSBDeviceTObject>();
-            this.allowListeningForConnection = true;
-
-            this.hookUsbPorts();
-        }
-
-
-        private void hookUsbPorts()
-        {
-            this.deviceWatcher.startWatching();
-        }
-
-
-
-        public bool isActive(string deviceId)
-        {
-            foreach (CameraUSBDeviceTObject camera in this.getAllCameras())
-            {
-                if (!camera.getDriveInfo().Name.Equals(deviceId)) continue;
-                return true;
-            }
-            return false;
-        }
+        private readonly USBCameraDeviceList<USBCameraDevice> camerasList;
 
         
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public List<CameraUSBDeviceTObject> getAllCameras()
-        {   
-            return this.cameras;
+        private readonly CameraServiceRepository repository;
+
+        public CameraService(FalconSdk sdk)
+        {
+            this.sdk = sdk;
+            this.repository = new CameraServiceRepository();
+            this.deviceWatcher = new Hardware.Hardware().deviceWatcher();
+            this.camerasList = new USBCameraDeviceList<USBCameraDevice>();
         }
 
+         
 
         public void listenForConnection()
         {
-            this.deviceWatcher.OnDeviceInsert += DeviceWatcher_OnDeviceInsert;
+            this.sdk.Mount();
+            this.camerasList.loadCameras();
+           
+            this.deviceWatcher.startWatching();
+            this.deviceWatcher.OnDeviceDetected += DeviceWatcher_OnDeviceDetected; 
             this.deviceWatcher.OnDeviceRemoved += DeviceWatcher_OnDeviceRemoved;
+            this.deviceWatcher.OnDeviceMounted += DeviceWatcher_OnDeviceMounted;
             
-            
-            while (this.allowListeningForConnection)
+            while(true)
             {
-                if (!this.allowListeningForConnection) break;
-
-                IEnumerable<DriveInfo> allDevices = ((IEnumerable<DriveInfo>)DriveInfo.GetDrives())
-                    .Where<DriveInfo>((Func<DriveInfo, bool>)
-                    (d => d.DriveType == DriveType.Removable && d.IsReady));
-
-                foreach (DriveInfo device in allDevices)
-                {
-                    CameraUSBDeviceTObject camera = CameraHelper.convertDeviceToFalconCamera(device);
-                    if (camera == null) continue;
-
-                    this.onCameraConnected(camera);
-                }
+                List<UsbRegistry> all = this.repository.allVisionDevices();
             }
         }
 
-        private void DeviceWatcher_OnDeviceRemoved(object sender, EventArgs e)
+        
+        private void DeviceWatcher_OnDeviceDetected(DeviceDetectedInformation detectedInformation, Sdk.Core.Enums.VolumeChangeEventType changeEventType)
         {
-            this.cameras.Clear();
+            Console.WriteLine("detected: " + detectedInformation.DriveLetter);
         }
 
-        private void DeviceWatcher_OnDeviceInsert(object sender, EventArgs e)
+        private void DeviceWatcher_OnDeviceRemoved(DeviceDetectedInformation detectedInformation, Sdk.Core.Enums.VolumeChangeEventType changeEventType)
         {
-            this.sdk.Mount();
+            Console.WriteLine("removed: " + detectedInformation.DriveLetter);
         }
 
-        private void onCameraConnected(CameraUSBDeviceTObject camera)
+        private void DeviceWatcher_OnDeviceMounted(DeviceDetectedInformation detectedInformation, Sdk.Core.Enums.VolumeChangeEventType changeEventType)
         {
-            if (this.cameras.Any(existedCamera => existedCamera.getDriveInfo().VolumeLabel == camera.getDriveInfo().VolumeLabel)) return;
+            Console.WriteLine("mounted: " + detectedInformation.DriveLetter);
+            this.loadCameras();
+        }   
+
+        private void loadCameras()
+        { 
+            IEnumerable<DriveInfo> allDevices = ((IEnumerable<DriveInfo>)DriveInfo.GetDrives()).Where<DriveInfo>((Func<DriveInfo, bool>)(d => d.DriveType == DriveType.Removable && d.IsReady));
+
+            foreach (DriveInfo device in allDevices)
+            {
+                USBCameraDevice camera = CameraHelper.convertDeviceToFalconCamera(device);
+                if (camera == null) continue;
+
+                this.onCameraConnected(camera);
+            }
+        }
+
+       
+
+        private void onCameraConnected(USBCameraDevice camera)
+        {
+            if (this.camerasList.Any(existedCamera => existedCamera.getDriveInfo().VolumeLabel == camera.getDriveInfo().VolumeLabel))
+                return;
             
-            this.cameras.Add(camera);
+            this.camerasList.Add(camera);
             this.OnCameraConnectedEvt?.Invoke(this, new CameraConnectedEvt(camera));
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<USBCameraDevice> getAllCameras()
+        {
+            return this.camerasList;
+        }
+
     }
 }

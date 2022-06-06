@@ -1,4 +1,4 @@
-﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device.dto;
+﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.USBCameraDevice;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +9,14 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events
 {
     public class CameraConnectedEvt : EventArgs
     {
-        private readonly CameraUSBDeviceTObject camera;
+        private readonly USBCameraDevice camera;
 
-        public CameraConnectedEvt(CameraUSBDeviceTObject camera)
+        public CameraConnectedEvt(USBCameraDevice camera)
         {
             this.camera = camera;
         }
 
-        public CameraUSBDeviceTObject getCamera()
+        public USBCameraDevice getCamera()
         {
             return camera;
         }

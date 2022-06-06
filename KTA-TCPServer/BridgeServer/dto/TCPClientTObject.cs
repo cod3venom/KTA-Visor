@@ -5,16 +5,16 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KTA_TCPBridge.BridgeServer.resource.Client
+namespace KTA_TCPBridge.BridgeServer.dto
 {
-    public class TCPClient
+    public class TCPClientTObject
     {
         private string ipAddress;
         private Socket socket;
         private Thread thread;
         private bool isBlocked;
 
-        public TCPClient(string ipAddress, Socket socket, Thread thread, bool isBlocked = false)
+        public TCPClientTObject(string ipAddress, Socket socket, Thread thread, bool isBlocked = false)
         {
             this.ipAddress = ipAddress;
             this.socket = socket;
@@ -22,7 +22,7 @@ namespace KTA_TCPBridge.BridgeServer.resource.Client
             this.isBlocked = isBlocked;
         }
 
-        public TCPClient setIpAddress(string ipAddress)
+        public TCPClientTObject setIpAddress(string ipAddress)
         {
             this.ipAddress = ipAddress;
             return this;
@@ -33,7 +33,7 @@ namespace KTA_TCPBridge.BridgeServer.resource.Client
             return this.ipAddress;
         }
 
-        public TCPClient setSocket(Socket socket)
+        public TCPClientTObject setSocket(Socket socket)
         {
             this.socket = socket;
             return this;
@@ -44,7 +44,7 @@ namespace KTA_TCPBridge.BridgeServer.resource.Client
             return this.socket;
         }
 
-        public TCPClient setThread(Thread thread)
+        public TCPClientTObject setThread(Thread thread)
         {
             this.thread = thread;
 
@@ -56,14 +56,14 @@ namespace KTA_TCPBridge.BridgeServer.resource.Client
             return this.thread;
         }
 
-        public TCPClient block()
+        public TCPClientTObject block()
         {
             this.isBlocked = true;
 
             return this;
         }
 
-        public TCPClient unblock()
+        public TCPClientTObject unblock()
         {
             this.isBlocked = false;
 

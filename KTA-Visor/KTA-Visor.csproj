@@ -46,14 +46,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="component\basic\topbar\TopBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\topbar\TopBar.Designer.cs">
+      <DependentUpon>TopBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Authentication\view\RFIDAuthenticationView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="module\Authentication\view\RFIDAuthenticationView.Designer.cs">
+      <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Station\view\StationsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Station\view\StationsView.Designer.cs">
+      <DependentUpon>StationsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="component\basic\topbar\TopBar.resx">
+      <DependentUpon>TopBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Authentication\view\RFIDAuthenticationView.resx">
+      <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Station\view\StationsView.resx">
+      <DependentUpon>StationsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -75,6 +97,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="kernel\helper\" />
+    <Folder Include="kernel\module\" />
+    <Folder Include="kernel\sharedKernel\" />
+    <Folder Include="module\Authentication\command\" />
+    <Folder Include="module\Authentication\entity\" />
+    <Folder Include="module\Authentication\exception\" />
+    <Folder Include="module\Authentication\repository\" />
+    <Folder Include="module\Station\entity\" />
+    <Folder Include="module\Station\repository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fullScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\station.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

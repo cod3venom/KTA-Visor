@@ -39,6 +39,9 @@
     <Reference Include="Falcon">
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Falcon.dll</HintPath>
     </Reference>
+    <Reference Include="Falcon_USB">
+      <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon_USB\Falcon_USB\bin\Debug\Falcon_USB.dll</HintPath>
+    </Reference>
     <Reference Include="Sdk.Core">
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Sdk.Core.dll</HintPath>
     </Reference>
@@ -54,6 +57,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="USBKitcs, Version=2.2.8.104, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\USBKitcs\USBKitcs\bin\Debug\USBKitcs.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="components\basic\table\Table.cs">
@@ -71,14 +78,19 @@
     <Compile Include="kernel\FalconBridge\AbstractResource.cs" />
     <Compile Include="kernel\FalconBridge\FalconBridge.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\CameraService.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\dto\CameraUSBDeviceTObject.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDevice.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\events\CameraConnectedEvt.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\DeviceIsNotFalconCameraException.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\CameraUSBDeviceFileNotFoundException.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\helpers\CameraHelper.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\repository\CameraServiceRepository.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDeviceList.cs" />
     <Compile Include="kernel\Hardware\DeviceWatcher\DeviceWatcher.cs" />
     <Compile Include="kernel\Hardware\Hardware.cs" />
+    <Compile Include="kernel\helper\ExecutionWaiter.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="kernel\helper\FileSizeHelper.cs" />
     <Compile Include="module\camera\views\CamerasView\CamerasView.cs">
       <SubType>Form</SubType>
@@ -117,6 +129,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="kernel\FalconBridge\Resource\CameraService\dto\" />
     <Folder Include="module\auth\" />
     <Folder Include="module\camera\dto\" />
     <Folder Include="module\camera\entity\" />
@@ -124,6 +137,9 @@
     <Folder Include="module\camera\helper\" />
     <Folder Include="module\camera\repository\" />
     <Folder Include="module\camera\service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

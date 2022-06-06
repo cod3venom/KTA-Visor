@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using KTA_TCPBridge.BridgeServer.dto;
-using KTA_TCPBridge.BridgeServer.resource.Client;
+using KTA_TCPBridge.BridgeServer.Resource.Server.Events;
 
 namespace KTA_TCPBridge.BridgeServer.Resource.Server
 {
-    public delegate void ServerStartedEventHandler(object sender, EventArgs e);
      
     public class TCPServer
     {
+        public event EventHandler<EventArgs> onServerStarted;
+        public event EventHandler<TCPServerClientConnectedEvent> onClientConnected;
+        public event EventHandler<TCPServerClientDisonnectedEvent> onClientDisconnected;
+
+
         private ServerConfigTObject serverConfig;
         private Socket serverSocket;
         private Thread serverSocketThread;
         private IPEndPoint ipEndpoint;
-        private TCPClientList<string, TCPClient> clientsList;
+        private TCPClientList<string, TCPClientTObject> clientsList;
         private bool isServerEnabled;
-
-        public event ServerStartedEventHandler onServerStarted;
 
         public TCPServer(ServerConfigTObject serverConfig)
         {
@@ -32,7 +34,7 @@ namespace KTA_TCPBridge.BridgeServer.Resource.Server
 
         private void initialize()
         {
-            this.clientsList = new TCPClientList<string, TCPClient>();
+            this.clientsList = new TCPClientList<string, TCPClientTObject>();
             this.ipEndpoint = new IPEndPoint(IPAddress.Parse(this.serverConfig.ipAddress), serverConfig.port);
             this.serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
@@ -70,10 +72,10 @@ namespace KTA_TCPBridge.BridgeServer.Resource.Server
                 this.serverSocketThread = new Thread(this.waitForClient);
                 this.serverSocketThread.IsBackground = true;
                 this.serverSocketThread.Start();
+                this.onServerStarted?.Invoke(this, new EventArgs());
 
-                this.onServerStarted += new EventHandler(onServerStartedHandler);
             }
-            catch(SocketException ex)
+            catch (SocketException ex)
             {
                 //on socketError
             }
@@ -81,11 +83,6 @@ namespace KTA_TCPBridge.BridgeServer.Resource.Server
             {
                 // onError
             }
-        }
-
-        private void onServerStartedHandler(object? sender, EventArgs e)
-        {
-            this.onServerStarted?.Invoke(sender, e);
         }
 
         private void waitForClient()
@@ -104,15 +101,15 @@ namespace KTA_TCPBridge.BridgeServer.Resource.Server
             clientThread.IsBackground = true;
             clientThread.Start(newConnection);
             string ipAddress = newConnection.RemoteEndPoint.ToString();
-            TCPClient client = new TCPClient(
+            TCPClientTObject client = new TCPClientTObject(
                 ipAddress,
                 newConnection,
                 clientThread
             );
 
             this.clientsList.addClient(ipAddress, client);
+            this.onClientConnected?.Invoke(this, (new TCPServerClientConnectedEvent(client)));
 
-            //on client added
         }
 
         private void handleMessages(Object client)

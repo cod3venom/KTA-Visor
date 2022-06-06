@@ -14,7 +14,6 @@
     <Folder Include="BridgeServer\command\" />
     <Folder Include="BridgeServer\helper\" />
     <Folder Include="BridgeServer\Resource\Client\Event\" />
-    <Folder Include="BridgeServer\Resource\Server\Event\" />
   </ItemGroup>
 
 </Project>

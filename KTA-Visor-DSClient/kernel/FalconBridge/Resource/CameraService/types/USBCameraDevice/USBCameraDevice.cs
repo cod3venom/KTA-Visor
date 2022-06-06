@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device.dto
+namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.USBCameraDevice
 {
-    public class CameraUSBDeviceTObject
+    public class USBCameraDevice
     {
         private DriveInfo device;
 
@@ -18,7 +18,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device.dto
         /// 
         /// </summary>
         /// <param name="device"></param>
-        public CameraUSBDeviceTObject(DriveInfo device)
+        public USBCameraDevice(DriveInfo device)
         {
             this.device = device;
         }
@@ -64,7 +64,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device.dto
         /// <param name="destination"></param>
         /// <returns></returns>
         /// <exception cref="CameraUSBDeviceDirectoryNotFoundException"></exception>
-        public CameraUSBDeviceTObject copyFilesTo(string destination)
+        public USBCameraDevice copyFilesTo(string destination)
         {
             if (!Directory.Exists(destination)) 
                 throw new CameraUSBDeviceDirectoryNotFoundException("Destination folder not found");

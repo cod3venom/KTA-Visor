@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KTA_Visor
+namespace KTA_Visor.module.Station.view
 {
-    public partial class Form1 : Form
+    public partial class StationsView : Form
     {
-        public Form1()
+        public StationsView()
         {
             InitializeComponent();
+        }
+
+        private void StationsView_Load(object sender, EventArgs e)
+        {
+            this.topBar1.Parent = this;
         }
     }
 }

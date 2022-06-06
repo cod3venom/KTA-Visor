@@ -1,7 +1,6 @@
 ﻿using KTA_Visor_DSClient.kernel.FalconBridge;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device;
-using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device.dto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
