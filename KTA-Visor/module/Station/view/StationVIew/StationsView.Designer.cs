@@ -32,10 +32,12 @@
             this.topBar1 = new KTA_Visor.component.basic.topbar.TopBar();
             this.versionTopBarContainer = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.horizontalSeparator1 = new KTA_Visor.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
             this.footer1 = new KTA_Visor.component.custom.Footer.Footer();
+            this.horizontalSeparator1 = new KTA_Visor.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
             this.table1 = new KTA_Visor.component.basic.table.Table();
+            this.navigationBar1 = new KTA_Visor.component.custom.NavigationBar.NavigationBar();
             this.topBarPanel.SuspendLayout();
+            this.versionTopBarContainer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +63,7 @@
             // 
             // versionTopBarContainer
             // 
+            this.versionTopBarContainer.Controls.Add(this.navigationBar1);
             this.versionTopBarContainer.Dock = System.Windows.Forms.DockStyle.Top;
             this.versionTopBarContainer.Location = new System.Drawing.Point(0, 35);
             this.versionTopBarContainer.Name = "versionTopBarContainer";
@@ -78,6 +81,16 @@
             this.panel1.Size = new System.Drawing.Size(1480, 82);
             this.panel1.TabIndex = 4;
             // 
+            // footer1
+            // 
+            this.footer1.AutoSize = true;
+            this.footer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(240)))), ((int)(((byte)(251)))));
+            this.footer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.footer1.Location = new System.Drawing.Point(0, 2);
+            this.footer1.Name = "footer1";
+            this.footer1.Size = new System.Drawing.Size(1480, 80);
+            this.footer1.TabIndex = 1;
+            // 
             // horizontalSeparator1
             // 
             this.horizontalSeparator1.BackColor = System.Drawing.Color.Silver;
@@ -86,15 +99,6 @@
             this.horizontalSeparator1.Name = "horizontalSeparator1";
             this.horizontalSeparator1.Size = new System.Drawing.Size(1480, 2);
             this.horizontalSeparator1.TabIndex = 0;
-            // 
-            // footer1
-            // 
-            this.footer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(240)))), ((int)(((byte)(251)))));
-            this.footer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.footer1.Location = new System.Drawing.Point(0, 2);
-            this.footer1.Name = "footer1";
-            this.footer1.Size = new System.Drawing.Size(1480, 80);
-            this.footer1.TabIndex = 1;
             // 
             // table1
             // 
@@ -112,6 +116,18 @@
             this.table1.Size = new System.Drawing.Size(1480, 786);
             this.table1.TabIndex = 5;
             // 
+            // navigationBar1
+            // 
+            this.navigationBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(240)))), ((int)(((byte)(251)))));
+            this.navigationBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navigationBar1.Links = new string[] {
+        "\"Stacje\", ",
+        "\"Ustawienia\""};
+            this.navigationBar1.Location = new System.Drawing.Point(0, 0);
+            this.navigationBar1.Name = "navigationBar1";
+            this.navigationBar1.Size = new System.Drawing.Size(1480, 121);
+            this.navigationBar1.TabIndex = 0;
+            // 
             // StationsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -127,7 +143,9 @@
             this.Text = "StationsView";
             this.Load += new System.EventHandler(this.StationsView_Load);
             this.topBarPanel.ResumeLayout(false);
+            this.versionTopBarContainer.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -141,5 +159,6 @@
         private component.basic.table.components.HorizontalSeparator.HorizontalSeparator horizontalSeparator1;
         private component.custom.Footer.Footer footer1;
         private component.basic.table.Table table1;
+        private component.custom.NavigationBar.NavigationBar navigationBar1;
     }
 }

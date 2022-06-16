@@ -14,8 +14,6 @@ namespace KTA_Visor.component.basic.button
     {
         private bool active = false;
 
-        private bool disabled = false;
-
 
         public PrimaryButton()
         {

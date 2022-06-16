@@ -24,52 +24,59 @@ namespace KTA_Visor.module.Station.view
 
         private readonly SettingsView settingsView;
 
-        private readonly TCPTunnel tunnel;
+        private readonly Tunnel.Tunnel tunnel;
 
         private readonly ColumnTObject[] Columns = new ColumnTObject[] { 
             new ColumnTObject(0, "ID"),
             new ColumnTObject(1, "IP Address"),
             new ColumnTObject(2, "Name"),
-            new ColumnTObject(3, "Serial Number"),
-            new ColumnTObject(4, "Total ports"),
-            new ColumnTObject(5, "Status"),
+            new ColumnTObject(3, "Total ports"),
+            new ColumnTObject(4, "Status"),
         };
+
         public StationsView()
         {
             InitializeComponent();
             this.authView = new RFIDAuthenticationView();
             this.settingsView = new SettingsView();
-            this.tunnel = new TCPTunnel();
+            this.tunnel = new Tunnel.Tunnel();
         }
 
         private void StationsView_Load(object sender, EventArgs e)
         {
             this.topBar1.Parent = this;
-            NavigationBar navBar = new NavigationBar();
-            navBar.Links = new string[] { "Stacje", "Ustawienia" };
-            navBar.Dock = DockStyle.Fill;
-            navBar.OnClick += NavBar_OnClick;
-            navBar.initialize();            
-            this.versionTopBarContainer.Controls.Add(navBar);
-
             this.table1.bundle.column.addMultiple(this.Columns);
 
+            this.hookTunnelPipe();
+        }
+
+        private void hookTunnelPipe()
+        {
             this.tunnel.start();
+            this.tunnel.onClientConnected += Tunnel_onClientConnected;
+            this.tunnel.onClientDisconnected += Tunnel_onClientDisconnected;
+            this.tunnel.onMessageReceived += Tunnel_onMessageReceived;
         }
 
-        private void NavBar_OnClick(object sender, component.custom.NavigationBar.events.NavigationBarLinkClickEvent e)
+        private void Tunnel_onClientConnected(object sender, TCPTunnel.module.server.events.TCPServerClientConnectedEvent e)
         {
-            switch(e.getLinkName())
-            {
-                case "Ustawienia":
-                    this.settingsView?.ShowDialog();
-                    break;
-            }
+            this.table1.bundle.row.add(
+                "1",
+                e.getClient().getIpAddress(),
+                "Docking station#" + e.getClient().getIpAddress(),
+                "8",
+                "Online"
+            );
         }
 
-        private void Item_OnLogin(object sender, components.events.StationItemActionEvent e)
+        private void Tunnel_onClientDisconnected(object sender, TCPTunnel.module.server.events.TCPServerClientDisonnectedEvent e)
         {
-            this.authView.ShowDialog();
+           this.table1.bundle.row.removeRow(e.getClient().getIpAddress());
+        }
+
+
+        private void Tunnel_onMessageReceived(object sender, TCPTunnel.module.server.events.TCPServerClientMessageReceivedEvent e)
+        {
         }
     }
 }

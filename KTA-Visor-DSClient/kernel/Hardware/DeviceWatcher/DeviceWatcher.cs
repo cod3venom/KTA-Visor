@@ -117,7 +117,7 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
                 this.usbInsertEventWatcher.EventArrived += UsbInsertEventWatcher_EventArrived;
                 this.usbInsertEventWatcher.Start();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 this.usbInsertEventWatcher?.Stop();
             }

@@ -326,13 +326,13 @@
     <Compile Include="module\Station\components\StationItem.Designer.cs">
       <DependentUpon>StationItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Station\view\StationsView.cs">
+    <Compile Include="module\Station\view\StationVIew\StationsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Station\view\StationsView.Designer.cs">
+    <Compile Include="module\Station\view\StationVIew\StationsView.Designer.cs">
       <DependentUpon>StationsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Tunnel\TCPTunnel.cs" />
+    <Compile Include="module\Tunnel\Tunnel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="component\basic\button\ImageButton.resx">
@@ -386,7 +386,7 @@
     <EmbeddedResource Include="module\Station\components\StationItem.resx">
       <DependentUpon>StationItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Station\view\StationsView.resx">
+    <EmbeddedResource Include="module\Station\view\StationVIew\StationsView.resx">
       <DependentUpon>StationsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -443,13 +443,9 @@
     <None Include="Resources\station.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KTA-Visor-DSClient\KTA-Visor-DSClient.csproj">
-      <Project>{73ab2552-c7db-493e-a5c6-9c16c931c85a}</Project>
-      <Name>KTA-Visor-DSClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tests\Tests.csproj">
-      <Project>{516a08b9-41d1-4c99-898e-43cf76b9747d}</Project>
-      <Name>Tests</Name>
+    <ProjectReference Include="..\TCPTunnel\TCPTunnel.csproj">
+      <Project>{FD182779-E8C1-4473-B561-D8C810A63D67}</Project>
+      <Name>TCPTunnel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

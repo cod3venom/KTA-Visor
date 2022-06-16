@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -76,8 +77,16 @@ namespace KTA_Visor_DSClient.module.camera.views.CamerasView
 
         private void CamerasView_Load(object sender, EventArgs e)
         {
+
+            TcpClient tcpclnt = new TcpClient();
+            Console.WriteLine("Connecting.....");
+
+            tcpclnt.Connect("127.0.0.1", 1337);
+
             this.table.addColumns(this.Columns);
             this.startListeningForDevices();
+
+
         }
 
         private void startListeningForDevices()
