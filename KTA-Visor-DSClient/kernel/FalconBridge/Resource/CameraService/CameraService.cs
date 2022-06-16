@@ -1,11 +1,13 @@
 ﻿using Falcon;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events;
-using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.helpers;
+using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.factory;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.repository;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.USBCameraDevice;
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
 using KTA_Visor_DSClient.kernel.helper;
+using KTA_Visor_DSClient.kernel.sharedKernel.logger;
 using Sdk.Core.DevicesDetection;
+using Sdk.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +22,9 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
 {
     public class CameraService
     {
+        public event EventHandler<CameraConnectedEvent> OnCameraConnectedEvent;
+
+        public event EventHandler<CameraDisconnectedEvent> OnCameraDisconnectedEvent;
 
         /// <summary>
         /// 
@@ -32,22 +37,23 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
         /// </summary>
         private FalconSdk sdk;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public event EventHandler<CameraConnectedEvt> OnCameraConnectedEvt;
 
-        
+
         /// <summary>
         /// 
         /// </summary>
         private readonly USBCameraDeviceList<USBCameraDevice> camerasList;
 
-        
+
         /// <summary>
         /// 
         /// </summary>
         private readonly CameraServiceRepository repository;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly Logger logger;
 
         public CameraService(FalconSdk sdk)
         {
@@ -55,76 +61,69 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
             this.repository = new CameraServiceRepository();
             this.deviceWatcher = new Hardware.Hardware().deviceWatcher();
             this.camerasList = new USBCameraDeviceList<USBCameraDevice>();
+            this.logger = new Logger();
         }
-
-         
-
-        public void listenForConnection()
-        {
-            this.sdk.Mount();
-            this.camerasList.loadCameras();
-           
-            this.deviceWatcher.startWatching();
-            this.deviceWatcher.OnDeviceDetected += DeviceWatcher_OnDeviceDetected; 
-            this.deviceWatcher.OnDeviceRemoved += DeviceWatcher_OnDeviceRemoved;
-            this.deviceWatcher.OnDeviceMounted += DeviceWatcher_OnDeviceMounted;
-            
-            while(true)
-            {
-                List<UsbRegistry> all = this.repository.allVisionDevices();
-            }
-        }
-
-        
-        private void DeviceWatcher_OnDeviceDetected(DeviceDetectedInformation detectedInformation, Sdk.Core.Enums.VolumeChangeEventType changeEventType)
-        {
-            Console.WriteLine("detected: " + detectedInformation.DriveLetter);
-        }
-
-        private void DeviceWatcher_OnDeviceRemoved(DeviceDetectedInformation detectedInformation, Sdk.Core.Enums.VolumeChangeEventType changeEventType)
-        {
-            Console.WriteLine("removed: " + detectedInformation.DriveLetter);
-        }
-
-        private void DeviceWatcher_OnDeviceMounted(DeviceDetectedInformation detectedInformation, Sdk.Core.Enums.VolumeChangeEventType changeEventType)
-        {
-            Console.WriteLine("mounted: " + detectedInformation.DriveLetter);
-            this.loadCameras();
-        }   
-
-        private void loadCameras()
-        { 
-            IEnumerable<DriveInfo> allDevices = ((IEnumerable<DriveInfo>)DriveInfo.GetDrives()).Where<DriveInfo>((Func<DriveInfo, bool>)(d => d.DriveType == DriveType.Removable && d.IsReady));
-
-            foreach (DriveInfo device in allDevices)
-            {
-                USBCameraDevice camera = CameraHelper.convertDeviceToFalconCamera(device);
-                if (camera == null) continue;
-
-                this.onCameraConnected(camera);
-            }
-        }
-
-       
-
-        private void onCameraConnected(USBCameraDevice camera)
-        {
-            if (this.camerasList.Any(existedCamera => existedCamera.getDriveInfo().VolumeLabel == camera.getDriveInfo().VolumeLabel))
-                return;
-            
-            this.camerasList.Add(camera);
-            this.OnCameraConnectedEvt?.Invoke(this, new CameraConnectedEvt(camera));
-        }
-
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public List<USBCameraDevice> getAllCameras()
+        public USBCameraDeviceList<USBCameraDevice> Cameras
         {
-            return this.camerasList;
+            get { return this.camerasList; }
         }
+
+       
+        /// <summary>
+        /// 
+        /// </summary>
+        public async void listenForConnection()
+        {
+            await Task.Delay(5000);
+            this.sdk.ConnectToDevice();
+           
+            new Thread(() => this.sdk.Mount()).Start();
+            await Task.Delay(5000);
+
+            this.camerasList.loadCameras();
+           
+            this.deviceWatcher.OnDeviceDetected += OnDeviceConnected;
+            this.deviceWatcher.OnDeviceMounted += OnDeviceConnected;
+            this.deviceWatcher.OnDeviceRemoved += OnDeviceDisconnected;
+            this.deviceWatcher.startWatching();
+        }
+
+        private bool isValidCameraDevice(string cameraVolumeLabel)
+        {
+            if (cameraVolumeLabel.Length > 0) cameraVolumeLabel = cameraVolumeLabel[0].ToString();
+            return File.Exists(cameraVolumeLabel + @":\\MISC\wifi.conf");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="detectedInformation"></param>
+        /// <param name="changeEventType"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnDeviceConnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
+        {
+            if (!this.isValidCameraDevice(e.DriveLetter)) return;
+
+            USBCameraDevice camera = USBCameraDeviceFactory.create(e.DriveLetter.ToString(), e.SerialNumber);
+            this.logger.info("Connected: " + camera);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="detectedInformation"></param>
+        /// <param name="changeEventType"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnDeviceDisconnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
+        {
+            USBCameraDevice camera = USBCameraDeviceFactory.create(e.SerialNumber.ToString());
+            this.logger.info("disconnected: " + camera);
+        }
+
 
     }
 }

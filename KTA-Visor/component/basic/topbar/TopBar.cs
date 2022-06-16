@@ -66,11 +66,7 @@ namespace KTA_Visor.component.basic.topbar
             set { parent = value; }
         }
 
-        public Image Icon
-        {
-            get { return this.icon.Image; }
-            set { this.icon.Image = value; }
-        }
+   
 
         public string Title
         {

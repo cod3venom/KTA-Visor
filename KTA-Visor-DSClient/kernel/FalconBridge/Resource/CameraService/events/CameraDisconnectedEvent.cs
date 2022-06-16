@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events
 {
-    public class CameraConnectedEvt : EventArgs
+    public class CameraDisconnectedEvent : EventArgs
     {
         private readonly USBCameraDevice camera;
 
-        public CameraConnectedEvt(USBCameraDevice camera)
+        public CameraDisconnectedEvent(USBCameraDevice camera)
         {
             this.camera = camera;
         }

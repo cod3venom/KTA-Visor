@@ -52,7 +52,6 @@
             // topBar
             // 
             this.topBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topBar.Icon = ((System.Drawing.Image)(resources.GetObject("topBar.Icon")));
             this.topBar.Location = new System.Drawing.Point(0, 0);
             this.topBar.Name = "topBar";
             this.topBar.Parent = this;

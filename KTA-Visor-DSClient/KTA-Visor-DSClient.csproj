@@ -78,13 +78,15 @@
     <Compile Include="kernel\FalconBridge\AbstractResource.cs" />
     <Compile Include="kernel\FalconBridge\FalconBridge.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\CameraService.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\events\CameraDisconnectedEvent.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\factory\USBCameraDeviceFactory.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDevice.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\events\CameraConnectedEvt.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\events\CameraConnectedEvent.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\DeviceIsNotFalconCameraException.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\CameraUSBDeviceFileNotFoundException.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\helpers\CameraHelper.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\repository\CameraServiceRepository.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDeviceHelper.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDeviceList.cs" />
     <Compile Include="kernel\Hardware\DeviceWatcher\DeviceWatcher.cs" />
     <Compile Include="kernel\Hardware\Hardware.cs" />
@@ -92,6 +94,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="kernel\helper\FileSizeHelper.cs" />
+    <Compile Include="kernel\sharedKernel\logger\Logger.cs" />
     <Compile Include="module\camera\views\CamerasView\CamerasView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="kernel\FalconBridge\Resource\CameraService\dto\" />
+    <Folder Include="kernel\FalconBridge\Resource\CameraService\helpers\" />
     <Folder Include="module\auth\" />
     <Folder Include="module\camera\dto\" />
     <Folder Include="module\camera\entity\" />

@@ -12,15 +12,18 @@ namespace KTA_TCPBridge.BridgeServer
     {
         private ServerConfigTObject serverConfig;
 
+        private readonly TCPServer tcpServer;
+
         protected AbstractResource (ServerConfigTObject serverConfig)
         {
             this.serverConfig = serverConfig;
-            
+            this.tcpServer = new TCPServer(this.serverConfig);
+
         }
 
-        public TCPServer tcpServer()
+        public TCPServer TcpServer
         {
-            return new TCPServer(this.serverConfig);
+            get { return this.tcpServer; }
         }        
     }
 }

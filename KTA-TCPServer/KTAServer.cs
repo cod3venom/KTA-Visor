@@ -12,16 +12,10 @@ namespace KTA_TCPBridge
             this.bridge = new TCPBridge(serverConfig);
         }
 
-        public TCPBridge getBridge()
+        public TCPBridge Bridge
         {
-            return this.bridge;
+            get { return this.bridge; }
         }
-
-        public KTAServer setBridge(TCPBridge bridge)
-        {
-            this.bridge = bridge;
-
-            return this;
-        }
+ 
     }
 }

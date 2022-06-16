@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Avalonia.0.10.15\build\Avalonia.props" Condition="Exists('..\packages\Avalonia.0.10.15\build\Avalonia.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>KTA_Visor</RootNamespace>
     <AssemblyName>KTA-Visor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,9 +35,169 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Avalonia, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Animation, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Animation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Base, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Controls, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.DesignerSupport, Version=0.7.0.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.DesignerSupport.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.DesktopRuntime, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.DesktopRuntime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Dialogs, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Dialogs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Input, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Input.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Interactivity, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Layout, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Layout.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Markup, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Markup.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Markup.Xaml, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Markup.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.MicroCom, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.MicroCom.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.OpenGL, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.OpenGL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Remote.Protocol, Version=0.10.15.0, Culture=neutral, PublicKeyToken=7ecde292c616a9f3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.Remote.Protocol.0.10.15\lib\netstandard2.0\Avalonia.Remote.Protocol.dll</HintPath>
+    </Reference>
+    <Reference Include="Avalonia.Styling, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Styling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Themes.Default, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Themes.Default.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Themes.Fluent, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Themes.Fluent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Visuals, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Visuals.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="Device.Net, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Device.Net.4.2.1\lib\net45\Device.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=10.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.3.0\lib\net\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="KTA-TCPBridge">
+      <HintPath>..\KTA-TCPServer\bin\Debug\net6.0-windows\KTA-TCPBridge.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.6.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.6.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MTIComms">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\BAIT Consulting\MTI Comms\MTIComms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive, Version=5.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.5.0.0\lib\net472\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,19 +207,124 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="component\basic\button\ImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\button\ImageButton.Designer.cs">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\button\PrimaryButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\button\PrimaryButton.Designer.cs">
+      <DependentUpon>PrimaryButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\button\SecondaryButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\button\SecondaryButton.Designer.cs">
+      <DependentUpon>SecondaryButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\separator\VerticalSeparator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\separator\VerticalSeparator.Designer.cs">
+      <DependentUpon>VerticalSeparator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\table\bundle\abstraction\column\Column.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\column\dto\ColumnTObject.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\column\event\ColumnEvent.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\row\dto\CellTObject.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\row\dto\RowTObject.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\row\Row.cs" />
+    <Compile Include="component\basic\table\bundle\AbstractResource.cs" />
+    <Compile Include="component\basic\table\bundle\TableBundle.cs" />
+    <Compile Include="component\basic\table\components\HorizontalSeparator\HorizontalSeparator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\table\components\HorizontalSeparator\HorizontalSeparator.Designer.cs">
+      <DependentUpon>HorizontalSeparator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\table\components\PositionCounter\PositionCounter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\table\components\PositionCounter\PositionCounter.Designer.cs">
+      <DependentUpon>PositionCounter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\table\Table.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\table\Table.Designer.cs">
+      <DependentUpon>Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\textbox\RoundedTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\textbox\RoundedTextBox.Designer.cs">
+      <DependentUpon>RoundedTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="component\basic\topbar\TopBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="component\basic\topbar\TopBar.Designer.cs">
       <DependentUpon>TopBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\custom\Footer\Footer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\Footer\Footer.Designer.cs">
+      <DependentUpon>Footer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\NavigationBar\components\NavigationLink\NavigationLink.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\NavigationBar\components\NavigationLink\NavigationLink.Designer.cs">
+      <DependentUpon>NavigationLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\NavigationBar\events\NavigationBarLinkClickEvent.cs" />
+    <Compile Include="component\custom\NavigationBar\NavigationBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\NavigationBar\NavigationBar.Designer.cs">
+      <DependentUpon>NavigationBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\VerticalTab\components\MenuLink\events\MenuLinkClickEvent.cs" />
+    <Compile Include="component\custom\VerticalTab\components\MenuLink\MenuLink.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\VerticalTab\components\MenuLink\MenuLink.Designer.cs">
+      <DependentUpon>MenuLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\VerticalTab\VerticalTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\VerticalTab\VerticalTab.Designer.cs">
+      <DependentUpon>VerticalTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="kernel\module\VirtualRFID\VirtualRFID.cs" />
+    <Compile Include="module\Authentication\events\RFIDAuthFailEvent.cs" />
+    <Compile Include="module\Authentication\events\RFIDAuthSuccessEvent.cs" />
     <Compile Include="module\Authentication\view\RFIDAuthenticationView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\Authentication\view\RFIDAuthenticationView.Designer.cs">
       <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Settings\view\SettingsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Settings\view\SettingsView.Designer.cs">
+      <DependentUpon>SettingsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Station\components\events\StationItemActionEvent.cs" />
+    <Compile Include="module\Station\components\StationItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Station\components\StationItem.Designer.cs">
+      <DependentUpon>StationItem.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Station\view\StationsView.cs">
       <SubType>Form</SubType>
@@ -64,13 +332,59 @@
     <Compile Include="module\Station\view\StationsView.Designer.cs">
       <DependentUpon>StationsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Tunnel\TCPTunnel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="component\basic\button\ImageButton.resx">
+      <DependentUpon>ImageButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\button\PrimaryButton.resx">
+      <DependentUpon>PrimaryButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\button\SecondaryButton.resx">
+      <DependentUpon>SecondaryButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\separator\VerticalSeparator.resx">
+      <DependentUpon>VerticalSeparator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\table\components\HorizontalSeparator\HorizontalSeparator.resx">
+      <DependentUpon>HorizontalSeparator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\table\components\PositionCounter\PositionCounter.resx">
+      <DependentUpon>PositionCounter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\table\Table.resx">
+      <DependentUpon>Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\textbox\RoundedTextBox.resx">
+      <DependentUpon>RoundedTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="component\basic\topbar\TopBar.resx">
       <DependentUpon>TopBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\Footer\Footer.resx">
+      <DependentUpon>Footer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\NavigationBar\components\NavigationLink\NavigationLink.resx">
+      <DependentUpon>NavigationLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\NavigationBar\NavigationBar.resx">
+      <DependentUpon>NavigationBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\VerticalTab\components\MenuLink\MenuLink.resx">
+      <DependentUpon>MenuLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\VerticalTab\VerticalTab.resx">
+      <DependentUpon>VerticalTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="module\Authentication\view\RFIDAuthenticationView.resx">
       <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Settings\view\SettingsView.resx">
+      <DependentUpon>SettingsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Station\components\StationItem.resx">
+      <DependentUpon>StationItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Station\view\StationsView.resx">
       <DependentUpon>StationsView.cs</DependentUpon>
@@ -85,6 +399,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -99,8 +414,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="component\basic\table\bundle\abstraction\row\event\" />
+    <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
+    <Folder Include="component\basic\table\components\VerticalSeparator\" />
+    <Folder Include="component\basic\table\dto\" />
     <Folder Include="kernel\helper\" />
-    <Folder Include="kernel\module\" />
     <Folder Include="kernel\sharedKernel\" />
     <Folder Include="module\Authentication\command\" />
     <Folder Include="module\Authentication\entity\" />
@@ -124,5 +442,25 @@
   <ItemGroup>
     <None Include="Resources\station.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KTA-Visor-DSClient\KTA-Visor-DSClient.csproj">
+      <Project>{73ab2552-c7db-493e-a5c6-9c16c931c85a}</Project>
+      <Name>KTA-Visor-DSClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tests\Tests.csproj">
+      <Project>{516a08b9-41d1-4c99-898e-43cf76b9747d}</Project>
+      <Name>Tests</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+    <Error Condition="!Exists('..\packages\Avalonia.0.10.15\build\Avalonia.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Avalonia.0.10.15\build\Avalonia.targets'))" />
+    <Error Condition="!Exists('..\packages\Avalonia.0.10.15\build\Avalonia.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Avalonia.0.10.15\build\Avalonia.props'))" />
+  </Target>
+  <Import Project="..\packages\Avalonia.0.10.15\build\Avalonia.targets" Condition="Exists('..\packages\Avalonia.0.10.15\build\Avalonia.targets')" />
 </Project>

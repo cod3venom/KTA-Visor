@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StationsView));
             this.topBarPanel = new System.Windows.Forms.Panel();
             this.topBar1 = new KTA_Visor.component.basic.topbar.TopBar();
-            this.label1 = new System.Windows.Forms.Label();
+            this.versionTopBarContainer = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.horizontalSeparator1 = new KTA_Visor.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
+            this.footer1 = new KTA_Visor.component.custom.Footer.Footer();
+            this.table1 = new KTA_Visor.component.basic.table.Table();
             this.topBarPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // topBarPanel
@@ -41,45 +45,90 @@
             this.topBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBarPanel.Location = new System.Drawing.Point(0, 0);
             this.topBarPanel.Name = "topBarPanel";
-            this.topBarPanel.Size = new System.Drawing.Size(1275, 53);
+            this.topBarPanel.Size = new System.Drawing.Size(1480, 35);
             this.topBarPanel.TabIndex = 0;
             // 
             // topBar1
             // 
+            this.topBar1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.topBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topBar1.Icon = ((System.Drawing.Image)(resources.GetObject("topBar1.Icon")));
             this.topBar1.Location = new System.Drawing.Point(0, 0);
             this.topBar1.Name = "topBar1";
             this.topBar1.Parent = null;
-            this.topBar1.Size = new System.Drawing.Size(1275, 53);
+            this.topBar1.Size = new System.Drawing.Size(1480, 35);
             this.topBar1.TabIndex = 0;
             this.topBar1.Title = "Window";
             // 
-            // label1
+            // versionTopBarContainer
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Inter SemiBold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.label1.Location = new System.Drawing.Point(23, 96);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Lista stacji";
+            this.versionTopBarContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.versionTopBarContainer.Location = new System.Drawing.Point(0, 35);
+            this.versionTopBarContainer.Name = "versionTopBarContainer";
+            this.versionTopBarContainer.Size = new System.Drawing.Size(1480, 121);
+            this.versionTopBarContainer.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(240)))), ((int)(((byte)(251)))));
+            this.panel1.Controls.Add(this.footer1);
+            this.panel1.Controls.Add(this.horizontalSeparator1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 942);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1480, 82);
+            this.panel1.TabIndex = 4;
+            // 
+            // horizontalSeparator1
+            // 
+            this.horizontalSeparator1.BackColor = System.Drawing.Color.Silver;
+            this.horizontalSeparator1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.horizontalSeparator1.Location = new System.Drawing.Point(0, 0);
+            this.horizontalSeparator1.Name = "horizontalSeparator1";
+            this.horizontalSeparator1.Size = new System.Drawing.Size(1480, 2);
+            this.horizontalSeparator1.TabIndex = 0;
+            // 
+            // footer1
+            // 
+            this.footer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(240)))), ((int)(((byte)(251)))));
+            this.footer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.footer1.Location = new System.Drawing.Point(0, 2);
+            this.footer1.Name = "footer1";
+            this.footer1.Size = new System.Drawing.Size(1480, 80);
+            this.footer1.TabIndex = 1;
+            // 
+            // table1
+            // 
+            this.table1.AllowAdd = true;
+            this.table1.AllowDelete = true;
+            this.table1.AllowEdit = true;
+            this.table1.AllowSearch = true;
+            this.table1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.table1.Location = new System.Drawing.Point(0, 156);
+            this.table1.Name = "table1";
+            this.table1.ShowAdd = true;
+            this.table1.ShowControls = false;
+            this.table1.ShowDelete = true;
+            this.table1.ShowEdit = true;
+            this.table1.Size = new System.Drawing.Size(1480, 786);
+            this.table1.TabIndex = 5;
             // 
             // StationsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 834);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1480, 1024);
+            this.Controls.Add(this.table1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.versionTopBarContainer);
             this.Controls.Add(this.topBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StationsView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StationsView";
             this.Load += new System.EventHandler(this.StationsView_Load);
             this.topBarPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -87,6 +136,10 @@
 
         private System.Windows.Forms.Panel topBarPanel;
         private component.basic.topbar.TopBar topBar1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel versionTopBarContainer;
+        private System.Windows.Forms.Panel panel1;
+        private component.basic.table.components.HorizontalSeparator.HorizontalSeparator horizontalSeparator1;
+        private component.custom.Footer.Footer footer1;
+        private component.basic.table.Table table1;
     }
 }

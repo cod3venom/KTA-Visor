@@ -47,7 +47,7 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
         public DeviceWatcher()
         {
         }
-         
+
 
 
         /// <summary>
@@ -62,8 +62,42 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
 
             this.hookUsbInsertWatcher(scope);
             this.hookUsbRemovingWatcher(scope);
+            this.loadConnectedDevices();
         }
 
+        public void loadConnectedDevices()
+        {
+            try
+            {
+                foreach (ManagementObject device in new ManagementObjectSearcher(@"SELECT * FROM Win32_DiskDrive WHERE InterfaceType LIKE 'USB%'").Get())
+                {
+                    foreach (ManagementObject partition in new ManagementObjectSearcher("ASSOCIATORS OF {Win32_DiskDrive.DeviceID='" + device.Properties["DeviceID"].Value+ "'} WHERE AssocClass = Win32_DiskDriveToDiskPartition").Get())
+                    {
+                        foreach (ManagementObject disk in new ManagementObjectSearcher("ASSOCIATORS OF {Win32_DiskPartition.DeviceID='"+ partition["DeviceID"]+ "'} WHERE AssocClass = Win32_LogicalDiskToPartition").Get())
+                        {
+                           
+                            string deviceID = device.GetPropertyValue("DeviceID").ToString();
+                            string pnpnDeviceID = device.GetPropertyValue("PNPDeviceID").ToString();
+                            string volumeName = disk["VolumeName"].ToString();
+                            string driveName = disk["Name"].ToString();
+
+                            DeviceDetectedInformation detectedInformation = new DeviceDetectedInformation()
+                            {
+                                DriveCaption = volumeName,
+                                DriveLetter = driveName,
+                                SerialNumber = this.GetDeviceSerialNumber(pnpnDeviceID)
+                            };
+
+                            this.OnDeviceDetected?.Invoke(detectedInformation, VolumeChangeEventType.Unmount);
+                        }
+                    }
+                }
+            }
+            catch (ManagementException e)
+            {
+                MessageBox.Show("An error occurred while querying for WMI data: " + e.Message);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -83,7 +117,8 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
                 this.usbInsertEventWatcher.EventArrived += UsbInsertEventWatcher_EventArrived;
                 this.usbInsertEventWatcher.Start();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 this.usbInsertEventWatcher?.Stop();
             }
         }
@@ -105,7 +140,8 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
                 this.usbRemoveEventWatcher.EventArrived += UsbRemoveEventWatcher_EventArrived;
                 this.usbRemoveEventWatcher.Start();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 this.usbRemoveEventWatcher.Stop();
             }
         }
@@ -187,7 +223,7 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
         /// <returns></returns>
         private bool VerifyInsertedUsb(ManagementBaseObject targetInstance)
         {
-            
+
             return targetInstance != null && targetInstance["Status"]?.ToString() == "OK";
         }
 
@@ -209,7 +245,9 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
         private string GetDeviceSerialNumber(string deviceIdString)
         {
             int length = deviceIdString.Length - deviceIdString.LastIndexOf("\\", StringComparison.Ordinal) - 1;
-            return deviceIdString.Substring(deviceIdString.LastIndexOf("\\", StringComparison.Ordinal) + 1, length);
+            deviceIdString = deviceIdString.Substring(deviceIdString.LastIndexOf("\\", StringComparison.Ordinal) + 1, length);
+            deviceIdString = deviceIdString.Replace("&0", "");
+            return deviceIdString;
         }
 
         /// <summary>

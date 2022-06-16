@@ -13,16 +13,29 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.US
     {
         private DriveInfo device;
 
-        
+        private string serialNumber = "";
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="device"></param>
-        public USBCameraDevice(DriveInfo device)
+        public USBCameraDevice(DriveInfo device, string serialNumber = "")
         {
             this.device = device;
+            this.serialNumber = serialNumber;
         }
 
+        public USBCameraDevice(string serialNumber)
+        {
+            this.serialNumber = serialNumber;
+            this.device = new DriveInfo("c");
+        }
+ 
+
+        public string getSerialNumber()
+        {
+            return this.serialNumber;
+        }
 
         /// <summary>
         /// 
@@ -81,5 +94,17 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.US
             }
             return this;
         }
+
+
+        public override string ToString() 
+        {
+            return new StringBuilder()
+                .Append("<USBCameraDevice: ")
+                .Append("SerialNumber: " + this.serialNumber)
+                .Append(", DriveLetter: " + this.device?.Name)
+                .Append(", TotalFiles: " + this.getFiles().Length)
+                .Append("/>")
+                .ToString();
+        }  
     }
 }
