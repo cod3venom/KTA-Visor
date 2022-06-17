@@ -5,11 +5,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using TCPTunnel.kernel.extensions;
+using TCPTunnel.kernel.extensions.router.dto;
+using TCPTunnel.kernel.types;
 using TCPTunnel.module.server.dto;
 using TCPTunnel.module.server.events;
-using TCPTunnel.module.server.extensions.router.dto;
-using TCPTunnel.module.server.types;
 
 namespace TCPTunnel.module.server
 {
@@ -26,7 +26,8 @@ namespace TCPTunnel.module.server
         private Thread serverSocketThread;
         private Thread heardBeatThread;
         private IPEndPoint ipEndpoint;
-        private types.TCPClientList<string, types.TCPClientTObject> clientsList;
+
+        private TCPClientList<string, TCPClientTObject> clientsList;
         private bool isServerEnabled;
 
         public Server(ServerConfigTObject serverConfig)
@@ -130,7 +131,7 @@ namespace TCPTunnel.module.server
                     int length = client.getSocket().Receive(receiveMessageArray);
                     string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);
 
-                    RouteTObject route = this.Router.ParseRoute(message);
+                    Request route = this.Router.ParseRoute(client, message);
                     this.onMessageReceived?.Invoke(this, new TCPServerClientMessageReceivedEvent(route));
                 }
                 catch (SocketException ex)

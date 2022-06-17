@@ -1,4 +1,5 @@
 ﻿
+using KTALogger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,11 @@ namespace KTA_Visor.module.Tunnel
 
         private readonly ServerConfigTObject config;
         private readonly Server server;
+        private readonly Logger logger;
          
         public Tunnel()
         {
+            this.logger = new Logger();
             this.config = new ServerConfigTObject("Server 1", "127.0.0.1", 1337);
             this.server = new TCPTunnel.TCPTunnel().createServer(config);
         }
@@ -39,26 +42,26 @@ namespace KTA_Visor.module.Tunnel
 
         private void TcpServer_onServerStarted(object sender, EventArgs e)
         {
-            Console.WriteLine("Server: UP");
+            this.logger.info("Server: UP");
             this.onServerStarted?.Invoke(sender, e);
         }
 
         private void TcpServer_onClientConnected(object sender, TCPServerClientConnectedEvent e)
         {
-            Console.WriteLine("Connected: " + e.getClient().getIpAddress());
+            this.logger.success("Connected: " + e.getClient().getIpAddress());
             this.onClientConnected?.Invoke(sender, e);
         }
         private void TcpServer_onClientDisconnected(object sender, TCPServerClientDisonnectedEvent e)
         {
-            Console.WriteLine("Disconnected: " + e.getClient().getIpAddress());
+            this.logger.warn("Disconnected: " + e.getClient().getIpAddress());
             this.onClientDisconnected?.Invoke(sender, e);
         }
 
         private void Server_onMessageReceived(object sender, TCPServerClientMessageReceivedEvent e)
         {
-            Console.WriteLine("Received: Request " + e.getRoute().Endpoint);
-            Console.WriteLine("Received: Message " + e.getRoute().Message);
-
+            this.logger.success("Received: Request " + e.getRoute().Endpoint);
+            this.logger.success("Received: Message " + e.getRoute().Body);
+            
             this.onMessageReceived?.Invoke(sender, e);
         }
 

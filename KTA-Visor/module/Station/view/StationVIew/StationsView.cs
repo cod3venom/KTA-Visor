@@ -5,6 +5,7 @@ using KTA_Visor.component.custom.NavigationBar;
 using KTA_Visor.module.Authentication.view;
 using KTA_Visor.module.Settings.view;
 using KTA_Visor.module.Station.components;
+using KTA_Visor.module.Station.controller;
 using KTA_Visor.module.Tunnel;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,10 @@ namespace KTA_Visor.module.Station.view
 
         private void Tunnel_onMessageReceived(object sender, TCPTunnel.module.server.events.TCPServerClientMessageReceivedEvent e)
         {
+            StationController controller = new StationController(this);
+            controller.StartWatching(e.getRoute());
         }
+
+      
     }
 }

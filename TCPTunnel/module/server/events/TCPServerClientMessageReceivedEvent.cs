@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TCPTunnel.module.server.extensions.router.dto;
-using TCPTunnel.module.server.types;
+using TCPTunnel.kernel.extensions.router.dto;
 
 namespace TCPTunnel.module.server.events
 {
     public class TCPServerClientMessageReceivedEvent : EventArgs
     {
-        private readonly RouteTObject route;
+        private readonly Request route;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="route"></param>
-        public TCPServerClientMessageReceivedEvent(RouteTObject route)
+        public TCPServerClientMessageReceivedEvent(Request route)
         {
             this.route = route;
         }
 
-        public RouteTObject getRoute() => this.route;
+        public Request getRoute() => this.route;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using KTA_Visor_DSClient.kernel.FalconBridge;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device;
-using KTA_Visor_DSClient.kernel.sharedKernel.logger;
+using KTALogger;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -78,12 +78,7 @@ namespace KTA_Visor_DSClient.module.camera.views.CamerasView
         private void CamerasView_Load(object sender, EventArgs e)
         {
 
-            TcpClient tcpclnt = new TcpClient();
-            Console.WriteLine("Connecting.....");
-
-            tcpclnt.Connect("127.0.0.1", 1337);
-
-            this.table.addColumns(this.Columns);
+            //this.table.addColumns(this.Columns);
             this.startListeningForDevices();
 
 
@@ -104,24 +99,24 @@ namespace KTA_Visor_DSClient.module.camera.views.CamerasView
         private void CameraService_OnCameraConnectedEvt(object sender, CameraConnectedEvent e)
         {
             string id = (this.cameraService.Cameras.Count()).ToString();
-            string[] row = new string[] {
-                    id,
-                    e.getCamera().getDriveInfo().Name,
-                    e.getCamera().getSerialNumber(),
-                    "100%",
-                    e.getCamera().getDiskUsage(),
-                    "5",
-                    "ONLINE"
-            };
+            
 
-            this.table.addRow(row);
+            /*this.table.addRow(
+                id,
+                e.getCamera().getDriveInfo().Name,
+                e.getCamera().getSerialNumber(),
+                "100%",
+                e.getCamera().getDiskUsage(),
+                "5",
+                "ONLINE"
+            );*/
         }
 
         private void CameraService_OnCameraDisconnectedEvent(object sender, CameraDisconnectedEvent e)
         {
 
-            DataGridViewRow row = this.table.findRow(e.getCamera().getSerialNumber());
-            this.table.removeRow(row.Index);
+            /*DataGridViewRow row = this.table.findRow(e.getCamera().getSerialNumber());
+            this.table.removeRow(row.Index);*/
         }
 
     }

@@ -36,12 +36,16 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
     <Reference Include="Falcon">
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Falcon.dll</HintPath>
     </Reference>
     <Reference Include="Falcon_USB">
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon_USB\Falcon_USB\bin\Debug\Falcon_USB.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Sdk.Core">
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Sdk.Core.dll</HintPath>
     </Reference>
@@ -94,13 +98,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="kernel\helper\FileSizeHelper.cs" />
-    <Compile Include="kernel\sharedKernel\logger\Logger.cs" />
     <Compile Include="module\camera\views\CamerasView\CamerasView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\camera\views\CamerasView\CamerasView.Designer.cs">
       <DependentUpon>CamerasView.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\tunnel\Tunnel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="components\basic\table\Table.resx">
@@ -134,6 +138,7 @@
   <ItemGroup>
     <Folder Include="kernel\FalconBridge\Resource\CameraService\dto\" />
     <Folder Include="kernel\FalconBridge\Resource\CameraService\helpers\" />
+    <Folder Include="kernel\sharedKernel\" />
     <Folder Include="module\auth\" />
     <Folder Include="module\camera\dto\" />
     <Folder Include="module\camera\entity\" />
@@ -144,6 +149,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logger\KTA-Logger.csproj">
+      <Project>{E9AEE10E-6DB8-484B-9FD6-41D03A92F748}</Project>
+      <Name>KTA-Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCPTunnel\TCPTunnel.csproj">
+      <Project>{FD182779-E8C1-4473-B561-D8C810A63D67}</Project>
+      <Name>TCPTunnel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

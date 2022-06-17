@@ -68,6 +68,15 @@ namespace KTA_Visor_DSClient.components.basic.table
             return this;
         }
 
+        public Table addRow(params object[] value)
+        {
+            this.dataGrid.Invoke(new Action(() => {
+                this.dataGrid.Rows.Add(value);
+            }));
+
+            return this;
+        }
+
         public DataGridViewRow findRow(string needle)
         {
             int rowIndex = -1;

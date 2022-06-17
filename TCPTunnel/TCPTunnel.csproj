@@ -47,22 +47,24 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TCPTunnel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\TCPTunnel.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="module\client\Client.cs" />
+    <Compile Include="module\client\dto\ClientConfigTObject.cs" />
+    <Compile Include="module\client\events\TCPClientDisconnectedEvent.cs" />
+    <Compile Include="module\client\events\TCPClientConnectedEvent.cs" />
+    <Compile Include="module\client\events\TCPClientMessageReceivedEvent.cs" />
     <Compile Include="module\server\events\TCPServerClientMessageReceivedEvent.cs" />
-    <Compile Include="module\server\ExtensionManager.cs" />
+    <Compile Include="kernel\extensions\ExtensionManager.cs" />
     <Compile Include="module\server\dto\ServerConfigTObject.cs" />
     <Compile Include="module\server\events\TCPServerClientConnectedEvent.cs" />
     <Compile Include="module\server\events\TCPServerClientDisonnectedEvent.cs" />
-    <Compile Include="module\server\extensions\router\dto\RouteTObject.cs" />
-    <Compile Include="module\server\extensions\router\Router.cs" />
+    <Compile Include="kernel\extensions\router\dto\Request.cs" />
+    <Compile Include="kernel\extensions\router\events\RouteControllerEvent.cs" />
+    <Compile Include="kernel\extensions\router\Router.cs" />
     <Compile Include="module\server\Server.cs" />
-    <Compile Include="module\server\types\TCPClientList.cs" />
-    <Compile Include="module\server\types\TCPClientTObject.cs" />
+    <Compile Include="kernel\types\TCPClientList.cs" />
+    <Compile Include="kernel\types\TCPClientTObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -71,8 +73,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="kernel\" />
-    <Folder Include="module\client\" />
+    <Folder Include="module\client\extension\" />
+    <Folder Include="module\client\types\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logger\KTA-Logger.csproj">
+      <Project>{E9AEE10E-6DB8-484B-9FD6-41D03A92F748}</Project>
+      <Name>KTA-Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

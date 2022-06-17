@@ -5,7 +5,7 @@ using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.repository;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.USBCameraDevice;
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
 using KTA_Visor_DSClient.kernel.helper;
-using KTA_Visor_DSClient.kernel.sharedKernel.logger;
+using KTALogger;
 using Sdk.Core.DevicesDetection;
 using Sdk.Core.Enums;
 using System;
@@ -109,6 +109,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
             if (!this.isValidCameraDevice(e.DriveLetter)) return;
 
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.DriveLetter.ToString(), e.SerialNumber);
+            this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
             this.logger.info("Connected: " + camera);
         }
 
@@ -121,6 +122,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
         private void OnDeviceDisconnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
         {
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.SerialNumber.ToString());
+            this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(camera));
             this.logger.info("disconnected: " + camera);
         }
 

@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>KTA_Visor_UI</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="component\basic\table\bundle\abstraction\row\event\" />
+    <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
+    <Folder Include="component\basic\table\components\VerticalSeparator\" />
+    <Folder Include="component\basic\table\dto\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="component\basic\button\ImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\basic\button\PrimaryButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\basic\button\SecondaryButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\basic\separator\VerticalSeparator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\basic\table\components\HorizontalSeparator\HorizontalSeparator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\basic\table\components\PositionCounter\PositionCounter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\basic\table\Table.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\basic\textbox\RoundedTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\basic\topbar\TopBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\custom\Footer\Footer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\custom\NavigationBar\components\NavigationLink\NavigationLink.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\custom\NavigationBar\NavigationBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\custom\VerticalTab\components\MenuLink\MenuLink.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="component\custom\VerticalTab\VerticalTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>
