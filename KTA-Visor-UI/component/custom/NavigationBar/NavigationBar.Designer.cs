@@ -30,7 +30,6 @@
         {
             this.titleLbl = new System.Windows.Forms.Label();
             this.leftPanel = new System.Windows.Forms.Panel();
-            this.versionLbl = new System.Windows.Forms.Label();
             this.middlePanel = new System.Windows.Forms.Panel();
             this.usernameLbl = new System.Windows.Forms.Label();
             this.loggedInLabel = new System.Windows.Forms.Label();
@@ -46,8 +45,8 @@
             // 
             this.titleLbl.AutoSize = true;
             this.titleLbl.Font = new System.Drawing.Font("Inter SemiBold", 24.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.titleLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
-            this.titleLbl.Location = new System.Drawing.Point(80, 29);
+            this.titleLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.titleLbl.Location = new System.Drawing.Point(14, 29);
             this.titleLbl.Name = "titleLbl";
             this.titleLbl.Size = new System.Drawing.Size(248, 50);
             this.titleLbl.TabIndex = 0;
@@ -55,25 +54,12 @@
             // 
             // leftPanel
             // 
-            this.leftPanel.Controls.Add(this.versionLbl);
             this.leftPanel.Controls.Add(this.titleLbl);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 0);
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(377, 147);
             this.leftPanel.TabIndex = 1;
-            // 
-            // versionLbl
-            // 
-            this.versionLbl.AutoSize = true;
-            this.versionLbl.BackColor = System.Drawing.Color.Transparent;
-            this.versionLbl.Font = new System.Drawing.Font("Inter Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.versionLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(161)))), ((int)(((byte)(170)))));
-            this.versionLbl.Location = new System.Drawing.Point(242, 79);
-            this.versionLbl.Name = "versionLbl";
-            this.versionLbl.Size = new System.Drawing.Size(109, 19);
-            this.versionLbl.TabIndex = 1;
-            this.versionLbl.Text = "ver-test.0-1";
             // 
             // middlePanel
             // 
@@ -90,8 +76,8 @@
             this.usernameLbl.AutoSize = true;
             this.usernameLbl.BackColor = System.Drawing.Color.Transparent;
             this.usernameLbl.Font = new System.Drawing.Font("Inter", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
-            this.usernameLbl.Location = new System.Drawing.Point(41, 46);
+            this.usernameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.usernameLbl.Location = new System.Drawing.Point(19, 59);
             this.usernameLbl.Name = "usernameLbl";
             this.usernameLbl.Size = new System.Drawing.Size(169, 28);
             this.usernameLbl.TabIndex = 3;
@@ -103,7 +89,7 @@
             this.loggedInLabel.BackColor = System.Drawing.Color.Transparent;
             this.loggedInLabel.Font = new System.Drawing.Font("Inter Medium", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loggedInLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(161)))), ((int)(((byte)(170)))));
-            this.loggedInLabel.Location = new System.Drawing.Point(43, 15);
+            this.loggedInLabel.Location = new System.Drawing.Point(21, 29);
             this.loggedInLabel.Name = "loggedInLabel";
             this.loggedInLabel.Size = new System.Drawing.Size(112, 16);
             this.loggedInLabel.TabIndex = 2;
@@ -139,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(240)))), ((int)(((byte)(251)))));
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.rightPanel);
             this.Controls.Add(this.middlePanel);
             this.Controls.Add(this.leftPanel);
@@ -159,7 +145,6 @@
 
         private System.Windows.Forms.Label titleLbl;
         private System.Windows.Forms.Panel leftPanel;
-        private System.Windows.Forms.Label versionLbl;
         private System.Windows.Forms.Panel middlePanel;
         private System.Windows.Forms.Label usernameLbl;
         private System.Windows.Forms.Label loggedInLabel;

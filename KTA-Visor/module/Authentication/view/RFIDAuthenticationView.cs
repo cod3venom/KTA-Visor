@@ -26,7 +26,7 @@ namespace KTA_Visor.module.Authentication.view
 
         private void RFIDAuthenticationView_Load(object sender, EventArgs e)
         {
-            this.topBar.Parent = this;
+            this.topBar1.Parent = this;
             this.rfid.connect();
         }
     }

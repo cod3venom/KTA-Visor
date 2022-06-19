@@ -34,6 +34,7 @@ namespace TCPTunnel.module.client
         {
             this.config = config;
             this.ipEndpoint =  new IPEndPoint(IPAddress.Parse(config.IpAddress), config.Port);
+            this.logger = new Logger();
         }
 
         public Client connect()
@@ -49,6 +50,16 @@ namespace TCPTunnel.module.client
             this.bootstrapThread.IsBackground = true;
             this.bootstrapThread.Start();
 
+            this.logger.success("Successfully connected to: " + this.config.IpAddress);
+            return this;
+        }
+
+        public Client reConnect()
+        {
+            this.logger.warn("Reconnecting ...");
+            this.client.getSocket().Disconnect(false);
+            this.connect();
+            this.logger.success("Successfully reconnected");
             return this;
         }
 
@@ -56,7 +67,7 @@ namespace TCPTunnel.module.client
         {
             while(this.client.IsConnected())
             {
-                Thread.SpinWait(1000);
+                Thread.Sleep(5000);
 
                 Thread onReceiveThread = new Thread(() => this.receiveMessages(this.client));
                 onReceiveThread.IsBackground = true;
@@ -68,20 +79,42 @@ namespace TCPTunnel.module.client
         {
             try
             {
-                Thread.SpinWait(100);
+                
                 byte[] receiveMessageArray = new byte[1024];
 
                 int length = client.getSocket().Receive(receiveMessageArray);
                 string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);
+                this.logger.info("Plain message: " + message);
 
                 Request request = this.Router.ParseRoute(client, message);
 
+                this.logger.info("Received Request on: " + request.Endpoint +  "\n with body: "+ request.Body);
+
                 this.onReceivedMessage?.Invoke(this, new TCPClientMessageReceivedEvent(request));
+
+                Thread.SpinWait(5000);
             }
             catch (Exception ex)
             {
 
             }
+        }
+
+
+        public void send(Request request)
+        {
+            this.client.Send(request);
+
+            this.logger.info("Sent request on: " + request.Endpoint + "\n with body: " + request.Body);
+        }
+
+        public bool isConnected()
+        {
+            if (this.client != null)
+            {
+                return this.client.IsConnected();
+            }
+            return false;
         }
     }
 }

@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using TCPTunnel.kernel.extensions.router.dto;
 using TCPTunnel.module.client;
 using TCPTunnel.module.client.dto;
 using TCPTunnel.module.client.events;
@@ -36,14 +38,32 @@ namespace KTA_Visor_DSClient.module.tunnel
             this.client.onReceivedMessage += Client_onReceivedMessage;
         }
 
+        public void reConnect()
+        {
+            this.client.reConnect();
+        }
+
+        public bool isConnected()
+        {
+            return this.client.isConnected();
+        }
+
+        public void send(Request request)
+        {
+            this.client.send(request);
+        }
+
         private void Client_onClientConnected(object sender, TCPClientConnectedEvent e)
         {
             this.onClientConnected?.Invoke(sender, e);
+            Thread.SpinWait(5000);
         }
 
         private void Client_onReceivedMessage(object sender, TCPTunnel.module.client.events.TCPClientMessageReceivedEvent e)
         {
            this.onMessageReceived?.Invoke(sender, e);
+            Thread.SpinWait(5000);
         }
+
     }
 }

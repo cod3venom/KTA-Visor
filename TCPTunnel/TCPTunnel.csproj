@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="kernel\extensions\router\interfaces\IRouteController.cs" />
+    <Compile Include="kernel\helpers\JSON.cs" />
+    <Compile Include="kernel\helpers\Network.cs" />
     <Compile Include="module\client\Client.cs" />
     <Compile Include="module\client\dto\ClientConfigTObject.cs" />
     <Compile Include="module\client\events\TCPClientDisconnectedEvent.cs" />

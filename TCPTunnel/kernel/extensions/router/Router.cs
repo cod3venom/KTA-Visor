@@ -11,14 +11,26 @@ namespace TCPTunnel.kernel.extensions.router
 {
     public class Router
     {
+        private readonly KTALogger.Logger logger;
+
+        public Router()
+        {
+            this.logger = new KTALogger.Logger();
+        }
+
         public Request ParseRoute(TCPClientTObject client, string message)
         {
             try
             {
+                this.logger.warn("Received plain message: " + message);
                 message = message.Replace("\r\n", "\n");
                 message = message.Replace("\n", "");
                 message = message.Replace("\\", "");
+
                 Request route = JsonConvert.DeserializeObject<Request>(message);
+
+                this.logger.warn("Converted message to json: " + route.Body);
+
                 route.Client = client;
                 client.Send(route);
                 return route;

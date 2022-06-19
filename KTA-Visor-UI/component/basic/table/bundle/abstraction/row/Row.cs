@@ -41,12 +41,13 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
             {
                 foreach (DataGridViewCell cell in row.Cells)
                 {
-                    if (cell.Value != value) continue;
-
-                    this.table.Invoke(new Action(() =>
+                    if (cell.Value?.ToString().ToLower() == value?.ToLower())
                     {
-                        this.table.Rows.Remove(row);
-                    }));
+                        this.table.Invoke(new Action(() =>
+                        {
+                            this.table.Rows.Remove(row);
+                        }));
+                    }
                 }
             }
 

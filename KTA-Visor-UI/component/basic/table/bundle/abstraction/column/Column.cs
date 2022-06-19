@@ -1,4 +1,5 @@
 ﻿using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
+using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.@event;
 using System;
 using System.Collections.Generic;
 using System.Linq;

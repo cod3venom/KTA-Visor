@@ -12,19 +12,25 @@ namespace TCPTunnel.kernel.extensions.router.dto
     {
 
         private string _endpoint = "";
-        private string _body = "";
+        private dynamic _body = "";
+
+        public Request(string endpoint = "", object body = null)
+        {
+            this._endpoint = endpoint;
+            this._body = body;
+        }
 
         public TCPClientTObject Client { get; set; }
         
         public string Endpoint 
         {
-            get { return this._endpoint;  }
+            get { return this._endpoint == null ? "" : this._endpoint;  }
             set { this._endpoint = value; } 
         }
 
-        public string Body
+        public dynamic Body
         { 
-            get { return this._body; }
+            get { return this._body == null ? "" : this._body; }
             set { this._body = value; }
         }
 

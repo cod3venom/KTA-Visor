@@ -11,6 +11,8 @@ namespace KTA_Visor.module.Station.service
 {
     public class StationViewService
     {
+        public event EventHandler<Request> onAuthorized;
+
         private readonly StationsView stationView;
 
         public StationViewService(StationsView stationView)
@@ -21,8 +23,7 @@ namespace KTA_Visor.module.Station.service
         public void onAuthenticate(Request request)
         {
             Console.WriteLine("OnAUth: " + request.Body.ToString());
-            request.Body = "Thanks";
-            request.Client.Send(request);
+            this.onAuthorized?.Invoke(this, request);
         }
     }
 }

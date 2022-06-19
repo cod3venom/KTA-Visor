@@ -87,6 +87,8 @@ namespace TCPTunnel.kernel.types
             {
                 byte[] messageArray = Encoding.UTF8.GetBytes(request.toJson());
                 this.socket.Send(messageArray);
+
+                Thread.SpinWait(5000);
             }
         }
 

@@ -35,7 +35,7 @@
             // 
             this.linkLabel.AutoSize = true;
             this.linkLabel.Font = new System.Drawing.Font("Inter Medium", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
+            this.linkLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(214)))), ((int)(((byte)(44)))));
             this.linkLabel.Location = new System.Drawing.Point(8, 9);
             this.linkLabel.Name = "linkLabel";
             this.linkLabel.Size = new System.Drawing.Size(62, 20);

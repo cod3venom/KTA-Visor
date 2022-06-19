@@ -126,9 +126,6 @@
     <Reference Include="KTA-TCPBridge">
       <HintPath>..\KTA-TCPServer\bin\Debug\net6.0-windows\KTA-TCPBridge.dll</HintPath>
     </Reference>
-    <Reference Include="KTA-Visor-UI">
-      <HintPath>..\KTA-Visor-UI\bin\Debug\net6.0-windows\KTA-Visor-UI.dll</HintPath>
-    </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -330,6 +327,7 @@
       <DependentUpon>StationItem.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Station\controller\StationController.cs" />
+    <Compile Include="module\Station\dto\StationTObject.cs" />
     <Compile Include="module\Station\service\StationViewService.cs" />
     <Compile Include="module\Station\view\StationVIew\StationsView.cs">
       <SubType>Form</SubType>
@@ -448,6 +446,10 @@
     <None Include="Resources\station.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KTA-Visor-UI\KTA-Visor-UI.csproj">
+      <Project>{C222A7CF-AC15-4728-A0F2-30CD6E568C63}</Project>
+      <Name>KTA-Visor-UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logger\KTA-Logger.csproj">
       <Project>{E9AEE10E-6DB8-484B-9FD6-41D03A92F748}</Project>
       <Name>KTA-Logger</Name>

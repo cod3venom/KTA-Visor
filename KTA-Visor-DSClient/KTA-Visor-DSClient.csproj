@@ -46,6 +46,9 @@
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon_USB\Falcon_USB\bin\Debug\Falcon_USB.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Sdk.Core">
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Sdk.Core.dll</HintPath>
     </Reference>
@@ -82,6 +85,7 @@
     <Compile Include="kernel\FalconBridge\AbstractResource.cs" />
     <Compile Include="kernel\FalconBridge\FalconBridge.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\CameraService.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraService\dto\DockingStationTObject.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\events\CameraDisconnectedEvent.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\factory\USBCameraDeviceFactory.cs" />
     <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDevice.cs" />
@@ -98,11 +102,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="kernel\helper\FileSizeHelper.cs" />
-    <Compile Include="module\camera\views\CamerasView\CamerasView.cs">
+    <Compile Include="module\camera\controller\CamerasListViewController.cs" />
+    <Compile Include="module\camera\service\CamerasListViewService.cs" />
+    <Compile Include="module\camera\views\CamerasView\CamerasListView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\camera\views\CamerasView\CamerasView.Designer.cs">
-      <DependentUpon>CamerasView.cs</DependentUpon>
+    <Compile Include="module\camera\views\CamerasView\CamerasListView.Designer.cs">
+      <DependentUpon>CamerasListView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\tunnel\Tunnel.cs" />
     <Compile Include="Program.cs" />
@@ -110,8 +116,8 @@
     <EmbeddedResource Include="components\basic\table\Table.resx">
       <DependentUpon>Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\camera\views\CamerasView\CamerasView.resx">
-      <DependentUpon>CamerasView.cs</DependentUpon>
+    <EmbeddedResource Include="module\camera\views\CamerasView\CamerasListView.resx">
+      <DependentUpon>CamerasListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -122,6 +128,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -136,7 +143,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="kernel\FalconBridge\Resource\CameraService\dto\" />
     <Folder Include="kernel\FalconBridge\Resource\CameraService\helpers\" />
     <Folder Include="kernel\sharedKernel\" />
     <Folder Include="module\auth\" />
@@ -145,12 +151,15 @@
     <Folder Include="module\camera\exception\" />
     <Folder Include="module\camera\helper\" />
     <Folder Include="module\camera\repository\" />
-    <Folder Include="module\camera\service\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KTA-Visor-UI\KTA-Visor-UI.csproj">
+      <Project>{C222A7CF-AC15-4728-A0F2-30CD6E568C63}</Project>
+      <Name>KTA-Visor-UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logger\KTA-Logger.csproj">
       <Project>{E9AEE10E-6DB8-484B-9FD6-41D03A92F748}</Project>
       <Name>KTA-Logger</Name>

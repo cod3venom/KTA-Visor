@@ -17,7 +17,7 @@ namespace KTA_Visor_DSClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CamerasView());
+            Application.Run(new CamerasListView());
         }
     }
 }

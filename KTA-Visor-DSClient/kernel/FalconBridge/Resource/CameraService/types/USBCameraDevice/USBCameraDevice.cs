@@ -31,10 +31,26 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.US
             this.device = new DriveInfo("c");
         }
  
-
-        public string getSerialNumber()
+        public DriveInfo Drive
         {
-            return this.serialNumber;
+            get { return device; }
+            set { device = value; }
+        }
+
+        public FileInfo[] Files
+        {
+            get { return this.getFiles(); }
+        }
+        
+        public string SerialNumber
+        {
+            get { return serialNumber; }
+            set { serialNumber = value; }
+        }
+
+        public string DiskUsage
+        {
+            get { return this.getDiskUsage();  }
         }
 
         /// <summary>
@@ -51,7 +67,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.US
         /// 
         /// </summary>
         /// <returns></returns>
-        public string getDiskUsage()
+        private string getDiskUsage()
         {
             string totalSpaceGB = FileSizeHelper.convertSize(this.device.TotalSize);
             string usedSpaceGB = FileSizeHelper.convertSize(this.device.AvailableFreeSpace);
@@ -68,7 +84,16 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraService.types.US
             DirectoryInfo directory = new DirectoryInfo(this.device + @"\DCIM\100MEDIA\");
             if (!directory.Exists) return new FileInfo[] { };
 
-            return directory.GetFiles();
+            FileInfo[] directoryFiles = directory.GetFiles();
+            FileInfo[] files = new FileInfo[directoryFiles.Length];
+ 
+            for(int i = 0; i < directoryFiles.Length; i++)
+            {
+                string fullPath = String.Format(@"{0}\\DCIM\100MEDIA\{1}", this.device, directoryFiles[i].Name);
+                FileInfo newFIle = new FileInfo(fullPath);
+                files[i] = newFIle;
+            }
+            return files;
         }
 
         /// <summary>

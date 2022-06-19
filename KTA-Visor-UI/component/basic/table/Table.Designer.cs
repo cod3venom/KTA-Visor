@@ -30,8 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Table));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableControlsContainer = new System.Windows.Forms.Panel();
             this.searchInput = new KTA_Visor_UI.component.basic.textbox.RoundedTextBox();
             this.totalLbl = new System.Windows.Forms.Label();
@@ -82,12 +83,13 @@
             // 
             // searchInput
             // 
-            this.searchInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
+            this.searchInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.searchInput.BorderRadius = 6;
-            this.searchInput.Location = new System.Drawing.Point(311, 5);
+            this.searchInput.ForeColor = System.Drawing.Color.White;
+            this.searchInput.Location = new System.Drawing.Point(311, 7);
             this.searchInput.Name = "searchInput";
             this.searchInput.Padding = new System.Windows.Forms.Padding(5);
-            this.searchInput.Size = new System.Drawing.Size(719, 32);
+            this.searchInput.Size = new System.Drawing.Size(719, 27);
             this.searchInput.TabIndex = 16;
             // 
             // totalLbl
@@ -95,7 +97,7 @@
             this.totalLbl.AutoSize = true;
             this.totalLbl.Font = new System.Drawing.Font("Inter Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
-            this.totalLbl.Location = new System.Drawing.Point(1167, 10);
+            this.totalLbl.Location = new System.Drawing.Point(1167, 12);
             this.totalLbl.Name = "totalLbl";
             this.totalLbl.Size = new System.Drawing.Size(39, 19);
             this.totalLbl.TabIndex = 15;
@@ -106,7 +108,7 @@
             this.slashLbl.AutoSize = true;
             this.slashLbl.Font = new System.Drawing.Font("Inter Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.slashLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
-            this.slashLbl.Location = new System.Drawing.Point(1157, 9);
+            this.slashLbl.Location = new System.Drawing.Point(1157, 12);
             this.slashLbl.Name = "slashLbl";
             this.slashLbl.Size = new System.Drawing.Size(16, 19);
             this.slashLbl.TabIndex = 14;
@@ -161,7 +163,7 @@
             this.currentLbl.AutoSize = true;
             this.currentLbl.Font = new System.Drawing.Font("Inter Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currentLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
-            this.currentLbl.Location = new System.Drawing.Point(1141, 10);
+            this.currentLbl.Location = new System.Drawing.Point(1141, 12);
             this.currentLbl.Name = "currentLbl";
             this.currentLbl.Size = new System.Drawing.Size(20, 19);
             this.currentLbl.TabIndex = 13;
@@ -170,12 +172,13 @@
             // bunifuFlatButton2
             // 
             this.bunifuFlatButton2.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.bunifuFlatButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
+            this.bunifuFlatButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.bunifuFlatButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bunifuFlatButton2.BorderRadius = 6;
             this.bunifuFlatButton2.ButtonText = "Search";
             this.bunifuFlatButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bunifuFlatButton2.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuFlatButton2.ForeColor = System.Drawing.Color.White;
             this.bunifuFlatButton2.Iconcolor = System.Drawing.Color.Transparent;
             this.bunifuFlatButton2.Iconimage = null;
             this.bunifuFlatButton2.Iconimage_right = null;
@@ -188,24 +191,24 @@
             this.bunifuFlatButton2.IconVisible = true;
             this.bunifuFlatButton2.IconZoom = 50D;
             this.bunifuFlatButton2.IsTab = false;
-            this.bunifuFlatButton2.Location = new System.Drawing.Point(1037, 5);
+            this.bunifuFlatButton2.Location = new System.Drawing.Point(1037, 7);
             this.bunifuFlatButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bunifuFlatButton2.Name = "bunifuFlatButton2";
-            this.bunifuFlatButton2.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
-            this.bunifuFlatButton2.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
+            this.bunifuFlatButton2.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.bunifuFlatButton2.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.bunifuFlatButton2.OnHoverTextColor = System.Drawing.Color.White;
             this.bunifuFlatButton2.selected = false;
-            this.bunifuFlatButton2.Size = new System.Drawing.Size(87, 32);
+            this.bunifuFlatButton2.Size = new System.Drawing.Size(87, 27);
             this.bunifuFlatButton2.TabIndex = 12;
             this.bunifuFlatButton2.Text = "Search";
             this.bunifuFlatButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.bunifuFlatButton2.Textcolor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
+            this.bunifuFlatButton2.Textcolor = System.Drawing.Color.White;
             this.bunifuFlatButton2.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // deleteBtn
             // 
             this.deleteBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(52)))), ((int)(((byte)(38)))));
+            this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.deleteBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.deleteBtn.BorderRadius = 6;
             this.deleteBtn.ButtonText = "Delete";
@@ -224,14 +227,14 @@
             this.deleteBtn.IconVisible = true;
             this.deleteBtn.IconZoom = 50D;
             this.deleteBtn.IsTab = false;
-            this.deleteBtn.Location = new System.Drawing.Point(217, 5);
+            this.deleteBtn.Location = new System.Drawing.Point(217, 7);
             this.deleteBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(52)))), ((int)(((byte)(38)))));
             this.deleteBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(52)))), ((int)(((byte)(38)))));
             this.deleteBtn.OnHoverTextColor = System.Drawing.Color.White;
             this.deleteBtn.selected = false;
-            this.deleteBtn.Size = new System.Drawing.Size(87, 32);
+            this.deleteBtn.Size = new System.Drawing.Size(87, 27);
             this.deleteBtn.TabIndex = 10;
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -241,7 +244,7 @@
             // editBtn
             // 
             this.editBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.editBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
+            this.editBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.editBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.editBtn.BorderRadius = 6;
             this.editBtn.ButtonText = "Edit";
@@ -260,24 +263,24 @@
             this.editBtn.IconVisible = true;
             this.editBtn.IconZoom = 50D;
             this.editBtn.IsTab = false;
-            this.editBtn.Location = new System.Drawing.Point(113, 5);
+            this.editBtn.Location = new System.Drawing.Point(113, 7);
             this.editBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.editBtn.Name = "editBtn";
-            this.editBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
-            this.editBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
+            this.editBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.editBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.editBtn.OnHoverTextColor = System.Drawing.Color.White;
             this.editBtn.selected = false;
-            this.editBtn.Size = new System.Drawing.Size(87, 32);
+            this.editBtn.Size = new System.Drawing.Size(87, 27);
             this.editBtn.TabIndex = 9;
             this.editBtn.Text = "Edit";
             this.editBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.editBtn.Textcolor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
+            this.editBtn.Textcolor = System.Drawing.Color.White;
             this.editBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // addBtn
             // 
             this.addBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
+            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.addBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.addBtn.BorderRadius = 6;
             this.addBtn.ButtonText = "Add";
@@ -295,18 +298,18 @@
             this.addBtn.IconVisible = true;
             this.addBtn.IconZoom = 50D;
             this.addBtn.IsTab = false;
-            this.addBtn.Location = new System.Drawing.Point(4, 5);
+            this.addBtn.Location = new System.Drawing.Point(4, 7);
             this.addBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
-            this.addBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(212)))), ((int)(((byte)(245)))));
+            this.addBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.addBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.addBtn.OnHoverTextColor = System.Drawing.Color.White;
             this.addBtn.selected = false;
-            this.addBtn.Size = new System.Drawing.Size(87, 32);
+            this.addBtn.Size = new System.Drawing.Size(87, 27);
             this.addBtn.TabIndex = 7;
             this.addBtn.Text = "Add";
             this.addBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.addBtn.Textcolor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
+            this.addBtn.Textcolor = System.Drawing.Color.White;
             this.addBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // panel1
@@ -321,20 +324,20 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(249)))), ((int)(((byte)(252)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(36)))), ((int)(((byte)(67)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(249)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(36)))), ((int)(((byte)(67)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.ColumnHeadersHeight = 25;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -349,6 +352,10 @@
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Inter Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(1)))), ((int)(((byte)(178)))), ((int)(((byte)(7)))));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(1310, 677);
             this.dataGridView1.TabIndex = 6;

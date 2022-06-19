@@ -98,6 +98,12 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
             return File.Exists(cameraVolumeLabel + @":\\MISC\wifi.conf");
         }
 
+        private bool isCameraAlreadyAdded(USBCameraDevice camera)
+        {
+            int index = this.camerasList.FindIndex(existedCamera => existedCamera.SerialNumber == camera.SerialNumber);
+            return index >= 0;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -109,8 +115,14 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
             if (!this.isValidCameraDevice(e.DriveLetter)) return;
 
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.DriveLetter.ToString(), e.SerialNumber);
+
+            if (this.isCameraAlreadyAdded(camera)) return;
+
+            this.camerasList.Add(camera);
+
             this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
             this.logger.info("Connected: " + camera);
+            Thread.SpinWait(5000);
         }
 
         /// <summary>
@@ -121,9 +133,17 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device
         /// <exception cref="NotImplementedException"></exception>
         private void OnDeviceDisconnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
         {
+
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.SerialNumber.ToString());
+
+            if (!this.isCameraAlreadyAdded(camera)) return;
+
+            int camIndex = this.camerasList.FindIndex(existedCamera => existedCamera.SerialNumber == camera.SerialNumber);
+            this.camerasList.RemoveAt(camIndex);
+
             this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(camera));
-            this.logger.info("disconnected: " + camera);
+            this.logger.warn("Disconnected: " + camera);
+            Thread.SpinWait(5000);
         }
 
 

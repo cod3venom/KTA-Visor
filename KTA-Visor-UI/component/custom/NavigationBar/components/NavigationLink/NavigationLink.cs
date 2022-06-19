@@ -34,7 +34,7 @@ namespace KTA_Visor_UI.component.custom.NavigationBar.components
 
         private void linkLabel_MouseEnter(object sender, EventArgs e)
         {
-            this.linkLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#2C80E2");
+            this.linkLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#44D62C");
         }
 
         private void linkLabel_MouseLeave(object sender, EventArgs e)

@@ -9,17 +9,20 @@ namespace TCPTunnel.module.server.events
 {
     public class TCPServerClientMessageReceivedEvent : EventArgs
     {
-        private readonly Request route;
+        private readonly Request request;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="route"></param>
-        public TCPServerClientMessageReceivedEvent(Request route)
+        /// <param name="request"></param>
+        public TCPServerClientMessageReceivedEvent(Request request)
         {
-            this.route = route;
+            this.request = request;
         }
 
-        public Request getRoute() => this.route;
+        public Request getRoute()
+        {
+            return this.request == null ? new Request() : this.request;
+        }
     }
 }

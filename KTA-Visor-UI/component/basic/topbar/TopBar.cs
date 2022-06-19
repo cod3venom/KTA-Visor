@@ -74,17 +74,17 @@ namespace KTA_Visor_UI.component.basic.topbar
             set { this.titleLbl.Text = value; }
         }
 
-        public Button CloseButton
+        public Bunifu.Framework.UI.BunifuImageButton CloseButton
         {
             get { return this.closeBtn; }
         }
 
-        public Button ResizeButton
+        public Bunifu.Framework.UI.BunifuImageButton ResizeButton
         {
             get { return this.resizeBtn; }
         }
 
-        public Button MinimizeButton
+        public Bunifu.Framework.UI.BunifuImageButton MinimizeButton
         {
             get { return this.minimizeBtn; }
         }
