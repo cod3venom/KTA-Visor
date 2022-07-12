@@ -92,11 +92,20 @@ namespace TCPTunnel.module.server
 
         private void waitForClient()
         {
-            while (this.isServerEnabled)
+            try
             {
-                Thread.Sleep(10);
-                Socket client = this.serverSocket.Accept();
-                this.handleNewCLient(client);
+                while (this.isServerEnabled)
+                {
+                    Thread.Sleep(10);
+                    Socket client = this.serverSocket.Accept();
+                    this.handleNewCLient(client);
+                }
+            }
+            catch(SocketException ex)
+            {
+                this.serverSocketThread?.Abort();
+                this.serverSocket.Dispose();
+                this.serverSocket.Close();
             }
         }
 

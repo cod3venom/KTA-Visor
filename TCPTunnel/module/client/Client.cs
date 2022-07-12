@@ -17,7 +17,11 @@ namespace TCPTunnel.module.client
 {
     public class Client : ExtensionManager
     {
+        public bool AutoReconnect;
+
         public event EventHandler<TCPClientConnectedEvent> onClientConnected;
+
+        public event EventHandler<EventArgs> onClientDisconnected;
 
         public event EventHandler<TCPClientMessageReceivedEvent> onReceivedMessage;
 
@@ -39,19 +43,47 @@ namespace TCPTunnel.module.client
 
         public Client connect()
         {
-            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            clientSocket.Connect(this.ipEndpoint);
+            try
+            {
+                Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                clientSocket.Connect(this.ipEndpoint);
 
-            this.client = new TCPClientTObject(clientSocket.RemoteEndPoint.ToString(), clientSocket);
+                this.client = new TCPClientTObject(clientSocket.RemoteEndPoint.ToString(), clientSocket);
 
-            this.onClientConnected?.Invoke(this, new TCPClientConnectedEvent(this.client));
+                this.onClientConnected?.Invoke(this, new TCPClientConnectedEvent(this.client));
 
-            this.bootstrapThread = new Thread(this.bootStrap);
-            this.bootstrapThread.IsBackground = true;
-            this.bootstrapThread.Start();
+                this.bootstrapThread = new Thread(this.bootStrap);
+                this.bootstrapThread.IsBackground = true;
+                this.bootstrapThread.Start();
 
-            this.logger.success("Successfully connected to: " + this.config.IpAddress);
+                this.logger.success("Successfully connected to: " + this.config.IpAddress);
+
+
+                while (!this.isConnected())
+                {
+                    this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
+                    break;
+                }
+            }
+            catch(SocketException)
+            {
+                this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
+            }
+
             return this;
+        }
+
+        public void autoReconnect()
+        {
+            while (!this.isConnected())
+            {
+                if (this.isConnected()) break;
+
+                this.logger.warn("Trying to auto-reconnect ...");
+                this.connect();
+
+                Thread.Sleep(5000);
+            }
         }
 
         public Client reConnect()
@@ -80,7 +112,7 @@ namespace TCPTunnel.module.client
             try
             {
                 
-                byte[] receiveMessageArray = new byte[1024];
+                byte[] receiveMessageArray = new byte[4096];
 
                 int length = client.getSocket().Receive(receiveMessageArray);
                 string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);

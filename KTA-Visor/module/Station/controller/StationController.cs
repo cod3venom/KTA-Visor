@@ -1,5 +1,7 @@
 ﻿using KTA_Visor.module.Station.service;
 using KTA_Visor.module.Station.view;
+using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,29 +27,18 @@ namespace KTA_Visor.module.Station.controller
             this.stationViewService = stationViewService;
         }
 
-        public  void StartWatching(Request request)
+        public void StartWatching(Request request)
         {
             switch (request.Endpoint)
             {
-                case "/authenticate": this.onAuthenticate(request); break;
-                case "/re-authenticate": this.onAuthenticate(request); break;
-
-                case "/logout": this.onLogout(request); break;
-
-                default:
-                    return;
+                case "response://station/authenticate": this.onAuthenticate(request); break;
             }
         }
  
 
-        private void onAuthenticate(Request request)
+        public void onAuthenticate(Request request)
         {
             this.stationViewService.onAuthenticate(request);
-        }
-
-        private void onLogout(Request route)
-        {
-          
         }
     }
 }

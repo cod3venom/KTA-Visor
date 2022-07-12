@@ -28,31 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button = new System.Windows.Forms.Button();
+            this.btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button
+            // btn
             // 
-            this.button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button.FlatAppearance.BorderSize = 0;
-            this.button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button.Font = new System.Drawing.Font("Inter", 8.2F);
-            this.button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.button.Location = new System.Drawing.Point(0, 0);
-            this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(145, 31);
-            this.button.TabIndex = 0;
-            this.button.Text = "Save";
-            this.button.UseVisualStyleBackColor = false;
-            this.button.MouseHover += new System.EventHandler(this.button_MouseHover);
+            this.btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(97)))));
+            this.btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn.FlatAppearance.BorderSize = 0;
+            this.btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn.Font = new System.Drawing.Font("Inter", 8.2F);
+            this.btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btn.Location = new System.Drawing.Point(0, 0);
+            this.btn.Name = "btn";
+            this.btn.Size = new System.Drawing.Size(145, 31);
+            this.btn.TabIndex = 0;
+            this.btn.Text = "Save";
+            this.btn.UseVisualStyleBackColor = false;
+            this.btn.Click += new System.EventHandler(this.button_Click);
+            this.btn.MouseHover += new System.EventHandler(this.button_MouseHover);
             // 
             // PrimaryButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button);
+            this.Controls.Add(this.btn);
             this.Name = "PrimaryButton";
             this.Size = new System.Drawing.Size(145, 31);
             this.ResumeLayout(false);
@@ -61,6 +62,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button;
+        private System.Windows.Forms.Button btn;
     }
 }

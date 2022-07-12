@@ -1,0 +1,15 @@
+﻿{
+  "app": {
+    "title": "KTA-Visor Docking System Client",
+
+    "fileSystem": {
+      "filesPath": "C:\\Users\\venom\\Desktop\\network_drive_test",
+      "autoCopy": true
+    },
+    "management": {
+      "serverIp": "127.0.0.1",
+      "serverPort": 1337,
+      "autoReconnect": true
+    }
+  }
+}

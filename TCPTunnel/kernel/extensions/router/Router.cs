@@ -25,15 +25,14 @@ namespace TCPTunnel.kernel.extensions.router
                 this.logger.warn("Received plain message: " + message);
                 message = message.Replace("\r\n", "\n");
                 message = message.Replace("\n", "");
-                message = message.Replace("\\", "");
 
-                Request route = JsonConvert.DeserializeObject<Request>(message);
+                Request request = JsonConvert.DeserializeObject<Request>(message);
 
-                this.logger.warn("Converted message to json: " + route.Body);
+                this.logger.warn("Converted message to json: " + request.Body);
 
-                route.Client = client;
-                client.Send(route);
-                return route;
+                request.Client = client;
+                
+                return request;
             }
             catch (Exception ex)
             {

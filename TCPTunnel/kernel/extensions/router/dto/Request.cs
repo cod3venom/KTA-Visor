@@ -14,7 +14,8 @@ namespace TCPTunnel.kernel.extensions.router.dto
         private string _endpoint = "";
         private dynamic _body = "";
 
-        public Request(string endpoint = "", object body = null)
+
+        public Request(string endpoint = "", dynamic body = null)
         {
             this._endpoint = endpoint;
             this._body = body;

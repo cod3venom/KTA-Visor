@@ -65,40 +65,31 @@ namespace KTA_Visor_UI.component.basic.table
 
         public bool ShowAdd
         {
-            get { return this.showAdd; }
-            set { this.showAdd = value; }
+            get { return this.addBtn.Visible; }
+            set { this.addBtn.Visible = value; }
         }
         public bool ShowEdit
         {
-            get { return this.showEdit; }
-            set { this.showEdit = value; }
+            get { return this.editBtn.Visible; }
+            set { this.editBtn.Visible = value; }
         }
         public bool ShowDelete
         {
-            get { return this.showDelete; }
-            set { this.showDelete = value; }
+            get { return this.deleteBtn.Visible; }
+            set { this.deleteBtn.Visible = value; }
         }
-        public DataGridView DataGridView
+
+        public Bunifu.Framework.UI.BunifuCustomDataGrid DataGridView
         {
-            get { return this.dataGridView1 as DataGridView; }
+            get { return this.dataGridView1; }
+            set { this.dataGridView1 = value; }
         }
+
 
         private void Table_Load(object sender, EventArgs e)
         {
-            this.addBtn.Enabled = this.allowAdd;
-            this.addBtn.Visible = this.showAdd;
 
-            this.editBtn.Enabled = this.allowEdit;
-            this.editBtn.Visible = this.showEdit;
-
-            this.deleteBtn.Enabled = this.allowDelete;
-            this.deleteBtn.Visible = this.showDelete;
-
-            this.searchInput.Enabled = this.AllowSearch;
-            this.searchInput.Input.Enabled = this.AllowSearch;
-
-            this.tableControlsContainer.Visible = this.showControls;
-
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
     }
 }

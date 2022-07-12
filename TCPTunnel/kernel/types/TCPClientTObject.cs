@@ -16,12 +16,14 @@ namespace TCPTunnel.kernel.types
         private Thread thread;
         private bool isBlocked;
 
+        private readonly KTALogger.Logger logger;
         public TCPClientTObject(string ipAddress, Socket socket, Thread thread = null, bool isBlocked = false)
         {
             this.ipAddress = ipAddress;
             this.socket = socket;
             this.thread = thread;
             this.isBlocked = isBlocked;
+            this.logger = new KTALogger.Logger();
         }
 
         public TCPClientTObject setIpAddress(string ipAddress)
@@ -39,6 +41,11 @@ namespace TCPTunnel.kernel.types
         {
             this.socket = socket;
             return this;
+        }
+
+        public Socket Sock
+        {
+            get { return this.socket; }
         }
 
         public Socket getSocket()
@@ -85,7 +92,11 @@ namespace TCPTunnel.kernel.types
         {
             if (this.IsConnected())
             {
-                byte[] messageArray = Encoding.UTF8.GetBytes(request.toJson());
+               
+                string body = request.toJson();
+                this.logger.info("Sending JSON message : ");
+                this.logger.info(body);
+                byte[] messageArray = Encoding.UTF8.GetBytes(body);
                 this.socket.Send(messageArray);
 
                 Thread.SpinWait(5000);

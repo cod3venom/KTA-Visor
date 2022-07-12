@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.topBarPanel = new System.Windows.Forms.Panel();
-            this.topBar1 = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.versionTopBarContainer = new System.Windows.Forms.Panel();
-            this.navigationBar1 = new KTA_Visor_UI.component.custom.NavigationBar.NavigationBar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.table = new KTA_Visor_UI.component.basic.table.Table();
             this.footer1 = new KTA_Visor_UI.component.custom.Footer.Footer();
+            this.navigationBar1 = new KTA_Visor_UI.component.custom.NavigationBar.NavigationBar();
+            this.topBar1 = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.horizontalSeparator1 = new KTA_Visor.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
-            this.table1 = new KTA_Visor_UI.component.basic.table.Table();
             this.topBarPanel.SuspendLayout();
             this.versionTopBarContainer.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -50,18 +50,6 @@
             this.topBarPanel.Size = new System.Drawing.Size(1480, 44);
             this.topBarPanel.TabIndex = 0;
             // 
-            // topBar1
-            // 
-            this.topBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.topBar1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.topBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topBar1.Location = new System.Drawing.Point(0, 0);
-            this.topBar1.Name = "topBar1";
-            this.topBar1.Parent = null;
-            this.topBar1.Size = new System.Drawing.Size(1480, 44);
-            this.topBar1.TabIndex = 0;
-            this.topBar1.Title = "Window";
-            // 
             // versionTopBarContainer
             // 
             this.versionTopBarContainer.Controls.Add(this.navigationBar1);
@@ -70,16 +58,6 @@
             this.versionTopBarContainer.Name = "versionTopBarContainer";
             this.versionTopBarContainer.Size = new System.Drawing.Size(1480, 121);
             this.versionTopBarContainer.TabIndex = 2;
-            // 
-            // navigationBar1
-            // 
-            this.navigationBar1.BackColor = System.Drawing.Color.White;
-            this.navigationBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.navigationBar1.Links = new string[0];
-            this.navigationBar1.Location = new System.Drawing.Point(0, 0);
-            this.navigationBar1.Name = "navigationBar1";
-            this.navigationBar1.Size = new System.Drawing.Size(1480, 121);
-            this.navigationBar1.TabIndex = 0;
             // 
             // panel1
             // 
@@ -92,6 +70,22 @@
             this.panel1.Size = new System.Drawing.Size(1480, 82);
             this.panel1.TabIndex = 4;
             // 
+            // table
+            // 
+            this.table.AllowAdd = true;
+            this.table.AllowDelete = true;
+            this.table.AllowEdit = true;
+            this.table.AllowSearch = true;
+            this.table.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.table.Location = new System.Drawing.Point(0, 165);
+            this.table.Name = "table";
+            this.table.ShowAdd = true;
+            this.table.ShowControls = false;
+            this.table.ShowDelete = true;
+            this.table.ShowEdit = true;
+            this.table.Size = new System.Drawing.Size(1480, 777);
+            this.table.TabIndex = 5;
+            // 
             // footer1
             // 
             this.footer1.AutoSize = true;
@@ -102,6 +96,28 @@
             this.footer1.Size = new System.Drawing.Size(1480, 80);
             this.footer1.TabIndex = 1;
             // 
+            // navigationBar1
+            // 
+            this.navigationBar1.BackColor = System.Drawing.Color.White;
+            this.navigationBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navigationBar1.Links = new string[0];
+            this.navigationBar1.Location = new System.Drawing.Point(0, 0);
+            this.navigationBar1.Name = "navigationBar1";
+            this.navigationBar1.Size = new System.Drawing.Size(1480, 121);
+            this.navigationBar1.TabIndex = 0;
+            // 
+            // topBar1
+            // 
+            this.topBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.topBar1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.topBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.topBar1.Location = new System.Drawing.Point(0, 0);
+            this.topBar1.Name = "topBar1";
+            this.topBar1.Parent = null;
+            this.topBar1.Size = new System.Drawing.Size(1480, 44);
+            this.topBar1.TabIndex = 0;
+            this.topBar1.Title = "Window";
+            // 
             // horizontalSeparator1
             // 
             this.horizontalSeparator1.BackColor = System.Drawing.Color.Silver;
@@ -111,28 +127,12 @@
             this.horizontalSeparator1.Size = new System.Drawing.Size(1480, 2);
             this.horizontalSeparator1.TabIndex = 0;
             // 
-            // table1
-            // 
-            this.table1.AllowAdd = true;
-            this.table1.AllowDelete = true;
-            this.table1.AllowEdit = true;
-            this.table1.AllowSearch = true;
-            this.table1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.table1.Location = new System.Drawing.Point(0, 165);
-            this.table1.Name = "table1";
-            this.table1.ShowAdd = true;
-            this.table1.ShowControls = false;
-            this.table1.ShowDelete = true;
-            this.table1.ShowEdit = true;
-            this.table1.Size = new System.Drawing.Size(1480, 777);
-            this.table1.TabIndex = 5;
-            // 
             // StationsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1480, 1024);
-            this.Controls.Add(this.table1);
+            this.Controls.Add(this.table);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.versionTopBarContainer);
             this.Controls.Add(this.topBarPanel);
@@ -158,6 +158,6 @@
         private KTA_Visor_UI.component.basic.topbar.TopBar topBar1;
         private KTA_Visor_UI.component.custom.NavigationBar.NavigationBar navigationBar1;
         private KTA_Visor_UI.component.custom.Footer.Footer footer1;
-        private KTA_Visor_UI.component.basic.table.Table table1;
+        private KTA_Visor_UI.component.basic.table.Table table;
     }
 }

@@ -3,7 +3,9 @@ using KTA_Visor.module.Settings.view;
 using KTA_Visor.module.Station.components;
 using KTA_Visor.module.Station.controller;
 using KTA_Visor.module.Station.dto;
+using KTA_Visor.module.Station.helper;
 using KTA_Visor.module.Station.service;
+using KTA_Visor.module.Station.view.StationVIew;
 using KTA_Visor.module.Tunnel;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using System;
@@ -55,29 +57,49 @@ namespace KTA_Visor.module.Station.view
         private void StationsView_Load(object sender, EventArgs e)
         {
             this.topBar1.Parent = this;
-            this.table1.bundle.column.addMultiple(this.Columns);
+            this.topBar1.onClose += StationsView_OnClose;
+            this.table.bundle.column.addMultiple(this.Columns);
 
-            this.hookTunnelPipe();
+            this.initialize();
         }
 
-        private void hookTunnelPipe()
+        private void StationsView_OnClose(object sender, EventArgs e)
+        {
+            this.tunnel.stop();
+        }
+
+        private void initialize()
         {
             this.tunnel.start();
             this.tunnel.onClientConnected += Tunnel_onClientConnected;
             this.tunnel.onClientDisconnected += Tunnel_onClientDisconnected;
             this.tunnel.onMessageReceived += Tunnel_onMessageReceived;
-
+            
             this.stationViewService.onAuthorized += StationViewService_onAuthorized;
+            this.table.DataGridView.CellDoubleClick += TableRow_CellDoubleClick;
         }
 
+        private void TableRow_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.Hide();
+
+            StationTObject station = RowHelper.RowToStation(this.table.DataGridView.SelectedRows);
+            station = this.stationsList.Find(item => item.ID == station.ID);
+
+            SingleStationView singleStationView = new SingleStationView(station, this.tunnel);
+            singleStationView.ShowDialog();
+        }
+ 
         private void Tunnel_onClientConnected(object sender, TCPTunnel.module.server.events.TCPServerClientConnectedEvent e)
         {
-       
+            e.getClient().Send(new Request(
+                "command://station/authenticate"
+            ));
         }
 
         private void Tunnel_onClientDisconnected(object sender, TCPTunnel.module.server.events.TCPServerClientDisonnectedEvent e)
         {
-            this.table1.bundle.row.removeRow(e.getClient().getIpAddress());
+            this.table.bundle.row.removeRow(e.getClient().getIpAddress());
         }
 
 
@@ -90,12 +112,13 @@ namespace KTA_Visor.module.Station.view
             station.Name = e.Body?.Name;
             station.TotalPorts = e.Body?.TotalPorts;
             station.Status = e.Body?.Status;
+            station.Client = e.Client;
 
             if (this.stationsList.Find(item => item.IpAddress == station.IpAddress) == null)
             {
                 this.stationsList.Add(station);
 
-                this.table1.bundle.row.add(
+                this.table.bundle.row.add(
                   station.ID.ToString(),
                   station.IpAddress,
                   station.Name,

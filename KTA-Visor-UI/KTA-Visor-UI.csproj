@@ -113,6 +113,37 @@
     <Compile Include="component\basic\topbar\TopBar.Designer.cs">
       <DependentUpon>TopBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\custom\Camera\Camerae.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\Camera\Camerae.Designer.cs">
+      <DependentUpon>Camerae.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\FileList\components\HorizontalFileItem\FileItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\FileList\components\HorizontalFileItem\FileItem.Designer.cs">
+      <DependentUpon>FileItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\FileList\FileList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\FileList\FileList.Designer.cs">
+      <DependentUpon>FileList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\MenuStripRenderer\MenuStripRenderer.cs" />
+    <Compile Include="component\custom\NumbersCard\NumbersCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\NumbersCard\NumbersCard.Designer.cs">
+      <DependentUpon>NumbersCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\LabelsListBar\components\SidebarMenuItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\LabelsListBar\components\SidebarMenuItem.Designer.cs">
+      <DependentUpon>SidebarMenuItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="component\custom\Footer\Footer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +162,13 @@
     </Compile>
     <Compile Include="component\custom\NavigationBar\NavigationBar.Designer.cs">
       <DependentUpon>NavigationBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\LabelsListBar\events\SideBarItemClickedEvent.cs" />
+    <Compile Include="component\custom\LabelsListBar\LabelsListBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\LabelsListBar\LabelsListBar.Designer.cs">
+      <DependentUpon>LabelsListBar.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\VerticalTab\components\MenuLink\events\MenuLinkClickEvent.cs" />
     <Compile Include="component\custom\VerticalTab\components\MenuLink\MenuLink.cs">
@@ -190,6 +228,21 @@
     <EmbeddedResource Include="component\basic\topbar\TopBar.resx">
       <DependentUpon>TopBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\Camera\Camerae.resx">
+      <DependentUpon>Camerae.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\FileList\components\HorizontalFileItem\FileItem.resx">
+      <DependentUpon>FileItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\FileList\FileList.resx">
+      <DependentUpon>FileList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\NumbersCard\NumbersCard.resx">
+      <DependentUpon>NumbersCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\LabelsListBar\components\SidebarMenuItem.resx">
+      <DependentUpon>SidebarMenuItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\Footer\Footer.resx">
       <DependentUpon>Footer.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\NavigationBar\NavigationBar.resx">
       <DependentUpon>NavigationBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\LabelsListBar\LabelsListBar.resx">
+      <DependentUpon>LabelsListBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\VerticalTab\components\MenuLink\MenuLink.resx">
       <DependentUpon>MenuLink.cs</DependentUpon>
@@ -215,6 +271,7 @@
     <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
+    <Folder Include="component\custom\SideNavigationBar\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

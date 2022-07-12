@@ -117,29 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="bunifuImageButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAU1JREFUOE9j
-        oAH4z6jX/YJbr/Ghs3rna14QHypBADT8Z9JsuSev0/CoR7fh0RWdhoeTdBseKoWG/meGqsAF/jNqNzxW
-        AWnUaXj8Ekj/B+LXQPZE/YYnaiCDoQoxgU7LU1nthkc1QA3PoRqhGGTQwwat+mdyUKWoQKXhNp9O4+Nc
-        nfpH91A1QjFY/GGeccddfqgWBNBuemQKVLQTiD8D8Xe4Jgj+AcQg8d26TU8soVoQABQoQJwGxJ1ARTug
-        mqD44T4g3a3b+DAdFCZQLQjg0PCfxbjhGZd+y2NpsPORNTc+rATFAEgepA6qBRNY9j3mBNoQiqr5cTIo
-        TKBKcAOQyaDEodP46B+S5kCFhvscUCX4wH9GrYbHZkBN36Ca/+g2PbYnIpFAAChBADXth0bbcZ3mB5pQ
-        KcIAlK61mh4YAp0eDopCrYZXPFApagEGBgDK0diEao3AKQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="bunifuImageButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAVFJREFUOE9j
-        oDrQanjFo930yFSn8VG4VtMDQ73uF9xQKcJAp/mBpk7Do+M69Y/uAen9+g1P1KBS+EFo6H9m3abH9kBN
-        f4D4PxB/02p4bMbA8J8RqgQ3UGi4z6HT+DgQqvE/0On/9BofOjs0/GeBKsENVBpu8wE1J8M1A7Fu48NQ
-        y77HnFAlmABksnHDMy7NlnvyOo0PK5E1Aw3L1W95LA2Sx+oC7YbHKkAb0oGKu3UaHu5D0dzwaIduw8NO
-        IE4DYiWoFgTQbXpiCVS0G4g/A/EPqCYY/g7EIPGdoCiEakEA4467/EAb86DRg6wRgkHiQOeDwgSqBRVo
-        1T+TAxrQoNPw+CWa5ufaDY9qdFqeykKVYgEN/5lACQKoeSJQw2uIRrBBPaAwIRjX4EQCDBSgCybpNjy6
-        AtIIigGQwVAlhMB/RvXO17ygxAFJ10SkLtIAAwMAq+vYhLTTHOcAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="bunifuElipse1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

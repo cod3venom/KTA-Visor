@@ -16,8 +16,9 @@ namespace KTA_Visor_DSClient.module.tunnel
 {
     public class Tunnel
     {
+
         public event EventHandler<TCPClientConnectedEvent> onClientConnected;
-        public event EventHandler<TCPServerClientDisonnectedEvent> onClientDisconnected;
+        public event EventHandler<EventArgs> onClientDisconnected;
         public event EventHandler<TCPClientMessageReceivedEvent> onMessageReceived;
 
         private readonly ClientConfigTObject config;
@@ -28,14 +29,25 @@ namespace KTA_Visor_DSClient.module.tunnel
         {
             this.config = config;
             this.client = new Client(config);
+            this.logger = new Logger();
         }
 
         public void connect()
         {
             this.client.connect();
             this.client.onClientConnected += Client_onClientConnected;
-
+            this.client.onClientDisconnected += Client_onClientDisconnected;
             this.client.onReceivedMessage += Client_onReceivedMessage;
+        }
+
+        public void disconnect()
+        {
+
+        }
+
+        public void autoReconnect()
+        {
+            this.client.autoReconnect();
         }
 
         public void reConnect()
@@ -57,6 +69,11 @@ namespace KTA_Visor_DSClient.module.tunnel
         {
             this.onClientConnected?.Invoke(sender, e);
             Thread.SpinWait(5000);
+        }
+
+        private void Client_onClientDisconnected(object sender, EventArgs e)
+        {
+            this.onClientDisconnected?.Invoke(sender, e);
         }
 
         private void Client_onReceivedMessage(object sender, TCPTunnel.module.client.events.TCPClientMessageReceivedEvent e)

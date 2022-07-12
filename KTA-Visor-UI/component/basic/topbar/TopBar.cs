@@ -14,14 +14,23 @@ namespace KTA_Visor_UI.component.basic.topbar
     {
         private Form parent;
 
-        public EventHandler<EventArgs> onClose;
-        public EventHandler<EventArgs> onResize;
-        public EventHandler<EventArgs> onMaximize;
-        public EventHandler<EventArgs> onMinimize;
+        public event EventHandler<EventArgs> onClose;
+        public event EventHandler<EventArgs> onResize;
+        public event EventHandler<EventArgs> onMaximize;
+        public event EventHandler<EventArgs> onMinimize;
+
+        
 
         public TopBar()
         {
             InitializeComponent();
+        }
+
+        public Color BackgroundColor
+        {
+            get { return this.BackColor; }
+            set { this.BackColor = value; }
+
         }
 
         private void TopBar_Load(object sender, EventArgs e)
@@ -42,13 +51,10 @@ namespace KTA_Visor_UI.component.basic.topbar
             if (this.parent.WindowState == FormWindowState.Maximized)
             {
                 this.parent.WindowState = FormWindowState.Normal;
-               // this.resizeBtn.Image = Properties.Resources.fullScreen;
                 this.onResize?.Invoke(sender, e);
             } else
             {
                 this.parent.WindowState = FormWindowState.Maximized;
-                //this.resizeBtn.Image = Properties.Resources.resize;
-
                 this.onMaximize?.Invoke(sender, e);
             }
         }

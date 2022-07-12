@@ -29,74 +29,60 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Footer));
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.sfBtn = new Bunifu.Framework.UI.BunifuImageButton();
+            this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
+            ((System.ComponentModel.ISupportInitialize)(this.sfBtn)).BeginInit();
             this.SuspendLayout();
             // 
-            // linkLabel1
+            // sfBtn
             // 
-            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.DisabledLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.linkLabel1.Font = new System.Drawing.Font("Inter SemiBold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.linkLabel1.Location = new System.Drawing.Point(69, 51);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(179, 20);
-            this.linkLabel1.TabIndex = 2;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Tag = "www.kta.pl";
-            this.linkLabel1.Text = "COPYRIGHT 2022 ©";
-            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(128)))), ((int)(((byte)(226)))));
+            this.sfBtn.BackColor = System.Drawing.Color.Transparent;
+            this.sfBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sfBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.sfBtn.Image = ((System.Drawing.Image)(resources.GetObject("sfBtn.Image")));
+            this.sfBtn.ImageActive = null;
+            this.sfBtn.Location = new System.Drawing.Point(986, 0);
+            this.sfBtn.Name = "sfBtn";
+            this.sfBtn.Padding = new System.Windows.Forms.Padding(0, 0, 25, 0);
+            this.sfBtn.Size = new System.Drawing.Size(93, 47);
+            this.sfBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sfBtn.TabIndex = 1;
+            this.sfBtn.TabStop = false;
+            this.sfBtn.Zoom = 10;
             // 
-            // pictureBox1
+            // bunifuSeparator1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 38);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(60, 46);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(658, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(282, 84);
-            this.panel1.TabIndex = 4;
+            this.bunifuSeparator1.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuSeparator1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.bunifuSeparator1.LineColor = System.Drawing.Color.Transparent;
+            this.bunifuSeparator1.LineThickness = 1;
+            this.bunifuSeparator1.Location = new System.Drawing.Point(1079, 0);
+            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bunifuSeparator1.Name = "bunifuSeparator1";
+            this.bunifuSeparator1.Size = new System.Drawing.Size(41, 47);
+            this.bunifuSeparator1.TabIndex = 2;
+            this.bunifuSeparator1.Transparency = 0;
+            this.bunifuSeparator1.Vertical = true;
             // 
             // Footer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.panel1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(97)))));
+            this.Controls.Add(this.sfBtn);
+            this.Controls.Add(this.bunifuSeparator1);
             this.Name = "Footer";
-            this.Size = new System.Drawing.Size(940, 84);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.Size = new System.Drawing.Size(1120, 47);
+            this.Load += new System.EventHandler(this.Footer_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.sfBtn)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel1;
+        private Bunifu.Framework.UI.BunifuImageButton sfBtn;
+        private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator1;
     }
 }

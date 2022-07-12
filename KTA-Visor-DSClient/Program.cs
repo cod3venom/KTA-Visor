@@ -1,4 +1,6 @@
-﻿using KTA_Visor_DSClient.module.camera.views.CamerasView;
+﻿using KTA_Visor_DSClient.install;
+using KTA_Visor_DSClient.module.dashboard.view;
+using KTA_Visor_DSClient.module.preloader.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,12 @@ namespace KTA_Visor_DSClient
         [STAThread]
         static void Main()
         {
+            Installer installer = new Installer();
+            installer.FullInstall();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CamerasListView());
+            Application.Run(new PreLoaderView(new DashboardView()));
         }
     }
 }

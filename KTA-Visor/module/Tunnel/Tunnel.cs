@@ -40,6 +40,11 @@ namespace KTA_Visor.module.Tunnel
             this.server.onMessageReceived += Server_onMessageReceived;
         }
 
+        public void stop()
+        {
+            this.server?.stopServer();
+        }
+
         private void TcpServer_onServerStarted(object sender, EventArgs e)
         {
             this.logger.info("Server: UP");

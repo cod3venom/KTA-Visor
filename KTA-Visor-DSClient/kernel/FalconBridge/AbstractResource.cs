@@ -1,4 +1,5 @@
-﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device;
+﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService;
+using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,9 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge
             this.sdk = new Falcon.FalconSdk();
             this.sdk.ConnectToDevice();
         }
-        public CameraService CameraService()
+        public CameraDeviceService CameraDeviceService()
         { 
-            return new CameraService(this.sdk);
+            return new CameraDeviceService(this.sdk);
         }
     }
 }

@@ -76,39 +76,62 @@
     <Compile Include="components\basic\table\Table.Designer.cs">
       <DependentUpon>Table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="install\Installer.cs" />
+    <Compile Include="install\settings\dto\SettingsFileTObject.cs" />
+    <Compile Include="install\settings\Settings.cs" />
     <Compile Include="kernel\FalconBridge\AbstractResource.cs" />
     <Compile Include="kernel\FalconBridge\FalconBridge.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\CameraService.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\dto\DockingStationTObject.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\events\CameraDisconnectedEvent.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\factory\USBCameraDeviceFactory.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDevice.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\events\CameraConnectedEvent.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\DeviceIsNotFalconCameraException.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\CameraUSBDeviceFileNotFoundException.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\repository\CameraServiceRepository.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDeviceHelper.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraService\types\USBCameraDevice\USBCameraDeviceList.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\CameraDeviceService.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\dto\DockingStationTObject.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\events\CameraDisconnectedEvent.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\factory\USBCameraDeviceFactory.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\USBCameraDevice.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\events\CameraConnectedEvent.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\exception\DeviceIsNotFalconCameraException.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\exception\CameraUSBDeviceFileNotFoundException.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\repository\CameraServiceRepository.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\USBCameraDeviceHelper.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\USBCameraDeviceList.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraSettingsManager\CameraSettingsManager.cs" />
+    <Compile Include="kernel\FalconBridge\Resource\CameraSettingsManager\interfaces\ICameraSettingsFields.cs" />
     <Compile Include="kernel\Hardware\DeviceWatcher\DeviceWatcher.cs" />
     <Compile Include="kernel\Hardware\Hardware.cs" />
+    <Compile Include="kernel\helper\EmbededFileHelper.cs" />
     <Compile Include="kernel\helper\ExecutionWaiter.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="kernel\helper\FileSizeHelper.cs" />
-    <Compile Include="module\camera\controller\CamerasListViewController.cs" />
-    <Compile Include="module\camera\service\CamerasListViewService.cs" />
-    <Compile Include="module\camera\views\CamerasView\CamerasListView.cs">
+    <Compile Include="kernel\sharedKernel\app-settings\AppSettings.cs" />
+    <Compile Include="module\camera-settings-manager\CameraSettingsManager.cs" />
+    <Compile Include="module\camera\command\CopyCameraFilesToNetworkStorageCommand.cs" />
+    <Compile Include="module\dashboard\controller\CameraController.cs" />
+    <Compile Include="module\camera\dto\GetCameraFilesRequestTObject.cs" />
+    <Compile Include="module\camera\repository\CameraListViewRepository.cs" />
+    <Compile Include="module\camera\service\CameraService.cs" />
+    <Compile Include="module\dashboard\view\DashboardView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\camera\views\CamerasView\CamerasListView.Designer.cs">
-      <DependentUpon>CamerasListView.cs</DependentUpon>
+    <Compile Include="module\dashboard\view\DashboardView.Designer.cs">
+      <DependentUpon>DashboardView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\preloader\view\PreLoaderView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\preloader\view\PreLoaderView.Designer.cs">
+      <DependentUpon>PreLoaderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\settings\views\FileSystemSettingsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\settings\views\FileSystemSettingsView.Designer.cs">
+      <DependentUpon>FileSystemSettingsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\settings\views\ManagementSettingsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\settings\views\ManagementSettingsView.Designer.cs">
+      <DependentUpon>ManagementSettingsView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\tunnel\Tunnel.cs" />
     <Compile Include="Program.cs" />
@@ -116,23 +139,36 @@
     <EmbeddedResource Include="components\basic\table\Table.resx">
       <DependentUpon>Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\camera\views\CamerasView\CamerasListView.resx">
-      <DependentUpon>CamerasListView.cs</DependentUpon>
+    <EmbeddedResource Include="module\dashboard\view\DashboardView.resx">
+      <DependentUpon>DashboardView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\preloader\view\PreLoaderView.resx">
+      <DependentUpon>PreLoaderView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\settings\views\FileSystemSettingsView.resx">
+      <DependentUpon>FileSystemSettingsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\settings\views\ManagementSettingsView.resx">
+      <DependentUpon>ManagementSettingsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="install\settings\Settings.json">
+      <CustomToolNamespace>KTA_Visor_DSClient.install.settings.Settings.json</CustomToolNamespace>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -143,14 +179,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="kernel\FalconBridge\Resource\CameraService\helpers\" />
-    <Folder Include="kernel\sharedKernel\" />
+    <Folder Include="kernel\FalconBridge\Resource\CameraDeviceService\helpers\" />
+    <Folder Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\interfaces\" />
     <Folder Include="module\auth\" />
-    <Folder Include="module\camera\dto\" />
-    <Folder Include="module\camera\entity\" />
-    <Folder Include="module\camera\exception\" />
-    <Folder Include="module\camera\helper\" />
-    <Folder Include="module\camera\repository\" />
+    <Folder Include="module\camera-settings-manager\dto\" />
+    <Folder Include="module\camera-settings-manager\repository\" />
+    <Folder Include="module\camera-settings-manager\service\" />
+    <Folder Include="module\dashboard\service\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
