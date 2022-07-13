@@ -21,11 +21,11 @@ namespace KTA_Visor.module.Tunnel
 
         private readonly ServerConfigTObject config;
         private readonly Server server;
-        private readonly Logger logger;
+        private readonly KTALogger.Logger logger;
          
         public Tunnel()
         {
-            this.logger = new Logger();
+            this.logger = new KTALogger.Logger();
             this.config = new ServerConfigTObject("Server 1", "127.0.0.1", 1337);
             this.server = new TCPTunnel.TCPTunnel().createServer(config);
         }

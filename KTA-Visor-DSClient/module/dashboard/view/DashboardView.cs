@@ -32,7 +32,7 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <summary>
         /// 
         /// </summary>
-        private readonly Logger logger;
+        private readonly KTALogger.Logger logger;
 
         /// <summary>
         /// 
@@ -93,7 +93,7 @@ namespace KTA_Visor_DSClient.module.dashboard.view
             this.topBar1.Title = this.settings.SettingsObj.app.title;
             this.topBar1.onClose += OnClose;
 
-            this.logger = new Logger();
+            this.logger = new KTALogger.Logger();
             this.falconBridge = new FalconBridge();
             this.camerasList = new USBCameraDeviceList<USBCameraDevice>();
             this.cameraDeviceService = this.falconBridge.CameraDeviceService();
@@ -103,6 +103,7 @@ namespace KTA_Visor_DSClient.module.dashboard.view
                 this.settings.SettingsObj.app.management.serverIp,
                 this.settings.SettingsObj.app.management.serverPort
             ));
+            this.tcpClientPanel.Tunnel = this.tunnel;
         }
 
  
@@ -113,10 +114,7 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <param name="e"></param>
         private void DashboardView_Load(object sender, EventArgs e)
         {
-
             this.render();
-            this.tunnel.connect();
-
             Thread watchForDeviceThr = new Thread(this.watchForDevices);
             watchForDeviceThr.IsBackground = true;
             watchForDeviceThr.Start();

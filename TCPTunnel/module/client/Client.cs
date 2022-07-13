@@ -32,13 +32,13 @@ namespace TCPTunnel.module.client
         private Thread bootstrapThread;
         private TCPClientTObject client;
 
-        private readonly Logger logger;
+        private readonly KTALogger.Logger logger;
 
-        public Client(ClientConfigTObject config)
+        public Client(ClientConfigTObject config, KTALogger.Logger logger)
         {
             this.config = config;
             this.ipEndpoint =  new IPEndPoint(IPAddress.Parse(config.IpAddress), config.Port);
-            this.logger = new Logger();
+            this.logger = logger;
         }
 
         public Client connect()
@@ -69,6 +69,13 @@ namespace TCPTunnel.module.client
             {
                 this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
             }
+
+            return this;
+        }
+
+        public Client disconnect()
+        {
+            this.client.getSocket().Close();
 
             return this;
         }

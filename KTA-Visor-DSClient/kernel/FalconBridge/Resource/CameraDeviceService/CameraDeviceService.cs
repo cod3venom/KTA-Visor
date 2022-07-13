@@ -53,7 +53,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         /// <summary>
         /// 
         /// </summary>
-        private readonly Logger logger;
+        private readonly KTALogger.Logger logger;
 
         public CameraDeviceService(FalconSdk sdk)
         {
@@ -61,7 +61,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
             this.repository = new CameraServiceRepository();
             this.deviceWatcher = new Hardware.Hardware().deviceWatcher();
             this.camerasList = new USBCameraDeviceList<USBCameraDevice>();
-            this.logger = new Logger();
+            this.logger = new KTALogger.Logger();
         }
 
         /// <summary>

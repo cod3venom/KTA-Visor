@@ -114,6 +114,7 @@ namespace TCPTunnel.kernel.types
                 return !(this.socket.Poll(1, SelectMode.SelectRead) && this.socket.Available == 0);
             }
             catch (SocketException) { return false; }
+            catch(Exception) { return false; }
         }
     }
 }

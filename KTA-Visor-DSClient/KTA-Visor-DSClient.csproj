@@ -105,6 +105,12 @@
     <Compile Include="kernel\sharedKernel\app-settings\AppSettings.cs" />
     <Compile Include="module\camera-settings-manager\CameraSettingsManager.cs" />
     <Compile Include="module\camera\command\CopyCameraFilesToNetworkStorageCommand.cs" />
+    <Compile Include="module\dashboard\componnets\TCPClient\TCPClient.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\dashboard\componnets\TCPClient\TCPClient.Designer.cs">
+      <DependentUpon>TCPClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\dashboard\controller\CameraController.cs" />
     <Compile Include="module\camera\dto\GetCameraFilesRequestTObject.cs" />
     <Compile Include="module\camera\repository\CameraListViewRepository.cs" />
@@ -138,6 +144,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="components\basic\table\Table.resx">
       <DependentUpon>Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\dashboard\componnets\TCPClient\TCPClient.resx">
+      <DependentUpon>TCPClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\dashboard\view\DashboardView.resx">
       <DependentUpon>DashboardView.cs</DependentUpon>

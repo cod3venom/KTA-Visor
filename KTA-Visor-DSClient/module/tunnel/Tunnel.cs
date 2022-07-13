@@ -23,13 +23,13 @@ namespace KTA_Visor_DSClient.module.tunnel
 
         private readonly ClientConfigTObject config;
         private readonly Client client;
-        private readonly Logger logger;
+        private readonly KTALogger.Logger logger;
 
         public Tunnel(ClientConfigTObject config)
         {
             this.config = config;
-            this.client = new Client(config);
-            this.logger = new Logger();
+            this.logger = new KTALogger.Logger();
+            this.client = new Client(config, this.logger);
         }
 
         public void connect()
@@ -42,6 +42,7 @@ namespace KTA_Visor_DSClient.module.tunnel
 
         public void disconnect()
         {
+            this.client.disconnect();
 
         }
 
@@ -68,7 +69,6 @@ namespace KTA_Visor_DSClient.module.tunnel
         private void Client_onClientConnected(object sender, TCPClientConnectedEvent e)
         {
             this.onClientConnected?.Invoke(sender, e);
-            Thread.SpinWait(5000);
         }
 
         private void Client_onClientDisconnected(object sender, EventArgs e)
@@ -80,6 +80,11 @@ namespace KTA_Visor_DSClient.module.tunnel
         {
            this.onMessageReceived?.Invoke(sender, e);
             Thread.SpinWait(5000);
+        }
+
+        public KTALogger.Logger DebuggingPipe
+        {
+            get { return this.logger; }
         }
 
     }
