@@ -1,6 +1,7 @@
 ﻿using KTA_Visor.module.Authentication.view;
 using KTA_Visor.module.Settings.view;
-using KTA_Visor.module.Station.components;
+using KTA_Visor.module.Station.components.StationItem.StationItem;
+using KTA_Visor.module.Station.components.StationItem.events;
 using KTA_Visor.module.Station.controller;
 using KTA_Visor.module.Station.dto;
 using KTA_Visor.module.Station.helper;
@@ -18,6 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
+using KTA_Visor.module.station.componnets.StationItem;
 
 namespace KTA_Visor.module.Station.view
 {
@@ -33,7 +35,7 @@ namespace KTA_Visor.module.Station.view
 
         private readonly StationController controller;
 
-        private readonly List<StationTObject> stationsList;
+        private readonly List<StationItem> stationsList;
 
         private readonly ColumnTObject[] Columns = new ColumnTObject[] { 
             new ColumnTObject(0, "ID"),
@@ -51,44 +53,26 @@ namespace KTA_Visor.module.Station.view
             this.tunnel = new Tunnel.Tunnel();
             this.stationViewService = new StationViewService(this);
             this.controller = new StationController(this, this.stationViewService);
-            this.stationsList = new List<StationTObject>();
+            this.stationsList = new List<StationItem>();
+
+          
         }
 
         private void StationsView_Load(object sender, EventArgs e)
         {
-            this.topBar1.Parent = this;
-            this.topBar1.onClose += StationsView_OnClose;
-            this.table.bundle.column.addMultiple(this.Columns);
-
+            this.topBar.Parent = this;
+            this.topBar.onClose += StationsView_OnClose;
             this.initialize();
-        }
-
-        private void StationsView_OnClose(object sender, EventArgs e)
-        {
-            this.tunnel.stop();
         }
 
         private void initialize()
         {
-            this.tunnel.start();
             this.tunnel.onClientConnected += Tunnel_onClientConnected;
             this.tunnel.onClientDisconnected += Tunnel_onClientDisconnected;
-            this.tunnel.onMessageReceived += Tunnel_onMessageReceived;
-            
+            this.tunnel.onMessageReceived += Tunnel_onMessageReceived;   
             this.stationViewService.onAuthorized += StationViewService_onAuthorized;
-            this.table.DataGridView.CellDoubleClick += TableRow_CellDoubleClick;
         }
-
-        private void TableRow_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            this.Hide();
-
-            StationTObject station = RowHelper.RowToStation(this.table.DataGridView.SelectedRows);
-            station = this.stationsList.Find(item => item.ID == station.ID);
-
-            SingleStationView singleStationView = new SingleStationView(station, this.tunnel);
-            singleStationView.ShowDialog();
-        }
+ 
  
         private void Tunnel_onClientConnected(object sender, TCPTunnel.module.server.events.TCPServerClientConnectedEvent e)
         {
@@ -99,7 +83,14 @@ namespace KTA_Visor.module.Station.view
 
         private void Tunnel_onClientDisconnected(object sender, TCPTunnel.module.server.events.TCPServerClientDisonnectedEvent e)
         {
-            this.table.bundle.row.removeRow(e.getClient().getIpAddress());
+            foreach (StationItem stationItem in this.stationsFlowLayoutPanel.Controls)
+            {
+                if (stationItem.Station.Client.getIpAddress() != e.getClient().getIpAddress()) continue;
+
+                this.Invoke((MethodInvoker)delegate {
+                    this.stationsFlowLayoutPanel.Controls.Remove(stationItem);
+                });
+            }
         }
 
 
@@ -114,27 +105,38 @@ namespace KTA_Visor.module.Station.view
             station.Status = e.Body?.Status;
             station.Client = e.Client;
 
-            if (this.stationsList.Find(item => item.IpAddress == station.IpAddress) == null)
-            {
-                this.stationsList.Add(station);
+            StationItem stationItem = new StationItem(station);
 
-                this.table.bundle.row.add(
-                  station.ID.ToString(),
-                  station.IpAddress,
-                  station.Name,
-                  station.TotalPorts.ToString(),
-                  station.Status
-              );
+            if (this.stationsList.Find(item => item.Station.IpAddress == station.IpAddress) == null)
+            {
+                this.stationsList.Add(stationItem);
+
+                this.Invoke((MethodInvoker)delegate
+                {
+                    this.stationsFlowLayoutPanel.Controls.Add(stationItem);
+                    stationItem.OnStationClick += OnOpenStation;
+                });
             }
             
         }
 
+        private void OnOpenStation(object sender, StationOnClickEvent e)
+        {
+            this.Hide();
+
+            SingleStationView singleStationView = new SingleStationView(e.Station, this.tunnel);
+            singleStationView.ShowDialog();
+        }
 
         private void Tunnel_onMessageReceived(object sender, TCPTunnel.module.server.events.TCPServerClientMessageReceivedEvent e)
         {
             controller.StartWatching(e.getRoute());
         }
 
-      
+        private void StationsView_OnClose(object sender, EventArgs e)
+        {
+            this.tunnel.stop();
+        }
+
     }
 }

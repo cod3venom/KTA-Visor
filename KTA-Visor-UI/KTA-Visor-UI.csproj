@@ -75,6 +75,7 @@
     <Compile Include="component\basic\customPanel\CustomPanel.Designer.cs">
       <DependentUpon>CustomPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\basic\topbar\events\TopBarToggleEvent.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\column\Column.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\column\dto\ColumnTObject.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\column\event\ColumnEvent.cs" />
@@ -113,12 +114,6 @@
     <Compile Include="component\basic\topbar\TopBar.Designer.cs">
       <DependentUpon>TopBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="component\custom\Camera\Camerae.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\Camera\Camerae.Designer.cs">
-      <DependentUpon>Camerae.cs</DependentUpon>
-    </Compile>
     <Compile Include="component\custom\FileList\components\HorizontalFileItem\FileItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,6 +125,19 @@
     </Compile>
     <Compile Include="component\custom\FileList\FileList.Designer.cs">
       <DependentUpon>FileList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\HorizontalProgressBar\HorizontalProgressBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\HorizontalProgressBar\HorizontalProgressBar.Designer.cs">
+      <DependentUpon>HorizontalProgressBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\LoggerView\events\LoggerViewLogEvent.cs" />
+    <Compile Include="component\custom\LoggerView\LoggerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\LoggerView\LoggerView.Designer.cs">
+      <DependentUpon>LoggerView.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\MenuStripRenderer\MenuStripRenderer.cs" />
     <Compile Include="component\custom\NumbersCard\NumbersCard.cs">
@@ -169,6 +177,12 @@
     </Compile>
     <Compile Include="component\custom\LabelsListBar\LabelsListBar.Designer.cs">
       <DependentUpon>LabelsListBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\Sidebar\Sidebar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\Sidebar\Sidebar.Designer.cs">
+      <DependentUpon>Sidebar.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\VerticalTab\components\MenuLink\events\MenuLinkClickEvent.cs" />
     <Compile Include="component\custom\VerticalTab\components\MenuLink\MenuLink.cs">
@@ -228,14 +242,17 @@
     <EmbeddedResource Include="component\basic\topbar\TopBar.resx">
       <DependentUpon>TopBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\Camera\Camerae.resx">
-      <DependentUpon>Camerae.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\FileList\components\HorizontalFileItem\FileItem.resx">
       <DependentUpon>FileItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\FileList\FileList.resx">
       <DependentUpon>FileList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\HorizontalProgressBar\HorizontalProgressBar.resx">
+      <DependentUpon>HorizontalProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\LoggerView\LoggerView.resx">
+      <DependentUpon>LoggerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\NumbersCard\NumbersCard.resx">
       <DependentUpon>NumbersCard.cs</DependentUpon>
@@ -254,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\LabelsListBar\LabelsListBar.resx">
       <DependentUpon>LabelsListBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\Sidebar\Sidebar.resx">
+      <DependentUpon>Sidebar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\VerticalTab\components\MenuLink\MenuLink.resx">
       <DependentUpon>MenuLink.cs</DependentUpon>

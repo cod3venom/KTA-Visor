@@ -16,6 +16,7 @@ namespace TCPTunnel.module.server
     public class Server : ExtensionManager
     {
         public event EventHandler<EventArgs> onServerStarted;
+        public event EventHandler<EventArgs> onServerStopped;
         public event EventHandler<TCPServerClientConnectedEvent> onClientConnected;
         public event EventHandler<TCPServerClientDisonnectedEvent> onClientDisconnected;
         public event EventHandler<TCPServerClientMessageReceivedEvent> onMessageReceived;
@@ -54,6 +55,7 @@ namespace TCPTunnel.module.server
         {
             this.isServerEnabled = false;
             this.serverSocket.Close();
+            this.onServerStopped?.Invoke(this, EventArgs.Empty);
         }
 
     
@@ -96,7 +98,7 @@ namespace TCPTunnel.module.server
             {
                 while (this.isServerEnabled)
                 {
-                    Thread.Sleep(10);
+                    Thread.SpinWait(1000);
                     Socket client = this.serverSocket.Accept();
                     this.handleNewCLient(client);
                 }
@@ -163,7 +165,7 @@ namespace TCPTunnel.module.server
                     this.onClientDisconnected?.Invoke(this, new TCPServerClientDisonnectedEvent(existedClient));
                 }
 
-                Thread.Sleep(1000);
+                Thread.SpinWait(1000);
             }
         }
 

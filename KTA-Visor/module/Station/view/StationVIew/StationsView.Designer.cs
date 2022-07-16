@@ -29,112 +29,154 @@
         private void InitializeComponent()
         {
             this.topBarPanel = new System.Windows.Forms.Panel();
-            this.versionTopBarContainer = new System.Windows.Forms.Panel();
+            this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.table = new KTA_Visor_UI.component.basic.table.Table();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.footer1 = new KTA_Visor_UI.component.custom.Footer.Footer();
-            this.navigationBar1 = new KTA_Visor_UI.component.custom.NavigationBar.NavigationBar();
-            this.topBar1 = new KTA_Visor_UI.component.basic.topbar.TopBar();
-            this.horizontalSeparator1 = new KTA_Visor.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.loggerView1 = new KTA_Visor_UI.component.custom.LoggerView.LoggerView();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.stationsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.topBarPanel.SuspendLayout();
-            this.versionTopBarContainer.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // topBarPanel
             // 
-            this.topBarPanel.Controls.Add(this.topBar1);
+            this.topBarPanel.Controls.Add(this.topBar);
             this.topBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBarPanel.Location = new System.Drawing.Point(0, 0);
             this.topBarPanel.Name = "topBarPanel";
-            this.topBarPanel.Size = new System.Drawing.Size(1480, 44);
+            this.topBarPanel.Size = new System.Drawing.Size(1440, 44);
             this.topBarPanel.TabIndex = 0;
             // 
-            // versionTopBarContainer
+            // topBar
             // 
-            this.versionTopBarContainer.Controls.Add(this.navigationBar1);
-            this.versionTopBarContainer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.versionTopBarContainer.Location = new System.Drawing.Point(0, 44);
-            this.versionTopBarContainer.Name = "versionTopBarContainer";
-            this.versionTopBarContainer.Size = new System.Drawing.Size(1480, 121);
-            this.versionTopBarContainer.TabIndex = 2;
+            this.topBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(97)))));
+            this.topBar.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(97)))));
+            this.topBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.topBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.topBar.Location = new System.Drawing.Point(0, 0);
+            this.topBar.Name = "topBar";
+            this.topBar.Parent = null;
+            this.topBar.Size = new System.Drawing.Size(1440, 44);
+            this.topBar.TabIndex = 0;
+            this.topBar.Title = "Window";
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.footer1);
-            this.panel1.Controls.Add(this.horizontalSeparator1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 942);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 44);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1480, 82);
-            this.panel1.TabIndex = 4;
+            this.panel1.Size = new System.Drawing.Size(78, 790);
+            this.panel1.TabIndex = 1;
             // 
-            // table
+            // panel2
             // 
-            this.table.AllowAdd = true;
-            this.table.AllowDelete = true;
-            this.table.AllowEdit = true;
-            this.table.AllowSearch = true;
-            this.table.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.table.Location = new System.Drawing.Point(0, 165);
-            this.table.Name = "table";
-            this.table.ShowAdd = true;
-            this.table.ShowControls = false;
-            this.table.ShowDelete = true;
-            this.table.ShowEdit = true;
-            this.table.Size = new System.Drawing.Size(1480, 777);
-            this.table.TabIndex = 5;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(78, 44);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1362, 14);
+            this.panel2.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(78, 58);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(14, 776);
+            this.panel3.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(1044, 58);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(382, 717);
+            this.panel4.TabIndex = 4;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.footer1);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(92, 789);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1348, 45);
+            this.panel5.TabIndex = 3;
             // 
             // footer1
             // 
             this.footer1.AutoSize = true;
-            this.footer1.BackColor = System.Drawing.Color.White;
+            this.footer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.footer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.footer1.Location = new System.Drawing.Point(0, 2);
+            this.footer1.Location = new System.Drawing.Point(0, 0);
             this.footer1.Name = "footer1";
-            this.footer1.Size = new System.Drawing.Size(1480, 80);
-            this.footer1.TabIndex = 1;
+            this.footer1.Size = new System.Drawing.Size(1348, 45);
+            this.footer1.TabIndex = 0;
             // 
-            // navigationBar1
+            // panel6
             // 
-            this.navigationBar1.BackColor = System.Drawing.Color.White;
-            this.navigationBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.navigationBar1.Links = new string[0];
-            this.navigationBar1.Location = new System.Drawing.Point(0, 0);
-            this.navigationBar1.Name = "navigationBar1";
-            this.navigationBar1.Size = new System.Drawing.Size(1480, 121);
-            this.navigationBar1.TabIndex = 0;
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel6.Location = new System.Drawing.Point(1426, 58);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(14, 731);
+            this.panel6.TabIndex = 5;
             // 
-            // topBar1
+            // panel9
             // 
-            this.topBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.topBar1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.topBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topBar1.Location = new System.Drawing.Point(0, 0);
-            this.topBar1.Name = "topBar1";
-            this.topBar1.Parent = null;
-            this.topBar1.Size = new System.Drawing.Size(1480, 44);
-            this.topBar1.TabIndex = 0;
-            this.topBar1.Title = "Window";
+            this.panel9.Controls.Add(this.loggerView1);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel9.Location = new System.Drawing.Point(92, 531);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(952, 244);
+            this.panel9.TabIndex = 5;
             // 
-            // horizontalSeparator1
+            // loggerView1
             // 
-            this.horizontalSeparator1.BackColor = System.Drawing.Color.Silver;
-            this.horizontalSeparator1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.horizontalSeparator1.Location = new System.Drawing.Point(0, 0);
-            this.horizontalSeparator1.Name = "horizontalSeparator1";
-            this.horizontalSeparator1.Size = new System.Drawing.Size(1480, 2);
-            this.horizontalSeparator1.TabIndex = 0;
+            this.loggerView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loggerView1.Location = new System.Drawing.Point(0, 0);
+            this.loggerView1.Name = "loggerView1";
+            this.loggerView1.ParentPanel = null;
+            this.loggerView1.Size = new System.Drawing.Size(952, 244);
+            this.loggerView1.TabIndex = 0;
+            // 
+            // panel10
+            // 
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel10.Location = new System.Drawing.Point(92, 775);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(1334, 14);
+            this.panel10.TabIndex = 6;
+            // 
+            // stationsFlowLayoutPanel
+            // 
+            this.stationsFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.stationsFlowLayoutPanel.Location = new System.Drawing.Point(92, 58);
+            this.stationsFlowLayoutPanel.Name = "stationsFlowLayoutPanel";
+            this.stationsFlowLayoutPanel.Size = new System.Drawing.Size(952, 473);
+            this.stationsFlowLayoutPanel.TabIndex = 7;
             // 
             // StationsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1480, 1024);
-            this.Controls.Add(this.table);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1440, 834);
+            this.Controls.Add(this.stationsFlowLayoutPanel);
+            this.Controls.Add(this.panel9);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel10);
+            this.Controls.Add(this.panel6);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.versionTopBarContainer);
             this.Controls.Add(this.topBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StationsView";
@@ -142,9 +184,9 @@
             this.Text = "StationsView";
             this.Load += new System.EventHandler(this.StationsView_Load);
             this.topBarPanel.ResumeLayout(false);
-            this.versionTopBarContainer.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -152,12 +194,17 @@
         #endregion
 
         private System.Windows.Forms.Panel topBarPanel;
-        private System.Windows.Forms.Panel versionTopBarContainer;
+        private KTA_Visor_UI.component.basic.topbar.TopBar topBar;
         private System.Windows.Forms.Panel panel1;
-        private component.basic.table.components.HorizontalSeparator.HorizontalSeparator horizontalSeparator1;
-        private KTA_Visor_UI.component.basic.topbar.TopBar topBar1;
-        private KTA_Visor_UI.component.custom.NavigationBar.NavigationBar navigationBar1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
         private KTA_Visor_UI.component.custom.Footer.Footer footer1;
-        private KTA_Visor_UI.component.basic.table.Table table;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
+        private KTA_Visor_UI.component.custom.LoggerView.LoggerView loggerView1;
+        private System.Windows.Forms.FlowLayoutPanel stationsFlowLayoutPanel;
     }
 }

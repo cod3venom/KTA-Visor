@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KTA_Visor_UI.component.basic.topbar.events;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,12 @@ namespace KTA_Visor_UI.component.basic.topbar
         public event EventHandler<EventArgs> onMaximize;
         public event EventHandler<EventArgs> onMinimize;
 
-        
+        public bool isToggled = false;
+
+        private bool isMaximized = false;
+
+        private Rectangle parentMinBounds;
+        private Rectangle parentMaxBounds;
 
         public TopBar()
         {
@@ -35,10 +41,13 @@ namespace KTA_Visor_UI.component.basic.topbar
 
         private void TopBar_Load(object sender, EventArgs e)
         {
+            this.parentMinBounds = this.ParentForm.Bounds;
+            this.parentMaxBounds = Screen.FromHandle(this.Handle).WorkingArea;
             this.closeBtn.Click += CloseBtn_Click;
             this.resizeBtn.Click += ResizeBtn_Click;
             this.minimizeBtn.Click += MinimizeBtn_Click;
         }
+ 
 
         private void CloseBtn_Click(object sender, EventArgs e)
         {
@@ -48,13 +57,16 @@ namespace KTA_Visor_UI.component.basic.topbar
 
         private void ResizeBtn_Click(object sender, EventArgs e)
         {
-            if (this.parent.WindowState == FormWindowState.Maximized)
+            if (this.isMaximized)
             {
+                this.ParentForm.Bounds = this.parentMinBounds;
                 this.parent.WindowState = FormWindowState.Normal;
+                this.isMaximized = false;
                 this.onResize?.Invoke(sender, e);
             } else
             {
-                this.parent.WindowState = FormWindowState.Maximized;
+                this.ParentForm.Bounds = this.parentMaxBounds;
+                this.isMaximized = true;
                 this.onMaximize?.Invoke(sender, e);
             }
         }
@@ -80,6 +92,7 @@ namespace KTA_Visor_UI.component.basic.topbar
             set { this.titleLbl.Text = value; }
         }
 
+       
         public Bunifu.Framework.UI.BunifuImageButton CloseButton
         {
             get { return this.closeBtn; }

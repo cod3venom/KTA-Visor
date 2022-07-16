@@ -67,10 +67,10 @@ namespace KTA_Visor_DSClient.module.camera.service
         }
 
 
-        public DirectoryInfo copyFielsToNetworkStorage(string driveName)
+        public void copyFielsToNetworkStorage(string driveName)
         {
             Dictionary<string, FileInfo> files = this.FilesFromDrive(driveName);
-            return CopyCameraFilesToNetworkStorageCommand.Execute(
+            CopyCameraFilesToNetworkStorageCommand.Execute(
                 files,
                 this.settings.SettingsObj.app?.fileSystem.networkStorage
             );

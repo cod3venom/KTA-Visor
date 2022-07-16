@@ -34,16 +34,15 @@ namespace KTA_Visor_DSClient.module.tunnel
 
         public void connect()
         {
-            this.client.connect();
             this.client.onClientConnected += Client_onClientConnected;
             this.client.onClientDisconnected += Client_onClientDisconnected;
             this.client.onReceivedMessage += Client_onReceivedMessage;
+            this.client.connect();
         }
 
         public void disconnect()
         {
             this.client.disconnect();
-
         }
 
         public void autoReconnect()

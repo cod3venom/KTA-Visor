@@ -61,6 +61,7 @@ namespace TCPTunnel.module.client
 
                 while (!this.isConnected())
                 {
+                    Thread.SpinWait(1000);
                     this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
                     break;
                 }
@@ -75,7 +76,13 @@ namespace TCPTunnel.module.client
 
         public Client disconnect()
         {
-            this.client.getSocket().Close();
+            if (this.client == null)
+                return this;
+
+            if (this.client.IsConnected())
+            {
+                this.client.getSocket().Close();
+            }
 
             return this;
         }
@@ -89,7 +96,7 @@ namespace TCPTunnel.module.client
                 this.logger.warn("Trying to auto-reconnect ...");
                 this.connect();
 
-                Thread.Sleep(5000);
+                Thread.SpinWait(1000);
             }
         }
 

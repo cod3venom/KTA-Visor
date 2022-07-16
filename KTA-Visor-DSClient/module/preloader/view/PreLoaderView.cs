@@ -42,17 +42,14 @@ namespace KTA_Visor_DSClient.module.preloader.view
 
         private void startLoading()
         {
-            for(int i = MIN_PROGRESS; i < MAX_PROGRESS; i+= PROGRESS_STEP)
-            {
-                string progress = string.Format("Loaded {0}%", i.ToString());
-                this.Invoke((MethodInvoker)delegate
-                {
-                    this.loaderLbl.Text = progress;
-                });
 
-                Thread.Sleep(PROGRESS_TIMEOUT);
-            }
+            this.horizontalProgressBar.OnProgressFinished += OnProgressBarFinished;
+            this.horizontalProgressBar.start();
+            Application.DoEvents();
+        }
 
+        private void OnProgressBarFinished(object sender, EventArgs e)
+        {
             this.showTargetView();
         }
 

@@ -15,6 +15,7 @@ namespace KTA_Visor.module.Tunnel
     public class Tunnel
     {
         public event EventHandler<EventArgs> onServerStarted;
+        public event EventHandler<EventArgs> onServerStopped;
         public event EventHandler<TCPServerClientConnectedEvent> onClientConnected;
         public event EventHandler<TCPServerClientDisonnectedEvent> onClientDisconnected;
         public event EventHandler<TCPServerClientMessageReceivedEvent> onMessageReceived;
@@ -30,14 +31,28 @@ namespace KTA_Visor.module.Tunnel
             this.server = new TCPTunnel.TCPTunnel().createServer(config);
         }
 
+
         public void start()
         {
-            this.server.startServer();
+            try
+            {
+                this.server.onServerStarted += TcpServer_onServerStarted;
+                this.server.onServerStopped += TcpServer_onServerStopped;
+                this.server.onClientConnected += TcpServer_onClientConnected;
+                this.server.onClientDisconnected += TcpServer_onClientDisconnected;
+                this.server.onMessageReceived += Server_onMessageReceived;
 
-            this.server.onServerStarted += TcpServer_onServerStarted;
-            this.server.onClientConnected += TcpServer_onClientConnected;            
-            this.server.onClientDisconnected += TcpServer_onClientDisconnected;
-            this.server.onMessageReceived += Server_onMessageReceived;
+                this.server.startServer();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void TcpServer_onServerStopped(object sender, EventArgs e)
+        {
+           this.onServerStopped?.Invoke(this, e);
         }
 
         public void stop()
@@ -68,6 +83,11 @@ namespace KTA_Visor.module.Tunnel
             this.logger.success("Received: Message " + e.getRoute().Body);
             
             this.onMessageReceived?.Invoke(sender, e);
+        }
+
+        public KTALogger.Logger DebuggingPipe
+        {
+            get { return this.logger; }
         }
 
     }

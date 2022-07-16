@@ -105,6 +105,24 @@
     <Compile Include="kernel\sharedKernel\app-settings\AppSettings.cs" />
     <Compile Include="module\camera-settings-manager\CameraSettingsManager.cs" />
     <Compile Include="module\camera\command\CopyCameraFilesToNetworkStorageCommand.cs" />
+    <Compile Include="module\dashboard\componnets\CameraItem\CameraItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\dashboard\componnets\CameraItem\CameraItem.Designer.cs">
+      <DependentUpon>CameraItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\dashboard\componnets\FileHistory\components\FileItem\FileItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\dashboard\componnets\FileHistory\components\FileItem\FileItem.Designer.cs">
+      <DependentUpon>FileItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\dashboard\componnets\FileHistory\FileHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\dashboard\componnets\FileHistory\FileHistory.Designer.cs">
+      <DependentUpon>FileHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\dashboard\componnets\TCPClient\TCPClient.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,6 +162,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="components\basic\table\Table.resx">
       <DependentUpon>Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\dashboard\componnets\CameraItem\CameraItem.resx">
+      <DependentUpon>CameraItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\dashboard\componnets\FileHistory\components\FileItem\FileItem.resx">
+      <DependentUpon>FileItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\dashboard\componnets\FileHistory\FileHistory.resx">
+      <DependentUpon>FileHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\dashboard\componnets\TCPClient\TCPClient.resx">
       <DependentUpon>TCPClient.cs</DependentUpon>
@@ -194,6 +221,7 @@
     <Folder Include="module\camera-settings-manager\dto\" />
     <Folder Include="module\camera-settings-manager\repository\" />
     <Folder Include="module\camera-settings-manager\service\" />
+    <Folder Include="module\dashboard\componnets\FileHistory\events\" />
     <Folder Include="module\dashboard\service\" />
     <Folder Include="Resources\" />
   </ItemGroup>

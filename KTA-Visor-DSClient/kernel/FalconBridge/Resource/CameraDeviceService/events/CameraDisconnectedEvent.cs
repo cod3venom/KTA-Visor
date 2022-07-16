@@ -16,6 +16,8 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events
             this.camera = camera;
         }
 
+        public USBCameraDevice Camera { get { return camera; } }
+
         public USBCameraDevice getCamera()
         {
             return camera;

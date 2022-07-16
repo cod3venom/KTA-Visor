@@ -5,6 +5,7 @@ using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device;
 using KTA_Visor_DSClient.module.camera.service;
+using KTA_Visor_DSClient.module.dashboard.componnets.CameraItem;
 using KTA_Visor_DSClient.module.dashboard.controller;
 using KTA_Visor_DSClient.module.settings.views;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
@@ -63,11 +64,6 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// </summary>
         private USBCameraDeviceList<USBCameraDevice> camerasList;
 
-        private bool sidebarIsToggled = false;
-
-        private readonly int SIDE_BAR_MAX_WIDTH = 230;
-        
-        private readonly int SIDE_BAR_MIN_WIDTH = 0;
 
         private enum WM_DEVICECHANGE
         {
@@ -75,14 +71,6 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         }
 
         private int WmDevicechange = 0x0219; // device change event  
-
-        private readonly ColumnTObject[] Columns = new ColumnTObject[] {
-            new ColumnTObject(0, "ID"),
-            new ColumnTObject(1, "Name"),
-            new ColumnTObject(2, "SN"),
-            new ColumnTObject(3, "Disk usage"),
-        };
-
 
         public DashboardView()
         {
@@ -92,6 +80,8 @@ namespace KTA_Visor_DSClient.module.dashboard.view
             this.topBar1.Parent = this;
             this.topBar1.Title = this.settings.SettingsObj.app.title;
             this.topBar1.onClose += OnClose;
+
+            this.loggerView.ParentPanel = this.loggerViewPanel;
 
             this.logger = new KTALogger.Logger();
             this.falconBridge = new FalconBridge();
@@ -103,10 +93,10 @@ namespace KTA_Visor_DSClient.module.dashboard.view
                 this.settings.SettingsObj.app.management.serverIp,
                 this.settings.SettingsObj.app.management.serverPort
             ));
-            this.tcpClientPanel.Tunnel = this.tunnel;
+            //this.tcpClientPanel.Tunnel = this.tunnel;
         }
 
- 
+
         /// <summary>
         /// 
         /// </summary>
@@ -114,11 +104,27 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <param name="e"></param>
         private void DashboardView_Load(object sender, EventArgs e)
         {
-            this.render();
+           
+            for(int i =0;i < 10; i++)
+            {
+                this.fileHistory.addFile("file_" + i.ToString() + ".mp4", "z:\\dowody", false);
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                CameraItem camera = new CameraItem();
+                camera.Margin = new Padding(10, 10, 10, 20);
+                camerasPanel.Controls.Add(camera);
+            }
+        }
+
+        private void OnStartListeningForCameras(object sender, EventArgs e)
+        {
             Thread watchForDeviceThr = new Thread(this.watchForDevices);
             watchForDeviceThr.IsBackground = true;
             watchForDeviceThr.Start();
         }
+
 
         /// <summary>
         /// 
@@ -129,17 +135,6 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         {
             this.tunnel.disconnect();
             Application.Exit();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void render()
-        { 
-            this.table.bundle.column.addMultiple(this.Columns);
-            this.sidebarToggleBtn.Click += OnShowHideSidebar;
-            this.managementBtn.Click += OnShowManagement;
-            this.fileSystemBtn.Click += OnShowFileSystem;
         }
 
 
@@ -163,40 +158,9 @@ namespace KTA_Visor_DSClient.module.dashboard.view
             new ManagementSettingsView().ShowDialog();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnShowHideSidebar(object sender, EventArgs e)
-        {
-            if (this.sidebarIsToggled){
-                this.showSideBar();
-            } else {
-                this.hideSideBar();
-            }
-            
-        }
+   
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void hideSideBar()
-        {
-            this.sidebarIsToggled = true;
-            this.sidebarPanel.Width = this.SIDE_BAR_MIN_WIDTH;
-            this.sidebarToggleBtn.Location = new Point(this.SIDE_BAR_MIN_WIDTH, 65);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void showSideBar()
-        {
-            this.sidebarIsToggled = false;
-            this.sidebarPanel.Width = this.SIDE_BAR_MAX_WIDTH;
-            this.sidebarToggleBtn.Location = new Point(this.SIDE_BAR_MAX_WIDTH, 65);
-        }
+     
 
         /// <summary>
         /// 
@@ -225,25 +189,20 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OnCameraConnectedEvt(object sender, CameraConnectedEvent e)
-        { 
-            this.table.bundle.row.add(
-                (this.cameraDeviceService.Cameras.Count()).ToString(),
-                e.getCamera().Drive?.Name,
-                e.getCamera().SerialNumber, 
-                e.getCamera().DiskUsage
-            );
-
+        {
+            CameraItem cameraItem = new CameraItem(e.Camera);
             this.camerasList.Add(e.getCamera());
+ 
+            this.Invoke((MethodInvoker)delegate {
+               // this.camerasLayoutPanel.Controls.Add(cameraItem);
+            });
 
             if (this.settings.SettingsObj.app.fileSystem.autoCopy)
             {
-                this.usedSpaceCard.setNumber(
-                    this.cameraService.copyFielsToNetworkStorage(e.getCamera().Drive.Name)
-                      .GetFiles().Length.ToString()
-                );
+                this.cameraService
+                    .copyFielsToNetworkStorage(e.getCamera().Drive.Name);
             }
 
-            this.connectedCamerasCard.setNumber(this.camerasList.Count().ToString());
         }
 
         /// <summary>
@@ -253,8 +212,21 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <param name="e"></param>
         private void OnCameraDisconnectedEvent(object sender, CameraDisconnectedEvent e)
         {
-            this.table.bundle.row.removeRow(e.getCamera().SerialNumber);
-            this.connectedCamerasCard.setNumber( this.camerasList.Count().ToString() );
+            //foreach(USBCameraDevice camera in this.camerasList)
+            //{
+            //    if (camera.SerialNumber != e.Camera.SerialNumber) continue;
+
+            //    foreach (CameraItem cameraItem in camerasLayoutPanel.Controls)
+            //    {
+            //        if (cameraItem.Camera.SerialNumber != e.Camera.SerialNumber) continue;
+
+            //        this.camerasList.Remove(camera);
+
+            //        this.Invoke((MethodInvoker)delegate { 
+            //            this.camerasLayoutPanel.Controls.Remove(cameraItem);
+            //        });
+            //    }
+            //}
         }
 
         /// <summary>
@@ -280,7 +252,7 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <exception cref="NotImplementedException"></exception>
         private void Tunnel_onClientDisconnected(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("KTA-Visor server is offline");
         }
 
         /// <summary>
@@ -303,5 +275,7 @@ namespace KTA_Visor_DSClient.module.dashboard.view
                 }
             }
         }
+
+        
     }
 }

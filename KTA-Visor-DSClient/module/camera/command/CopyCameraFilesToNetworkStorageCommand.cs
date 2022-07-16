@@ -9,8 +9,11 @@ namespace KTA_Visor_DSClient.module.camera.command
 {
     public class CopyCameraFilesToNetworkStorageCommand
     {
-        public static DirectoryInfo Execute(Dictionary<string, FileInfo> files, string networkDriveLocation)
+        public static void Execute(Dictionary<string, FileInfo> files, string networkDriveLocation)
         {
+            if (networkDriveLocation == null)
+                return;
+
             DirectoryInfo directory = new DirectoryInfo(networkDriveLocation);
             if (!directory.Exists)
                 throw new Exception("Network drive location does not exists");
@@ -29,7 +32,6 @@ namespace KTA_Visor_DSClient.module.camera.command
                 }
             }
 
-            return directory;
         }
     }
 }

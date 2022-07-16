@@ -322,12 +322,17 @@
     <Compile Include="module\Settings\view\SettingsView.Designer.cs">
       <DependentUpon>SettingsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Station\components\events\StationItemActionEvent.cs" />
-    <Compile Include="module\Station\components\StationItem.cs">
+    <Compile Include="module\Station\components\StationItem\StationItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Station\components\StationItem.Designer.cs">
+    <Compile Include="module\Station\components\StationItem\StationItem.Designer.cs">
       <DependentUpon>StationItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Station\components\TCPServerUI\TCPServerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Station\components\TCPServerUI\TCPServerUI.Designer.cs">
+      <DependentUpon>TCPServerUI.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Station\controller\StationController.cs" />
     <Compile Include="module\Station\controller\SingleStationViewController.cs" />
@@ -401,8 +406,11 @@
     <EmbeddedResource Include="module\Settings\view\SettingsView.resx">
       <DependentUpon>SettingsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Station\components\StationItem.resx">
+    <EmbeddedResource Include="module\Station\components\StationItem\StationItem.resx">
       <DependentUpon>StationItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Station\components\TCPServerUI\TCPServerUI.resx">
+      <DependentUpon>TCPServerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Station\view\StationVIew\SingleStationView.resx">
       <DependentUpon>SingleStationView.cs</DependentUpon>
