@@ -307,6 +307,10 @@
     <Compile Include="component\custom\VerticalTab\VerticalTab.Designer.cs">
       <DependentUpon>VerticalTab.cs</DependentUpon>
     </Compile>
+    <Compile Include="install\Installer.cs" />
+    <Compile Include="install\settings\dto\SettingsFileTObject.cs" />
+    <Compile Include="install\settings\Settings.cs" />
+    <Compile Include="kernel\helper\EmbededFileHelper.cs" />
     <Compile Include="kernel\module\VirtualRFID\VirtualRFID.cs" />
     <Compile Include="module\Authentication\events\RFIDAuthFailEvent.cs" />
     <Compile Include="module\Authentication\events\RFIDAuthSuccessEvent.cs" />
@@ -316,12 +320,19 @@
     <Compile Include="module\Authentication\view\RFIDAuthenticationView.Designer.cs">
       <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Settings\view\SettingsView.cs">
-      <SubType>Form</SubType>
+    <Compile Include="module\Station\components\ClientsList\ClientsList.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Settings\view\SettingsView.Designer.cs">
-      <DependentUpon>SettingsView.cs</DependentUpon>
+    <Compile Include="module\Station\components\ClientsList\ClientsList.Designer.cs">
+      <DependentUpon>ClientsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Station\components\ClientsList\components\ClientItem\ClientItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Station\components\ClientsList\components\ClientItem\ClientItem.Designer.cs">
+      <DependentUpon>ClientItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Station\components\StationItem\events\StationItemClickEvent.cs" />
     <Compile Include="module\Station\components\StationItem\StationItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -356,6 +367,12 @@
       <DependentUpon>StationsView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Tunnel\Tunnel.cs" />
+    <Compile Include="module\Tunnel\view\TunnelSettingsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Tunnel\view\TunnelSettingsView.Designer.cs">
+      <DependentUpon>TunnelSettingsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="component\basic\button\ImageButton.resx">
@@ -403,8 +420,11 @@
     <EmbeddedResource Include="module\Authentication\view\RFIDAuthenticationView.resx">
       <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Settings\view\SettingsView.resx">
-      <DependentUpon>SettingsView.cs</DependentUpon>
+    <EmbeddedResource Include="module\Station\components\ClientsList\ClientsList.resx">
+      <DependentUpon>ClientsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Station\components\ClientsList\components\ClientItem\ClientItem.resx">
+      <DependentUpon>ClientItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Station\components\StationItem\StationItem.resx">
       <DependentUpon>StationItem.cs</DependentUpon>
@@ -418,6 +438,9 @@
     <EmbeddedResource Include="module\Station\view\StationVIew\StationsView.resx">
       <DependentUpon>StationsView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="module\Tunnel\view\TunnelSettingsView.resx">
+      <DependentUpon>TunnelSettingsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -428,6 +451,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="install\settings\Settings.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -447,7 +471,6 @@
     <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
-    <Folder Include="kernel\helper\" />
     <Folder Include="kernel\sharedKernel\" />
     <Folder Include="module\Authentication\command\" />
     <Folder Include="module\Authentication\entity\" />
@@ -455,6 +478,7 @@
     <Folder Include="module\Authentication\repository\" />
     <Folder Include="module\Station\entity\" />
     <Folder Include="module\Station\repository\" />
+    <Folder Include="module\Tunnel\components\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close.png" />
@@ -489,6 +513,12 @@
       <Name>TCPTunnel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green_circle.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -500,4 +530,9 @@
     <Error Condition="!Exists('..\packages\Avalonia.0.10.15\build\Avalonia.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Avalonia.0.10.15\build\Avalonia.props'))" />
   </Target>
   <Import Project="..\packages\Avalonia.0.10.15\build\Avalonia.targets" Condition="Exists('..\packages\Avalonia.0.10.15\build\Avalonia.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties install_4settings_4settings_1json__JsonSchema="https://appsemble.app/api.json" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

@@ -17,12 +17,22 @@ namespace KTA_Visor_DSClient
         [STAThread]
         static void Main()
         {
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                SetProcessDPIAware();
+            }
+
             Installer installer = new Installer();
             installer.FullInstall();
 
+            KTALogger.Logger logger = new KTALogger.Logger();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PreLoaderView(new DashboardView()));
+            Application.Run(new PreLoaderView(new DashboardView(logger)));
         }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
     }
 }

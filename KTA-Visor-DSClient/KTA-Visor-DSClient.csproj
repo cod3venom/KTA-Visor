@@ -105,6 +105,9 @@
     <Compile Include="kernel\sharedKernel\app-settings\AppSettings.cs" />
     <Compile Include="module\camera-settings-manager\CameraSettingsManager.cs" />
     <Compile Include="module\camera\command\CopyCameraFilesToNetworkStorageCommand.cs" />
+    <Compile Include="module\camera\dto\CopiedCameraFileTObject.cs" />
+    <Compile Include="module\camera\service\CameraDeviceServiceWrapper.cs" />
+    <Compile Include="module\camera\virtualStorage\CamerasVirtualStorage.cs" />
     <Compile Include="module\dashboard\componnets\CameraItem\CameraItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -132,7 +135,7 @@
     <Compile Include="module\dashboard\controller\CameraController.cs" />
     <Compile Include="module\camera\dto\GetCameraFilesRequestTObject.cs" />
     <Compile Include="module\camera\repository\CameraListViewRepository.cs" />
-    <Compile Include="module\camera\service\CameraService.cs" />
+    <Compile Include="module\camera\service\SingleCameraService.cs" />
     <Compile Include="module\dashboard\view\DashboardView.cs">
       <SubType>Form</SubType>
     </Compile>

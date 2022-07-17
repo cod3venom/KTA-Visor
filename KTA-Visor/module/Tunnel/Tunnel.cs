@@ -36,7 +36,7 @@ namespace KTA_Visor.module.Tunnel
         {
             try
             {
-                this.server.onServerStarted += TcpServer_onServerStarted;
+                this.server.onServerStarted += TcpServer_onServerStarted; ;
                 this.server.onServerStopped += TcpServer_onServerStopped;
                 this.server.onClientConnected += TcpServer_onClientConnected;
                 this.server.onClientDisconnected += TcpServer_onClientDisconnected;
@@ -48,6 +48,11 @@ namespace KTA_Visor.module.Tunnel
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+
+        private void TcpServer_onServerStarted(object sender, TCPServerStartedEvent e)
+        {
+            this.logger.info(String.Format("Started Server on {0}:{1}", e.Config.ipAddress, e.Config.port.ToString()));
         }
 
         private void TcpServer_onServerStopped(object sender, EventArgs e)

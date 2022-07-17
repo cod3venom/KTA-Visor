@@ -1,4 +1,5 @@
-﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
+﻿using KTA_Visor.module.Station.components.StationItem.events;
+using KTA_Visor.module.Station.dto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,50 +9,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TCPTunnel.kernel.types;
 
-namespace KTA_Visor.module.station.componnets.StationItem
+namespace KTA_Visor.module.Station.components.StationItem
 {
     public partial class StationItem : UserControl
     {
+        public event EventHandler<StationItemClickEvent> OnClick;
+
         public StationItem()
         {
             InitializeComponent();
         }
 
-        public StationItem(USBCameraDevice camera)
+        public StationItem(StationTObject station)
         {
-            this.Name = camera.Drive.Name;
-            this.IpAddress = camera;
-            this.Camera = camera;
+            InitializeComponent();
+            this.Station = station;
+            this.ID = station.ID;
+            this.Name = station.Name;
+            this.IpAddress = station.Client.getIpAddress();
         }
 
-        public StationItem(string name, string serialNumber = "")
-        {
-            this.Name = name;
-            this.SerialNumber = serialNumber;
-        }
-
-        private void CameraItem_Load(object sender, EventArgs e)
+        
+        private void StationItem_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void CameraItem_MouseLeave(object sender, EventArgs e)
+        public StationTObject Station { get; set; }
+
+        public int ID { get; set; }
+
+        public string Name
         {
-            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#002361");
+            get { return this.stationNameLbl.Text; }
+            set { this.stationNameLbl.Text = value; }
         }
 
-        private void CameraItem_MouseEnter(object sender, EventArgs e)
+        public string IpAddress
         {
-            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#556C95");
+            get { return this.ipAddressLbl.Text; }
+            set { this.ipAddressLbl.Text = value; }
         }
-
-        public USBCameraDevice Camera { get; set; }
-
-        public string Name { get; set; }
-
-        public string IpAddress { get; set; }
-
-       
     }
 }

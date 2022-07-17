@@ -28,18 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button = new System.Windows.Forms.Button();
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.SuspendLayout();
             // 
             // button
             // 
-            this.button.BackColor = System.Drawing.Color.White;
+            this.button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(231)))));
             this.button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button.Font = new System.Drawing.Font("Inter", 8.2F);
-            this.button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.button.Font = new System.Drawing.Font("Inter SemiBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(84)))), ((int)(((byte)(89)))));
             this.button.Location = new System.Drawing.Point(0, 0);
             this.button.Name = "button";
             this.button.Size = new System.Drawing.Size(145, 31);
@@ -47,10 +49,16 @@
             this.button.Text = "Save";
             this.button.UseVisualStyleBackColor = false;
             // 
+            // bunifuElipse1
+            // 
+            this.bunifuElipse1.ElipseRadius = 10;
+            this.bunifuElipse1.TargetControl = this;
+            // 
             // SecondaryButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.Controls.Add(this.button);
             this.Name = "SecondaryButton";
             this.Size = new System.Drawing.Size(145, 31);
@@ -62,5 +70,6 @@
         #endregion
 
         private System.Windows.Forms.Button button;
+        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
     }
 }

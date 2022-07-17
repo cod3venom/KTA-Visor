@@ -20,8 +20,10 @@ namespace KTA_Visor_DSClient.module.dashboard.componnets.CameraItem
 
         public CameraItem(USBCameraDevice camera)
         {
-            this.Name = camera.Drive.Name;
+            InitializeComponent();
+            this.Name = camera.Name;
             this.SerialNumber = camera.SerialNumber;
+            this.Drive = camera.Drive.Name;
             this.Camera = camera;
         }
 
@@ -29,11 +31,12 @@ namespace KTA_Visor_DSClient.module.dashboard.componnets.CameraItem
         {
             this.Name = name;
             this.SerialNumber = serialNumber;
+             
         }
 
         private void CameraItem_Load(object sender, EventArgs e)
         {
-
+           // this.Padding = new Padding(10, 10, 10, 20);
         }
 
         private void CameraItem_MouseLeave(object sender, EventArgs e)
@@ -48,9 +51,23 @@ namespace KTA_Visor_DSClient.module.dashboard.componnets.CameraItem
 
         public USBCameraDevice Camera { get; set; }
 
-        public string Name { get; set; }
+        public string Name 
+        { 
+            get { return this.cameraNameLbl.Text; }
+            set { this.cameraNameLbl.Text = value; }
+        }
 
-        public string SerialNumber { get; set; }
+        public string SerialNumber 
+        {
+            get { return this.cameraSNLbl.Text; }
+            set { this.cameraSNLbl.Text = value; }
+        }
+
+        public string Drive
+        {
+            get { return this.cameraDriveLbl.Text; }
+            set { this.cameraDriveLbl.Text = value; }
+        }
 
        
     }

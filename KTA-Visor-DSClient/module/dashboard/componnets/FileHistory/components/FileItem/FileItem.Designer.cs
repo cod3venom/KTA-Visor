@@ -34,10 +34,10 @@
             this.storageLbl = new System.Windows.Forms.Label();
             this.diffValue = new System.Windows.Forms.Label();
             this.diffLbl = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.dateLbl = new System.Windows.Forms.Label();
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
+            this.footerPanel = new System.Windows.Forms.Panel();
+            this.footerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // nameLbl
@@ -106,16 +106,16 @@
             this.diffLbl.TabIndex = 4;
             this.diffLbl.Text = "Diff";
             // 
-            // label7
+            // dateLbl
             // 
-            this.label7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label7.Font = new System.Drawing.Font("Inter SemiBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(160)))), ((int)(((byte)(162)))));
-            this.label7.Location = new System.Drawing.Point(209, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 25);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "21.03.2012";
+            this.dateLbl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dateLbl.Font = new System.Drawing.Font("Inter SemiBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(160)))), ((int)(((byte)(162)))));
+            this.dateLbl.Location = new System.Drawing.Point(209, 0);
+            this.dateLbl.Name = "dateLbl";
+            this.dateLbl.Size = new System.Drawing.Size(76, 25);
+            this.dateLbl.TabIndex = 6;
+            this.dateLbl.Text = "21.03.2012";
             // 
             // bunifuSeparator1
             // 
@@ -131,21 +131,21 @@
             this.bunifuSeparator1.Transparency = 255;
             this.bunifuSeparator1.Vertical = false;
             // 
-            // panel1
+            // footerPanel
             // 
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 81);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(285, 25);
-            this.panel1.TabIndex = 8;
+            this.footerPanel.Controls.Add(this.dateLbl);
+            this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.footerPanel.Location = new System.Drawing.Point(0, 81);
+            this.footerPanel.Name = "footerPanel";
+            this.footerPanel.Size = new System.Drawing.Size(285, 25);
+            this.footerPanel.TabIndex = 8;
             // 
             // FileItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.footerPanel);
             this.Controls.Add(this.bunifuSeparator1);
             this.Controls.Add(this.diffValue);
             this.Controls.Add(this.diffLbl);
@@ -156,7 +156,7 @@
             this.Name = "FileItem";
             this.Size = new System.Drawing.Size(285, 108);
             this.Load += new System.EventHandler(this.FileItem_Load);
-            this.panel1.ResumeLayout(false);
+            this.footerPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,8 +170,8 @@
         private System.Windows.Forms.Label storageLbl;
         private System.Windows.Forms.Label diffValue;
         private System.Windows.Forms.Label diffLbl;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label dateLbl;
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel footerPanel;
     }
 }

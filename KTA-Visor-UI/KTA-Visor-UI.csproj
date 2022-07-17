@@ -75,6 +75,18 @@
     <Compile Include="component\basic\customPanel\CustomPanel.Designer.cs">
       <DependentUpon>CustomPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\basic\StatusIndicator\StatusIndicator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\StatusIndicator\StatusIndicator.Designer.cs">
+      <DependentUpon>StatusIndicator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\textbox\DefaultTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\textbox\DefaultTextBox.Designer.cs">
+      <DependentUpon>DefaultTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="component\basic\topbar\events\TopBarToggleEvent.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\column\Column.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\column\dto\ColumnTObject.cs" />
@@ -113,6 +125,12 @@
     </Compile>
     <Compile Include="component\basic\topbar\TopBar.Designer.cs">
       <DependentUpon>TopBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\CircleImageButton\CircleImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\CircleImageButton\CircleImageButton.Designer.cs">
+      <DependentUpon>CircleImageButton.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\FileList\components\HorizontalFileItem\FileItem.cs">
       <SubType>UserControl</SubType>
@@ -227,6 +245,9 @@
     <EmbeddedResource Include="component\basic\customPanel\CustomPanel.resx">
       <DependentUpon>CustomPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\StatusIndicator\StatusIndicator.resx">
+      <DependentUpon>StatusIndicator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="component\basic\table\components\HorizontalSeparator\HorizontalSeparator.resx">
       <DependentUpon>HorizontalSeparator.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,11 +257,17 @@
     <EmbeddedResource Include="component\basic\table\Table.resx">
       <DependentUpon>Table.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\textbox\DefaultTextBox.resx">
+      <DependentUpon>DefaultTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="component\basic\textbox\RoundedTextBox.resx">
       <DependentUpon>RoundedTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\basic\topbar\TopBar.resx">
       <DependentUpon>TopBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\CircleImageButton\CircleImageButton.resx">
+      <DependentUpon>CircleImageButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\FileList\components\HorizontalFileItem\FileItem.resx">
       <DependentUpon>FileItem.cs</DependentUpon>
@@ -292,6 +319,18 @@
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
     <Folder Include="component\custom\SideNavigationBar\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand_cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand_cursor.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red_circle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

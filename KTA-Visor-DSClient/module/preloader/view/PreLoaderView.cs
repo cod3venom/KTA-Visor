@@ -20,6 +20,7 @@ namespace KTA_Visor_DSClient.module.preloader.view
 
         private readonly Form targetForm;
 
+        
         public PreLoaderView()
         {
             InitializeComponent();

@@ -59,6 +59,7 @@ namespace KTALogger
             while(true)
             {
                 this.calibrateLogger();
+                Thread.Sleep(100);
             }
         }
 

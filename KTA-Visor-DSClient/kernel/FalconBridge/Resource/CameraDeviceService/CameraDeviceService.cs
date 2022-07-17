@@ -55,6 +55,15 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         /// </summary>
         private readonly KTALogger.Logger logger;
 
+        public CameraDeviceService(FalconSdk sdk, KTALogger.Logger logger)
+        {
+            this.sdk = sdk;
+            this.repository = new CameraServiceRepository();
+            this.deviceWatcher = new Hardware.Hardware().deviceWatcher();
+            this.camerasList = new USBCameraDeviceList<USBCameraDevice>();
+            this.logger = logger;
+        }
+
         public CameraDeviceService(FalconSdk sdk)
         {
             this.sdk = sdk;
@@ -80,11 +89,9 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         {
             await Task.Delay(5000);
             this.sdk.ConnectToDevice();
-           
+
             new Thread(() => this.sdk.Mount()).Start();
             await Task.Delay(5000);
-
-            USBCameraDevice device = new USBCameraDevice();
            
             this.deviceWatcher.OnDeviceDetected += OnDeviceConnected;
             this.deviceWatcher.OnDeviceMounted += OnDeviceConnected;
@@ -95,7 +102,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         private bool isValidCameraDevice(string cameraVolumeLabel)
         {
             if (cameraVolumeLabel.Length > 0) cameraVolumeLabel = cameraVolumeLabel[0].ToString();
-            return File.Exists(cameraVolumeLabel + @":\\MISC\wifi.conf");
+            return File.Exists(cameraVolumeLabel + @":\\ID.txt");
         }
 
         private bool isCameraAlreadyAdded(USBCameraDevice camera)

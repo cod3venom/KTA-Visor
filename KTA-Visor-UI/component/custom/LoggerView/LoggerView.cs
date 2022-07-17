@@ -31,7 +31,10 @@ namespace KTA_Visor_UI.component.custom.LoggerView
 
         public void append(string log)
         {
-            this.richTextBox.AppendText(string.Format(""));
+            this.Invoke((MethodInvoker)delegate
+            {
+                this.richTextBox.AppendText(log + Environment.NewLine);
+            });
         }
 
         private void cleanBtn_Click(object sender, EventArgs e)

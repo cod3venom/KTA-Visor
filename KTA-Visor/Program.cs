@@ -1,4 +1,5 @@
-﻿using KTA_Visor.module.Authentication.view;
+﻿using KTA_Visor.install;
+using KTA_Visor.module.Authentication.view;
 using KTA_Visor.module.Station.view;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,20 @@ namespace KTA_Visor
         [STAThread]
         static void Main()
         {
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                SetProcessDPIAware();
+            }
+
+            Installer installer = new Installer();
+            installer.FullInstall();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StationsView());
         }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
     }
 }

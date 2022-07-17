@@ -2,6 +2,7 @@
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.module.camera.dto;
 using KTA_Visor_DSClient.module.camera.service;
+using KTA_Visor_DSClient.module.camera.store;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,24 +18,37 @@ namespace KTA_Visor_DSClient.module.dashboard.controller
 {
     internal class CameraController : IRouteController
     {
-        private readonly USBCameraDeviceList<USBCameraDevice> camerasList;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly SingleCameraService camerasListViewService;
 
-        private readonly CameraService camerasListViewService;
-
-
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly tunnel.Tunnel tunnel;
 
-        public CameraController(
-            USBCameraDeviceList<USBCameraDevice> camerasList,
-            tunnel.Tunnel tunnel
-        )
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly KTALogger.Logger logger;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tunnel"></param>
+        /// <param name="logger"></param>
+        public CameraController(tunnel.Tunnel tunnel, KTALogger.Logger logger)
         {
-            this.camerasList = camerasList;
             this.tunnel = tunnel;
+            this.logger = logger;
         }
 
         public void StartWatching(Request request)
         {
+            this.logger.info(String.Format("Received request on endpoint {0}", request.Endpoint));
+            this.logger.info(String.Format("With body \n {0}", request.Body));
             switch (request.Endpoint)
             {
                 case "command://station/authenticate": this.onActionAuthenticate(request); break;
@@ -53,7 +67,7 @@ namespace KTA_Visor_DSClient.module.dashboard.controller
                     Network.GetLocalIPAddress(),
                     8,
                     "Online",
-                    this.camerasList.ToArray()
+                    CamerasVirtualStorage.Cameras.ToArray()
                 )
             ));
         }

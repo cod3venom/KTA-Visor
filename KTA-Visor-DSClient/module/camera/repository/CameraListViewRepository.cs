@@ -1,4 +1,6 @@
 ﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
+using KTA_Visor_DSClient.module.camera.store;
+using KTA_Visor_DSClient.module.dashboard.componnets.CameraItem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,11 +12,10 @@ namespace KTA_Visor_DSClient.module.camera.repository
 {
     public class CameraListViewRepository
     {
-        private readonly USBCameraDeviceList<USBCameraDevice> camerasList;
-
-        public CameraListViewRepository(USBCameraDeviceList<USBCameraDevice> camerasList)
+        
+        public CameraListViewRepository()
         {
-            this.camerasList = camerasList;
+             
         }
 
 
@@ -22,10 +23,13 @@ namespace KTA_Visor_DSClient.module.camera.repository
         {
             get
             {
-                USBCameraDeviceList<USBCameraDevice> cams = this.camerasList;
                 Dictionary<string, USBCameraDevice> dict = new Dictionary<string, USBCameraDevice>();
 
-                cams.ForEach(camera => dict.Add(camera.getDriveInfo().Name, camera));
+                foreach(CameraItem device in CamerasVirtualStorage.CameraItems)
+                {
+                    if (dict.ContainsKey(device.Camera.getDriveInfo().Name)) continue;
+                    dict.Add(device.Camera.getDriveInfo().Name, device.Camera);
+                }
                 return dict;
             }
         }

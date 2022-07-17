@@ -4,7 +4,9 @@ using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Device;
+using KTA_Visor_DSClient.module.camera.dto;
 using KTA_Visor_DSClient.module.camera.service;
+using KTA_Visor_DSClient.module.camera.store;
 using KTA_Visor_DSClient.module.dashboard.componnets.CameraItem;
 using KTA_Visor_DSClient.module.dashboard.controller;
 using KTA_Visor_DSClient.module.settings.views;
@@ -16,6 +18,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -35,34 +38,23 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// </summary>
         private readonly KTALogger.Logger logger;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly FalconBridge falconBridge;
 
         /// <summary>
         /// 
         /// </summary>
-        private tunnel.Tunnel tunnel;
+        private tunnel.Tunnel _tunnel;
+
+   
 
         /// <summary>
         /// 
         /// </summary>
-        private readonly CameraDeviceService cameraDeviceService;
+        private readonly SingleCameraService _singleCameraService;
 
         /// <summary>
         /// 
         /// </summary>
-        private readonly CameraService cameraService;
-        /// <summary>
-        /// 
-        /// </summary>
-        private Thread deviceListenerThr;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private USBCameraDeviceList<USBCameraDevice> camerasList;
+        private readonly CameraDeviceServiceWrapper _cameraDeviceServiceWrapper;
 
 
         private enum WM_DEVICECHANGE
@@ -72,28 +64,27 @@ namespace KTA_Visor_DSClient.module.dashboard.view
 
         private int WmDevicechange = 0x0219; // device change event  
 
-        public DashboardView()
+        public DashboardView(KTALogger.Logger logger)
         {
             InitializeComponent();
+
+            this.logger = logger;
             this.settings = new Settings();
 
-            this.topBar1.Parent = this;
-            this.topBar1.Title = this.settings.SettingsObj.app.title;
-            this.topBar1.onClose += OnClose;
+            this._cameraDeviceServiceWrapper = new CameraDeviceServiceWrapper(this.logger);
+            this._singleCameraService = new SingleCameraService();
 
-            this.loggerView.ParentPanel = this.loggerViewPanel;
-
-            this.logger = new KTALogger.Logger();
-            this.falconBridge = new FalconBridge();
-            this.camerasList = new USBCameraDeviceList<USBCameraDevice>();
-            this.cameraDeviceService = this.falconBridge.CameraDeviceService();
-            this.cameraService = new CameraService(this.camerasList);
-
-            this.tunnel = new tunnel.Tunnel(new ClientConfigTObject(
+            this._tunnel = new tunnel.Tunnel(new ClientConfigTObject(
                 this.settings.SettingsObj.app.management.serverIp,
                 this.settings.SettingsObj.app.management.serverPort
             ));
-            //this.tcpClientPanel.Tunnel = this.tunnel;
+            
+            this.topBar.Parent = this;
+            this.topBar.Title = this.settings.SettingsObj.app.title;
+            this.topBar.onClose += OnClose;
+
+            this.loggerView.ParentPanel = this.loggerViewPanel;
+
         }
 
 
@@ -104,25 +95,42 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <param name="e"></param>
         private void DashboardView_Load(object sender, EventArgs e)
         {
-           
-            for(int i =0;i < 10; i++)
-            {
-                this.fileHistory.addFile("file_" + i.ToString() + ".mp4", "z:\\dowody", false);
-            }
 
-            for (int i = 0; i < 10; i++)
-            {
-                CameraItem camera = new CameraItem();
-                camera.Margin = new Padding(10, 10, 10, 20);
-                camerasPanel.Controls.Add(camera);
-            }
+            this.logger.OnLogHasWritten += OnLogHasWritten;
+            this._cameraDeviceServiceWrapper.OnCameraConnectedEvent += OnCameraConnectedEvent;
+            this._cameraDeviceServiceWrapper.OnCameraDisconnectedEvent += OnCameraDisconnectedEvent;
+
+
+            this._tunnel.onClientDisconnected += Tunnel_onClientDisconnected;
+            this._tunnel.onMessageReceived += Tunnel_onMessageReceived;
+
+            this.connectToTunelMenuItem.Click += ConnectToTunnel;
+            this.disconnectFromTunelMenuItem.Click += DisconnectFromTunnel;
+            this.restartTunelMenuItem.Click += RestartTunnelConnection;
+            this._cameraDeviceServiceWrapper.Start();
         }
 
-        private void OnStartListeningForCameras(object sender, EventArgs e)
+        private void ConnectToTunnel(object sender, EventArgs e)
         {
-            Thread watchForDeviceThr = new Thread(this.watchForDevices);
-            watchForDeviceThr.IsBackground = true;
-            watchForDeviceThr.Start();
+            this._tunnel.connect();
+        }
+         
+        private void DisconnectFromTunnel(object sender, EventArgs e)
+        {
+            this._tunnel.disconnect();
+        }
+
+        private void RestartTunnelConnection(object sender, EventArgs e)
+        {
+            this._tunnel.disconnect();
+            Task.Delay(100);
+            this._tunnel.connect();
+        }
+
+
+        private void OnLogHasWritten(object sender, Logger.dto.LoggerEvent e)
+        {
+            this.loggerView.append(e.Log);
         }
 
 
@@ -133,7 +141,7 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <param name="e"></param>
         private void OnClose(object sender, EventArgs e)
         {
-            this.tunnel.disconnect();
+            this._tunnel.disconnect();
             Application.Exit();
         }
 
@@ -157,50 +165,42 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         {
             new ManagementSettingsView().ShowDialog();
         }
-
-   
-
-     
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void watchForDevices()
-        {
-            this.deviceListenerThr = new Thread(() => this.cameraDeviceService.listenForConnection());
-            this.deviceListenerThr.IsBackground = true;
-            this.deviceListenerThr.Start();
-
-            this.cameraDeviceService.OnCameraConnectedEvent += OnCameraConnectedEvt;
-            this.cameraDeviceService.OnCameraDisconnectedEvent += OnCameraDisconnectedEvent;
-
-            this.tunnel.onClientDisconnected += Tunnel_onClientDisconnected;
-            this.tunnel.onMessageReceived += Tunnel_onMessageReceived;
-
-
-            this.logger.info("Started Listening process");
-
-            Thread.Sleep(5000);
-        }
+ 
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnCameraConnectedEvt(object sender, CameraConnectedEvent e)
+        private void OnCameraConnectedEvent(object sender, CameraConnectedEvent e)
         {
             CameraItem cameraItem = new CameraItem(e.Camera);
-            this.camerasList.Add(e.getCamera());
- 
-            this.Invoke((MethodInvoker)delegate {
-               // this.camerasLayoutPanel.Controls.Add(cameraItem);
-            });
+            if (CamerasVirtualStorage.exists(cameraItem)) return;
 
-            if (this.settings.SettingsObj.app.fileSystem.autoCopy)
+            CamerasVirtualStorage.Add(cameraItem);
+
+             
+            if (camerasFlowLayoutPanel.InvokeRequired || this.InvokeRequired)
             {
-                this.cameraService
-                    .copyFielsToNetworkStorage(e.getCamera().Drive.Name);
+                this.Invoke((MethodInvoker)delegate {
+                    camerasFlowLayoutPanel.Controls.Add(cameraItem);
+                    
+                });
+            } else
+            {
+                camerasFlowLayoutPanel.Controls.Add(cameraItem);
+            }
+            
+
+            if (!this.settings.SettingsObj.app.fileSystem.autoCopy)
+                return;
+
+            var copiedFiles = this._singleCameraService.copyFielsToNetworkStorage(e.getCamera().Drive.Name);
+
+            foreach (KeyValuePair<string, CopiedCameraFileTObject> pair in copiedFiles)
+            {
+                this.fileHistory.addFile(pair.Value.File, pair.Value.Directory, pair.Value.Diff);
+                this.logger.info(String.Format("Copied file {0} from device {1} ", pair.Value.File.FullName, e.getCamera().Drive.Name));
             }
 
         }
@@ -212,21 +212,12 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         /// <param name="e"></param>
         private void OnCameraDisconnectedEvent(object sender, CameraDisconnectedEvent e)
         {
-            //foreach(USBCameraDevice camera in this.camerasList)
-            //{
-            //    if (camera.SerialNumber != e.Camera.SerialNumber) continue;
+            foreach (CameraItem cameraItem in CamerasVirtualStorage.CameraItems)
+            {
+                if (cameraItem.SerialNumber != e.Camera.SerialNumber) continue;
 
-            //    foreach (CameraItem cameraItem in camerasLayoutPanel.Controls)
-            //    {
-            //        if (cameraItem.Camera.SerialNumber != e.Camera.SerialNumber) continue;
-
-            //        this.camerasList.Remove(camera);
-
-            //        this.Invoke((MethodInvoker)delegate { 
-            //            this.camerasLayoutPanel.Controls.Remove(cameraItem);
-            //        });
-            //    }
-            //}
+                this.camerasFlowLayoutPanel.Controls.Remove(cameraItem);
+            }
         }
 
         /// <summary>
@@ -237,11 +228,9 @@ namespace KTA_Visor_DSClient.module.dashboard.view
         private void Tunnel_onMessageReceived(object sender, TCPClientMessageReceivedEvent e)
         {
             new CameraController(
-                this.camerasList,
-                this.tunnel
+                this._tunnel,
+                this.logger
             ).StartWatching(e.getRoute());
-
-            Thread.Sleep(5000);
         }
 
         /// <summary>
@@ -268,9 +257,7 @@ namespace KTA_Visor_DSClient.module.dashboard.view
                 switch ((WM_DEVICECHANGE)m.WParam)
                 {
                     case WM_DEVICECHANGE.DBT_DEVNODES_CHANGED:
-                        Thread watchForDeviceThr = new Thread(this.watchForDevices);
-                        watchForDeviceThr.IsBackground = true;
-                        watchForDeviceThr.Start();
+                        this._cameraDeviceServiceWrapper.Start();
                         break;
                 }
             }

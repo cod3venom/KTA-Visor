@@ -1,0 +1,16 @@
+﻿{
+  "app": {
+    "title": "KTA-Visor Manager",
+
+    "tunnel": {
+      "title":  "Server - settings",
+      "serverIp": "127.0.0.1",
+      "serverPort": 1337,
+      "serverMode": "DEBUG",
+      "modes": [
+        "DEBUG",
+        "PRODUCTION"
+      ]
+    }
+  }
+}

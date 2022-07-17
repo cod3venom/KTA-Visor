@@ -18,8 +18,14 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge
             this.sdk = new Falcon.FalconSdk();
             this.sdk.ConnectToDevice();
         }
-        public CameraDeviceService CameraDeviceService()
+
+        public CameraDeviceService CameraDeviceService(KTALogger.Logger logger)
         { 
+            return new CameraDeviceService(this.sdk, logger);
+        }
+
+        public CameraDeviceService CameraDeviceService()
+        {
             return new CameraDeviceService(this.sdk);
         }
     }

@@ -27,7 +27,7 @@ namespace KTA_Visor_DSClient.install
 
             if (!fileInfo.Exists)
             {
-                string settingsContent = EmbededFileHelper.Read("KTA_Visor_DSClient.install.settings.Settings.json");
+                string settingsContent = EmbededFileHelper.Read("KTA_Visor_DSClient.install.settings.Settings.json", true);
                 File.WriteAllText(fileInfo.FullName, settingsContent);
             }
         }

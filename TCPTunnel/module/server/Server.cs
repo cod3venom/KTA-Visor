@@ -15,7 +15,7 @@ namespace TCPTunnel.module.server
 {
     public class Server : ExtensionManager
     {
-        public event EventHandler<EventArgs> onServerStarted;
+        public event EventHandler<TCPServerStartedEvent> onServerStarted;
         public event EventHandler<EventArgs> onServerStopped;
         public event EventHandler<TCPServerClientConnectedEvent> onClientConnected;
         public event EventHandler<TCPServerClientDisonnectedEvent> onClientDisconnected;
@@ -72,7 +72,7 @@ namespace TCPTunnel.module.server
                 this.serverSocketThread.IsBackground = true;
                 this.serverSocketThread.Start();
                 this.isServerEnabled = true;
-                this.onServerStarted?.Invoke(this, new EventArgs());
+                this.onServerStarted?.Invoke(this, new TCPServerStartedEvent(this.serverConfig));
 
 
                 this.heardBeatThread = new Thread(checkHeartBeat);

@@ -2,7 +2,10 @@
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.dto;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.module.camera.command;
+using KTA_Visor_DSClient.module.camera.dto;
 using KTA_Visor_DSClient.module.camera.repository;
+using KTA_Visor_DSClient.module.dashboard.componnets.CameraItem;
+using KTA_Visor_DSClient.module.dashboard.view;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,29 +18,18 @@ using TCPTunnel.kernel.helpers;
 
 namespace KTA_Visor_DSClient.module.camera.service
 {
-    public class CameraService
+    public class SingleCameraService
     {
         private readonly Settings settings;
 
-        private readonly USBCameraDeviceList<USBCameraDevice> camerasList;
-
         private readonly CameraListViewRepository cameraRepository;
 
-        public CameraService(USBCameraDeviceList<USBCameraDevice> camerasList)
+        public SingleCameraService()
         {
             this.settings = new Settings();
-            this.camerasList = camerasList;
-            this.cameraRepository = new CameraListViewRepository(camerasList);
+            this.cameraRepository = new CameraListViewRepository();
         }
-
-        public DockingStationTObject getDockingStation()
-        {
-            DockingStationTObject station = new DockingStationTObject();
-            station.IpAddress = Network.GetLocalIPAddress();
-            station.Cameras = this.camerasList.ToArray();
-
-            return station;
-        }
+ 
 
         public Dictionary<string, USBCameraDevice> CamerasDict
         {
@@ -67,10 +59,10 @@ namespace KTA_Visor_DSClient.module.camera.service
         }
 
 
-        public void copyFielsToNetworkStorage(string driveName)
+        public Dictionary<string, CopiedCameraFileTObject> copyFielsToNetworkStorage(string driveName)
         {
             Dictionary<string, FileInfo> files = this.FilesFromDrive(driveName);
-            CopyCameraFilesToNetworkStorageCommand.Execute(
+            return CopyCameraFilesToNetworkStorageCommand.Execute(
                 files,
                 this.settings.SettingsObj.app?.fileSystem.networkStorage
             );

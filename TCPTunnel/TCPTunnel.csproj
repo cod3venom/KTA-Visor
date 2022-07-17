@@ -65,6 +65,7 @@
     <Compile Include="kernel\extensions\router\dto\Request.cs" />
     <Compile Include="kernel\extensions\router\events\RouteControllerEvent.cs" />
     <Compile Include="kernel\extensions\router\Router.cs" />
+    <Compile Include="module\server\events\TCPServerStartedEvent.cs" />
     <Compile Include="module\server\Server.cs" />
     <Compile Include="kernel\types\TCPClientList.cs" />
     <Compile Include="kernel\types\TCPClientTObject.cs" />

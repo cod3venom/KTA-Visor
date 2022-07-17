@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +24,15 @@ namespace KTA_Visor_DSClient.module.dashboard.componnets.FileHistory
 
         }
 
-        public void addFile(string name, string storage, bool diff)
+        public void addFile(FileInfo file, DirectoryInfo storage, bool diff)
         {
-            FileItem item = new FileItem(name, storage, diff);
+            FileItem item = new FileItem(file, storage, diff);
             item.Dock = DockStyle.Top;
-            this.historyListPanel.Controls.Add(item);
+
+            this.Invoke((MethodInvoker)delegate
+            {
+                this.historyListPanel.Controls.Add(item);
+            });
         }
     }
 }

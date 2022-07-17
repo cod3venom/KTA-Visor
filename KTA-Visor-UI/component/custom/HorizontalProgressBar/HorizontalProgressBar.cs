@@ -21,12 +21,27 @@ namespace KTA_Visor_UI.component.custom.HorizontalProgressBar
 
         public int Transition { get; set; }
 
+        public Color ProgressColor { get; set; } 
+
         private void HorizontalProgressBar_Load(object sender, EventArgs e)
         {
             this.bunifuProgressBar.MaximumValue = 100;
         }
 
+
+
         public void start()
+        {
+            if (this.ProgressColor != null)
+            {
+                this.bunifuProgressBar.ProgressColor = this.ProgressColor;
+            }
+
+            Thread progressThr = new Thread(this._start);
+            progressThr.IsBackground = true;
+            progressThr.Start();
+        }
+        public void _start()
         {
             for(int i = 0; i <= 100; i++)
             {
@@ -42,7 +57,7 @@ namespace KTA_Visor_UI.component.custom.HorizontalProgressBar
 
                 if (this.Transition != null)
                 {
-                    Thread.Sleep(Transition);
+                    Thread.Sleep(this.Transition);
                 } else
                 {
                     Thread.Sleep(20);

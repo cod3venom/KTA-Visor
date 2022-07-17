@@ -50,10 +50,11 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         /// 
         /// </summary>
         /// <param name="device"></param>
-        public USBCameraDevice(DriveInfo device, string serialNumber = "")
+        public USBCameraDevice(DriveInfo device, string serialNumber = "", string name = "")
         {
             this.device = device;
             this.serialNumber = serialNumber;
+            this.Name = name;
             this.sdk = new FalconSdk();
         }
 
@@ -68,6 +69,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
             this.sdk = new FalconSdk();
         }
 
+         
         /// <summary>
         /// 
         /// </summary>
@@ -92,6 +94,16 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         /// </summary>
         [JsonProperty("serialNumber")]
         public string SerialNumber
+        {
+            get { return serialNumber; }
+            set { serialNumber = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name
         {
             get { return serialNumber; }
             set { serialNumber = value; }

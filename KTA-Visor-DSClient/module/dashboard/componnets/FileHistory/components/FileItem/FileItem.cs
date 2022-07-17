@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,19 +18,42 @@ namespace KTA_Visor_DSClient.module.dashboard.componnets.FileHistory.components.
         {
             InitializeComponent();
         }
+        private readonly FileInfo file;
+        private readonly DirectoryInfo storage;
 
-        public FileItem(string name, string storage, bool diff)
+        public FileItem(FileInfo file, DirectoryInfo storage, bool diff)
         {
             InitializeComponent();
 
-            this.Name = name;
-            this.Storage = storage;
+            this.file = file;
+            this.storage = storage;
+
+            this.Name = file.Name;
+            this.Storage = storage.Name ;
             this.Diff = diff;
         }
 
+
         private void FileItem_Load(object sender, EventArgs e)
         {
+            this.Click += OpenFile;
+            this.nameLbl.Click += OpenFile;
+            this.nameValue.Click += OpenFile;
+            this.storageLbl.Click += OpenFile;
+            this.storageValue.Click += OpenFile;
+            this.diffLbl.Click += OpenFile;
+            this.diffValue.Click += OpenFile;
+            this.dateLbl.Click += OpenFile;
+            this.footerPanel.Click += OpenFile;
+        }
 
+        private void OpenFile(object sender, EventArgs e)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+               
+                Process.Start(this.file.FullName);
+            });
         }
 
         public string Name
@@ -40,7 +65,7 @@ namespace KTA_Visor_DSClient.module.dashboard.componnets.FileHistory.components.
         public string Storage
         {
             get { return this.storageValue.Text; }
-            set { this.storageValue.Text = value; }
+            set { this.storageValue.Text = value.ToString().Substring(0, 10); }
         }
 
         public bool Diff

@@ -1,7 +1,4 @@
 ﻿using KTA_Visor.module.Authentication.view;
-using KTA_Visor.module.Settings.view;
-using KTA_Visor.module.Station.components.StationItem.StationItem;
-using KTA_Visor.module.Station.components.StationItem.events;
 using KTA_Visor.module.Station.controller;
 using KTA_Visor.module.Station.dto;
 using KTA_Visor.module.Station.helper;
@@ -19,15 +16,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
-using KTA_Visor.module.station.componnets.StationItem;
+using KTA_Visor.module.Station.components.StationItem;
+using KTA_Visor.module.Station.components.StationItem.events;
+using KTA_Visor.module.Station.components.ClientsList.components.ClientItem;
+using KTA_Visor.module.Tunnel.view;
 
 namespace KTA_Visor.module.Station.view
 {
     public partial class StationsView : Form
     {
-        private readonly RFIDAuthenticationView authView;
-
-        private readonly SettingsView settingsView;
+        
+        private readonly TunnelSettingsView tunnelSettingsView;
 
         private readonly Tunnel.Tunnel tunnel;
 
@@ -37,19 +36,14 @@ namespace KTA_Visor.module.Station.view
 
         private readonly List<StationItem> stationsList;
 
-        private readonly ColumnTObject[] Columns = new ColumnTObject[] { 
-            new ColumnTObject(0, "ID"),
-            new ColumnTObject(1, "IP Address"),
-            new ColumnTObject(2, "Name"),
-            new ColumnTObject(3, "Total ports"),
-            new ColumnTObject(4, "Status"),
-        };
+   
 
         public StationsView()
         {
             InitializeComponent();
-            this.authView = new RFIDAuthenticationView();
-            this.settingsView = new SettingsView();
+            this.loggerView.ParentPanel = this.loggerPanel;
+            this.tunnelSettingsView = new TunnelSettingsView();
+
             this.tunnel = new Tunnel.Tunnel();
             this.stationViewService = new StationViewService(this);
             this.controller = new StationController(this, this.stationViewService);
@@ -67,13 +61,58 @@ namespace KTA_Visor.module.Station.view
 
         private void initialize()
         {
+            this.startTunnelServerMenuItem.Click += StartTunnel;
+            this.stopTunnelServerMenuItem.Click += StopTunnel;
+            this.tunnelSettingsBtn.OnClick += OpenTunnelSettings;
             this.tunnel.onClientConnected += Tunnel_onClientConnected;
             this.tunnel.onClientDisconnected += Tunnel_onClientDisconnected;
-            this.tunnel.onMessageReceived += Tunnel_onMessageReceived;   
-            this.stationViewService.onAuthorized += StationViewService_onAuthorized;
+            this.tunnel.onMessageReceived += Tunnel_onMessageReceived;
+            this.stationViewService.onAuthorized += StationViewService_onAuthorized1;
+           
         }
- 
- 
+
+        private void StationViewService_onAuthorized1(object sender, Request e)
+        {
+            StationTObject station = new StationTObject();
+
+            station.ID = this.stationsList.Count() + 1;
+            station.IpAddress = e.Body?.IpAddress;
+            station.Name = e.Body?.Name;
+            station.TotalPorts = e.Body?.TotalPorts;
+            station.Status = e.Body?.Status;
+            station.Client = e.Client;
+
+            StationItem stationItem = new StationItem(station);
+
+            if (this.stationsList.Find(item => item.Station.IpAddress == station.IpAddress) == null)
+            {
+                this.stationsList.Add(stationItem);
+
+                this.Invoke((MethodInvoker)delegate
+                {
+                    this.stationsFlowLayoutPanel.Controls.Add(stationItem);
+                    stationItem.OnClick += OnOpenStation;
+                });
+            }
+        }
+
+        private void StartTunnel(object sender, EventArgs e)
+        {
+            this.tunnel.start();
+            this.tunnelIndicator.running(true, "Uruchomiony");
+        }
+
+        private void StopTunnel(object sender, EventArgs e)
+        {
+            this.tunnel.stop();
+            this.tunnelIndicator.running(false, "Wstrzymany");
+        }
+
+        private void OpenTunnelSettings(object sender, EventArgs e)
+        {
+            (new TunnelSettingsView()).ShowDialog();
+        }
+
         private void Tunnel_onClientConnected(object sender, TCPTunnel.module.server.events.TCPServerClientConnectedEvent e)
         {
             e.getClient().Send(new Request(
@@ -114,17 +153,17 @@ namespace KTA_Visor.module.Station.view
                 this.Invoke((MethodInvoker)delegate
                 {
                     this.stationsFlowLayoutPanel.Controls.Add(stationItem);
-                    stationItem.OnStationClick += OnOpenStation;
+                    stationItem.OnClick += OnOpenStation;
                 });
             }
             
         }
 
-        private void OnOpenStation(object sender, StationOnClickEvent e)
+        private void OnOpenStation(object sender, StationItemClickEvent e)
         {
             this.Hide();
 
-            SingleStationView singleStationView = new SingleStationView(e.Station, this.tunnel);
+            SingleStationView singleStationView = new SingleStationView(e.Item?.Station, this.tunnel);
             singleStationView.ShowDialog();
         }
 
