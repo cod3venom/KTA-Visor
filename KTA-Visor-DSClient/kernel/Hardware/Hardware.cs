@@ -12,5 +12,10 @@ namespace KTA_Visor_DSClient.kernel.Hardware
         {
             return new DeviceWatcher.DeviceWatcher();
         }
+
+        public USBDeviceRelay.USBDeviceRelay Relay()
+        { 
+            return new USBDeviceRelay.USBDeviceRelay();
+        }
     }
 }

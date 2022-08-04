@@ -97,6 +97,7 @@
     <Compile Include="kernel\FalconBridge\Resource\CameraSettingsManager\interfaces\ICameraSettingsFields.cs" />
     <Compile Include="kernel\Hardware\DeviceWatcher\DeviceWatcher.cs" />
     <Compile Include="kernel\Hardware\Hardware.cs" />
+    <Compile Include="kernel\Hardware\USBDeviceRelay\USBDeviceRelay.cs" />
     <Compile Include="kernel\helper\EmbededFileHelper.cs" />
     <Compile Include="kernel\helper\ExecutionWaiter.cs">
       <SubType>Component</SubType>
@@ -232,6 +233,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KTA-USB-Relay\KTA-USB-Relay.csproj">
+      <Project>{4E2CF358-27B6-43B9-A1C0-6C862D8E930F}</Project>
+      <Name>KTA-USB-Relay</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KTA-Visor-UI\KTA-Visor-UI.csproj">
       <Project>{C222A7CF-AC15-4728-A0F2-30CD6E568C63}</Project>
       <Name>KTA-Visor-UI</Name>
