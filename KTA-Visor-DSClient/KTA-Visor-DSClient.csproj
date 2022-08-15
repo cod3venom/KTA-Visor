@@ -107,6 +107,7 @@
     <Compile Include="module\camera-settings-manager\CameraSettingsManager.cs" />
     <Compile Include="module\camera\command\CopyCameraFilesToNetworkStorageCommand.cs" />
     <Compile Include="module\camera\dto\CopiedCameraFileTObject.cs" />
+    <Compile Include="module\camera\dto\GetSelectedCameraFilesRequestTObject.cs" />
     <Compile Include="module\camera\service\CameraDeviceServiceWrapper.cs" />
     <Compile Include="module\camera\virtualStorage\CamerasVirtualStorage.cs" />
     <Compile Include="module\dashboard\componnets\CameraItem\CameraItem.cs">

@@ -141,16 +141,19 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         private void OnDeviceDisconnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
         {
 
-            USBCameraDevice camera = USBCameraDeviceFactory.create(e.SerialNumber.ToString());
+           try
+            {
+                USBCameraDevice camera = USBCameraDeviceFactory.create(e.SerialNumber.ToString());
 
-            if (!this.isCameraAlreadyAdded(camera)) return;
+                int camIndex = this.camerasList.FindIndex(existedCamera => existedCamera.SerialNumber == camera.SerialNumber);
+                this.camerasList.RemoveAt(camIndex);
 
-            int camIndex = this.camerasList.FindIndex(existedCamera => existedCamera.SerialNumber == camera.SerialNumber);
-            this.camerasList.RemoveAt(camIndex);
-
-            this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(camera));
-            this.logger.warn("Disconnected: " + camera);
-            Thread.SpinWait(5000);
+                this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(camera));
+                this.logger.warn("Disconnected: " + camera);
+                Thread.SpinWait(5000);
+            }
+            catch(Exception ex)
+            {}
         }
 
 

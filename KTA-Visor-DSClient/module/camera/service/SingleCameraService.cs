@@ -58,6 +58,22 @@ namespace KTA_Visor_DSClient.module.camera.service
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serialNumber"></param>
+        /// <returns></returns>
+        public string CameraDriveByBadgeId(string badgeId)
+        {
+            foreach(KeyValuePair<string, USBCameraDevice> camera in this.cameraRepository.CamerasDict)
+            {
+                if (camera.Value.SerialNumber != badgeId) continue;
+
+                return camera.Value.Drive.Name;
+            }
+            return "";
+        }
+
 
         public Dictionary<string, CopiedCameraFileTObject> copyFielsToNetworkStorage(string driveName)
         {

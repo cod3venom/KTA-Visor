@@ -37,7 +37,7 @@ namespace KTA_Visor_DSClient.module.camera.command
 
                 if (File.Exists(destFile.FullName) && destFile.Length == file.Length)
                 {
-                    file.Delete();
+                    //file.Delete();
 
                     copiedFiles.Add(destFile.Name, new CopiedCameraFileTObject(destFile, true));
                 }

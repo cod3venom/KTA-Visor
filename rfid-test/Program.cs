@@ -1,7 +1,11 @@
-﻿using LibUsbDotNet;
+﻿using HidLibrary;
+using LibUsbDotNet;
+using LibUsbDotNet.Info;
 using LibUsbDotNet.Main;
+using PCSC;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,101 +14,45 @@ namespace rfid_test
 {
     internal class Program
     {
-        public static UsbDevice MyUsbDevice;
+         
 
-        #region SET YOUR USB Vendor and Product ID!
-
-        public static UsbDeviceFinder MyUsbFinder = new UsbDeviceFinder(0416, 0xb030);
-
-        #endregion
-
-        static void Main(string[] args)
+        static void Main()
         {
-            ErrorCode ec = ErrorCode.None;
-
-            try
+            using (var ctx = new SCardContext())
             {
-                // Find and open the usb device.
-                var dev = UsbDevice.AllDevices;
+                ctx.Establish(SCardScope.User);
 
-                // If the device is open and ready
-                if (MyUsbDevice == null) throw new Exception("Device Not Found.");
+                var readerNames = ctx.GetReaders();
+                var readerStates = ctx.GetReaderStatus(readerNames);
 
-                // If this is a "whole" usb device (libusb-win32, linux libusb-1.0)
-                // it exposes an IUsbDevice interface. If not (WinUSB) the 
-                // 'wholeUsbDevice' variable will be null indicating this is 
-                // an interface of a device; it does not require or support 
-                // configuration and interface selection.
-                IUsbDevice wholeUsbDevice = MyUsbDevice as IUsbDevice;
-                if (!ReferenceEquals(wholeUsbDevice, null))
+                foreach (var state in readerStates)
                 {
-                    // This is a "whole" USB device. Before it can be used, 
-                    // the desired configuration and interface must be selected.
+                    Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    Console.WriteLine("Reader: {0}\n" +
+                        "CurrentState: {1}\n" +
+                        "EventState: {2}\n" +
+                        "CurrentStateValue: {3}\n" +
+                        "EventStateValue: {4}\n" +
+                        "UserData: {5}\n" +
+                        "CardChangeEventCnt: {6}\n" +
+                        "ATR: {7}",
 
-                    // Select config #1
-                    wholeUsbDevice.SetConfiguration(1);
+                        state.ReaderName,
+                        state.CurrentState,
+                        state.EventState,
+                        state.CurrentStateValue,
+                        state.EventStateValue,
+                        state.UserData,
+                        state.CardChangeEventCnt,
+                        BitConverter.ToString(state.Atr ?? new byte[0]));
 
-                    // Claim interface #0.
-                    wholeUsbDevice.ClaimInterface(0);
+                    state.Dispose();
                 }
 
-                // open read endpoint 1.
-                UsbEndpointReader reader = MyUsbDevice.OpenEndpointReader(ReadEndpointID.Ep01);
-
-
-                byte[] readBuffer = new byte[1024];
-                while (ec == ErrorCode.None)
-                {
-                    int bytesRead;
-
-                    // If the device hasn't sent data in the last 5 seconds,
-                    // a timeout error (ec = IoTimedOut) will occur. 
-                    ec = reader.Read(readBuffer, 5000, out bytesRead);
-
-                    if (bytesRead == 0) throw new Exception(string.Format("{0}:No more bytes!", ec));
-                    Console.WriteLine("{0} bytes read", bytesRead);
-
-                    // Write that output to the console.
-                    Console.Write(Encoding.Default.GetString(readBuffer, 0, bytesRead));
-                }
-
-                Console.WriteLine("\r\nDone!\r\n");
+                ctx.Release();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-                Console.WriteLine((ec != ErrorCode.None ? ec + ":" : String.Empty) + ex.Message);
-            }
-            finally
-            {
-                if (MyUsbDevice != null)
-                {
-                    if (MyUsbDevice.IsOpen)
-                    {
-                        // If this is a "whole" usb device (libusb-win32, linux libusb-1.0)
-                        // it exposes an IUsbDevice interface. If not (WinUSB) the 
-                        // 'wholeUsbDevice' variable will be null indicating this is 
-                        // an interface of a device; it does not require or support 
-                        // configuration and interface selection.
-                        IUsbDevice wholeUsbDevice = MyUsbDevice as IUsbDevice;
-                        if (!ReferenceEquals(wholeUsbDevice, null))
-                        {
-                            // Release interface #0.
-                            wholeUsbDevice.ReleaseInterface(0);
-                        }
-
-                        MyUsbDevice.Close();
-                    }
-                    MyUsbDevice = null;
-
-                    // Free usb resources
-                    UsbDevice.Exit();
-
-                }
-
-                // Wait for user input..
-                Console.ReadKey();
-            }
+            Console.ReadKey();
         }
     }
 }
+

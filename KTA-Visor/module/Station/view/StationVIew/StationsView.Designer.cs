@@ -42,7 +42,7 @@
             this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tunnelSettingsBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
-            this.circleImageButton1 = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
+            this.cardBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -177,7 +177,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.panel1.Controls.Add(this.tunnelSettingsBtn);
-            this.panel1.Controls.Add(this.circleImageButton1);
+            this.panel1.Controls.Add(this.cardBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 72);
             this.panel1.Name = "panel1";
@@ -193,14 +193,14 @@
             this.tunnelSettingsBtn.Size = new System.Drawing.Size(70, 70);
             this.tunnelSettingsBtn.TabIndex = 1;
             // 
-            // circleImageButton1
+            // cardBtn
             // 
-            this.circleImageButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-            this.circleImageButton1.Icon = ((System.Drawing.Image)(resources.GetObject("circleImageButton1.Icon")));
-            this.circleImageButton1.Location = new System.Drawing.Point(23, 104);
-            this.circleImageButton1.Name = "circleImageButton1";
-            this.circleImageButton1.Size = new System.Drawing.Size(70, 70);
-            this.circleImageButton1.TabIndex = 0;
+            this.cardBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.cardBtn.Icon = ((System.Drawing.Image)(resources.GetObject("cardBtn.Icon")));
+            this.cardBtn.Location = new System.Drawing.Point(23, 104);
+            this.cardBtn.Name = "cardBtn";
+            this.cardBtn.Size = new System.Drawing.Size(70, 70);
+            this.cardBtn.TabIndex = 0;
             // 
             // panel2
             // 
@@ -379,7 +379,7 @@
         private KTA_Visor_UI.component.custom.LoggerView.LoggerView loggerView;
         private System.Windows.Forms.FlowLayoutPanel stationsFlowLayoutPanel;
         private components.ClientsList.ClientsList clientsList;
-        private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton circleImageButton1;
+        private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton cardBtn;
         private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton tunnelSettingsBtn;
         private System.Windows.Forms.MenuStrip tunnelMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem tunnelToolStripMenuItem;

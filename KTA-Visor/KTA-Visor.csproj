@@ -320,6 +320,12 @@
     <Compile Include="module\Authentication\view\RFIDAuthenticationView.Designer.cs">
       <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Card\view\CardTestView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Card\view\CardTestView.Designer.cs">
+      <DependentUpon>CardTestView.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\Station\components\ClientsList\ClientsList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -347,6 +353,7 @@
     </Compile>
     <Compile Include="module\Station\controller\StationController.cs" />
     <Compile Include="module\Station\controller\SingleStationViewController.cs" />
+    <Compile Include="module\Station\dto\GetSelectedCameraFilesRequestTObject.cs" />
     <Compile Include="module\Station\dto\GetCameraFilesRequestTObject.cs" />
     <Compile Include="module\Station\dto\StationTObject.cs" />
     <Compile Include="module\Station\events\StationCameraFilesReceivedEvent.cs" />
@@ -419,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Authentication\view\RFIDAuthenticationView.resx">
       <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Card\view\CardTestView.resx">
+      <DependentUpon>CardTestView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Station\components\ClientsList\ClientsList.resx">
       <DependentUpon>ClientsList.cs</DependentUpon>
@@ -496,6 +506,10 @@
     <None Include="Resources\station.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KTA-RFID-Keyboard\KTA-RFID-Keyboard.csproj">
+      <Project>{0F7A4FE1-A252-4B42-BCFC-CBCB67EAE920}</Project>
+      <Name>KTA-RFID-Keyboard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KTA-Visor-DSClient\KTA-Visor-DSClient.csproj">
       <Project>{73AB2552-C7DB-493E-A5C6-9C16C931C85A}</Project>
       <Name>KTA-Visor-DSClient</Name>

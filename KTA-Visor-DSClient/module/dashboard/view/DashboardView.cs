@@ -1,5 +1,4 @@
-﻿using KTA_USB_Relay.interop.service;
-using KTA_Visor_DSClient.install.settings;
+﻿using KTA_Visor_DSClient.install.settings;
 using KTA_Visor_DSClient.kernel.FalconBridge;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService;
@@ -112,12 +111,9 @@ namespace KTA_Visor_DSClient.module.dashboard.view
             this.restartTunelMenuItem.Click += RestartTunnelConnection;
             this._cameraDeviceServiceWrapper.Start();
 
-            USBDeviceRelay relay = new Hardware().Relay();
 
-            relay.Init();
-            UsbRelayDeviceInfo enumerated = relay.Enumerate();
-
-            this.logger.success(enumerated.SerialNumber);
+            //USBDeviceRelay relayDevice = new USBDeviceRelay();
+            
 
         }
 

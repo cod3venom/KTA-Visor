@@ -43,6 +43,7 @@ namespace KTA_Visor_DSClient.module.dashboard.controller
         {
             this.tunnel = tunnel;
             this.logger = logger;
+            this.camerasListViewService = new SingleCameraService();
         }
 
         public void StartWatching(Request request)
@@ -54,6 +55,7 @@ namespace KTA_Visor_DSClient.module.dashboard.controller
                 case "command://station/authenticate": this.onActionAuthenticate(request); break;
                 case "command://station/cameras": this.onActionSendCamerasList(request); break;
                 case "command://station/camera/files": this.onActionSendSelectedCameraFiles(request); break;
+                case "command://station/camera/selected/files": this.onActionSendSelectedCameraFiles(request); break;
             }
 
             Thread.Sleep(5000);
@@ -84,10 +86,10 @@ namespace KTA_Visor_DSClient.module.dashboard.controller
 
         private void onActionSendSelectedCameraFiles(Request request)
         {
-            GetCameraFilesRequestTObject body = JsonConvert.DeserializeObject<GetCameraFilesRequestTObject>(request.Body);
-            string json = JsonConvert.SerializeObject(this.camerasListViewService.FilesFromDrive(body.CameraDrive));
+            GetSelectedCameraFilesRequestTObject body = JsonConvert.DeserializeObject<GetSelectedCameraFilesRequestTObject>(request.Body);
+            string json = JsonConvert.SerializeObject(this.camerasListViewService.CameraDriveByBadgeId(body.BadgeId));
             request.Client.Send(new Request(
-                "response://station/camera/files",
+                "response://station/camera/selected/files",
                 json
             ));
         }

@@ -39,6 +39,7 @@
             this.cameraSNLbl = new System.Windows.Forms.Label();
             this.cameraDriveLbl = new System.Windows.Forms.Label();
             this.cameraNameLbl = new System.Windows.Forms.Label();
+            this.badgeLbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -82,7 +83,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 33);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(201, 168);
+            this.panel2.Size = new System.Drawing.Size(201, 204);
             this.panel2.TabIndex = 1;
             // 
             // pictureBox2
@@ -93,21 +94,22 @@
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(70, 3);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(62, 65);
+            this.pictureBox2.Size = new System.Drawing.Size(62, 64);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.cameraDriveLbl);
+            this.panel3.Controls.Add(this.badgeLbl);
             this.panel3.Controls.Add(this.bunifuFlatButton1);
             this.panel3.Controls.Add(this.cameraSNLbl);
-            this.panel3.Controls.Add(this.cameraDriveLbl);
             this.panel3.Controls.Add(this.cameraNameLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 107);
+            this.panel3.Location = new System.Drawing.Point(0, 116);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(201, 94);
+            this.panel3.Size = new System.Drawing.Size(201, 121);
             this.panel3.TabIndex = 2;
             // 
             // bunifuFlatButton1
@@ -132,7 +134,7 @@
             this.bunifuFlatButton1.IconVisible = true;
             this.bunifuFlatButton1.IconZoom = 90D;
             this.bunifuFlatButton1.IsTab = false;
-            this.bunifuFlatButton1.Location = new System.Drawing.Point(35, 59);
+            this.bunifuFlatButton1.Location = new System.Drawing.Point(36, 86);
             this.bunifuFlatButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bunifuFlatButton1.Name = "bunifuFlatButton1";
             this.bunifuFlatButton1.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
@@ -148,36 +150,47 @@
             // 
             // cameraSNLbl
             // 
-            this.cameraSNLbl.AutoSize = true;
+            this.cameraSNLbl.Dock = System.Windows.Forms.DockStyle.Top;
             this.cameraSNLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cameraSNLbl.Location = new System.Drawing.Point(64, 23);
+            this.cameraSNLbl.Location = new System.Drawing.Point(0, 19);
             this.cameraSNLbl.Name = "cameraSNLbl";
-            this.cameraSNLbl.Size = new System.Drawing.Size(78, 16);
+            this.cameraSNLbl.Size = new System.Drawing.Size(201, 16);
             this.cameraSNLbl.TabIndex = 3;
             this.cameraSNLbl.Text = "SN1234567";
             this.cameraSNLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cameraDriveLbl
             // 
-            this.cameraDriveLbl.AutoSize = true;
+            this.cameraDriveLbl.Dock = System.Windows.Forms.DockStyle.Top;
             this.cameraDriveLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cameraDriveLbl.Location = new System.Drawing.Point(86, 39);
+            this.cameraDriveLbl.Location = new System.Drawing.Point(0, 51);
             this.cameraDriveLbl.Name = "cameraDriveLbl";
-            this.cameraDriveLbl.Size = new System.Drawing.Size(24, 16);
+            this.cameraDriveLbl.Size = new System.Drawing.Size(201, 16);
             this.cameraDriveLbl.TabIndex = 2;
             this.cameraDriveLbl.Text = "F:\\";
             this.cameraDriveLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cameraNameLbl
             // 
-            this.cameraNameLbl.AutoSize = true;
+            this.cameraNameLbl.Dock = System.Windows.Forms.DockStyle.Top;
             this.cameraNameLbl.Font = new System.Drawing.Font("Inter SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cameraNameLbl.Location = new System.Drawing.Point(61, 4);
+            this.cameraNameLbl.Location = new System.Drawing.Point(0, 0);
             this.cameraNameLbl.Name = "cameraNameLbl";
-            this.cameraNameLbl.Size = new System.Drawing.Size(77, 19);
+            this.cameraNameLbl.Size = new System.Drawing.Size(201, 19);
             this.cameraNameLbl.TabIndex = 2;
             this.cameraNameLbl.Text = "Camera 1";
             this.cameraNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // badgeLbl
+            // 
+            this.badgeLbl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.badgeLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.badgeLbl.Location = new System.Drawing.Point(0, 35);
+            this.badgeLbl.Name = "badgeLbl";
+            this.badgeLbl.Size = new System.Drawing.Size(201, 16);
+            this.badgeLbl.TabIndex = 5;
+            this.badgeLbl.Text = "123456";
+            this.badgeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CameraItem
             // 
@@ -188,7 +201,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "CameraItem";
-            this.Size = new System.Drawing.Size(201, 201);
+            this.Size = new System.Drawing.Size(201, 237);
             this.Load += new System.EventHandler(this.CameraItem_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -196,7 +209,6 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -213,5 +225,6 @@
         private System.Windows.Forms.Label cameraDriveLbl;
         private System.Windows.Forms.Label cameraNameLbl;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton1;
+        private System.Windows.Forms.Label badgeLbl;
     }
 }

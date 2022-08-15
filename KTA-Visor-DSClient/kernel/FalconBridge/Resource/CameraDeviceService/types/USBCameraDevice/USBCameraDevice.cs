@@ -28,6 +28,12 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         /// <summary>
         /// 
         /// </summary>
+        private string badgeId = "";
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly FalconSdk sdk;
 
         /// <summary>
@@ -54,6 +60,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         {
             this.device = device;
             this.serialNumber = serialNumber;
+            this.badgeId = serialNumber;
             this.Name = name;
             this.sdk = new FalconSdk();
         }
@@ -65,6 +72,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         public USBCameraDevice(string serialNumber)
         {
             this.serialNumber = serialNumber;
+            this.badgeId = serialNumber;
             this.device = new DriveInfo("c");
             this.sdk = new FalconSdk();
         }
@@ -98,6 +106,17 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
             get { return serialNumber; }
             set { serialNumber = value; }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("badgeId")]
+        public string BadgeId
+        {
+            get { return badgeId; }
+            set { badgeId= value; }
+        }
+
 
         /// <summary>
         /// 

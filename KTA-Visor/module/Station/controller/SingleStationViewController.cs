@@ -32,20 +32,37 @@ namespace KTA_Visor.module.Station.controller
         {
             switch (request.Endpoint)
             {
-                case "/station/cameras": this.onReceiveCamerasList(request); break;
-                case "/station/camera/files": this.onReceiveCamerasList(request); break;
+                case "response://station/cameras": this.onReceiveCamerasList(request); break;
+                case "response://station/camera/files": this.onReceiveCamerasList(request); break;
+                case "response://station/camera/selectedCamera/files": this.onReceiveSelectedCameraFiles(request); break;
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
         public void onReceiveCamerasList(Request request)
         {
             this.singleStationViewService.onReceivedCamerasList(request);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
         public void onReceiveCameraFiles(Request request)
         {
             this.singleStationViewService.onReceiveCameraFiles(request);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        public void onReceiveSelectedCameraFiles(Request request)
+        {
+            this.singleStationViewService.onReceiveSelectedCameraFiles(request);
         }
     }
 }

@@ -20,12 +20,16 @@ using KTA_Visor.module.Station.components.StationItem;
 using KTA_Visor.module.Station.components.StationItem.events;
 using KTA_Visor.module.Station.components.ClientsList.components.ClientItem;
 using KTA_Visor.module.Tunnel.view;
+using KTA_Visor.module.Card.view;
+using KTA_RFID_Keyboard.module.RFIDKeyboardReader;
 
 namespace KTA_Visor.module.Station.view
 {
     public partial class StationsView : Form
     {
         
+        private readonly KeyboardReader keyboardReader;
+
         private readonly TunnelSettingsView tunnelSettingsView;
 
         private readonly Tunnel.Tunnel tunnel;
@@ -43,6 +47,7 @@ namespace KTA_Visor.module.Station.view
             InitializeComponent();
             this.loggerView.ParentPanel = this.loggerPanel;
             this.tunnelSettingsView = new TunnelSettingsView();
+            this.keyboardReader = new KeyboardReader();
 
             this.tunnel = new Tunnel.Tunnel();
             this.stationViewService = new StationViewService(this);
@@ -64,11 +69,25 @@ namespace KTA_Visor.module.Station.view
             this.startTunnelServerMenuItem.Click += StartTunnel;
             this.stopTunnelServerMenuItem.Click += StopTunnel;
             this.tunnelSettingsBtn.OnClick += OpenTunnelSettings;
+            this.cardBtn.OnClick += OpenCardView;
             this.tunnel.onClientConnected += Tunnel_onClientConnected;
             this.tunnel.onClientDisconnected += Tunnel_onClientDisconnected;
             this.tunnel.onMessageReceived += Tunnel_onMessageReceived;
             this.stationViewService.onAuthorized += StationViewService_onAuthorized1;
-           
+
+            this.keyboardReader.Subscribe();
+            this.keyboardReader.OnKeyboardInputChanged += KeyboardReader_OnKeyboardInputChanged; ;
+
+        }
+
+        private void KeyboardReader_OnKeyboardInputChanged(object sender, KTA_RFID_Keyboard.module.reader.events.OnKeyboardReaderDataChanagedEvent e)
+        {
+            Console.WriteLine("detected:" + KeyboardReader.Input);
+        }
+
+        private void OpenCardView(object sender, EventArgs e)
+        {
+            new CardTestView().ShowDialog();
         }
 
         private void StationViewService_onAuthorized1(object sender, Request e)
@@ -90,8 +109,8 @@ namespace KTA_Visor.module.Station.view
 
                 this.Invoke((MethodInvoker)delegate
                 {
-                    this.stationsFlowLayoutPanel.Controls.Add(stationItem);
                     stationItem.OnClick += OnOpenStation;
+                    this.stationsFlowLayoutPanel.Controls.Add(stationItem);
                 });
             }
         }

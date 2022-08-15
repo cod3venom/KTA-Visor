@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
 using TCPTunnel.kernel.types;
 
@@ -36,7 +37,7 @@ namespace TCPTunnel.kernel.extensions.router
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
                 return null;
             }
         }

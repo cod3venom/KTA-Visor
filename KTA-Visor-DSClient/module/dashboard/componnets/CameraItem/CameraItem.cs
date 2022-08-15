@@ -21,16 +21,17 @@ namespace KTA_Visor_DSClient.module.dashboard.componnets.CameraItem
         public CameraItem(USBCameraDevice camera)
         {
             InitializeComponent();
-            this.Name = camera.Name;
             this.SerialNumber = camera.SerialNumber;
-            this.Drive = camera.Drive.Name;
+            this.Name = camera.Drive.Name;
             this.Camera = camera;
+            this.Badge = String.Format("Kamera - {0}", camera.BadgeId);
         }
 
         public CameraItem(string name, string serialNumber = "")
         {
             this.Name = name;
             this.SerialNumber = serialNumber;
+            this.Badge = "Kamera - 124131";
              
         }
 
@@ -61,6 +62,12 @@ namespace KTA_Visor_DSClient.module.dashboard.componnets.CameraItem
         {
             get { return this.cameraSNLbl.Text; }
             set { this.cameraSNLbl.Text = value; }
+        }
+
+        public string Badge
+        {
+            get { return this.badgeLbl.Text; }
+            set { this.badgeLbl.Text = value; }
         }
 
         public string Drive

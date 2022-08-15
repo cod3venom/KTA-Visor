@@ -138,7 +138,7 @@ namespace TCPTunnel.module.server
                 try
                 {
                     Thread.SpinWait(100);
-                    byte[] receiveMessageArray = new byte[1024];
+                    byte[] receiveMessageArray = new byte[this.serverSocket.ReceiveBufferSize];
                     int length = client.getSocket().Receive(receiveMessageArray);
                     string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);
 

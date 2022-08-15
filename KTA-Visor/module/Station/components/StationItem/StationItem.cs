@@ -29,9 +29,15 @@ namespace KTA_Visor.module.Station.components.StationItem
             this.ID = station.ID;
             this.Name = station.Name;
             this.IpAddress = station.Client.getIpAddress();
+            this.openBtn.Click += onOpen;
+            
         }
 
-        
+        private void onOpen(object sender, EventArgs e)
+        {
+           this.OnClick?.Invoke(sender, new StationItemClickEvent(this));
+        }
+
         private void StationItem_Load(object sender, EventArgs e)
         {
 

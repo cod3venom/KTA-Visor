@@ -1,73 +1,29 @@
-﻿using KTA_USB_Relay.interop.interfaces;
-using KTA_USB_Relay.interop.service;
+﻿
+using KTA_USB_Relay.kernel.sharedKernel.module.COMConnector;
+using KTA_USB_Relay.kernel.sharedKernel.module.commander;
 using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KTA_USB_Relay
 {
-    public class USBRelay : IUSBRelay
+    public class Relay 
     {
-        public int Init()
+
+        private readonly COMConnector connector;
+
+        private readonly RelayDevice device;
+
+        public Relay(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBit)
         {
-            return InteropService.Init();
+            this.connector = new COMConnector(portName, baudRate, parity, dataBits, stopBit);
+            this.device = new RelayDevice(connector);
         }
 
-        public int Open(UsbRelayDeviceInfo deviceInfo)
-        {
-            return InteropService.Open(deviceInfo);
-        }
-
-        public int OpenAllRelayChannels(int hHandle)
-        {
-            return InteropService.OpenAllRelayChannels(hHandle);
-        }
-
-        public int OpenOneRelayChannel(int hHandle, int index)
-        {
-            return InteropService.OpenOneRelayChannel(hHandle, index);
-        }
-
-        public int OpenWithSerialNumber(string serialNumber, int stringLength)
-        {
-            return InteropService.OpenWithSerialNumber(serialNumber, stringLength);
-        }
-
-        public void Close(int hHandle)
-        {
-            InteropService.Close(hHandle);
-        }
-
-        public int CloseAllRelayChannels(int hHandle)
-        {
-            return InteropService.CloseAllRelayChannels(hHandle);
-        }
-
-        public int CloseOneRelayChannel(int hHandle, int index)
-        {
-            return InteropService.CloseOneRelayChannel(hHandle, index); 
-        }
-
-        public UsbRelayDeviceInfo Enumerate()
-        {
-            return InteropService.Enumerate();
-        }
-
-        public int Exit()
-        {
-            return InteropService.Exit();
-        }
-
-        public void FreeEnumerate(UsbRelayDeviceInfo deviceInfo)
-        {
-            InteropService.FreeEnumerate(deviceInfo);
-        }
-
-        public int GetStatus(int hHandle, ref int status)
-        {
-            return InteropService.GetStatus(hHandle, ref status);
-        }
+        public RelayDevice Device => this.device;
+ 
     }
 }

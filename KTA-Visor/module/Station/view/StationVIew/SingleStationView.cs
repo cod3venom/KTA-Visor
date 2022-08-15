@@ -59,8 +59,6 @@ namespace KTA_Visor.module.Station.view.StationVIew
             this.singleStationViewService = new SingleStationViewService(this.station, this);
             this.controller = new SingleStationViewController(this, this.singleStationViewService);
             
-
-            
         }
 
         private void SingleStationView_Load(object sender, EventArgs e)
@@ -80,6 +78,7 @@ namespace KTA_Visor.module.Station.view.StationVIew
             this.singleStationViewService.askForCameras();
             this.singleStationViewService.onCamerasReceived += onCamerasReceived;
             this.singleStationViewService.onCameraFilesReceived += onCameraFilesReceived;
+            this.singleStationViewService.onSelectedCameraFilesReceived += onSelectedCameraFilesReceived;
         }
 
         
@@ -93,7 +92,7 @@ namespace KTA_Visor.module.Station.view.StationVIew
 
                 SidebarMenuItem item = new SidebarMenuItem();
                 item.ExtraObject = camera;
-                item.Label = "Kamera - " + camera.Drive;
+                item.Label = "Kamera - " + camera.BadgeId;
                 item.Dock = DockStyle.Top;
                 item.onClick += onCameraSelect;
                 this.sidebar.add(item);
@@ -108,7 +107,7 @@ namespace KTA_Visor.module.Station.view.StationVIew
             if (!typeof(USBCameraDevice).IsInstanceOfType(e.Item.ExtraObject)) return;
             
             USBCameraDevice camera = (USBCameraDevice)e.Item.ExtraObject;
-            this.singleStationViewService.askForCameraFiles(camera?.Drive?.Name);
+            this.singleStationViewService.askForFilesFromSelectedCamera(camera?.Drive?.Name);
 
             this.setBreadCrumbs(e.Item.Label);
             this.sidebar.MenuItems.ForEach(item => item.setActive(e.Item.Label));
@@ -129,6 +128,11 @@ namespace KTA_Visor.module.Station.view.StationVIew
                 this.fileList.add(fileItem);
                 
             }
+        }
+
+        private void onSelectedCameraFilesReceived(object sender, StationCameraFilesReceivedEvent e)
+        {
+            this.onCameraFilesReceived(sender, e);
         }
 
         private void Tunnel_onMessageReceived(object sender, TCPTunnel.module.server.events.TCPServerClientMessageReceivedEvent e)

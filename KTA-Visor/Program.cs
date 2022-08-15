@@ -30,6 +30,8 @@ namespace KTA_Visor
             Application.Run(new StationsView());
         }
 
+ 
+
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
     }

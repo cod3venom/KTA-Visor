@@ -17,6 +17,7 @@ namespace KTA_Visor.module.Station.service
     {
         public EventHandler<StationCamerasListReceivedEvent> onCamerasReceived;
         public EventHandler<StationCameraFilesReceivedEvent> onCameraFilesReceived;
+        public EventHandler<StationCameraFilesReceivedEvent> onSelectedCameraFilesReceived;
 
         private readonly StationTObject station;
 
@@ -32,17 +33,26 @@ namespace KTA_Visor.module.Station.service
         public void askForCameras()
         {
             this.station.Client?.Send(new Request(
-                "/station/cameras"
+                "command://station/cameras"
             ));
         }
 
         public void askForCameraFiles(string drive)
         {
             this.station.Client?.Send(new Request(
-                "/station/camera/files",
+                "command://station/camera/files",
                 new GetCameraFilesRequestTObject(drive)
             ));
         }
+
+        public void askForFilesFromSelectedCamera(string cameraId)
+        {
+            this.station.Client?.Send(new Request(
+                "command://station/camera/selected/files",
+                new GetSelectedCameraFilesRequestTObject(cameraId)
+            ));
+        }
+
         public void onReceivedCamerasList(Request request)
         {
             Dictionary<string, USBCameraDevice> cameras = JsonConvert.DeserializeObject<Dictionary<string, USBCameraDevice>> (request.Body);
@@ -55,6 +65,13 @@ namespace KTA_Visor.module.Station.service
             Dictionary<string, FileInfo> files = JsonConvert.DeserializeObject<Dictionary<string, FileInfo>>(request.Body);
 
             this.onCameraFilesReceived?.Invoke(this, new StationCameraFilesReceivedEvent(files));
+        } 
+        
+        public void onReceiveSelectedCameraFiles(Request request)
+        {
+            Dictionary<string, FileInfo> files = JsonConvert.DeserializeObject<Dictionary<string, FileInfo>>(request.Body);
+
+            this.onSelectedCameraFilesReceived?.Invoke(this, new StationCameraFilesReceivedEvent(files));
         }
     }
 }
