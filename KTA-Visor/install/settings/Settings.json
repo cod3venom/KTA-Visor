@@ -1,7 +1,9 @@
 ﻿{
   "app": {
     "title": "KTA-Visor Manager",
-
+    "api": {
+      "url":  "http://192.168.0.162:8000/api"
+    },
     "tunnel": {
       "title":  "Server - settings",
       "serverIp": "127.0.0.1",

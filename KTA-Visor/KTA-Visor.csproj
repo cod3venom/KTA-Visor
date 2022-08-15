@@ -311,7 +311,17 @@
     <Compile Include="install\settings\dto\SettingsFileTObject.cs" />
     <Compile Include="install\settings\Settings.cs" />
     <Compile Include="kernel\helper\EmbededFileHelper.cs" />
+    <Compile Include="kernel\module\HttpClientHelper\events\HttpUnauthorizedInterceptorEvent.cs" />
+    <Compile Include="kernel\module\HttpClientHelper\HttpClientHelper.cs" />
+    <Compile Include="kernel\module\HttpClientHelper\interfaces\IHttpClient.cs" />
     <Compile Include="kernel\module\VirtualRFID\VirtualRFID.cs" />
+    <Compile Include="kernel\sharedKernel\bootstrap\Bootstrap.cs" />
+    <Compile Include="kernel\sharedKernel\bootstrap\watcher\Watcher.cs" />
+    <Compile Include="kernel\sharedKernel\bootstrap\watcher\watchers\UnauthorizedWatcher.cs" />
+    <Compile Include="kernel\sharedKernel\helper\DTOHelper\util\DTOHelperStruct.cs" />
+    <Compile Include="kernel\sharedKernel\helper\LocalStorage\LocalStorage.cs" />
+    <Compile Include="kernel\sharedKernel\SharedKernel.cs" />
+    <Compile Include="kernel\sharedKernel\util\HttpClientUtil.cs" />
     <Compile Include="module\Authentication\events\RFIDAuthFailEvent.cs" />
     <Compile Include="module\Authentication\events\RFIDAuthSuccessEvent.cs" />
     <Compile Include="module\Authentication\view\RFIDAuthenticationView.cs">
@@ -325,6 +335,25 @@
     </Compile>
     <Compile Include="module\Card\view\CardTestView.Designer.cs">
       <DependentUpon>CardTestView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\auth\command\SaveSessionCommand.cs" />
+    <Compile Include="module\Managemnt\module\auth\dto\request\SignInRequestTObject.cs" />
+    <Compile Include="module\Managemnt\module\auth\dto\request\SignUpRequestTObject.cs" />
+    <Compile Include="module\Managemnt\module\auth\entity\SignUpEntity.cs" />
+    <Compile Include="module\Managemnt\module\auth\entity\SignInEntity.cs" />
+    <Compile Include="module\Managemnt\module\auth\repository\AuthRepository.cs" />
+    <Compile Include="module\Managemnt\module\auth\service\AuthService.cs" />
+    <Compile Include="module\Managemnt\module\auth\view\SignInView\SignInView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\auth\view\SignInView\SignInView.Designer.cs">
+      <DependentUpon>SignInView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\auth\view\SignUpView\SignUpView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\auth\view\SignUpView\SignUpView.Designer.cs">
+      <DependentUpon>SignUpView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Station\components\ClientsList\ClientsList.cs">
       <SubType>UserControl</SubType>
@@ -430,6 +459,12 @@
     <EmbeddedResource Include="module\Card\view\CardTestView.resx">
       <DependentUpon>CardTestView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\auth\view\SignInView\SignInView.resx">
+      <DependentUpon>SignInView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\auth\view\SignUpView\SignUpView.resx">
+      <DependentUpon>SignUpView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="module\Station\components\ClientsList\ClientsList.resx">
       <DependentUpon>ClientsList.cs</DependentUpon>
     </EmbeddedResource>
@@ -481,11 +516,13 @@
     <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
-    <Folder Include="kernel\sharedKernel\" />
     <Folder Include="module\Authentication\command\" />
     <Folder Include="module\Authentication\entity\" />
     <Folder Include="module\Authentication\exception\" />
     <Folder Include="module\Authentication\repository\" />
+    <Folder Include="module\Managemnt\helper\" />
+    <Folder Include="module\Managemnt\module\camera\" />
+    <Folder Include="module\Managemnt\module\officer\" />
     <Folder Include="module\Station\entity\" />
     <Folder Include="module\Station\repository\" />
     <Folder Include="module\Tunnel\components\" />

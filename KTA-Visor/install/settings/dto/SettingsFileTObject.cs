@@ -15,10 +15,16 @@ namespace KTA_Visor.install.settings.dto
         {
             public string title { get; set; }
 
+            public API api { get; set; }
           
             public Tunnel tunnel{ get; set; }
         }
          
+        public class API
+        {
+            public string url { get; set; }
+        }
+
         public class Tunnel
         {
             public string title { get; set; }

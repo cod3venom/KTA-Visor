@@ -24,8 +24,8 @@ namespace KTA_Visor_UI.component.basic.topbar
 
         private bool isMaximized = false;
 
-        private Rectangle parentMinBounds;
-        private Rectangle parentMaxBounds;
+        public Rectangle parentMinBounds;
+        public Rectangle parentMaxBounds;
 
         public TopBar()
         {
