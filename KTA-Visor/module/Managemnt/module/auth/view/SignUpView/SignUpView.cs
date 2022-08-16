@@ -30,7 +30,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignUpView
             this.centerisePanel();
 
             this.signInLink.Click += onShowSignInView;
-            this.signUpBtn.Click += onSignIn;
+            this.signUpBtn.Click += onSignUp;
         }
 
         private void centerisePanel()
@@ -43,7 +43,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignUpView
         }
 
 
-        private async void onSignIn(object sender, EventArgs e)
+        private async void onSignUp(object sender, EventArgs e)
         {
            try
             {
@@ -53,6 +53,9 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignUpView
                    this.emailTxt.Text,
                    this.passwordTxt.Text
                ));
+
+                this.Hide();
+                new Management.view.Management().Show();
             }
             catch(Exception ex)
             {

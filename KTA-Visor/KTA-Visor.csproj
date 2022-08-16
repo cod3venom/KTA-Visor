@@ -355,52 +355,83 @@
     <Compile Include="module\Managemnt\module\auth\view\SignUpView\SignUpView.Designer.cs">
       <DependentUpon>SignUpView.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Station\components\ClientsList\ClientsList.cs">
+    <Compile Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Station\components\ClientsList\ClientsList.Designer.cs">
+    <Compile Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.Designer.cs">
+      <DependentUpon>CamerasViewPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\officer\dto\request\EditOfficerRequestTObject.cs" />
+    <Compile Include="module\Managemnt\module\officer\dto\request\CreateOfficerRequestTObject.cs" />
+    <Compile Include="module\Managemnt\module\officer\entity\OfficersEntity.cs" />
+    <Compile Include="module\Managemnt\module\officer\entity\OfficerEntity.cs" />
+    <Compile Include="module\Managemnt\module\officer\events\OnSaveNewOfficerEvent.cs" />
+    <Compile Include="module\Managemnt\module\officer\repository\OfficerRepository.cs" />
+    <Compile Include="module\Managemnt\module\officer\service\OfficerService.cs" />
+    <Compile Include="module\Managemnt\module\officer\view\forms\OfficerCrudForm\OfficerCrudForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\officer\view\forms\OfficerCrudForm\OfficerCrudForm.Designer.cs">
+      <DependentUpon>OfficerCrudForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\officer\view\OfficersPanelView\OfficersPanelView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\officer\view\OfficersPanelView\OfficersPanelView.Designer.cs">
+      <DependentUpon>OfficersPanelView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\station\components\ClientsList\ClientsList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\station\components\ClientsList\ClientsList.Designer.cs">
       <DependentUpon>ClientsList.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Station\components\ClientsList\components\ClientItem\ClientItem.cs">
+    <Compile Include="module\Managemnt\module\station\components\ClientsList\components\ClientItem\ClientItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Station\components\ClientsList\components\ClientItem\ClientItem.Designer.cs">
+    <Compile Include="module\Managemnt\module\station\components\ClientsList\components\ClientItem\ClientItem.Designer.cs">
       <DependentUpon>ClientItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Station\components\StationItem\events\StationItemClickEvent.cs" />
-    <Compile Include="module\Station\components\StationItem\StationItem.cs">
+    <Compile Include="module\Managemnt\module\station\components\StationItem\events\StationItemClickEvent.cs" />
+    <Compile Include="module\Managemnt\module\station\components\StationItem\StationItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Station\components\StationItem\StationItem.Designer.cs">
+    <Compile Include="module\Managemnt\module\station\components\StationItem\StationItem.Designer.cs">
       <DependentUpon>StationItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Station\components\TCPServerUI\TCPServerUI.cs">
+    <Compile Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Station\components\TCPServerUI\TCPServerUI.Designer.cs">
+    <Compile Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.Designer.cs">
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Station\controller\StationController.cs" />
-    <Compile Include="module\Station\controller\SingleStationViewController.cs" />
-    <Compile Include="module\Station\dto\GetSelectedCameraFilesRequestTObject.cs" />
-    <Compile Include="module\Station\dto\GetCameraFilesRequestTObject.cs" />
-    <Compile Include="module\Station\dto\StationTObject.cs" />
-    <Compile Include="module\Station\events\StationCameraFilesReceivedEvent.cs" />
-    <Compile Include="module\Station\events\StationCamerasListReceivedEvent.cs" />
-    <Compile Include="module\Station\helper\RowHelper.cs" />
-    <Compile Include="module\Station\service\SingleStationViewService.cs" />
-    <Compile Include="module\Station\service\StationViewService.cs" />
-    <Compile Include="module\Station\view\StationVIew\SingleStationView.cs">
+    <Compile Include="module\Managemnt\module\station\controller\StationController.cs" />
+    <Compile Include="module\Managemnt\module\station\controller\SingleStationViewController.cs" />
+    <Compile Include="module\Managemnt\module\station\dto\GetSelectedCameraFilesRequestTObject.cs" />
+    <Compile Include="module\Managemnt\module\station\dto\GetCameraFilesRequestTObject.cs" />
+    <Compile Include="module\Managemnt\module\station\dto\StationTObject.cs" />
+    <Compile Include="module\Managemnt\module\station\events\StationCameraFilesReceivedEvent.cs" />
+    <Compile Include="module\Managemnt\module\station\events\StationCamerasListReceivedEvent.cs" />
+    <Compile Include="module\Managemnt\module\station\helper\RowHelper.cs" />
+    <Compile Include="module\Managemnt\module\station\service\SingleStationViewService.cs" />
+    <Compile Include="module\Managemnt\module\station\service\StationViewService.cs" />
+    <Compile Include="module\Managemnt\module\station\view\StationVIew\SingleStationView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Station\view\StationVIew\SingleStationView.Designer.cs">
+    <Compile Include="module\Managemnt\module\station\view\StationVIew\SingleStationView.Designer.cs">
       <DependentUpon>SingleStationView.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Station\view\StationVIew\StationsView.cs">
+    <Compile Include="module\Managemnt\module\station\view\StationVIew\StationsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Station\view\StationVIew\StationsView.Designer.cs">
+    <Compile Include="module\Managemnt\module\station\view\StationVIew\StationsView.Designer.cs">
       <DependentUpon>StationsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\view\Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\view\Management.Designer.cs">
+      <DependentUpon>Management.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Tunnel\Tunnel.cs" />
     <Compile Include="module\Tunnel\view\TunnelSettingsView.cs">
@@ -465,23 +496,35 @@
     <EmbeddedResource Include="module\Managemnt\module\auth\view\SignUpView\SignUpView.resx">
       <DependentUpon>SignUpView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Station\components\ClientsList\ClientsList.resx">
+    <EmbeddedResource Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.resx">
+      <DependentUpon>CamerasViewPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\officer\view\forms\OfficerCrudForm\OfficerCrudForm.resx">
+      <DependentUpon>OfficerCrudForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\officer\view\OfficersPanelView\OfficersPanelView.resx">
+      <DependentUpon>OfficersPanelView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\station\components\ClientsList\ClientsList.resx">
       <DependentUpon>ClientsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Station\components\ClientsList\components\ClientItem\ClientItem.resx">
+    <EmbeddedResource Include="module\Managemnt\module\station\components\ClientsList\components\ClientItem\ClientItem.resx">
       <DependentUpon>ClientItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Station\components\StationItem\StationItem.resx">
+    <EmbeddedResource Include="module\Managemnt\module\station\components\StationItem\StationItem.resx">
       <DependentUpon>StationItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Station\components\TCPServerUI\TCPServerUI.resx">
+    <EmbeddedResource Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.resx">
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Station\view\StationVIew\SingleStationView.resx">
+    <EmbeddedResource Include="module\Managemnt\module\station\view\StationVIew\SingleStationView.resx">
       <DependentUpon>SingleStationView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Station\view\StationVIew\StationsView.resx">
+    <EmbeddedResource Include="module\Managemnt\module\station\view\StationVIew\StationsView.resx">
       <DependentUpon>StationsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\view\Management.resx">
+      <DependentUpon>Management.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Tunnel\view\TunnelSettingsView.resx">
       <DependentUpon>TunnelSettingsView.cs</DependentUpon>
@@ -521,10 +564,9 @@
     <Folder Include="module\Authentication\exception\" />
     <Folder Include="module\Authentication\repository\" />
     <Folder Include="module\Managemnt\helper\" />
-    <Folder Include="module\Managemnt\module\camera\" />
-    <Folder Include="module\Managemnt\module\officer\" />
-    <Folder Include="module\Station\entity\" />
-    <Folder Include="module\Station\repository\" />
+    <Folder Include="module\Managemnt\module\officer\command\" />
+    <Folder Include="module\Managemnt\module\station\entity\" />
+    <Folder Include="module\Managemnt\module\station\repository\" />
     <Folder Include="module\Tunnel\components\" />
   </ItemGroup>
   <ItemGroup>

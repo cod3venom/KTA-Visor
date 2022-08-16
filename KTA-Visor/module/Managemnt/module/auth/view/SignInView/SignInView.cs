@@ -44,7 +44,8 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
                     this.passwordTxt.Text
                 ));
 
-                MessageBox.Show(signIn.data.firstName);
+                this.Hide();
+                new Management.view.Management().Show();
             }
             catch(Exception ex)
             {

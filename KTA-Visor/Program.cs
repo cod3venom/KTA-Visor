@@ -32,8 +32,8 @@ namespace KTA_Visor
             installer.FullInstall();
 
             Settings settings = new Settings();
-            HttpClientUtil.initializeHttpClient("http://192.168.0.162:8000/api");
-            HttpClientUtil.initializeSecuredClient("http://192.168.0.162:8000/api");
+            HttpClientUtil.initializeHttpClient("http://localhost:8000/api");
+            HttpClientUtil.initializeSecuredClient("http://localhost:8000/api");
 
             new Bootstrap()._Watcher.unAuthorizedWatcher().Watch();
 

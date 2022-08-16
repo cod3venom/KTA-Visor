@@ -17,6 +17,13 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
             this.table = table;
         }
 
+        public DataGridViewRow selectedRow
+        {
+            get
+            {
+                return this.table.CurrentRow;
+            }
+        }
         public Row add(RowTObject row)
         {
             this.table.Invoke(new Action(() => {
@@ -51,6 +58,12 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
                 }
             }
 
+            return this;
+        }
+
+        public Row clear()
+        {
+            this.table.Rows.Clear();
             return this;
         }
     }

@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableControlsContainer = new System.Windows.Forms.Panel();
-            this.editBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.deleteBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.editBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.addBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.dataGridView1 = new Bunifu.Framework.UI.BunifuCustomDataGrid();
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse();
-            this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse();
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.roundedTextBox1 = new KTA_Visor_UI.component.basic.textbox.RoundedTextBox();
             this.horizontalSeparator1 = new KTA_Visor_UI.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
             this.horizontalSeparator3 = new KTA_Visor_UI.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
@@ -47,9 +48,9 @@
             // 
             // tableControlsContainer
             // 
-            this.tableControlsContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(97)))));
-            this.tableControlsContainer.Controls.Add(this.editBtn);
+            this.tableControlsContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.tableControlsContainer.Controls.Add(this.deleteBtn);
+            this.tableControlsContainer.Controls.Add(this.editBtn);
             this.tableControlsContainer.Controls.Add(this.addBtn);
             this.tableControlsContainer.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableControlsContainer.Location = new System.Drawing.Point(0, 0);
@@ -58,10 +59,45 @@
             this.tableControlsContainer.Size = new System.Drawing.Size(1310, 42);
             this.tableControlsContainer.TabIndex = 1;
             // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Activecolor = System.Drawing.Color.Black;
+            this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.deleteBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.deleteBtn.BorderRadius = 6;
+            this.deleteBtn.ButtonText = "Delete";
+            this.deleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteBtn.DisabledColor = System.Drawing.Color.Gray;
+            this.deleteBtn.Iconcolor = System.Drawing.Color.Transparent;
+            this.deleteBtn.Iconimage = null;
+            this.deleteBtn.Iconimage_right = null;
+            this.deleteBtn.Iconimage_right_Selected = null;
+            this.deleteBtn.Iconimage_Selected = null;
+            this.deleteBtn.IconMarginLeft = 0;
+            this.deleteBtn.IconMarginRight = 0;
+            this.deleteBtn.IconRightVisible = true;
+            this.deleteBtn.IconRightZoom = 0D;
+            this.deleteBtn.IconVisible = true;
+            this.deleteBtn.IconZoom = 50D;
+            this.deleteBtn.IsTab = false;
+            this.deleteBtn.Location = new System.Drawing.Point(231, 7);
+            this.deleteBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.deleteBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.deleteBtn.OnHoverTextColor = System.Drawing.Color.Black;
+            this.deleteBtn.selected = false;
+            this.deleteBtn.Size = new System.Drawing.Size(87, 27);
+            this.deleteBtn.TabIndex = 9;
+            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.deleteBtn.Textcolor = System.Drawing.Color.Black;
+            this.deleteBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
             // editBtn
             // 
-            this.editBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.editBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(214)))), ((int)(((byte)(44)))));
+            this.editBtn.Activecolor = System.Drawing.Color.Black;
+            this.editBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.editBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.editBtn.BorderRadius = 6;
             this.editBtn.ButtonText = "Edit";
@@ -79,60 +115,24 @@
             this.editBtn.IconVisible = true;
             this.editBtn.IconZoom = 50D;
             this.editBtn.IsTab = false;
-            this.editBtn.Location = new System.Drawing.Point(118, 7);
+            this.editBtn.Location = new System.Drawing.Point(119, 7);
             this.editBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.editBtn.Name = "editBtn";
-            this.editBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(214)))), ((int)(((byte)(44)))));
-            this.editBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(214)))), ((int)(((byte)(44)))));
-            this.editBtn.OnHoverTextColor = System.Drawing.Color.White;
+            this.editBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.editBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.editBtn.OnHoverTextColor = System.Drawing.Color.Black;
             this.editBtn.selected = false;
             this.editBtn.Size = new System.Drawing.Size(87, 27);
-            this.editBtn.TabIndex = 11;
+            this.editBtn.TabIndex = 8;
             this.editBtn.Text = "Edit";
             this.editBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.editBtn.Textcolor = System.Drawing.Color.White;
+            this.editBtn.Textcolor = System.Drawing.Color.Black;
             this.editBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // 
-            // deleteBtn
-            // 
-            this.deleteBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(52)))), ((int)(((byte)(38)))));
-            this.deleteBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.deleteBtn.BorderRadius = 6;
-            this.deleteBtn.ButtonText = "Delete";
-            this.deleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.deleteBtn.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(89)))), ((int)(((byte)(86)))));
-            this.deleteBtn.Enabled = false;
-            this.deleteBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.deleteBtn.Iconimage = null;
-            this.deleteBtn.Iconimage_right = null;
-            this.deleteBtn.Iconimage_right_Selected = null;
-            this.deleteBtn.Iconimage_Selected = null;
-            this.deleteBtn.IconMarginLeft = 0;
-            this.deleteBtn.IconMarginRight = 0;
-            this.deleteBtn.IconRightVisible = true;
-            this.deleteBtn.IconRightZoom = 0D;
-            this.deleteBtn.IconVisible = true;
-            this.deleteBtn.IconZoom = 50D;
-            this.deleteBtn.IsTab = false;
-            this.deleteBtn.Location = new System.Drawing.Point(226, 7);
-            this.deleteBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(52)))), ((int)(((byte)(38)))));
-            this.deleteBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(52)))), ((int)(((byte)(38)))));
-            this.deleteBtn.OnHoverTextColor = System.Drawing.Color.White;
-            this.deleteBtn.selected = false;
-            this.deleteBtn.Size = new System.Drawing.Size(87, 27);
-            this.deleteBtn.TabIndex = 10;
-            this.deleteBtn.Text = "Delete";
-            this.deleteBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.deleteBtn.Textcolor = System.Drawing.Color.White;
-            this.deleteBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // addBtn
             // 
-            this.addBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(214)))), ((int)(((byte)(44)))));
+            this.addBtn.Activecolor = System.Drawing.Color.Black;
+            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.addBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.addBtn.BorderRadius = 6;
             this.addBtn.ButtonText = "Add";
@@ -153,15 +153,15 @@
             this.addBtn.Location = new System.Drawing.Point(13, 7);
             this.addBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(214)))), ((int)(((byte)(44)))));
-            this.addBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(214)))), ((int)(((byte)(44)))));
-            this.addBtn.OnHoverTextColor = System.Drawing.Color.White;
+            this.addBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.addBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.addBtn.OnHoverTextColor = System.Drawing.Color.Black;
             this.addBtn.selected = false;
             this.addBtn.Size = new System.Drawing.Size(87, 27);
             this.addBtn.TabIndex = 7;
             this.addBtn.Text = "Add";
             this.addBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.addBtn.Textcolor = System.Drawing.Color.White;
+            this.addBtn.Textcolor = System.Drawing.Color.Black;
             this.addBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // dataGridView1
@@ -170,15 +170,15 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(193)))), ((int)(((byte)(229)))));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(249)))), ((int)(((byte)(252)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(36)))), ((int)(((byte)(67)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(249)))), ((int)(((byte)(252)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(36)))), ((int)(((byte)(67)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.ColumnHeadersHeight = 25;
@@ -188,7 +188,7 @@
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.Color.White;
             this.dataGridView1.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(249)))), ((int)(((byte)(252)))));
-            this.dataGridView1.HeaderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(36)))), ((int)(((byte)(67)))));
+            this.dataGridView1.HeaderForeColor = System.Drawing.Color.Black;
             this.dataGridView1.Location = new System.Drawing.Point(0, 42);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -260,10 +260,10 @@
         private components.HorizontalSeparator.HorizontalSeparator horizontalSeparator3;
         private Bunifu.Framework.UI.BunifuCustomDataGrid dataGridView1;
         private Bunifu.Framework.UI.BunifuFlatButton addBtn;
-        private Bunifu.Framework.UI.BunifuFlatButton deleteBtn;
         private textbox.RoundedTextBox roundedTextBox1;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse2;
+        private Bunifu.Framework.UI.BunifuFlatButton deleteBtn;
         private Bunifu.Framework.UI.BunifuFlatButton editBtn;
     }
 }

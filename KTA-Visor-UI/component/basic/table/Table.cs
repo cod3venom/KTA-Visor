@@ -14,6 +14,9 @@ namespace KTA_Visor_UI.component.basic.table
     public partial class Table : UserControl
     {
         public readonly TableBundle bundle;
+        public event EventHandler OnAddButton;
+        public event EventHandler OnEditButton;
+        public event EventHandler OnDeleteButton;
 
         private bool allowAdd = true;
         private bool allowEdit = true;
@@ -90,6 +93,24 @@ namespace KTA_Visor_UI.component.basic.table
         {
 
             this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.addBtn.Click += onAddBtn;
+            this.editBtn.Click += onEditBtn;
+            this.deleteBtn.Click += onDeleteBtn;
+        }
+
+        private void onAddBtn(object sender, EventArgs e)
+        {
+            this.OnAddButton?.Invoke(this, new EventArgs());
+        }
+
+        private void onEditBtn(object sender, EventArgs e)
+        {
+            this.OnEditButton?.Invoke(this, e);
+        }
+
+        private void onDeleteBtn(object sender, EventArgs e)
+        {
+            this.OnDeleteButton?.Invoke(this, e);
         }
     }
 }
