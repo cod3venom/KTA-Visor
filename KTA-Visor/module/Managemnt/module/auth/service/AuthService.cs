@@ -3,6 +3,7 @@ using KTA_Visor.module.Managemnt.module.auth.command;
 using KTA_Visor.module.Managemnt.module.auth.dto.request;
 using KTA_Visor.module.Managemnt.module.auth.entity;
 using KTA_Visor.module.Managemnt.module.auth.repository;
+using KTA_Visor.module.Shared.Exceptions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -85,12 +86,12 @@ namespace KTA_Visor.module.Managemnt.module.auth.service
         {
             if (request.email == null)
             {
-                throw new ArgumentNullException(nameof(request.email) + " can't be empty");
+                throw new BadRequestException(nameof(request.email) + " can't be empty");
             }
 
             if (request.password == null)
             {
-                throw new ArgumentNullException(nameof(request.password) + " can't be empty");
+                throw new BadRequestException(nameof(request.password) + " can't be empty");
             }
 
             try
@@ -101,7 +102,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.service
 
                 if (sisgnIn == null || sisgnIn?.data?.jwt == null)
                 {
-                    throw new Exception("Unable to sign-in, please try later");
+                    throw new WrongCredentialsException("Unable to sign-in, please try later");
                 }
 
                 SaveSessionCommand.Execute(sisgnIn.data.jwt);

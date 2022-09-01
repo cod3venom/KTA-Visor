@@ -1,22 +1,19 @@
 ﻿using KTA_Visor.install;
 using KTA_Visor.install.settings;
-using KTA_Visor.kernel.sharedKernel;
 using KTA_Visor.kernel.sharedKernel.bootstrap;
 using KTA_Visor.kernel.sharedKernel.util;
-using KTA_Visor.module.Authentication.view;
+using KTA_Visor.module.Management.tunnel;
 using KTA_Visor.module.Managemnt.module.auth.view.SignInView;
-using KTA_Visor.module.Managemnt.module.auth.view.SignUpView;
-using KTA_Visor.module.Station.view;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KTA_Visor
 {
+
     internal static class Program
     {
+        public static Tunnel Tunnel = new Tunnel();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

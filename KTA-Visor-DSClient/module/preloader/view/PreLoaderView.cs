@@ -34,11 +34,7 @@ namespace KTA_Visor_DSClient.module.preloader.view
 
         private void PreLoaderView_Load(object sender, EventArgs e)
         {
-            Thread thr = new Thread(this.startLoading);
-            thr.IsBackground = true;
-            thr.Start();
-
-            
+            this.startLoading();
         }
 
         private void startLoading()
@@ -56,9 +52,18 @@ namespace KTA_Visor_DSClient.module.preloader.view
 
         private void showTargetView()
         {
-            if (!this.targetForm.IsDisposed)
+            if (this.InvokeRequired)
             {
-                this.Invoke((MethodInvoker)delegate{
+                if (!this.targetForm.IsDisposed)
+                {
+                    this.Invoke((MethodInvoker)delegate {
+                        this.Hide();
+                        this.targetForm.Show();
+                    });
+                }
+            } else
+            {
+                this.Invoke((MethodInvoker)delegate {
                     this.Hide();
                     this.targetForm.Show();
                 });

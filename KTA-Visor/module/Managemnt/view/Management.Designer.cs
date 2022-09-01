@@ -31,9 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Management));
             this.topBarPanel = new System.Windows.Forms.Panel();
             this.cardMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.tunnelMenuStrip = new System.Windows.Forms.MenuStrip();
             this.tunnelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startTunnelServerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,7 +39,7 @@
             this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cameraBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
-            this.circleImageButton2 = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
+            this.stationBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
             this.officersBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
             this.tunnelSettingsBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
             this.cardBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
@@ -59,7 +56,6 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.topBarPanel.SuspendLayout();
-            this.cardMenuStrip.SuspendLayout();
             this.tunnelMenuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.footerPanel.SuspendLayout();
@@ -83,37 +79,11 @@
             this.cardMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.cardMenuStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.cardMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cardMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
             this.cardMenuStrip.Location = new System.Drawing.Point(78, 44);
             this.cardMenuStrip.Name = "cardMenuStrip";
-            this.cardMenuStrip.Size = new System.Drawing.Size(83, 27);
+            this.cardMenuStrip.Size = new System.Drawing.Size(202, 24);
             this.cardMenuStrip.TabIndex = 2;
             this.cardMenuStrip.Text = "Card ID";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Inter Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(75, 23);
-            this.toolStripMenuItem1.Text = "Card ID";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(159, 26);
-            this.toolStripMenuItem2.Text = "Sign Card";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(159, 26);
-            this.toolStripMenuItem3.Text = "Test Card";
             // 
             // tunnelMenuStrip
             // 
@@ -124,7 +94,7 @@
             this.tunnelToolStripMenuItem});
             this.tunnelMenuStrip.Location = new System.Drawing.Point(0, 44);
             this.tunnelMenuStrip.Name = "tunnelMenuStrip";
-            this.tunnelMenuStrip.Size = new System.Drawing.Size(78, 27);
+            this.tunnelMenuStrip.Size = new System.Drawing.Size(69, 27);
             this.tunnelMenuStrip.TabIndex = 1;
             this.tunnelMenuStrip.Text = "menuStrip1";
             // 
@@ -136,29 +106,29 @@
             this.restartTunnelServerMenuItem});
             this.tunnelToolStripMenuItem.Font = new System.Drawing.Font("Inter Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tunnelToolStripMenuItem.Name = "tunnelToolStripMenuItem";
-            this.tunnelToolStripMenuItem.Size = new System.Drawing.Size(70, 23);
-            this.tunnelToolStripMenuItem.Text = "Tunnel";
+            this.tunnelToolStripMenuItem.Size = new System.Drawing.Size(61, 23);
+            this.tunnelToolStripMenuItem.Text = "Tunel";
             // 
             // startTunnelServerMenuItem
             // 
             this.startTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startTunnelServerMenuItem.Image")));
             this.startTunnelServerMenuItem.Name = "startTunnelServerMenuItem";
-            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(142, 26);
-            this.startTunnelServerMenuItem.Text = "Start";
+            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.startTunnelServerMenuItem.Text = "Uruchom";
             // 
             // stopTunnelServerMenuItem
             // 
             this.stopTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopTunnelServerMenuItem.Image")));
             this.stopTunnelServerMenuItem.Name = "stopTunnelServerMenuItem";
-            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(142, 26);
-            this.stopTunnelServerMenuItem.Text = "Stop";
+            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.stopTunnelServerMenuItem.Text = "Zatrzymaj";
             // 
             // restartTunnelServerMenuItem
             // 
             this.restartTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restartTunnelServerMenuItem.Image")));
             this.restartTunnelServerMenuItem.Name = "restartTunnelServerMenuItem";
-            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(142, 26);
-            this.restartTunnelServerMenuItem.Text = "Restart";
+            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.restartTunnelServerMenuItem.Text = "Zresetuj";
             // 
             // topBar
             // 
@@ -177,7 +147,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.panel1.Controls.Add(this.cameraBtn);
-            this.panel1.Controls.Add(this.circleImageButton2);
+            this.panel1.Controls.Add(this.stationBtn);
             this.panel1.Controls.Add(this.officersBtn);
             this.panel1.Controls.Add(this.tunnelSettingsBtn);
             this.panel1.Controls.Add(this.cardBtn);
@@ -196,14 +166,14 @@
             this.cameraBtn.Size = new System.Drawing.Size(70, 70);
             this.cameraBtn.TabIndex = 4;
             // 
-            // circleImageButton2
+            // stationBtn
             // 
-            this.circleImageButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-            this.circleImageButton2.Icon = ((System.Drawing.Image)(resources.GetObject("circleImageButton2.Icon")));
-            this.circleImageButton2.Location = new System.Drawing.Point(23, 287);
-            this.circleImageButton2.Name = "circleImageButton2";
-            this.circleImageButton2.Size = new System.Drawing.Size(70, 70);
-            this.circleImageButton2.TabIndex = 3;
+            this.stationBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.stationBtn.Icon = ((System.Drawing.Image)(resources.GetObject("stationBtn.Icon")));
+            this.stationBtn.Location = new System.Drawing.Point(23, 287);
+            this.stationBtn.Name = "stationBtn";
+            this.stationBtn.Size = new System.Drawing.Size(70, 70);
+            this.stationBtn.TabIndex = 3;
             // 
             // officersBtn
             // 
@@ -363,8 +333,6 @@
             this.Load += new System.EventHandler(this.StationsView_Load);
             this.topBarPanel.ResumeLayout(false);
             this.topBarPanel.PerformLayout();
-            this.cardMenuStrip.ResumeLayout(false);
-            this.cardMenuStrip.PerformLayout();
             this.tunnelMenuStrip.ResumeLayout(false);
             this.tunnelMenuStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -396,14 +364,11 @@
         private System.Windows.Forms.ToolStripMenuItem stopTunnelServerMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restartTunnelServerMenuItem;
         private System.Windows.Forms.MenuStrip cardMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.Panel panel7;
         private KTA_Visor_UI.component.basic.StatusIndicator.StatusIndicator tunnelIndicator;
         private System.Windows.Forms.Panel panel8;
         private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton cameraBtn;
-        private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton circleImageButton2;
+        private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton stationBtn;
         private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton officersBtn;
         private System.Windows.Forms.Panel contentPanel;
     }

@@ -1,4 +1,5 @@
 ﻿using Logger.dto;
+using Logger.interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KTALogger
 {
-    public class Logger
+    public class Logger : ILogger
     {
         /// <summary>
         /// 
@@ -169,14 +170,18 @@ namespace KTALogger
 
             string fullText = String.Format(loggerFormat, this.currentTime, type, caller, message);
             
-            this.OnLogHasWritten?.Invoke(this, new LoggerEvent(type, fullText));
+            this.OnLogHasWritten?.Invoke(this, new LoggerEvent(type, fullText, message));
 
-            using(StreamWriter sw = this.loggerFile.AppendText())
+            try
             {
-                sw.WriteLine(fullText);
-                sw.Close();
-                Console.WriteLine(fullText);
+                using (StreamWriter sw = this.loggerFile.AppendText())
+                {
+                    sw.WriteLine(fullText);
+                    sw.Close();
+                    Console.WriteLine(fullText);
+                }
             }
+            catch(Exception ex) { }
         }
     }
 }

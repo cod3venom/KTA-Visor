@@ -23,6 +23,7 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel
             new ColumnTObject(2, "NAZWISKO"),
             new ColumnTObject(3, "ID KAMERY"),
             new ColumnTObject(4, "ID KARTY"),
+            new ColumnTObject(5, "NUMER ODZNAKI"),
         };
 
         private readonly OfficerService officerService;
@@ -40,69 +41,73 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel
             this.table.OnAddButton += onClickedAddNewOfficer;
             this.table.OnEditButton += onClickEditOfficer;
             this.table.OnDeleteButton += onClickDeleteOfficer;
-            this.officerCrudForm.OnSave += onSaveNewOfficer; ;
-
-            this.table.bundle.column.addMultiple(this.Columns);
+                        this.table.bundle.column.addMultiple(this.Columns);
             this.fetchOfficers();
         }
 
-        private void onSaveNewOfficer(object sender, events.OnSaveNewOfficerEvent e)
-        {
-            this.officerService.create(new CreateOfficerRequestTObject(
-                e.FirstName, e.LastName, e.CameraId, e.CardId
-            ));
-
-            this.fetchOfficers();
-        }
 
         private void onClickedAddNewOfficer(object sender, EventArgs e)
         {
             this.officerCrudForm = new OfficerCrudForm();
+            this.officerCrudForm.OnCreateOfficer += onSaveNewOfficer; ;
             this.officerCrudForm.ShowDialog();
         }
 
-        private void onClickEditOfficer(object sender, EventArgs e)
+        private async void onClickEditOfficer(object sender, EventArgs e)
         {
-            OfficerEntity officer = this.selectedRowToOfficer();
+            string officerId = this.getSelectedOfficerID();
+            OfficerEntity officer = await this.officerService.findById(officerId);
             this.officerCrudForm = new OfficerCrudForm(
                 officer.data.id,
                 officer.data.firstName,
                 officer.data.lastName,
-                officer.data.camId,
-                officer.data.cardId
+                officer.data.camCustomId,
+                officer.data.cardCustomID,
+                officer.data.badgeId
             );
-
+            this.officerCrudForm.OnEditOfficerEvent += onEditOfficer;
             this.officerCrudForm.ShowDialog();
         }
 
-        private void onClickDeleteOfficer(object sender, EventArgs e)
+        private async void onClickDeleteOfficer(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            string officerId = this.getSelectedOfficerID();
+            this.officerService.delet(officerId);
+            this.fetchOfficers();
         }
 
-        private OfficerEntity selectedRowToOfficer()
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void onSaveNewOfficer(object sender, events.OnOfficerCRUDEvent e)
         {
-            DataGridViewRow selectedRow = this.table.bundle.row.selectedRow;
-            if (selectedRow == null)
-                throw new Exception("Proszę wybrać dane");
+            await this.officerService.create(new CreateOfficerRequestTObject(
+                e.firstName, e.lastName, e.camCustomId, e.cardCustomId, e.badgeId
+            ));
 
-            if (selectedRow.Cells.Count < 5)
-                throw new Exception("Proszę wybrać poprawne dane");
-
-            OfficerEntity officer = new OfficerEntity();
-            officer.data = new OfficerEntity.Data();
-            officer.data.id = selectedRow.Cells["ID"].Value.ToString();
-            officer.data.firstName = selectedRow.Cells["IMIĘ"].Value.ToString();
-            officer.data.lastName= selectedRow.Cells["NAZWISKO"].Value.ToString();
-            officer.data.camId = selectedRow.Cells["ID KAMERY"].Value.ToString();
-            officer.data.cardId= selectedRow.Cells["ID KARTY"].Value.ToString();
-            return officer;
+            this.officerCrudForm.Close();
+            this.fetchOfficers();
         }
 
+
+        private async void onEditOfficer(object sender, events.OnOfficerCRUDEvent e)
+        {
+            await this.officerService.edit(e.id, new EditOfficerRequestTObject(
+                e.firstName, e.lastName, e.camCustomId, e.cardCustomId, e.badgeId
+            ));
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         private async void fetchOfficers()
         {
             OfficersEntity officers = await this.officerService.all();
-            this.table.bundle.row.clear();
+            this.table.DataGridView.Rows.Clear();
 
             foreach (var officer in officers.data)
             {
@@ -110,10 +115,21 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel
                     officer.id,
                     officer.firstName,
                     officer.lastName,
-                    officer.camera?.customId,
-                    officer.cardId
+                    officer.camCustomId,
+                    officer.cardCustomID,
+                    officer.badgeId
                 );
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private string getSelectedOfficerID()
+        {
+            return this.table.bundle.row.selectedRow.Cells["ID"].Value.ToString();
         }
 
     }

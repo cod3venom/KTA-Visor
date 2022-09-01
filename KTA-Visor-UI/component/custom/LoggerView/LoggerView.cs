@@ -31,10 +31,29 @@ namespace KTA_Visor_UI.component.custom.LoggerView
 
         public void append(string log)
         {
-            this.Invoke((MethodInvoker)delegate
+            if (this.InvokeRequired)
             {
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.richTextBox.AppendText(log + Environment.NewLine);
+
+                    this.richTextBox.HideSelection = true;
+                    this.richTextBox.SelectionStart = richTextBox.Text.Length;
+                    this.richTextBox.ScrollToCaret();
+                });
+            }
+
+            else
+            {
+                if (this.richTextBox.IsDisposed)
+                    return;
+
                 this.richTextBox.AppendText(log + Environment.NewLine);
-            });
+
+                this.richTextBox.HideSelection = true;
+                this.richTextBox.SelectionStart = richTextBox.Text.Length;
+                this.richTextBox.ScrollToCaret();
+            }
         }
 
         private void cleanBtn_Click(object sender, EventArgs e)

@@ -13,26 +13,51 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.forms.OfficerCrudForm
 {
     public partial class OfficerCrudForm : Form
     {
-        public event EventHandler<OnSaveNewOfficerEvent> OnSave;
+        private string id = "";
+        
+        public event EventHandler<OnOfficerCRUDEvent> OnCreateOfficer;
+        public event EventHandler<OnOfficerCRUDEvent> OnEditOfficerEvent;
+
+        private string mode = "create";
+
         public OfficerCrudForm()
         {
             InitializeComponent();
         }
 
-       
 
-        public OfficerCrudForm(string id, string firstName, string lastName, string cameraId, string cardId)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="cameraId"></param>
+        /// <param name="cardId"></param>
+        public OfficerCrudForm(
+            string id,
+            string firstName,
+            string lastName,
+            string camerCustomId,
+            string cardCustomId,
+            string badgeId
+        )
         {
             InitializeComponent();
+            this.id = id;
             this.firstNameTxt.Text = firstName;
             this.lastNameTxt.Text = lastName;
-            this.cameraIdsCombo.Items.Add(cameraId);
-            this.cardIdsCombo.Items.Add(cardId);
-
-            this.cameraIdsCombo.SelectedIndex = this.cameraIdsCombo.Items.IndexOf(cameraId);
-            this.cardIdsCombo.SelectedIndex = this.cardIdsCombo.Items.IndexOf(cardId);
+            this.camCustomIdTxt.Text = camerCustomId;
+            this.cardCustomIdTxt.Text = cardCustomId;
+            this.badgeIdTxxt.Text = badgeId;
+            this.mode = "edit";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OfficerCrudForm_Load(object sender, EventArgs e)
         {
             this.topBar1.Parent = this;
@@ -42,14 +67,34 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.forms.OfficerCrudForm
             this.saveBtn.OnClick += onSaveBtn;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void onSaveBtn(object sender, EventArgs e)
         {
-            this.OnSave?.Invoke(sender, new OnSaveNewOfficerEvent(
-                this.firstNameTxt.Text,
-                this.lastNameTxt.Text,
-                this.cameraIdsCombo.SelectedItem.ToString(),
-                this.cardIdsCombo.SelectedItem.ToString()
-            ));
+           if (this.mode == "create")
+            {
+                this.OnCreateOfficer?.Invoke(this, new OnOfficerCRUDEvent(
+                   this.firstNameTxt.Text,
+                   this.lastNameTxt.Text,
+                   this.camCustomIdTxt.Text,
+                   this.cardCustomIdTxt.Text,
+                   this.badgeIdTxxt.Text
+                ));
+            }
+           else if(this.mode == "edit")
+            {
+                this.OnEditOfficerEvent?.Invoke(this, new OnOfficerCRUDEvent(
+                   this.id,
+                   this.firstNameTxt.Text,
+                   this.lastNameTxt.Text,
+                   this.camCustomIdTxt.Text,
+                   this.cardCustomIdTxt.Text,
+                   this.badgeIdTxxt.Text
+                ));
+            }
         }
 
         private void onCloseCurrentForm(object sender, EventArgs e)

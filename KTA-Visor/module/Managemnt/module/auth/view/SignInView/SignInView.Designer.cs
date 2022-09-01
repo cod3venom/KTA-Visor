@@ -60,7 +60,7 @@
             this.signInPanel.Controls.Add(this.topBar1);
             this.signInPanel.Controls.Add(this.passwordLbl);
             this.signInPanel.Controls.Add(this.emailLbl);
-            this.signInPanel.Location = new System.Drawing.Point(440, 169);
+            this.signInPanel.Location = new System.Drawing.Point(437, 171);
             this.signInPanel.MaximumSize = new System.Drawing.Size(441, 509);
             this.signInPanel.Name = "signInPanel";
             this.signInPanel.Size = new System.Drawing.Size(441, 509);
@@ -202,6 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.ClientSize = new System.Drawing.Size(1320, 847);
             this.Controls.Add(this.signInPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

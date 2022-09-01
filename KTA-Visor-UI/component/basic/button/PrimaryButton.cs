@@ -23,7 +23,6 @@ namespace KTA_Visor_UI.component.basic.button
 
             if (this.active)
             {
-                this.BackColor = System.Drawing.ColorTranslator.FromHtml("#3F3F46"); ;
                 this.ForeColor = Color.White;
             }
         }

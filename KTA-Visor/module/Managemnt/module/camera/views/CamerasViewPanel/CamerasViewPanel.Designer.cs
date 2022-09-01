@@ -28,38 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.table1 = new KTA_Visor_UI.component.basic.table.Table();
+            this.table = new KTA_Visor_UI.component.basic.table.Table();
             this.SuspendLayout();
             // 
-            // table1
+            // table
             // 
-            this.table1.AllowAdd = true;
-            this.table1.AllowDelete = true;
-            this.table1.AllowEdit = true;
-            this.table1.AllowSearch = true;
-            this.table1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.table1.Location = new System.Drawing.Point(0, 0);
-            this.table1.Name = "table1";
-            this.table1.ShowAdd = true;
-            this.table1.ShowControls = true;
-            this.table1.ShowDelete = true;
-            this.table1.ShowEdit = true;
-            this.table1.Size = new System.Drawing.Size(1307, 687);
-            this.table1.TabIndex = 0;
+            this.table.AllowAdd = true;
+            this.table.AllowDelete = true;
+            this.table.AllowEdit = true;
+            this.table.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.table.Location = new System.Drawing.Point(0, 0);
+            this.table.Name = "table";
+            this.table.Size = new System.Drawing.Size(1307, 687);
+            this.table.TabIndex = 0;
+            this.table.Title = "Kamery";
             // 
             // CamerasViewPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.table1);
+            this.Controls.Add(this.table);
             this.Name = "CamerasViewPanel";
             this.Size = new System.Drawing.Size(1307, 687);
+            this.Load += new System.EventHandler(this.CamerasViewPanel_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private KTA_Visor_UI.component.basic.table.Table table1;
+        private KTA_Visor_UI.component.basic.table.Table table;
     }
 }

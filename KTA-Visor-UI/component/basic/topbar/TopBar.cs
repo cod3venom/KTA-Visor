@@ -51,7 +51,10 @@ namespace KTA_Visor_UI.component.basic.topbar
 
         private void CloseBtn_Click(object sender, EventArgs e)
         {
-            this.parent.Close();
+            this.Invoke((MethodInvoker)delegate
+            {
+                this.parent.Close();
+            });
             this.onClose?.Invoke(sender, e);
         }
 

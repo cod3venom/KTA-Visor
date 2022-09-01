@@ -17,16 +17,26 @@ namespace KTA_Visor.module.Managemnt.module.officer.repository
             return await HttpClientUtil.securedClient.GET("/api/me/officers");
         }
 
+        public async Task<HttpResponseMessage> findById(string id)
+        {
+            return await HttpClientUtil.securedClient.GET("/api/me/officers/"+id);
+        }
+
         public async Task<HttpResponseMessage> create(CreateOfficerRequestTObject request)
         {
             string payload = JsonConvert.SerializeObject(request);
             return await HttpClientUtil.securedClient.POST("/api/me/officers", payload);
         }
 
-        public async Task<HttpResponseMessage> edit(EditOfficerRequestTObject request)
+        public async Task<HttpResponseMessage> edit(string id, EditOfficerRequestTObject request)
         {
             string payload = JsonConvert.SerializeObject(request);
-            return await HttpClientUtil.securedClient.PUT("/api/me/officers", payload);
+            return await HttpClientUtil.securedClient.PUT("/api/me/officers/"+id, payload);
+        }
+        
+        public async Task<HttpResponseMessage> delete(string id)
+        {
+            return await HttpClientUtil.securedClient.DELETE("/api/me/officers/"+id);
         }
     }
 }

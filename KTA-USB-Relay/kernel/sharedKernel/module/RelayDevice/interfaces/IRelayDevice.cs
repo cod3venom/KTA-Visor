@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,15 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander.interfaces
 
         void TurnOn8();
         void TurnOff8();
+
+        void turnOnAll(int transition = 10);
+        void turnOffAll(int transition = 10);
+        void turnOnByPort(int portNumber);
+        void turnOffByPort(int portNumber);
+        void isTurnedOn(int portNumber);
+
+
+        void sendStringCommand(string command);
 
     }
 }

@@ -1,7 +1,13 @@
 ﻿{
   "app": {
     "title": "KTA-Visor Docking System Client",
-
+    "station": {
+      "serialNumber": "1234567890",
+      "ipAddress": "127.0.0.2"
+    },
+    "usbRelay": {
+      "COMport": "COM5"
+    },
     "fileSystem": {
       "filesPath": "C:\\Users\\venom\\Desktop\\network_drive_test",
       "autoCopy": true
@@ -10,6 +16,9 @@
       "serverIp": "127.0.0.1",
       "serverPort": 1337,
       "autoReconnect": true
+    },
+    "backend": {
+      "stationCustomId": "1998"
     }
   }
 }

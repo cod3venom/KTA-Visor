@@ -13,6 +13,7 @@ namespace KTA_Visor_UI.component.custom.HorizontalProgressBar
 {
     public partial class HorizontalProgressBar : UserControl
     {
+        public event EventHandler<EventArgs> OnProgressStarted;
         public event EventHandler<EventArgs> OnProgressFinished;
         public HorizontalProgressBar()
         {
@@ -36,6 +37,8 @@ namespace KTA_Visor_UI.component.custom.HorizontalProgressBar
             {
                 this.bunifuProgressBar.ProgressColor = this.ProgressColor;
             }
+
+            this.OnProgressStarted?.Invoke(this, EventArgs.Empty);
 
             Thread progressThr = new Thread(this._start);
             progressThr.IsBackground = true;

@@ -19,29 +19,63 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.COMConnector
         private Parity parity;
         private int dataBits;
         private StopBits stopBits;
+        private readonly KTALogger.Logger logger;
 
         private SerialPort client;
 
-        public COMConnector(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits)
+        public COMConnector(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits, KTALogger.Logger logger)
         {
             this.portName = portName;
             this.baudRate = baudRate;
             this.parity = parity;
             this.dataBits = dataBits;
             this.stopBits = stopBits;
-
+            this.logger = logger;
             this.client = new SerialPort(this.portName, this.baudRate, this.parity, this.dataBits, this.stopBits);
         }
 
         public COMConnector connect()
         {
-            if (!this.client.IsOpen)
+            try
             {
-                this.client.Open();
-            }
+                if (!this.client.IsOpen)
+                {
+                    this.client.Open();
+                    this.logger.success(string.Format("Connected to the {0}", this.portName));
 
-            this.initialize();
+                }
+
+                this.initialize();
+            }
+            catch(Exception)
+            {
+
+            }
             return this;
+        }
+
+        public COMConnector disconnect()
+        {
+            this.client?.Close();
+            return this;
+        }
+
+        public COMConnector reconnect()
+        {
+            if (this.client.IsOpen)
+            {
+                this.client.Close();
+                Thread.Sleep(1000);
+            }
+            this.client.Open();
+            return this;
+        }
+        public bool isConnected
+        {
+            get
+            {
+                return this.client.IsOpen;
+            }
         }
 
         private void initialize()
@@ -51,14 +85,9 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.COMConnector
 
         private void onDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            this.OnDataReceived?.Invoke(sender, new OnDataReceivedEvent(this.client));
-            Console.WriteLine(this.client.ReadLine());
-        }
-
-        public COMConnector disconnect()
-        {
-            this.client?.Close();
-            return this;
+            string receivedData = this.client.ReadExisting();
+            this.logger.info(string.Format("Received from {0} : {1}", this.portName, receivedData));
+            this.OnDataReceived?.Invoke(sender, new OnDataReceivedEvent(this.client, receivedData));
         }
 
         public COMConnector send(string message)

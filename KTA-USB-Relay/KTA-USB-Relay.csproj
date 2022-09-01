@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4E2CF358-27B6-43B9-A1C0-6C862D8E930F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KTA_USB_Relay</RootNamespace>
     <AssemblyName>KTA-USB-Relay</AssemblyName>
@@ -34,6 +34,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Logger">
+      <HintPath>..\Logger\bin\Debug\Logger.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,12 +50,15 @@
     <Compile Include="kernel\sharedKernel\flags\ASCIIKey.cs" />
     <Compile Include="kernel\sharedKernel\module\COMConnector\COMConnector.cs" />
     <Compile Include="kernel\sharedKernel\module\COMConnector\events\OnDataReceivedEvent.cs" />
+    <Compile Include="kernel\sharedKernel\module\RelayDevice\command\ParsePowerStatusCommand.cs" />
+    <Compile Include="kernel\sharedKernel\module\RelayDevice\dto\USBRelayPortsToObject.cs" />
+    <Compile Include="kernel\sharedKernel\module\RelayDevice\enums\Enums.cs" />
+    <Compile Include="kernel\sharedKernel\module\RelayDevice\events\OnReceivedPortStatusEvent.cs" />
     <Compile Include="kernel\sharedKernel\module\RelayDevice\RelayDevice.cs" />
     <Compile Include="kernel\sharedKernel\module\RelayDevice\interfaces\IRelayDevice.cs" />
     <Compile Include="kernel\sharedKernel\module\RelayDevice\resolver\USBRelayCommandResolver.cs" />
     <Compile Include="kernel\sharedKernel\module\RelayDevice\syntax\turnOf\TurnOff.cs" />
     <Compile Include="kernel\sharedKernel\module\RelayDevice\syntax\turnOn\TurnON.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Relay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,8 +67,6 @@
     <Folder Include="kernel\sharedKernel\module\COMConnector\helper\" />
     <Folder Include="kernel\sharedKernel\module\COMConnector\interface\" />
     <Folder Include="kernel\sharedKernel\module\COMConnector\repository\" />
-    <Folder Include="kernel\sharedKernel\module\RelayDevice\command\" />
-    <Folder Include="kernel\sharedKernel\module\RelayDevice\flag\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

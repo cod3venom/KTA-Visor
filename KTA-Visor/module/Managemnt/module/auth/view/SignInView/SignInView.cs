@@ -32,17 +32,21 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
 
             this.signInBtn.Click += onSignIn;
             this.signUpLink.Click += onShowSignUpView;
-           
+
+            this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.centerisePanel();
+
         }
 
         private async void onSignIn(object sender, EventArgs e)
         {
             try
             {
-               SignInEntity signIn = await this.authService.signIn(new SignInRequestTObject(
-                    this.emailTxt.Text,
-                    this.passwordTxt.Text
-                ));
+
+                SignInEntity signIn = await this.authService.signIn(new SignInRequestTObject(
+                     this.emailTxt.Text,
+                     this.passwordTxt.Text
+                 ));
 
                 this.Hide();
                 new Management.view.Management().Show();

@@ -4,6 +4,7 @@ using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.factor
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.repository;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
+using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.events;
 using KTA_Visor_DSClient.kernel.helper;
 using KTALogger;
 using Sdk.Core.DevicesDetection;
@@ -15,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using USBKitcs;
 using USBKitcs.Main;
 
@@ -25,6 +27,9 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         public event EventHandler<CameraConnectedEvent> OnCameraConnectedEvent;
 
         public event EventHandler<CameraDisconnectedEvent> OnCameraDisconnectedEvent;
+
+        public event EventHandler<EventArgs> OnCameraConnectedOrDisconnected;
+
 
         /// <summary>
         /// 
@@ -42,61 +47,107 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         /// <summary>
         /// 
         /// </summary>
-        private readonly USBCameraDeviceList<USBCameraDevice> camerasList;
+        private Dictionary<string, USBCameraDevice> camerasList;
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly CameraServiceRepository repository;
 
         /// <summary>
         /// 
         /// </summary>
         private readonly KTALogger.Logger logger;
 
-        public CameraDeviceService(FalconSdk sdk, KTALogger.Logger logger)
+        public CameraDeviceService(FalconSdk sdk, ref DeviceWatcher deviceWatcher, KTALogger.Logger logger)
         {
             this.sdk = sdk;
-            this.repository = new CameraServiceRepository();
-            this.deviceWatcher = new Hardware.Hardware().deviceWatcher();
-            this.camerasList = new USBCameraDeviceList<USBCameraDevice>();
+            this.deviceWatcher =  deviceWatcher;
+            this.camerasList = new Dictionary<string, USBCameraDevice>();
             this.logger = logger;
+
+
+            this.deviceWatcher.DriveInserted += OnDeviceConnected;
+            this.deviceWatcher.DriveRemoved += OnDeviceDisconnected;
+            this.deviceWatcher.DeviceInsertedOrRemoved += OnDeviceInsertedOrRemoved;
         }
 
-        public CameraDeviceService(FalconSdk sdk)
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="detectedInformation"></param>
+        /// <param name="changeEventType"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnDeviceConnected(object sender, DriveChangedEventArgs e)
         {
-            this.sdk = sdk;
-            this.repository = new CameraServiceRepository();
-            this.deviceWatcher = new Hardware.Hardware().deviceWatcher();
-            this.camerasList = new USBCameraDeviceList<USBCameraDevice>();
-            this.logger = new KTALogger.Logger();
+            if (!this.isValidCameraDevice(e.Drive)) return;
+
+            USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.ToString());
+
+
+            if (this.isCameraAlreadyAdded(camera)) return;
+
+            this.camerasList.Add(camera.BadgeId, camera);
+
+            this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public USBCameraDeviceList<USBCameraDevice> Cameras
+        /// <param name="detectedInformation"></param>
+        /// <param name="changeEventType"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnDeviceDisconnected(object sender, DriveChangedEventArgs e)
         {
-            get { return this.camerasList; }
+            try
+            {
+                USBCameraDevice disconnectedCamera = null;
+
+                foreach (KeyValuePair<string, USBCameraDevice> kvp in this.camerasList)
+                {
+
+                    if (kvp.Value.Drive.Name == e.Drive)
+                    {
+                        disconnectedCamera = kvp.Value;
+                    }
+                }
+
+                if (disconnectedCamera == null)
+                    return;
+
+                this.camerasList.Remove(disconnectedCamera.BadgeId);
+                this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(disconnectedCamera));
+            }
+            catch (Exception ex)
+            {
+                this.logger.error(ex.Message, ex);
+            }
         }
 
-       
         /// <summary>
         /// 
         /// </summary>
-        public async void listenForConnection()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnDeviceInsertedOrRemoved(object sender, EventArgs e)
         {
-            await Task.Delay(5000);
+           this.mountDevices();
+           this.OnCameraConnectedOrDisconnected?.Invoke(sender, e);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async void mountDevices()
+        {
+            await Task.Delay(4000);
             this.sdk.ConnectToDevice();
 
-            new Thread(() => this.sdk.Mount()).Start();
-            await Task.Delay(5000);
-           
-            this.deviceWatcher.OnDeviceDetected += OnDeviceConnected;
-            this.deviceWatcher.OnDeviceMounted += OnDeviceConnected;
-            this.deviceWatcher.OnDeviceRemoved += OnDeviceDisconnected;
-            this.deviceWatcher.startWatching();
+            if (FalconGlobals.ALLOW_FS_MOUNTING)
+            {
+                new Thread(() => this.sdk.Mount()).Start();
+                await Task.Delay(4000);
+            }
         }
 
         private bool isValidCameraDevice(string cameraVolumeLabel)
@@ -105,57 +156,22 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
             return File.Exists(cameraVolumeLabel + @":\\ID.txt");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="camera"></param>
+        /// <returns></returns>
         private bool isCameraAlreadyAdded(USBCameraDevice camera)
         {
-            int index = this.camerasList.FindIndex(existedCamera => existedCamera.SerialNumber == camera.SerialNumber);
-            return index >= 0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="detectedInformation"></param>
-        /// <param name="changeEventType"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void OnDeviceConnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
-        {
-            if (!this.isValidCameraDevice(e.DriveLetter)) return;
-
-            USBCameraDevice camera = USBCameraDeviceFactory.create(e.DriveLetter.ToString(), e.SerialNumber);
-
-            if (this.isCameraAlreadyAdded(camera)) return;
-
-            this.camerasList.Add(camera);
-
-            this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
-            this.logger.info("Connected: " + camera);
-            Thread.SpinWait(5000);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="detectedInformation"></param>
-        /// <param name="changeEventType"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void OnDeviceDisconnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
-        {
-
-           try
+            foreach(KeyValuePair<string, USBCameraDevice> kvp in this.camerasList)
             {
-                USBCameraDevice camera = USBCameraDeviceFactory.create(e.SerialNumber.ToString());
-
-                int camIndex = this.camerasList.FindIndex(existedCamera => existedCamera.SerialNumber == camera.SerialNumber);
-                this.camerasList.RemoveAt(camIndex);
-
-                this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(camera));
-                this.logger.warn("Disconnected: " + camera);
-                Thread.SpinWait(5000);
+                if (kvp.Key == camera.BadgeId)
+                {
+                    return true;
+                }
+                continue;
             }
-            catch(Exception ex)
-            {}
+            return false;
         }
-
-
     }
 }

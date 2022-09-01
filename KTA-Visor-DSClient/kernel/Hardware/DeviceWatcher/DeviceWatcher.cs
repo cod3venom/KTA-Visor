@@ -1,289 +1,212 @@
 ﻿
+using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.events;
+using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.interfaces;
 using Sdk.Core.DevicesDetection;
-using Sdk.Core.Enums;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Management;
-using System.Text;
-using System.Threading;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using USBKitcs;
-using USBKitcs.Main;
 
 namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
 {
-    public class DeviceWatcher
+    public class DeviceWatcher : IUsbDeviceEventDetector, IDisposable
     {
+        public event EventHandler<EventArgs> DeviceInsertedOrRemoved;
+        public event EventHandler<DriveChangedEventArgs> DriveInserted;
+        public event EventHandler<DriveChangedEventArgs> DriveRemoved;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private ManagementEventWatcher usbInsertEventWatcher;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private ManagementEventWatcher usbRemoveEventWatcher;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public event DeviceDetectionHandle OnDeviceDetected;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public event DeviceDetectionHandle OnDeviceRemoved;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public event DeviceDetectionHandle OnDeviceMounted;
+        private const int WM_DEVICECHANGE = 537;
+        private const int DBT_DEVICEARRIVAL = 32768;
+        private const int DBT_DEVICEREMOVECOMPLETE = 32772;
+        private const int DBT_DEVNODES_CHANGED = 7;
+        private const int DBT_DEVTYP_VOLUME = 2;
+        private readonly string _className;
+        private readonly IntPtr _windowHandle;
+        private static DeviceWatcher.WndProc noGCthis;
+        private bool disposedValue = false;
 
 
         public DeviceWatcher()
         {
+            DeviceWatcher.WNDCLASS wc = new DeviceWatcher.WNDCLASS();
+            DeviceWatcher.noGCthis = new DeviceWatcher.WndProc(this.WndProcCallback);
+            wc.lpfnWndProc = DeviceWatcher.noGCthis;
+            this._className = nameof(DeviceWatcher) + (object)new Random().Next();
+            wc.lpszClassName = this._className;
+            int num = (int)DeviceWatcher.RegisterClass(wc);
+            this._windowHandle = DeviceWatcher.CreateWindowEx(0, wc.lpszClassName, "Window title", 0, 100, 100, 500, 500, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, (object)0);
         }
 
+        [DllImport("User32", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr CreateWindowEx(
+          int dwExStyle,
+          string lpszClassName,
+          string lpszWindowName,
+          int style,
+          int x,
+          int y,
+          int width,
+          int height,
+          IntPtr hWndParent,
+          IntPtr hMenu,
+          IntPtr hInst,
+          [MarshalAs(UnmanagedType.AsAny)] object pvParam);
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr DefWindowProc(
+          IntPtr hWnd,
+          int uMsg,
+          IntPtr wParam,
+          IntPtr lParam);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void startWatching()
+        [DllImport("User32", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern short RegisterClass(DeviceWatcher.WNDCLASS wc);
+
+        [DllImport("User32", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern short UnRegisterClass(string className, IntPtr handle);
+
+        [AllowReversePInvokeCalls]
+        private IntPtr WndProcCallback(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam)
         {
-            ManagementScope scope = new ManagementScope("root\\CIMV2")
+            if (msg == 537)
             {
-                Options = { EnablePrivileges = true }
-            };
-
-            this.hookUsbInsertWatcher(scope);
-            this.hookUsbRemovingWatcher(scope);
-            this.loadConnectedDevices();
+                switch (wparam.ToInt32())
+                {
+                    case 7:
+                        this.FireDeviceInsertedOrRemoved();
+                        break;
+                    case 32768:
+                        string drive1 = this.GetDrive(lparam);
+                        if (drive1.Length > 0)
+                        {
+                            this.FireDriveInserted(drive1);
+                            break;
+                        }
+                        break;
+                    case 32772:
+                        string drive2 = this.GetDrive(lparam);
+                        if (drive2.Length > 0)
+                        {
+                            this.FireDriveRemoved(drive2);
+                            break;
+                        }
+                        break;
+                }
+            }
+            return DeviceWatcher.DefWindowProc(hWnd, msg, wparam, lparam);
         }
 
-        public void loadConnectedDevices()
+        private string GetDrive(IntPtr lparam)
         {
+            DeviceWatcher.DEV_BROADCAST_VOLUME devBroadcastVolume = new DeviceWatcher.DEV_BROADCAST_VOLUME();
+            Marshal.PtrToStructure(lparam, (object)devBroadcastVolume);
+            if (devBroadcastVolume.dbch_Devicetype == 2U)
+            {
+                ulong dbchUnitmask = (ulong)devBroadcastVolume.dbch_Unitmask;
+                char ch = 'A';
+                while (ch <= 'Z')
+                {
+                    if ((dbchUnitmask & 1UL) > 0UL)
+                        return string.Format("{0}:\\", (object)ch);
+                    ++ch;
+                    dbchUnitmask >>= 1;
+                }
+            }
+            return string.Empty;
+        }
+
+        private void FireDriveInserted(string drive)
+        {
+            if (this.DriveInserted == null)
+                return;
+            this.DriveInserted((object)this, new DriveChangedEventArgs(drive));
+        }
+
+        private void FireDriveRemoved(string drive)
+        {
+            if (this.DriveRemoved == null)
+                return;
+            this.DriveRemoved((object)this, new DriveChangedEventArgs(drive));
+        }
+
+        private void FireDeviceInsertedOrRemoved()
+        {
+            if (this.DeviceInsertedOrRemoved == null)
+                return;
+            this.DeviceInsertedOrRemoved((object)this, EventArgs.Empty);
+        }
+
+        public async void LoadConnectedDevices()
+        {
+            ManagementObjectSearcher devices = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_DiskDrive");
             try
             {
-                foreach (ManagementObject device in new ManagementObjectSearcher(@"SELECT * FROM Win32_DiskDrive WHERE InterfaceType LIKE 'USB%'").Get())
+                await Task.Delay(2000);
+
+                foreach (ManagementObject device in devices.Get())
                 {
-                    foreach (ManagementObject partition in new ManagementObjectSearcher("ASSOCIATORS OF {Win32_DiskDrive.DeviceID='" + device.Properties["DeviceID"].Value+ "'} WHERE AssocClass = Win32_DiskDriveToDiskPartition").Get())
+                    foreach (ManagementObject partition in new ManagementObjectSearcher("ASSOCIATORS OF {Win32_DiskDrive.DeviceID='" + device.Properties["DeviceID"].Value + "'} WHERE AssocClass = Win32_DiskDriveToDiskPartition").Get())
                     {
-                        foreach (ManagementObject disk in new ManagementObjectSearcher("ASSOCIATORS OF {Win32_DiskPartition.DeviceID='"+ partition["DeviceID"]+ "'} WHERE AssocClass = Win32_LogicalDiskToPartition").Get())
+                        foreach (ManagementObject disk in new ManagementObjectSearcher("ASSOCIATORS OF {Win32_DiskPartition.DeviceID='" + partition["DeviceID"] + "'} WHERE AssocClass = Win32_LogicalDiskToPartition").Get())
                         {
-                           
+
                             string deviceID = device.GetPropertyValue("DeviceID").ToString();
                             string pnpnDeviceID = device.GetPropertyValue("PNPDeviceID").ToString();
                             string volumeName = disk["VolumeName"].ToString();
-                            string driveName = disk["Name"].ToString();
+                            string drive = disk["Name"].ToString();
 
-                            DeviceDetectedInformation detectedInformation = new DeviceDetectedInformation()
-                            {
-                                DriveCaption = volumeName,
-                                DriveLetter = driveName,
-                                SerialNumber = this.GetDeviceSerialNumber(pnpnDeviceID)
-                            };
-
-                            this.OnDeviceDetected?.Invoke(detectedInformation, VolumeChangeEventType.Unmount);
+                            this.FireDriveInserted(drive);
                         }
                     }
                 }
             }
-            catch (ManagementException e)
+            catch (Exception e)
             {
-                MessageBox.Show("An error occurred while querying for WMI data: " + e.Message);
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="scope"></param>
-        private void hookUsbInsertWatcher(ManagementScope scope)
-        {
-            try
-            {
-                // var query = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 2");
-
-                this.usbInsertEventWatcher = new ManagementEventWatcher(scope, (EventQuery)new WqlEventQuery()
-                {
-                    EventClassName = "__InstanceCreationEvent",
-                    WithinInterval = new TimeSpan(0, 0, 0, 0, 500),
-                    Condition = "TargetInstance ISA 'Win32_DiskDrive'"
-                });
-                this.usbInsertEventWatcher.EventArrived += UsbInsertEventWatcher_EventArrived;
-                this.usbInsertEventWatcher.Start();
-            }
-            catch (Exception)
-            {
-                this.usbInsertEventWatcher?.Stop();
+                 Console.WriteLine(e.Message);
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="scope"></param>
-        private void hookUsbRemovingWatcher(ManagementScope scope)
+        protected virtual void Dispose(bool disposing)
         {
-            try
-            {
-                this.usbRemoveEventWatcher = new ManagementEventWatcher(scope, (EventQuery)new WqlEventQuery()
-                {
-                    EventClassName = "__InstanceDeletionEvent",
-                    WithinInterval = new TimeSpan(0, 0, 0, 0, 500),
-                    Condition = "TargetInstance ISA 'Win32_USBHub'"
-                });
-                this.usbRemoveEventWatcher.EventArrived += UsbRemoveEventWatcher_EventArrived;
-                this.usbRemoveEventWatcher.Start();
-            }
-            catch (Exception ex)
-            {
-                this.usbRemoveEventWatcher.Stop();
-            }
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UsbInsertEventWatcher_EventArrived(object sender, EventArrivedEventArgs e)
-        {
-            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent["TargetInstance"];
-            if (!this.VerifyInsertedUsb(targetInstance)) return;
-            string volumeName;
-            string driveName;
-
-            if (this.GetDriveLetterFromDisk(targetInstance["DeviceID"]?.ToString(), out volumeName, out driveName))
-            {
-                DeviceDetectedInformation detectedInformation = new DeviceDetectedInformation()
-                {
-                    DriveCaption = volumeName,
-                    DriveLetter = driveName,
-                    SerialNumber = this.GetDeviceSerialNumber(targetInstance.Properties["PNPDeviceID"].Value.ToString())
-                };
-
-                this.OnDeviceMounted?.Invoke(detectedInformation, VolumeChangeEventType.Unmount);
-            }
-            else
-            {
-                DeviceDetectedInformation detectedInformation = new DeviceDetectedInformation()
-                {
-                    SerialNumber = this.GetDeviceSerialNumber(targetInstance.Properties["PNPDeviceID"].Value.ToString())
-                };
-
-                this.OnDeviceDetected?.Invoke(detectedInformation, VolumeChangeEventType.Removed);
-            }
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void UsbRemoveEventWatcher_EventArrived(object sender, EventArrivedEventArgs e)
-        {
-            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent["TargetInstance"];
-            if (!this.VerifyRemovedUsb(targetInstance))
+            if (this.disposedValue)
                 return;
-            string volumeName;
-            string driveName;
-            if (this.GetDriveLetterFromDisk(targetInstance["DeviceID"]?.ToString(), out volumeName, out driveName))
-            {
-                DeviceDetectedInformation detectedInformation = new DeviceDetectedInformation()
-                {
-                    DriveCaption = volumeName,
-                    DriveLetter = driveName,
-                    SerialNumber = this.GetDeviceSerialNumber(targetInstance.Properties["PNPDeviceID"].Value.ToString())
-                };
-                this.OnDeviceRemoved?.Invoke(detectedInformation, VolumeChangeEventType.Unmount);
-            }
-            else
-            {
-                DeviceDetectedInformation detectedInformation = new DeviceDetectedInformation()
-                {
-                    SerialNumber = this.GetDeviceSerialNumber(targetInstance.Properties["PNPDeviceID"].Value.ToString())
-                };
-
-                this.OnDeviceRemoved?.Invoke(detectedInformation, VolumeChangeEventType.Removed);
-            }
+            if (!disposing)
+                ;
+            int num = (int)DeviceWatcher.UnRegisterClass(this._className, this._windowHandle);
+            this.disposedValue = true;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="targetInstance"></param>
-        /// <returns></returns>
-        private bool VerifyInsertedUsb(ManagementBaseObject targetInstance)
+        void IDisposable.Dispose()
         {
-
-            return targetInstance != null && targetInstance["Status"]?.ToString() == "OK";
+            this.Dispose(true);
+            GC.SuppressFinalize((object)this);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="targetInstance"></param>
-        /// <returns></returns>
-        private bool VerifyRemovedUsb(ManagementBaseObject targetInstance)
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        public class WNDCLASS
         {
-            return targetInstance != null && targetInstance["Status"]?.ToString() == "OK";
+            public int style;
+            public DeviceWatcher.WndProc lpfnWndProc;
+            public int cbClsExtra;
+            public int cbWndExtra;
+            public IntPtr hInstance;
+            public IntPtr hIcon;
+            public IntPtr hCursor;
+            public IntPtr hbrBackground;
+            public string lpszMenuName;
+            public string lpszClassName;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceIdString"></param>
-        /// <returns></returns>
-        private string GetDeviceSerialNumber(string deviceIdString)
+        [StructLayout(LayoutKind.Sequential)]
+        private class DEV_BROADCAST_VOLUME
         {
-            int length = deviceIdString.Length - deviceIdString.LastIndexOf("\\", StringComparison.Ordinal) - 1;
-            deviceIdString = deviceIdString.Substring(deviceIdString.LastIndexOf("\\", StringComparison.Ordinal) + 1, length);
-            deviceIdString = deviceIdString.Replace("&0", "");
-            return deviceIdString;
+            public uint dbch_Size;
+            public uint dbch_Devicetype;
+            public uint dbch_Reserved;
+            public uint dbch_Unitmask;
+            public ushort dbch_Flags;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceId"></param>
-        /// <param name="volumeName"></param>
-        /// <param name="driveName"></param>
-        /// <returns></returns>
-        private bool GetDriveLetterFromDisk(string deviceId, out string volumeName, out string driveName)
-        {
-            volumeName = (string)null;
-            driveName = (string)null;
-
-            ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(new ObjectQuery("ASSOCIATORS OF {Win32_DiskDrive.DeviceID='" + deviceId + "'} WHERE AssocClass = Win32_DiskDriveToDiskPartition"));
-            try
-            {
-                foreach (ManagementBaseObject managementBaseObject in managementObjectSearcher.Get())
-                {
-                    using (ManagementObjectCollection.ManagementObjectEnumerator enumerator = new ManagementObjectSearcher("ASSOCIATORS OF {Win32_DiskPartition.DeviceID='" + managementBaseObject["DeviceID"] + "'} WHERE AssocClass = Win32_LogicalDiskToPartition").Get().GetEnumerator())
-                    {
-                        if (enumerator.MoveNext())
-                        {
-                            ManagementBaseObject current = enumerator.Current;
-                            volumeName = current["VolumeName"]?.ToString();
-                            driveName = current["Name"]?.ToString();
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        public delegate IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
     }
 }

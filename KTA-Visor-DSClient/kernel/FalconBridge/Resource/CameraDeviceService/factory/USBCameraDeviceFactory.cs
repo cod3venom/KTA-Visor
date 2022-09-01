@@ -10,10 +10,10 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.fa
 {
     public class USBCameraDeviceFactory
     {
-        public static USBCameraDevice create(string driveLetter, string serialNumber)
+        public static USBCameraDevice create(string driveLetter)
         {
 
-            return new USBCameraDevice(new DriveInfo(driveLetter), serialNumber);
+            return new USBCameraDevice(new DriveInfo(driveLetter));
         }
 
         public static USBCameraDevice create(DriveInfo driveInfo, string serialNumber)
@@ -21,15 +21,6 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.fa
 
             return new USBCameraDevice(driveInfo, serialNumber);
         }
-
-        public static USBCameraDevice create(DriveInfo driveInfo)
-        {
-            return new USBCameraDevice(driveInfo, "");
-        }
-
-        public static USBCameraDevice create(string serialNumber)
-        {
-            return new USBCameraDevice(serialNumber);
-        }
+ 
     }
 }

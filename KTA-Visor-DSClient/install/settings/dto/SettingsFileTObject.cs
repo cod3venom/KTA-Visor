@@ -17,11 +17,32 @@ namespace KTA_Visor_DSClient.install.settings.dto
         public string title
         { get; set; }
 
+        public Station station
+        { get; set; }
+
+        public USBRelay usbRelay
+        { get; set; }
+
         public FileSystem fileSystem
         { get; set; }
 
         public Management management
         { get; set; }
+
+        public Backend backend
+        { get; set; }
+    }
+
+
+    public class Station
+    {
+        public string serialNumber { get; set; }
+        public string ipAddress { get; set; }
+    }
+
+    public class USBRelay
+    {
+        public string COMport { get; set; }
     }
 
     public class FileSystem
@@ -42,6 +63,12 @@ namespace KTA_Visor_DSClient.install.settings.dto
         { get; set; }
 
         public bool autoReconnect
+        { get; set; }
+    }
+
+    public class Backend
+    {
+        public string stationCustomId 
         { get; set; }
     }
 }

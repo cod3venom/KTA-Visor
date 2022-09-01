@@ -1,4 +1,4 @@
-﻿using KTA_Visor.module.Tunnel;
+﻿using KTA_Visor.module.Management.tunnel;
 using Logger.dto;
 using System;
 using System.Collections.Generic;
@@ -18,22 +18,16 @@ namespace KTA_Visor.module.Station.components.TCPServerUI
 
         public event EventHandler<EventArgs> OnClientDisconnected;
 
-        private Tunnel.Tunnel tunnel;
 
         public TCPServerUI()
         {
             InitializeComponent();
         }
 
-        public TCPServerUI(Tunnel.Tunnel tunnel)
-        {
-            this.tunnel = tunnel;
-        }
 
-        public Tunnel.Tunnel Tunnel
+        public Tunnel tunnel
         {
-            get { return this.tunnel; }
-            set { this.tunnel = value; }
+            get { return Program.Tunnel; }
         }
         private void TCPServerUI_Load(object sender, EventArgs e)
         {

@@ -53,34 +53,7 @@ namespace KTA_Visor_UI.component.basic.table
             set { this.allowDelete = value; }
         }
 
-        public bool AllowSearch
-        {
-            get { return this.allowSearch; }
-            set { this.allowSearch= value; }
-        }
-
-        public bool ShowControls
-        {
-            get { return this.showControls; }
-            set { this.showControls = value; }
-        }
-
-
-        public bool ShowAdd
-        {
-            get { return this.addBtn.Visible; }
-            set { this.addBtn.Visible = value; }
-        }
-        public bool ShowEdit
-        {
-            get { return this.editBtn.Visible; }
-            set { this.editBtn.Visible = value; }
-        }
-        public bool ShowDelete
-        {
-            get { return this.deleteBtn.Visible; }
-            set { this.deleteBtn.Visible = value; }
-        }
+ 
 
         public Bunifu.Framework.UI.BunifuCustomDataGrid DataGridView
         {
@@ -88,6 +61,11 @@ namespace KTA_Visor_UI.component.basic.table
             set { this.dataGridView1 = value; }
         }
 
+        public string Title
+        {
+            set { this.titleLbl.Text = value; }
+            get { return this.titleLbl.Text; }
+        }
 
         private void Table_Load(object sender, EventArgs e)
         {
@@ -96,6 +74,10 @@ namespace KTA_Visor_UI.component.basic.table
             this.addBtn.Click += onAddBtn;
             this.editBtn.Click += onEditBtn;
             this.deleteBtn.Click += onDeleteBtn;
+
+            this.addPanel.Visible = this.allowAdd;
+            this.editPanel.Visible = this.allowEdit;
+            this.deletePanel.Visible = this.allowDelete;
         }
 
         private void onAddBtn(object sender, EventArgs e)

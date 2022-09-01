@@ -37,9 +37,11 @@
             this.lastNameTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.lastNameLbl = new System.Windows.Forms.Label();
             this.cardIdLbl = new System.Windows.Forms.Label();
-            this.cameraIdsCombo = new MetroFramework.Controls.MetroComboBox();
-            this.cardIdsCombo = new MetroFramework.Controls.MetroComboBox();
             this.saveBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
+            this.camCustomIdTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.cardCustomIdTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.badgeIdTxxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.badgeIdLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -138,36 +140,6 @@
             this.cardIdLbl.TabIndex = 22;
             this.cardIdLbl.Text = "ID Karty";
             // 
-            // cameraIdsCombo
-            // 
-            this.cameraIdsCombo.FormattingEnabled = true;
-            this.cameraIdsCombo.ItemHeight = 24;
-            this.cameraIdsCombo.Items.AddRange(new object[] {
-            "1234567,",
-            "1234566,",
-            "1234555,",
-            "1234444"});
-            this.cameraIdsCombo.Location = new System.Drawing.Point(74, 186);
-            this.cameraIdsCombo.Name = "cameraIdsCombo";
-            this.cameraIdsCombo.Size = new System.Drawing.Size(303, 30);
-            this.cameraIdsCombo.TabIndex = 23;
-            this.cameraIdsCombo.UseSelectable = true;
-            // 
-            // cardIdsCombo
-            // 
-            this.cardIdsCombo.FormattingEnabled = true;
-            this.cardIdsCombo.ItemHeight = 24;
-            this.cardIdsCombo.Items.AddRange(new object[] {
-            "1234567,",
-            "1234566,",
-            "1234555,",
-            "1234444"});
-            this.cardIdsCombo.Location = new System.Drawing.Point(425, 186);
-            this.cardIdsCombo.Name = "cardIdsCombo";
-            this.cardIdsCombo.Size = new System.Drawing.Size(303, 30);
-            this.cardIdsCombo.TabIndex = 24;
-            this.cardIdsCombo.UseSelectable = true;
-            // 
             // saveBtn
             // 
             this.saveBtn.Active = false;
@@ -177,14 +149,78 @@
             this.saveBtn.TabIndex = 25;
             this.saveBtn.Title = "Save";
             // 
+            // camCustomIdTxt
+            // 
+            this.camCustomIdTxt.BorderColorFocused = System.Drawing.Color.White;
+            this.camCustomIdTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.camCustomIdTxt.BorderColorMouseHover = System.Drawing.Color.White;
+            this.camCustomIdTxt.BorderThickness = 1;
+            this.camCustomIdTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.camCustomIdTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.camCustomIdTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.camCustomIdTxt.isPassword = false;
+            this.camCustomIdTxt.Location = new System.Drawing.Point(74, 187);
+            this.camCustomIdTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.camCustomIdTxt.Name = "camCustomIdTxt";
+            this.camCustomIdTxt.Size = new System.Drawing.Size(303, 37);
+            this.camCustomIdTxt.TabIndex = 26;
+            this.camCustomIdTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // cardCustomIdTxt
+            // 
+            this.cardCustomIdTxt.BorderColorFocused = System.Drawing.Color.White;
+            this.cardCustomIdTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cardCustomIdTxt.BorderColorMouseHover = System.Drawing.Color.White;
+            this.cardCustomIdTxt.BorderThickness = 1;
+            this.cardCustomIdTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.cardCustomIdTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cardCustomIdTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cardCustomIdTxt.isPassword = true;
+            this.cardCustomIdTxt.Location = new System.Drawing.Point(425, 187);
+            this.cardCustomIdTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.cardCustomIdTxt.Name = "cardCustomIdTxt";
+            this.cardCustomIdTxt.Size = new System.Drawing.Size(303, 37);
+            this.cardCustomIdTxt.TabIndex = 27;
+            this.cardCustomIdTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // badgeIdTxxt
+            // 
+            this.badgeIdTxxt.BorderColorFocused = System.Drawing.Color.White;
+            this.badgeIdTxxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.badgeIdTxxt.BorderColorMouseHover = System.Drawing.Color.White;
+            this.badgeIdTxxt.BorderThickness = 1;
+            this.badgeIdTxxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.badgeIdTxxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.badgeIdTxxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.badgeIdTxxt.isPassword = false;
+            this.badgeIdTxxt.Location = new System.Drawing.Point(74, 274);
+            this.badgeIdTxxt.Margin = new System.Windows.Forms.Padding(4);
+            this.badgeIdTxxt.Name = "badgeIdTxxt";
+            this.badgeIdTxxt.Size = new System.Drawing.Size(303, 37);
+            this.badgeIdTxxt.TabIndex = 29;
+            this.badgeIdTxxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // badgeIdLbl
+            // 
+            this.badgeIdLbl.AutoSize = true;
+            this.badgeIdLbl.BackColor = System.Drawing.Color.Transparent;
+            this.badgeIdLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.badgeIdLbl.Location = new System.Drawing.Point(70, 251);
+            this.badgeIdLbl.Name = "badgeIdLbl";
+            this.badgeIdLbl.Size = new System.Drawing.Size(116, 19);
+            this.badgeIdLbl.TabIndex = 28;
+            this.badgeIdLbl.Text = "Numer odznaki";
+            // 
             // OfficerCrudForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.badgeIdTxxt);
+            this.Controls.Add(this.badgeIdLbl);
+            this.Controls.Add(this.cardCustomIdTxt);
+            this.Controls.Add(this.camCustomIdTxt);
             this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.cardIdsCombo);
-            this.Controls.Add(this.cameraIdsCombo);
             this.Controls.Add(this.cardIdLbl);
             this.Controls.Add(this.lastNameTxt);
             this.Controls.Add(this.lastNameLbl);
@@ -206,14 +242,16 @@
 
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private KTA_Visor_UI.component.basic.topbar.TopBar topBar1;
-        private MetroFramework.Controls.MetroComboBox cardIdsCombo;
-        private MetroFramework.Controls.MetroComboBox cameraIdsCombo;
         private System.Windows.Forms.Label cardIdLbl;
         private Bunifu.Framework.UI.BunifuMetroTextbox lastNameTxt;
         private System.Windows.Forms.Label lastNameLbl;
         private System.Windows.Forms.Label cameraIdLbl;
         private Bunifu.Framework.UI.BunifuMetroTextbox firstNameTxt;
         private System.Windows.Forms.Label firstNameLbl;
-        private KTA_Visor_UI.component.basic.button.PrimaryButton saveBtn;
+        public KTA_Visor_UI.component.basic.button.PrimaryButton saveBtn;
+        private Bunifu.Framework.UI.BunifuMetroTextbox cardCustomIdTxt;
+        private Bunifu.Framework.UI.BunifuMetroTextbox camCustomIdTxt;
+        private Bunifu.Framework.UI.BunifuMetroTextbox badgeIdTxxt;
+        private System.Windows.Forms.Label badgeIdLbl;
     }
 }

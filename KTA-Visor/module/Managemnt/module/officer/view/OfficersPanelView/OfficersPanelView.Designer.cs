@@ -36,16 +36,12 @@
             this.table.AllowAdd = true;
             this.table.AllowDelete = true;
             this.table.AllowEdit = true;
-            this.table.AllowSearch = true;
             this.table.Dock = System.Windows.Forms.DockStyle.Fill;
             this.table.Location = new System.Drawing.Point(0, 0);
             this.table.Name = "table";
-            this.table.ShowAdd = true;
-            this.table.ShowControls = true;
-            this.table.ShowDelete = true;
-            this.table.ShowEdit = true;
             this.table.Size = new System.Drawing.Size(1065, 697);
             this.table.TabIndex = 0;
+            this.table.Title = "Funkcjonariusze";
             // 
             // OfficersPanelView
             // 

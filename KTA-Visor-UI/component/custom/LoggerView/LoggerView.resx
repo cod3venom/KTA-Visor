@@ -118,10 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="maximizeBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAACNJREFUKFNj+E8iIF/DzZs38WIYGNWAD8MA+RqIBSRq+P8fAEg6IV/yFOt7AAAA
+        AElFTkSuQmCC
+</value>
+  </data>
+  <data name="minimizeBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAECAYAAABREWWJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAABFJREFUGFdj+E8BGJKa//8HAPUz7xG+YObCAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="clearBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EQAACxEBf2RfkQAAAdhJREFUOE+llN0rQ2Ecxx/FXyJ/gX/ABc5wo5S4UGfFpbhwp7QbO4cLeVl5iZWX
+        EAAACxABrSO9dQAAAdhJREFUOE+llN0rQ2Ecxx/FXyJ/gX/ABc5wo5S4UGfFpbhwp7QbO4cLeVl5iZWX
         Ri4nRLSUs7PZyoRhbcdbmCnDJLb4eZ7jeWztPE7LvvWpnef5/r7nZd8eRCTYvd21kmIrBkH2delhRH3u
         K1iLfhUFyaBxCLU7w09koRg6nMdJGodfWfZ2HcXTcP709S8O4x9QK6udNA6hallp2D574ZoLgcwKktdC
         4xCqGdypWNxLcM2FsIRn6waVchqHUOVksMyxdZ3hmQ9uP0CcDEHb+D7s37wb9gmO7at0lc1TSuN+1O/W
@@ -130,19 +143,6 @@
         /z2cJDKgXrzpv8WJEFjxHvMZKsOUX53hzUuoH/BB41AAjnGg3a3p35CsjeA95jNUhsmsOmZwK8P0V3XM
         4FaGyaw6f8GtDFN+dQqBWxkmclDyjiYzyAwdN0qwK9YZ/wv3AOUx7XuGGkkV6ThHACUWSRFzj3YziBfw
         DJ3GQugbOncdFPaPw0cAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="maximizeBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EQAACxEBf2RfkQAAACNJREFUKFNj+E8iIF/DzZs38WIYGNWAD8MA+RqIBSRq+P8fAEg6IV/yFOt7AAAA
-        AElFTkSuQmCC
-</value>
-  </data>
-  <data name="minimizeBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAECAYAAABREWWJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EQAACxEBf2RfkQAAABFJREFUGFdj+E8BGJKa//8HAPUz7xG+YObCAAAAAElFTkSuQmCC
 </value>
   </data>
 </root>

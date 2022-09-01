@@ -9,84 +9,45 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KTA_Visor_DSClient.kernel.generator;
+using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice.localSettings;
 
 namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice
 {
-    public class USBCameraDevice
+    public class USBCameraDevice : USBCameraDeviceSettings
     {
         /// <summary>
         /// 
         /// </summary>
-        private DriveInfo device;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private string serialNumber = "";
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private string badgeId = "";
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly FalconSdk sdk;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public USBCameraDevice() 
+        /// <param name="device"></param>
+        public USBCameraDevice(DriveInfo device, string serialNumber, string name = ""):base(device)
         {
-            this.sdk = new FalconSdk();
-        }
+            this.Drive = device;
+            this.Name = name;
+            this.ID = this.Settings.ID;
+            this.BadgeId = this.Settings.BadgeId;
+            this.SerialNumber = serialNumber;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public FalconSdk SDK
-        {
-            get { return this.sdk; }
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="device"></param>
-        public USBCameraDevice(DriveInfo device, string serialNumber = "", string name = "")
+        public USBCameraDevice(DriveInfo device,  string name = "") : base(device)
         {
-            this.device = device;
-            this.serialNumber = serialNumber;
-            this.badgeId = serialNumber;
+            this.Drive = device;
             this.Name = name;
-            this.sdk = new FalconSdk();
+            this.ID = this.Settings.ID;
+            this.BadgeId = this.Settings.BadgeId;
+            this.SerialNumber = "";
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="serialNumber"></param>
-        public USBCameraDevice(string serialNumber)
-        {
-            this.serialNumber = serialNumber;
-            this.badgeId = serialNumber;
-            this.device = new DriveInfo("c");
-            this.sdk = new FalconSdk();
-        }
-
-         
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("Drive")]
-        public DriveInfo Drive
-        {
-            get { return device; }
-            set { device = value; }
-        }
+        public DriveInfo Drive { get; set; }
 
         /// <summary>
         /// 
@@ -100,33 +61,23 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("serialNumber")]
-        public string SerialNumber
-        {
-            get { return serialNumber; }
-            set { serialNumber = value; }
-        }
+        public string SerialNumber { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("badgeId")]
-        public string BadgeId
-        {
-            get { return badgeId; }
-            set { badgeId= value; }
-        }
+        public string ID { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public string BadgeId { get; set; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("name")]
-        public string Name
-        {
-            get { return serialNumber; }
-            set { serialNumber = value; }
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// 
@@ -136,25 +87,40 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
             get { return this.getDiskUsage();  }
         }
 
+        public int RelayPort { get; set; }
+        
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public DriveInfo getDriveInfo()
         {
-            return this.device;
+            return this.Drive;
         }
  
 
-        
+        public USBCameraDevice Select()
+        {
+            this.Settings.IsSelected = true;
+            this.SaveSettings();
+            return this;
+        }
+
+        public USBCameraDevice Deselect()
+        {
+            this.Settings.IsSelected = false;
+            this.SaveSettings();
+            return this;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         private string getDiskUsage()
         {
-            string totalSpaceGB = FileSizeHelper.convertSize(this.device.TotalSize);
-            string usedSpaceGB = FileSizeHelper.convertSize(this.device.AvailableFreeSpace);
+            string totalSpaceGB = FileSizeHelper.convertSize(this.Drive.TotalSize);
+            string usedSpaceGB = FileSizeHelper.convertSize(this.Drive.AvailableFreeSpace);
 
             return string.Format("{0}/{1}", usedSpaceGB.ToString(), totalSpaceGB.ToString());
         }
@@ -165,7 +131,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         /// <returns></returns>
         public FileInfo[] getFiles()
         {
-            DirectoryInfo directory = new DirectoryInfo(this.device + @"\DCIM\100MEDIA\");
+            DirectoryInfo directory = new DirectoryInfo(this.Drive + @"\DCIM\100MEDIA\");
             if (!directory.Exists) return new FileInfo[] { };
 
             return directory.GetFiles();
@@ -203,8 +169,8 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         {
             return new StringBuilder()
                 .Append("<USBCameraDevice: ")
-                .Append("SerialNumber: " + this.serialNumber)
-                .Append(", DriveLetter: " + this.device?.Name)
+                .Append("SerialNumber: " + this.SerialNumber)
+                .Append(", DriveLetter: " + this.Drive?.Name)
                 .Append(", TotalFiles: " + this.getFiles().Length)
                 .Append("/>")
                 .ToString();

@@ -150,6 +150,12 @@
     <Compile Include="component\custom\HorizontalProgressBar\HorizontalProgressBar.Designer.cs">
       <DependentUpon>HorizontalProgressBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\custom\LoadingLabel\LoadingLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\LoadingLabel\LoadingLabel.Designer.cs">
+      <DependentUpon>LoadingLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="component\custom\LoggerView\events\LoggerViewLogEvent.cs" />
     <Compile Include="component\custom\LoggerView\LoggerView.cs">
       <SubType>UserControl</SubType>
@@ -158,6 +164,12 @@
       <DependentUpon>LoggerView.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\MenuStripRenderer\MenuStripRenderer.cs" />
+    <Compile Include="component\custom\Alert\AlertWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="component\custom\Alert\AlertWindow.Designer.cs">
+      <DependentUpon>AlertWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="component\custom\NumbersCard\NumbersCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,6 +213,12 @@
     </Compile>
     <Compile Include="component\basic\Sidebar\Sidebar.Designer.cs">
       <DependentUpon>Sidebar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\Loader\Spinner.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\Loader\Spinner.Designer.cs">
+      <DependentUpon>Spinner.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\VerticalTab\components\MenuLink\events\MenuLinkClickEvent.cs" />
     <Compile Include="component\custom\VerticalTab\components\MenuLink\MenuLink.cs">
@@ -266,6 +284,9 @@
     <EmbeddedResource Include="component\basic\topbar\TopBar.resx">
       <DependentUpon>TopBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\Alert\AlertWindow.resx">
+      <DependentUpon>AlertWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\CircleImageButton\CircleImageButton.resx">
       <DependentUpon>CircleImageButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -277,6 +298,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\HorizontalProgressBar\HorizontalProgressBar.resx">
       <DependentUpon>HorizontalProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\Loader\Spinner.resx">
+      <DependentUpon>Spinner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\LoadingLabel\LoadingLabel.resx">
+      <DependentUpon>LoadingLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\LoggerView\LoggerView.resx">
       <DependentUpon>LoggerView.cs</DependentUpon>
@@ -331,6 +358,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\red_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\usbPort_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\usbPort_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\alert.png" />
+    <Content Include="icons\attention.png" />
+    <Content Include="icons\bell_logo.png" />
+    <Content Include="icons\confirm.png" />
+    <Content Include="icons\falcon-admin-128x128.ico" />
+    <Content Include="icons\falcon-icon-camera.ico" />
+    <Content Include="icons\falcon-user-128x128.ico" />
+    <Content Include="icons\question.png" />
+    <None Include="icons\spinner.gif" />
+    <None Include="icons\Spinner1.gif" />
+    <Content Include="icons\wolfcom-logo-words.png" />
+    <Content Include="icons\youtube.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>KTA_Visor</RootNamespace>
     <AssemblyName>KTA-Visor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -117,6 +117,9 @@
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
+    <Reference Include="CircularProgressBar, Version=2.8.0.16, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\CircularProgressBar.2.8.0.16\lib\net40\CircularProgressBar.dll</HintPath>
+    </Reference>
     <Reference Include="Device.Net, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Device.Net.4.2.1\lib\net45\Device.Net.dll</HintPath>
     </Reference>
@@ -211,6 +214,9 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WinFormAnimation, Version=1.6.0.4, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinFormAnimation.1.6.0.4\lib\net40\WinFormAnimation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="component\basic\button\ImageButton.cs">
@@ -330,12 +336,6 @@
     <Compile Include="module\Authentication\view\RFIDAuthenticationView.Designer.cs">
       <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Card\view\CardTestView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Card\view\CardTestView.Designer.cs">
-      <DependentUpon>CardTestView.cs</DependentUpon>
-    </Compile>
     <Compile Include="module\Managemnt\module\auth\command\SaveSessionCommand.cs" />
     <Compile Include="module\Managemnt\module\auth\dto\request\SignInRequestTObject.cs" />
     <Compile Include="module\Managemnt\module\auth\dto\request\SignUpRequestTObject.cs" />
@@ -355,17 +355,30 @@
     <Compile Include="module\Managemnt\module\auth\view\SignUpView\SignUpView.Designer.cs">
       <DependentUpon>SignUpView.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\camera\dto\request\EditCameraRequestTObject .cs" />
+    <Compile Include="module\Managemnt\module\camera\dto\request\CreateCameraRequestTObject.cs" />
+    <Compile Include="module\Managemnt\module\camera\entity\CamerasEntity.cs" />
+    <Compile Include="module\Managemnt\module\camera\entity\CameraEntity.cs" />
+    <Compile Include="module\Managemnt\module\camera\events\OnCameraCRUDEvent.cs" />
+    <Compile Include="module\Managemnt\module\camera\repository\CameraRepository.cs" />
+    <Compile Include="module\Managemnt\module\camera\service\CameraService.cs" />
     <Compile Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.Designer.cs">
       <DependentUpon>CamerasViewPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\camera\views\forms\CameraCRUDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\camera\views\forms\CameraCRUDForm.Designer.cs">
+      <DependentUpon>CameraCRUDForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\Managemnt\module\officer\dto\request\EditOfficerRequestTObject.cs" />
     <Compile Include="module\Managemnt\module\officer\dto\request\CreateOfficerRequestTObject.cs" />
     <Compile Include="module\Managemnt\module\officer\entity\OfficersEntity.cs" />
     <Compile Include="module\Managemnt\module\officer\entity\OfficerEntity.cs" />
-    <Compile Include="module\Managemnt\module\officer\events\OnSaveNewOfficerEvent.cs" />
+    <Compile Include="module\Managemnt\module\officer\events\OnOfficerCRUDEvent.cs" />
     <Compile Include="module\Managemnt\module\officer\repository\OfficerRepository.cs" />
     <Compile Include="module\Managemnt\module\officer\service\OfficerService.cs" />
     <Compile Include="module\Managemnt\module\officer\view\forms\OfficerCrudForm\OfficerCrudForm.cs">
@@ -405,41 +418,51 @@
     <Compile Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.Designer.cs">
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\station\controller\StationController.cs" />
-    <Compile Include="module\Managemnt\module\station\controller\SingleStationViewController.cs" />
+    <Compile Include="module\Managemnt\module\station\dto\EditStationRequestTObject.cs" />
+    <Compile Include="module\Managemnt\module\station\dto\CreateStationRequestTObject.cs" />
     <Compile Include="module\Managemnt\module\station\dto\GetSelectedCameraFilesRequestTObject.cs" />
     <Compile Include="module\Managemnt\module\station\dto\GetCameraFilesRequestTObject.cs" />
     <Compile Include="module\Managemnt\module\station\dto\StationTObject.cs" />
+    <Compile Include="module\Managemnt\module\station\entity\StationsEntity.cs" />
+    <Compile Include="module\Managemnt\module\station\entity\StationEntity.cs" />
+    <Compile Include="module\Managemnt\module\station\events\OnStationCRUDEvent.cs" />
     <Compile Include="module\Managemnt\module\station\events\StationCameraFilesReceivedEvent.cs" />
     <Compile Include="module\Managemnt\module\station\events\StationCamerasListReceivedEvent.cs" />
     <Compile Include="module\Managemnt\module\station\helper\RowHelper.cs" />
-    <Compile Include="module\Managemnt\module\station\service\SingleStationViewService.cs" />
-    <Compile Include="module\Managemnt\module\station\service\StationViewService.cs" />
-    <Compile Include="module\Managemnt\module\station\view\StationVIew\SingleStationView.cs">
+    <Compile Include="module\Managemnt\module\station\repository\StationRepository.cs" />
+    <Compile Include="module\Managemnt\module\station\service\StationService.cs" />
+    <Compile Include="module\Managemnt\module\station\view\forms\StationCRUDForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\station\view\StationVIew\SingleStationView.Designer.cs">
-      <DependentUpon>SingleStationView.cs</DependentUpon>
+    <Compile Include="module\Managemnt\module\station\view\forms\StationCRUDForm.Designer.cs">
+      <DependentUpon>StationCRUDForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\station\view\StationVIew\StationsView.cs">
-      <SubType>Form</SubType>
+    <Compile Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\station\view\StationVIew\StationsView.Designer.cs">
-      <DependentUpon>StationsView.cs</DependentUpon>
+    <Compile Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.Designer.cs">
+      <DependentUpon>StationViewPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\tunnel\view\TunnelSettingsPanelView\TunnelSettingsPanelView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\tunnel\view\TunnelSettingsPanelView\TunnelSettingsPanelView.Designer.cs">
+      <DependentUpon>TunnelSettingsPanelView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\user\consts\UserRole.cs" />
     <Compile Include="module\Managemnt\view\Management.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\Managemnt\view\Management.Designer.cs">
       <DependentUpon>Management.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Tunnel\Tunnel.cs" />
-    <Compile Include="module\Tunnel\view\TunnelSettingsView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Tunnel\view\TunnelSettingsView.Designer.cs">
-      <DependentUpon>TunnelSettingsView.cs</DependentUpon>
-    </Compile>
+    <Compile Include="module\Shared\Exceptions\WrongCredentialsException.cs" />
+    <Compile Include="module\Shared\Exceptions\BadRequestException.cs" />
+    <Compile Include="module\Shared\Exceptions\RecordNotFoundException.cs" />
+    <Compile Include="module\Shared\Exceptions\UnableToEditRecordException.cs" />
+    <Compile Include="module\Shared\Exceptions\UnableToCreateRecordException .cs" />
+    <Compile Include="module\Shared\Exceptions\UnableToRemoveRecordException.cs" />
+    <Compile Include="module\Managemnt\module\tunnel\Tunnel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="component\basic\button\ImageButton.resx">
@@ -487,9 +510,6 @@
     <EmbeddedResource Include="module\Authentication\view\RFIDAuthenticationView.resx">
       <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Card\view\CardTestView.resx">
-      <DependentUpon>CardTestView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\auth\view\SignInView\SignInView.resx">
       <DependentUpon>SignInView.cs</DependentUpon>
     </EmbeddedResource>
@@ -498,6 +518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.resx">
       <DependentUpon>CamerasViewPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\camera\views\forms\CameraCRUDForm.resx">
+      <DependentUpon>CameraCRUDForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\officer\view\forms\OfficerCrudForm\OfficerCrudForm.resx">
       <DependentUpon>OfficerCrudForm.cs</DependentUpon>
@@ -517,17 +540,17 @@
     <EmbeddedResource Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.resx">
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\station\view\StationVIew\SingleStationView.resx">
-      <DependentUpon>SingleStationView.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\station\view\forms\StationCRUDForm.resx">
+      <DependentUpon>StationCRUDForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\station\view\StationVIew\StationsView.resx">
-      <DependentUpon>StationsView.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.resx">
+      <DependentUpon>StationViewPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\tunnel\view\TunnelSettingsPanelView\TunnelSettingsPanelView.resx">
+      <DependentUpon>TunnelSettingsPanelView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\view\Management.resx">
       <DependentUpon>Management.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Tunnel\view\TunnelSettingsView.resx">
-      <DependentUpon>TunnelSettingsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -564,10 +587,12 @@
     <Folder Include="module\Authentication\exception\" />
     <Folder Include="module\Authentication\repository\" />
     <Folder Include="module\Managemnt\helper\" />
+    <Folder Include="module\Managemnt\module\camera\command\" />
     <Folder Include="module\Managemnt\module\officer\command\" />
-    <Folder Include="module\Managemnt\module\station\entity\" />
-    <Folder Include="module\Managemnt\module\station\repository\" />
-    <Folder Include="module\Tunnel\components\" />
+    <Folder Include="module\Managemnt\module\station\controller\" />
+    <Folder Include="module\Managemnt\module\station\exception\" />
+    <Folder Include="module\Managemnt\module\user\entity\" />
+    <Folder Include="module\Shared\Component\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close.png" />
