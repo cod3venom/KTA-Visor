@@ -51,7 +51,7 @@
             this.createdAtLbl = new System.Windows.Forms.Label();
             this.isEvidenceChk = new System.Windows.Forms.CheckBox();
             this.isRemovableEvidenceChk = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.descriptionLbl = new System.Windows.Forms.Label();
             this.descriptionTxt = new System.Windows.Forms.RichTextBox();
             this.footerPanel.SuspendLayout();
             this.SuspendLayout();
@@ -348,16 +348,16 @@
             this.isRemovableEvidenceChk.Text = "Można usuwać";
             this.isRemovableEvidenceChk.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // descriptionLbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(23, 524);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 19);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "Opis";
+            this.descriptionLbl.AutoSize = true;
+            this.descriptionLbl.BackColor = System.Drawing.Color.Transparent;
+            this.descriptionLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionLbl.Location = new System.Drawing.Point(23, 524);
+            this.descriptionLbl.Name = "descriptionLbl";
+            this.descriptionLbl.Size = new System.Drawing.Size(41, 19);
+            this.descriptionLbl.TabIndex = 44;
+            this.descriptionLbl.Text = "Opis";
             // 
             // descriptionTxt
             // 
@@ -376,7 +376,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 874);
             this.Controls.Add(this.descriptionTxt);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.descriptionLbl);
             this.Controls.Add(this.isRemovableEvidenceChk);
             this.Controls.Add(this.isEvidenceChk);
             this.Controls.Add(this.createdAtTxt);
@@ -433,6 +433,6 @@
         private System.Windows.Forms.CheckBox isRemovableEvidenceChk;
         private System.Windows.Forms.CheckBox isEvidenceChk;
         private System.Windows.Forms.RichTextBox descriptionTxt;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label descriptionLbl;
     }
 }

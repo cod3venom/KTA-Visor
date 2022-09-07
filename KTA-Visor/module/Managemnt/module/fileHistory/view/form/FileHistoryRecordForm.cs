@@ -52,7 +52,8 @@ namespace KTA_Visor.module.Managemnt.module.fileHistory.view.form
             this.fileHistory.removableEvidence = this.isRemovableEvidenceChk.Checked;
             _ = this.fileHistoryService.edit(this.fileHistory.id, new EditFileHistoryRequestTObject(
                     this.fileHistory.evidence,
-                    this.fileHistory.removableEvidence
+                    this.fileHistory.removableEvidence,
+                    this.descriptionTxt.Text
             ));
 
             this.Close();
