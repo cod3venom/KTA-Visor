@@ -23,8 +23,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Tunnel
 
         private readonly ClientConfigTObject config;
      
-  
-
         public Tunnel(ClientConfigTObject config, KTALogger.Logger logger): base(config, logger)
         {
             this.config = config;
@@ -44,7 +42,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Tunnel
             this.disconnect();
         }
 
-        public void AutoReconnect()
+        public new void AutoReconnect()
         {
             this.autoReconnect();
         }

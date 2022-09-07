@@ -45,9 +45,30 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column
         /// <returns></returns>
         public Column add(ColumnTObject column)
         {
-            this.table.Columns.Add(column.getName(), column.getName());
+            DataGridViewColumn columnUI = new DataGridViewColumn();
+            switch(column.Type)
+            {
+                case "text":
+                    columnUI = new DataGridViewTextBoxColumn();
+                    break;
 
-            this.onColumnAdded?.Invoke(this, new ColumnEvent(column.getName(), column.getId()));
+                case "checkbox":
+                    columnUI = new DataGridViewCheckBoxColumn();
+                    break;
+
+                case "button":
+                    columnUI = new DataGridViewButtonColumn();
+                    break;
+
+            }
+
+            columnUI.Name = column.Name;
+            columnUI.HeaderText = column.Name;
+            columnUI.ReadOnly = column.ReadOnly;
+
+            this.table.Columns.Add(columnUI);
+
+            this.onColumnAdded?.Invoke(this, new ColumnEvent(column.Name, column.ID));
             return this;
         }
 
@@ -57,7 +78,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column
         /// <returns></returns>
         public Column remove(ColumnTObject column)
         {
-            this.table.Columns.Remove(column.getName());
+            this.table.Columns.Remove(column.Name);
             return this;
         }
     }

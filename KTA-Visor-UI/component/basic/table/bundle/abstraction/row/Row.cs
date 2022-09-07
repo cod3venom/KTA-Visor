@@ -12,18 +12,58 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
     {
         private readonly DataGridView table;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="table"></param>
         public Row(DataGridView table)
         {
             this.table = table;
         }
 
-        public DataGridViewRow selectedRow
+        /// <summary>
+        /// 
+        /// </summary>
+        public DataGridViewRow SelectedRow
         {
             get
             {
                 return this.table.CurrentRow;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DataGridViewRowCollection Rows
+        {
+            get { return this.table.Rows; }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public DataGridViewRow FindRowByCellValue(string value)
+        {
+            int rowIndex = -1;
+            foreach (DataGridViewRow row in this.Rows)
+            {
+                if (row.Cells[1].Value.ToString().Equals(value))
+                {
+                    rowIndex = row.Index;
+                    break;
+                }
+            }
+            return this.Rows[rowIndex];
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
         public Row add(RowTObject row)
         {
             this.table.Invoke(new Action(() => {
@@ -33,6 +73,11 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public Row add(params object[] values)
         {
             this.table.Invoke(new Action(() => {
@@ -42,6 +87,11 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public Row removeRow(string value)
         {
             foreach (DataGridViewRow row in this.table.Rows)
@@ -61,6 +111,10 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Row clear()
         {
             this.table.Rows.Clear();

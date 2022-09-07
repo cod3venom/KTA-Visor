@@ -1,4 +1,5 @@
-﻿using KTA_Visor.module.Managemnt.module.auth.service;
+﻿using KTAVisorAPISDK.module.auth.dto.request;
+using KTAVisorAPISDK.module.auth.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,7 +48,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignUpView
         {
            try
             {
-                await this.authService.signUp(new dto.request.SignUpRequestTObject(
+                await this.authService.signUp(new SignUpRequestTObject(
                    this.firstNameTxt.Text,
                    this.lastNameText.Text,
                    this.emailTxt.Text,

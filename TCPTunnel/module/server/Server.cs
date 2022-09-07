@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +12,9 @@ using TCPTunnel.kernel.extensions.router.dto;
 using TCPTunnel.kernel.types;
 using TCPTunnel.module.server.dto;
 using TCPTunnel.module.server.events;
+using TCPTunnel.module.shared;
+using TCPTunnel.module.shared.entity;
+using TCPTunnel.module.shared.events;
 
 namespace TCPTunnel.module.server
 {
@@ -21,6 +26,9 @@ namespace TCPTunnel.module.server
         public event EventHandler<TCPServerClientDisonnectedEvent> onClientDisconnected;
         public event EventHandler<TCPServerClientMessageReceivedEvent> onMessageReceived;
 
+        private event EventHandler<OnAuthCommandSent> onAuthCommandSent;
+        private event EventHandler<OnAuthResponseDataReceived> onAuthResponseDataReceived;
+        private event EventHandler<OnAuthIsOK> onAuthIsOk;
 
         private ServerConfigTObject serverConfig;
         private Socket serverSocket;
@@ -28,21 +36,28 @@ namespace TCPTunnel.module.server
         private Thread heardBeatThread;
         private IPEndPoint ipEndpoint;
 
+        private TCPClientList<string, TCPClientTObject> tempClientList;
         private TCPClientList<string, TCPClientTObject> clientsList;
         private bool isServerEnabled;
+
 
         public Server(ServerConfigTObject serverConfig)
         {
             this.serverConfig = serverConfig;
             this.isServerEnabled = true;
+            this.tempClientList = new TCPClientList<string, TCPClientTObject>();
+            this.clientsList = new TCPClientList<string, TCPClientTObject>();
             this.initialize();
         }
 
         private void initialize()
         {
-            this.clientsList = new TCPClientList<string, TCPClientTObject>();
             this.ipEndpoint = new IPEndPoint(IPAddress.Parse(this.serverConfig.ipAddress), serverConfig.port);
             this.serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            this.onAuthCommandSent += OnAuthCommandSent; ;
+            this.onAuthResponseDataReceived += OnAuthResponseDataReceived; ;
+            this.onAuthIsOk += OnAuthIsOk;
         }
 
         public void startServer()
@@ -78,9 +93,6 @@ namespace TCPTunnel.module.server
                 this.heardBeatThread = new Thread(checkHeartBeat);
                 this.heardBeatThread.IsBackground = true;
                 this.heardBeatThread.Start();
-
-
-
             }
             catch (SocketException ex)
             {
@@ -121,15 +133,22 @@ namespace TCPTunnel.module.server
             string ipAddress = newConnection.RemoteEndPoint.ToString();
             TCPClientTObject client = new TCPClientTObject(ipAddress,newConnection,clientThread);
 
-            this.clientsList.addClient(ipAddress, client);
-            this.onClientConnected?.Invoke(this, new TCPServerClientConnectedEvent(client));
+            this.tempClientList.addClient(ipAddress, client);
 
+            Request authCommandRequest = new Request(Endpoints.AUTH_NEED_COMMAND_ENDPOINT);
+            client.Send(authCommandRequest);
+            this.onAuthCommandSent.Invoke(this, new shared.events.OnAuthCommandSent(client, authCommandRequest));
+            
             Thread messengerThread = new Thread(() => this.OnReceiveMessage(client));
             messengerThread.IsBackground = true;
             messengerThread.Start();
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
         public void OnReceiveMessage(TCPClientTObject client)
         {
             while(client.IsConnected())
@@ -142,12 +161,61 @@ namespace TCPTunnel.module.server
                     int length = client.getSocket().Receive(receiveMessageArray);
                     string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);
 
-                    Request route = this.Router.ParseRoute(client, message);
-                    this.onMessageReceived?.Invoke(this, new TCPServerClientMessageReceivedEvent(route));
+                    Request request = this.Router.ParseRoute(client, message);
+                    
+                    if (request.Endpoint == Endpoints.AUTH_NEED_RESPONSE_ENDPOINT)
+                    {
+                        this.onAuthResponseDataReceived.Invoke(this, new OnAuthResponseDataReceived(client, request));
+                    }
+                    else
+                    {
+                        this.onMessageReceived.Invoke(this, new TCPServerClientMessageReceivedEvent(request));
+                    }
+                    
                 }
                 catch (SocketException ex)
                 { }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnAuthCommandSent(object sender, OnAuthCommandSent e)
+        {
+            Console.WriteLine(String.Format("Client {0} Asked for authentication on : {1}", e.Client.getIpAddress(), e.Request.Endpoint));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnAuthResponseDataReceived(object sender, OnAuthResponseDataReceived e)
+        {
+            if (e.Request.Body == null)
+                return;
+            this.onAuthIsOk.Invoke(this, new OnAuthIsOK(e.Client, e.Request));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnAuthIsOk(object sender, OnAuthIsOK e)
+        {
+            JObject jb = (JObject)e.Request.Body;
+            dynamic authData = jb.ToObject<AuthData>();
+            e.Client.Send(new Request(Endpoints.AUTH_IS_OK_COMMAND_ENDPOINT));
+            e.Client.AuthData = authData;
+
+            string ipAddress = e.Client.getSocket().RemoteEndPoint.ToString();
+            this.clientsList.addClient(ipAddress, e.Client);
+
+            this.onClientConnected.Invoke(e, new TCPServerClientConnectedEvent(e.Client));
         }
 
         private void checkHeartBeat()

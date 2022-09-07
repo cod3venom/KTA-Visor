@@ -63,6 +63,16 @@ namespace KTA_Visor_DSClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap generate {
+            get {
+                object obj = ResourceManager.GetObject("generate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap usbPort_off {
             get {
                 object obj = ResourceManager.GetObject("usbPort_off", resourceCulture);

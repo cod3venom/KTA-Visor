@@ -1,8 +1,8 @@
-﻿using KTA_Visor.module.Managemnt.module.officer.dto.request;
-using KTA_Visor.module.Managemnt.module.officer.entity;
-using KTA_Visor.module.Managemnt.module.officer.service;
-using KTA_Visor.module.Managemnt.module.officer.view.forms.OfficerCrudForm;
+﻿using KTA_Visor.module.Managemnt.module.officer.view.forms.OfficerCrudForm;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
+using KTAVisorAPISDK.module.officer.dto.request;
+using KTAVisorAPISDK.module.officer.entity;
+using KTAVisorAPISDK.officer.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +17,9 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel
 {
     public partial class OfficersPanelView : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ColumnTObject[] Columns = new ColumnTObject[] { 
             new ColumnTObject(0, "ID"),
             new ColumnTObject(1, "IMIĘ"),
@@ -26,9 +29,16 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel
             new ColumnTObject(5, "NUMER ODZNAKI"),
         };
 
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly OfficerService officerService;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private OfficerCrudForm officerCrudForm;
+        
         public OfficersPanelView()
         {
             InitializeComponent();
@@ -62,14 +72,14 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel
                 officer.data.firstName,
                 officer.data.lastName,
                 officer.data.camCustomId,
-                officer.data.cardCustomID,
+                officer.data.cardId,
                 officer.data.badgeId
             );
             this.officerCrudForm.OnEditOfficerEvent += onEditOfficer;
             this.officerCrudForm.ShowDialog();
         }
 
-        private async void onClickDeleteOfficer(object sender, EventArgs e)
+        private void onClickDeleteOfficer(object sender, EventArgs e)
         {
             string officerId = this.getSelectedOfficerID();
             this.officerService.delet(officerId);
@@ -106,17 +116,17 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel
         /// </summary>
         private async void fetchOfficers()
         {
-            OfficersEntity officers = await this.officerService.all();
+            OfficerEntity officers = await this.officerService.all();
             this.table.DataGridView.Rows.Clear();
 
-            foreach (var officer in officers.data)
+            foreach (var officer in officers.datas)
             {
                 this.table.bundle.row.add(
                     officer.id,
                     officer.firstName,
                     officer.lastName,
                     officer.camCustomId,
-                    officer.cardCustomID,
+                    officer.cardId,
                     officer.badgeId
                 );
             }
@@ -129,7 +139,7 @@ namespace KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel
         /// <exception cref="Exception"></exception>
         private string getSelectedOfficerID()
         {
-            return this.table.bundle.row.selectedRow.Cells["ID"].Value.ToString();
+            return this.table.bundle.row.SelectedRow.Cells["ID"].Value.ToString();
         }
 
     }

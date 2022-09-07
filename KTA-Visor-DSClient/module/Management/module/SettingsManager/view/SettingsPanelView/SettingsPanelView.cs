@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KTA_Visor_DSClient.kernel.generator;
 
 namespace KTA_Visor_DSClient.module.Management.module.SettingsManager.view.SettingsPanelView
 {
@@ -23,7 +24,7 @@ namespace KTA_Visor_DSClient.module.Management.module.SettingsManager.view.Setti
 
         private void SettingsPanelView_Load(object sender, EventArgs e)
         {
-            this.serialNumberTxt.Text = this.settings.SettingsObj.app.station.serialNumber;
+            this.stationIdTxt.Text = this.settings.SettingsObj.app.station.stationId;
             this.stationIpTxt.Text = this.settings.SettingsObj.app.station.ipAddress;
 
             this.ipTxt.Text = this.ipTxt.Text.PadLeft(this.ipTxt.Text.Length + 5);
@@ -33,11 +34,16 @@ namespace KTA_Visor_DSClient.module.Management.module.SettingsManager.view.Setti
             this.portTxt.Text = this.settings?.SettingsObj?.app?.management?.serverPort.ToString();
             this.autoReconnectChck.Checked = this.settings.SettingsObj.app.management.autoReconnect;
 
-            this.storageLocationTxt.Text = this.settings.SettingsObj.app.fileSystem.networkStorage;
+            this.storageLocationTxt.Text = this.settings.SettingsObj.app.fileSystem.filesPath;
             this.autoCopyChk.Checked = this.settings.SettingsObj.app.fileSystem.autoCopy;
 
             this.storageLocationTxt.Click += onBrowseStorageLocation;
             this.saveBtn.OnClick += onSaveSettings;
+
+            this.sstationGenBtn.Click += (delegate (object _sender, EventArgs ev)
+            {
+                this.stationIdTxt.Text = RandomData.RandomString(15);
+            });
         }
 
         private void onBrowseStorageLocation(object sender, EventArgs e)
@@ -50,6 +56,16 @@ namespace KTA_Visor_DSClient.module.Management.module.SettingsManager.view.Setti
 
         private void onSaveSettings(object sender, EventArgs e)
         {
+            this.settings.SettingsObj.app.station.stationId = this.stationIdTxt.Text;
+            this.settings.SettingsObj.app.station.ipAddress = this.stationIpTxt.Text;
+
+            this.settings.SettingsObj.app.management.serverIp = this.ipTxt.Text;
+            this.settings.SettingsObj.app.management.serverPort = Int32.Parse(this.portTxt.Text);
+            this.settings.SettingsObj.app.management.autoReconnect = this.autoReconnectChck.Checked;
+
+            this.settings.SettingsObj.app.fileSystem.filesPath = this.storageLocationTxt.Text;
+            this.settings.SettingsObj.app.fileSystem.autoCopy = this.autoCopyChk.Checked;
+
             this.settings.Save(this.settings.SettingsObj);
              
         }

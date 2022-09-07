@@ -112,13 +112,14 @@
     <Compile Include="kernel\sharedKernel\HttpClientHelper\HttpClientHelper.cs" />
     <Compile Include="kernel\sharedKernel\HttpClientHelper\interfaces\IHttpClient.cs" />
     <Compile Include="kernel\sharedKernel\LocalStorage\LocalStorage.cs" />
-    <Compile Include="module\info\InformationCollector.cs" />
-    <Compile Include="module\Management\module\Auth\command\SaveSessionCommand.cs" />
-    <Compile Include="module\Management\module\Auth\dto\request\SignInRequestTObject.cs" />
-    <Compile Include="module\Management\module\Auth\entity\SignInEntity.cs" />
-    <Compile Include="module\Management\module\Auth\exception\WrongCredentialsException.cs" />
-    <Compile Include="module\Management\module\Auth\repository\AuthRepository.cs" />
-    <Compile Include="module\Management\module\Auth\service\AuthService.cs" />
+    <Compile Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.Designer.cs">
+      <DependentUpon>CameraItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Management\workers\Tunnel\controller\TunnelController.cs" />
+    <Compile Include="module\Management\workers\Tunnel\TunnelBackgroundWrorker.cs" />
     <Compile Include="module\Management\module\Camera\command\AddCamerasToTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\command\CopyCameraFilesToNetworkStorageCommand.cs" />
     <Compile Include="module\Management\module\Camera\command\RemoveCamerasFromTheGlobalMemory.cs" />
@@ -131,22 +132,11 @@
     <Compile Include="module\Management\module\Camera\component\CameraItem\events\OnCloseCameraItemFormEvent.cs" />
     <Compile Include="module\Management\module\Camera\component\CameraItem\events\OnOpenCameraItemEvent.cs" />
     <Compile Include="module\Management\module\Camera\consts\CameraSettingsConsts.cs" />
-    <Compile Include="module\Management\module\Camera\dto\request\CreateCameraRequestTObject.cs" />
     <Compile Include="module\Management\module\Camera\dto\CopiedCameraFileTObject.cs" />
     <Compile Include="module\Management\module\Camera\dto\GetCameraFilesRequestTObject.cs" />
     <Compile Include="module\Management\module\Camera\dto\GetSelectedCameraFilesRequestTObject.cs" />
-    <Compile Include="module\Management\module\Camera\entity\CameraEntity.cs" />
-    <Compile Include="module\Management\module\Camera\entity\CamerasEntity.cs" />
     <Compile Include="module\Management\module\Camera\flags\WMEvents.cs" />
     <Compile Include="module\Management\module\Camera\flags\WMQuery.cs" />
-    <Compile Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.Designer.cs">
-      <DependentUpon>CameraItemForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Management\module\Camera\repository\CameraRepository.cs" />
-    <Compile Include="module\Management\module\Camera\service\CameraService.cs" />
     <Compile Include="module\Management\module\Camera\service\CamerasService.cs" />
     <Compile Include="module\Management\module\Camera\view\CamerasPanelView\CamerasPanelView.cs">
       <SubType>UserControl</SubType>
@@ -176,36 +166,11 @@
       <DependentUpon>SettingsPanelView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Management\module\Station\bootloader\StationBootLoader.cs" />
-    <Compile Include="module\Management\module\Station\dto\request\RemoveInactiveCameraToStationRequestTObject.cs" />
-    <Compile Include="module\Management\module\Station\dto\request\AddActiveCameraToStationRequestTObject.cs" />
-    <Compile Include="module\Management\module\Station\dto\request\CreateStationRequestTObject.cs" />
-    <Compile Include="module\Management\module\Station\entity\StationsEntity.cs" />
-    <Compile Include="module\Management\module\Station\entity\StationEntity.cs" />
-    <Compile Include="module\Management\module\Station\repository\StationRepository.cs" />
-    <Compile Include="module\Management\module\Station\service\StationService.cs" />
     <Compile Include="module\Management\view\ManagementView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\Management\view\ManagementView.Designer.cs">
       <DependentUpon>ManagementView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\preloader\view\PreLoaderView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\preloader\view\PreLoaderView.Designer.cs">
-      <DependentUpon>PreLoaderView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\settings\views\FileSystemSettingsView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\settings\views\FileSystemSettingsView.Designer.cs">
-      <DependentUpon>FileSystemSettingsView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\settings\views\ManagementSettingsView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\settings\views\ManagementSettingsView.Designer.cs">
-      <DependentUpon>ManagementSettingsView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Management\module\Tunnel\Tunnel.cs" />
     <Compile Include="module\Shared\Globals\Globals.cs" />
@@ -217,9 +182,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Management\module\Camera\component\CameraItem\CameraItem.resx">
       <DependentUpon>CameraItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.resx">
-      <DependentUpon>CameraItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Management\module\Camera\view\CamerasPanelView\CamerasPanelView.resx">
       <DependentUpon>CamerasPanelView.cs</DependentUpon>
@@ -235,15 +197,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Management\view\ManagementView.resx">
       <DependentUpon>ManagementView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\preloader\view\PreLoaderView.resx">
-      <DependentUpon>PreLoaderView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\settings\views\FileSystemSettingsView.resx">
-      <DependentUpon>FileSystemSettingsView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\settings\views\ManagementSettingsView.resx">
-      <DependentUpon>ManagementSettingsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -290,6 +243,10 @@
       <Project>{C222A7CF-AC15-4728-A0F2-30CD6E568C63}</Project>
       <Name>KTA-Visor-UI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KTAVisorAPISDK\KTAVisorAPISDK.csproj">
+      <Project>{64224B9B-57A3-4786-AB3F-47A5095DD046}</Project>
+      <Name>KTAVisorAPISDK</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logger\KTA-Logger.csproj">
       <Project>{E9AEE10E-6DB8-484B-9FD6-41D03A92F748}</Project>
       <Name>KTA-Logger</Name>
@@ -304,6 +261,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\usbPort_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\generate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

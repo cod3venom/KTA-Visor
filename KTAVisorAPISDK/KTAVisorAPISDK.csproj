@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{64224B9B-57A3-4786-AB3F-47A5095DD046}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KTAVisorAPISDK</RootNamespace>
+    <AssemblyName>KTAVisorAPISDK</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="module\fileHistory\dto\request\EditFileHistoryRequestTObject.cs" />
+    <Compile Include="module\fileHistory\dto\request\CreateFileHistoryRequestTObject.cs" />
+    <Compile Include="module\fileHistory\entity\FileHistoryEntity.cs" />
+    <Compile Include="module\fileHistory\repository\FileHistoryRepository.cs" />
+    <Compile Include="module\fileHistory\service\FileHistoryService.cs" />
+    <Compile Include="module\station\dto\AddActiveCameraToStationRequestTObject.cs" />
+    <Compile Include="SDK.cs" />
+    <Compile Include="kernel\module\HttpClientHelper\events\HttpUnauthorizedInterceptorEvent.cs" />
+    <Compile Include="kernel\module\HttpClientHelper\HttpClientHelper.cs" />
+    <Compile Include="kernel\module\HttpClientHelper\interfaces\IHttpClient.cs" />
+    <Compile Include="kernel\sharedKernel\helper\DTOHelper\util\DTOHelperStruct.cs" />
+    <Compile Include="kernel\sharedKernel\helper\LocalStorage\LocalStorage.cs" />
+    <Compile Include="kernel\sharedKernel\util\HttpClientUtil.cs" />
+    <Compile Include="module\auth\command\SaveSessionCommand.cs" />
+    <Compile Include="module\auth\dto\request\SignInRequestTObject.cs" />
+    <Compile Include="module\auth\dto\request\SignUpRequestTObject.cs" />
+    <Compile Include="module\auth\entity\SignInEntity.cs" />
+    <Compile Include="module\auth\entity\SignUpEntity.cs" />
+    <Compile Include="module\auth\repository\AuthRepository.cs" />
+    <Compile Include="module\auth\service\AuthService.cs" />
+    <Compile Include="module\camera\dto\request\CreateCameraRequestTObject.cs" />
+    <Compile Include="module\camera\dto\request\EditCameraRequestTObject .cs" />
+    <Compile Include="module\camera\entity\CameraEntity.cs" />
+    <Compile Include="module\camera\repository\CameraRepository.cs" />
+    <Compile Include="module\camera\service\CameraService.cs" />
+    <Compile Include="module\officer\dto\request\CreateOfficerRequestTObject.cs" />
+    <Compile Include="module\officer\dto\request\EditOfficerRequestTObject.cs" />
+    <Compile Include="module\officer\entity\OfficerEntity.cs" />
+    <Compile Include="module\officer\events\OnOfficerCRUDEvent.cs" />
+    <Compile Include="module\officer\repository\OfficerRepository.cs" />
+    <Compile Include="module\officer\service\OfficerService.cs" />
+    <Compile Include="module\station\dto\CreateStationRequestTObject.cs" />
+    <Compile Include="module\station\dto\EditStationRequestTObject.cs" />
+    <Compile Include="module\station\dto\GetCameraFilesRequestTObject.cs" />
+    <Compile Include="module\station\dto\GetSelectedCameraFilesRequestTObject.cs" />
+    <Compile Include="module\station\entity\StationEntity.cs" />
+    <Compile Include="module\station\repository\StationRepository.cs" />
+    <Compile Include="module\station\service\StationService.cs" />
+    <Compile Include="module\user\consts\UserRole.cs" />
+    <Compile Include="module\user\entity\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\Exceptions\BadRequestException.cs" />
+    <Compile Include="Shared\Exceptions\RecordNotFoundException.cs" />
+    <Compile Include="Shared\Exceptions\UnableToCreateRecordException .cs" />
+    <Compile Include="Shared\Exceptions\UnableToEditRecordException.cs" />
+    <Compile Include="Shared\Exceptions\UnableToRemoveRecordException.cs" />
+    <Compile Include="Shared\Exceptions\WrongCredentialsException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="module\camera\command\" />
+    <Folder Include="module\card\command\" />
+    <Folder Include="module\card\entity\" />
+    <Folder Include="module\card\repository\" />
+    <Folder Include="module\card\service\" />
+    <Folder Include="module\fileHistory\command\" />
+    <Folder Include="module\officer\command\" />
+    <Folder Include="module\station\command\" />
+    <Folder Include="module\user\command\" />
+    <Folder Include="module\user\repository\" />
+    <Folder Include="module\user\service\" />
+    <Folder Include="Shared\Component\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

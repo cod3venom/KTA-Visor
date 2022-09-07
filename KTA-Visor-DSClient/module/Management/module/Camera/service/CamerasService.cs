@@ -4,6 +4,8 @@ using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
 using KTA_Visor_DSClient.module.Management.module.Camera.command;
 using KTA_Visor_DSClient.module.Shared.Globals;
+using KTAVisorAPISDK.module.camera.dto.request;
+using KTAVisorAPISDK.module.camera.service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +17,20 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
     public class CamerasService
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
         public event EventHandler<CameraConnectedEvent> OnCameraConnectedEvent;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public event EventHandler<CameraDisconnectedEvent> OnCameraDisconnectedEvent;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public event EventHandler<EventArgs> OnCameraConnectedOrDisconnected;
-
 
         
         /// <summary>
@@ -26,6 +38,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         /// </summary>
         private readonly KTALogger.Logger logger;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly CameraService cameraService;
        
         public CamerasService(DeviceWatcher deviceWatcher, KTALogger.Logger logger)
@@ -43,7 +58,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         /// <summary>
         /// 
         /// </summary>
-        public async void Start()
+        public void Start()
         {
             this.FalconBridge.CameraDeviceService.OnCameraConnectedEvent += onCameraConnectedEvt;
             this.FalconBridge.CameraDeviceService.OnCameraDisconnectedEvent += onCameraDisconnectedEvent;
@@ -56,12 +71,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void onCameraConnectedEvt(object sender, CameraConnectedEvent e)
+        private async void onCameraConnectedEvt(object sender, CameraConnectedEvent e)
         {
             if (!AddCamerasToTheGlobalMemory.Execute(e.Camera))
                 return;
 
-            this.cameraService.create(new dto.CreateCameraRequestTObject(e.Camera.ID, e.Camera.BadgeId));
+           await  this.cameraService.create(new CreateCameraRequestTObject(e.Camera.ID, e.Camera.BadgeId));
             this.OnCameraConnectedEvent?.Invoke(sender, new CameraConnectedEvent(e.Camera));
         }
 

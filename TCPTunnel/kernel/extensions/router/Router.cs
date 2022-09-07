@@ -37,7 +37,7 @@ namespace TCPTunnel.kernel.extensions.router
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                this.logger.error(ex.Message);
                 return null;
             }
         }

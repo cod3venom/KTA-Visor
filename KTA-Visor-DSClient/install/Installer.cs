@@ -20,6 +20,7 @@ namespace KTA_Visor_DSClient.install
         }
         private void writeSettingsFile()
         {
+            
             DirectoryInfo dirInfo = new DirectoryInfo(string.Format("{0}/settings", this.currentPath));
             FileInfo fileInfo = new FileInfo(string.Format("{0}/settings/settings.json", this.currentPath));
             if (!dirInfo.Exists)

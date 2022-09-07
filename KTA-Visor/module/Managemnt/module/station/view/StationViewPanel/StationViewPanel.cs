@@ -1,9 +1,9 @@
-﻿using KTA_Visor.module.Managemnt.module.station.dto;
-using KTA_Visor.module.Managemnt.module.station.entity;
-using KTA_Visor.module.Managemnt.module.station.service;
-using KTA_Visor.module.Managemnt.module.station.view.forms;
+﻿using KTA_Visor.module.Managemnt.module.station.view.forms;
 using KTA_Visor.module.Station.events;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
+using KTAVisorAPISDK.module.station.dto;
+using KTAVisorAPISDK.module.station.entity;
+using KTAVisorAPISDK.module.station.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,16 +18,26 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
 {
     public partial class StationViewPanel : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ColumnTObject[] Columns = new ColumnTObject[] {
             new ColumnTObject(0, "ID"),
             new ColumnTObject(1, "IDENTYFIKATOR STACJI"),
             new ColumnTObject(2, "IP ADRES"),
-            new ColumnTObject(3, "ZMODYFIKOWANO"),
-            new ColumnTObject(4, "UTWORZONO")
+            new ColumnTObject(3, "AKTYWNY"),
+            new ColumnTObject(4, "ZMODYFIKOWANO"),
+            new ColumnTObject(5, "UTWORZONO")
         };
 
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly StationService stationService;
         
+        /// <summary>
+        /// 
+        /// </summary>
         private StationCRUDForm stationCRUDForm;
 
         /// <summary>
@@ -37,14 +47,13 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
         {
             InitializeComponent();
             this.stationService = new StationService();
-            this.table.OnAddButton += onClickAddNewStation;
+            this.table.AllowAdd = false;
             this.table.OnEditButton += onClickEditStation;
             this.table.OnDeleteButton += onClickDeleteStation;
+            this.table.DataGridView.CellDoubleClick += onOpenStation;
             this.table.bundle.column.addMultiple(this.Columns);
         }
 
-        
-    
         /// <summary>
         /// 
         /// </summary>
@@ -52,7 +61,14 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
         /// <param name="e"></param>
         private void StationViewPanel_Load(object sender, EventArgs e)
         {
-            this.fetchStations();
+            Program.TunnelBackgroundWorker.OnClientConnected += onStationConnected;
+            Program.TunnelBackgroundWorker.OnClientDisconnected += onStationDisconnected;
+            this.table.DataGridView.Cursor = Cursors.Hand;
+        }
+
+        private void onOpenSelectedStation(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
 
         /// <summary>
@@ -60,18 +76,24 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void onClickAddNewStation(object sender, EventArgs e)
+        private async void onStationConnected(object sender, events.OnClientConnected e)
         {
-            this.stationCRUDForm = new StationCRUDForm();
-            this.stationCRUDForm.OnCreateStationEvent += (async delegate (object _sender, OnStationCRUDEvent evt)
-            {
-                await this.stationService.create(new CreateStationRequestTObject(evt.stationCustomId, evt.stationIpAddress));
-                this.stationCRUDForm.Close();
-                this.fetchStations();
-                
-            });
-            this.stationCRUDForm.ShowDialog();
+            StationEntity station = await this.stationService.findByCustomId(e.Client.AuthData.Identificator);
+            this.addSingleRecord(station);
+
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void onStationDisconnected(object sender, events.OnClientDisconnected e)
+        {
+            this.table.bundle.row.removeRow(e.Client.getIpAddress());
+        }
+ 
 
         /// <summary>
         /// 
@@ -80,12 +102,11 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
         /// <param name="e"></param>
         private async void onClickEditStation(object sender, EventArgs e)
         {
-            string selectedStationId = this.getSelectedCameraId();
-            StationEntity stationEntity = await this.stationService.findById(selectedStationId);
+            StationEntity stationEntity = await this.stationService.findById(this.SelectedStationId);
             this.stationCRUDForm = new StationCRUDForm(stationEntity.data.stationId, stationEntity.data.stationIp);
             this.stationCRUDForm.OnEditStationEvent += (async delegate (object _sender, OnStationCRUDEvent evt)
             {
-                await this.stationService.edit(stationEntity.data.id, new EditStationRequestTObject(evt.stationCustomId, evt.stationIpAddress));
+                await this.stationService.edit(stationEntity.data.id, new EditStationRequestTObject(evt.stationId, evt.stationIpAddress));
                 this.stationCRUDForm.Close();
                 this.fetchStations();
             });
@@ -101,8 +122,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
         {
             try
             {
-                string selectedStationId = this.getSelectedCameraId();
-                this.stationService.delete(selectedStationId);
+                this.stationService.delete(this.SelectedStationId);
             }
             catch(Exception ex)
             {
@@ -110,34 +130,58 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
             }
         }
 
+        private void onOpenStation(object sender, DataGridViewCellEventArgs e)
+        {
+            (new StationCamerasForm(this.SelectedStationId)).ShowDialog();
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
         private async void fetchStations()
         {
-            StationsEntity stationsEntity= await this.stationService.all();
+            StationEntity stationEntity= await this.stationService.all();
             this.table.DataGridView.Rows.Clear();
 
-            foreach (var station in stationsEntity.data)
+            foreach (var station in stationEntity.datas)
             {
-                this.table.bundle.row.add(
-                    station.id,
-                    station.stationId,
-                    station.stationIp,
-                    station.updatedAt,
-                    station.createdAt
-                );
+                this.addSingleRecord(station);
             }
         }
 
+        private void addSingleRecord(dynamic station)
+        {
+            if (station == null)
+                return;
+            this.table.bundle.row.add(
+                   station?.data?.id,
+                   station?.data?.stationId,
+                   station?.data?.stationIp,
+                   station?.data?.active ? "Tak" : "Nie",
+                   station?.data?.updatedAt,
+                   station?.data?.createdAt
+               );
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        private string getSelectedCameraId()
+        private string SelectedStationId
         {
-            return this.table.bundle.row.selectedRow.Cells["ID"].Value.ToString();
+            get { return this.table.bundle.row.SelectedRow.Cells["ID"].Value.ToString(); }
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private string SelectStationCustomId
+        {
+            get { return this.table.bundle.row.SelectedRow.Cells["ID"].Value.ToString(); }
+        }
+
     }
 }

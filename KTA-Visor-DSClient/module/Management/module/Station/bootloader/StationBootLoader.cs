@@ -1,7 +1,7 @@
 ﻿using KTA_Visor_DSClient.install.settings;
-using KTA_Visor_DSClient.module.Management.module.Station.dto.request;
-using KTA_Visor_DSClient.module.Management.module.Station.entity;
 using KTA_Visor_DSClient.module.Shared.Globals;
+using KTAVisorAPISDK.module.station.dto;
+using KTAVisorAPISDK.module.station.entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +12,31 @@ namespace KTA_Visor_DSClient.module.Management.module.Station.bootloader
 {
     public class StationBootLoader
     {
-        public async void load()
+        public static async Task<StationEntity> load()
         {
             Settings settings = new Settings();
-            StationEntity entity = await Program.StationService.create(new CreateStationRequestTObject(
-                 settings.SettingsObj.app.backend.stationCustomId,
-                 "127.0.0.1"
+            if (settings.SettingsObj.app.station.stationId == null || settings.SettingsObj.app.station.stationId == "")
+                return new StationEntity();
+
+            StationEntity entity = await Program.StationService.findByCustomId(settings.SettingsObj.app.station.stationId);
+
+            if (entity?.data?.id != null)
+            {
+                entity = await Program.StationService.edit(entity.data.id, new EditStationRequestTObject(
+                     settings.SettingsObj.app.station.stationId,
+                     entity.data.stationIp,
+                     true
+                ));
+            }
+            else if (entity?.data?.id == null)
+            {
+                entity = await Program.StationService.create(new CreateStationRequestTObject(
+                 settings.SettingsObj.app.station.stationId,
+                 "127.0.0.1",
+                 settings.SettingsObj.app.rdp.userName,
+                 settings.SettingsObj.app.rdp.password
              ));
+            }
 
             if (entity.data?.id == null)
             {
@@ -28,7 +46,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Station.bootloader
                 Program.logger.success("Currently using station with id="+entity.data.id);
                 Globals.STATION = entity;
             }
-            
+
+            return entity;
         }
     }
 }

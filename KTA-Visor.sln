@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{516A08B9-41D1-4C99-898E-43CF76B9747D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTA-Visor", "KTA-Visor\KTA-Visor.csproj", "{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTA-Visor-DSClient", "KTA-Visor-DSClient\KTA-Visor-DSClient.csproj", "{73AB2552-C7DB-493E-A5C6-9C16C931C85A}"
@@ -17,13 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTA-Visor-UI", "KTA-Visor-U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTA-USB-Relay", "KTA-USB-Relay\KTA-USB-Relay.csproj", "{4E2CF358-27B6-43B9-A1C0-6C862D8E930F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rfid-test", "rfid-test\rfid-test.csproj", "{9D306569-4BEC-4077-827E-B0FFEE124106}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTA-Types", "KTA-Types\KTA-Types.csproj", "{958F8948-C72E-46CF-A276-480DA0DEC2A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTA-RFID-Keyboard", "KTA-RFID-Keyboard\KTA-RFID-Keyboard.csproj", "{0F7A4FE1-A252-4B42-BCFC-CBCB67EAE920}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falcon-Protocol", "Falcon-Protocol\Falcon-Protocol.csproj", "{E59D82DC-77EE-4F93-900F-3624857C51CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTAVisorAPISDK", "KTAVisorAPISDK\KTAVisorAPISDK.csproj", "{64224B9B-57A3-4786-AB3F-47A5095DD046}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{516A08B9-41D1-4C99-898E-43CF76B9747D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{516A08B9-41D1-4C99-898E-43CF76B9747D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{516A08B9-41D1-4C99-898E-43CF76B9747D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{516A08B9-41D1-4C99-898E-43CF76B9747D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,10 +53,6 @@ Global
 		{4E2CF358-27B6-43B9-A1C0-6C862D8E930F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E2CF358-27B6-43B9-A1C0-6C862D8E930F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E2CF358-27B6-43B9-A1C0-6C862D8E930F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D306569-4BEC-4077-827E-B0FFEE124106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D306569-4BEC-4077-827E-B0FFEE124106}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D306569-4BEC-4077-827E-B0FFEE124106}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D306569-4BEC-4077-827E-B0FFEE124106}.Release|Any CPU.Build.0 = Release|Any CPU
 		{958F8948-C72E-46CF-A276-480DA0DEC2A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{958F8948-C72E-46CF-A276-480DA0DEC2A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{958F8948-C72E-46CF-A276-480DA0DEC2A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +65,10 @@ Global
 		{E59D82DC-77EE-4F93-900F-3624857C51CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E59D82DC-77EE-4F93-900F-3624857C51CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E59D82DC-77EE-4F93-900F-3624857C51CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64224B9B-57A3-4786-AB3F-47A5095DD046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64224B9B-57A3-4786-AB3F-47A5095DD046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64224B9B-57A3-4786-AB3F-47A5095DD046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64224B9B-57A3-4786-AB3F-47A5095DD046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

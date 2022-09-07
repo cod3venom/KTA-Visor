@@ -1,6 +1,6 @@
 ﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
-using KTA_Visor_DSClient.module.Management.module.Camera.entity;
-using KTA_Visor_DSClient.module.Management.module.Station.entity;
+using KTAVisorAPISDK.module.camera.entity;
+using KTAVisorAPISDK.module.station.entity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

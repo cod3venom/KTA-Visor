@@ -85,7 +85,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
                 string idFileContent = File.ReadAllText(this.IDFileOnDrive.FullName).Replace(Environment.NewLine, "");
                 if (idFileContent != this.Settings.ID)
                 {
-                    File.WriteAllText(idFileContent, this.Settings.ID);
+                    File.WriteAllText(this.IDFileOnDrive.FullName, idFileContent);
                 }
             }
             return this.settingsFileOnDrive;

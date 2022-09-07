@@ -283,7 +283,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
 
                 if (port == (int)Port.Eight)
                 {
-                    this.OnEndTurningOnfAll.Invoke(this, EventArgs.Empty);
+                    this.OnEndTurningOnfAll?.Invoke(this, EventArgs.Empty);
                 }
             }));
         }
@@ -300,7 +300,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
                 Thread.Sleep(transition);
                 if (port == (int)Port.Eight)
                 {
-                    this.OnEndTurningOffAll.Invoke(this, EventArgs.Empty);
+                    this.OnEndTurningOffAll?.Invoke(this, EventArgs.Empty);
                 }
             }));
         }
@@ -313,7 +313,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         {
             this.sendStringCommand(String.Format("S {0}", portNumber.ToString()));
             Thread.Sleep(100);
-            this.OnTurnedOnByPort.Invoke(this, EventArgs.Empty);
+            this.OnTurnedOnByPort?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -324,7 +324,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         {
             this.sendStringCommand(String.Format("C {0}", portNumber.ToString()));
             Thread.Sleep(100);
-            this.OnTurnedOffByPort.Invoke(this, EventArgs.Empty);
+            this.OnTurnedOffByPort?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

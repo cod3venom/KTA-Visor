@@ -31,7 +31,9 @@ namespace KTA_Visor.module.Management.tunnel
             this.server = new TCPTunnel.TCPTunnel().createServer(config);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void start()
         {
             try
@@ -49,47 +51,74 @@ namespace KTA_Visor.module.Management.tunnel
                 Console.WriteLine(ex.ToString());
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public void stop()
+        {
+            this.server?.stopServer();
+        }
+      
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TcpServer_onServerStarted(object sender, TCPServerStartedEvent e)
         {
             this.logger.info(String.Format("Started Server on {0}:{1}", e.Config.ipAddress, e.Config.port.ToString()));
+            this.onServerStarted?.Invoke(sender, e);
+
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TcpServer_onServerStopped(object sender, EventArgs e)
         {
            this.onServerStopped?.Invoke(this, e);
         }
 
-        public void stop()
-        {
-            this.server?.stopServer();
-        }
-
-        private void TcpServer_onServerStarted(object sender, EventArgs e)
-        {
-            this.logger.info("Server: UP");
-            this.onServerStarted?.Invoke(sender, e);
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TcpServer_onClientConnected(object sender, TCPServerClientConnectedEvent e)
         {
             this.logger.success("Connected: " + e.getClient().getIpAddress());
             this.onClientConnected?.Invoke(sender, e);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TcpServer_onClientDisconnected(object sender, TCPServerClientDisonnectedEvent e)
         {
             this.logger.warn("Disconnected: " + e.getClient().getIpAddress());
             this.onClientDisconnected?.Invoke(sender, e);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Server_onMessageReceived(object sender, TCPServerClientMessageReceivedEvent e)
         {
-            this.logger.success("Received: Request " + e.getRoute().Endpoint);
-            this.logger.success("Received: Message " + e.getRoute().Body);
+            this.logger.success("Received: Request " + e.Request.Endpoint);
+            this.logger.success("Received: Message " + e.Request.Body);
             
             this.onMessageReceived?.Invoke(sender, e);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public KTALogger.Logger DebuggingPipe
         {
             get { return this.logger; }

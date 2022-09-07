@@ -1,6 +1,8 @@
 ﻿
 using KTA_Visor_DSClient.module.Management.module.Camera.dto;
 using KTA_Visor_DSClient.module.Shared.Globals;
+using KTAVisorAPISDK.module.fileHistory.dto.request;
+using KTAVisorAPISDK.module.fileHistory.service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,13 +15,17 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command
     public class CopyCameraFilesToNetworkStorageCommand
     {
         public static Dictionary<string, CopiedCameraFileTObject> Execute(
+            string stationCustomId,
+            string cameraCustomId,
+            string badgeId, 
+            FileHistoryService fileHistoryService,
             Dictionary<string, FileInfo> files, 
             string networkDriveLocation
         )
         {
             Dictionary<string, CopiedCameraFileTObject> copiedFiles = new Dictionary<string, CopiedCameraFileTObject>();
 
-            if (networkDriveLocation == null)
+            if (networkDriveLocation == null || networkDriveLocation == "")
                 return copiedFiles;
 
             DirectoryInfo directory = new DirectoryInfo(networkDriveLocation);
@@ -35,7 +41,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command
                 if (File.Exists(destFile.FullName))
                 {
                     copiedFiles.Add(destFile.Name, new CopiedCameraFileTObject(destFile, false));
-                    continue;
                 }
 
                 file.CopyTo(destFile.FullName);
@@ -44,9 +49,19 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command
                 {
                     //file.Delete();
 
-                    Program.logger.success(String.Format("Successfully copied File {0} from the {1} to the {2} folder", file.Name, file.DirectoryName, networkDriveLocation));
 
                     copiedFiles.Add(destFile.Name, new CopiedCameraFileTObject(destFile, true));
+                    _ = fileHistoryService.create(new CreateFileHistoryRequestTObject(
+                        stationCustomId,
+                        cameraCustomId,
+                        badgeId,
+                        file.Name,
+                        file.FullName,
+                        destFile.FullName,
+                        destFile.Length
+                    ));
+
+                    Program.logger.success(String.Format("Successfully copied File {0} from the {1} to the {2} folder", file.Name, file.DirectoryName, networkDriveLocation));
                 }
             }
 

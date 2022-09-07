@@ -2,7 +2,7 @@
   "app": {
     "title": "KTA-Visor Docking System Client",
     "station": {
-      "serialNumber": "1234567890",
+      "stationId": "123456789",
       "ipAddress": "127.0.0.2"
     },
     "usbRelay": {
@@ -18,7 +18,11 @@
       "autoReconnect": true
     },
     "backend": {
-      "stationCustomId": "1998"
+      "api": ""
+    },
+    "rdp": {
+      "userName": "KTAVisor",
+      "password":  "KTAVisor0013@"
     }
   }
 }

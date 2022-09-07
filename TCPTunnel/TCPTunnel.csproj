@@ -58,6 +58,7 @@
     <Compile Include="module\client\events\TCPClientDisconnectedEvent.cs" />
     <Compile Include="module\client\events\TCPClientConnectedEvent.cs" />
     <Compile Include="module\client\events\TCPClientMessageReceivedEvent.cs" />
+    <Compile Include="module\client\events\TCPEndpointReceivedEvent.cs" />
     <Compile Include="module\server\events\TCPServerClientMessageReceivedEvent.cs" />
     <Compile Include="kernel\extensions\ExtensionManager.cs" />
     <Compile Include="module\server\dto\ServerConfigTObject.cs" />
@@ -70,6 +71,13 @@
     <Compile Include="module\server\Server.cs" />
     <Compile Include="kernel\types\TCPClientList.cs" />
     <Compile Include="kernel\types\TCPClientTObject.cs" />
+    <Compile Include="module\shared\entity\AuthData.cs" />
+    <Compile Include="module\shared\Endpoints.cs" />
+    <Compile Include="module\shared\events\OnAuthResponseDataSent.cs" />
+    <Compile Include="module\shared\events\OnAuthResponseDataReceived.cs" />
+    <Compile Include="module\shared\events\OnAuthIsOK.cs" />
+    <Compile Include="module\shared\events\OnAuthCommandSent.cs" />
+    <Compile Include="module\shared\events\OnAuthCommandReceived.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -78,7 +86,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="module\client\extension\" />
     <Folder Include="module\client\types\" />
   </ItemGroup>
   <ItemGroup>

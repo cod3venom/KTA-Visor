@@ -17,12 +17,9 @@ namespace TCPTunnel.module.server.events
         /// <param name="request"></param>
         public TCPServerClientMessageReceivedEvent(Request request)
         {
-            this.request = request;
+            this.Request = request;
         }
 
-        public Request getRoute()
-        {
-            return this.request == null ? new Request() : this.request;
-        }
+        public Request Request { get; private set; }
     }
 }

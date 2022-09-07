@@ -1,10 +1,10 @@
-﻿using KTA_Visor.module.Managemnt.module.camera.dto.request;
-using KTA_Visor.module.Managemnt.module.camera.entity;
-using KTA_Visor.module.Managemnt.module.camera.events;
-using KTA_Visor.module.Managemnt.module.camera.service;
+﻿using KTA_Visor.module.Managemnt.module.camera.events;
 using KTA_Visor.module.Managemnt.module.camera.views.forms;
 using KTA_Visor.module.Shared.Exceptions;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
+using KTAVisorAPISDK.module.camera.dto.reques;
+using KTAVisorAPISDK.module.camera.entity;
+using KTAVisorAPISDK.module.camera.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,17 +19,28 @@ namespace KTA_Visor.module.Managemnt.module.camera.views.CameraViewPanel
 {
     public partial class CamerasViewPanel : UserControl
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ColumnTObject[] Columns = new ColumnTObject[] {
             new ColumnTObject(0, "ID"),
             new ColumnTObject(1, "IDENTYFIKATOR KAMERY"),
-            new ColumnTObject(2, "IMIĘ"),
-            new ColumnTObject(3, "NAZWISKO"),
+            new ColumnTObject(2, "IDENTYFIKATOR STACJI"),
             new ColumnTObject(4, "ZMODYFIKOWANO"),
             new ColumnTObject(5, "UTWORZONO")
         };
 
+        /// <summary>
+        /// 
+        /// </summary>
         private CameraCRUDForm cameraCRUDForm;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private CameraService cameraService;
+        
         public CamerasViewPanel()
         {
             InitializeComponent();
@@ -76,16 +87,15 @@ namespace KTA_Visor.module.Managemnt.module.camera.views.CameraViewPanel
 
         private async void fetchCameras()
         {
-            CamerasEntity camerasEntity = await this.cameraService.all();
+            CameraEntity camerasEntity = await this.cameraService.all();
             this.table.DataGridView.Rows.Clear();
 
-            foreach (var camera in camerasEntity.data)
+            foreach (CameraEntity.Camera camera in camerasEntity.datas)
             {
                 this.table.bundle.row.add(
                     camera.id,
                     camera.cameraCustomId,
-                    camera.officer.firstName,
-                    camera.officer.lastName,
+                    camera.stationId,
                     camera.updatedAt,
                     camera.createdAt
                 );
@@ -99,7 +109,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.views.CameraViewPanel
         /// <exception cref="Exception"></exception>
         private string getSelectedCameraId()
         {
-            return this.table.bundle.row.selectedRow.Cells["ID"].Value.ToString();
+            return this.table.bundle.row.SelectedRow.Cells["ID"].Value.ToString();
         }
     }
 }

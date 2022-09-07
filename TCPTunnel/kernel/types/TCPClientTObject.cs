@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TCPTunnel.kernel.extensions.router.dto;
+using TCPTunnel.module.shared.entity;
 
 namespace TCPTunnel.kernel.types
 {
@@ -26,22 +27,29 @@ namespace TCPTunnel.kernel.types
             this.logger = new KTALogger.Logger();
         }
 
-        public TCPClientTObject setIpAddress(string ipAddress)
-        {
-            this.ipAddress = ipAddress;
-            return this;
-        }
+        public AuthData AuthData { get; set; }
 
         public string getIpAddress()
         {
-            return this.ipAddress;
+            return this.ipAddress.Split(':')[0];
         }
 
-        public TCPClientTObject setSocket(Socket socket)
+        public string IpAddress
         {
-            this.socket = socket;
-            return this;
+            get { return this.ipAddress.Split(':')[0]; }
         }
+        
+        public int Port
+        {
+            get { return Int32.Parse(this.ipAddress.Split(':')[1]); }
+        }
+
+        public string FullAddress
+        {
+            get { return this.ipAddress; }
+        }
+
+
 
         public Socket Sock
         {

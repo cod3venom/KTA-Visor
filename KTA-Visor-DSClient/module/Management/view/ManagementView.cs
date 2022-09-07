@@ -3,10 +3,9 @@ using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
 using KTA_Visor_DSClient.module.Management.module.Camera.view.CamerasPanelView;
 using KTA_Visor_DSClient.module.Management.module.PowerSupply.view.PowerSupplyPanelView;
 using KTA_Visor_DSClient.module.Management.module.SettingsManager.view.SettingsPanelView;
-using KTA_Visor_UI.component.custom.MessageWindow;
-using Logger.dto;
+using KTA_Visor_DSClient.module.Shared.Globals;
+using KTAVisorAPISDK.module.station.dto;
 using System;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace KTA_Visor_DSClient.module.Management.view
@@ -60,23 +59,23 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.camerasPanel = new CamerasPanelView(this.deviceWatcher);
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
 
+            Application.ApplicationExit += onApplicationExit;
         }
 
-       
         private void ManagementView_Load(object sender, EventArgs e)
         {
             this.initializeLoggerSettings();
-            this.initializeSideBar();
+            this.initializeControls();
             Program.Relay.turnOnAll(0);
         }
 
-        private void initializeSideBar()
+        private void initializeControls()
         {
 
             this.camerasPanel.Dock = DockStyle.Fill;
             this.panelsContainer.Controls.Add(this.camerasPanel);
 
-            this.camerasBtn.OnClick += (async delegate (object _sender, EventArgs evt)
+            this.camerasBtn.OnClick += ( delegate (object _sender, EventArgs evt)
             {
                 this.camerasPanel = new CamerasPanelView(this.deviceWatcher);
                 this.camerasPanel.Dock = DockStyle.Fill;
@@ -84,7 +83,7 @@ namespace KTA_Visor_DSClient.module.Management.view
                 this.panelsContainer.Controls.Add(this.camerasPanel);
             });
 
-            this.powerSupplyBtn.OnClick += (async delegate (object _sender, EventArgs evt)
+            this.powerSupplyBtn.OnClick += ( delegate (object _sender, EventArgs evt)
             {
                 this.powerSupplyPanel= new PowerSupplyPanelView();
                 this.powerSupplyPanel.Dock = DockStyle.Fill;
@@ -99,13 +98,61 @@ namespace KTA_Visor_DSClient.module.Management.view
                 this.panelsContainer.Controls.Clear();
                 this.panelsContainer.Controls.Add(this.settingsPanel);
             });
+
+            this.connectToTunelMenuItem.Click += (delegate (object _sender, EventArgs evt) {
+                Program.TunnelBackgroundWrorker.Run();
+            });
+            this.restartTunelMenuItem.Click += (delegate (object _sender, EventArgs evt) {
+                Program.TunnelBackgroundWrorker.Restart();
+            });
+            this.disconnectFromTunelMenuItem.Click += (delegate (object _sender, EventArgs evt) {
+                Program.TunnelBackgroundWrorker.Stop();
+            });
+
+            this.backendRegisterMenuItem.Click += (async delegate (object _sender, EventArgs evt) {
+                await Program.StationService.create(new CreateStationRequestTObject(
+                    this.settings.SettingsObj.app.station.stationId,
+                    this.settings.SettingsObj.app.station.ipAddress,
+                    this.settings.SettingsObj.app.rdp.userName,
+                    this.settings.SettingsObj.app.rdp.password
+                ));
+            });
+
+            this.backendUpdateMenuItem.Click += (async delegate (object _sender, EventArgs evt) {
+                await Program.StationService.edit(Globals.STATION?.data?.id, new EditStationRequestTObject(
+                    this.settings.SettingsObj.app.station.stationId,
+                    this.settings.SettingsObj.app.station.ipAddress,
+                    true
+                ));
+            });
+
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void initializeLoggerSettings()
         {
             Program.logger.OnLogHasWritten += (delegate (object sender, Logger.dto.LoggerEvent e) {
                 this.loggerView.append(e.Log);
             });
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private async void onApplicationExit(object sender, EventArgs e)
+        {
+            EditStationRequestTObject request = new EditStationRequestTObject(
+                Globals.STATION.data.stationId,
+                Globals.STATION.data.stationIp,
+                false
+            );
+            await Program.StationService.edit(Globals.STATION.data.id, request);
         }
 
         /// <summary>

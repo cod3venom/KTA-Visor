@@ -23,10 +23,10 @@ namespace KTA_Visor.module.Managemnt.module.station.view.forms
             InitializeComponent();
         }
 
-        public StationCRUDForm(string stationCustomId, string stationIpAddress)
+        public StationCRUDForm(string stationId, string stationIpAddress)
         {
             InitializeComponent();
-            this.stationCustomIdTxt.Text = stationCustomId;
+            this.stationIdTxt.Text = stationId;
             this.stationIpAddressTxt.Text = stationIpAddress;
             this.mode = "edit";
         }
@@ -45,14 +45,14 @@ namespace KTA_Visor.module.Managemnt.module.station.view.forms
             if (this.mode == "create")
             {
                 this.OnCreateStationEvent?.Invoke(this, new OnStationCRUDEvent(
-                    this.stationCustomIdTxt.Text,
+                    this.stationIdTxt.Text,
                     this.stationIpAddressTxt.Text
                 ));
             }
             else if (this.mode == "edit")
             {
                 this.OnEditStationEvent?.Invoke(this, new OnStationCRUDEvent(
-                    this.stationCustomIdTxt.Text,
+                    this.stationIdTxt.Text,
                     this.stationIpAddressTxt.Text
                 ));
             }

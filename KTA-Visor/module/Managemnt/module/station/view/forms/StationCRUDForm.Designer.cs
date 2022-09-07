@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.stationCustomIdTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
-            this.stationCustomIdLbl = new System.Windows.Forms.Label();
+            this.stationIdTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.stationIdLbl = new System.Windows.Forms.Label();
             this.stationIpAddressTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.stationIpAddressLbl = new System.Windows.Forms.Label();
             this.saveBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
@@ -56,33 +56,33 @@
             this.bunifuElipse1.ElipseRadius = 5;
             this.bunifuElipse1.TargetControl = this;
             // 
-            // stationCustomIdTxt
+            // stationIdTxt
             // 
-            this.stationCustomIdTxt.BorderColorFocused = System.Drawing.Color.White;
-            this.stationCustomIdTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.stationCustomIdTxt.BorderColorMouseHover = System.Drawing.Color.White;
-            this.stationCustomIdTxt.BorderThickness = 1;
-            this.stationCustomIdTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.stationCustomIdTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stationCustomIdTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.stationCustomIdTxt.isPassword = false;
-            this.stationCustomIdTxt.Location = new System.Drawing.Point(29, 105);
-            this.stationCustomIdTxt.Margin = new System.Windows.Forms.Padding(4);
-            this.stationCustomIdTxt.Name = "stationCustomIdTxt";
-            this.stationCustomIdTxt.Size = new System.Drawing.Size(303, 37);
-            this.stationCustomIdTxt.TabIndex = 21;
-            this.stationCustomIdTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.stationIdTxt.BorderColorFocused = System.Drawing.Color.White;
+            this.stationIdTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.stationIdTxt.BorderColorMouseHover = System.Drawing.Color.White;
+            this.stationIdTxt.BorderThickness = 1;
+            this.stationIdTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.stationIdTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stationIdTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.stationIdTxt.isPassword = false;
+            this.stationIdTxt.Location = new System.Drawing.Point(29, 105);
+            this.stationIdTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.stationIdTxt.Name = "stationIdTxt";
+            this.stationIdTxt.Size = new System.Drawing.Size(303, 37);
+            this.stationIdTxt.TabIndex = 21;
+            this.stationIdTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
-            // stationCustomIdLbl
+            // stationIdLbl
             // 
-            this.stationCustomIdLbl.AutoSize = true;
-            this.stationCustomIdLbl.BackColor = System.Drawing.Color.Transparent;
-            this.stationCustomIdLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stationCustomIdLbl.Location = new System.Drawing.Point(25, 82);
-            this.stationCustomIdLbl.Name = "stationCustomIdLbl";
-            this.stationCustomIdLbl.Size = new System.Drawing.Size(141, 19);
-            this.stationCustomIdLbl.TabIndex = 20;
-            this.stationCustomIdLbl.Text = "Identyfikator Stacji";
+            this.stationIdLbl.AutoSize = true;
+            this.stationIdLbl.BackColor = System.Drawing.Color.Transparent;
+            this.stationIdLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stationIdLbl.Location = new System.Drawing.Point(25, 82);
+            this.stationIdLbl.Name = "stationIdLbl";
+            this.stationIdLbl.Size = new System.Drawing.Size(141, 19);
+            this.stationIdLbl.TabIndex = 20;
+            this.stationIdLbl.Text = "Identyfikator Stacji";
             // 
             // stationIpAddressTxt
             // 
@@ -129,8 +129,8 @@
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.stationIpAddressTxt);
             this.Controls.Add(this.stationIpAddressLbl);
-            this.Controls.Add(this.stationCustomIdTxt);
-            this.Controls.Add(this.stationCustomIdLbl);
+            this.Controls.Add(this.stationIdTxt);
+            this.Controls.Add(this.stationIdLbl);
             this.Controls.Add(this.topBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StationCRUDForm";
@@ -148,8 +148,8 @@
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private Bunifu.Framework.UI.BunifuMetroTextbox stationIpAddressTxt;
         private System.Windows.Forms.Label stationIpAddressLbl;
-        private Bunifu.Framework.UI.BunifuMetroTextbox stationCustomIdTxt;
-        private System.Windows.Forms.Label stationCustomIdLbl;
+        private Bunifu.Framework.UI.BunifuMetroTextbox stationIdTxt;
+        private System.Windows.Forms.Label stationIdLbl;
         public KTA_Visor_UI.component.basic.button.PrimaryButton saveBtn;
     }
 }

@@ -9,17 +9,17 @@ namespace TCPTunnel.module.server.events
 {
     public class TCPServerClientConnectedEvent : EventArgs
     {
-        private readonly TCPClientTObject client;
-
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="client"></param>
         public TCPServerClientConnectedEvent(TCPClientTObject client)
         {
-            this.client = client;
+            this.Client = client;
         }
 
-        public TCPClientTObject getClient() => this.client;
+        public TCPClientTObject Client { get; private set; }
+        public TCPClientTObject getClient() => this.Client;
     }
 }

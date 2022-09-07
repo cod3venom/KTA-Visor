@@ -11,13 +11,13 @@ namespace KTA_Visor.module.Station.events
     public class OnStationCRUDEvent : EventArgs
     {
 
-        public OnStationCRUDEvent(string stationCustomId, string stationIpAddress)
+        public OnStationCRUDEvent(string stationId, string stationIpAddress)
         {
-            this.stationCustomId = stationCustomId;
+            this.stationId = stationId;
             this.stationIpAddress = stationIpAddress;
         }
 
-        public string stationCustomId { get; set; }
+        public string stationId { get; set; }
         public string stationIpAddress { get; set; }
 
         

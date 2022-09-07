@@ -1,14 +1,8 @@
-﻿using KTA_Visor.module.Managemnt.module.auth.dto.request;
-using KTA_Visor.module.Managemnt.module.auth.entity;
-using KTA_Visor.module.Managemnt.module.auth.service;
+﻿using KTAVisorAPISDK.module.auth.dto.request;
+using KTAVisorAPISDK.module.auth.entity;
+using KTAVisorAPISDK.module.auth.service;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView

@@ -38,6 +38,7 @@
             this.restartTunnelServerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.filesHistoryBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
             this.cameraBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
             this.stationBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
             this.officersBtn = new KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton();
@@ -113,21 +114,21 @@
             // 
             this.startTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startTunnelServerMenuItem.Image")));
             this.startTunnelServerMenuItem.Name = "startTunnelServerMenuItem";
-            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(159, 26);
             this.startTunnelServerMenuItem.Text = "Uruchom";
             // 
             // stopTunnelServerMenuItem
             // 
             this.stopTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopTunnelServerMenuItem.Image")));
             this.stopTunnelServerMenuItem.Name = "stopTunnelServerMenuItem";
-            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(159, 26);
             this.stopTunnelServerMenuItem.Text = "Zatrzymaj";
             // 
             // restartTunnelServerMenuItem
             // 
             this.restartTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restartTunnelServerMenuItem.Image")));
             this.restartTunnelServerMenuItem.Name = "restartTunnelServerMenuItem";
-            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(159, 26);
             this.restartTunnelServerMenuItem.Text = "Zresetuj";
             // 
             // topBar
@@ -146,6 +147,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.panel1.Controls.Add(this.filesHistoryBtn);
             this.panel1.Controls.Add(this.cameraBtn);
             this.panel1.Controls.Add(this.stationBtn);
             this.panel1.Controls.Add(this.officersBtn);
@@ -156,6 +158,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(113, 762);
             this.panel1.TabIndex = 1;
+            // 
+            // filesHistoryBtn
+            // 
+            this.filesHistoryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.filesHistoryBtn.Icon = ((System.Drawing.Image)(resources.GetObject("filesHistoryBtn.Icon")));
+            this.filesHistoryBtn.Location = new System.Drawing.Point(23, 479);
+            this.filesHistoryBtn.Name = "filesHistoryBtn";
+            this.filesHistoryBtn.Size = new System.Drawing.Size(70, 70);
+            this.filesHistoryBtn.TabIndex = 5;
             // 
             // cameraBtn
             // 
@@ -371,5 +382,6 @@
         private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton stationBtn;
         private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton officersBtn;
         private System.Windows.Forms.Panel contentPanel;
+        private KTA_Visor_UI.component.custom.CircleImageButton.CircleImageButton filesHistoryBtn;
     }
 }

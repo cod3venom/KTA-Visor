@@ -12,6 +12,8 @@ using TCPTunnel.kernel.extensions.router.dto;
 using TCPTunnel.kernel.types;
 using TCPTunnel.module.client.dto;
 using TCPTunnel.module.client.events;
+using TCPTunnel.module.shared;
+using TCPTunnel.module.shared.events;
 
 namespace TCPTunnel.module.client
 {
@@ -24,6 +26,11 @@ namespace TCPTunnel.module.client
         public event EventHandler<EventArgs> onClientDisconnected;
 
         public event EventHandler<TCPClientMessageReceivedEvent> onReceivedMessage;
+
+        public event EventHandler<OnAuthCommandReceived> onAuthCommandReceived;
+        public event EventHandler<OnAuthResponseDataSent> onAuthResponseSent;
+        public event EventHandler<OnAuthIsOK> onAuthIsOk;
+        
 
         private readonly ClientConfigTObject config;
         private readonly IPEndPoint ipEndpoint;
@@ -39,7 +46,12 @@ namespace TCPTunnel.module.client
             this.config = config;
             this.ipEndpoint =  new IPEndPoint(IPAddress.Parse(config.IpAddress), config.Port);
             this.logger = logger;
+
+            this.onAuthCommandReceived += OnAuthCommandReceived;
+            this.onAuthResponseSent += OnAuthCommandSent;
+            this.onAuthIsOk += OnAuthIsOk;
         }
+
 
         public Client connect()
         {
@@ -49,8 +61,6 @@ namespace TCPTunnel.module.client
                 clientSocket.Connect(this.ipEndpoint);
 
                 this.client = new TCPClientTObject(clientSocket.RemoteEndPoint.ToString(), clientSocket);
-
-                this.onClientConnected?.Invoke(this, new TCPClientConnectedEvent(this.client));
 
                 this.bootstrapThread = new Thread(this.bootStrap);
                 this.bootstrapThread.IsBackground = true;
@@ -136,13 +146,23 @@ namespace TCPTunnel.module.client
 
                 this.logger.info("Received Request on: " + request.Endpoint +  "\n with body: "+ request.Body);
 
-                this.onReceivedMessage?.Invoke(this, new TCPClientMessageReceivedEvent(request));
+                if (request.Endpoint == Endpoints.AUTH_NEED_COMMAND_ENDPOINT)
+                {
+                    this.onAuthCommandReceived?.Invoke(this, new OnAuthCommandReceived(client, request));
+                }
+                if (request.Endpoint == Endpoints.AUTH_IS_OK_COMMAND_ENDPOINT)
+                {
+                    this.onAuthIsOk?.Invoke(this, new OnAuthIsOK(client, request));
+                }
+                else
+                {
+                    this.onReceivedMessage?.Invoke(this, new TCPClientMessageReceivedEvent(request));
+                }
 
                 Thread.SpinWait(5000);
             }
             catch (Exception ex)
             {
-
             }
         }
 
@@ -161,6 +181,21 @@ namespace TCPTunnel.module.client
                 return this.client.IsConnected();
             }
             return false;
+        }
+
+        private void OnAuthCommandReceived(object sender, OnAuthCommandReceived e)
+        {
+            client.Send(new Request(Endpoints.AUTH_NEED_RESPONSE_ENDPOINT, this.config.AuthData));
+        }
+
+        private void OnAuthCommandSent(object sender, OnAuthResponseDataSent e)
+        {
+            Console.WriteLine(String.Format("Sent auth request from {0}", e.Client.getIpAddress()));
+        }
+
+        private void OnAuthIsOk(object sender, OnAuthIsOK e)
+        {
+            this.onClientConnected?.Invoke(this, new TCPClientConnectedEvent(this.client));
         }
     }
 }
