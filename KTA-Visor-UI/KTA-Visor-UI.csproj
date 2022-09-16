@@ -170,6 +170,7 @@
     <Compile Include="component\custom\Alert\AlertWindow.Designer.cs">
       <DependentUpon>AlertWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\custom\Notification\NotificationWIndow.cs" />
     <Compile Include="component\custom\NumbersCard\NumbersCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -219,6 +220,13 @@
     </Compile>
     <Compile Include="component\custom\Loader\Spinner.Designer.cs">
       <DependentUpon>Spinner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\Security\FileEncryption\events\OnSaveFileEncryptionPasswordsEvent.cs" />
+    <Compile Include="component\custom\Security\FileEncryption\FileEncryptionWithPasswordWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="component\custom\Security\FileEncryption\FileEncryptionWithPasswordWindow.Designer.cs">
+      <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\VerticalTab\components\MenuLink\events\MenuLinkClickEvent.cs" />
     <Compile Include="component\custom\VerticalTab\components\MenuLink\MenuLink.cs">
@@ -329,6 +337,9 @@
     <EmbeddedResource Include="component\basic\Sidebar\Sidebar.resx">
       <DependentUpon>Sidebar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\Security\FileEncryption\FileEncryptionWithPasswordWindow.resx">
+      <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\VerticalTab\components\MenuLink\MenuLink.resx">
       <DependentUpon>MenuLink.cs</DependentUpon>
     </EmbeddedResource>
@@ -345,6 +356,7 @@
     <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
+    <Folder Include="component\custom\Security\NewFolder1\" />
     <Folder Include="component\custom\SideNavigationBar\" />
   </ItemGroup>
   <ItemGroup>
@@ -374,6 +386,9 @@
     <Content Include="icons\falcon-icon-camera.ico" />
     <Content Include="icons\falcon-user-128x128.ico" />
     <Content Include="icons\question.png" />
+    <None Include="Resources\hide.png" />
+    <None Include="Resources\show.png" />
+    <None Include="Resources\notification.wav" />
     <None Include="icons\spinner.gif" />
     <None Include="icons\Spinner1.gif" />
     <Content Include="icons\wolfcom-logo-words.png" />

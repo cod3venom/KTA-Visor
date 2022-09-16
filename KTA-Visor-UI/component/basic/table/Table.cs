@@ -18,16 +18,7 @@ namespace KTA_Visor_UI.component.basic.table
         public event EventHandler OnEditButton;
         public event EventHandler OnDeleteButton;
 
-        private bool allowAdd = true;
-        private bool allowEdit = true;
-        private bool allowDelete = true;
-        private bool allowSearch = true;
 
-
-        private bool showAdd= true;
-        private bool showEdit = true;
-        private bool showDelete= true;
-        private bool showControls = true;
 
         public Table()
         {
@@ -37,20 +28,20 @@ namespace KTA_Visor_UI.component.basic.table
 
         public bool AllowAdd
         {
-            get { return this.allowAdd; }
-            set { this.allowAdd = value; }
+            get { return this.addBtn.Visible; }
+            set { this.addBtn.Visible = value; }
         }
 
         public bool AllowEdit
         {
-            get { return this.allowEdit; }
-            set { this.allowEdit = value; }
+            get { return this.editBtn.Visible; }
+            set { this.editBtn.Visible = value; }
         }
 
         public bool AllowDelete
         {
-            get { return this.allowDelete; }
-            set { this.allowDelete = value; }
+            get { return this.deleteBtn.Visible; }
+            set { this.deleteBtn.Visible = value; }
         }
 
  
@@ -74,10 +65,6 @@ namespace KTA_Visor_UI.component.basic.table
             this.addBtn.Click += onAddBtn;
             this.editBtn.Click += onEditBtn;
             this.deleteBtn.Click += onDeleteBtn;
-
-            this.addPanel.Visible = this.allowAdd;
-            this.editPanel.Visible = this.allowEdit;
-            this.deletePanel.Visible = this.allowDelete;
         }
 
         private void onAddBtn(object sender, EventArgs e)

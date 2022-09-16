@@ -11,14 +11,15 @@ namespace TCPTunnel
     public class TCPTunnel
     {
 
+        public static KTALogger.Logger logger;
         public TCPTunnel()
         {
-
+            logger = new KTALogger.Logger();
         }
 
         public Server createServer(ServerConfigTObject config)
         {
-            return new Server(config);
+            return new Server(config, TCPTunnel.logger);
         }
     }
 }

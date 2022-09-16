@@ -40,6 +40,30 @@ namespace KTA_Visor_UI.component.custom.MessageWindow
             this.ShowDialog();
         }
 
+        public AlertWindow(string message)
+        {
+            InitializeComponent();
+            this.Type = "info";
+            this.Title = "";
+            this.Message = message;
+            this.calibrateIcon();
+            this.ShowDialog();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="type"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static AlertWindow Show(string message, string type = "info", string title = "")
+        {
+            AlertWindow alert = new AlertWindow(type, title, message);
+            alert.ShowDialog();
+            return alert;
+        }
+
         public string Type { get; set; }
         public string Title
         {

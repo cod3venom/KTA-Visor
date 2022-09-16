@@ -1,5 +1,4 @@
 ﻿using KTA_Visor.module.Managemnt.module.camera.events;
-using KTA_Visor.module.Managemnt.module.camera.views.forms;
 using KTA_Visor.module.Shared.Exceptions;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using KTAVisorAPISDK.module.camera.dto.reques;
@@ -31,10 +30,6 @@ namespace KTA_Visor.module.Managemnt.module.camera.views.CameraViewPanel
             new ColumnTObject(5, "UTWORZONO")
         };
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private CameraCRUDForm cameraCRUDForm;
 
         /// <summary>
         /// 
@@ -46,8 +41,6 @@ namespace KTA_Visor.module.Managemnt.module.camera.views.CameraViewPanel
             InitializeComponent();
             this.cameraService = new CameraService();
             this.table.AllowAdd = false;
-            this.table.OnEditButton += onClickEditCamera;
-            this.table.OnDeleteButton += onClickDeleteCamera;
             this.table.bundle.column.addMultiple(this.Columns);
         }
 
@@ -56,19 +49,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.views.CameraViewPanel
             this.fetchCameras();
         }
 
-        private async void onClickEditCamera(object sender, EventArgs e)
-        {
-            string selectedCameraId = this.getSelectedCameraId();
-
-            CameraEntity cameraEntity = await this.cameraService.findById(selectedCameraId);
-            this.cameraCRUDForm = new CameraCRUDForm(cameraEntity.data.cameraCustomId);
-            this.cameraCRUDForm.OnEditCameraEvent += (async delegate (object _sender, OnCameraCRUDEvent evt) {
-                await this.cameraService.edit(selectedCameraId, new EditCameraRequestTObject(evt.CameraCustomId));
-                this.cameraCRUDForm.Hide();
-                this.fetchCameras();
-            });
-            this.cameraCRUDForm.ShowDialog();
-        }
+      
 
         private async void onClickDeleteCamera(object sender, EventArgs e)
         {

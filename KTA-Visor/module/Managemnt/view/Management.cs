@@ -17,37 +17,14 @@ namespace KTA_Visor.module.Management.view
 {
     public partial class Management : Form
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly KeyboardReader keyboardReader;
 
+        private  KeyboardReader keyboardReader;
+        private  StationViewPanel stationPanel;
+        private  CamerasViewPanel camerasPanel;
+        private  OfficersPanelView officersPanel;
+        private  FileHistoryViewPanel filesHistoryPanel;
+        private  TunnelSettingsViewPanel tunnelSettingsPanel;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly StationViewPanel stationPanel;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly CamerasViewPanel camerasPanel;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly OfficersPanelView officersPanel;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly FileHistoryViewPanel filesHistoryPanel;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// 
-        private readonly TunnelSettingsViewPanel tunnelSettingsPanel;
         public Management()
         {
             InitializeComponent();
@@ -59,6 +36,8 @@ namespace KTA_Visor.module.Management.view
             this.officersPanel = new OfficersPanelView();
             this.filesHistoryPanel = new FileHistoryViewPanel();
             this.tunnelSettingsPanel = new TunnelSettingsViewPanel();
+            this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
+            Program.Logger.OnLogHasWritten += onLogHasWritten;
         }
 
         private void StationsView_Load(object sender, EventArgs e)
@@ -78,8 +57,6 @@ namespace KTA_Visor.module.Management.view
             this.initializeButtons();
             this.initializeRFIDReader();
             this.initializeTunnelBackgroundWoerker();
-
-            Program.Logger.OnLogHasWritten += onLogHasWritten;
         }
 
         private void initializeTunnelBackgroundWoerker()
@@ -116,36 +93,48 @@ namespace KTA_Visor.module.Management.view
                 Program.Tunnel.start();
                 this.tunnelIndicator.running(true, "Uruchomiony");
             });
+            
             this.stopTunnelServerMenuItem.Click += (delegate (object sender, EventArgs e){
                 Program.Tunnel.stop();
                 this.tunnelIndicator.running(false, "Wstrzymany");
             });
 
+            this.restartTunnelServerMenuItem.Click += (delegate (object sender, EventArgs e) {
+                Program.Tunnel.restart();
+                this.tunnelIndicator.running(false, "Uruchomiony");
+            });
+
             this.tunnelSettingsBtn.OnClick += (delegate(object sender, EventArgs e) {
+                this.tunnelSettingsPanel = new TunnelSettingsViewPanel();
                 this.contentPanel.Controls.Clear();
                 tunnelSettingsPanel.Dock = DockStyle.Fill;
                 this.contentPanel.Controls.Add(tunnelSettingsPanel);
             });
 
+
             this.officersBtn.OnClick += (delegate (object sender, EventArgs e) {
+                this.officersPanel = new OfficersPanelView();
                 this.contentPanel.Controls.Clear();
                 this.officersPanel.Dock = DockStyle.Fill;
                 this.contentPanel.Controls.Add(this.officersPanel);
             });
 
             this.cameraBtn.OnClick += (delegate (object sender, EventArgs e) {
+                this.camerasPanel = new CamerasViewPanel();
                 this.contentPanel.Controls.Clear();
                 this.camerasPanel.Dock = DockStyle.Fill;
                 this.contentPanel.Controls.Add(this.camerasPanel);
             });
 
             this.stationBtn.OnClick += (delegate (object sender, EventArgs e){
+                this.stationPanel = new StationViewPanel();
                 this.contentPanel.Controls.Clear();
                 this.stationPanel.Dock = DockStyle.Fill;
                 this.contentPanel.Controls.Add(this.stationPanel);
             });
 
             this.filesHistoryBtn.OnClick += (delegate (object sender, EventArgs e) {
+                this.filesHistoryPanel = new FileHistoryViewPanel();
                 this.contentPanel.Controls.Clear();
                 this.filesHistoryPanel.Dock = DockStyle.Fill;
                 this.contentPanel.Controls.Add(this.filesHistoryPanel);

@@ -15,7 +15,7 @@ namespace KTA_Visor_DSClient.module.Shared.Globals
         public static bool IS_IN_SETTINGS_MODE = false; 
         
         public static StationEntity STATION = new StationEntity();
-        public static List<CameraEntity> BACKEND_CURRENT_CAMERAS = new List<CameraEntity>();
+        public static List<CameraEntity> ACTIVE_CAMERAS = new List<CameraEntity>();
 
 
         public static ObservableCollection<USBCameraDevice> CAMERAS_LIST = new ObservableCollection<USBCameraDevice>();

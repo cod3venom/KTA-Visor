@@ -9,15 +9,29 @@ namespace KTAVisorAPISDK.module.camera.dto.request
     public class CreateCameraRequestTObject
     {
 
-        public CreateCameraRequestTObject(string camCustomId = "", string badgeId = "", string driveName = "")
+        public CreateCameraRequestTObject(
+            int index = 0,
+            string camCustomId = "",
+            string stationId = "",
+            string badgeId = "",
+            string driveName = "",
+            bool active = true
+        )
         {
+            this.index = index;
             this.camCustomId = camCustomId;
+            this.stationId = stationId;
             this.badgeId = badgeId;
             this.driveName = driveName;
+            this.active = active;
+     
         }
 
+        public int index { get; set; }
         public string camCustomId { get; set; }
+        public string stationId { get; set; }
         public string badgeId { get; set; }
         public string driveName { get; set; }
+        public bool active { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.Camera.events;
 using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
-using KTA_Visor_DSClient.module.Management.module.Camera.command;
+using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.dto.request;
 using KTAVisorAPISDK.module.camera.service;
@@ -76,7 +76,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             if (!AddCamerasToTheGlobalMemory.Execute(e.Camera))
                 return;
 
-           await  this.cameraService.create(new CreateCameraRequestTObject(e.Camera.ID, e.Camera.BadgeId));
+            await  this.cameraService.create(new CreateCameraRequestTObject(e.Camera.Index, e.Camera.ID, Globals.STATION.data.stationId, e.Camera.BadgeId));
             this.OnCameraConnectedEvent?.Invoke(sender, new CameraConnectedEvent(e.Camera));
         }
 
@@ -97,6 +97,11 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         private void onCameraConnectedOrDisconnected(object sender, EventArgs e)
         {
            this.OnCameraConnectedOrDisconnected?.Invoke(sender, e);
+        }
+
+        public async void TryToMountDevice()
+        {
+            await Task.Run(this.FalconBridge.CameraDeviceService.TryToMountDevice);
         }
 
 

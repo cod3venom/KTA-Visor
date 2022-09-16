@@ -12,7 +12,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Station.bootloader
 {
     public class StationBootLoader
     {
-        public static async Task<StationEntity> load()
+        public static async Task<StationEntity> load(bool isActive = true)
         {
             Settings settings = new Settings();
             if (settings.SettingsObj.app.station.stationId == null || settings.SettingsObj.app.station.stationId == "")
@@ -24,8 +24,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Station.bootloader
             {
                 entity = await Program.StationService.edit(entity.data.id, new EditStationRequestTObject(
                      settings.SettingsObj.app.station.stationId,
-                     entity.data.stationIp,
-                     true
+                     settings.SettingsObj.app.station.ipAddress,
+                     isActive
                 ));
             }
             else if (entity?.data?.id == null)

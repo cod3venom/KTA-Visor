@@ -32,6 +32,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.COMConnector
             this.stopBits = stopBits;
             this.logger = logger;
             this.client = new SerialPort(this.portName, this.baudRate, this.parity, this.dataBits, this.stopBits);
+            this.initialize();
         }
 
         public COMConnector connect()
@@ -41,11 +42,10 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.COMConnector
                 if (!this.client.IsOpen)
                 {
                     this.client.Open();
+                    this.initialize();
                     this.logger.success(string.Format("Connected to the {0}", this.portName));
 
                 }
-
-                this.initialize();
             }
             catch(Exception)
             {
@@ -100,5 +100,10 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.COMConnector
             return this;
         }
 
+        public COMConnector discardInBuffer()
+        {
+            this.client.DiscardInBuffer();
+            return this;
+        }
     }
 }

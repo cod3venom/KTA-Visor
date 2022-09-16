@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CameraItem));
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -38,20 +39,28 @@
             this.cameraDriveLbl = new System.Windows.Forms.Label();
             this.badgeLbl = new System.Windows.Forms.Label();
             this.openBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.cameraItemMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.systemPlikówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyFilesToUSBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyFilesToDVDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.targetDriveDevicePathDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.nasStorageFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
+            this.cameraItemMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.pictureBox3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 33);
+            this.panel2.Location = new System.Drawing.Point(0, 27);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(201, 131);
+            this.panel2.Size = new System.Drawing.Size(151, 107);
             this.panel2.TabIndex = 4;
             // 
             // pictureBox3
@@ -60,9 +69,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(67, 21);
+            this.pictureBox3.Location = new System.Drawing.Point(50, 17);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(80, 89);
+            this.pictureBox3.Size = new System.Drawing.Size(60, 73);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 1;
             this.pictureBox3.TabStop = false;
@@ -73,16 +83,18 @@
             this.panel1.Controls.Add(this.batteryLbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(201, 33);
+            this.panel1.Size = new System.Drawing.Size(151, 27);
             this.panel1.TabIndex = 3;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(130, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(98, 6);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 21);
+            this.pictureBox1.Size = new System.Drawing.Size(21, 17);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -91,9 +103,10 @@
             // 
             this.batteryLbl.AutoSize = true;
             this.batteryLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.batteryLbl.Location = new System.Drawing.Point(162, 10);
+            this.batteryLbl.Location = new System.Drawing.Point(122, 8);
+            this.batteryLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.batteryLbl.Name = "batteryLbl";
-            this.batteryLbl.Size = new System.Drawing.Size(32, 16);
+            this.batteryLbl.Size = new System.Drawing.Size(28, 14);
             this.batteryLbl.TabIndex = 0;
             this.batteryLbl.Text = "10%";
             // 
@@ -103,18 +116,20 @@
             this.panel3.Controls.Add(this.badgeLbl);
             this.panel3.Controls.Add(this.openBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 164);
+            this.panel3.Location = new System.Drawing.Point(0, 134);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(201, 73);
+            this.panel3.Size = new System.Drawing.Size(151, 59);
             this.panel3.TabIndex = 5;
             // 
             // cameraDriveLbl
             // 
             this.cameraDriveLbl.Dock = System.Windows.Forms.DockStyle.Top;
             this.cameraDriveLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cameraDriveLbl.Location = new System.Drawing.Point(0, 16);
+            this.cameraDriveLbl.Location = new System.Drawing.Point(0, 13);
+            this.cameraDriveLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.cameraDriveLbl.Name = "cameraDriveLbl";
-            this.cameraDriveLbl.Size = new System.Drawing.Size(201, 16);
+            this.cameraDriveLbl.Size = new System.Drawing.Size(151, 13);
             this.cameraDriveLbl.TabIndex = 2;
             this.cameraDriveLbl.Text = "F:\\";
             this.cameraDriveLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -124,8 +139,9 @@
             this.badgeLbl.Dock = System.Windows.Forms.DockStyle.Top;
             this.badgeLbl.Font = new System.Drawing.Font("Inter SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.badgeLbl.Location = new System.Drawing.Point(0, 0);
+            this.badgeLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.badgeLbl.Name = "badgeLbl";
-            this.badgeLbl.Size = new System.Drawing.Size(201, 16);
+            this.badgeLbl.Size = new System.Drawing.Size(151, 13);
             this.badgeLbl.TabIndex = 5;
             this.badgeLbl.Text = "123456";
             this.badgeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -152,30 +168,68 @@
             this.openBtn.IconVisible = true;
             this.openBtn.IconZoom = 90D;
             this.openBtn.IsTab = false;
-            this.openBtn.Location = new System.Drawing.Point(30, 39);
-            this.openBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openBtn.Location = new System.Drawing.Point(22, 32);
             this.openBtn.Name = "openBtn";
             this.openBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.openBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.openBtn.OnHoverTextColor = System.Drawing.Color.White;
             this.openBtn.selected = false;
-            this.openBtn.Size = new System.Drawing.Size(138, 26);
+            this.openBtn.Size = new System.Drawing.Size(104, 21);
             this.openBtn.TabIndex = 4;
             this.openBtn.Text = "Otwórz";
             this.openBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.openBtn.Textcolor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(84)))), ((int)(((byte)(89)))));
             this.openBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
+            // cameraItemMenuStrip
+            // 
+            this.cameraItemMenuStrip.BackColor = System.Drawing.Color.Silver;
+            this.cameraItemMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.systemPlikówToolStripMenuItem});
+            this.cameraItemMenuStrip.Name = "cameraItemMenuStrip";
+            this.cameraItemMenuStrip.Size = new System.Drawing.Size(151, 26);
+            // 
+            // systemPlikówToolStripMenuItem
+            // 
+            this.systemPlikówToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyFilesToUSBMenuItem,
+            this.copyFilesToDVDMenuItem});
+            this.systemPlikówToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("systemPlikówToolStripMenuItem.Image")));
+            this.systemPlikówToolStripMenuItem.Name = "systemPlikówToolStripMenuItem";
+            this.systemPlikówToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.systemPlikówToolStripMenuItem.Text = "System Plików";
+            // 
+            // copyFilesToUSBMenuItem
+            // 
+            this.copyFilesToUSBMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyFilesToUSBMenuItem.Image")));
+            this.copyFilesToUSBMenuItem.Name = "copyFilesToUSBMenuItem";
+            this.copyFilesToUSBMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.copyFilesToUSBMenuItem.Text = "Zgrywanie na Nosnik USB";
+            // 
+            // copyFilesToDVDMenuItem
+            // 
+            this.copyFilesToDVDMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyFilesToDVDMenuItem.Image")));
+            this.copyFilesToDVDMenuItem.Name = "copyFilesToDVDMenuItem";
+            this.copyFilesToDVDMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.copyFilesToDVDMenuItem.Text = "Zgrywanie na Nosnik DVD";
+            // 
+            // nasStorageFileDialog
+            // 
+            this.nasStorageFileDialog.FileName = "Wybierz pliki które chcesz skopiować";
+            this.nasStorageFileDialog.Multiselect = true;
+            // 
             // CameraItem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.ContextMenuStrip = this.cameraItemMenuStrip;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CameraItem";
-            this.Size = new System.Drawing.Size(201, 237);
+            this.Size = new System.Drawing.Size(151, 193);
             this.Load += new System.EventHandler(this.CameraItem_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -183,6 +237,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.cameraItemMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -198,5 +253,11 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label cameraDriveLbl;
         private System.Windows.Forms.Label badgeLbl;
+        private System.Windows.Forms.ContextMenuStrip cameraItemMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem systemPlikówToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyFilesToUSBMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyFilesToDVDMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog targetDriveDevicePathDialog;
+        private System.Windows.Forms.OpenFileDialog nasStorageFileDialog;
     }
 }

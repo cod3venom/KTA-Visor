@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KTAVisorAPISDK.module.camera.entity;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace KTA_Visor.module.Shared.Global
     {
         public static string READED_CARD_INPUT = "";
         public static bool IS_SERVER_ONLINE = false;
+        public static List<CameraEntity.Camera> SELECTED_STATION_ACTIVE_CAMERAS= new List<CameraEntity.Camera>();
+
         public static ObservableCollection<TCPClientTObject> CLIENTS_LIST = new ObservableCollection<TCPClientTObject>();
     }
 }

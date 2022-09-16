@@ -3,10 +3,14 @@ using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
 using KTA_Visor_DSClient.module.Management.module.Camera.view.CamerasPanelView;
 using KTA_Visor_DSClient.module.Management.module.PowerSupply.view.PowerSupplyPanelView;
 using KTA_Visor_DSClient.module.Management.module.SettingsManager.view.SettingsPanelView;
+using KTA_Visor_DSClient.module.Management.module.Station.bootloader;
+using KTA_Visor_DSClient.module.Management.workers.Tunnel;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.station.dto;
 using System;
 using System.Windows.Forms;
+using TCPTunnel.module.client.dto;
+using TCPTunnel.module.shared.entity;
 
 namespace KTA_Visor_DSClient.module.Management.view
 {
@@ -38,10 +42,7 @@ namespace KTA_Visor_DSClient.module.Management.view
         /// </summary>
         private readonly DeviceWatcher deviceWatcher;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="logger"></param>
+
         public ManagementView(KTALogger.Logger logger)
         {
             InitializeComponent();
@@ -62,11 +63,16 @@ namespace KTA_Visor_DSClient.module.Management.view
             Application.ApplicationExit += onApplicationExit;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ManagementView_Load(object sender, EventArgs e)
         {
             this.initializeLoggerSettings();
             this.initializeControls();
-            Program.Relay.turnOnAll(0);
+            this.initializeTunnelConnection();
         }
 
         private void initializeControls()
@@ -138,6 +144,18 @@ namespace KTA_Visor_DSClient.module.Management.view
             });
         }
 
+  
+        private void initializeTunnelConnection()
+        {
+            if (Globals.STATION == null)
+            {
+                this.logger.error("Unable to initialize tunnel connection");
+                this.logger.error("Because Station global variable is null");
+                return;
+            }
+
+            Program.TunnelBackgroundWrorker.Run();
+        }
 
         /// <summary>
         /// 
@@ -162,7 +180,7 @@ namespace KTA_Visor_DSClient.module.Management.view
         /// <param name="e"></param>
         private void OnClose(object sender, EventArgs e)
         {
-            Program.Relay.turnOffAll(0);
+            Program.Relay.turnOffAll();
             Application.Exit();
         }
     }

@@ -24,7 +24,7 @@ namespace KTAVisorAPISDK.module.station.repository
 
         public async Task<HttpResponseMessage> findByCustomId(string customId)
         {
-            return await HttpClientUtil.securedClient.GET("/api/hidden/stations/customId/" + customId);
+            return await HttpClientUtil.securedClient.GET(String.Format("/api/hidden/stations/customid/{0}", customId));
         }
         
         public async Task<HttpResponseMessage> findByIp(string ip)
@@ -42,6 +42,11 @@ namespace KTAVisorAPISDK.module.station.repository
         {
             string payload = JsonConvert.SerializeObject(request);
             return await HttpClientUtil.securedClient.PUT(string.Format("/api/hidden/stations/{0}/active-cameras", id), payload);
+        }
+
+        public async Task<HttpResponseMessage> deactivateAllCamerasFromTheStation(string id)
+        {
+            return await HttpClientUtil.securedClient.PUT(string.Format("/api/hidden/stations/{0}/deactivate-all-cameras", id));
         }
 
         public async Task<HttpResponseMessage> edit(string id, EditStationRequestTObject request)

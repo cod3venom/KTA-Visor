@@ -60,10 +60,11 @@
             this.signInPanel.Controls.Add(this.topBar1);
             this.signInPanel.Controls.Add(this.passwordLbl);
             this.signInPanel.Controls.Add(this.emailLbl);
-            this.signInPanel.Location = new System.Drawing.Point(437, 171);
-            this.signInPanel.MaximumSize = new System.Drawing.Size(441, 509);
+            this.signInPanel.Location = new System.Drawing.Point(328, 139);
+            this.signInPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.signInPanel.MaximumSize = new System.Drawing.Size(331, 414);
             this.signInPanel.Name = "signInPanel";
-            this.signInPanel.Size = new System.Drawing.Size(441, 509);
+            this.signInPanel.Size = new System.Drawing.Size(331, 414);
             this.signInPanel.TabIndex = 13;
             // 
             // signUpLink
@@ -74,9 +75,10 @@
             this.signUpLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.signUpLink.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpLink.ForeColor = System.Drawing.Color.Gray;
-            this.signUpLink.Location = new System.Drawing.Point(243, 328);
+            this.signUpLink.Location = new System.Drawing.Point(182, 266);
+            this.signUpLink.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.signUpLink.Name = "signUpLink";
-            this.signUpLink.Size = new System.Drawing.Size(111, 19);
+            this.signUpLink.Size = new System.Drawing.Size(86, 15);
             this.signUpLink.TabIndex = 19;
             this.signUpLink.Text = "Zarejestruj się";
             // 
@@ -86,9 +88,10 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(82, 328);
+            this.label1.Location = new System.Drawing.Point(62, 266);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(163, 19);
+            this.label1.Size = new System.Drawing.Size(130, 15);
             this.label1.TabIndex = 18;
             this.label1.Text = "Nie posiadasz  konta?";
             // 
@@ -113,14 +116,13 @@
             this.signInBtn.IconVisible = true;
             this.signInBtn.IconZoom = 90D;
             this.signInBtn.IsTab = false;
-            this.signInBtn.Location = new System.Drawing.Point(69, 265);
-            this.signInBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.signInBtn.Location = new System.Drawing.Point(52, 215);
             this.signInBtn.Name = "signInBtn";
             this.signInBtn.Normalcolor = System.Drawing.Color.Gray;
             this.signInBtn.OnHovercolor = System.Drawing.Color.Silver;
             this.signInBtn.OnHoverTextColor = System.Drawing.Color.White;
             this.signInBtn.selected = false;
-            this.signInBtn.Size = new System.Drawing.Size(303, 37);
+            this.signInBtn.Size = new System.Drawing.Size(227, 30);
             this.signInBtn.TabIndex = 17;
             this.signInBtn.Text = "Zaloguj się";
             this.signInBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,10 +139,9 @@
             this.passwordTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.passwordTxt.isPassword = false;
-            this.passwordTxt.Location = new System.Drawing.Point(69, 205);
-            this.passwordTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.passwordTxt.Location = new System.Drawing.Point(52, 167);
             this.passwordTxt.Name = "passwordTxt";
-            this.passwordTxt.Size = new System.Drawing.Size(303, 37);
+            this.passwordTxt.Size = new System.Drawing.Size(227, 30);
             this.passwordTxt.TabIndex = 16;
             this.passwordTxt.Text = "admin123";
             this.passwordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -155,10 +156,9 @@
             this.emailTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.emailTxt.isPassword = false;
-            this.emailTxt.Location = new System.Drawing.Point(69, 123);
-            this.emailTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.emailTxt.Location = new System.Drawing.Point(52, 100);
             this.emailTxt.Name = "emailTxt";
-            this.emailTxt.Size = new System.Drawing.Size(303, 37);
+            this.emailTxt.Size = new System.Drawing.Size(227, 30);
             this.emailTxt.TabIndex = 15;
             this.emailTxt.Text = "levan@skillsforge.pl";
             this.emailTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -170,9 +170,10 @@
             this.topBar1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.topBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBar1.Location = new System.Drawing.Point(0, 0);
+            this.topBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.topBar1.Name = "topBar1";
             this.topBar1.Parent = null;
-            this.topBar1.Size = new System.Drawing.Size(439, 44);
+            this.topBar1.Size = new System.Drawing.Size(329, 36);
             this.topBar1.TabIndex = 12;
             this.topBar1.Title = "";
             // 
@@ -181,9 +182,10 @@
             this.passwordLbl.AutoSize = true;
             this.passwordLbl.BackColor = System.Drawing.Color.Transparent;
             this.passwordLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordLbl.Location = new System.Drawing.Point(65, 182);
+            this.passwordLbl.Location = new System.Drawing.Point(49, 148);
+            this.passwordLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.passwordLbl.Name = "passwordLbl";
-            this.passwordLbl.Size = new System.Drawing.Size(61, 19);
+            this.passwordLbl.Size = new System.Drawing.Size(48, 15);
             this.passwordLbl.TabIndex = 10;
             this.passwordLbl.Text = "Hasło *";
             // 
@@ -192,20 +194,23 @@
             this.emailLbl.AutoSize = true;
             this.emailLbl.BackColor = System.Drawing.Color.Transparent;
             this.emailLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailLbl.Location = new System.Drawing.Point(65, 100);
+            this.emailLbl.Location = new System.Drawing.Point(49, 81);
+            this.emailLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.emailLbl.Name = "emailLbl";
-            this.emailLbl.Size = new System.Drawing.Size(112, 19);
+            this.emailLbl.Size = new System.Drawing.Size(87, 15);
             this.emailLbl.TabIndex = 8;
             this.emailLbl.Text = "Adres e-mail *";
             // 
             // SignInView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.ClientSize = new System.Drawing.Size(1320, 847);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(990, 688);
             this.Controls.Add(this.signInPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SignInView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SignInView";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KTA_Visor_DSClient.module.Management.module.Camera.controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,11 @@ namespace KTA_Visor.module.Managemnt.workers.tunnel.controller
                 case "response://show-active-devices":
                     this.OnEndpointReceived?.Invoke(this, new TCPEndpointReceivedEvent(request));
                     break;
+            }
+
+            if (request.Endpoint.Contains("response://camera") || request.Endpoint.Contains("response://cameras"))
+            {
+                new CameraController().Watch(request);
             }
         }
     }

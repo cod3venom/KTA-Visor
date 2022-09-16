@@ -19,12 +19,9 @@ namespace TCPTunnel.module.client
 {
     public class Client : ExtensionManager
     {
-        public bool AutoReconnect;
-
+        
         public event EventHandler<TCPClientConnectedEvent> onClientConnected;
-
         public event EventHandler<EventArgs> onClientDisconnected;
-
         public event EventHandler<TCPClientMessageReceivedEvent> onReceivedMessage;
 
         public event EventHandler<OnAuthCommandReceived> onAuthCommandReceived;
@@ -36,7 +33,6 @@ namespace TCPTunnel.module.client
         private readonly IPEndPoint ipEndpoint;
         
         private Thread clientThread;
-        private Thread bootstrapThread;
         private TCPClientTObject client;
 
         private readonly KTALogger.Logger logger;
@@ -50,8 +46,10 @@ namespace TCPTunnel.module.client
             this.onAuthCommandReceived += OnAuthCommandReceived;
             this.onAuthResponseSent += OnAuthCommandSent;
             this.onAuthIsOk += OnAuthIsOk;
+            this.onClientDisconnected += onClientDisconnectedHandler;
         }
 
+        public bool IsAutoReconnectEnabled { get; set; }
 
         public Client connect()
         {
@@ -62,9 +60,9 @@ namespace TCPTunnel.module.client
 
                 this.client = new TCPClientTObject(clientSocket.RemoteEndPoint.ToString(), clientSocket);
 
-                this.bootstrapThread = new Thread(this.bootStrap);
-                this.bootstrapThread.IsBackground = true;
-                this.bootstrapThread.Start();
+                Thread listeningThread = new Thread(this.listening);
+                listeningThread.IsBackground = true;
+                listeningThread.Start();
 
                 this.logger.success("Successfully connected to: " + this.config.IpAddress);
 
@@ -84,6 +82,19 @@ namespace TCPTunnel.module.client
             return this;
         }
 
+
+        private void listening()
+        {
+            while (this.client.IsConnected())
+            {
+                Thread.Sleep(1000);
+
+                Thread onReceiveThread = new Thread(() => this.receiveMessages(this.client));
+                onReceiveThread.IsBackground = true;
+                onReceiveThread.Start();
+            }
+        }
+
         public Client disconnect()
         {
             if (this.client == null)
@@ -97,38 +108,17 @@ namespace TCPTunnel.module.client
             return this;
         }
 
-        public void autoReconnect()
+
+
+        private void onClientDisconnectedHandler(object sender, EventArgs e)
         {
-            while (!this.isConnected())
-            {
-                if (this.isConnected()) break;
+            if (!this.IsAutoReconnectEnabled)
+                return;
+            if (!this.isConnected())
+                return;
 
-                this.logger.warn("Trying to auto-reconnect ...");
-                this.connect();
-
-                Thread.SpinWait(1000);
-            }
-        }
-
-        public Client reConnect()
-        {
-            this.logger.warn("Reconnecting ...");
-            this.client.getSocket().Disconnect(false);
+            Thread.Sleep(1000);
             this.connect();
-            this.logger.success("Successfully reconnected");
-            return this;
-        }
-
-        private void bootStrap()
-        {
-            while(this.client.IsConnected())
-            {
-                Thread.Sleep(5000);
-
-                Thread onReceiveThread = new Thread(() => this.receiveMessages(this.client));
-                onReceiveThread.IsBackground = true;
-                onReceiveThread.Start();
-            }
         }
 
         private void receiveMessages(TCPClientTObject client)
@@ -144,6 +134,10 @@ namespace TCPTunnel.module.client
 
                 Request request = this.Router.ParseRoute(client, message);
 
+                if (request == null)
+                {
+                    return;
+                }
                 this.logger.info("Received Request on: " + request.Endpoint +  "\n with body: "+ request.Body);
 
                 if (request.Endpoint == Endpoints.AUTH_NEED_COMMAND_ENDPOINT)
@@ -159,10 +153,13 @@ namespace TCPTunnel.module.client
                     this.onReceivedMessage?.Invoke(this, new TCPClientMessageReceivedEvent(request));
                 }
 
+                request = null;
+
                 Thread.SpinWait(5000);
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
             }
         }
 

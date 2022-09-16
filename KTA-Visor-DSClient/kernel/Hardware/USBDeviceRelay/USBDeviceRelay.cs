@@ -49,7 +49,7 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
         /// <returns></returns>
         private bool assignRelayPortToTheCamera(int portNumber, ref USBCameraDevice requestedDevice)
         {
-            this.sendStringCommand(String.Format("C {0}", portNumber.ToString()));
+            this.sendCommand(String.Format("C {0}", portNumber.ToString()));
             Thread.Sleep(100);
             
             if (!Directory.Exists(requestedDevice.Drive.Name))

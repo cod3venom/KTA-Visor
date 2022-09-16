@@ -1,7 +1,9 @@
 ﻿
+using KTA_Visor.module.Managemnt.module.camera.components.CameraItem.commands.filesystem;
 using KTA_Visor.module.Managemnt.module.camera.form;
 using KTA_Visor.module.Managemnt.module.Camera.component.CameraItem.events;
 using KTAVisorAPISDK.module.camera.entity;
+using KTAVisorAPISDK.module.station.entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +20,12 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
     {
         public event EventHandler<OnOpenCameraItemEvent> OnOpenCameraItem;
         public event EventHandler<OnCloseCameraItemFormEvent> OnCloseCameraItemForm;
+        public event EventHandler<OnCloseCameraItemFormEvent> OnCopyToUSBClicked;
+        public event EventHandler<OnCloseCameraItemFormEvent> OnCopyToDVDClicked;
+
+
+
+        private readonly StationEntity station;
 
         public readonly CameraItemSettingsForm form;
 
@@ -26,15 +34,14 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             InitializeComponent();
         }
 
-
-
-        public CameraItem(CameraEntity.Camera camera)
+        public CameraItem(CameraEntity.Camera camera, StationEntity station)
         {
             InitializeComponent();
             this.Camera = camera;
             this.Drive = camera?.driveName;
             this.Badge = camera?.badgeId;
-            this.form = new CameraItemSettingsForm(camera);
+            this.station = station;
+            this.form = new CameraItemSettingsForm(camera, station);
         }
 
         private void CameraItem_Load(object sender, EventArgs e)
@@ -42,9 +49,25 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             this.Padding = new Padding(10, 10, 10, 20);
             this.openBtn.Click += OpenBtn_Click;
             this.form.OnCloseForm += onCloseForm;
+            this.copyFilesToUSBMenuItem.Click += onCopyFilesToUSB;
+            this.copyFilesToDVDMenuItem.Click += onCopyFilesToDVD;
         }
 
-     
+        
+
+        public CameraEntity.Camera Camera { get; set; }
+
+        public string Badge
+        {
+            get { return this.badgeLbl.Text; }
+            set { this.badgeLbl.Text = value; }
+        }
+
+        public string Drive
+        {
+            get { return this.cameraDriveLbl.Text; }
+            set { this.cameraDriveLbl.Text = value; }
+        }
 
         private void OpenBtn_Click(object sender, EventArgs e)
         {
@@ -66,19 +89,25 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             this.BackColor = System.Drawing.ColorTranslator.FromHtml("#556C95");
         }
 
-        public CameraEntity.Camera Camera { get; set; }
-
-        public string Badge
+        private void onCopyFilesToUSB(object sender, EventArgs e)
         {
-            get { return this.badgeLbl.Text; }
-            set { this.badgeLbl.Text = value; }
+            this.nasStorageFileDialog.ShowDialog();
+            this.targetDriveDevicePathDialog.ShowDialog();
+
+
+            CopyFilesToUSBCommand.Execute(
+                this.targetDriveDevicePathDialog.SelectedPath,
+                this.nasStorageFileDialog.FileNames
+            );
+
+            this.OnCopyToUSBClicked?.Invoke(this, new OnCloseCameraItemFormEvent(this, this.Camera));
         }
 
-        public string Drive
+        private void onCopyFilesToDVD(object sender, EventArgs e)
         {
-            get { return this.cameraDriveLbl.Text; }
-            set { this.cameraDriveLbl.Text = value; }
+            this.OnCopyToDVDClicked?.Invoke(this, new OnCloseCameraItemFormEvent(this, this.Camera));
         }
+
 
     }
 }

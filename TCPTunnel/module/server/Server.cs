@@ -26,9 +26,9 @@ namespace TCPTunnel.module.server
         public event EventHandler<TCPServerClientDisonnectedEvent> onClientDisconnected;
         public event EventHandler<TCPServerClientMessageReceivedEvent> onMessageReceived;
 
-        private event EventHandler<OnAuthCommandSent> onAuthCommandSent;
-        private event EventHandler<OnAuthResponseDataReceived> onAuthResponseDataReceived;
-        private event EventHandler<OnAuthIsOK> onAuthIsOk;
+        public event EventHandler<OnAuthCommandSent> onAuthCommandSent;
+        public event EventHandler<OnAuthResponseDataReceived> onAuthResponseDataReceived;
+        public event EventHandler<OnAuthIsOK> onAuthIsOk;
 
         private ServerConfigTObject serverConfig;
         private Socket serverSocket;
@@ -39,46 +39,49 @@ namespace TCPTunnel.module.server
         private TCPClientList<string, TCPClientTObject> tempClientList;
         private TCPClientList<string, TCPClientTObject> clientsList;
         private bool isServerEnabled;
+        private KTALogger.Logger logger;
 
 
-        public Server(ServerConfigTObject serverConfig)
+        public Server(ServerConfigTObject serverConfig, KTALogger.Logger logger)
         {
             this.serverConfig = serverConfig;
+            this.logger = logger;
             this.isServerEnabled = true;
             this.tempClientList = new TCPClientList<string, TCPClientTObject>();
             this.clientsList = new TCPClientList<string, TCPClientTObject>();
-            this.initialize();
         }
-
-        private void initialize()
-        {
-            this.ipEndpoint = new IPEndPoint(IPAddress.Parse(this.serverConfig.ipAddress), serverConfig.port);
-            this.serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            this.onAuthCommandSent += OnAuthCommandSent; ;
-            this.onAuthResponseDataReceived += OnAuthResponseDataReceived; ;
-            this.onAuthIsOk += OnAuthIsOk;
-        }
-
+ 
         public void startServer()
         {
             this.isServerEnabled = true;
+            this.onAuthCommandSent += OnAuthCommandSent; ;
+            this.onAuthResponseDataReceived += OnAuthResponseDataReceived; ;
+            this.onAuthIsOk += OnAuthIsOk;
+            this.logger.info(string.Format("Started TCP SERVER on {0}", this.serverConfig.ipAddress));
+
             this.bootstrap();
         }
 
         public void stopServer()
         {
             this.isServerEnabled = false;
+            this.onAuthCommandSent -= OnAuthCommandSent; ;
+            this.onAuthResponseDataReceived -= OnAuthResponseDataReceived; ;
+            this.onAuthIsOk -= OnAuthIsOk;
             this.serverSocket.Close();
+            this.logger.info(string.Format("Stopped TCP SERVER on {0}", this.serverConfig.ipAddress));
+
             this.onServerStopped?.Invoke(this, EventArgs.Empty);
         }
 
-    
+
 
         private void bootstrap()
         {
             try
             {
+                this.ipEndpoint = new IPEndPoint(IPAddress.Parse(this.serverConfig.ipAddress), serverConfig.port);
+                this.serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 this.serverSocket.Bind(this.ipEndpoint);
                 this.serverSocket.Listen(this.serverConfig.listenInterval);
                 // on server started
@@ -93,14 +96,16 @@ namespace TCPTunnel.module.server
                 this.heardBeatThread = new Thread(checkHeartBeat);
                 this.heardBeatThread.IsBackground = true;
                 this.heardBeatThread.Start();
+                this.logger.info(string.Format("Bootstrapped TCP SERVER on {0}", this.serverConfig.ipAddress));
+
             }
             catch (SocketException ex)
             {
-                Console.WriteLine(ex.Message);
+                this.logger.error(string.Format("Socket Exception occured : {0}", ex.Message));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                this.logger.error(string.Format("Exception occured in TCP SERVER Bootstrapper: {0}", ex.Message));
             }
         }
 
@@ -110,16 +115,21 @@ namespace TCPTunnel.module.server
             {
                 while (this.isServerEnabled)
                 {
-                    Thread.SpinWait(1000);
+                    Thread.Sleep(100);
                     Socket client = this.serverSocket.Accept();
                     this.handleNewCLient(client);
                 }
             }
-            catch(SocketException ex)
+            catch (SocketException ex)
             {
                 this.serverSocketThread?.Abort();
                 this.serverSocket.Dispose();
                 this.serverSocket.Close();
+                this.logger.error(string.Format("Socket Exception occured when waiting for client: {0}", ex.Message));
+            }
+            catch (Exception ex)
+            {
+                this.logger.error(string.Format("Exception occured when waiting for client: {0}", ex.Message));
             }
         }
 
@@ -129,16 +139,19 @@ namespace TCPTunnel.module.server
             Thread clientThread = new Thread(this.handleMessages);
             clientThread.IsBackground = true;
             clientThread.Start(newConnection);
-            
+
             string ipAddress = newConnection.RemoteEndPoint.ToString();
-            TCPClientTObject client = new TCPClientTObject(ipAddress,newConnection,clientThread);
+            TCPClientTObject client = new TCPClientTObject(ipAddress, newConnection, clientThread);
+
+            if (this.tempClientList.ContainsKey(ipAddress))
+                return;
 
             this.tempClientList.addClient(ipAddress, client);
 
             Request authCommandRequest = new Request(Endpoints.AUTH_NEED_COMMAND_ENDPOINT);
             client.Send(authCommandRequest);
             this.onAuthCommandSent.Invoke(this, new shared.events.OnAuthCommandSent(client, authCommandRequest));
-            
+
             Thread messengerThread = new Thread(() => this.OnReceiveMessage(client));
             messengerThread.IsBackground = true;
             messengerThread.Start();
@@ -151,18 +164,23 @@ namespace TCPTunnel.module.server
         /// <param name="client"></param>
         public void OnReceiveMessage(TCPClientTObject client)
         {
-            while(client.IsConnected())
+            while (client.IsConnected())
             {
-               
+
                 try
                 {
-                    Thread.SpinWait(100);
+                    Thread.Sleep(100);
                     byte[] receiveMessageArray = new byte[this.serverSocket.ReceiveBufferSize];
                     int length = client.getSocket().Receive(receiveMessageArray);
                     string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);
 
                     Request request = this.Router.ParseRoute(client, message);
-                    
+
+                    if (request == null)
+                    {
+                        return;
+                    }
+
                     if (request.Endpoint == Endpoints.AUTH_NEED_RESPONSE_ENDPOINT)
                     {
                         this.onAuthResponseDataReceived.Invoke(this, new OnAuthResponseDataReceived(client, request));
@@ -171,10 +189,16 @@ namespace TCPTunnel.module.server
                     {
                         this.onMessageReceived.Invoke(this, new TCPServerClientMessageReceivedEvent(request));
                     }
-                    
+
                 }
                 catch (SocketException ex)
-                { }
+                {
+                    this.logger.error(string.Format("Socket Exception occured when receiving message from client: {0}", ex.Message));
+                }
+                catch (Exception ex)
+                {
+                    this.logger.error(string.Format("Socket Exception occured when receiving message from client: {0}", ex.Message));
+                }
             }
         }
 
@@ -215,6 +239,8 @@ namespace TCPTunnel.module.server
             string ipAddress = e.Client.getSocket().RemoteEndPoint.ToString();
             this.clientsList.addClient(ipAddress, e.Client);
 
+            this.logger.info(string.Format("Successfully authenticated and added client in CLIENTLIST", e.Client.getIpAddress()));
+
             this.onClientConnected.Invoke(e, new TCPServerClientConnectedEvent(e.Client));
         }
 
@@ -222,6 +248,8 @@ namespace TCPTunnel.module.server
         {
             while (this.isServerEnabled)
             {
+                Thread.Sleep(100);
+
                 foreach (var existedClient in this.clientsList.Values.ToList())
                 {
                     if (existedClient is null) continue;
@@ -229,11 +257,10 @@ namespace TCPTunnel.module.server
 
                     var key = this.clientsList.Where(pair => pair.Value == existedClient).Select(pair => pair.Key).FirstOrDefault();
                     this.clientsList.Remove(key);
+                    this.logger.info(string.Format("Detected client disconnection when checkin HEARTBEAT: {0}", existedClient.getIpAddress()));
 
                     this.onClientDisconnected?.Invoke(this, new TCPServerClientDisonnectedEvent(existedClient));
                 }
-
-                Thread.SpinWait(1000);
             }
         }
 

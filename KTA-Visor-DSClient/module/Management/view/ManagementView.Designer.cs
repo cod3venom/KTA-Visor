@@ -39,10 +39,11 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.connectToTunelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tunnelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tunnelMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cardMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.backendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backendRegisterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backendUpdateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topBarPanel = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.loggerViewPanel = new System.Windows.Forms.Panel();
@@ -69,9 +70,9 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelsContainer = new System.Windows.Forms.Panel();
             this.deviceWatcheBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.backendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backendRegisterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backendUpdateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.właczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyłączWszystkieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zresetujWszystkiePortyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tunnelMenuStrip.SuspendLayout();
             this.cardMenuStrip.SuspendLayout();
             this.topBarPanel.SuspendLayout();
@@ -99,9 +100,10 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.topBar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.topBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBar.Location = new System.Drawing.Point(0, 0);
+            this.topBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.topBar.Name = "topBar";
             this.topBar.Parent = null;
-            this.topBar.Size = new System.Drawing.Size(1165, 44);
+            this.topBar.Size = new System.Drawing.Size(874, 36);
             this.topBar.TabIndex = 0;
             this.topBar.Title = "Window";
             // 
@@ -109,22 +111,22 @@ namespace KTA_Visor_DSClient.module.Management.view
             // 
             this.restartTunelMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restartTunelMenuItem.Image")));
             this.restartTunelMenuItem.Name = "restartTunelMenuItem";
-            this.restartTunelMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.restartTunelMenuItem.Text = "Restart";
+            this.restartTunelMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.restartTunelMenuItem.Text = "Zresetuj";
             // 
             // disconnectFromTunelMenuItem
             // 
             this.disconnectFromTunelMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("disconnectFromTunelMenuItem.Image")));
             this.disconnectFromTunelMenuItem.Name = "disconnectFromTunelMenuItem";
-            this.disconnectFromTunelMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.disconnectFromTunelMenuItem.Text = "Disconnect";
+            this.disconnectFromTunelMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.disconnectFromTunelMenuItem.Text = "Rozłącz";
             // 
             // connectToTunelMenuItem
             // 
             this.connectToTunelMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("connectToTunelMenuItem.Image")));
             this.connectToTunelMenuItem.Name = "connectToTunelMenuItem";
-            this.connectToTunelMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.connectToTunelMenuItem.Text = "Connect";
+            this.connectToTunelMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.connectToTunelMenuItem.Text = "Podłącz";
             // 
             // tunnelToolStripMenuItem
             // 
@@ -134,7 +136,7 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.restartTunelMenuItem});
             this.tunnelToolStripMenuItem.Font = new System.Drawing.Font("Inter Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tunnelToolStripMenuItem.Name = "tunnelToolStripMenuItem";
-            this.tunnelToolStripMenuItem.Size = new System.Drawing.Size(70, 23);
+            this.tunnelToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.tunnelToolStripMenuItem.Text = "Tunnel";
             // 
             // tunnelMenuStrip
@@ -144,35 +146,23 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.tunnelMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tunnelMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tunnelToolStripMenuItem});
-            this.tunnelMenuStrip.Location = new System.Drawing.Point(0, 44);
+            this.tunnelMenuStrip.Location = new System.Drawing.Point(0, 36);
             this.tunnelMenuStrip.Name = "tunnelMenuStrip";
-            this.tunnelMenuStrip.Size = new System.Drawing.Size(78, 27);
+            this.tunnelMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.tunnelMenuStrip.Size = new System.Drawing.Size(63, 24);
             this.tunnelMenuStrip.TabIndex = 1;
             this.tunnelMenuStrip.Text = "menuStrip1";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(224, 26);
-            this.toolStripMenuItem3.Text = "Test Card";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(224, 26);
-            this.toolStripMenuItem2.Text = "Sign Card";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
+            this.właczToolStripMenuItem,
+            this.wyłączWszystkieToolStripMenuItem,
+            this.zresetujWszystkiePortyToolStripMenuItem});
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Inter Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(75, 24);
-            this.toolStripMenuItem1.Text = "Card ID";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(69, 20);
+            this.toolStripMenuItem1.Text = "Zaśilanie";
             // 
             // cardMenuStrip
             // 
@@ -182,11 +172,33 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.cardMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.backendToolStripMenuItem});
-            this.cardMenuStrip.Location = new System.Drawing.Point(78, 44);
+            this.cardMenuStrip.Location = new System.Drawing.Point(58, 36);
             this.cardMenuStrip.Name = "cardMenuStrip";
-            this.cardMenuStrip.Size = new System.Drawing.Size(312, 28);
+            this.cardMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.cardMenuStrip.Size = new System.Drawing.Size(139, 24);
             this.cardMenuStrip.TabIndex = 2;
             this.cardMenuStrip.Text = "Card ID";
+            // 
+            // backendToolStripMenuItem
+            // 
+            this.backendToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backendRegisterMenuItem,
+            this.backendUpdateMenuItem});
+            this.backendToolStripMenuItem.Name = "backendToolStripMenuItem";
+            this.backendToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.backendToolStripMenuItem.Text = "Backend";
+            // 
+            // backendRegisterMenuItem
+            // 
+            this.backendRegisterMenuItem.Name = "backendRegisterMenuItem";
+            this.backendRegisterMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backendRegisterMenuItem.Text = "Register";
+            // 
+            // backendUpdateMenuItem
+            // 
+            this.backendUpdateMenuItem.Name = "backendUpdateMenuItem";
+            this.backendUpdateMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backendUpdateMenuItem.Text = "Update";
             // 
             // topBarPanel
             // 
@@ -196,16 +208,18 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.topBarPanel.Controls.Add(this.topBar);
             this.topBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBarPanel.Location = new System.Drawing.Point(0, 0);
+            this.topBarPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.topBarPanel.Name = "topBarPanel";
-            this.topBarPanel.Size = new System.Drawing.Size(1165, 72);
+            this.topBarPanel.Size = new System.Drawing.Size(874, 58);
             this.topBarPanel.TabIndex = 1;
             // 
             // panel11
             // 
             this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel11.Location = new System.Drawing.Point(127, 398);
+            this.panel11.Location = new System.Drawing.Point(95, 324);
+            this.panel11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(628, 14);
+            this.panel11.Size = new System.Drawing.Size(472, 11);
             this.panel11.TabIndex = 32;
             // 
             // loggerViewPanel
@@ -213,35 +227,39 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.loggerViewPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.loggerViewPanel.Controls.Add(this.loggerView);
             this.loggerViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.loggerViewPanel.Location = new System.Drawing.Point(127, 412);
+            this.loggerViewPanel.Location = new System.Drawing.Point(95, 335);
+            this.loggerViewPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.loggerViewPanel.Name = "loggerViewPanel";
-            this.loggerViewPanel.Size = new System.Drawing.Size(628, 244);
+            this.loggerViewPanel.Size = new System.Drawing.Size(472, 198);
             this.loggerViewPanel.TabIndex = 27;
             // 
             // loggerView
             // 
             this.loggerView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loggerView.Location = new System.Drawing.Point(0, 0);
+            this.loggerView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.loggerView.Name = "loggerView";
             this.loggerView.ParentPanel = null;
-            this.loggerView.Size = new System.Drawing.Size(628, 244);
+            this.loggerView.Size = new System.Drawing.Size(472, 198);
             this.loggerView.TabIndex = 0;
             // 
             // panel9
             // 
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(755, 81);
+            this.panel9.Location = new System.Drawing.Point(567, 66);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(14, 575);
+            this.panel9.Size = new System.Drawing.Size(10, 467);
             this.panel9.TabIndex = 28;
             // 
             // panel7
             // 
             this.panel7.Controls.Add(this.panel14);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(127, 656);
+            this.panel7.Location = new System.Drawing.Point(95, 533);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(642, 14);
+            this.panel7.Size = new System.Drawing.Size(482, 11);
             this.panel7.TabIndex = 30;
             // 
             // panel14
@@ -249,26 +267,29 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.panel14.BackColor = System.Drawing.Color.White;
             this.panel14.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel14.Location = new System.Drawing.Point(0, 0);
+            this.panel14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(642, 14);
+            this.panel14.Size = new System.Drawing.Size(482, 11);
             this.panel14.TabIndex = 32;
             // 
             // panel12
             // 
             this.panel12.Controls.Add(this.panel6);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel12.Location = new System.Drawing.Point(382, 0);
+            this.panel12.Location = new System.Drawing.Point(287, 0);
+            this.panel12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(14, 589);
+            this.panel12.Size = new System.Drawing.Size(10, 478);
             this.panel12.TabIndex = 19;
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.White;
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 575);
+            this.panel6.Location = new System.Drawing.Point(0, 467);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(14, 14);
+            this.panel6.Size = new System.Drawing.Size(10, 11);
             this.panel6.TabIndex = 32;
             // 
             // fileHistoryPanel
@@ -277,36 +298,40 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.fileHistoryPanel.Controls.Add(this.panel2);
             this.fileHistoryPanel.Controls.Add(this.panel12);
             this.fileHistoryPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.fileHistoryPanel.Location = new System.Drawing.Point(769, 81);
+            this.fileHistoryPanel.Location = new System.Drawing.Point(577, 66);
+            this.fileHistoryPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fileHistoryPanel.Name = "fileHistoryPanel";
-            this.fileHistoryPanel.Size = new System.Drawing.Size(396, 589);
+            this.fileHistoryPanel.Size = new System.Drawing.Size(297, 478);
             this.fileHistoryPanel.TabIndex = 29;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 575);
+            this.panel2.Location = new System.Drawing.Point(0, 467);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(382, 14);
+            this.panel2.Size = new System.Drawing.Size(287, 11);
             this.panel2.TabIndex = 31;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.panel13);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(113, 81);
+            this.panel5.Location = new System.Drawing.Point(85, 66);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(14, 589);
+            this.panel5.Size = new System.Drawing.Size(10, 478);
             this.panel5.TabIndex = 26;
             // 
             // panel13
             // 
             this.panel13.BackColor = System.Drawing.Color.White;
             this.panel13.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel13.Location = new System.Drawing.Point(0, 575);
+            this.panel13.Location = new System.Drawing.Point(0, 467);
+            this.panel13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(14, 14);
+            this.panel13.Size = new System.Drawing.Size(10, 11);
             this.panel13.TabIndex = 32;
             // 
             // settingsBtn
@@ -315,9 +340,10 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.settingsBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.settingsBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Image")));
             this.settingsBtn.ImageActive = null;
-            this.settingsBtn.Location = new System.Drawing.Point(19, 18);
+            this.settingsBtn.Location = new System.Drawing.Point(14, 15);
+            this.settingsBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.settingsBtn.Name = "settingsBtn";
-            this.settingsBtn.Size = new System.Drawing.Size(36, 26);
+            this.settingsBtn.Size = new System.Drawing.Size(27, 21);
             this.settingsBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.settingsBtn.TabIndex = 0;
             this.settingsBtn.TabStop = false;
@@ -328,18 +354,20 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.panel4.Controls.Add(this.panel8);
             this.panel4.Controls.Add(this.settingsBtn);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 466);
+            this.panel4.Location = new System.Drawing.Point(0, 378);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(113, 123);
+            this.panel4.Size = new System.Drawing.Size(85, 100);
             this.panel4.TabIndex = 17;
             // 
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.White;
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 109);
+            this.panel8.Location = new System.Drawing.Point(0, 89);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(113, 14);
+            this.panel8.Size = new System.Drawing.Size(85, 11);
             this.panel8.TabIndex = 32;
             // 
             // panel1
@@ -349,27 +377,30 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.panel1.Controls.Add(this.powerSupplyBtn);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 81);
+            this.panel1.Location = new System.Drawing.Point(0, 66);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(113, 589);
+            this.panel1.Size = new System.Drawing.Size(85, 478);
             this.panel1.TabIndex = 25;
             // 
             // camerasBtn
             // 
             this.camerasBtn.BackColor = System.Drawing.Color.White;
             this.camerasBtn.Icon = ((System.Drawing.Image)(resources.GetObject("camerasBtn.Icon")));
-            this.camerasBtn.Location = new System.Drawing.Point(32, 23);
+            this.camerasBtn.Location = new System.Drawing.Point(24, 19);
+            this.camerasBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.camerasBtn.Name = "camerasBtn";
-            this.camerasBtn.Size = new System.Drawing.Size(46, 49);
+            this.camerasBtn.Size = new System.Drawing.Size(34, 40);
             this.camerasBtn.TabIndex = 19;
             // 
             // powerSupplyBtn
             // 
             this.powerSupplyBtn.BackColor = System.Drawing.Color.White;
             this.powerSupplyBtn.Icon = ((System.Drawing.Image)(resources.GetObject("powerSupplyBtn.Icon")));
-            this.powerSupplyBtn.Location = new System.Drawing.Point(32, 90);
+            this.powerSupplyBtn.Location = new System.Drawing.Point(24, 73);
+            this.powerSupplyBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.powerSupplyBtn.Name = "powerSupplyBtn";
-            this.powerSupplyBtn.Size = new System.Drawing.Size(46, 49);
+            this.powerSupplyBtn.Size = new System.Drawing.Size(34, 40);
             this.powerSupplyBtn.TabIndex = 18;
             // 
             // footer1
@@ -378,17 +409,19 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.footer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.footer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.footer1.Location = new System.Drawing.Point(0, 0);
+            this.footer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.footer1.Name = "footer1";
-            this.footer1.Size = new System.Drawing.Size(1165, 45);
+            this.footer1.Size = new System.Drawing.Size(874, 37);
             this.footer1.TabIndex = 0;
             // 
             // footerPanel
             // 
             this.footerPanel.Controls.Add(this.footer1);
             this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.footerPanel.Location = new System.Drawing.Point(0, 670);
+            this.footerPanel.Location = new System.Drawing.Point(0, 544);
+            this.footerPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.footerPanel.Name = "footerPanel";
-            this.footerPanel.Size = new System.Drawing.Size(1165, 45);
+            this.footerPanel.Size = new System.Drawing.Size(874, 37);
             this.footerPanel.TabIndex = 24;
             // 
             // bunifuElipse2
@@ -399,9 +432,10 @@ namespace KTA_Visor_DSClient.module.Management.view
             // panel10
             // 
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 79);
+            this.panel10.Location = new System.Drawing.Point(0, 64);
+            this.panel10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1165, 2);
+            this.panel10.Size = new System.Drawing.Size(874, 2);
             this.panel10.TabIndex = 31;
             // 
             // panel3
@@ -410,45 +444,44 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.panel3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1165, 79);
+            this.panel3.Size = new System.Drawing.Size(874, 64);
             this.panel3.TabIndex = 23;
             // 
             // panelsContainer
             // 
             this.panelsContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.panelsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelsContainer.Location = new System.Drawing.Point(127, 81);
+            this.panelsContainer.Location = new System.Drawing.Point(95, 66);
+            this.panelsContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelsContainer.Name = "panelsContainer";
-            this.panelsContainer.Size = new System.Drawing.Size(628, 317);
+            this.panelsContainer.Size = new System.Drawing.Size(472, 258);
             this.panelsContainer.TabIndex = 33;
             // 
-            // backendToolStripMenuItem
+            // właczToolStripMenuItem
             // 
-            this.backendToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backendRegisterMenuItem,
-            this.backendUpdateMenuItem});
-            this.backendToolStripMenuItem.Name = "backendToolStripMenuItem";
-            this.backendToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
-            this.backendToolStripMenuItem.Text = "Backend";
+            this.właczToolStripMenuItem.Name = "właczToolStripMenuItem";
+            this.właczToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.właczToolStripMenuItem.Text = "Włącz wszystkie porty";
             // 
-            // backendRegisterMenuItem
+            // wyłączWszystkieToolStripMenuItem
             // 
-            this.backendRegisterMenuItem.Name = "backendRegisterMenuItem";
-            this.backendRegisterMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.backendRegisterMenuItem.Text = "Register";
+            this.wyłączWszystkieToolStripMenuItem.Name = "wyłączWszystkieToolStripMenuItem";
+            this.wyłączWszystkieToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.wyłączWszystkieToolStripMenuItem.Text = "Wyłącz wszystkie porty";
             // 
-            // backendUpdateMenuItem
+            // zresetujWszystkiePortyToolStripMenuItem
             // 
-            this.backendUpdateMenuItem.Name = "backendUpdateMenuItem";
-            this.backendUpdateMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.backendUpdateMenuItem.Text = "Update";
+            this.zresetujWszystkiePortyToolStripMenuItem.Name = "zresetujWszystkiePortyToolStripMenuItem";
+            this.zresetujWszystkiePortyToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.zresetujWszystkiePortyToolStripMenuItem.Text = "Zresetuj wszystkie porty";
             // 
             // ManagementView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1165, 715);
+            this.ClientSize = new System.Drawing.Size(874, 581);
             this.Controls.Add(this.panelsContainer);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.loggerViewPanel);
@@ -461,6 +494,7 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ManagementView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ManagementView";
@@ -507,8 +541,6 @@ namespace KTA_Visor_DSClient.module.Management.view
         private System.Windows.Forms.Panel topBarPanel;
         private System.Windows.Forms.MenuStrip cardMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.MenuStrip tunnelMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem tunnelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectToTunelMenuItem;
@@ -528,5 +560,8 @@ namespace KTA_Visor_DSClient.module.Management.view
         private System.Windows.Forms.ToolStripMenuItem backendToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backendRegisterMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backendUpdateMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem właczToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wyłączWszystkieToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zresetujWszystkiePortyToolStripMenuItem;
     }
 }

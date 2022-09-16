@@ -52,20 +52,20 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.storageLocationTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.storageLocationTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.sstationGenBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // autoReconnectChck
@@ -73,7 +73,7 @@
             this.autoReconnectChck.AutoSize = true;
             this.autoReconnectChck.Location = new System.Drawing.Point(124, 98);
             this.autoReconnectChck.Name = "autoReconnectChck";
-            this.autoReconnectChck.Size = new System.Drawing.Size(18, 17);
+            this.autoReconnectChck.Size = new System.Drawing.Size(15, 14);
             this.autoReconnectChck.TabIndex = 16;
             this.autoReconnectChck.UseVisualStyleBackColor = true;
             // 
@@ -84,7 +84,7 @@
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(5, 97);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 16);
+            this.label1.Size = new System.Drawing.Size(85, 14);
             this.label1.TabIndex = 15;
             this.label1.Text = "Auto reconnect";
             // 
@@ -95,7 +95,7 @@
             this.portLbl.ForeColor = System.Drawing.Color.Black;
             this.portLbl.Location = new System.Drawing.Point(32, 70);
             this.portLbl.Name = "portLbl";
-            this.portLbl.Size = new System.Drawing.Size(78, 16);
+            this.portLbl.Size = new System.Drawing.Size(65, 14);
             this.portLbl.TabIndex = 14;
             this.portLbl.Text = "Server Port";
             // 
@@ -114,7 +114,7 @@
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(22, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 12);
+            this.label2.Size = new System.Drawing.Size(82, 10);
             this.label2.TabIndex = 12;
             this.label2.Text = "Manager Server";
             // 
@@ -125,7 +125,7 @@
             this.ipLbl.ForeColor = System.Drawing.Color.Black;
             this.ipLbl.Location = new System.Drawing.Point(47, 41);
             this.ipLbl.Name = "ipLbl";
-            this.ipLbl.Size = new System.Drawing.Size(63, 16);
+            this.ipLbl.Size = new System.Drawing.Size(53, 14);
             this.ipLbl.TabIndex = 11;
             this.ipLbl.Text = "Server IP";
             // 
@@ -163,7 +163,7 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(22, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 12);
+            this.label3.Size = new System.Drawing.Size(61, 10);
             this.label3.TabIndex = 18;
             this.label3.Text = "File System";
             // 
@@ -176,7 +176,7 @@
             this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Location = new System.Drawing.Point(38, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 16);
+            this.label4.Size = new System.Drawing.Size(48, 14);
             this.label4.TabIndex = 5;
             this.label4.Text = "Storage";
             // 
@@ -187,7 +187,7 @@
             this.stationIPLbl.ForeColor = System.Drawing.Color.Black;
             this.stationIPLbl.Location = new System.Drawing.Point(44, 90);
             this.stationIPLbl.Name = "stationIPLbl";
-            this.stationIPLbl.Size = new System.Drawing.Size(66, 16);
+            this.stationIPLbl.Size = new System.Drawing.Size(57, 14);
             this.stationIPLbl.TabIndex = 24;
             this.stationIPLbl.Text = "Station IP";
             // 
@@ -206,7 +206,7 @@
             this.label6.ForeColor = System.Drawing.Color.Black;
             this.label6.Location = new System.Drawing.Point(22, 20);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 12);
+            this.label6.Size = new System.Drawing.Size(61, 10);
             this.label6.TabIndex = 22;
             this.label6.Text = "Information";
             // 
@@ -217,7 +217,7 @@
             this.serialNumberLbl.ForeColor = System.Drawing.Color.Black;
             this.serialNumberLbl.Location = new System.Drawing.Point(43, 58);
             this.serialNumberLbl.Name = "serialNumberLbl";
-            this.serialNumberLbl.Size = new System.Drawing.Size(67, 16);
+            this.serialNumberLbl.Size = new System.Drawing.Size(58, 14);
             this.serialNumberLbl.TabIndex = 21;
             this.serialNumberLbl.Text = "Station ID";
             // 
@@ -234,7 +234,7 @@
             this.autoCopyChk.AutoSize = true;
             this.autoCopyChk.Location = new System.Drawing.Point(124, 70);
             this.autoCopyChk.Name = "autoCopyChk";
-            this.autoCopyChk.Size = new System.Drawing.Size(18, 17);
+            this.autoCopyChk.Size = new System.Drawing.Size(15, 14);
             this.autoCopyChk.TabIndex = 26;
             this.autoCopyChk.UseVisualStyleBackColor = true;
             // 
@@ -245,7 +245,7 @@
             this.label5.ForeColor = System.Drawing.Color.Black;
             this.label5.Location = new System.Drawing.Point(20, 71);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 16);
+            this.label5.Size = new System.Drawing.Size(62, 14);
             this.label5.TabIndex = 25;
             this.label5.Text = "Auto Copy";
             // 
@@ -276,7 +276,7 @@
             this.label8.ForeColor = System.Drawing.Color.Black;
             this.label8.Location = new System.Drawing.Point(24, 20);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 12);
+            this.label8.Size = new System.Drawing.Size(54, 10);
             this.label8.TabIndex = 30;
             this.label8.Text = "USB Relay";
             // 
@@ -287,7 +287,7 @@
             this.label9.ForeColor = System.Drawing.Color.Black;
             this.label9.Location = new System.Drawing.Point(26, 58);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(68, 16);
+            this.label9.Size = new System.Drawing.Size(58, 14);
             this.label9.TabIndex = 29;
             this.label9.Text = "COM Port";
             // 
@@ -314,6 +314,59 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 454);
             this.tableLayoutPanel1.TabIndex = 35;
             // 
+            // panel8
+            // 
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel8.Location = new System.Drawing.Point(433, 347);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(385, 104);
+            this.panel8.TabIndex = 5;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.storageLocationTxt);
+            this.panel7.Controls.Add(this.label4);
+            this.panel7.Controls.Add(this.label3);
+            this.panel7.Controls.Add(this.autoCopyChk);
+            this.panel7.Controls.Add(this.label5);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(3, 347);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(424, 104);
+            this.panel7.TabIndex = 4;
+            // 
+            // storageLocationTxt
+            // 
+            this.storageLocationTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.storageLocationTxt.Location = new System.Drawing.Point(124, 37);
+            this.storageLocationTxt.Name = "storageLocationTxt";
+            this.storageLocationTxt.Size = new System.Drawing.Size(246, 22);
+            this.storageLocationTxt.TabIndex = 27;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.White;
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(433, 175);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(385, 166);
+            this.panel6.TabIndex = 3;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.ipLbl);
+            this.panel5.Controls.Add(this.ipTxt);
+            this.panel5.Controls.Add(this.label2);
+            this.panel5.Controls.Add(this.portTxt);
+            this.panel5.Controls.Add(this.portLbl);
+            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.autoReconnectChck);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(3, 175);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(424, 166);
+            this.panel5.TabIndex = 2;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label8);
@@ -322,7 +375,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(433, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(386, 166);
+            this.panel3.Size = new System.Drawing.Size(385, 166);
             this.panel3.TabIndex = 0;
             // 
             // panel4
@@ -340,65 +393,12 @@
             this.panel4.Size = new System.Drawing.Size(424, 166);
             this.panel4.TabIndex = 1;
             // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.ipLbl);
-            this.panel5.Controls.Add(this.ipTxt);
-            this.panel5.Controls.Add(this.label2);
-            this.panel5.Controls.Add(this.portTxt);
-            this.panel5.Controls.Add(this.portLbl);
-            this.panel5.Controls.Add(this.label1);
-            this.panel5.Controls.Add(this.autoReconnectChck);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 175);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(424, 166);
-            this.panel5.TabIndex = 2;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.White;
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(433, 175);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(386, 166);
-            this.panel6.TabIndex = 3;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.storageLocationTxt);
-            this.panel7.Controls.Add(this.label4);
-            this.panel7.Controls.Add(this.label3);
-            this.panel7.Controls.Add(this.autoCopyChk);
-            this.panel7.Controls.Add(this.label5);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(3, 347);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(424, 104);
-            this.panel7.TabIndex = 4;
-            // 
-            // panel8
-            // 
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(433, 347);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(386, 104);
-            this.panel8.TabIndex = 5;
-            // 
-            // storageLocationTxt
-            // 
-            this.storageLocationTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.storageLocationTxt.Location = new System.Drawing.Point(124, 37);
-            this.storageLocationTxt.Name = "storageLocationTxt";
-            this.storageLocationTxt.Size = new System.Drawing.Size(246, 22);
-            this.storageLocationTxt.TabIndex = 27;
-            // 
             // sstationGenBtn
             // 
             this.sstationGenBtn.BackColor = System.Drawing.Color.Transparent;
             this.sstationGenBtn.BackgroundImage = global::KTA_Visor_DSClient.Properties.Resources.generate;
             this.sstationGenBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.sstationGenBtn.Location = new System.Drawing.Point(376, 48);
+            this.sstationGenBtn.Location = new System.Drawing.Point(376, 50);
             this.sstationGenBtn.Name = "sstationGenBtn";
             this.sstationGenBtn.Size = new System.Drawing.Size(22, 22);
             this.sstationGenBtn.TabIndex = 32;
@@ -416,14 +416,14 @@
             this.Load += new System.EventHandler(this.SettingsPanelView_Load);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }

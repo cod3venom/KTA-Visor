@@ -12,32 +12,16 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
 {
     public class USBCameraDeviceSettings
     {
-        /// <summary>
-        /// 
-        /// </summary>
+
         private readonly DriveInfo driveInfo;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private readonly FileInfo settingsFileOnDrive;
-
         private readonly FileInfo IDFileOnDrive;
 
         /// <summary>
         /// 
         /// </summary>
         protected string cameraId = "";
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected string cameraBadgeId = "";
-        
-        
-        /// <summary>
-        /// 
-        /// </summary>
         public LocalSettingsTObject Settings { get; set; }
 
         public USBCameraDeviceSettings(DriveInfo drive)
@@ -78,14 +62,24 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
 
             if (!this.IDFileOnDrive.Exists)
             {
-                File.WriteAllText(this.settingsFileOnDrive.FullName, this.Settings.ID);
+                using(StreamWriter writer = new StreamWriter(this.IDFileOnDrive.FullName))
+                {
+                    writer.WriteLine(this.Settings.ID);
+                    writer.WriteLine(this.Settings.BadgeId);
+                    writer.Close();
+
+                }
             }
             else
             {
-                string idFileContent = File.ReadAllText(this.IDFileOnDrive.FullName).Replace(Environment.NewLine, "");
+                string idFileContent = File.ReadAllText(this.IDFileOnDrive.FullName).Split('\n')[0];
                 if (idFileContent != this.Settings.ID)
                 {
-                    File.WriteAllText(this.IDFileOnDrive.FullName, idFileContent);
+                    using (StreamWriter writer = new StreamWriter(this.IDFileOnDrive.FullName))
+                    {
+                        writer.Write(string.Format("{0}\n {1}", this.Settings.ID, this.Settings.BadgeId));
+                        writer.Close();
+                    }
                 }
             }
             return this.settingsFileOnDrive;
@@ -109,8 +103,12 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
                 settings = this.Settings;
             }
 
+            if (!File.Exists(this.settingsFileOnDrive.FullName))
+                return;
             string settingsContent = JsonConvert.SerializeObject(settings);
             File.WriteAllText(this.settingsFileOnDrive.FullName, settingsContent);
         }
+
+   
     }
 }

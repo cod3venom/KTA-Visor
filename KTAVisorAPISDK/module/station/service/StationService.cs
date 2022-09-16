@@ -73,6 +73,16 @@ namespace KTAVisorAPISDK.module.station.service
             return station;
         }
 
+  
+        public async Task<StationEntity> deactivateAllCamerasFromTheStation(string id)
+        {
+            HttpResponseMessage result = await this.stationRepository.deactivateAllCamerasFromTheStation(id);
+            string responseBody = await result.Content.ReadAsStringAsync();
+            StationEntity station = JsonConvert.DeserializeObject<StationEntity>(responseBody);
+
+            return station;
+        }
+
 
         public async Task<StationEntity> edit(string id, EditStationRequestTObject request)
         {

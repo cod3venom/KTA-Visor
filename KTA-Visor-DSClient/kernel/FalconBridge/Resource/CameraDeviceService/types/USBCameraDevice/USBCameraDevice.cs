@@ -20,11 +20,12 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         /// 
         /// </summary>
         /// <param name="device"></param>
-        public USBCameraDevice(DriveInfo device, string serialNumber, string name = ""):base(device)
+        public USBCameraDevice(DriveInfo device, string serialNumber, int index = 0):base(device)
         {
-            this.Drive = device;
-            this.Name = name;
+            this.Index = index;
             this.ID = this.Settings.ID;
+            this.Name = device.Name;
+            this.Drive = device;
             this.BadgeId = this.Settings.BadgeId;
             this.SerialNumber = serialNumber;
 
@@ -34,11 +35,12 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         /// 
         /// </summary>
         /// <param name="device"></param>
-        public USBCameraDevice(DriveInfo device,  string name = "") : base(device)
+        public USBCameraDevice(DriveInfo device,  int index = 0) : base(device)
         {
-            this.Drive = device;
-            this.Name = name;
+            this.Index = index;
             this.ID = this.Settings.ID;
+            this.Name = device.Name;
+            this.Drive = device;
             this.BadgeId = this.Settings.BadgeId;
             this.SerialNumber = "";
         }
@@ -57,6 +59,12 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.ty
         {
             get { return this.getFiles(); }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Index { get; set; }
+
 
         /// <summary>
         /// 

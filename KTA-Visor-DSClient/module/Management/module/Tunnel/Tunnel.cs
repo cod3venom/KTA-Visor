@@ -14,68 +14,86 @@ using TCPTunnel.module.server.events;
 
 namespace KTA_Visor_DSClient.module.Management.module.Tunnel
 {
-    public class Tunnel:Client
+    public class Tunnel: Client
     {
 
-        public event EventHandler<TCPClientConnectedEvent> OnClientConnected;
-        public event EventHandler<EventArgs> OnClientDisconnected;
-        public event EventHandler<TCPClientMessageReceivedEvent> onMessageReceived;
+        /// <summary>
+        /// 
+        /// </summary>
+        public event EventHandler<TCPClientConnectedEvent> OnClientConnectedToTheTunnel;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public event EventHandler<EventArgs> OnClientDisconnectedFromTheTunnel;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public event EventHandler<TCPClientMessageReceivedEvent> OnMessageReceivedInTheTunnel;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ClientConfigTObject config;
      
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="logger"></param>
         public Tunnel(ClientConfigTObject config, KTALogger.Logger logger): base(config, logger)
         {
             this.config = config;
              
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Connect()
         {
-            this.onClientConnected += Client_onClientConnected;
-            this.onClientDisconnected += Client_onClientDisconnected;
-            this.onReceivedMessage += Client_onReceivedMessage;
+            this.onClientConnected += (delegate(object sender, TCPClientConnectedEvent e)
+            {
+                this.OnClientConnectedToTheTunnel?.Invoke(sender, e);
+            });
+            this.onClientDisconnected += (delegate(object sender, EventArgs e)
+            {
+                this.OnClientDisconnectedFromTheTunnel?.Invoke(sender, e);
+            });
+            this.onReceivedMessage += (delegate(object sender, TCPClientMessageReceivedEvent e) {
+                this.OnMessageReceivedInTheTunnel?.Invoke(sender, e);
+            });
+
             this.connect();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Disconnect()
         {
             this.disconnect();
         }
+ 
 
-        public new void AutoReconnect()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsConnected
         {
-            this.autoReconnect();
+            get { return this.isConnected(); }
         }
 
-        public void ReConnect()
-        {
-            this.reConnect();
-        }
 
-        public bool IsConnected()
-        {
-            return this.isConnected();
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
         public void Send(Request request)
         {
             this.send(request);
-        }
-
-        private void Client_onClientConnected(object sender, TCPClientConnectedEvent e)
-        {
-            this.OnClientConnected?.Invoke(sender, e);
-        }
-
-        private void Client_onClientDisconnected(object sender, EventArgs e)
-        {
-            this.OnClientDisconnected?.Invoke(sender, e);
-        }
-
-        private void Client_onReceivedMessage(object sender, TCPTunnel.module.client.events.TCPClientMessageReceivedEvent e)
-        {
-           this.onMessageReceived?.Invoke(sender, e);
-            Thread.SpinWait(5000);
         }
     }
 }

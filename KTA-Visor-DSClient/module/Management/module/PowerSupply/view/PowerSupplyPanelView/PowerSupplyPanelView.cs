@@ -44,12 +44,12 @@ namespace KTA_Visor_DSClient.module.Management.module.PowerSupply.view.PowerSupp
 
         private void onTurnOnPower(object sender, OnTurnOnPowerEvent e)
         {
-            Program.Relay.sendStringCommand(e.Command);
+            Program.Relay.sendCommand(e.Command);
         }
 
         private void onTurnOffPower(object sender, OnTurnOffPowerEvent e)
         {
-            Program.Relay.sendStringCommand(e.Command);
+            Program.Relay.sendCommand(e.Command);
         }
     }
 }

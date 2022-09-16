@@ -39,6 +39,9 @@
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
+    <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splicer.1.1\lib\net45\DirectShowLib-2005.dll</HintPath>
+    </Reference>
     <Reference Include="Falcon">
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Falcon.dll</HintPath>
     </Reference>
@@ -51,6 +54,9 @@
     </Reference>
     <Reference Include="Sdk.Core">
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Sdk.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Splicer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a66524ed949429f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splicer.1.1\lib\net45\Splicer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -112,17 +118,22 @@
     <Compile Include="kernel\sharedKernel\HttpClientHelper\HttpClientHelper.cs" />
     <Compile Include="kernel\sharedKernel\HttpClientHelper\interfaces\IHttpClient.cs" />
     <Compile Include="kernel\sharedKernel\LocalStorage\LocalStorage.cs" />
+    <Compile Include="module\Management\module\Camera\command\backend\MarkCameraAsInactiveOnBackendCommand.cs" />
+    <Compile Include="module\Management\module\Camera\command\backend\MarkCameraAsActiveOnBackendCommand.cs" />
+    <Compile Include="module\Management\module\Camera\command\filesystem\MergeCopiedVideosIntoOneCommand.cs" />
+    <Compile Include="module\Management\module\Camera\controller\CameraController.cs" />
     <Compile Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.Designer.cs">
       <DependentUpon>CameraItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Management\module\Camera\service\CameraDeviceSettingsService.cs" />
     <Compile Include="module\Management\workers\Tunnel\controller\TunnelController.cs" />
     <Compile Include="module\Management\workers\Tunnel\TunnelBackgroundWrorker.cs" />
-    <Compile Include="module\Management\module\Camera\command\AddCamerasToTheGlobalMemory.cs" />
-    <Compile Include="module\Management\module\Camera\command\CopyCameraFilesToNetworkStorageCommand.cs" />
-    <Compile Include="module\Management\module\Camera\command\RemoveCamerasFromTheGlobalMemory.cs" />
+    <Compile Include="module\Management\module\Camera\command\memory\AddCamerasToTheGlobalMemory.cs" />
+    <Compile Include="module\Management\module\Camera\command\filesystem\CopyCameraFilesToNetworkStorageCommand.cs" />
+    <Compile Include="module\Management\module\Camera\command\memory\RemoveCamerasFromTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\component\CameraItem\CameraItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -235,6 +246,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Falcon-Protocol\Falcon-Protocol.csproj">
+      <Project>{E59D82DC-77EE-4F93-900F-3624857C51CE}</Project>
+      <Name>Falcon-Protocol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KTA-USB-Relay\KTA-USB-Relay.csproj">
       <Project>{4E2CF358-27B6-43B9-A1C0-6C862D8E930F}</Project>
       <Name>KTA-USB-Relay</Name>
@@ -264,6 +279,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\generate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ASL - Apache Software Foundation License.txt" />
+    <Content Include="Utilities\Audio\Formats.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

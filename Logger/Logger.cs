@@ -69,17 +69,29 @@ namespace KTALogger
         /// </summary>
         private void calibrateLogger()
         {
-            this.startDate = this.currentDate;
+            try
+            {
+                this.startDate = this.currentDate;
 
-            this.loggerFilePath = string.Format("{0}\\logs\\log_{1}.KTALogger",
-               Directory.GetCurrentDirectory(),
-               this.startDate
-            );
-            
-            this.loggerFile = new FileInfo(this.loggerFilePath);
+                this.loggerFilePath = string.Format("{0}\\logs\\log_{1}.KTALogger",
+                   Directory.GetCurrentDirectory(),
+                   this.startDate
+                );
 
-            if (!File.Exists(this.loggerFile.FullName)) {
-                File.WriteAllText(this.loggerFilePath, "");
+                this.loggerFile = new FileInfo(this.loggerFilePath);
+
+                if (!File.Exists(this.loggerFile.FullName))
+                {
+                    File.WriteAllText(this.loggerFilePath, "");
+                }
+            }
+            catch(IOException exception)
+            {
+                Console.WriteLine(exception.ToString());    
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
             }
         }
 
@@ -158,7 +170,7 @@ namespace KTALogger
         /// <param name="caller"></param>
         /// <param name="message"></param>
         /// <param name="context"></param>
-        private void write(string type, string caller, string message, object context = null)
+        private void write(string type, string caller, string message, dynamic context = null)
         {
             switch (type)
             {

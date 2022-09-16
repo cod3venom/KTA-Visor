@@ -67,6 +67,8 @@ namespace KTA_Visor_DSClient.module.Management.module.SettingsManager.view.Setti
             this.settings.SettingsObj.app.fileSystem.autoCopy = this.autoCopyChk.Checked;
 
             this.settings.Save(this.settings.SettingsObj);
+
+            Application.Restart();
              
         }
     }

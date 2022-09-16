@@ -13,12 +13,19 @@ namespace TCPTunnel.kernel.extensions.router.dto
 
         private string _endpoint = "";
         private dynamic _body = "";
+        private dynamic _parameters = new string[] { };
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="endpoint"></param>
+        /// <param name="body"></param>
         public Request(string endpoint = "", dynamic body = null)
         {
             this._endpoint = endpoint;
             this._body = body;
+            this._parameters = endpoint.Replace("/", "").Split('@');
         }
 
         public TCPClientTObject Client { get; set; }
@@ -35,6 +42,11 @@ namespace TCPTunnel.kernel.extensions.router.dto
             set { this._body = value; }
         }
 
+        public dynamic[] Parameters 
+        { 
+            get { return this._parameters; }
+            set { this._parameters = value; }
+        }
 
         public string toJson()
         {

@@ -12,13 +12,30 @@ namespace TCPTunnel.kernel.extensions.router
 {
     public class Router
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly KTALogger.Logger logger;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private Request currentRequest;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public Router()
         {
             this.logger = new KTALogger.Logger();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public Request ParseRoute(TCPClientTObject client, string message)
         {
             try
@@ -27,19 +44,28 @@ namespace TCPTunnel.kernel.extensions.router
                 message = message.Replace("\r\n", "\n");
                 message = message.Replace("\n", "");
 
-                Request request = JsonConvert.DeserializeObject<Request>(message);
+                this.currentRequest = JsonConvert.DeserializeObject<Request>(message);
 
-                this.logger.warn("Converted message to json: " + request.Body);
+                this.logger.warn("Converted message to json: " + this.currentRequest.Body);
 
-                request.Client = client;
+                this.currentRequest.Client = client;
                 
-                return request;
+                return this.currentRequest;
             }
             catch (Exception ex)
             {
                 this.logger.error(ex.Message);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetParams()
+        {
+            return this.currentRequest.Endpoint.Replace("/", "").Split('@');
         }
     }
 }

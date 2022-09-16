@@ -78,14 +78,17 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         /// <exception cref="NotImplementedException"></exception>
         private void OnDeviceConnected(object sender, DriveChangedEventArgs e)
         {
+            this.TryToMountDevice();
+
             if (!this.isValidCameraDevice(e.Drive)) return;
 
-            USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.ToString());
+            USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.ToString(), camerasList.Count);
 
 
             if (this.isCameraAlreadyAdded(camera)) return;
 
             this.camerasList.Add(camera.BadgeId, camera);
+
 
             this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
         }
@@ -100,6 +103,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         {
             try
             {
+                this.TryToMountDevice();
                 USBCameraDevice disconnectedCamera = null;
 
                 foreach (KeyValuePair<string, USBCameraDevice> kvp in this.camerasList)
@@ -130,7 +134,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         /// <param name="e"></param>
         private void OnDeviceInsertedOrRemoved(object sender, EventArgs e)
         {
-           this.mountDevices();
+           this.TryToMountDevice();
            this.OnCameraConnectedOrDisconnected?.Invoke(sender, e);
         }
 
@@ -138,7 +142,7 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         /// <summary>
         /// 
         /// </summary>
-        private async void mountDevices()
+        public async void TryToMountDevice()
         {
             await Task.Delay(4000);
             this.sdk.ConnectToDevice();

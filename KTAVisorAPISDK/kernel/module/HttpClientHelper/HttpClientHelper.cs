@@ -24,14 +24,14 @@ namespace KTAVisorAPISDK.kernel.module.HttpClientHelper
             return this._call("GET", address);
         }
 
-        public Task<HttpResponseMessage> POST(string address, string data)
+        public Task<HttpResponseMessage> POST(string address, string data = "")
         {
             var content = new StringContent(data.ToString(), Encoding.UTF8, "application/json");
 
             return this._call("POST", address, content);
         }
 
-        public Task<HttpResponseMessage> PUT(string address, string data)
+        public Task<HttpResponseMessage> PUT(string address, string data = "")
         {
             var content = new StringContent(data.ToString(), Encoding.UTF8, "application/json");
 

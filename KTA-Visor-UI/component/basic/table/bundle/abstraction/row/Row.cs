@@ -66,9 +66,16 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         /// <returns></returns>
         public Row add(RowTObject row)
         {
-            this.table.Invoke(new Action(() => {
-                this.table.Rows.Add(row.getCells());
-            }));
+           try
+            {
+                this.table.Invoke(new Action(() => {
+                    this.table.Rows.Add(row.getCells());
+                }));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             
             return this;
         }
@@ -80,10 +87,16 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         /// <returns></returns>
         public Row add(params object[] values)
         {
-            this.table.Invoke(new Action(() => {
-                this.table.Rows.Add(values);
-            }));
-
+            try
+            {
+                this.table.Invoke(new Action(() => {
+                    this.table.Rows.Add(values);
+                }));
+            }
+             catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             return this;
         }
 
@@ -102,6 +115,9 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
                     {
                         this.table.Invoke(new Action(() =>
                         {
+                            if (table.IsDisposed)
+                                return;
+
                             this.table.Rows.Remove(row);
                         }));
                     }

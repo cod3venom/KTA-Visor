@@ -123,6 +123,9 @@
     <Reference Include="Device.Net, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Device.Net.4.2.1\lib\net45\Device.Net.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="Falcon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Falcon.dll</HintPath>
@@ -320,6 +323,7 @@
     <Compile Include="install\Installer.cs" />
     <Compile Include="install\settings\dto\SettingsFileTObject.cs" />
     <Compile Include="install\settings\Settings.cs" />
+    <Compile Include="kernel\generate\RandomData.cs" />
     <Compile Include="kernel\helper\EmbededFileHelper.cs" />
     <Compile Include="kernel\module\HttpClientHelper\events\HttpUnauthorizedInterceptorEvent.cs" />
     <Compile Include="kernel\module\HttpClientHelper\HttpClientHelper.cs" />
@@ -332,14 +336,6 @@
     <Compile Include="kernel\sharedKernel\helper\LocalStorage\LocalStorage.cs" />
     <Compile Include="kernel\sharedKernel\SharedKernel.cs" />
     <Compile Include="kernel\sharedKernel\util\HttpClientUtil.cs" />
-    <Compile Include="module\Authentication\events\RFIDAuthFailEvent.cs" />
-    <Compile Include="module\Authentication\events\RFIDAuthSuccessEvent.cs" />
-    <Compile Include="module\Authentication\view\RFIDAuthenticationView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Authentication\view\RFIDAuthenticationView.Designer.cs">
-      <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
-    </Compile>
     <Compile Include="module\Managemnt\command\RemoveClientToTheGlobalMemoryCommand.cs" />
     <Compile Include="module\Managemnt\command\AddClientToTheGlobalMemoryCommand.cs" />
     <Compile Include="module\Managemnt\events\OnServerStoppedEvent.cs" />
@@ -364,8 +360,21 @@
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\CameraItem.Designer.cs">
       <DependentUpon>CameraItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\camera\components\CameraItem\commands\filesystem\CopyFilesToUSBCommand.cs" />
+    <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\ContextMenu\ContextMenuCopyFilesToDiskClickEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\OnCloseCameraItemFormEvent.cs" />
+    <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\ContextMenu\ContextMenuCopyFilesToUSBClickEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\OnOpenCameraItemEvent.cs" />
+    <Compile Include="module\Managemnt\module\camera\components\CameraNotification\CameraNotificationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\camera\components\CameraNotification\CameraNotificationWindow.Designer.cs">
+      <DependentUpon>CameraNotificationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\camera\components\CameraNotification\events\CameraNotificationOpenClickEvent.cs" />
+    <Compile Include="module\Managemnt\module\camera\components\CameraNotification\events\CameraNotificationViewNextPositionEvent.cs" />
+    <Compile Include="module\Managemnt\module\camera\components\CameraNotification\globals\CameraNotificationWindowGlobals.cs" />
+    <Compile Include="module\Managemnt\module\camera\controller\CamerasController.cs" />
     <Compile Include="module\Managemnt\module\camera\events\OnCameraCRUDEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.cs">
       <SubType>Form</SubType>
@@ -373,23 +382,11 @@
     <Compile Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.Designer.cs">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\camera\form\CameraRDPForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\module\camera\form\CameraRDPForm.Designer.cs">
-      <DependentUpon>CameraRDPForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.Designer.cs">
       <DependentUpon>CamerasViewPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Managemnt\module\camera\views\forms\CameraCRUDForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\module\camera\views\forms\CameraCRUDForm.Designer.cs">
-      <DependentUpon>CameraCRUDForm.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\fileHistory\view\FileHistoryViewPanel\FileHistoryViewPanel.cs">
       <SubType>UserControl</SubType>
@@ -434,20 +431,15 @@
     <Compile Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.Designer.cs">
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\station\controller\StationController.cs" />
     <Compile Include="module\Managemnt\module\station\events\OnStationCRUDEvent.cs" />
     <Compile Include="module\Managemnt\module\station\events\StationCameraFilesReceivedEvent.cs" />
     <Compile Include="module\Managemnt\module\station\events\StationCamerasListReceivedEvent.cs" />
-    <Compile Include="module\Managemnt\module\station\view\forms\StationCamerasForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="module\Managemnt\module\station\view\StationCameraPanel\StationCamerasPanel.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\station\view\forms\StationCamerasForm.Designer.cs">
-      <DependentUpon>StationCamerasForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Managemnt\module\station\view\forms\StationCRUDForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\module\station\view\forms\StationCRUDForm.Designer.cs">
-      <DependentUpon>StationCRUDForm.cs</DependentUpon>
+    <Compile Include="module\Managemnt\module\station\view\StationCameraPanel\StationCamerasPanel.Designer.cs">
+      <DependentUpon>StationCamerasPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.cs">
       <SubType>UserControl</SubType>
@@ -522,9 +514,6 @@
     <EmbeddedResource Include="component\custom\VerticalTab\VerticalTab.resx">
       <DependentUpon>VerticalTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Authentication\view\RFIDAuthenticationView.resx">
-      <DependentUpon>RFIDAuthenticationView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\auth\view\SignInView\SignInView.resx">
       <DependentUpon>SignInView.cs</DependentUpon>
     </EmbeddedResource>
@@ -534,14 +523,14 @@
     <EmbeddedResource Include="module\Managemnt\module\camera\components\CameraItem\CameraItem.resx">
       <DependentUpon>CameraItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\camera\form\CameraRDPForm.resx">
-      <DependentUpon>CameraRDPForm.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\camera\components\CameraNotification\CameraNotificationWindow.resx">
+      <DependentUpon>CameraNotificationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.resx">
+      <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.resx">
       <DependentUpon>CamerasViewPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\camera\views\forms\CameraCRUDForm.resx">
-      <DependentUpon>CameraCRUDForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\fileHistory\view\FileHistoryViewPanel\FileHistoryViewPanel.resx">
       <DependentUpon>FileHistoryViewPanel.cs</DependentUpon>
@@ -564,11 +553,8 @@
     <EmbeddedResource Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.resx">
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\station\view\forms\StationCamerasForm.resx">
-      <DependentUpon>StationCamerasForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\station\view\forms\StationCRUDForm.resx">
-      <DependentUpon>StationCRUDForm.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\station\view\StationCameraPanel\StationCamerasPanel.resx">
+      <DependentUpon>StationCamerasPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.resx">
       <DependentUpon>StationViewPanel.cs</DependentUpon>
@@ -609,14 +595,9 @@
     <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
-    <Folder Include="module\Authentication\command\" />
-    <Folder Include="module\Authentication\entity\" />
-    <Folder Include="module\Authentication\exception\" />
-    <Folder Include="module\Authentication\repository\" />
     <Folder Include="module\Managemnt\helper\" />
     <Folder Include="module\Managemnt\module\camera\command\" />
     <Folder Include="module\Managemnt\module\settings\" />
-    <Folder Include="module\Managemnt\module\station\controller\" />
     <Folder Include="module\Managemnt\module\user\entity\" />
     <Folder Include="module\Shared\Component\" />
   </ItemGroup>
@@ -689,6 +670,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\generate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\notification.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
