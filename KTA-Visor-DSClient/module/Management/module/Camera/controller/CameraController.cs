@@ -50,12 +50,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
             entity.datas = new List<CameraEntity.Camera>();
             Globals.CAMERAS_LIST.ToList().ForEach(async delegate (USBCameraDevice cameraDevice)
             {
-                CameraEntity cameraEntity = await this.cameraService.findByBadgeId(cameraDevice.BadgeId);
+                CameraEntity cameraEntity = await this.cameraService.findByCustomId(cameraDevice.ID);
                 entity.datas.Add(cameraEntity.data);
             });
 
             request.Client.Send(new Request(
-                "response://cemeras/all",
+                "response://cameras/all",
                 entity
             ));
         }

@@ -1,6 +1,7 @@
 ﻿using KTA_USB_Relay.kernel.sharedKernel.module.RelayDevice.dto;
 using KTA_USB_Relay.kernel.sharedKernel.module.RelayDevice.events;
 using KTA_Visor_DSClient.module.Management.module.PowerSupply.component.USBRelayItem.events;
+using KTA_Visor_DSClient.module.Shared.Globals;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,14 +58,14 @@ namespace KTA_Visor_DSClient.module.Management.module.PowerSupply.component.USBR
         /// </summary>
         private void checkState()
         {
-            Program.Relay.OnReceivedPortStatusEvent += (delegate (object sender, OnReceivedPortStatusEvent evt)
+            Globals.Relay.OnReceivedPortStatusEvent += (delegate (object sender, OnReceivedPortStatusEvent evt)
             {
                 USBRelayPortsToObject.Port port = evt.Ports.findByPortNumber(this.PortNumber);
                 this.isON = evt.Ports.findByPortNumber(this.PortNumber).Status == 0 ? false : true;
                 this.render();
             });
 
-            Program.Relay.isTurnedOn(this.PortNumber);
+            Globals.Relay.isTurnedOn(this.PortNumber);
         }
 
         /// <summary>

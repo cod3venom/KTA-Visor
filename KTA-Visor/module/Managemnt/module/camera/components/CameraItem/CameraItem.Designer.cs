@@ -36,8 +36,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.batteryLbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.cameraDriveLbl = new System.Windows.Forms.Label();
-            this.badgeLbl = new System.Windows.Forms.Label();
+            this.stationIdLbl = new System.Windows.Forms.Label();
+            this.badgeIdLbl = new System.Windows.Forms.Label();
+            this.cameraIdLbl = new System.Windows.Forms.Label();
+            this.stationIdTextLbl = new System.Windows.Forms.Label();
+            this.cameraIdTextLbl = new System.Windows.Forms.Label();
+            this.badgeIdTextLbl = new System.Windows.Forms.Label();
             this.openBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.cameraItemMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.systemPlikówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,9 +62,9 @@
             this.panel2.Controls.Add(this.pictureBox3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 27);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(151, 107);
+            this.panel2.Size = new System.Drawing.Size(265, 98);
             this.panel2.TabIndex = 4;
             // 
             // pictureBox3
@@ -69,10 +73,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(50, 17);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox3.Location = new System.Drawing.Point(94, 17);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(60, 73);
+            this.pictureBox3.Size = new System.Drawing.Size(64, 61);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 1;
             this.pictureBox3.TabStop = false;
@@ -83,16 +87,16 @@
             this.panel1.Controls.Add(this.batteryLbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(151, 27);
+            this.panel1.Size = new System.Drawing.Size(265, 27);
             this.panel1.TabIndex = 3;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(98, 6);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(207, 6);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(21, 17);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -103,7 +107,7 @@
             // 
             this.batteryLbl.AutoSize = true;
             this.batteryLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.batteryLbl.Location = new System.Drawing.Point(122, 8);
+            this.batteryLbl.Location = new System.Drawing.Point(231, 8);
             this.batteryLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.batteryLbl.Name = "batteryLbl";
             this.batteryLbl.Size = new System.Drawing.Size(28, 14);
@@ -112,39 +116,79 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.cameraDriveLbl);
-            this.panel3.Controls.Add(this.badgeLbl);
+            this.panel3.Controls.Add(this.stationIdLbl);
+            this.panel3.Controls.Add(this.badgeIdLbl);
+            this.panel3.Controls.Add(this.cameraIdLbl);
+            this.panel3.Controls.Add(this.stationIdTextLbl);
+            this.panel3.Controls.Add(this.cameraIdTextLbl);
+            this.panel3.Controls.Add(this.badgeIdTextLbl);
             this.panel3.Controls.Add(this.openBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 134);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Location = new System.Drawing.Point(0, 125);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(151, 59);
+            this.panel3.Size = new System.Drawing.Size(265, 135);
             this.panel3.TabIndex = 5;
             // 
-            // cameraDriveLbl
+            // stationIdLbl
             // 
-            this.cameraDriveLbl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cameraDriveLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cameraDriveLbl.Location = new System.Drawing.Point(0, 13);
-            this.cameraDriveLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.cameraDriveLbl.Name = "cameraDriveLbl";
-            this.cameraDriveLbl.Size = new System.Drawing.Size(151, 13);
-            this.cameraDriveLbl.TabIndex = 2;
-            this.cameraDriveLbl.Text = "F:\\";
-            this.cameraDriveLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.stationIdLbl.AutoSize = true;
+            this.stationIdLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stationIdLbl.Location = new System.Drawing.Point(70, 72);
+            this.stationIdLbl.Name = "stationIdLbl";
+            this.stationIdLbl.Size = new System.Drawing.Size(47, 14);
+            this.stationIdLbl.TabIndex = 10;
+            this.stationIdLbl.Text = "123456";
             // 
-            // badgeLbl
+            // badgeIdLbl
             // 
-            this.badgeLbl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.badgeLbl.Font = new System.Drawing.Font("Inter SemiBold", 9F, System.Drawing.FontStyle.Bold);
-            this.badgeLbl.Location = new System.Drawing.Point(0, 0);
-            this.badgeLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.badgeLbl.Name = "badgeLbl";
-            this.badgeLbl.Size = new System.Drawing.Size(151, 13);
-            this.badgeLbl.TabIndex = 5;
-            this.badgeLbl.Text = "123456";
-            this.badgeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.badgeIdLbl.AutoSize = true;
+            this.badgeIdLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.badgeIdLbl.Location = new System.Drawing.Point(70, 25);
+            this.badgeIdLbl.Name = "badgeIdLbl";
+            this.badgeIdLbl.Size = new System.Drawing.Size(47, 14);
+            this.badgeIdLbl.TabIndex = 9;
+            this.badgeIdLbl.Text = "123456";
+            // 
+            // cameraIdLbl
+            // 
+            this.cameraIdLbl.AutoSize = true;
+            this.cameraIdLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraIdLbl.Location = new System.Drawing.Point(70, 49);
+            this.cameraIdLbl.Name = "cameraIdLbl";
+            this.cameraIdLbl.Size = new System.Drawing.Size(47, 14);
+            this.cameraIdLbl.TabIndex = 8;
+            this.cameraIdLbl.Text = "123456";
+            // 
+            // stationIdTextLbl
+            // 
+            this.stationIdTextLbl.AutoSize = true;
+            this.stationIdTextLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stationIdTextLbl.Location = new System.Drawing.Point(17, 72);
+            this.stationIdTextLbl.Name = "stationIdTextLbl";
+            this.stationIdTextLbl.Size = new System.Drawing.Size(53, 14);
+            this.stationIdTextLbl.TabIndex = 7;
+            this.stationIdTextLbl.Text = "ID Stacji:";
+            // 
+            // cameraIdTextLbl
+            // 
+            this.cameraIdTextLbl.AutoSize = true;
+            this.cameraIdTextLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraIdTextLbl.Location = new System.Drawing.Point(7, 49);
+            this.cameraIdTextLbl.Name = "cameraIdTextLbl";
+            this.cameraIdTextLbl.Size = new System.Drawing.Size(63, 14);
+            this.cameraIdTextLbl.TabIndex = 6;
+            this.cameraIdTextLbl.Text = "ID Kamery:";
+            // 
+            // badgeIdTextLbl
+            // 
+            this.badgeIdTextLbl.AutoSize = true;
+            this.badgeIdTextLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.badgeIdTextLbl.Location = new System.Drawing.Point(3, 25);
+            this.badgeIdTextLbl.Name = "badgeIdTextLbl";
+            this.badgeIdTextLbl.Size = new System.Drawing.Size(73, 14);
+            this.badgeIdTextLbl.TabIndex = 5;
+            this.badgeIdTextLbl.Text = "NR Odznaki: ";
             // 
             // openBtn
             // 
@@ -155,6 +199,7 @@
             this.openBtn.ButtonText = "Otwórz";
             this.openBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.openBtn.DisabledColor = System.Drawing.Color.Gray;
+            this.openBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.openBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(84)))), ((int)(((byte)(89)))));
             this.openBtn.Iconcolor = System.Drawing.Color.Transparent;
             this.openBtn.Iconimage = null;
@@ -168,13 +213,13 @@
             this.openBtn.IconVisible = true;
             this.openBtn.IconZoom = 90D;
             this.openBtn.IsTab = false;
-            this.openBtn.Location = new System.Drawing.Point(22, 32);
+            this.openBtn.Location = new System.Drawing.Point(0, 114);
             this.openBtn.Name = "openBtn";
             this.openBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.openBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.openBtn.OnHoverTextColor = System.Drawing.Color.White;
             this.openBtn.selected = false;
-            this.openBtn.Size = new System.Drawing.Size(104, 21);
+            this.openBtn.Size = new System.Drawing.Size(265, 21);
             this.openBtn.TabIndex = 4;
             this.openBtn.Text = "Otwórz";
             this.openBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -227,9 +272,9 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CameraItem";
-            this.Size = new System.Drawing.Size(151, 193);
+            this.Size = new System.Drawing.Size(265, 260);
             this.Load += new System.EventHandler(this.CameraItem_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -237,6 +282,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.cameraItemMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -251,13 +297,17 @@
         private System.Windows.Forms.Panel panel3;
         private Bunifu.Framework.UI.BunifuFlatButton openBtn;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label cameraDriveLbl;
-        private System.Windows.Forms.Label badgeLbl;
         private System.Windows.Forms.ContextMenuStrip cameraItemMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem systemPlikówToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyFilesToUSBMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyFilesToDVDMenuItem;
         private System.Windows.Forms.FolderBrowserDialog targetDriveDevicePathDialog;
         private System.Windows.Forms.OpenFileDialog nasStorageFileDialog;
+        private System.Windows.Forms.Label stationIdLbl;
+        private System.Windows.Forms.Label badgeIdLbl;
+        private System.Windows.Forms.Label cameraIdLbl;
+        private System.Windows.Forms.Label stationIdTextLbl;
+        private System.Windows.Forms.Label cameraIdTextLbl;
+        private System.Windows.Forms.Label badgeIdTextLbl;
     }
 }

@@ -11,7 +11,7 @@ namespace TCPTunnel.module.server.dto
         public string serverName = "";
         public string ipAddress = "";
         public int port = 1337;
-        public int listenInterval = 10;
+        public int listenInterval = 1000;
 
         public ServerConfigTObject(
             string serverName = "",

@@ -163,6 +163,25 @@ namespace KTALogger
             this.write("error", caller, message, context);
         }
 
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="context"></param>
+        public void print(string message, object context = null)
+        {
+            string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
+            this.write("print", caller, message, context);
+        }
+
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="context"></param>
+        public void hidden(string message, object context = null)
+        {
+            string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
+            this.write("hidden", caller, message, context);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -178,6 +197,7 @@ namespace KTALogger
                 case "info": Console.ForegroundColor = ConsoleColor.DarkBlue; break;
                 case "warn": Console.ForegroundColor = ConsoleColor.DarkYellow; break;
                 case "error": Console.ForegroundColor = ConsoleColor.DarkRed; break;
+                case "print": Console.ForegroundColor = ConsoleColor.DarkGray; break;
             }
 
             string fullText = String.Format(loggerFormat, this.currentTime, type, caller, message);
@@ -190,7 +210,11 @@ namespace KTALogger
                 {
                     sw.WriteLine(fullText);
                     sw.Close();
-                    Console.WriteLine(fullText);
+
+                    if (type != "hidden")
+                    {
+                        Console.WriteLine(fullText);
+                    }
                 }
             }
             catch(Exception ex) { }

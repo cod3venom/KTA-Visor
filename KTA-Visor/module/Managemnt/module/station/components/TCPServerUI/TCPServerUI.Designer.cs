@@ -125,7 +125,6 @@
             this.stopListeningBtn.TabIndex = 1;
             this.stopListeningBtn.Text = "Stop";
             this.stopListeningBtn.UseVisualStyleBackColor = false;
-            this.stopListeningBtn.Click += new System.EventHandler(this.stopListeningBtn_Click);
             // 
             // startListeningBTN
             // 
@@ -143,7 +142,6 @@
             this.startListeningBTN.TabIndex = 0;
             this.startListeningBTN.Text = "Start";
             this.startListeningBTN.UseVisualStyleBackColor = false;
-            this.startListeningBTN.Click += new System.EventHandler(this.startListeningBTN_Click);
             // 
             // panel2
             // 
@@ -163,7 +161,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "TCPServerUI";
             this.Size = new System.Drawing.Size(1265, 460);
-            this.Load += new System.EventHandler(this.TCPServerUI_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

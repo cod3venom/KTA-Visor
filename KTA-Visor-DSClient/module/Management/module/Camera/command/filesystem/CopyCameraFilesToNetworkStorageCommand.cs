@@ -69,7 +69,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem
                         destFile.Length
                     ));
 
-                    Program.logger.success(String.Format("Successfully copied File {0} from the {1} to the {2} folder", file.Name, file.DirectoryName, networkDriveLocation));
+                    Globals.Logger.success(String.Format("Successfully copied File {0} from the {1} to the {2} folder", file.Name, file.DirectoryName, networkDriveLocation));
                 }
             }
 

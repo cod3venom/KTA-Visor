@@ -338,6 +338,7 @@
     <Compile Include="kernel\sharedKernel\util\HttpClientUtil.cs" />
     <Compile Include="module\Managemnt\command\RemoveClientToTheGlobalMemoryCommand.cs" />
     <Compile Include="module\Managemnt\command\AddClientToTheGlobalMemoryCommand.cs" />
+    <Compile Include="module\Managemnt\events\OnMessageReceivedFromClient.cs" />
     <Compile Include="module\Managemnt\events\OnServerStoppedEvent.cs" />
     <Compile Include="module\Managemnt\events\OnServerStartedEvent.cs" />
     <Compile Include="module\Managemnt\events\OnClientDisconnected.cs" />
@@ -374,7 +375,6 @@
     <Compile Include="module\Managemnt\module\camera\components\CameraNotification\events\CameraNotificationOpenClickEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraNotification\events\CameraNotificationViewNextPositionEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraNotification\globals\CameraNotificationWindowGlobals.cs" />
-    <Compile Include="module\Managemnt\module\camera\controller\CamerasController.cs" />
     <Compile Include="module\Managemnt\module\camera\events\OnCameraCRUDEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.cs">
       <SubType>Form</SubType>
@@ -413,6 +413,9 @@
     <Compile Include="module\Managemnt\module\officer\view\OfficersPanelView\OfficersPanelView.Designer.cs">
       <DependentUpon>OfficersPanelView.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\station\command\AskForCamerasOfSelectedStationCommand.cs" />
+    <Compile Include="module\Managemnt\module\station\command\DisplayCamerasOfSelectedStationCommand.cs" />
+    <Compile Include="module\Managemnt\module\station\command\DisplayStationInTableCommand.cs" />
     <Compile Include="module\Managemnt\module\station\components\ClientsList\ClientsList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -435,23 +438,11 @@
     <Compile Include="module\Managemnt\module\station\events\OnStationCRUDEvent.cs" />
     <Compile Include="module\Managemnt\module\station\events\StationCameraFilesReceivedEvent.cs" />
     <Compile Include="module\Managemnt\module\station\events\StationCamerasListReceivedEvent.cs" />
-    <Compile Include="module\Managemnt\module\station\view\StationCameraPanel\StationCamerasPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\module\station\view\StationCameraPanel\StationCamerasPanel.Designer.cs">
-      <DependentUpon>StationCamerasPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.Designer.cs">
       <DependentUpon>StationViewPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Managemnt\module\tunnel\view\TunnelSettingsPanelView\TunnelSettingsPanelView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\module\tunnel\view\TunnelSettingsPanelView\TunnelSettingsPanelView.Designer.cs">
-      <DependentUpon>TunnelSettingsPanelView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\user\consts\UserRole.cs" />
     <Compile Include="module\Managemnt\view\Management.cs">
@@ -460,15 +451,20 @@
     <Compile Include="module\Managemnt\view\Management.Designer.cs">
       <DependentUpon>Management.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\workers\tunnel\controller\TunnelController.cs" />
-    <Compile Include="module\Managemnt\workers\tunnel\TunnelBackgroundWorker.cs" />
+    <Compile Include="module\Managemnt\view\SettingsEntryPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\view\SettingsEntryPoint.Designer.cs">
+      <DependentUpon>SettingsEntryPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\workers\tunnel\controller\ServerTunnelController.cs" />
+    <Compile Include="module\Managemnt\workers\tunnel\ServerTunnelBackgroundWorker.cs" />
     <Compile Include="module\Shared\Exceptions\WrongCredentialsException.cs" />
     <Compile Include="module\Shared\Exceptions\BadRequestException.cs" />
     <Compile Include="module\Shared\Exceptions\RecordNotFoundException.cs" />
     <Compile Include="module\Shared\Exceptions\UnableToEditRecordException.cs" />
     <Compile Include="module\Shared\Exceptions\UnableToCreateRecordException .cs" />
     <Compile Include="module\Shared\Exceptions\UnableToRemoveRecordException.cs" />
-    <Compile Include="module\Managemnt\module\tunnel\Tunnel.cs" />
     <Compile Include="module\Shared\Global\Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -553,17 +549,14 @@
     <EmbeddedResource Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.resx">
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\station\view\StationCameraPanel\StationCamerasPanel.resx">
-      <DependentUpon>StationCamerasPanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.resx">
       <DependentUpon>StationViewPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\tunnel\view\TunnelSettingsPanelView\TunnelSettingsPanelView.resx">
-      <DependentUpon>TunnelSettingsPanelView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\view\Management.resx">
       <DependentUpon>Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\view\SettingsEntryPoint.resx">
+      <DependentUpon>SettingsEntryPoint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -597,7 +590,6 @@
     <Folder Include="component\basic\table\dto\" />
     <Folder Include="module\Managemnt\helper\" />
     <Folder Include="module\Managemnt\module\camera\command\" />
-    <Folder Include="module\Managemnt\module\settings\" />
     <Folder Include="module\Managemnt\module\user\entity\" />
     <Folder Include="module\Shared\Component\" />
   </ItemGroup>

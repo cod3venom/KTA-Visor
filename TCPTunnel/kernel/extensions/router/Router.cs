@@ -40,14 +40,11 @@ namespace TCPTunnel.kernel.extensions.router
         {
             try
             {
-                this.logger.warn("Received plain message: " + message);
+                this.logger.hidden("Received plain message: " + message);
                 message = message.Replace("\r\n", "\n");
                 message = message.Replace("\n", "");
 
                 this.currentRequest = JsonConvert.DeserializeObject<Request>(message);
-
-                this.logger.warn("Converted message to json: " + this.currentRequest.Body);
-
                 this.currentRequest.Client = client;
                 
                 return this.currentRequest;

@@ -118,43 +118,43 @@
     <Compile Include="kernel\sharedKernel\HttpClientHelper\HttpClientHelper.cs" />
     <Compile Include="kernel\sharedKernel\HttpClientHelper\interfaces\IHttpClient.cs" />
     <Compile Include="kernel\sharedKernel\LocalStorage\LocalStorage.cs" />
+    <Compile Include="module\Management\clientTunnel\ClientTunnel.cs" />
+    <Compile Include="module\Management\clientTunnel\events\OnRequestReceivedInTunnelEvent.cs" />
+    <Compile Include="module\Management\Entrypoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Management\Entrypoint.Designer.cs">
+      <DependentUpon>Entrypoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Management\events\OnExceptionOccuredEvent.cs" />
     <Compile Include="module\Management\module\Camera\command\backend\MarkCameraAsInactiveOnBackendCommand.cs" />
     <Compile Include="module\Management\module\Camera\command\backend\MarkCameraAsActiveOnBackendCommand.cs" />
     <Compile Include="module\Management\module\Camera\command\filesystem\MergeCopiedVideosIntoOneCommand.cs" />
     <Compile Include="module\Management\module\Camera\controller\CameraController.cs" />
-    <Compile Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.cs">
+    <Compile Include="module\Management\module\Camera\service\CameraDeviceSettingsService.cs" />
+    <Compile Include="module\Management\module\PowerSupply\PowerSupplyInitializer.cs" />
+    <Compile Include="module\Management\module\PowerSupply\PowerSupplyWatcher.cs" />
+    <Compile Include="module\Management\module\Station\events\OnStationAbstraction.cs" />
+    <Compile Include="module\Management\module\Station\events\OnUnableToRegisterStation.cs" />
+    <Compile Include="module\Management\module\Station\events\OnStationUpdatedEvent.cs" />
+    <Compile Include="module\Management\module\Station\events\OnStationCreatedEvent.cs" />
+    <Compile Include="module\Management\module\Station\StationInitializer.cs" />
+    <Compile Include="module\Management\view\SettingsManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Management\module\Camera\form\CameraItemForm\CameraItemForm.Designer.cs">
-      <DependentUpon>CameraItemForm.cs</DependentUpon>
+    <Compile Include="module\Management\view\SettingsManager.Designer.cs">
+      <DependentUpon>SettingsManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Management\module\Camera\service\CameraDeviceSettingsService.cs" />
-    <Compile Include="module\Management\workers\Tunnel\controller\TunnelController.cs" />
-    <Compile Include="module\Management\workers\Tunnel\TunnelBackgroundWrorker.cs" />
     <Compile Include="module\Management\module\Camera\command\memory\AddCamerasToTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\command\filesystem\CopyCameraFilesToNetworkStorageCommand.cs" />
     <Compile Include="module\Management\module\Camera\command\memory\RemoveCamerasFromTheGlobalMemory.cs" />
-    <Compile Include="module\Management\module\Camera\component\CameraItem\CameraItem.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Management\module\Camera\component\CameraItem\CameraItem.Designer.cs">
-      <DependentUpon>CameraItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Management\module\Camera\component\CameraItem\events\OnCloseCameraItemFormEvent.cs" />
-    <Compile Include="module\Management\module\Camera\component\CameraItem\events\OnOpenCameraItemEvent.cs" />
     <Compile Include="module\Management\module\Camera\consts\CameraSettingsConsts.cs" />
     <Compile Include="module\Management\module\Camera\dto\CopiedCameraFileTObject.cs" />
     <Compile Include="module\Management\module\Camera\dto\GetCameraFilesRequestTObject.cs" />
     <Compile Include="module\Management\module\Camera\dto\GetSelectedCameraFilesRequestTObject.cs" />
     <Compile Include="module\Management\module\Camera\flags\WMEvents.cs" />
     <Compile Include="module\Management\module\Camera\flags\WMQuery.cs" />
-    <Compile Include="module\Management\module\Camera\service\CamerasService.cs" />
-    <Compile Include="module\Management\module\Camera\view\CamerasPanelView\CamerasPanelView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Management\module\Camera\view\CamerasPanelView\CamerasPanelView.Designer.cs">
-      <DependentUpon>CamerasPanelView.cs</DependentUpon>
-    </Compile>
+    <Compile Include="module\Management\module\Camera\CameraDevicesWatcher.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnCheckStateEvent.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnTurnOffPowerEvent.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnTurnOnPowerEvent.cs" />
@@ -164,50 +164,25 @@
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\USBRelayItem.Designer.cs">
       <DependentUpon>USBRelayItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Management\module\PowerSupply\view\PowerSupplyPanelView\PowerSupplyPanelView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Management\module\PowerSupply\view\PowerSupplyPanelView\PowerSupplyPanelView.Designer.cs">
-      <DependentUpon>PowerSupplyPanelView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Management\module\SettingsManager\view\SettingsPanelView\SettingsPanelView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Management\module\SettingsManager\view\SettingsPanelView\SettingsPanelView.Designer.cs">
-      <DependentUpon>SettingsPanelView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Management\module\Station\bootloader\StationBootLoader.cs" />
-    <Compile Include="module\Management\view\ManagementView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Management\view\ManagementView.Designer.cs">
-      <DependentUpon>ManagementView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Management\module\Tunnel\Tunnel.cs" />
+    <Compile Include="module\Shared\GlobalController.cs" />
+    <Compile Include="module\Shared\Globals\events\OnStationInitializedEvent.cs" />
+    <Compile Include="module\Shared\Globals\events\OnBackendInitializedEvent.cs" />
     <Compile Include="module\Shared\Globals\Globals.cs" />
+    <Compile Include="module\Shared\Globals\BootLoader.cs" />
     <Compile Include="module\Shared\Util\HttpClientUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="components\basic\table\Table.resx">
       <DependentUpon>Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Management\module\Camera\component\CameraItem\CameraItem.resx">
-      <DependentUpon>CameraItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Management\module\Camera\view\CamerasPanelView\CamerasPanelView.resx">
-      <DependentUpon>CamerasPanelView.cs</DependentUpon>
+    <EmbeddedResource Include="module\Management\Entrypoint.resx">
+      <DependentUpon>Entrypoint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Management\module\PowerSupply\component\USBRelayItem\USBRelayItem.resx">
       <DependentUpon>USBRelayItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Management\module\PowerSupply\view\PowerSupplyPanelView\PowerSupplyPanelView.resx">
-      <DependentUpon>PowerSupplyPanelView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Management\module\SettingsManager\view\SettingsPanelView\SettingsPanelView.resx">
-      <DependentUpon>SettingsPanelView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Management\view\ManagementView.resx">
-      <DependentUpon>ManagementView.cs</DependentUpon>
+    <EmbeddedResource Include="module\Management\view\SettingsManager.resx">
+      <DependentUpon>SettingsManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -282,6 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ASL - Apache Software Foundation License.txt" />
+    <None Include="Resources\magicWand.png" />
     <Content Include="Utilities\Audio\Formats.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

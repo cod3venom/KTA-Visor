@@ -13,21 +13,22 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge
     {
 
      
-        private readonly DeviceWatcher deviceWatcher;
-
+        
         private readonly KTALogger.Logger logger;
 
 
         public AbstractResource(DeviceWatcher deviceWatcher, KTALogger.Logger logger)
         {
-            this.deviceWatcher = deviceWatcher;
+            this.DeviceWatcher = deviceWatcher;
             this.logger = logger;
 
             this.Sdk = new Falcon.FalconSdk();
-            this.CameraDeviceService = new CameraDeviceService(this.Sdk, ref this.deviceWatcher, this.logger);
+            this.CameraDeviceService = new CameraDeviceService(this.Sdk, ref deviceWatcher, this.logger);
+            this.CameraDeviceService.TryToMountDevice();
         }
 
         public Falcon.FalconSdk Sdk { get; set; }
         public CameraDeviceService CameraDeviceService { get; set; }
+        public DeviceWatcher DeviceWatcher{ get; set; }
     }
 }

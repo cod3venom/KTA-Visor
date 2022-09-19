@@ -8,5 +8,6 @@ namespace KTAVisorAPISDK
 {
     public class SDK
     {
+
     }
 }

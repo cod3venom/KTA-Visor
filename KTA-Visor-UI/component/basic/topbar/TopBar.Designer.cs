@@ -33,6 +33,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.titleLbl = new System.Windows.Forms.Label();
+            this.descriptionLbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.minimizeBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.resizeBtn = new Bunifu.Framework.UI.BunifuImageButton();
@@ -40,7 +41,6 @@
             this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuDragControl2 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuDragControl3 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -52,37 +52,52 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.titleLbl);
+            this.panel1.Controls.Add(this.descriptionLbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1099, 44);
+            this.panel1.Size = new System.Drawing.Size(825, 36);
             this.panel1.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.titleLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 44);
+            this.panel3.Size = new System.Drawing.Size(150, 36);
             this.panel3.TabIndex = 2;
             // 
             // titleLbl
             // 
-            this.titleLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.titleLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.titleLbl.Font = new System.Drawing.Font("Inter Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLbl.AutoSize = true;
+            this.titleLbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.titleLbl.Font = new System.Drawing.Font("Inter ExtraBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(150)))), ((int)(((byte)(158)))));
-            this.titleLbl.Location = new System.Drawing.Point(0, 0);
-            this.titleLbl.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.titleLbl.Location = new System.Drawing.Point(2, 10);
+            this.titleLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.titleLbl.Name = "titleLbl";
-            this.titleLbl.Padding = new System.Windows.Forms.Padding(200, 0, 0, 0);
-            this.titleLbl.Size = new System.Drawing.Size(1099, 44);
-            this.titleLbl.TabIndex = 1;
-            this.titleLbl.Text = "Window";
-            this.titleLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.titleLbl.Size = new System.Drawing.Size(56, 14);
+            this.titleLbl.TabIndex = 0;
+            this.titleLbl.Text = "KTAvisor";
+            // 
+            // descriptionLbl
+            // 
+            this.descriptionLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.descriptionLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.descriptionLbl.Font = new System.Drawing.Font("Inter Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(150)))), ((int)(((byte)(158)))));
+            this.descriptionLbl.Location = new System.Drawing.Point(0, 0);
+            this.descriptionLbl.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.descriptionLbl.Name = "descriptionLbl";
+            this.descriptionLbl.Padding = new System.Windows.Forms.Padding(150, 0, 0, 0);
+            this.descriptionLbl.Size = new System.Drawing.Size(825, 36);
+            this.descriptionLbl.TabIndex = 1;
+            this.descriptionLbl.Text = "Window";
+            this.descriptionLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
@@ -91,9 +106,10 @@
             this.panel2.Controls.Add(this.resizeBtn);
             this.panel2.Controls.Add(this.closeBtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(1099, 0);
+            this.panel2.Location = new System.Drawing.Point(825, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 44);
+            this.panel2.Size = new System.Drawing.Size(118, 36);
             this.panel2.TabIndex = 1;
             // 
             // minimizeBtn
@@ -101,9 +117,10 @@
             this.minimizeBtn.BackColor = System.Drawing.Color.Transparent;
             this.minimizeBtn.Image = ((System.Drawing.Image)(resources.GetObject("minimizeBtn.Image")));
             this.minimizeBtn.ImageActive = null;
-            this.minimizeBtn.Location = new System.Drawing.Point(22, 12);
+            this.minimizeBtn.Location = new System.Drawing.Point(16, 10);
+            this.minimizeBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.minimizeBtn.Name = "minimizeBtn";
-            this.minimizeBtn.Size = new System.Drawing.Size(20, 20);
+            this.minimizeBtn.Size = new System.Drawing.Size(15, 16);
             this.minimizeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.minimizeBtn.TabIndex = 5;
             this.minimizeBtn.TabStop = false;
@@ -114,9 +131,10 @@
             this.resizeBtn.BackColor = System.Drawing.Color.Transparent;
             this.resizeBtn.Image = ((System.Drawing.Image)(resources.GetObject("resizeBtn.Image")));
             this.resizeBtn.ImageActive = null;
-            this.resizeBtn.Location = new System.Drawing.Point(71, 12);
+            this.resizeBtn.Location = new System.Drawing.Point(53, 10);
+            this.resizeBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.resizeBtn.Name = "resizeBtn";
-            this.resizeBtn.Size = new System.Drawing.Size(20, 20);
+            this.resizeBtn.Size = new System.Drawing.Size(15, 16);
             this.resizeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.resizeBtn.TabIndex = 4;
             this.resizeBtn.TabStop = false;
@@ -127,9 +145,10 @@
             this.closeBtn.BackColor = System.Drawing.Color.Transparent;
             this.closeBtn.Image = ((System.Drawing.Image)(resources.GetObject("closeBtn.Image")));
             this.closeBtn.ImageActive = null;
-            this.closeBtn.Location = new System.Drawing.Point(119, 12);
+            this.closeBtn.Location = new System.Drawing.Point(89, 10);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(20, 20);
+            this.closeBtn.Size = new System.Drawing.Size(15, 16);
             this.closeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.closeBtn.TabIndex = 3;
             this.closeBtn.TabStop = false;
@@ -146,7 +165,7 @@
             // 
             this.bunifuDragControl2.Fixed = true;
             this.bunifuDragControl2.Horizontal = true;
-            this.bunifuDragControl2.TargetControl = this.titleLbl;
+            this.bunifuDragControl2.TargetControl = this.descriptionLbl;
             this.bunifuDragControl2.Vertical = true;
             // 
             // bunifuDragControl3
@@ -156,28 +175,17 @@
             this.bunifuDragControl3.TargetControl = this.panel2;
             this.bunifuDragControl3.Vertical = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Inter ExtraBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(150)))), ((int)(((byte)(158)))));
-            this.label1.Location = new System.Drawing.Point(3, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "KTAvisor";
-            // 
             // TopBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "TopBar";
-            this.Size = new System.Drawing.Size(1257, 44);
+            this.Size = new System.Drawing.Size(943, 36);
             this.Load += new System.EventHandler(this.TopBar_Load);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -193,7 +201,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label titleLbl;
+        private System.Windows.Forms.Label descriptionLbl;
         private System.Windows.Forms.Panel panel2;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl1;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl2;
@@ -202,6 +210,6 @@
         private Bunifu.Framework.UI.BunifuImageButton minimizeBtn;
         private Bunifu.Framework.UI.BunifuImageButton resizeBtn;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label titleLbl;
     }
 }

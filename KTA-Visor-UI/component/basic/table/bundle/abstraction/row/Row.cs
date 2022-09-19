@@ -12,18 +12,12 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
     {
         private readonly DataGridView table;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="table"></param>
         public Row(DataGridView table)
         {
             this.table = table;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         public DataGridViewRow SelectedRow
         {
             get
@@ -32,19 +26,16 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        public DataGridViewCell FindSelectedRowCell(string columnName)
+        {
+            return this.SelectedRow.Cells[columnName];
+        }
+
         public DataGridViewRowCollection Rows
         {
             get { return this.table.Rows; }
         }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public DataGridViewRow FindRowByCellValue(string value)
         {
             int rowIndex = -1;

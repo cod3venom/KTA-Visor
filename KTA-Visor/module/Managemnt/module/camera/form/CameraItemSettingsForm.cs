@@ -1,4 +1,5 @@
 ﻿using KTA_Visor.kernel.generator;
+using KTA_Visor.module.Shared.Global;
 using KTA_Visor_UI.component.custom.MessageWindow;
 using KTAVisorAPISDK.module.camera.dto.reques;
 using KTAVisorAPISDK.module.camera.dto.request;
@@ -168,7 +169,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
 
             this.camera = camEntity.data;
 
-            Program.TunnelBackgroundWorker.sendRequest(this.station.data.stationIp, new Request(
+            Globals.ServerTunnelBackgroundWorker.sendRequest(this.station.data.stationIp, new Request(
                "command://camera/settings/change",
                this.camera
            ));

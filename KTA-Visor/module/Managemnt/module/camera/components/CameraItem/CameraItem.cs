@@ -38,8 +38,9 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         {
             InitializeComponent();
             this.Camera = camera;
-            this.Drive = camera?.driveName;
             this.Badge = camera?.badgeId;
+            this.CamCustomId = camera?.cameraCustomId;
+            this.StationCustomId = this.station?.data?.stationId;
             this.station = station;
             this.form = new CameraItemSettingsForm(camera, station);
         }
@@ -57,16 +58,24 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
 
         public CameraEntity.Camera Camera { get; set; }
 
+         
+
         public string Badge
         {
-            get { return this.badgeLbl.Text; }
-            set { this.badgeLbl.Text = value; }
+            get { return this.badgeIdLbl.Text; }
+            set { this.badgeIdLbl.Text = value; }
         }
 
-        public string Drive
+        public string CamCustomId
         {
-            get { return this.cameraDriveLbl.Text; }
-            set { this.cameraDriveLbl.Text = value; }
+            get { return this.cameraIdLbl.Text; }
+            set { this.cameraIdLbl.Text = value; }
+        }
+
+        public string StationCustomId
+        {
+            get { return this.stationIdLbl.Text; }
+            set { this.stationIdLbl.Text = value; }
         }
 
         private void OpenBtn_Click(object sender, EventArgs e)

@@ -16,6 +16,7 @@ namespace TCPTunnel.module.client.events
             this.request = request;
         }
 
+        public Request Request { get { return request; } }
         public Request getRoute()
         {
             return this.request;

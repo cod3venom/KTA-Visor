@@ -15,6 +15,9 @@ namespace KTA_Visor_DSClient.install.settings.dto
     public class App
     {
         public string title { get; set; }
+        public bool installed{ get; set; }
+        public bool configured { get; set; }
+        public string releaseName{ get; set; }
         public Station station { get; set; }
         public UsbRelay usbRelay { get; set; }
         public FileSystem fileSystem { get; set; }

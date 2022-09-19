@@ -1,14 +1,15 @@
 ﻿using KTA_Visor.install;
 using KTA_Visor.install.settings;
 using KTA_Visor.kernel.sharedKernel.bootstrap;
-using KTA_Visor.module.Management.tunnel;
 using KTA_Visor.module.Managemnt.module.auth.view.SignInView;
 using KTA_Visor.module.Managemnt.workers.tunnel;
+using KTA_Visor.module.Shared.Global;
 using KTAVisorAPISDK.kernel.sharedKernel.util;
 using System;
 using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Windows.Forms;
+using TCPTunnel.module.server.dto;
 
 namespace KTA_Visor
 {
@@ -16,9 +17,6 @@ namespace KTA_Visor
     internal static class Program
     {
         public static KTALogger.Logger Logger;
-
-        public static Tunnel Tunnel;
-        public static TunnelBackgroundWorker TunnelBackgroundWorker;
 
 
         /// <summary>
@@ -55,8 +53,13 @@ namespace KTA_Visor
             HttpClientUtil.initializeSecuredClient("http://localhost:8000/api");
             new Bootstrap()._Watcher.unAuthorizedWatcher().Watch();
 
-            Tunnel = new Tunnel(Logger);
-            Program.TunnelBackgroundWorker = new TunnelBackgroundWorker(Program.Tunnel);
+            Globals.ServerTunnelBackgroundWorker = new ServerTunnelBackgroundWorker(new ServerConfigTObject(
+                    "Management",
+                     settings.SettingsObj?.app?.tunnel?.serverIp,
+                     settings.SettingsObj.app.tunnel.serverPort
+                ), 
+                Program.Logger
+            );
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

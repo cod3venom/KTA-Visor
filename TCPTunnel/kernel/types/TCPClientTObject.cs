@@ -15,14 +15,16 @@ namespace TCPTunnel.kernel.types
         private string ipAddress;
         private Socket socket;
         private Thread thread;
+        private readonly string asWho;
         private bool isBlocked;
 
         private readonly KTALogger.Logger logger;
-        public TCPClientTObject(string ipAddress, Socket socket, Thread thread = null, bool isBlocked = false)
+        public TCPClientTObject(string ipAddress, Socket socket, Thread thread = null, string asWho = "Client", bool isBlocked = false)
         {
             this.ipAddress = ipAddress;
             this.socket = socket;
             this.thread = thread;
+            this.asWho = asWho;
             this.isBlocked = isBlocked;
             this.logger = new KTALogger.Logger();
         }
@@ -102,12 +104,15 @@ namespace TCPTunnel.kernel.types
             {
                
                 string body = request.toJson();
-                this.logger.info("Sending JSON message : ");
-                this.logger.info(body);
                 byte[] messageArray = Encoding.UTF8.GetBytes(body);
-                this.socket.Send(messageArray);
 
-                Thread.SpinWait(5000);
+                Thread sendThread = new Thread((ThreadStart)delegate
+                {
+                    this.socket.Send(messageArray);
+                });
+
+                sendThread.IsBackground = true;
+                sendThread.Start();
             }
         }
 

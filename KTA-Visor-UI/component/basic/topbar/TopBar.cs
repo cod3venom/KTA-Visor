@@ -87,7 +87,6 @@ namespace KTA_Visor_UI.component.basic.topbar
             set { parent = value; }
         }
 
-   
 
         public string Title
         {
@@ -95,10 +94,21 @@ namespace KTA_Visor_UI.component.basic.topbar
             set { this.titleLbl.Text = value; }
         }
 
-       
+        public string Description
+        {
+            get { return this.descriptionLbl.Text; }
+            set { this.descriptionLbl.Text = value; }
+        }
+
         public Bunifu.Framework.UI.BunifuImageButton CloseButton
         {
             get { return this.closeBtn; }
+        }
+
+        public bool AllowClose
+        {
+            get { return this.closeBtn.Visible; }
+            set { this.closeBtn.Visible = value; }
         }
 
         public Bunifu.Framework.UI.BunifuImageButton ResizeButton
@@ -106,9 +116,21 @@ namespace KTA_Visor_UI.component.basic.topbar
             get { return this.resizeBtn; }
         }
 
+        public bool AllowResize
+        {
+            get { return this.resizeBtn.Visible; }
+            set { this.resizeBtn.Visible = value; }
+        }
+
         public Bunifu.Framework.UI.BunifuImageButton MinimizeButton
         {
             get { return this.minimizeBtn; }
+        }
+
+        public bool AllowMinimize
+        {
+            get { return this.minimizeBtn.Visible; }
+            set { this.minimizeBtn.Visible = value; }
         }
     }
 }

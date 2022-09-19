@@ -142,15 +142,14 @@ namespace KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService
         /// <summary>
         /// 
         /// </summary>
-        public async void TryToMountDevice()
+        public void TryToMountDevice()
         {
-            await Task.Delay(4000);
             this.sdk.ConnectToDevice();
 
             if (FalconGlobals.ALLOW_FS_MOUNTING)
             {
                 new Thread(() => this.sdk.Mount()).Start();
-                await Task.Delay(4000);
+                Thread.Sleep(2500);
             }
         }
 

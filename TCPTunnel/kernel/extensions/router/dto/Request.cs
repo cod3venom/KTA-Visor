@@ -21,11 +21,15 @@ namespace TCPTunnel.kernel.extensions.router.dto
         /// </summary>
         /// <param name="endpoint"></param>
         /// <param name="body"></param>
-        public Request(string endpoint = "", dynamic body = null)
+        public Request(string endpoint = "", dynamic body = null, TCPClientTObject client = null)
         {
             this._endpoint = endpoint;
             this._body = body;
-            this._parameters = endpoint.Replace("/", "").Split('@');
+            this.Client = client;
+            if (this._endpoint.Contains("@"))
+            {
+                this._parameters = endpoint.Replace("/", "").Split('@');
+            }
         }
 
         public TCPClientTObject Client { get; set; }

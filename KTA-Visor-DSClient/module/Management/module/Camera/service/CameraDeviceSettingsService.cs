@@ -26,14 +26,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         {
             FalconGlobals.ALLOW_FS_MOUNTING = false;
          
-            int portName = Program.Relay.findPortByBadgeId(badgeId);
-            
-            Program.Relay.turnOffAll();
+            int portName = Globals.Relay.findPortByBadgeId(badgeId);
+
+            Globals.Relay.turnOffAll();
             Thread.Sleep(4000);
-            Program.Relay.connector.disconnect();
+            Globals.Relay.turnOnByPort(portName);
             Thread.Sleep(4000);
-            Program.Relay.connector.connect();
-            Program.Relay.turnOnByPort(portName);
             this.falconProtocol.Connect();
            
         }
@@ -42,9 +40,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         {
             FalconGlobals.ALLOW_FS_MOUNTING = true;
 
-            Program.Relay.turnOffAll();
+            Globals.Relay.turnOffAll();
             Thread.Sleep(4000);
-            Program.Relay.turnOnAll();
+            Globals.Relay.turnOnAll();
         }
 
         public MENU_CONFIG GetMenuConfig( int index = -1)
@@ -55,7 +53,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 
         public MENU_CONFIG SetMenuConfig(CameraEntity.Camera camera)
         {
-            Program.TunnelBackgroundWrorker.Stop();
             USBCameraDevice device = Globals.CAMERAS_LIST.ToList().Find((USBCameraDevice dev) => dev.Drive.Name.Contains(camera.driveName));
             
             this.SelectDevice(camera.badgeId);
@@ -79,7 +76,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             this.falconProtocol.SetMenuConfig(menuStruct);
 
             this.DeSelectDevice();
-            Program.TunnelBackgroundWrorker.Restart();
             return menuStruct;
         }
 

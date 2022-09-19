@@ -41,7 +41,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.backend
             }
             catch (Exception ex)
             {
-                Program.logger.error(ex.Message);
+                Globals.Logger.error(ex.Message);
                 return false;
             }
         }

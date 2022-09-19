@@ -1,4 +1,6 @@
-﻿using KTAVisorAPISDK.module.camera.entity;
+﻿using KTA_Visor.module.Managemnt.workers.tunnel;
+using KTAVisorAPISDK.module.camera.entity;
+using KTAVisorAPISDK.module.station.entity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,8 +15,12 @@ namespace KTA_Visor.module.Shared.Global
     {
         public static string READED_CARD_INPUT = "";
         public static bool IS_SERVER_ONLINE = false;
-        public static List<CameraEntity.Camera> SELECTED_STATION_ACTIVE_CAMERAS= new List<CameraEntity.Camera>();
+        public static ServerTunnelBackgroundWorker ServerTunnelBackgroundWorker;
 
-        public static ObservableCollection<TCPClientTObject> CLIENTS_LIST = new ObservableCollection<TCPClientTObject>();
+
+        public static List<StationEntity.Station> STATIONS_LIST = new List<StationEntity.Station>();
+        public static List<CameraEntity.Camera> ALL_STATION_CAMERAS = new List<CameraEntity.Camera>();
+        public static List<TCPClientTObject> CLIENTS_LIST = new List<TCPClientTObject>();
+
     }
 }

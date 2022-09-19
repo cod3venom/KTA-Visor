@@ -1,20 +1,23 @@
 ﻿{
   "app": {
     "title": "KTA-Visor Docking System Client",
+    "installed": false,
+    "configured": false,
+    "releaseName": "proud-unit.ver.1.0.0.2022",
     "station": {
-      "stationId": "123456789",
-      "ipAddress": "127.0.0.2"
+      "stationId": "",
+      "ipAddress": ""
     },
     "usbRelay": {
-      "COMport": "COM5"
+      "COMport": ""
     },
     "fileSystem": {
-      "filesPath": "C:\\Users\\venom\\Desktop\\network_drive_test",
+      "filesPath": "",
       "autoCopy": true
     },
     "management": {
-      "serverIp": "127.0.0.1",
-      "serverPort": 1337,
+      "serverIp": "",
+      "serverPort": 0,
       "autoReconnect": true
     },
     "backend": {
@@ -22,7 +25,7 @@
     },
     "rdp": {
       "userName": "KTAVisor",
-      "password":  "KTAVisor0013@"
+      "password": "KTAVisor0013@"
     }
   }
 }

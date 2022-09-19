@@ -19,6 +19,8 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
     public class RelayDevice : IRelayDevice
     {
         public static USBRelayPortsToObject USBRelayDeviceStatusList = new USBRelayPortsToObject();
+        public event EventHandler<EventArgs> OnSuccessFullyConnected;
+        public event EventHandler<EventArgs> OnUnableToConnect;
         public event EventHandler<OnReceivedPortStatusEvent> OnReceivedPortStatusEvent;
         public event EventHandler<EventArgs> OnTurnedOnAll;
         public event EventHandler<EventArgs> OnTurnedOffAll;
@@ -39,8 +41,16 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         /// </summary>
         public void Open()
         {
-            this.connector.OnDataReceived += OnReceivedMessageFromRelayDevice;
-            this.connector.connect();
+            try
+            {
+                this.connector.OnDataReceived += OnReceivedMessageFromRelayDevice;
+                this.connector.connect();
+                this.OnSuccessFullyConnected?.Invoke(this, EventArgs.Empty);
+            }
+            catch (Exception ex)
+            {
+                this.OnUnableToConnect?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>

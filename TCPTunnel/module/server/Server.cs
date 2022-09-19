@@ -50,8 +50,8 @@ namespace TCPTunnel.module.server
             this.tempClientList = new TCPClientList<string, TCPClientTObject>();
             this.clientsList = new TCPClientList<string, TCPClientTObject>();
         }
- 
-        public void startServer()
+
+        public void StartServer()
         {
             this.isServerEnabled = true;
             this.onAuthCommandSent += OnAuthCommandSent; ;
@@ -62,7 +62,7 @@ namespace TCPTunnel.module.server
             this.bootstrap();
         }
 
-        public void stopServer()
+        public void StopServer()
         {
             this.isServerEnabled = false;
             this.onAuthCommandSent -= OnAuthCommandSent; ;
@@ -141,7 +141,7 @@ namespace TCPTunnel.module.server
             clientThread.Start(newConnection);
 
             string ipAddress = newConnection.RemoteEndPoint.ToString();
-            TCPClientTObject client = new TCPClientTObject(ipAddress, newConnection, clientThread);
+            TCPClientTObject client = new TCPClientTObject(ipAddress, newConnection, clientThread, "Server");
 
             if (this.tempClientList.ContainsKey(ipAddress))
                 return;

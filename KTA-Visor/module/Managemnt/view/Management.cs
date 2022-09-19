@@ -6,11 +6,8 @@ using KTA_RFID_Keyboard.module.RFIDKeyboardReader;
 using KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel;
 using KTA_Visor.module.Managemnt.module.camera.views.CameraViewPanel;
 using KTA_Visor.module.Managemnt.module.station.view.StationViewPanel;
-using KTA_Visor.module.Managemnt.module.tunnel.view.TunnelSettingsPanelView;
-using TCPTunnel.module.server.events;
 using KTA_Visor.module.Shared.Global;
 using KTA_Visor.module.Managemnt.events;
-using TCPTunnel.kernel.extensions.router.dto;
 using KTA_Visor.module.Managemnt.module.fileHistory.view.FileHistoryViewPanel;
 
 namespace KTA_Visor.module.Management.view
@@ -20,11 +17,8 @@ namespace KTA_Visor.module.Management.view
 
         private  KeyboardReader keyboardReader;
         private  StationViewPanel stationPanel;
-        private  CamerasViewPanel camerasPanel;
-        private  OfficersPanelView officersPanel;
         private  FileHistoryViewPanel filesHistoryPanel;
-        private  TunnelSettingsViewPanel tunnelSettingsPanel;
-
+        
         public Management()
         {
             InitializeComponent();
@@ -32,10 +26,7 @@ namespace KTA_Visor.module.Management.view
             this.loggerView.ParentPanel = this.loggerPanel;
             this.keyboardReader = new KeyboardReader();
             this.stationPanel = new StationViewPanel();
-            this.camerasPanel = new CamerasViewPanel();
-            this.officersPanel = new OfficersPanelView();
             this.filesHistoryPanel = new FileHistoryViewPanel();
-            this.tunnelSettingsPanel = new TunnelSettingsViewPanel();
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
             Program.Logger.OnLogHasWritten += onLogHasWritten;
         }
@@ -61,28 +52,17 @@ namespace KTA_Visor.module.Management.view
 
         private void initializeTunnelBackgroundWoerker()
         {
-            Program.TunnelBackgroundWorker.OnServerStarted += (delegate (object sender, OnServerStartedEvent e)
+            Globals.ServerTunnelBackgroundWorker.OnServerStarted += (delegate (object sender, OnServerStartedEvent e)
             {
                 this.tunnelIndicator.running(true, "Uruchomiony");
             });
 
-            Program.TunnelBackgroundWorker.OnServerStopped += (delegate (object sender, OnServerStoppedEvent e)
+            Globals.ServerTunnelBackgroundWorker.OnServerStopped += (delegate (object sender, OnServerStoppedEvent e)
             {
                 this.tunnelIndicator.running(false, "Wstrzymany");
             });
 
-
-            Program.TunnelBackgroundWorker.OnClientConnected += (delegate (object sender, OnClientConnected e)
-            {
-               
-            });
-
-            Program.TunnelBackgroundWorker.OnClientDisconnected += (delegate (object sender, OnClientDisconnected e)
-            {
-                
-            });
-
-            Program.TunnelBackgroundWorker.Run();
+            Globals.ServerTunnelBackgroundWorker.Run();
         }
 
         private void initializeButtons()
@@ -90,41 +70,20 @@ namespace KTA_Visor.module.Management.view
 
             this.startTunnelServerMenuItem.Click += (delegate (object sender, EventArgs e)
             {
-                Program.Tunnel.start();
+                Globals.ServerTunnelBackgroundWorker.Run();
                 this.tunnelIndicator.running(true, "Uruchomiony");
             });
             
             this.stopTunnelServerMenuItem.Click += (delegate (object sender, EventArgs e){
-                Program.Tunnel.stop();
+                Globals.ServerTunnelBackgroundWorker.Stop();
                 this.tunnelIndicator.running(false, "Wstrzymany");
             });
 
             this.restartTunnelServerMenuItem.Click += (delegate (object sender, EventArgs e) {
-                Program.Tunnel.restart();
+                Globals.ServerTunnelBackgroundWorker.Restart();
                 this.tunnelIndicator.running(false, "Uruchomiony");
             });
 
-            this.tunnelSettingsBtn.OnClick += (delegate(object sender, EventArgs e) {
-                this.tunnelSettingsPanel = new TunnelSettingsViewPanel();
-                this.contentPanel.Controls.Clear();
-                tunnelSettingsPanel.Dock = DockStyle.Fill;
-                this.contentPanel.Controls.Add(tunnelSettingsPanel);
-            });
-
-
-            this.officersBtn.OnClick += (delegate (object sender, EventArgs e) {
-                this.officersPanel = new OfficersPanelView();
-                this.contentPanel.Controls.Clear();
-                this.officersPanel.Dock = DockStyle.Fill;
-                this.contentPanel.Controls.Add(this.officersPanel);
-            });
-
-            this.cameraBtn.OnClick += (delegate (object sender, EventArgs e) {
-                this.camerasPanel = new CamerasViewPanel();
-                this.contentPanel.Controls.Clear();
-                this.camerasPanel.Dock = DockStyle.Fill;
-                this.contentPanel.Controls.Add(this.camerasPanel);
-            });
 
             this.stationBtn.OnClick += (delegate (object sender, EventArgs e){
                 this.stationPanel = new StationViewPanel();
@@ -159,7 +118,7 @@ namespace KTA_Visor.module.Management.view
 
         private void StationsView_OnClose(object sender, EventArgs e)
         {
-            Program.Tunnel.stop();
+            Globals.ServerTunnelBackgroundWorker.Stop();
             Environment.Exit(-1);
         }
 

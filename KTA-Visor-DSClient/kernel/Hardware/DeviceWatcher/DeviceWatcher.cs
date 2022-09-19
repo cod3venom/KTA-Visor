@@ -5,6 +5,7 @@ using Sdk.Core.DevicesDetection;
 using System;
 using System.Management;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
@@ -141,7 +142,7 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
             ManagementObjectSearcher devices = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_DiskDrive");
             try
             {
-                await Task.Delay(2000);
+                Thread.Sleep(2000);
 
                 foreach (ManagementObject device in devices.Get())
                 {
