@@ -1,6 +1,6 @@
 ﻿using Falcon_Protocol;
-using KTA_Visor_DSClient.kernel.FalconBridge;
-using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
+using KTA_Visor_DSClient.module.Management.module.Camera;
+using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.entity;
 using System;
@@ -24,7 +24,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 
         public  void SelectDevice(string badgeId)
         {
-            FalconGlobals.ALLOW_FS_MOUNTING = false;
+            Globals.ALLOW_FS_MOUNTING = false;
          
             int portName = Globals.Relay.findPortByBadgeId(badgeId);
 
@@ -38,7 +38,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 
         public void DeSelectDevice()
         {
-            FalconGlobals.ALLOW_FS_MOUNTING = true;
+            Globals.ALLOW_FS_MOUNTING = true;
 
             Globals.Relay.turnOffAll();
             Thread.Sleep(4000);

@@ -48,7 +48,11 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
             this.cameraService = new CameraService();
             this.table.AllowAdd = false;
             this.table.bundle.column.addMultiple(this.Columns);
+
+             
         }
+
+      
 
         private void StationViewPanel_Load(object sender, EventArgs e)
         {
@@ -57,17 +61,24 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
             Globals.ServerTunnelBackgroundWorker.OnMessageReceivedFromClient += onResponseReceivedFromStation;
             this.table.DataGridView.Cursor = Cursors.Hand;
             this.table.DataGridView.CellDoubleClick += onCellDoubleClick;
+            this.hookEvents();
         }
 
-       
+        private void hookEvents()
+        {
+            this.stationController.OnRefreshCamerasList += onRefreshCamerasList;
+        }
+
         private void onStationConnected(object sender, events.OnClientConnected e)
         {
             DisplayStationInTableCommand.Execute(this.table.DataGridView, e);
+            this.downloadSelectedStationCameras();
         }
 
         private void onStationDisconnected(object sender, events.OnClientDisconnected e)
         {
             this.table.bundle.row.removeRow(e.Client.getIpAddress());
+            this.downloadSelectedStationCameras();
         }
 
 
@@ -78,8 +89,29 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
 
         private void onCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            AskForCamerasOfSelectedStationCommand.Execute(this.table.DataGridView, e);
+           this.downloadSelectedStationCameras();
         }
 
+        private void onRefreshCamerasList(object sender, Station.events.OnRefreshCamerasListEvent e)
+        {
+            this.downloadSelectedStationCameras();
+        }
+
+        private void downloadSelectedStationCameras()
+        {
+            string stationCustomId = this.getStationId();
+            DisplayCamerasOfSelectedStationCommand.Execute(this.cameraService, this.camerasFlowPanel, stationCustomId);
+        }
+
+        private string getStationId()
+        {
+            if (this.table.DataGridView.SelectedRows.Count == 0)
+                return "";
+
+            if (this.table.DataGridView.SelectedRows[0].Cells[0]?.Value == null)
+                return "";
+
+            return this.table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
+        }
     }
 }

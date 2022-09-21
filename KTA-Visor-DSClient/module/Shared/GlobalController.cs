@@ -1,5 +1,5 @@
-﻿using KTA_Visor_DSClient.module.Management.clientTunnel;
-using KTA_Visor_DSClient.module.Management.module.Camera.controller;
+﻿using KTA_Visor_DSClient.module.Management.module.Camera.controller;
+using KTA_Visor_DSClient.module.Management.module.clientTunnel;
 using TCPTunnel.kernel.extensions.router.dto;
 
 namespace KTA_Visor_DSClient.module.Shared
@@ -12,6 +12,7 @@ namespace KTA_Visor_DSClient.module.Shared
 
         private readonly ClientTunnel client;
         private readonly CameraController cameraController;
+
         public GlobalController(ClientTunnel client)
         {
             this.client = client;

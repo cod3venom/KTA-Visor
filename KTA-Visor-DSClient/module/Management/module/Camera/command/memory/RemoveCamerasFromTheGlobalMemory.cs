@@ -1,12 +1,17 @@
-﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
+﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
+using KTA_Visor_DSClient.module.Management.module.clientTunnel;
 using KTA_Visor_DSClient.module.Shared.Globals;
+using KTAVisorAPISDK.module.camera.dto.reques;
+using KTAVisorAPISDK.module.camera.entity;
+using KTAVisorAPISDK.module.camera.service;
 using System;
+using TCPTunnel.kernel.extensions.router.dto;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
 {
     public class RemoveCamerasFromTheGlobalMemory
     {
-        public static bool Execute(string badgeId)
+        public static bool Execute(string badgeId, ClientTunnel client)
         {
             foreach(USBCameraDevice camera in Globals.CAMERAS_LIST)
             {
@@ -14,6 +19,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
                 {
 
                     Globals.CAMERAS_LIST.Remove(camera);
+                    RemoveCamerasFromTheGlobalMemory.storeOnBackendAsInActive(camera, client);
 
                     Globals.Logger.success(String.Format(
                         "Successfully Removed Camera {0} from the global CAMERAS_LIST",
@@ -24,6 +30,24 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
                     
             }
             return false;
+        }
+
+        private static async void storeOnBackendAsInActive(USBCameraDevice camera, ClientTunnel client)
+        {
+            CameraService service = new CameraService();
+            CameraEntity cameraEntity = await service.findByBadgeId(camera.BadgeId);
+            _ = new CameraService().edit(cameraEntity?.data?.id, new EditCameraRequestTObject(
+                  camera.Index,
+                  camera.ID,
+                  Globals.STATION.data.stationId,
+                  camera.BadgeId,
+                  camera.Drive.Name,
+                  false
+            ));
+
+            client.Emit(new Request(
+               "response://cameras/refresh"
+           ));
         }
     }
 }

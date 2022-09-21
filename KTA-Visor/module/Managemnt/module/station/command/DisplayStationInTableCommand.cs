@@ -21,6 +21,8 @@ namespace KTA_Visor.module.Managemnt.module.station.command
 
             StationEntity station  = await new StationService().findByCustomId(e.Client.AuthData.Identificator);
 
+            if (station?.data == null)
+                return;
             if (Globals.STATIONS_LIST.Contains(station.data))
                 return;
 
@@ -34,8 +36,6 @@ namespace KTA_Visor.module.Managemnt.module.station.command
                 station?.data?.updatedAt,
                 station?.data?.createdAt
             );
-
-            e.Client.Send(new Request("command://cameras/all"));
         }
     }
 }

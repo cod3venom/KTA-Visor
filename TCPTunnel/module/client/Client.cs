@@ -56,7 +56,9 @@ namespace TCPTunnel.module.client
                 this.client = new TCPClientTObject(clientSocket.RemoteEndPoint.ToString(), clientSocket);
 
                 this.logger.success("Successfully connected to: " + this.config.IpAddress);
-                this.listening();
+
+                Thread listeningThread = new Thread(() => this.listening());
+                listeningThread.Start();
 
             }
             catch (SocketException)

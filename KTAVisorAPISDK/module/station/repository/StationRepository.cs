@@ -19,7 +19,7 @@ namespace KTAVisorAPISDK.module.station.repository
 
         public async Task<HttpResponseMessage> findById(string id)
         {
-            return await HttpClientUtil.securedClient.GET("/api/hidden/stations/" + id);
+            return await HttpClientUtil.securedClient.GET(String.Format("/api/hidden/stations/{0}", id));
         }
 
         public async Task<HttpResponseMessage> findByCustomId(string customId)
@@ -29,7 +29,7 @@ namespace KTAVisorAPISDK.module.station.repository
         
         public async Task<HttpResponseMessage> findByIp(string ip)
         {
-            return await HttpClientUtil.securedClient.GET("/api/hidden/stations/ip/" + ip);
+            return await HttpClientUtil.securedClient.GET(String.Format("/api/hidden/stations/ip/{0}", ip));
         }
 
         public async Task<HttpResponseMessage> create(CreateStationRequestTObject request)

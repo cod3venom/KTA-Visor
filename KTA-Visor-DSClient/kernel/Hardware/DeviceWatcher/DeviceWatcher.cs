@@ -1,20 +1,17 @@
 ﻿
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.events;
-using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.interfaces;
-using Sdk.Core.DevicesDetection;
 using System;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
 {
-    public class DeviceWatcher : IUsbDeviceEventDetector, IDisposable
+    public class DeviceWatcher :  IDisposable
     {
-        public event EventHandler<EventArgs> DeviceInsertedOrRemoved;
-        public event EventHandler<DriveChangedEventArgs> DriveInserted;
-        public event EventHandler<DriveChangedEventArgs> DriveRemoved;
+        public event EventHandler<EventArgs> OnDeviceConnectedOrDisconnected;
+        public event EventHandler<DriveChangedEventArgs> OnDeviceConnected;
+        public event EventHandler<DriveChangedEventArgs> OnDeviceDisconnected;
 
         private const int WM_DEVICECHANGE = 537;
         private const int DBT_DEVICEARRIVAL = 32768;
@@ -74,13 +71,13 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
                 switch (wparam.ToInt32())
                 {
                     case 7:
-                        this.FireDeviceInsertedOrRemoved();
+                        this.FireOnDeviceConnectedOrDisconnected();
                         break;
                     case 32768:
                         string drive1 = this.GetDrive(lparam);
                         if (drive1.Length > 0)
                         {
-                            this.FireDriveInserted(drive1);
+                            this.FireOnDeviceConnected(drive1);
                             break;
                         }
                         break;
@@ -88,7 +85,7 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
                         string drive2 = this.GetDrive(lparam);
                         if (drive2.Length > 0)
                         {
-                            this.FireDriveRemoved(drive2);
+                            this.FireOnDeviceDisconnected(drive2);
                             break;
                         }
                         break;
@@ -116,25 +113,25 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
             return string.Empty;
         }
 
-        private void FireDriveInserted(string drive)
+        private void FireOnDeviceConnected(string drive)
         {
-            if (this.DriveInserted == null)
+            if (this.OnDeviceConnected == null)
                 return;
-            this.DriveInserted((object)this, new DriveChangedEventArgs(drive));
+            this.OnDeviceConnected((object)this, new DriveChangedEventArgs(drive));
         }
 
-        private void FireDriveRemoved(string drive)
+        private void FireOnDeviceDisconnected(string drive)
         {
-            if (this.DriveRemoved == null)
+            if (this.OnDeviceDisconnected == null)
                 return;
-            this.DriveRemoved((object)this, new DriveChangedEventArgs(drive));
+            this.OnDeviceDisconnected((object)this, new DriveChangedEventArgs(drive));
         }
 
-        private void FireDeviceInsertedOrRemoved()
+        private void FireOnDeviceConnectedOrDisconnected()
         {
-            if (this.DeviceInsertedOrRemoved == null)
+            if (this.OnDeviceConnectedOrDisconnected == null)
                 return;
-            this.DeviceInsertedOrRemoved((object)this, EventArgs.Empty);
+            this.OnDeviceConnectedOrDisconnected((object)this, EventArgs.Empty);
         }
 
         public async void LoadConnectedDevices()
@@ -156,14 +153,14 @@ namespace KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher
                             string volumeName = disk["VolumeName"].ToString();
                             string drive = disk["Name"].ToString();
 
-                            this.FireDriveInserted(drive);
+                            this.FireOnDeviceConnected(drive);
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                 Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 

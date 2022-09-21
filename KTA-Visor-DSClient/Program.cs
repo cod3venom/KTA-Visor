@@ -14,7 +14,7 @@ namespace KTA_Visor_DSClient
     {
 
         [STAThread]
-        [HandleProcessCorruptedStateExceptions]
+        //[HandleProcessCorruptedStateExceptions]
         static void Main()
         {
            
@@ -25,14 +25,8 @@ namespace KTA_Visor_DSClient
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-           
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
 
-            Entrypoint entryPoint = new Entrypoint();
-            entryPoint.OnExceptionOccured += onExceptionOccured;
-
-            Application.Run(entryPoint);
+            Application.Run(new Entrypoint());
         }
 
         private static void onExceptionOccured(object sender, OnExceptionOccuredEvent e)

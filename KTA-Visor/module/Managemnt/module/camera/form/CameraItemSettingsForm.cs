@@ -170,7 +170,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
             this.camera = camEntity.data;
 
             Globals.ServerTunnelBackgroundWorker.sendRequest(this.station.data.stationIp, new Request(
-               "command://camera/settings/change",
+               "command://cameras/settings/change",
                this.camera
            ));
 

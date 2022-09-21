@@ -85,26 +85,20 @@
     <Compile Include="install\Installer.cs" />
     <Compile Include="install\settings\dto\SettingsFileTObject.cs" />
     <Compile Include="install\settings\Settings.cs" />
-    <Compile Include="kernel\FalconBridge\AbstractResource.cs" />
-    <Compile Include="kernel\FalconBridge\FalconBridge.cs" />
-    <Compile Include="kernel\FalconBridge\FalconGlobals.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\CameraDeviceService.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\dto\DockingStationTObject.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\events\CameraDisconnectedEvent.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\factory\USBCameraDeviceFactory.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\localSettings\LocalSettingsTObject.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\localSettings\USBCameraDeviceSettings.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\USBCameraDevice.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\events\CameraConnectedEvent.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\exception\DeviceIsNotFalconCameraException.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\exception\CameraUSBDeviceFileNotFoundException.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\repository\CameraServiceRepository.cs" />
-    <Compile Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\USBCameraDeviceList.cs" />
+    <Compile Include="kernel\Hardware\DeviceWatcher\events\DriveChangedEventArgs.cs" />
+    <Compile Include="module\Management\module\Camera\CameraDeviceWatcher.cs" />
+    <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
+    <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
+    <Compile Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\LocalSettingsTObject.cs" />
+    <Compile Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\USBCameraDeviceSettings.cs" />
+    <Compile Include="module\Management\module\Camera\types\USBCameraDevice\USBCameraDevice.cs" />
+    <Compile Include="module\Management\module\Camera\events\CameraConnectedEvent.cs" />
+    <Compile Include="module\Management\module\Camera\exception\DeviceIsNotFalconCameraException.cs" />
+    <Compile Include="module\Management\module\Camera\exception\CameraUSBDeviceFileNotFoundException.cs" />
+    <Compile Include="module\Management\module\Camera\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
+    <Compile Include="module\Management\module\Camera\types\USBCameraDevice\USBCameraDeviceList.cs" />
     <Compile Include="kernel\generator\RandomData.cs" />
     <Compile Include="kernel\Hardware\DeviceWatcher\DeviceWatcher.cs" />
-    <Compile Include="kernel\Hardware\DeviceWatcher\events\DriveChangedEventArgs.cs" />
-    <Compile Include="kernel\Hardware\DeviceWatcher\interfaces\IUsbDeviceEventDetector.cs" />
     <Compile Include="kernel\Hardware\Hardware.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\USBDeviceRelay.cs" />
     <Compile Include="kernel\helper\EmbededFileHelper.cs" />
@@ -118,8 +112,8 @@
     <Compile Include="kernel\sharedKernel\HttpClientHelper\HttpClientHelper.cs" />
     <Compile Include="kernel\sharedKernel\HttpClientHelper\interfaces\IHttpClient.cs" />
     <Compile Include="kernel\sharedKernel\LocalStorage\LocalStorage.cs" />
-    <Compile Include="module\Management\clientTunnel\ClientTunnel.cs" />
-    <Compile Include="module\Management\clientTunnel\events\OnRequestReceivedInTunnelEvent.cs" />
+    <Compile Include="module\Management\module\clientTunnel\ClientTunnel.cs" />
+    <Compile Include="module\Management\module\clientTunnel\events\OnRequestReceivedInTunnelEvent.cs" />
     <Compile Include="module\Management\Entrypoint.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,8 +121,6 @@
       <DependentUpon>Entrypoint.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Management\events\OnExceptionOccuredEvent.cs" />
-    <Compile Include="module\Management\module\Camera\command\backend\MarkCameraAsInactiveOnBackendCommand.cs" />
-    <Compile Include="module\Management\module\Camera\command\backend\MarkCameraAsActiveOnBackendCommand.cs" />
     <Compile Include="module\Management\module\Camera\command\filesystem\MergeCopiedVideosIntoOneCommand.cs" />
     <Compile Include="module\Management\module\Camera\controller\CameraController.cs" />
     <Compile Include="module\Management\module\Camera\service\CameraDeviceSettingsService.cs" />
@@ -154,7 +146,6 @@
     <Compile Include="module\Management\module\Camera\dto\GetSelectedCameraFilesRequestTObject.cs" />
     <Compile Include="module\Management\module\Camera\flags\WMEvents.cs" />
     <Compile Include="module\Management\module\Camera\flags\WMQuery.cs" />
-    <Compile Include="module\Management\module\Camera\CameraDevicesWatcher.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnCheckStateEvent.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnTurnOffPowerEvent.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnTurnOnPowerEvent.cs" />
@@ -192,7 +183,7 @@
     <EmbeddedResource Include="install\settings\Settings.json">
       <CustomToolNamespace>KTA_Visor_DSClient.install.settings.Settings.json</CustomToolNamespace>
     </EmbeddedResource>
-    <None Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\localSettings\LocalSettings.json" />
+    <None Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\LocalSettings.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -213,8 +204,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="kernel\FalconBridge\Resource\CameraDeviceService\helpers\" />
-    <Folder Include="kernel\FalconBridge\Resource\CameraDeviceService\types\USBCameraDevice\interfaces\" />
+    <Folder Include="kernel\CameraDevice\" />
+    <Folder Include="module\Management\module\Camera\types\USBCameraDevice\interfaces\" />
     <Folder Include="module\Management\module\PowerSupply\service\" />
   </ItemGroup>
   <ItemGroup>

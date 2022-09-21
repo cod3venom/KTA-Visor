@@ -136,12 +136,10 @@ namespace TCPTunnel.module.server
 
         private void handleNewCLient(Socket newConnection)
         {
-            Thread clientThread = new Thread(this.handleMessages);
-            clientThread.IsBackground = true;
-            clientThread.Start(newConnection);
+
 
             string ipAddress = newConnection.RemoteEndPoint.ToString();
-            TCPClientTObject client = new TCPClientTObject(ipAddress, newConnection, clientThread, "Server");
+            TCPClientTObject client = new TCPClientTObject(ipAddress, newConnection, null, "Server");
 
             if (this.tempClientList.ContainsKey(ipAddress))
                 return;

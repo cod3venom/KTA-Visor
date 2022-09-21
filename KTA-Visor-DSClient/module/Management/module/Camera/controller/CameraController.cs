@@ -1,4 +1,4 @@
-﻿using KTA_Visor_DSClient.kernel.FalconBridge.Resource.CameraDeviceService.types.USBCameraDevice;
+﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.module.Management.module.Camera.service;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.entity;
@@ -33,7 +33,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
                     this.getAllCameras(request);
                     break;
 
-                case "command://camera/settings/change":
+                case "command://cameras/settings/change":
                     this.changeSettings(request);
                     break;
             }

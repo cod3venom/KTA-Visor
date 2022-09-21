@@ -3,6 +3,7 @@ using KTA_Visor.module.Managemnt.module.Camera.component.CameraItem;
 using KTA_Visor.module.Managemnt.module.Camera.component.CameraItem.events;
 using KTA_Visor.module.Shared.Global;
 using KTAVisorAPISDK.module.camera.entity;
+using KTAVisorAPISDK.module.camera.service;
 using KTAVisorAPISDK.module.station.entity;
 using KTAVisorAPISDK.module.station.service;
 using Newtonsoft.Json;
@@ -17,24 +18,24 @@ namespace KTA_Visor.module.Managemnt.module.station.command
 {
     public class DisplayCamerasOfSelectedStationCommand
     {
-        public static void Execute(FlowLayoutPanel camerasFlowPanel, dynamic camerasData)
+        public static async void Execute(CameraService cameraService, FlowLayoutPanel camerasFlowPanel, string stationCustomId)
         {
-            if (camerasData == null || camerasData?.datas == null) return;
+            
 
-            CameraEntity camerasEntity = JsonConvert.DeserializeObject<CameraEntity>(camerasData.ToString());
-
+            CameraEntity camerasEntity = await cameraService.findByStationId(stationCustomId);
+            
             camerasFlowPanel.Invoke((MethodInvoker) delegate {
                 camerasFlowPanel.Controls.Clear();
             });
 
-                foreach (CameraEntity.Camera camera in camerasEntity.datas)
+            foreach (CameraEntity.Camera camera in camerasEntity.datas)
             {
                 if (Globals.ALL_STATION_CAMERAS.Contains(camera))
                     continue;
 
                 Globals.ALL_STATION_CAMERAS.Add(camera);
 
-                camerasFlowPanel.Invoke((MethodInvoker)async delegate
+                camerasFlowPanel.Invoke((MethodInvoker) async delegate
                 {
                     StationEntity station = await new StationService().findByCustomId(camera.stationId);
                     CameraItem item = new CameraItem(camera, station);
@@ -43,7 +44,7 @@ namespace KTA_Visor.module.Managemnt.module.station.command
                     {
                         new CameraItemSettingsForm(e.Camera, station).ShowDialog();
                     });
-                     camerasFlowPanel.Controls.Add(item);
+                        camerasFlowPanel.Controls.Add(item);
 
                 });
             }

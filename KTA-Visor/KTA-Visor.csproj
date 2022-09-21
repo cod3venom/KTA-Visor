@@ -413,7 +413,6 @@
     <Compile Include="module\Managemnt\module\officer\view\OfficersPanelView\OfficersPanelView.Designer.cs">
       <DependentUpon>OfficersPanelView.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\station\command\AskForCamerasOfSelectedStationCommand.cs" />
     <Compile Include="module\Managemnt\module\station\command\DisplayCamerasOfSelectedStationCommand.cs" />
     <Compile Include="module\Managemnt\module\station\command\DisplayStationInTableCommand.cs" />
     <Compile Include="module\Managemnt\module\station\components\ClientsList\ClientsList.cs">
@@ -435,9 +434,7 @@
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\station\controller\StationController.cs" />
-    <Compile Include="module\Managemnt\module\station\events\OnStationCRUDEvent.cs" />
-    <Compile Include="module\Managemnt\module\station\events\StationCameraFilesReceivedEvent.cs" />
-    <Compile Include="module\Managemnt\module\station\events\StationCamerasListReceivedEvent.cs" />
+    <Compile Include="module\Managemnt\module\station\events\OnRefreshCamerasListEvent.cs" />
     <Compile Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

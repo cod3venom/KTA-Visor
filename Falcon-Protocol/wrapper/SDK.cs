@@ -11,6 +11,9 @@ namespace Falcon_Protocol.wrapper
 {
     public class SDK 
     {
+
+        private event EventHandler<EventArgs> OnDeviceMounted;
+
         /// <summary>
         /// 
         /// </summary>
@@ -75,6 +78,8 @@ namespace Falcon_Protocol.wrapper
         {
             int[] iRet = new int[1];
             FalconProtocolInteropService.SetMSDC(ref this.pwd, iRet);
+            this.OnDeviceMounted?.Invoke(this, EventArgs.Empty);
+
             return this.calcIRet(iRet);
         }
 
