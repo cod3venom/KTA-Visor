@@ -116,10 +116,12 @@ namespace TCPTunnel.kernel.types
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        public void Disconnect()
+        {
+            this.socket.Close();
+            this.socket.Dispose();
+        }
+
         public bool IsConnected()
         {
             try

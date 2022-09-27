@@ -1,5 +1,6 @@
 ﻿using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.@event;
+using KTA_Visor_UI.component.basic.table.bundle.abstraction.filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,28 +10,24 @@ using System.Windows.Forms;
 
 namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column
 {
-    public class Column
+    public class Column: Sorter
     {
-        public event EventHandler<ColumnEvent> onColumnAdded;
+  
+        private readonly Table table;
 
-        public event EventHandler<ColumnEvent> onColumnRemoved;
 
-        public event EventHandler<ColumnEvent> onColumnClicked;
-
-        private readonly DataGridView table;
-
-        public Column(DataGridView table)
+        public Column(Table  table): base(table)
         {
             this.table = table;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="columns"></param>
-        /// <returns></returns>
+        public ColumnTObject[] Columns { get; set; }
+
+ 
         public Column addMultiple(ColumnTObject[] columns)
-        {
+        {            
+            this.InitColumns(columns);
+
             foreach (var item in columns)
             {
                 this.add(item);
@@ -38,11 +35,6 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column
             return this;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="column"></param>
-        /// <returns></returns>
         public Column add(ColumnTObject column)
         {
             DataGridViewColumn columnUI = new DataGridViewColumn();
@@ -66,20 +58,10 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column
             columnUI.HeaderText = column.Name;
             columnUI.ReadOnly = column.ReadOnly;
 
-            this.table.Columns.Add(columnUI);
+            this.table.DataGridView.Columns.Add(columnUI);
 
-            this.onColumnAdded?.Invoke(this, new ColumnEvent(column.Name, column.ID));
             return this;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public Column remove(ColumnTObject column)
-        {
-            this.table.Columns.Remove(column.Name);
-            return this;
-        }
     }
 }

@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TCPTunnel.kernel.extensions;
 using TCPTunnel.kernel.extensions.router.dto;
 using TCPTunnel.kernel.types;
@@ -25,6 +26,7 @@ namespace TCPTunnel.module.client
         public event EventHandler<TCPClientMessageReceivedEvent> onReceivedMessage;
         public event EventHandler<OnAuthCommandReceived> onAuthCommandReceived;
         public event EventHandler<OnAuthIsOK> onAuthIsOk;
+        public event EventHandler<OnClientExceptionHappend> OnException;
 
         private readonly ClientConfigTObject config;
         private readonly IPEndPoint ipEndpoint;
@@ -72,16 +74,22 @@ namespace TCPTunnel.module.client
 
         private void listening()
         {
-            while (this.client.IsConnected())
+            try
             {
-                Thread.Sleep(1000);
+                while (this.client.IsConnected())
+                {
+                    Thread.Sleep(1000);
 
-                Thread onReceiveThread = new Thread(() => this.OnReceiveMessage(this.client));
-                onReceiveThread.IsBackground = true;
-                onReceiveThread.Start();
+                    Thread onReceiveThread = new Thread(() => this.OnReceiveMessage(this.client));
+                    onReceiveThread.IsBackground = true;
+                    onReceiveThread.Start();
+                }
+
+                this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
             }
-
-            this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
+            catch(Exception exception) {
+                this.OnException?.Invoke(this, new OnClientExceptionHappend(exception));
+            }
         }
 
         public Client disconnect()
@@ -150,6 +158,7 @@ namespace TCPTunnel.module.client
             }
             catch (Exception ex)
             {
+                this.client.Disconnect();
                 Console.WriteLine(ex.Message);
             }
         }

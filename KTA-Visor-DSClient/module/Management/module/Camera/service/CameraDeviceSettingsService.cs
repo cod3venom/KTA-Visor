@@ -1,4 +1,5 @@
 ﻿using Falcon_Protocol;
+using KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay.events;
 using KTA_Visor_DSClient.module.Management.module.Camera;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.module.Shared.Globals;
@@ -17,33 +18,32 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
     public class CameraDeviceSettingsService
     {
         private readonly FalconProtocol falconProtocol;
+        private USBCameraDevice selectedCameraDevice;
+        private int selectedCameraPortNumber = -1;
+
         public CameraDeviceSettingsService()
         {
             this.falconProtocol = new FalconProtocol();
+            this.hookEvents();
         }
 
-        public  void SelectDevice(string badgeId)
+ 
+        private void hookEvents()
         {
-            Globals.ALLOW_FS_MOUNTING = false;
-         
-            int portName = Globals.Relay.findPortByBadgeId(badgeId);
+            
+            Globals.Relay.OnFoundPortByBadgeId += onFoundPortNumberByBadgeId;
+        }
+
+        private void onFoundPortNumberByBadgeId(object sender, OnFoundPortByBadgeId e)
+        {
+            this.selectedCameraDevice = e.Camera;
+            this.selectedCameraPortNumber = e.PortNumber;
 
             Globals.Relay.turnOffAll();
-            Thread.Sleep(4000);
-            Globals.Relay.turnOnByPort(portName);
-            Thread.Sleep(4000);
-            this.falconProtocol.Connect();
-           
+            Globals.Relay.turnOnByPort(this.selectedCameraPortNumber);
         }
-
-        public void DeSelectDevice()
-        {
-            Globals.ALLOW_FS_MOUNTING = true;
-
-            Globals.Relay.turnOffAll();
-            Thread.Sleep(4000);
-            Globals.Relay.turnOnAll();
-        }
+        
+ 
 
         public MENU_CONFIG GetMenuConfig( int index = -1)
         {
@@ -51,14 +51,24 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             return this.falconProtocol.GetMenuConfig();
         }
 
-        public MENU_CONFIG SetMenuConfig(CameraEntity.Camera camera)
+        public void SetMenuConfig(CameraEntity.Camera camera)
         {
             USBCameraDevice device = Globals.CAMERAS_LIST.ToList().Find((USBCameraDevice dev) => dev.Drive.Name.Contains(camera.driveName));
-            
-            this.SelectDevice(camera.badgeId);
-            
+            if (device == null)
+                return;
 
-            var menuStruct = this.falconProtocol.GetMenuConfig();
+            Globals.ALLOW_FS_MOUNTING = false;
+            int portNumber = Globals.Relay.findPortByBadgeId(device.BadgeId);
+
+            Globals.Relay.turnOffAll();
+
+            Thread.Sleep(8000);
+            Globals.Relay.turnOnByPort(portNumber);
+
+            Thread.Sleep(8000);
+            bool isConnected = this.falconProtocol.Connect();
+         
+            var menuStruct = this.falconProtocol.GetMenuConfig(device.Index);
             menuStruct.video_res = Convert.ToByte(camera.settings.resolution);
             menuStruct.video_quality = Convert.ToByte(camera.settings.quality);
             menuStruct.video_format = Convert.ToByte(camera.settings.codecFormat);
@@ -68,15 +78,16 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             menuStruct.gps = Convert.ToByte(camera.settings.gps);
             menuStruct.wifi = Convert.ToByte(camera.settings.wifi);
 
-
-
             device.Settings.ID = camera.cameraCustomId;
             device.Settings.BadgeId = camera.badgeId;
             device.SaveSettings();
-            this.falconProtocol.SetMenuConfig(menuStruct);
 
-            this.DeSelectDevice();
-            return menuStruct;
+            this.falconProtocol.SetMenuConfig(menuStruct, device.Index) ;
+
+            Globals.ALLOW_FS_MOUNTING = true;
+            Globals.Relay.turnOffAll();
+            Thread.Sleep(10000);
+            Globals.Relay.turnOnAll();
         }
 
 

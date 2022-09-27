@@ -55,6 +55,7 @@
     <Compile Include="kernel\helpers\Network.cs" />
     <Compile Include="module\client\Client.cs" />
     <Compile Include="module\client\dto\ClientConfigTObject.cs" />
+    <Compile Include="module\client\events\OnClientExceptionHappend.cs" />
     <Compile Include="module\client\events\TCPClientDisconnectedEvent.cs" />
     <Compile Include="module\client\events\TCPClientConnectedEvent.cs" />
     <Compile Include="module\client\events\TCPClientMessageReceivedEvent.cs" />

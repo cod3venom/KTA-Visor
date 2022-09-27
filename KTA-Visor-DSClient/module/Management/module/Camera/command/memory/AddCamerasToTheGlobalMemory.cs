@@ -12,10 +12,13 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
     {
         public static bool Execute(USBCameraDevice camera, ClientTunnel client)
         {
+
+             
             if (Globals.CAMERAS_LIST.Count == 0)
             {
-
                 Globals.CAMERAS_LIST.Add(camera);
+                camera.Index = Globals.CAMERAS_LIST.Count;
+
                 AddCamerasToTheGlobalMemory.storeOnBackendAsActive(camera, client);
                 return true;
             }
@@ -26,6 +29,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
                     continue;
  
                 Globals.CAMERAS_LIST.Add((camera));
+                camera.Index = Globals.CAMERAS_LIST.Count;
+
                 AddCamerasToTheGlobalMemory.storeOnBackendAsActive(camera, client);
                 Globals.Logger.success(String.Format("Successfully Added Camera {0} from the global CAMERAS_LIST", camera.BadgeId));
 

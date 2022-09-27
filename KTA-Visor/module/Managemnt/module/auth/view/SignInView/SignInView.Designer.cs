@@ -60,7 +60,7 @@
             this.signInPanel.Controls.Add(this.topBar1);
             this.signInPanel.Controls.Add(this.passwordLbl);
             this.signInPanel.Controls.Add(this.emailLbl);
-            this.signInPanel.Location = new System.Drawing.Point(328, 139);
+            this.signInPanel.Location = new System.Drawing.Point(324, 153);
             this.signInPanel.Margin = new System.Windows.Forms.Padding(2);
             this.signInPanel.MaximumSize = new System.Drawing.Size(331, 414);
             this.signInPanel.Name = "signInPanel";
@@ -173,7 +173,7 @@
             this.topBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.topBar1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.topBar1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.topBar1.Description = "Logowanie";
+            this.topBar1.Description = "";
             this.topBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBar1.Location = new System.Drawing.Point(0, 0);
             this.topBar1.Margin = new System.Windows.Forms.Padding(2);
@@ -181,7 +181,7 @@
             this.topBar1.Parent = null;
             this.topBar1.Size = new System.Drawing.Size(329, 36);
             this.topBar1.TabIndex = 12;
-            this.topBar1.Title = "";
+            this.topBar1.Title = "Logowanie";
             // 
             // passwordLbl
             // 

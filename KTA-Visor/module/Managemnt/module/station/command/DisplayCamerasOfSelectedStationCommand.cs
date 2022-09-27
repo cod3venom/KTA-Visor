@@ -21,33 +21,58 @@ namespace KTA_Visor.module.Managemnt.module.station.command
         public static async void Execute(CameraService cameraService, FlowLayoutPanel camerasFlowPanel, string stationCustomId)
         {
             
-
-            CameraEntity camerasEntity = await cameraService.findByStationId(stationCustomId);
-            
-            camerasFlowPanel.Invoke((MethodInvoker) delegate {
-                camerasFlowPanel.Controls.Clear();
-            });
-
-            foreach (CameraEntity.Camera camera in camerasEntity.datas)
+            try
             {
-                if (Globals.ALL_STATION_CAMERAS.Contains(camera))
-                    continue;
+                CameraEntity camerasEntity = await cameraService.findByStationId(stationCustomId);
 
-                Globals.ALL_STATION_CAMERAS.Add(camera);
-
-                camerasFlowPanel.Invoke((MethodInvoker) async delegate
-                {
-                    StationEntity station = await new StationService().findByCustomId(camera.stationId);
-                    CameraItem item = new CameraItem(camera, station);
-
-                    item.OnOpenCameraItem += (delegate (Object _sender, OnOpenCameraItemEvent e)
-                    {
-                        new CameraItemSettingsForm(e.Camera, station).ShowDialog();
-                    });
-                        camerasFlowPanel.Controls.Add(item);
-
+                camerasFlowPanel.Invoke((MethodInvoker)delegate {
+                    camerasFlowPanel.Controls.Clear();
                 });
+
+                if (camerasEntity.datas == null)
+                    return;
+
+                foreach (CameraEntity.Camera camera in camerasEntity.datas)
+                {
+                    if (Globals.ALL_STATION_CAMERAS.Contains(camera))
+                        continue;
+
+                    Globals.ALL_STATION_CAMERAS.Add(camera);
+
+                    camerasFlowPanel.Invoke((MethodInvoker)async delegate
+                    {
+                        StationEntity station = await new StationService().findByCustomId(camera.stationId);
+                        CameraItem item = new CameraItem(camera, station);
+
+                        item.OnOpenCameraItem += (delegate (Object _sender, OnOpenCameraItemEvent e)
+                        {
+                            new CameraItemSettingsForm(e.Camera, station).ShowDialog();
+                        });
+                        camerasFlowPanel.Controls.Add(item);
+                    });
+                }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void displayfakeRecords()
+        {
+            CameraEntity entity1 = new CameraEntity();
+            entity1.data = new CameraEntity.Camera();
+            entity1.data.id = "1";
+            entity1.data.index = 1;
+            entity1.data.cameraCustomId = "1234";
+            entity1.data.badgeId= "1234";
+            entity1.data.driveName= "1";
+            entity1.data.active = true;
+            entity1.data.stationId = "1111";
+            entity1.data.updatedAt = "11.01.2022";
+            entity1.data.createdAt= "12.01.2022";
+
+            //for (int i = 0; i <)
         }
     }
 }

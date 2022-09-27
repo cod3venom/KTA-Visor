@@ -1,25 +1,23 @@
 ﻿using KTA_Visor_UI.component.basic.table.bundle.abstraction.column;
+using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
+using KTA_Visor_UI.component.basic.table.bundle.abstraction.filter;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.row;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KTA_Visor_UI.component.basic.table.bundle
 {
-    public abstract class AbstractResource
+    public abstract class AbstractResource : UserControl
     {
-        private readonly Table table;
+        
+        protected Table Table { get; set; }
 
-        public readonly Column column;
+        public Column Column { get; set; }
 
-        public readonly Row row;
-        public AbstractResource(Table table)
-        {
-            this.table = table;
-            this.column = new Column(table.DataGridView);
-            this.row = new Row(table.DataGridView);
-        }
+        public Row Row { get; set; }
     }
 }

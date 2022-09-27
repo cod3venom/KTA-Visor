@@ -86,6 +86,7 @@
     <Compile Include="install\settings\dto\SettingsFileTObject.cs" />
     <Compile Include="install\settings\Settings.cs" />
     <Compile Include="kernel\Hardware\DeviceWatcher\events\DriveChangedEventArgs.cs" />
+    <Compile Include="kernel\Hardware\USBDeviceRelay\events\OnFoundPortByBadgeId.cs" />
     <Compile Include="module\Management\module\Camera\CameraDeviceWatcher.cs" />
     <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
@@ -247,9 +248,7 @@
     <None Include="Resources\generate.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ASL - Apache Software Foundation License.txt" />
     <None Include="Resources\magicWand.png" />
-    <Content Include="Utilities\Audio\Formats.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

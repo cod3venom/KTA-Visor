@@ -1,4 +1,5 @@
-﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
+﻿using KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay.events;
+using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
 {
     public class USBDeviceRelay: KTA_USB_Relay.Relay
     {
+        public event EventHandler<OnFoundPortByBadgeId> OnFoundPortByBadgeId;
 
         public USBDeviceRelay(string portName,int baudRate, Parity parity, int dataBits, StopBits stopBit, KTALogger.Logger logger): base(portName, baudRate, parity, dataBits, stopBit, logger)
         {
@@ -31,13 +33,15 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
             USBCameraDevice requestedDevice = Globals.CAMERAS_LIST.ToList().Find(x => x.BadgeId == badgeId);
             if (requestedDevice == null)
                 return -1;
-
-            for (int portNumber = 1; portNumber < 9; portNumber++)
+            foreach(int portNumber in this.Ports)
             {
-                if (this.assignRelayPortToTheCamera(portNumber, ref requestedDevice))
-                    return portNumber;
-            }
+                if (!this.assignRelayPortToTheCamera(portNumber, ref requestedDevice))
+                    continue;
 
+                Thread.Sleep(1000);
+                this.OnFoundPortByBadgeId?.Invoke(this, new events.OnFoundPortByBadgeId(portNumber, requestedDevice));
+                return portNumber;
+            }
             return -1;
         }
  

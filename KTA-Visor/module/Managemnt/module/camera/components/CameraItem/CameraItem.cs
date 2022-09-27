@@ -41,6 +41,7 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             this.Badge = camera?.badgeId;
             this.CamCustomId = camera?.cameraCustomId;
             this.StationCustomId = this.station?.data?.stationId;
+            this.CameraIndex = camera?.index.ToString();
             this.station = station;
             this.form = new CameraItemSettingsForm(camera, station);
         }
@@ -76,6 +77,12 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         {
             get { return this.stationIdLbl.Text; }
             set { this.stationIdLbl.Text = value; }
+        }
+
+        public string CameraIndex
+        {
+            get { return this.cameraIndexLbl.Text; }
+            set { this.cameraIndexLbl.Text = value; }
         }
 
         private void OpenBtn_Click(object sender, EventArgs e)

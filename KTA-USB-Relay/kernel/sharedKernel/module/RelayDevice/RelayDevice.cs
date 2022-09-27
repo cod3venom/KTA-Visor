@@ -21,11 +21,11 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         public static USBRelayPortsToObject USBRelayDeviceStatusList = new USBRelayPortsToObject();
         public event EventHandler<EventArgs> OnSuccessFullyConnected;
         public event EventHandler<EventArgs> OnUnableToConnect;
-        public event EventHandler<OnReceivedPortStatusEvent> OnReceivedPortStatusEvent;
         public event EventHandler<EventArgs> OnTurnedOnAll;
         public event EventHandler<EventArgs> OnTurnedOffAll;
         public event EventHandler<EventArgs> OnTurnedOnSingle;
         public event EventHandler<EventArgs> OnTurnedOffSingle;
+        public event EventHandler<OnReceivedPortStatusEvent> OnReceivedPortStatusEvent;
 
         public COMConnector.COMConnector connector;
         public List<int> Ports = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -123,7 +123,8 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
             {
                 this.sendCommand(String.Format("S {0}", port.ToString()));
             }
-
+            Thread.SpinWait(3000);
+            this.OnTurnedOnAll?.Invoke(this, EventArgs.Empty);
         }
         
         /// <summary>
@@ -137,6 +138,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
                 this.sendCommand(String.Format("C {0}", port.ToString()));
             }
 
+            Thread.SpinWait(3000);
             this.OnTurnedOffAll?.Invoke(this, EventArgs.Empty);
         }
 
@@ -147,6 +149,8 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         public void turnOnByPort(int portNumber)
         {
             this.sendCommand(String.Format("S {0}", portNumber.ToString()));
+            this.OnTurnedOnSingle?.Invoke(this, EventArgs.Empty);
+
         }
 
         /// <summary>
@@ -156,9 +160,23 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         public void turnOffByPort(int portNumber)
         {
             this.sendCommand(String.Format("C {0}", portNumber.ToString()));
+            this.OnTurnedOffSingle?.Invoke(this, EventArgs.Empty);
         }
 
-      
+        public void restartAll()
+        {
+            this.turnOffAll();
+            Thread.Sleep(5000);
+            this.turnOnAll();
+        }
+
+        public void restartSingle(int portNumber)
+        {
+            this.turnOffByPort(portNumber);
+            Thread.Sleep(5000);
+            this.turnOnByPort(portNumber);
+        }
+
         /// <summary>
         /// Main private method for
         /// sending the of commands

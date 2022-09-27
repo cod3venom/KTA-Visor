@@ -13,6 +13,7 @@ namespace KTAVisorAPISDK.module.fileHistory.entity
    
         public class FileHistory
         {
+            public string id { get; set; }
             public string stationId { get; set; }
             public string cameraCustomId { get; set; }
             public string badgeId { get; set; }
@@ -22,9 +23,10 @@ namespace KTAVisorAPISDK.module.fileHistory.entity
             public double fileSize { get; set; }
             public bool evidence { get; set; }
             public bool removableEvidence { get; set; }
+            public bool isDeleted { get; set; }
             public string description{ get; set; }
-            public string id { get; set; }
             public string createdAt { get; set; }
+            public string deletedAt { get; set; }
         }
 
 

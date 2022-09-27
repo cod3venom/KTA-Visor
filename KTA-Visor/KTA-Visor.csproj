@@ -382,12 +382,6 @@
     <Compile Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.Designer.cs">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.Designer.cs">
-      <DependentUpon>CamerasViewPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="module\Managemnt\module\fileHistory\view\FileHistoryViewPanel\FileHistoryViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -400,18 +394,11 @@
     <Compile Include="module\Managemnt\module\fileHistory\view\form\FileHistoryRecordForm.Designer.cs">
       <DependentUpon>FileHistoryRecordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\officer\events\OnOfficerCRUDEvent.cs" />
-    <Compile Include="module\Managemnt\module\officer\view\forms\OfficerCrudForm\OfficerCrudForm.cs">
+    <Compile Include="module\Managemnt\module\logs\view\LogsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\officer\view\forms\OfficerCrudForm\OfficerCrudForm.Designer.cs">
-      <DependentUpon>OfficerCrudForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Managemnt\module\officer\view\OfficersPanelView\OfficersPanelView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\module\officer\view\OfficersPanelView\OfficersPanelView.Designer.cs">
-      <DependentUpon>OfficersPanelView.cs</DependentUpon>
+    <Compile Include="module\Managemnt\module\logs\view\LogsView.Designer.cs">
+      <DependentUpon>LogsView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\station\command\DisplayCamerasOfSelectedStationCommand.cs" />
     <Compile Include="module\Managemnt\module\station\command\DisplayStationInTableCommand.cs" />
@@ -442,6 +429,12 @@
       <DependentUpon>StationViewPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\user\consts\UserRole.cs" />
+    <Compile Include="module\Managemnt\sub-window\VersionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\sub-window\VersionWindow.Designer.cs">
+      <DependentUpon>VersionWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\Managemnt\view\Management.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -522,20 +515,14 @@
     <EmbeddedResource Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.resx">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\camera\views\CamerasViewPanel\CamerasViewPanel.resx">
-      <DependentUpon>CamerasViewPanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\fileHistory\view\FileHistoryViewPanel\FileHistoryViewPanel.resx">
       <DependentUpon>FileHistoryViewPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\fileHistory\view\form\FileHistoryRecordForm.resx">
       <DependentUpon>FileHistoryRecordForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\officer\view\forms\OfficerCrudForm\OfficerCrudForm.resx">
-      <DependentUpon>OfficerCrudForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\officer\view\OfficersPanelView\OfficersPanelView.resx">
-      <DependentUpon>OfficersPanelView.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\logs\view\LogsView.resx">
+      <DependentUpon>LogsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\station\components\ClientsList\ClientsList.resx">
       <DependentUpon>ClientsList.cs</DependentUpon>
@@ -548,6 +535,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.resx">
       <DependentUpon>StationViewPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\sub-window\VersionWindow.resx">
+      <DependentUpon>VersionWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\view\Management.resx">
       <DependentUpon>Management.cs</DependentUpon>
@@ -586,7 +576,6 @@
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
     <Folder Include="module\Managemnt\helper\" />
-    <Folder Include="module\Managemnt\module\camera\command\" />
     <Folder Include="module\Managemnt\module\user\entity\" />
     <Folder Include="module\Shared\Component\" />
   </ItemGroup>

@@ -18,7 +18,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem
             string stationCustomId,
             string cameraCustomId,
             string badgeId, 
-            FileHistoryService fileHistoryService,
             Dictionary<string, FileInfo> files, 
             string networkDriveLocation
         )
@@ -58,7 +57,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem
                     }
 
 
+                    FileHistoryService fileHistoryService = new FileHistoryService();
                     copiedFiles.Add(destFile.Name, new CopiedCameraFileTObject(destFile, true));
+
                     _ = fileHistoryService.create(new CreateFileHistoryRequestTObject(
                         stationCustomId,
                         cameraCustomId,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace KTA_Visor_UI.component.basic.table.bundle
 {
     public class TableBundle : AbstractResource
     {
-        
-        public TableBundle(Table table): base(table)
+
+        public TableBundle():base()
         {
         }
+
+        protected Table Table { get; set; }
  
     }
 }

@@ -1,4 +1,5 @@
 ﻿using KTA_Visor_UI.component.basic.table.bundle.abstraction.row.dto;
+using KTA_Visor_UI.component.basic.table.bundle.abstraction.search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ using System.Windows.Forms;
 
 namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
 {
-    public class Row
+    public class Row : Searcher
     {
-        private readonly DataGridView table;
+        private readonly Table table;
 
-        public Row(DataGridView table)
+        public Row(Table table): base(table)
         {
             this.table = table;
         }
@@ -22,7 +23,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         {
             get
             {
-                return this.table.CurrentRow;
+                return this.table.DataGridView.CurrentRow;
             }
         }
 
@@ -33,7 +34,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
 
         public DataGridViewRowCollection Rows
         {
-            get { return this.table.Rows; }
+            get { return this.table.DataGridView.Rows; }
         }
         
         public DataGridViewRow FindRowByCellValue(string value)
@@ -55,12 +56,12 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        public Row add(RowTObject row)
+        public Row Add(RowTObject row)
         {
            try
             {
                 this.table.Invoke(new Action(() => {
-                    this.table.Rows.Add(row.getCells());
+                    this.table.DataGridView.Rows.Add(row.getCells());
                 }));
             }
             catch (Exception ex)
@@ -76,12 +77,12 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public Row add(params object[] values)
+        public Row Add(params object[] values)
         {
             try
             {
                 this.table.Invoke(new Action(() => {
-                    this.table.Rows.Add(values);
+                    this.table.DataGridView.Rows.Add(values);
                 }));
             }
              catch (Exception ex)
@@ -96,26 +97,41 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Row removeRow(string value)
+        public Row Remove(string value)
         {
-            foreach (DataGridViewRow row in this.table.Rows)
+            try
             {
-                foreach (DataGridViewCell cell in row.Cells)
+                foreach (DataGridViewRow row in this.table.DataGridView.Rows)
                 {
-                    if (cell.Value?.ToString().ToLower() == value?.ToLower())
+                    foreach (DataGridViewCell cell in row.Cells)
                     {
-                        this.table.Invoke(new Action(() =>
+                        if (cell.Value?.ToString().ToLower() == value?.ToLower())
                         {
-                            if (table.IsDisposed)
-                                return;
+                            this.table.Invoke(new Action(() =>
+                            {
+                                if (table.IsDisposed)
+                                    return;
 
-                            this.table.Rows.Remove(row);
-                        }));
+                                try
+                                {
+                                    this.table.DataGridView.Rows.Remove(row);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                }
+                            }));
+                        }
                     }
                 }
+                return this;
             }
 
-            return this;
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return this;
+            }
         }
 
         /// <summary>
@@ -124,7 +140,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         /// <returns></returns>
         public Row clear()
         {
-            this.table.Rows.Clear();
+            this.table.DataGridView.Rows.Clear();
             return this;
         }
     }

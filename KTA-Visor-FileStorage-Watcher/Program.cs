@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KTAVisorAPISDK.kernel.sharedKernel.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
@@ -14,12 +15,21 @@ namespace KTA_Visor_FileStorage_Watcher
         /// </summary>
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
+
+            HttpClientUtil.initializeHttpClient("http://localhost:8000/api");
+            HttpClientUtil.initializeSecuredClient("http://localhost:8000/api");
+#if DEBUG
+            FileWatcherService service = new FileWatcherService();
+           service.onDebug();
+#else
+             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new FileWatcherService()
             };
             ServiceBase.Run(ServicesToRun);
+#endif
+         
         }
     }
 }

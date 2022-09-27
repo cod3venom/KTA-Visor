@@ -1,4 +1,5 @@
-﻿using KTA_Visor.kernel.generator;
+﻿using Falcon_Protocol.enums;
+using KTA_Visor.kernel.generator;
 using KTA_Visor.module.Shared.Global;
 using KTA_Visor_UI.component.custom.MessageWindow;
 using KTAVisorAPISDK.module.camera.dto.reques;
@@ -103,7 +104,8 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
                 this.badgeIdTxt.Text = this.camera.badgeId;
                 this.dateTimeTxt.Text = DateTime.Now.ToString();
 
-                this.recordingResolutionCombo.DataSource = Enum.GetValues(typeof(VideoResolutions));
+                
+                this.recordingResolutionCombo.DataSource = new Enums().ResolutionValues();
                 this.recordingResolutionCombo.SelectedIndex = this.camera.settings.resolution;
 
                 this.recordingQualityCombo.DataSource = Enum.GetValues(typeof(Qualitys));
@@ -157,14 +159,14 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
             _ = this.cameraSettingsService.edit(camEntity.data.id, new EditCameraSettingsTObject(
                 camEntity.data.cameraCustomId,
                 camEntity.data.badgeId,
-                camEntity.data.settings.resolution,
-                camEntity.data.settings.quality,
-                camEntity.data.settings.codecFormat,
-                camEntity.data.settings.preRecording ? 1 : 0,
-                camEntity.data.settings.timeZone,
-                camEntity.data.settings.gps,
-                camEntity.data.settings.wifi,
-                camEntity.data.settings.aesEncryption
+                this.camera.settings.resolution,
+                this.camera.settings.quality,
+                this.camera.settings.codecFormat,
+                this.camera.settings.preRecording ? 1 : 0,
+                this.camera.settings.timeZone,
+                this.camera.settings.gps,
+                this.camera.settings.wifi,
+                this.camera.settings.aesEncryption
             ));
 
             this.camera = camEntity.data;

@@ -145,6 +145,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             return directory.GetFiles();
         }
 
+        public Dictionary<string, FileInfo> getFilesAsDict()
+        {
+            Dictionary<string, FileInfo> dict = new Dictionary<string, FileInfo>();
+            this.getFiles().ToArray().ToList().ForEach((file) => dict.Add(file.Name, file));
+            return dict;
+        }
         /// <summary>
         /// 
         /// </summary>

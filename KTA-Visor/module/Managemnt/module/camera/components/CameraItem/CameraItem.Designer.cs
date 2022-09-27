@@ -49,6 +49,7 @@
             this.copyFilesToDVDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.targetDriveDevicePathDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.nasStorageFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.cameraIndexLbl = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
@@ -116,6 +117,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.cameraIndexLbl);
             this.panel3.Controls.Add(this.stationIdLbl);
             this.panel3.Controls.Add(this.badgeIdLbl);
             this.panel3.Controls.Add(this.cameraIdLbl);
@@ -134,7 +136,7 @@
             // 
             this.stationIdLbl.AutoSize = true;
             this.stationIdLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stationIdLbl.Location = new System.Drawing.Point(70, 72);
+            this.stationIdLbl.Location = new System.Drawing.Point(70, 73);
             this.stationIdLbl.Name = "stationIdLbl";
             this.stationIdLbl.Size = new System.Drawing.Size(47, 14);
             this.stationIdLbl.TabIndex = 10;
@@ -164,7 +166,7 @@
             // 
             this.stationIdTextLbl.AutoSize = true;
             this.stationIdTextLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stationIdTextLbl.Location = new System.Drawing.Point(17, 72);
+            this.stationIdTextLbl.Location = new System.Drawing.Point(17, 73);
             this.stationIdTextLbl.Name = "stationIdTextLbl";
             this.stationIdTextLbl.Size = new System.Drawing.Size(53, 14);
             this.stationIdTextLbl.TabIndex = 7;
@@ -263,6 +265,17 @@
             this.nasStorageFileDialog.FileName = "Wybierz pliki które chcesz skopiować";
             this.nasStorageFileDialog.Multiselect = true;
             // 
+            // cameraIndexLbl
+            // 
+            this.cameraIndexLbl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cameraIndexLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraIndexLbl.Location = new System.Drawing.Point(248, 0);
+            this.cameraIndexLbl.Name = "cameraIndexLbl";
+            this.cameraIndexLbl.Size = new System.Drawing.Size(17, 114);
+            this.cameraIndexLbl.TabIndex = 12;
+            this.cameraIndexLbl.Text = "-1";
+            this.cameraIndexLbl.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
             // CameraItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,5 +322,6 @@
         private System.Windows.Forms.Label stationIdTextLbl;
         private System.Windows.Forms.Label cameraIdTextLbl;
         private System.Windows.Forms.Label badgeIdTextLbl;
+        private System.Windows.Forms.Label cameraIndexLbl;
     }
 }

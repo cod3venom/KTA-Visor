@@ -28,14 +28,37 @@ namespace KTA_Visor.module.Managemnt.module.station.command
 
             Globals.STATIONS_LIST.Add(station.data);
 
-            table.Rows.Add(
-                station?.data?.stationId,
-                e.Client?.IpAddress,
-                station?.data?.stationIp,
-                station.data.active ? "Tak" : "Nie",
-                station?.data?.updatedAt,
-                station?.data?.createdAt
-            );
+            table.Invoke((MethodInvoker)delegate
+            {
+                table.Rows.Add(
+                   station?.data?.stationId,
+                   e.Client?.IpAddress,
+                   station?.data?.stationIp,
+                   station.data.active ? "Tak" : "Nie",
+                   station?.data?.updatedAt,
+                   station?.data?.createdAt
+               );
+
+
+                for(int i = 0; i < 100; i++)
+                {
+                    StationEntity fakeStation = new StationEntity();
+                    fakeStation.data = station.data;
+                    fakeStation.data.id = i.ToString();
+                    fakeStation.data.stationId = "station_" + i.ToString();
+                    fakeStation.data.active = true;
+
+                    string fakeIp = "127.0.0.1." + i.ToString();
+                    table.Rows.Add(
+                          fakeStation?.data?.stationId,
+                          fakeIp,
+                          fakeStation?.data?.stationIp,
+                          fakeStation.data.active ? "Tak" : "Nie",
+                          fakeStation?.data?.updatedAt,
+                          fakeStation?.data?.createdAt
+                      );
+                }
+            });
         }
     }
 }

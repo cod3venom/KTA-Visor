@@ -34,13 +34,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.titleLbl = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.messageLbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.okBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
             this.iconDrag = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.labelDrag = new Bunifu.Framework.UI.BunifuDragControl(this.components);
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.okBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
+            this.cancelBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -59,7 +60,7 @@
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(437, 32);
             this.panel1.TabIndex = 0;
@@ -87,7 +88,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(10, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.pictureBox1.Size = new System.Drawing.Size(28, 32);
@@ -95,12 +96,21 @@
             this.pictureBox1.TabIndex = 24;
             this.pictureBox1.TabStop = false;
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Silver;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(10, 32);
+            this.panel4.TabIndex = 25;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.messageLbl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 32);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(437, 101);
             this.panel2.TabIndex = 1;
@@ -120,13 +130,24 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.cancelBtn);
             this.panel3.Controls.Add(this.okBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 102);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(437, 31);
             this.panel3.TabIndex = 2;
+            // 
+            // okBtn
+            // 
+            this.okBtn.Active = false;
+            this.okBtn.Location = new System.Drawing.Point(360, 6);
+            this.okBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.okBtn.Name = "okBtn";
+            this.okBtn.Size = new System.Drawing.Size(73, 20);
+            this.okBtn.TabIndex = 0;
+            this.okBtn.Title = "OK";
             // 
             // iconDrag
             // 
@@ -142,24 +163,15 @@
             this.labelDrag.TargetControl = this.titleLbl;
             this.labelDrag.Vertical = true;
             // 
-            // panel4
+            // cancelBtn
             // 
-            this.panel4.BackColor = System.Drawing.Color.Silver;
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(10, 32);
-            this.panel4.TabIndex = 25;
-            // 
-            // okBtn
-            // 
-            this.okBtn.Active = false;
-            this.okBtn.Location = new System.Drawing.Point(360, 6);
-            this.okBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.okBtn.Name = "okBtn";
-            this.okBtn.Size = new System.Drawing.Size(73, 20);
-            this.okBtn.TabIndex = 0;
-            this.okBtn.Title = "OK";
+            this.cancelBtn.Active = false;
+            this.cancelBtn.Location = new System.Drawing.Point(271, 6);
+            this.cancelBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(73, 20);
+            this.cancelBtn.TabIndex = 1;
+            this.cancelBtn.Title = "Zamknij";
             // 
             // AlertWindow
             // 
@@ -170,7 +182,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AlertWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MessageWindow";
@@ -196,5 +208,6 @@
         private Bunifu.Framework.UI.BunifuDragControl iconDrag;
         private Bunifu.Framework.UI.BunifuDragControl labelDrag;
         private System.Windows.Forms.Panel panel4;
+        private basic.button.PrimaryButton cancelBtn;
     }
 }

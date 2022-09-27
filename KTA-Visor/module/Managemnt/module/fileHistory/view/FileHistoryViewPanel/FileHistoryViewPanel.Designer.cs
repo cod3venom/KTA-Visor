@@ -38,18 +38,20 @@
             this.table.AllowEdit = true;
             this.table.Dock = System.Windows.Forms.DockStyle.Fill;
             this.table.Location = new System.Drawing.Point(0, 0);
+            this.table.Margin = new System.Windows.Forms.Padding(2);
             this.table.Name = "table";
-            this.table.Size = new System.Drawing.Size(1232, 834);
+            this.table.Size = new System.Drawing.Size(1420, 672);
             this.table.TabIndex = 0;
             this.table.Title = "Historia Plików";
             // 
             // FileHistoryViewPanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.table);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FileHistoryViewPanel";
-            this.Size = new System.Drawing.Size(1232, 834);
+            this.Size = new System.Drawing.Size(1420, 672);
             this.Load += new System.EventHandler(this.FileHistoryViewPanel_Load);
             this.ResumeLayout(false);
 

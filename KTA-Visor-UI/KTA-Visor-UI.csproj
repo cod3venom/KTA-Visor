@@ -81,6 +81,11 @@
     <Compile Include="component\basic\StatusIndicator\StatusIndicator.Designer.cs">
       <DependentUpon>StatusIndicator.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\basic\table\bundle\abstraction\search\command\TableSearchingCommand.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\search\Searcher.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\sorter\command\SortByDescending.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\sorter\command\SortByAscending.cs" />
+    <Compile Include="component\basic\table\bundle\abstraction\sorter\Sorter.cs" />
     <Compile Include="component\basic\textbox\DefaultTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -94,8 +99,12 @@
     <Compile Include="component\basic\table\bundle\abstraction\row\dto\CellTObject.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\row\dto\RowTObject.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\row\Row.cs" />
-    <Compile Include="component\basic\table\bundle\AbstractResource.cs" />
-    <Compile Include="component\basic\table\bundle\TableBundle.cs" />
+    <Compile Include="component\basic\table\bundle\AbstractResource.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\table\bundle\TableBundle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="component\basic\table\components\HorizontalSeparator\HorizontalSeparator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,12 +159,6 @@
     <Compile Include="component\custom\HorizontalProgressBar\HorizontalProgressBar.Designer.cs">
       <DependentUpon>HorizontalProgressBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="component\custom\LoadingLabel\LoadingLabel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\LoadingLabel\LoadingLabel.Designer.cs">
-      <DependentUpon>LoadingLabel.cs</DependentUpon>
-    </Compile>
     <Compile Include="component\custom\LoggerView\events\LoggerViewLogEvent.cs" />
     <Compile Include="component\custom\LoggerView\LoggerView.cs">
       <SubType>UserControl</SubType>
@@ -163,7 +166,6 @@
     <Compile Include="component\custom\LoggerView\LoggerView.Designer.cs">
       <DependentUpon>LoggerView.cs</DependentUpon>
     </Compile>
-    <Compile Include="component\custom\MenuStripRenderer\MenuStripRenderer.cs" />
     <Compile Include="component\custom\Alert\AlertWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,12 +173,6 @@
       <DependentUpon>AlertWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\Notification\NotificationWIndow.cs" />
-    <Compile Include="component\custom\NumbersCard\NumbersCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\NumbersCard\NumbersCard.Designer.cs">
-      <DependentUpon>NumbersCard.cs</DependentUpon>
-    </Compile>
     <Compile Include="component\custom\LabelsListBar\components\SidebarMenuItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -188,19 +184,6 @@
     </Compile>
     <Compile Include="component\custom\Footer\Footer.Designer.cs">
       <DependentUpon>Footer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="component\custom\NavigationBar\components\NavigationLink\NavigationLink.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\NavigationBar\components\NavigationLink\NavigationLink.Designer.cs">
-      <DependentUpon>NavigationLink.cs</DependentUpon>
-    </Compile>
-    <Compile Include="component\custom\NavigationBar\events\NavigationBarLinkClickEvent.cs" />
-    <Compile Include="component\custom\NavigationBar\NavigationBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\NavigationBar\NavigationBar.Designer.cs">
-      <DependentUpon>NavigationBar.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\LabelsListBar\events\SideBarItemClickedEvent.cs" />
     <Compile Include="component\custom\LabelsListBar\LabelsListBar.cs">
@@ -310,26 +293,14 @@
     <EmbeddedResource Include="component\custom\Loader\Spinner.resx">
       <DependentUpon>Spinner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\LoadingLabel\LoadingLabel.resx">
-      <DependentUpon>LoadingLabel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\LoggerView\LoggerView.resx">
       <DependentUpon>LoggerView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\NumbersCard\NumbersCard.resx">
-      <DependentUpon>NumbersCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\LabelsListBar\components\SidebarMenuItem.resx">
       <DependentUpon>SidebarMenuItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\Footer\Footer.resx">
       <DependentUpon>Footer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\NavigationBar\components\NavigationLink\NavigationLink.resx">
-      <DependentUpon>NavigationLink.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\NavigationBar\NavigationBar.resx">
-      <DependentUpon>NavigationBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\LabelsListBar\LabelsListBar.resx">
       <DependentUpon>LabelsListBar.cs</DependentUpon>

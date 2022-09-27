@@ -113,6 +113,7 @@ namespace Falcon_Protocol.interop
         [DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "Eylog_SetMenuConfig", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int Eylog_SetMenuConfig(ref MENU_CONFIG menu_conf, int config_len, int[] iRet);
 
+
 		/// <summary>
 		/// 
 		/// </summary>

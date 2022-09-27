@@ -73,5 +73,18 @@ namespace KTAVisorAPISDK.module.fileHistory.service
 
             return fileHistory;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<FileHistoryEntity> delete(string id)
+        {
+            HttpResponseMessage result = await this.fileHistoryRepository.delete(id);
+            string responseBody = await result.Content.ReadAsStringAsync();
+            FileHistoryEntity fileHistory = JsonConvert.DeserializeObject<FileHistoryEntity>(responseBody);
+
+            return fileHistory;
+        }
     }
 }

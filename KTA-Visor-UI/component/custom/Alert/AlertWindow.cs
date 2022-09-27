@@ -13,6 +13,8 @@ namespace KTA_Visor_UI.component.custom.MessageWindow
     public partial class AlertWindow : Form
     {
         public event EventHandler<EventArgs> OnOk;
+        public event EventHandler<EventArgs> OnCancel;
+
         protected override CreateParams CreateParams
         {
             get
@@ -29,23 +31,25 @@ namespace KTA_Visor_UI.component.custom.MessageWindow
             InitializeComponent();
         }
 
-        public AlertWindow(string type, string title, string message)
+        public AlertWindow(string type, string title, string message, bool allowcancel = false)
         {
             InitializeComponent();
             
             this.Type = type;
             this.Title = title;
             this.Message = message;
+            this.AllowCancel = allowcancel;
             this.calibrateIcon();
             this.ShowDialog();
         }
 
-        public AlertWindow(string message)
+        public AlertWindow(string message, string type="info", bool allowcancel = false)
         {
             InitializeComponent();
             this.Type = "info";
             this.Title = "";
             this.Message = message;
+            this.AllowCancel = allowcancel;
             this.calibrateIcon();
             this.ShowDialog();
         }
@@ -57,9 +61,9 @@ namespace KTA_Visor_UI.component.custom.MessageWindow
         /// <param name="type"></param>
         /// <param name="title"></param>
         /// <returns></returns>
-        public static AlertWindow Show(string message, string type = "info", string title = "")
+        public static AlertWindow Show(string message, string type = "info", string title = "", bool allowCancel = false)
         {
-            AlertWindow alert = new AlertWindow(type, title, message);
+            AlertWindow alert = new AlertWindow(type, title, message, allowCancel);
             alert.ShowDialog();
             return alert;
         }
@@ -70,19 +74,27 @@ namespace KTA_Visor_UI.component.custom.MessageWindow
             set { this.titleLbl.Text = value; }
             get { return this.titleLbl.Text; }
         }
-
         public string Message
         {
             set { this.messageLbl.Text = value; } 
             get { return this.messageLbl.Text; }
         }
-
         public Bitmap Icon { get; set; }
+        public bool AllowCancel
+        {
+            get { return this.cancelBtn.Visible; }
+            set { this.cancelBtn.Visible = value; }
+        }
 
         private void AlertWindow_Load(object sender, EventArgs e)
         {
             this.okBtn.OnClick += (delegate (object s, EventArgs ev) { 
                 this.OnOk?.Invoke(this, new EventArgs());
+                this.Close();
+            });
+
+            this.cancelBtn.OnClick += (delegate (object s, EventArgs ev) {
+                this.OnCancel?.Invoke(this, new EventArgs());
                 this.Close();
             });
         }

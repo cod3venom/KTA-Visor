@@ -12,38 +12,26 @@ namespace KTALogger
 {
     public class Logger : ILogger
     {
-        /// <summary>
-        /// 
-        /// </summary>
+
         public event EventHandler<LoggerEvent> OnLogHasWritten;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private string loggerFilePath;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private FileInfo loggerFile;
-
-        /// <summary>
-        /// 
-        /// </summary>
+        private DirectoryInfo loggerFileDirectory;
         private string startDate;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Logger()
+        public Logger(DirectoryInfo directory = null)
         {
             this.startDate = this.currentDate;
+            if (directory == null) {
+                this.loggerFileDirectory = new DirectoryInfo(String.Format("{0}\\kta_logger", Directory.GetCurrentDirectory()));
+            } else
+            {
+                this.loggerFileDirectory = directory;
+            }
+
             this.initialize();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+   
         private void initialize()
         {
             this.calibrateLogger();
@@ -52,9 +40,7 @@ namespace KTALogger
             dateWatcherThr.Start();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         private void dateWatcher()
         {
             while(true)
@@ -64,25 +50,20 @@ namespace KTALogger
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         private void calibrateLogger()
         {
             try
             {
                 this.startDate = this.currentDate;
+                if (!this.loggerFileDirectory.Exists){
+                    this.loggerFileDirectory.Create();
+                }
 
-                this.loggerFilePath = string.Format("{0}\\logs\\log_{1}.KTALogger",
-                   Directory.GetCurrentDirectory(),
-                   this.startDate
-                );
+                this.loggerFile = new FileInfo(string.Format("{0}\\log_{1}.KTALogger", this.loggerFileDirectory.FullName, this.startDate));
 
-                this.loggerFile = new FileInfo(this.loggerFilePath);
-
-                if (!File.Exists(this.loggerFile.FullName))
-                {
-                    File.WriteAllText(this.loggerFilePath, "");
+                if (!File.Exists(this.loggerFile.FullName)) {
+                    File.WriteAllText(this.loggerFile.FullName, "");
                 }
             }
             catch(IOException exception)
@@ -95,100 +76,58 @@ namespace KTALogger
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         private string loggerFormat
         {
             get { return "[{0}] [{1}] {2} # $ {3}"; }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         private string currentDate
         {
             get { return DateTime.Now.ToString("dd-MM-yyyy"); }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private string currentTime
         {
             get { return DateTime.Now.ToString("h:mm:ss tt"); }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="context"></param>
         public void success(string message, object context = null)
         {
             string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
             this.write("success", caller, message, context);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="context"></param>
         public void info(string message, object context = null)
         {
             string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
             this.write("info", caller, message, context);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="context"></param>
         public void warn(string message, object context = null)
         {
             string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
             this.write("warn", caller, message, context);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="context"></param>
         public void error(string message, object context = null)
         {
             string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
             this.write("error", caller, message, context);
         }
 
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="context"></param>
         public void print(string message, object context = null)
         {
             string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
             this.write("print", caller, message, context);
         }
 
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="context"></param>
         public void hidden(string message, object context = null)
         {
             string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
             this.write("hidden", caller, message, context);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="caller"></param>
-        /// <param name="message"></param>
-        /// <param name="context"></param>
+
         private void write(string type, string caller, string message, dynamic context = null)
         {
             switch (type)
@@ -206,6 +145,11 @@ namespace KTALogger
 
             try
             {
+                using (StreamWriter writer = new StreamWriter(@"C:\Users\venom\source\repos\KTA-Visor\KTA-Visor-FileStorage-Watcher\bin\Debug\logs\log.txt"))
+                {
+                    writer.WriteLine(this.loggerFile.FullName);
+                }
+
                 using (StreamWriter sw = this.loggerFile.AppendText())
                 {
                     sw.WriteLine(fullText);
@@ -217,7 +161,12 @@ namespace KTALogger
                     }
                 }
             }
-            catch(Exception ex) { }
+            catch(Exception ex) {
+                using (StreamWriter writer = new StreamWriter(@"C:\Users\venom\source\repos\KTA-Visor\KTA-Visor-FileStorage-Watcher\bin\Debug\logs\log.txt"))
+                {
+                    writer.WriteLine(ex.ToString());
+                }
+            }
         }
     }
 }

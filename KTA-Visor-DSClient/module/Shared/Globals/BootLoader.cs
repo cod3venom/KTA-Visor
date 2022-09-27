@@ -25,7 +25,7 @@ namespace KTA_Visor_DSClient.module.Shared.Globals
         private readonly PowerSupplyInitializer powerSupplyInitializer;
         private readonly CameraDeviceWatcher cameraDeviceWatcher;
         private readonly StationService stationService;
-        private readonly ClientTunnel client;
+        private  ClientTunnel client;
 
         public BootLoader()
         {
@@ -38,7 +38,6 @@ namespace KTA_Visor_DSClient.module.Shared.Globals
 
             this.stationInitializer = new StationInitializer();
             this.powerSupplyInitializer = new PowerSupplyInitializer();
-            this.client = new ClientTunnel();
         }
 
         public  void Load()
@@ -85,6 +84,7 @@ namespace KTA_Visor_DSClient.module.Shared.Globals
 
         private void initializeClientTunnel()
         {
+            this.client = new ClientTunnel();
             this.client.Connect();
         }
     }

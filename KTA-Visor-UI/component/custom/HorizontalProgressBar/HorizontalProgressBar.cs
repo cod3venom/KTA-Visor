@@ -26,6 +26,7 @@ namespace KTA_Visor_UI.component.custom.HorizontalProgressBar
 
         private void HorizontalProgressBar_Load(object sender, EventArgs e)
         {
+            this.Width = 232;
             this.bunifuProgressBar.MaximumValue = 100;
         }
 
@@ -33,38 +34,34 @@ namespace KTA_Visor_UI.component.custom.HorizontalProgressBar
 
         public void start()
         {
-            if (this.ProgressColor != null)
-            {
+            if (this.ProgressColor != null) 
                 this.bunifuProgressBar.ProgressColor = this.ProgressColor;
-            }
 
-            this.OnProgressStarted?.Invoke(this, EventArgs.Empty);
-
+            this.percentageLbl.Visible = true;
             Thread progressThr = new Thread(this._start);
             progressThr.IsBackground = true;
             progressThr.Start();
         }
+
         public void _start()
         {
-            for(int i = 0; i <= 100; i++)
+            this.OnProgressStarted?.Invoke(this, EventArgs.Empty);
+            for (int i = 0; i <= 100; i++)
             {
                 this.Invoke((MethodInvoker)delegate {
                     this.bunifuProgressBar.Value = i;
-                });
+                    this.percentageLbl.Text = String.Format("{0}%", i.ToString());
+                
 
-                if (this.bunifuProgressBar.Value == 100)
-                {
-                    this.OnProgressFinished?.Invoke(this, EventArgs.Empty);
-                    break;
-                }
+                    if (this.bunifuProgressBar.Value == 100)
+                    {
+                        this.OnProgressFinished?.Invoke(this, EventArgs.Empty);
+                        this.Hide();
+                        return;
+                    }
 
-                if (this.Transition != null)
-                {
                     Thread.Sleep(this.Transition);
-                } else
-                {
-                    Thread.Sleep(20);
-                }
+                });
             }
         }
     }

@@ -45,7 +45,7 @@ namespace KTA_Visor.module.Managemnt.module.fileHistory.view.FileHistoryViewPane
 
         private void FileHistoryViewPanel_Load(object sender, EventArgs e)
         {
-            this.table.bundle.column.addMultiple(this.Columns);
+            this.table.Column.addMultiple(this.Columns);
             this.table.DataGridView.CellDoubleClick += onOpenSelectedRecord;
             this.fetch();
         }
@@ -63,11 +63,11 @@ namespace KTA_Visor.module.Managemnt.module.fileHistory.view.FileHistoryViewPane
 
         private async void fetch()
         {
-            this.table.bundle.row.clear();
+            this.table.Row.clear();
             FileHistoryEntity files = await this.fileHistoryService.all();
             foreach (FileHistory file in files.datas)
             {
-                this.table.bundle.row.add(
+                this.table.Row.Add(
                     file.id,
                     file.fileDestPath,
                     file.fileSize.ToString(),
@@ -87,7 +87,7 @@ namespace KTA_Visor.module.Managemnt.module.fileHistory.view.FileHistoryViewPane
         /// <exception cref="Exception"></exception>
         private string ID
         {
-            get { return this.table.bundle.row.SelectedRow.Cells["ID"].Value.ToString(); }
+            get { return this.table.Row.SelectedRow.Cells["ID"].Value.ToString(); }
         }
 
     }

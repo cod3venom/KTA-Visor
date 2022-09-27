@@ -13,6 +13,8 @@ using System.IO;
 using System.Threading;
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
+using static Falcon_Protocol.interop.FalconProtocolInteropService;
+using KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService
 {
@@ -23,7 +25,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 
         private readonly CameraService cameraService;
         private DeviceWatcher deviceWatcher;
-
+        private ZFY_INFO currentDeviceInfo;
         public CameraDeviceWatcher()
         {     
             this.cameraService = new CameraService();
@@ -41,6 +43,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 
         private void onDeviceConnectedOrDisconnected(object sender, EventArgs e)
         {
+            this.Connect();
+            this.currentDeviceInfo = this.GetDeviceInfo(Globals.CAMERAS_LIST.Count);
+
             this.TryToMountDevice();
             Globals.Logger.print("Device action detected");
         }
@@ -50,12 +55,21 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 
             if (!this.isValidCameraDevice(e.Drive)) return;
 
+            this.Connect();
+            this.currentDeviceInfo = this.GetDeviceInfo(Globals.CAMERAS_LIST.Count);
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive, Globals.USB_CAMERA_DEVICES_LIST.Count);
 
 
             if (this.isCameraAlreadyAdded(camera)) return;
 
             AddCamerasToTheGlobalMemory.Execute(camera, Globals.ClientTunnel);
+            CopyCameraFilesToNetworkStorageCommand.Execute(
+                Globals.STATION?.data?.stationId,
+                camera.ID,
+                camera.BadgeId,
+                camera.getFilesAsDict(),
+                Globals.settings.SettingsObj?.app?.fileSystem?.filesPath
+            );
 
             Globals.Logger.success(String.Format("Camera with badge id {0} was inserted successfully", camera.BadgeId));
             this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
@@ -85,8 +99,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 
         public void TryToMountDevice()
         {
-            this.Connect();
-
             if (Globals.ALLOW_FS_MOUNTING)
             {
                 new Thread(() => this.Mount()).Start();

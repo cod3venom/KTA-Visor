@@ -235,6 +235,9 @@ namespace TCPTunnel.module.server
             e.Client.AuthData = authData;
 
             string ipAddress = e.Client.getSocket().RemoteEndPoint.ToString();
+            if (this.clientsList.ContainsKey(ipAddress))
+                return;
+
             this.clientsList.addClient(ipAddress, e.Client);
 
             this.logger.info(string.Format("Successfully authenticated and added client in CLIENTLIST", e.Client.getIpAddress()));

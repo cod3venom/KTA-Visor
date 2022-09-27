@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="kernel\sharedKernel\helper\Notepad\NotepadHelper.cs" />
     <Compile Include="module\camera\dto\request\DeselectAllCamerasFromTheStationTObject.cs" />
     <Compile Include="module\camera\dto\request\SelectCurrentCameraInStationRequestTObject.cs" />
     <Compile Include="module\camera\dto\request\EditCameraSettingsTObject.cs" />
@@ -54,8 +55,14 @@
     <Compile Include="module\fileHistory\dto\request\EditFileHistoryRequestTObject.cs" />
     <Compile Include="module\fileHistory\dto\request\CreateFileHistoryRequestTObject.cs" />
     <Compile Include="module\fileHistory\entity\FileHistoryEntity.cs" />
+    <Compile Include="module\fileHistory\repository\FileHistoryFileWatcherRepository.cs" />
     <Compile Include="module\fileHistory\repository\FileHistoryRepository.cs" />
+    <Compile Include="module\fileHistory\service\FileHistoryFileWatcherService.cs" />
     <Compile Include="module\fileHistory\service\FileHistoryService.cs" />
+    <Compile Include="module\logger\dto\GetLogsInRangeRequestTObject.cs" />
+    <Compile Include="module\logger\entity\LoggerEntity.cs" />
+    <Compile Include="module\logger\repository\LoggerRepository.cs" />
+    <Compile Include="module\logger\service\LoggerService.cs" />
     <Compile Include="module\station\dto\RemoveInactiveCameraFromStationRequestTObject.cs" />
     <Compile Include="module\station\dto\AddActiveCameraToStationRequestTObject.cs" />
     <Compile Include="SDK.cs" />

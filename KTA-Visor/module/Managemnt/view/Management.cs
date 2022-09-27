@@ -1,14 +1,12 @@
-﻿using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
-using KTA_Visor.module.Managemnt.workers.tunnel;
-using System;
-using System.Windows.Forms;
-using KTA_RFID_Keyboard.module.RFIDKeyboardReader;
-using KTA_Visor.module.Managemnt.module.officer.view.OfficersViewPanel;
-using KTA_Visor.module.Managemnt.module.camera.views.CameraViewPanel;
+﻿using KTA_RFID_Keyboard.module.RFIDKeyboardReader;
 using KTA_Visor.module.Managemnt.module.station.view.StationViewPanel;
 using KTA_Visor.module.Shared.Global;
 using KTA_Visor.module.Managemnt.events;
 using KTA_Visor.module.Managemnt.module.fileHistory.view.FileHistoryViewPanel;
+using System;
+using System.Windows.Forms;
+using KTA_Visor.module.Managemnt.module.logs.view;
+using KTA_Visor.module.Managemnt.sub_window;
 
 namespace KTA_Visor.module.Management.view
 {
@@ -22,7 +20,7 @@ namespace KTA_Visor.module.Management.view
         public Management()
         {
             InitializeComponent();
-            this.topBar.Parent = this;
+  
             this.loggerView.ParentPanel = this.loggerPanel;
             this.keyboardReader = new KeyboardReader();
             this.stationPanel = new StationViewPanel();
@@ -84,6 +82,13 @@ namespace KTA_Visor.module.Management.view
                 this.tunnelIndicator.running(false, "Uruchomiony");
             });
 
+            this.logsMenuItem.Click += (delegate (object sender, EventArgs e) {
+                new LogsView().ShowDialog();
+            });
+
+            this.versionMenuItem.Click += (delegate (object sender, EventArgs e) {
+                new VersionWindow().ShowDialog();
+            });
 
             this.stationBtn.OnClick += (delegate (object sender, EventArgs e){
                 this.stationPanel = new StationViewPanel();
@@ -97,6 +102,10 @@ namespace KTA_Visor.module.Management.view
                 this.contentPanel.Controls.Clear();
                 this.filesHistoryPanel.Dock = DockStyle.Fill;
                 this.contentPanel.Controls.Add(this.filesHistoryPanel);
+            });
+
+            this.logoutbtn.Click += (delegate (object sender, EventArgs e) {
+                Application.Restart();
             });
 
         }
@@ -116,7 +125,7 @@ namespace KTA_Visor.module.Management.view
            this.loggerView.append(e.Log);
         }
 
-        private void StationsView_OnClose(object sender, EventArgs e)
+        private void onCLose(object sender, EventArgs e)
         {
             Globals.ServerTunnelBackgroundWorker.Stop();
             Environment.Exit(-1);

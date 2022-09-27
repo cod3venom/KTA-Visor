@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KTA_Visor_UI.component.custom.CircleImageButton
@@ -49,9 +40,21 @@ namespace KTA_Visor_UI.component.custom.CircleImageButton
 
         private void CircleImageButton_Load(object sender, EventArgs e)
         {
-            //this.bunifuBtn.Cursor = CircleImageButton.handCursor;
-
             this.bunifuBtn.Click += BunifuBtn_Click;
+            this.bunifuBtn.MouseEnter += onMouseEnter;
+            this.bunifuBtn.MouseLeave += onMouseLeave;
+ 
+        }
+ 
+        private void onMouseEnter(object sender, EventArgs e)
+        {
+            this.toolTip1.Show(this.Label, this.bunifuBtn, new Point(this.bunifuBtn.Location.X + 50, this.bunifuBtn.Location.Y + 25));
+        }
+
+
+        private void onMouseLeave(object sender, EventArgs e)
+        {
+            this.toolTip1.Hide(this.bunifuBtn);
         }
 
         private void BunifuBtn_Click(object sender, EventArgs e)
@@ -65,6 +68,7 @@ namespace KTA_Visor_UI.component.custom.CircleImageButton
             set { this.bunifuBtn.Image = value; }
         }
 
+        public string Label { get; set; }
         private void bunifuBtn_MouseEnter(object sender, EventArgs e)
         {
 

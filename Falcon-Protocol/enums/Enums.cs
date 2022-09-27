@@ -17,6 +17,14 @@ namespace Falcon_Protocol.enums
             Resolution800x480P30
         }
 
+        public List<string> ResolutionValues ()
+        {
+            List<string> values = new List<string> ();
+            foreach (var resolution in Enum.GetValues(typeof(VideoResolutions))) {
+                values.Add(resolution.ToString().Replace("Resolution", ""));
+            }
+            return values;
+        }
 
         public enum Qualitys
         {

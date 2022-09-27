@@ -43,5 +43,15 @@ namespace KTAVisorAPISDK.module.fileHistory.repository
             string payload = JsonConvert.SerializeObject(request);
             return await HttpClientUtil.securedClient.PUT(string.Format("/api/me/file-history/{0}", id), payload);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<HttpResponseMessage> delete(string id)
+        {
+            return await HttpClientUtil.securedClient.DELETE(string.Format("/api/me/file-history/{0}", id));
+        }
     }
 }

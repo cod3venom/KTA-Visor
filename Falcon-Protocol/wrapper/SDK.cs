@@ -96,13 +96,20 @@ namespace Falcon_Protocol.wrapper
         /// 
         /// </summary>
         /// <returns></returns>
-        public MENU_CONFIG GetMenuConfig()
+        public MENU_CONFIG GetMenuConfig(int deviceIndex = -1)
         {
             var menuStruct = new MENU_CONFIG();
             int readMenuConfigLen = Marshal.SizeOf(menuStruct);
             int[] iret = new int[1];
 
-            FalconProtocolInteropService.Eylog_GetMenuConfig(ref menuStruct, readMenuConfigLen, iret);
+            if (deviceIndex > 0)
+            {
+                FalconProtocolInteropService.Eylog_GetMenuConfig_ByIndex(ref menuStruct, readMenuConfigLen, iret, deviceIndex);
+            }
+            else
+            {
+                FalconProtocolInteropService.Eylog_GetMenuConfig(ref menuStruct, readMenuConfigLen, iret);
+            }
 
             return menuStruct;
         }
@@ -113,14 +120,30 @@ namespace Falcon_Protocol.wrapper
         /// </summary>
         /// <param name="menuStruct"></param>
         /// <returns></returns>
-        public MENU_CONFIG SetMenuConfig(MENU_CONFIG menuStruct)
+        public MENU_CONFIG SetMenuConfig(MENU_CONFIG menuStruct, int deviceIndex = -1)
         {
             int config_len = Marshal.SizeOf(menuStruct);
             int[] iret = new int[1];
 
-            FalconProtocolInteropService.Eylog_SetMenuConfig(ref menuStruct, config_len, iret);
-
+            if (deviceIndex != -1)
+            {
+                FalconProtocolInteropService.Eylog_SetMenuConfig_ByIndex(ref menuStruct, config_len, iret, deviceIndex);
+            }
+            else
+            {
+                FalconProtocolInteropService.Eylog_SetMenuConfig(ref menuStruct, config_len, iret);
+            }
             return menuStruct;
+        }
+
+        public ZFY_INFO GetDeviceInfo(int deviceIndex)
+        {
+            
+            ZFY_INFO info = new ZFY_INFO();
+            int[] iret = new int[1];
+
+            FalconProtocolInteropService.GetZFYInfo_ByIndex(ref info, this.pwd, iret, deviceIndex);
+            return info;
         }
 
         /// <summary>
