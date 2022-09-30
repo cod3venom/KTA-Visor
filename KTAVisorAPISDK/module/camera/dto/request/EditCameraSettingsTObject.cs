@@ -12,6 +12,7 @@ namespace KTAVisorAPISDK.module.camera.dto.request
         public EditCameraSettingsTObject(
           string camCustomId = "",
           string badgeId = "",
+          string cardId = "",
           int videoResolution = 0,
           int quality = 0,
           int codecFormat = 0,
@@ -36,8 +37,9 @@ namespace KTAVisorAPISDK.module.camera.dto.request
 
         public int index { get; set; }
         public string camCustomId { get; set; }
-        public string stationId { get; set; }
         public string badgeId { get; set; }
+        public string cardId { get; set; }
+        public string stationId { get; set; }
 
 
         ///////////////////////////////////

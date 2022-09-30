@@ -14,10 +14,11 @@ namespace KTA_Visor.install.settings.dto
         public class App
         {
             public string title { get; set; }
-
-            public API api { get; set; }
-          
+            public bool configured { get; set; }
+            public string releaseName { get; set; }
+            public API api { get; set; }        
             public Tunnel tunnel{ get; set; }
+            public FileSystem fileSystem { get; set; }
         }
          
         public class API
@@ -36,6 +37,12 @@ namespace KTA_Visor.install.settings.dto
             public string serverMode { get; set; }
 
             public string[] modes { get; set; }
+        }
+
+        public class FileSystem
+        {
+            public string filesPath { get; set; }
+            public bool autoCopy { get; set; }
         }
     }
 }

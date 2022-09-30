@@ -7,6 +7,7 @@ using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using KTAVisorAPISDK.module.camera.service;
 using KTAVisorAPISDK.module.station.service;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
@@ -46,16 +47,24 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
 
         private void StationViewPanel_Load(object sender, EventArgs e)
         {
+
+            this.initialize();
+        }
+ 
+        private async void initialize()
+        {
+            await this.loader.Start(1000, 100);
+            this.hookEvents();
+            await this.loader.Stop(1000);
+
+        }
+        private void hookEvents()
+        {
             Globals.ServerTunnelBackgroundWorker.OnClientConnected += onStationConnected;
             Globals.ServerTunnelBackgroundWorker.OnClientDisconnected += onStationDisconnected;
             Globals.ServerTunnelBackgroundWorker.OnMessageReceivedFromClient += onResponseReceivedFromStation;
             this.table.DataGridView.Cursor = Cursors.Hand;
             this.table.DataGridView.CellDoubleClick += onCellDoubleClick;
-            this.hookEvents();
-        }
-
-        private void hookEvents()
-        {
             this.stationController.OnRefreshCamerasList += onRefreshCamerasList;
         }
 

@@ -65,6 +65,8 @@
     <Compile Include="module\logger\service\LoggerService.cs" />
     <Compile Include="module\station\dto\RemoveInactiveCameraFromStationRequestTObject.cs" />
     <Compile Include="module\station\dto\AddActiveCameraToStationRequestTObject.cs" />
+    <Compile Include="module\user\repository\UserRepository.cs" />
+    <Compile Include="module\user\service\UserService.cs" />
     <Compile Include="SDK.cs" />
     <Compile Include="kernel\module\HttpClientHelper\events\HttpUnauthorizedInterceptorEvent.cs" />
     <Compile Include="kernel\module\HttpClientHelper\HttpClientHelper.cs" />
@@ -98,7 +100,7 @@
     <Compile Include="module\station\repository\StationRepository.cs" />
     <Compile Include="module\station\service\StationService.cs" />
     <Compile Include="module\user\consts\UserRole.cs" />
-    <Compile Include="module\user\entity\User.cs" />
+    <Compile Include="module\user\entity\UserEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\Exceptions\BadRequestException.cs" />
     <Compile Include="Shared\Exceptions\RecordNotFoundException.cs" />
@@ -117,8 +119,6 @@
     <Folder Include="module\officer\command\" />
     <Folder Include="module\station\command\" />
     <Folder Include="module\user\command\" />
-    <Folder Include="module\user\repository\" />
-    <Folder Include="module\user\service\" />
     <Folder Include="Shared\Component\" />
   </ItemGroup>
   <ItemGroup>

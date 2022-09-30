@@ -11,8 +11,9 @@ namespace KTAVisorAPISDK.module.camera.dto.reques
         public EditCameraRequestTObject(
            int index = 0,
            string camCustomId = "",
-           string stationId = "",
            string badgeId = "",
+           string cardId = "",
+           string stationId = "",
            string driveName = "",
            bool active = false
        )

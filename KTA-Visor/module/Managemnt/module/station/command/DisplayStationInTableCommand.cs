@@ -40,24 +40,7 @@ namespace KTA_Visor.module.Managemnt.module.station.command
                );
 
 
-                for(int i = 0; i < 100; i++)
-                {
-                    StationEntity fakeStation = new StationEntity();
-                    fakeStation.data = station.data;
-                    fakeStation.data.id = i.ToString();
-                    fakeStation.data.stationId = "station_" + i.ToString();
-                    fakeStation.data.active = true;
-
-                    string fakeIp = "127.0.0.1." + i.ToString();
-                    table.Rows.Add(
-                          fakeStation?.data?.stationId,
-                          fakeIp,
-                          fakeStation?.data?.stationIp,
-                          fakeStation.data.active ? "Tak" : "Nie",
-                          fakeStation?.data?.updatedAt,
-                          fakeStation?.data?.createdAt
-                      );
-                }
+              
             });
         }
     }

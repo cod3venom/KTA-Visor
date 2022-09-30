@@ -13,6 +13,8 @@ namespace KTAVisorAPISDK.module.camera.entity
         {
             public string cameraCustomId { get; set; }
             public string badgeId { get; set; }
+            public string cardId { get; set; }
+
             public int resolution { get; set; }
             public int quality { get; set; }
             public int codecFormat { get; set; }

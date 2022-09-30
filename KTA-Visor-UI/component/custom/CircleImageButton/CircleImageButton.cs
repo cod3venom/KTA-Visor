@@ -23,6 +23,12 @@ namespace KTA_Visor_UI.component.custom.CircleImageButton
         }
 
         private static Cursor handCursor = new Cursor(Properties.Resources.hand_cursor.Handle);
+
+        public Color BackColor
+        {
+            get { return this.BackColor; }
+            set { this.BackColor = value; }
+        }
         
         public CircleImageButton()
         {

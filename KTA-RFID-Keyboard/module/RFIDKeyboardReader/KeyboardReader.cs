@@ -17,6 +17,10 @@ namespace KTA_RFID_Keyboard.module.RFIDKeyboardReader
 
         private static IKeyboardMouseEvents m_GlobalHook;
 
+        public KeyboardReader()
+        {
+            this.Subscribe();
+        }
 
         public void Subscribe()
         {

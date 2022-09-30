@@ -1,11 +1,13 @@
 ﻿{
   "app": {
     "title": "KTA-Visor Manager",
+    "configured": false,
+    "releaseName": "proud-unit.ver.1.0.0.2022",
     "api": {
-      "url":  "http://localhost:8000/api"
+      "url": "http://localhost:8000/api"
     },
     "tunnel": {
-      "title":  "Server - settings",
+      "title": "Server - settings",
       "serverIp": "127.0.0.1",
       "serverPort": 1337,
       "serverMode": "DEBUG",
@@ -13,6 +15,10 @@
         "DEBUG",
         "PRODUCTION"
       ]
+    },
+    "fileSystem": {
+      "filesPath": "",
+      "autoCopy": true
     }
   }
 }

@@ -65,6 +65,7 @@ namespace TCPTunnel.module.client
             }
             catch (SocketException)
             {
+                this.client.Disconnect();
                 this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
             }
 

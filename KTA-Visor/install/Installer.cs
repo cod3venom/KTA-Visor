@@ -16,29 +16,45 @@ namespace KTA_Visor.install
         {
             this.currentPath = Directory.GetCurrentDirectory();
         }
+
+        private DirectoryInfo SettingsDirectory
+        {
+            get { return new DirectoryInfo(string.Format("{0}/settings", this.currentPath)); }
+        }
+
+        private FileInfo SettingsFile
+        {
+            get { return new FileInfo(string.Format("{0}/settings/Settings.json", this.currentPath)); }
+        }
+
+        private DirectoryInfo LogsDirectory
+        {
+            get { return new DirectoryInfo(string.Format("{0}/logs", this.currentPath)); }
+        }
+
+
         private void writeSettingsFile()
         {
-            DirectoryInfo dirInfo = new DirectoryInfo(string.Format("{0}/settings", this.currentPath));
-            FileInfo fileInfo = new FileInfo(string.Format("{0}/settings/Settings.json", this.currentPath));
-            if (!dirInfo.Exists)
-                dirInfo.Create();
+            
+            if (!this.SettingsDirectory.Exists)
+                this.SettingsDirectory.Create();
 
-            if (!fileInfo.Exists)
+            if (!this.SettingsFile.Exists)
             {
                 string settingsContent = EmbededFileHelper.Read("KTA_Visor.install.settings.Settings.json", true);
-                File.WriteAllText(fileInfo.FullName, settingsContent);
+                File.WriteAllText(this.SettingsFile.FullName, settingsContent);
             }
         }
 
         private void createLogsDir()
         {
-            DirectoryInfo dirInfo = new DirectoryInfo(string.Format("{0}/logs", this.currentPath));
-            if (dirInfo.Exists)
+            if (this.LogsDirectory.Exists)
                 return;
 
-            dirInfo.Create();
+            this.LogsDirectory.Create();
         }
 
+    
         public void FullInstall()
         {
             this.writeSettingsFile();

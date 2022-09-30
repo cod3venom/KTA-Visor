@@ -1,5 +1,7 @@
 ﻿using KTAVisorAPISDK.module.auth.dto.request;
 using KTAVisorAPISDK.module.auth.service;
+using KTAVisorAPISDK.module.user.entity;
+using KTAVisorAPISDK.module.user.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +17,12 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignUpView
     public partial class SignUpView : Form
     {
         private readonly AuthService authService;
+        private readonly UserService userService;
         public SignUpView()
         {
             InitializeComponent();
             this.authService = new AuthService();
+            this.userService = new UserService();
             this.topBar1.Parent = this;
          }
 
@@ -56,7 +60,8 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignUpView
                ));
 
                 this.Hide();
-                new Management.view.Management().Show();
+                UserEntity user = await this.userService.me();
+                new Management.view.Management(user).Show();
             }
             catch(Exception ex)
             {

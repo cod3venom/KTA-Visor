@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>KTA_Visor</RootNamespace>
     <AssemblyName>KTA-Visor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -429,11 +429,29 @@
       <DependentUpon>StationViewPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\user\consts\UserRole.cs" />
+    <Compile Include="module\Managemnt\sub-window\FileExplorerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\sub-window\FileExplorerWindow.Designer.cs">
+      <DependentUpon>FileExplorerWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\sub-window\TunnelWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\sub-window\TunnelWindow.Designer.cs">
+      <DependentUpon>TunnelWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\Managemnt\sub-window\VersionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\Managemnt\sub-window\VersionWindow.Designer.cs">
       <DependentUpon>VersionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\view\KernelLoader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\view\KernelLoader.Designer.cs">
+      <DependentUpon>KernelLoader.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\view\Management.cs">
       <SubType>Form</SubType>
@@ -455,6 +473,7 @@
     <Compile Include="module\Shared\Exceptions\UnableToEditRecordException.cs" />
     <Compile Include="module\Shared\Exceptions\UnableToCreateRecordException .cs" />
     <Compile Include="module\Shared\Exceptions\UnableToRemoveRecordException.cs" />
+    <Compile Include="module\Shared\Global\Bootloader.cs" />
     <Compile Include="module\Shared\Global\Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -536,8 +555,17 @@
     <EmbeddedResource Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.resx">
       <DependentUpon>StationViewPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\sub-window\FileExplorerWindow.resx">
+      <DependentUpon>FileExplorerWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\sub-window\TunnelWindow.resx">
+      <DependentUpon>TunnelWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\sub-window\VersionWindow.resx">
       <DependentUpon>VersionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\view\KernelLoader.resx">
+      <DependentUpon>KernelLoader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\view\Management.resx">
       <DependentUpon>Management.cs</DependentUpon>

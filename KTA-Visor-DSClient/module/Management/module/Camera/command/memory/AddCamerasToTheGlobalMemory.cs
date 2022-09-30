@@ -45,8 +45,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
             _ = new CameraService().create(new CreateCameraRequestTObject(
                   camera.Index,
                   camera.ID,
+                  camera.BadgeId,
+                  "",
                   Globals.STATION.data.stationId,
-                  camera.BadgeId
+                  camera.Drive?.Name
               ));
 
             client.Emit(new Request(

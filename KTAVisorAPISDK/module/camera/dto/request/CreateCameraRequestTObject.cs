@@ -12,16 +12,18 @@ namespace KTAVisorAPISDK.module.camera.dto.request
         public CreateCameraRequestTObject(
             int index = 0,
             string camCustomId = "",
-            string stationId = "",
             string badgeId = "",
+            string cardId = "",
+            string stationId = "",
             string driveName = "",
             bool active = true
         )
         {
             this.index = index;
             this.camCustomId = camCustomId;
-            this.stationId = stationId;
             this.badgeId = badgeId;
+            this.cardId = cardId;
+            this.stationId = stationId;
             this.driveName = driveName;
             this.active = active;
      
@@ -29,8 +31,9 @@ namespace KTAVisorAPISDK.module.camera.dto.request
 
         public int index { get; set; }
         public string camCustomId { get; set; }
-        public string stationId { get; set; }
         public string badgeId { get; set; }
+        public string cardId { get; set; }
+        public string stationId { get; set; }
         public string driveName { get; set; }
         public bool active { get; set; }
     }

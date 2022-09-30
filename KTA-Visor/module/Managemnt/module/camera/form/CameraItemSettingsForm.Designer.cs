@@ -47,6 +47,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.saveBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.wifiChk = new System.Windows.Forms.CheckBox();
+            this.wifiLbl = new System.Windows.Forms.Label();
+            this.gpsChk = new System.Windows.Forms.CheckBox();
+            this.gpsLbl = new System.Windows.Forms.Label();
             this.preRecordingChk = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.recordingCodecFormatCombo = new System.Windows.Forms.ComboBox();
@@ -55,10 +59,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.recordingResolutionCombo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.gpsChk = new System.Windows.Forms.CheckBox();
-            this.gpsLbl = new System.Windows.Forms.Label();
-            this.wifiChk = new System.Windows.Forms.CheckBox();
-            this.wifiLbl = new System.Windows.Forms.Label();
+            this.genCardId = new System.Windows.Forms.Button();
+            this.cardId = new System.Windows.Forms.Label();
+            this.cardIdtxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -71,12 +74,16 @@
             // 
             // topBar
             // 
+            this.topBar.AllowClose = true;
+            this.topBar.AllowMinimize = true;
+            this.topBar.AllowResize = true;
             this.topBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.topBar.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.topBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.topBar.Description = "Window";
             this.topBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBar.Location = new System.Drawing.Point(0, 0);
-            this.topBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.topBar.Margin = new System.Windows.Forms.Padding(2);
             this.topBar.Name = "topBar";
             this.topBar.Parent = null;
             this.topBar.Size = new System.Drawing.Size(858, 36);
@@ -117,7 +124,7 @@
             this.dateTimeLbl.AutoSize = true;
             this.dateTimeLbl.BackColor = System.Drawing.Color.Transparent;
             this.dateTimeLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimeLbl.Location = new System.Drawing.Point(28, 147);
+            this.dateTimeLbl.Location = new System.Drawing.Point(28, 184);
             this.dateTimeLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.dateTimeLbl.Name = "dateTimeLbl";
             this.dateTimeLbl.Size = new System.Drawing.Size(88, 15);
@@ -147,7 +154,7 @@
             this.dateTimeTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimeTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dateTimeTxt.isPassword = false;
-            this.dateTimeTxt.Location = new System.Drawing.Point(176, 150);
+            this.dateTimeTxt.Location = new System.Drawing.Point(176, 187);
             this.dateTimeTxt.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimeTxt.Name = "dateTimeTxt";
             this.dateTimeTxt.Size = new System.Drawing.Size(166, 20);
@@ -182,6 +189,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.genCardId);
+            this.panel1.Controls.Add(this.cardId);
+            this.panel1.Controls.Add(this.cardIdtxt);
             this.panel1.Controls.Add(this.syncDateTIme);
             this.panel1.Controls.Add(this.genBadgeId);
             this.panel1.Controls.Add(this.genDeviceId);
@@ -204,7 +214,7 @@
             this.syncDateTIme.BackColor = System.Drawing.Color.White;
             this.syncDateTIme.BackgroundImage = global::KTA_Visor.Properties.Resources.sync;
             this.syncDateTIme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.syncDateTIme.Location = new System.Drawing.Point(334, 150);
+            this.syncDateTIme.Location = new System.Drawing.Point(334, 187);
             this.syncDateTIme.Margin = new System.Windows.Forms.Padding(2);
             this.syncDateTIme.Name = "syncDateTIme";
             this.syncDateTIme.Size = new System.Drawing.Size(19, 20);
@@ -308,6 +318,50 @@
             this.panel3.Size = new System.Drawing.Size(404, 480);
             this.panel3.TabIndex = 36;
             // 
+            // wifiChk
+            // 
+            this.wifiChk.AutoSize = true;
+            this.wifiChk.Location = new System.Drawing.Point(173, 237);
+            this.wifiChk.Margin = new System.Windows.Forms.Padding(2);
+            this.wifiChk.Name = "wifiChk";
+            this.wifiChk.Size = new System.Drawing.Size(15, 14);
+            this.wifiChk.TabIndex = 57;
+            this.wifiChk.UseVisualStyleBackColor = true;
+            // 
+            // wifiLbl
+            // 
+            this.wifiLbl.AutoSize = true;
+            this.wifiLbl.BackColor = System.Drawing.Color.Transparent;
+            this.wifiLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wifiLbl.Location = new System.Drawing.Point(17, 236);
+            this.wifiLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.wifiLbl.Name = "wifiLbl";
+            this.wifiLbl.Size = new System.Drawing.Size(31, 15);
+            this.wifiLbl.TabIndex = 56;
+            this.wifiLbl.Text = "WiFi";
+            // 
+            // gpsChk
+            // 
+            this.gpsChk.AutoSize = true;
+            this.gpsChk.Location = new System.Drawing.Point(173, 205);
+            this.gpsChk.Margin = new System.Windows.Forms.Padding(2);
+            this.gpsChk.Name = "gpsChk";
+            this.gpsChk.Size = new System.Drawing.Size(15, 14);
+            this.gpsChk.TabIndex = 55;
+            this.gpsChk.UseVisualStyleBackColor = true;
+            // 
+            // gpsLbl
+            // 
+            this.gpsLbl.AutoSize = true;
+            this.gpsLbl.BackColor = System.Drawing.Color.Transparent;
+            this.gpsLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpsLbl.Location = new System.Drawing.Point(17, 204);
+            this.gpsLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.gpsLbl.Name = "gpsLbl";
+            this.gpsLbl.Size = new System.Drawing.Size(32, 15);
+            this.gpsLbl.TabIndex = 54;
+            this.gpsLbl.Text = "GPS";
+            // 
             // preRecordingChk
             // 
             this.preRecordingChk.AutoSize = true;
@@ -393,49 +447,46 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Rozdzielczość";
             // 
-            // gpsChk
+            // genCardId
             // 
-            this.gpsChk.AutoSize = true;
-            this.gpsChk.Location = new System.Drawing.Point(173, 205);
-            this.gpsChk.Margin = new System.Windows.Forms.Padding(2);
-            this.gpsChk.Name = "gpsChk";
-            this.gpsChk.Size = new System.Drawing.Size(15, 14);
-            this.gpsChk.TabIndex = 55;
-            this.gpsChk.UseVisualStyleBackColor = true;
+            this.genCardId.BackColor = System.Drawing.Color.White;
+            this.genCardId.BackgroundImage = global::KTA_Visor.Properties.Resources.generate;
+            this.genCardId.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.genCardId.Location = new System.Drawing.Point(334, 146);
+            this.genCardId.Margin = new System.Windows.Forms.Padding(2);
+            this.genCardId.Name = "genCardId";
+            this.genCardId.Size = new System.Drawing.Size(19, 20);
+            this.genCardId.TabIndex = 40;
+            this.genCardId.UseVisualStyleBackColor = false;
             // 
-            // gpsLbl
+            // cardId
             // 
-            this.gpsLbl.AutoSize = true;
-            this.gpsLbl.BackColor = System.Drawing.Color.Transparent;
-            this.gpsLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpsLbl.Location = new System.Drawing.Point(17, 204);
-            this.gpsLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.gpsLbl.Name = "gpsLbl";
-            this.gpsLbl.Size = new System.Drawing.Size(32, 15);
-            this.gpsLbl.TabIndex = 54;
-            this.gpsLbl.Text = "GPS";
+            this.cardId.AutoSize = true;
+            this.cardId.BackColor = System.Drawing.Color.Transparent;
+            this.cardId.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cardId.Location = new System.Drawing.Point(28, 146);
+            this.cardId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.cardId.Name = "cardId";
+            this.cardId.Size = new System.Drawing.Size(52, 15);
+            this.cardId.TabIndex = 38;
+            this.cardId.Text = "ID Karty";
             // 
-            // wifiChk
+            // cardIdtxt
             // 
-            this.wifiChk.AutoSize = true;
-            this.wifiChk.Location = new System.Drawing.Point(173, 237);
-            this.wifiChk.Margin = new System.Windows.Forms.Padding(2);
-            this.wifiChk.Name = "wifiChk";
-            this.wifiChk.Size = new System.Drawing.Size(15, 14);
-            this.wifiChk.TabIndex = 57;
-            this.wifiChk.UseVisualStyleBackColor = true;
-            // 
-            // wifiLbl
-            // 
-            this.wifiLbl.AutoSize = true;
-            this.wifiLbl.BackColor = System.Drawing.Color.Transparent;
-            this.wifiLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.wifiLbl.Location = new System.Drawing.Point(17, 236);
-            this.wifiLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.wifiLbl.Name = "wifiLbl";
-            this.wifiLbl.Size = new System.Drawing.Size(31, 15);
-            this.wifiLbl.TabIndex = 56;
-            this.wifiLbl.Text = "WiFi";
+            this.cardIdtxt.BorderColorFocused = System.Drawing.Color.White;
+            this.cardIdtxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cardIdtxt.BorderColorMouseHover = System.Drawing.Color.White;
+            this.cardIdtxt.BorderThickness = 1;
+            this.cardIdtxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.cardIdtxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cardIdtxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cardIdtxt.isPassword = false;
+            this.cardIdtxt.Location = new System.Drawing.Point(176, 146);
+            this.cardIdtxt.Margin = new System.Windows.Forms.Padding(4);
+            this.cardIdtxt.Name = "cardIdtxt";
+            this.cardIdtxt.Size = new System.Drawing.Size(166, 20);
+            this.cardIdtxt.TabIndex = 39;
+            this.cardIdtxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // CameraItemSettingsForm
             // 
@@ -495,5 +546,8 @@
         private System.Windows.Forms.Label wifiLbl;
         private System.Windows.Forms.CheckBox gpsChk;
         private System.Windows.Forms.Label gpsLbl;
+        private System.Windows.Forms.Button genCardId;
+        private System.Windows.Forms.Label cardId;
+        private Bunifu.Framework.UI.BunifuMetroTextbox cardIdtxt;
     }
 }

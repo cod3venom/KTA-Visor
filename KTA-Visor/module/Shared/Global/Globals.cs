@@ -13,6 +13,9 @@ namespace KTA_Visor.module.Shared.Global
 {
     public class Globals
     {
+
+        public static KTALogger.Logger Logger = new KTALogger.Logger();
+
         public static string READED_CARD_INPUT = "";
         public static bool IS_SERVER_ONLINE = false;
         public static ServerTunnelBackgroundWorker ServerTunnelBackgroundWorker;
@@ -21,6 +24,7 @@ namespace KTA_Visor.module.Shared.Global
         public static List<StationEntity.Station> STATIONS_LIST = new List<StationEntity.Station>();
         public static List<CameraEntity.Camera> ALL_STATION_CAMERAS = new List<CameraEntity.Camera>();
         public static List<TCPClientTObject> CLIENTS_LIST = new List<TCPClientTObject>();
+        
 
     }
 }

@@ -118,8 +118,8 @@ namespace TCPTunnel.kernel.types
 
         public void Disconnect()
         {
-            this.socket.Close();
             this.socket.Dispose();
+            //this.socket.Close();
         }
 
         public bool IsConnected()

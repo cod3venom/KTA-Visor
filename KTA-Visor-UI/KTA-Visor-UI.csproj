@@ -63,6 +63,21 @@
     <Compile Include="component\basic\button\SecondaryButton.Designer.cs">
       <DependentUpon>SecondaryButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\basic\progressbar\FullScreenHorizontalLoader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\progressbar\FullScreenHorizontalLoader.Designer.cs">
+      <DependentUpon>FullScreenHorizontalLoader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\progressbar\FullScreenCircleLoader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\progressbar\FullScreenCircleLoader.Designer.cs">
+      <DependentUpon>FullScreenCircleLoader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\basic\progressbar\ImprovedProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="component\basic\separator\VerticalSeparator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -141,6 +156,12 @@
     <Compile Include="component\custom\CircleImageButton\CircleImageButton.Designer.cs">
       <DependentUpon>CircleImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\custom\FIleExplorer\FileExplorer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\FIleExplorer\FileExplorer.Designer.cs">
+      <DependentUpon>FileExplorer.cs</DependentUpon>
+    </Compile>
     <Compile Include="component\custom\FileList\components\HorizontalFileItem\FileItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -173,36 +194,17 @@
       <DependentUpon>AlertWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\Notification\NotificationWIndow.cs" />
-    <Compile Include="component\custom\LabelsListBar\components\SidebarMenuItem.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\LabelsListBar\components\SidebarMenuItem.Designer.cs">
-      <DependentUpon>SidebarMenuItem.cs</DependentUpon>
-    </Compile>
     <Compile Include="component\custom\Footer\Footer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="component\custom\Footer\Footer.Designer.cs">
       <DependentUpon>Footer.cs</DependentUpon>
     </Compile>
-    <Compile Include="component\custom\LabelsListBar\events\SideBarItemClickedEvent.cs" />
-    <Compile Include="component\custom\LabelsListBar\LabelsListBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\LabelsListBar\LabelsListBar.Designer.cs">
-      <DependentUpon>LabelsListBar.cs</DependentUpon>
-    </Compile>
     <Compile Include="component\basic\Sidebar\Sidebar.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="component\basic\Sidebar\Sidebar.Designer.cs">
       <DependentUpon>Sidebar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="component\custom\Loader\Spinner.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\Loader\Spinner.Designer.cs">
-      <DependentUpon>Spinner.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\Security\FileEncryption\events\OnSaveFileEncryptionPasswordsEvent.cs" />
     <Compile Include="component\custom\Security\FileEncryption\FileEncryptionWithPasswordWindow.cs">
@@ -211,18 +213,11 @@
     <Compile Include="component\custom\Security\FileEncryption\FileEncryptionWithPasswordWindow.Designer.cs">
       <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="component\custom\VerticalTab\components\MenuLink\events\MenuLinkClickEvent.cs" />
-    <Compile Include="component\custom\VerticalTab\components\MenuLink\MenuLink.cs">
+    <Compile Include="component\custom\User\UserProfile\UserProfileCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="component\custom\VerticalTab\components\MenuLink\MenuLink.Designer.cs">
-      <DependentUpon>MenuLink.cs</DependentUpon>
-    </Compile>
-    <Compile Include="component\custom\VerticalTab\VerticalTab.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\VerticalTab\VerticalTab.Designer.cs">
-      <DependentUpon>VerticalTab.cs</DependentUpon>
+    <Compile Include="component\custom\User\UserProfile\UserProfileCard.Designer.cs">
+      <DependentUpon>UserProfileCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -247,6 +242,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="component\basic\button\SecondaryButton.resx">
       <DependentUpon>SecondaryButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\progressbar\FullScreenHorizontalLoader.resx">
+      <DependentUpon>FullScreenHorizontalLoader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\basic\progressbar\FullScreenCircleLoader.resx">
+      <DependentUpon>FullScreenCircleLoader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\basic\separator\VerticalSeparator.resx">
       <DependentUpon>VerticalSeparator.cs</DependentUpon>
@@ -281,6 +282,9 @@
     <EmbeddedResource Include="component\custom\CircleImageButton\CircleImageButton.resx">
       <DependentUpon>CircleImageButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\FIleExplorer\FileExplorer.resx">
+      <DependentUpon>FileExplorer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\FileList\components\HorizontalFileItem\FileItem.resx">
       <DependentUpon>FileItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,20 +294,11 @@
     <EmbeddedResource Include="component\custom\HorizontalProgressBar\HorizontalProgressBar.resx">
       <DependentUpon>HorizontalProgressBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\Loader\Spinner.resx">
-      <DependentUpon>Spinner.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\LoggerView\LoggerView.resx">
       <DependentUpon>LoggerView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\LabelsListBar\components\SidebarMenuItem.resx">
-      <DependentUpon>SidebarMenuItem.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\Footer\Footer.resx">
       <DependentUpon>Footer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\LabelsListBar\LabelsListBar.resx">
-      <DependentUpon>LabelsListBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\basic\Sidebar\Sidebar.resx">
       <DependentUpon>Sidebar.cs</DependentUpon>
@@ -311,11 +306,8 @@
     <EmbeddedResource Include="component\custom\Security\FileEncryption\FileEncryptionWithPasswordWindow.resx">
       <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\VerticalTab\components\MenuLink\MenuLink.resx">
-      <DependentUpon>MenuLink.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\VerticalTab\VerticalTab.resx">
-      <DependentUpon>VerticalTab.cs</DependentUpon>
+    <EmbeddedResource Include="component\custom\User\UserProfile\UserProfileCard.resx">
+      <DependentUpon>UserProfileCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -328,7 +320,6 @@
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
     <Folder Include="component\custom\Security\NewFolder1\" />
-    <Folder Include="component\custom\SideNavigationBar\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hand_cursor.png" />

@@ -29,31 +29,28 @@ namespace KTA_Visor_UI.component.custom.LoggerView
 
         public Panel ParentPanel { get; set; }
 
-        public void append(string log)
+        public void append(string message, Color color)
         {
             if (this.InvokeRequired)
             {
                 this.BeginInvoke((MethodInvoker)delegate
                 {
-                    this.richTextBox.AppendText(log + Environment.NewLine);
+                    if (color == null)
+                    {
+                        color = Color.Black;
+                    }
 
-                    this.richTextBox.HideSelection = true;
-                    this.richTextBox.SelectionStart = richTextBox.Text.Length;
+                    richTextBox.SelectionStart = richTextBox.TextLength;
+                    richTextBox.SelectionLength = 0;
+
+                    richTextBox.SelectionColor = color;
+                    richTextBox.AppendText(message + Environment.NewLine);
+                    richTextBox.SelectionColor = richTextBox.ForeColor;
                     this.richTextBox.ScrollToCaret();
                 });
             }
 
-            else
-            {
-                if (this.richTextBox.IsDisposed)
-                    return;
-
-                this.richTextBox.AppendText(log + Environment.NewLine);
-
-                this.richTextBox.HideSelection = true;
-                this.richTextBox.SelectionStart = richTextBox.Text.Length;
-                this.richTextBox.ScrollToCaret();
-            }
+             
         }
 
         private void cleanBtn_Click(object sender, EventArgs e)

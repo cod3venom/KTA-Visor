@@ -7,128 +7,174 @@ using System;
 using System.Windows.Forms;
 using KTA_Visor.module.Managemnt.module.logs.view;
 using KTA_Visor.module.Managemnt.sub_window;
+using System.ComponentModel;
+using KTA_Visor.install.settings;
+using KTAVisorAPISDK.module.user.entity;
+using KTAVisorAPISDK.module.user.service;
 
 namespace KTA_Visor.module.Management.view
 {
     public partial class Management : Form
     {
 
-        private  KeyboardReader keyboardReader;
-        private  StationViewPanel stationPanel;
-        private  FileHistoryViewPanel filesHistoryPanel;
-        
-        public Management()
+        private Settings settings;
+        private KeyboardReader keyboardReader;
+        private StationViewPanel stationPanel;
+        private FileHistoryViewPanel filesHistoryPanel;
+        private UserEntity userEntity;
+        public Management(UserEntity userEntity)
         {
             InitializeComponent();
-  
-            this.loggerView.ParentPanel = this.loggerPanel;
-            this.keyboardReader = new KeyboardReader();
-            this.stationPanel = new StationViewPanel();
+
+            this.settings = new Settings();
             this.filesHistoryPanel = new FileHistoryViewPanel();
+            this.keyboardReader = new KeyboardReader();
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
-            Program.Logger.OnLogHasWritten += onLogHasWritten;
+            this.loggerView.ParentPanel = this.loggerPanel;
+            this.stationPanel = new StationViewPanel();
+            this.stationPanel.Dock = DockStyle.Fill;
+            this.contentPanel.Controls.Add(this.stationPanel);
+            this.userEntity = userEntity;
         }
 
         private void StationsView_Load(object sender, EventArgs e)
         {
-            this.renderDefaultPanel();
             this.initialize();
-        }
-
-        private void renderDefaultPanel()
-        {
-            this.stationPanel.Dock = DockStyle.Fill;
-            this.contentPanel.Controls.Add(this.stationPanel);
         }
 
         private void initialize()
         {
-            this.initializeButtons();
-            this.initializeRFIDReader();
-            this.initializeTunnelBackgroundWoerker();
+            this.renderData();
+            this.hookEvents();
         }
 
-        private void initializeTunnelBackgroundWoerker()
+ 
+        private void renderData()
         {
-            Globals.ServerTunnelBackgroundWorker.OnServerStarted += (delegate (object sender, OnServerStartedEvent e)
-            {
-                this.tunnelIndicator.running(true, "Uruchomiony");
-            });
+            this.userProfileCard.FirstAndLastName = String.Format("{0} {1}", this.userEntity.data?.firstName, this.userEntity.data?.lastName);
+        }
 
-            Globals.ServerTunnelBackgroundWorker.OnServerStopped += (delegate (object sender, OnServerStoppedEvent e)
-            {
-                this.tunnelIndicator.running(false, "Wstrzymany");
-            });
+        private void hookEvents()
+        {
 
+
+            Globals.Logger.OnLogHasWritten += onLogHasWritten;
+            Globals.ServerTunnelBackgroundWorker.OnServerStarted += onServerStarted;
+            Globals.ServerTunnelBackgroundWorker.OnServerStopped += onServerStopped;
             Globals.ServerTunnelBackgroundWorker.Run();
+
+            this.startTunnelServerMenuItem.Click += onStartTunnelServerMenuItemClick;
+            this.stopTunnelServerMenuItem.Click += onStopTunnelServerMenuItemClick;
+            this.restartTunnelServerMenuItem.Click += onRestartTunnelServerMenuItemClick;
+            this.logsMenuItem.Click += onLogsMenuItemClick;
+            this.versionMenuItem.Click += onVersionMenuItemClick;
+
+            this.userProfileCard.OnStationsClick += onStationsClick;
+            this.userProfileCard.OnFileHistoryClick += onFileHistoryClick;
+            this.userProfileCard.OnTunnelClick += onTunneClick;
+            this.userProfileCard.OnLogsClick += onLogsClick;
+            this.userProfileCard.OnLogOutclick += onLogoutClick;
+            this.userProfileCard.OnFileExplorerClick += onFileExplorerClick;
+            this.keyboardReader.OnKeyboardInputChanged += onKeyboardInputChanged;
         }
 
-        private void initializeButtons()
-        {
-
-            this.startTunnelServerMenuItem.Click += (delegate (object sender, EventArgs e)
-            {
-                Globals.ServerTunnelBackgroundWorker.Run();
-                this.tunnelIndicator.running(true, "Uruchomiony");
-            });
-            
-            this.stopTunnelServerMenuItem.Click += (delegate (object sender, EventArgs e){
-                Globals.ServerTunnelBackgroundWorker.Stop();
-                this.tunnelIndicator.running(false, "Wstrzymany");
-            });
-
-            this.restartTunnelServerMenuItem.Click += (delegate (object sender, EventArgs e) {
-                Globals.ServerTunnelBackgroundWorker.Restart();
-                this.tunnelIndicator.running(false, "Uruchomiony");
-            });
-
-            this.logsMenuItem.Click += (delegate (object sender, EventArgs e) {
-                new LogsView().ShowDialog();
-            });
-
-            this.versionMenuItem.Click += (delegate (object sender, EventArgs e) {
-                new VersionWindow().ShowDialog();
-            });
-
-            this.stationBtn.OnClick += (delegate (object sender, EventArgs e){
-                this.stationPanel = new StationViewPanel();
-                this.contentPanel.Controls.Clear();
-                this.stationPanel.Dock = DockStyle.Fill;
-                this.contentPanel.Controls.Add(this.stationPanel);
-            });
-
-            this.filesHistoryBtn.OnClick += (delegate (object sender, EventArgs e) {
-                this.filesHistoryPanel = new FileHistoryViewPanel();
-                this.contentPanel.Controls.Clear();
-                this.filesHistoryPanel.Dock = DockStyle.Fill;
-                this.contentPanel.Controls.Add(this.filesHistoryPanel);
-            });
-
-            this.logoutbtn.Click += (delegate (object sender, EventArgs e) {
-                Application.Restart();
-            });
-
-        }
-
-        private void initializeRFIDReader()
-        {
-            this.keyboardReader.Subscribe();
-            this.keyboardReader.OnKeyboardInputChanged += (delegate(object sender, KTA_RFID_Keyboard.module.reader.events.OnKeyboardReaderDataChanagedEvent e)
-            {
-                Globals.READED_CARD_INPUT = e.Input;
-                Program.Logger.info(String.Format("Scanned CARD INPUT: {0}", Globals.READED_CARD_INPUT));
-            });
-        }
        
-        private void onLogHasWritten(object sender, Logger.dto.LoggerEvent e)
+        private void onServerStarted(object sender, OnServerStartedEvent e)
         {
-           this.loggerView.append(e.Log);
+            this.tunnelIndicator.running(true, "Uruchomiony");
         }
 
-        private void onCLose(object sender, EventArgs e)
+
+        private void onServerStopped(object sender, OnServerStoppedEvent e)
+        {
+            this.tunnelIndicator.running(false, "Wstrzymany");
+        }
+
+
+        private void onStartTunnelServerMenuItemClick(object sender, EventArgs e)
+        {
+            Globals.ServerTunnelBackgroundWorker.Run();
+            this.tunnelIndicator.running(true, "Uruchomiony");
+        }
+
+
+        private void onStopTunnelServerMenuItemClick(object sender, EventArgs e)
         {
             Globals.ServerTunnelBackgroundWorker.Stop();
-            Environment.Exit(-1);
+            this.tunnelIndicator.running(false, "Wstrzymany");
+        }
+
+        private void onRestartTunnelServerMenuItemClick(object sender, EventArgs e)
+        {
+            Globals.ServerTunnelBackgroundWorker.Restart();
+            this.tunnelIndicator.running(false, "Uruchomiony");
+        }
+
+        private void onLogsMenuItemClick(object sender, EventArgs e)
+        {
+            new LogsView().ShowDialog();
+        }
+
+
+        private void onVersionMenuItemClick(object sender, EventArgs e)
+        {
+            new VersionWindow().ShowDialog();
+        }
+
+        private void onStationsClick(object sender, EventArgs e)
+        {
+            this.stationPanel = new StationViewPanel();
+            this.contentPanel.Controls.Clear();
+            this.stationPanel.Dock = DockStyle.Fill;
+            this.contentPanel.Controls.Add(this.stationPanel);
+        }
+
+        private void onFileHistoryClick(object sender, EventArgs e)
+        {
+            this.filesHistoryPanel = new FileHistoryViewPanel();
+            this.contentPanel.Controls.Clear();
+            this.filesHistoryPanel.Dock = DockStyle.Fill;
+            this.contentPanel.Controls.Add(this.filesHistoryPanel);
+        }
+
+        private void onTunneClick(object sender, EventArgs e)
+        {
+            new TunnelWindow().ShowDialog();
+            return;
+        }
+
+        private void onFileExplorerClick(object sender, EventArgs e)
+        {
+            new FileExplorerWindow(this.settings.SettingsObj.app?.fileSystem?.filesPath).ShowDialog();
+        }
+
+        private void onLogsClick(object sender, EventArgs e)
+        {
+            new LogsView().ShowDialog();
+        }
+
+        private void onLogoutClick(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+
+        private void onKeyboardInputChanged(object sender, KTA_RFID_Keyboard.module.reader.events.OnKeyboardReaderDataChanagedEvent e)
+        {
+            Globals.READED_CARD_INPUT = e.Input;
+            Globals.Logger.info(String.Format("Scanned CARD INPUT: {0}", Globals.READED_CARD_INPUT));
+        }
+
+        private void onLogHasWritten(object sender, Logger.dto.LoggerEvent e)
+        {
+            this.loggerView.append(e.Log, e.Color);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            Globals.ServerTunnelBackgroundWorker.Stop();
+            Application.Exit();
         }
 
     }

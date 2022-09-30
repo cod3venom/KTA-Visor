@@ -64,14 +64,21 @@ namespace TCPTunnel.module.server
 
         public void StopServer()
         {
-            this.isServerEnabled = false;
-            this.onAuthCommandSent -= OnAuthCommandSent; ;
-            this.onAuthResponseDataReceived -= OnAuthResponseDataReceived; ;
-            this.onAuthIsOk -= OnAuthIsOk;
-            this.serverSocket.Close();
-            this.logger.info(string.Format("Stopped TCP SERVER on {0}", this.serverConfig.ipAddress));
+            try
+            {
+                this.isServerEnabled = false;
+                this.onAuthCommandSent -= OnAuthCommandSent; ;
+                this.onAuthResponseDataReceived -= OnAuthResponseDataReceived; ;
+                this.onAuthIsOk -= OnAuthIsOk;
+                this.onServerStopped?.Invoke(this, EventArgs.Empty);
+                this.logger.info(string.Format("Stopped TCP SERVER on {0}", this.serverConfig.ipAddress));
+                this.serverSocket.Disconnect(true);
+            }
+            catch (Exception ex)
+            {
+                this.logger.error(ex.Message, ex);
+            }
 
-            this.onServerStopped?.Invoke(this, EventArgs.Empty);
         }
 
 

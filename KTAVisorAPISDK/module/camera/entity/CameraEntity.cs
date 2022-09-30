@@ -14,6 +14,7 @@ namespace KTAVisorAPISDK.module.camera.entity
             public int index { get; set; }
             public string cameraCustomId { get; set; }
             public string badgeId { get; set; }
+            public string cardId { get; set; }
             public string driveName { get; set; }
             public bool active { get; set; }
             public string stationId { get; set; }

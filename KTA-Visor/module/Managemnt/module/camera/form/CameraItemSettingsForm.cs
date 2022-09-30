@@ -73,9 +73,22 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
                     this.camera.settings.badgeId = generatedID;
                     this.badgeIdTxt.Text = generatedID;
                 });
+
+                this.genCardId.Click += (delegate (object _sender, EventArgs _e) {
+                    string genCardId = RandomData.RandomString(this.MIN_ID_LENGTH);
+                    this.camera.cardId= genCardId;
+                    this.camera.settings.cardId = genCardId;
+                    this.cardIdtxt.Text = genCardId;
+                });
+
                 this.badgeIdTxt.OnValueChanged += (delegate (object _sender, EventArgs _e) {
                     this.camera.badgeId = this.badgeIdTxt.Text;
                     this.camera.settings.badgeId = this.badgeIdTxt.Text;
+                });
+
+                this.cardIdtxt.OnValueChanged += (delegate (object _sender, EventArgs _e) {
+                    this.camera.cardId= this.cardIdtxt.Text;
+                    this.camera.settings.cardId = this.cardIdtxt.Text;
                 });
                 this.syncDateTIme.Click += (delegate(object _sender, EventArgs _e) {
                     this.dateTimeTxt.Text = DateTime.Now.ToString();
@@ -102,6 +115,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
 
                 this.deviceIdTxt.Text = this.camera.cameraCustomId;
                 this.badgeIdTxt.Text = this.camera.badgeId;
+                this.cardId.Text = this.camera.cardId;
                 this.dateTimeTxt.Text = DateTime.Now.ToString();
 
                 
@@ -150,8 +164,9 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
             camEntity = await this.cameraService.edit(this.camera.id, new EditCameraRequestTObject(
                this.camera.index,
                this.camera.cameraCustomId,
-               this.camera.stationId,
                this.camera.badgeId,
+               this.camera.cardId,
+               this.camera.stationId,
                this.camera.driveName,
                this.camera.active
             ));
@@ -159,6 +174,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
             _ = this.cameraSettingsService.edit(camEntity.data.id, new EditCameraSettingsTObject(
                 camEntity.data.cameraCustomId,
                 camEntity.data.badgeId,
+                this.camera.settings.cardId,
                 this.camera.settings.resolution,
                 this.camera.settings.quality,
                 this.camera.settings.codecFormat,

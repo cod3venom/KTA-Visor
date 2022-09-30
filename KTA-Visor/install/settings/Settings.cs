@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KTA_Visor.install.settings
 {
@@ -38,23 +39,32 @@ namespace KTA_Visor.install.settings
         }
 
 
-        public SettingsFileTObject Save(SettingsFileTObject settings)
+        public SettingsFileTObject Save(SettingsFileTObject settings, bool restart = false)
         {
             string jsonSettings = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(this.settingsFile.FullName, jsonSettings);
 
             this.loadSettings();
 
+            if (restart)
+            {
+                Application.Restart();
+            }
+
             return this.settingsFileTObject;
         }
 
-        public SettingsFileTObject Save()
+        public SettingsFileTObject Save(bool restart = false)
         {
             string jsonSettings = JsonConvert.SerializeObject(this.settingsFileTObject, Formatting.Indented);
             File.WriteAllText(this.settingsFile.FullName, jsonSettings);
 
             this.loadSettings();
 
+            if (restart)
+            {
+                Application.Restart();
+            }
             return this.settingsFileTObject;
         }
     }

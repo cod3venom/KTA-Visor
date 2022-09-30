@@ -146,6 +146,17 @@ namespace Falcon_Protocol.wrapper
             return info;
         }
 
+
+        public ZFY_INFO SetDeviceInfo(ZFY_INFO info, int deviceIndex)
+        {
+
+            int[] iret = new int[1];
+
+            FalconProtocolInteropService.WriteZFYInfo_ByIndex(ref info, this.pwd, iret, deviceIndex);
+            return info;
+        }
+
+
         /// <summary>
         /// 
         /// </summary>

@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.releaseNameLbl = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.footer1 = new KTA_Visor_UI.component.custom.Footer.Footer();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -43,6 +44,9 @@
             this.autoCopyChk = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.apiLbl = new System.Windows.Forms.Label();
+            this.apiTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.backendLbl = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.ipLbl = new System.Windows.Forms.Label();
             this.ipTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
@@ -56,22 +60,17 @@
             this.label9 = new System.Windows.Forms.Label();
             this.usbRelayPort = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.sstationGenBtn = new System.Windows.Forms.Button();
             this.stationIdTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.serialNumberLbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.stationIpTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.stationIPLbl = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.saveBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.bunifuSeparator2 = new Bunifu.Framework.UI.BunifuSeparator();
-            this.saveBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
-            this.footer1 = new KTA_Visor_UI.component.custom.Footer.Footer();
             this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
-            this.releaseNameLbl = new System.Windows.Forms.Label();
-            this.sstationGenBtn = new System.Windows.Forms.Button();
-            this.backendLbl = new System.Windows.Forms.Label();
-            this.apiLbl = new System.Windows.Forms.Label();
-            this.apiTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -99,6 +98,19 @@
             this.panel1.Size = new System.Drawing.Size(864, 82);
             this.panel1.TabIndex = 2;
             // 
+            // releaseNameLbl
+            // 
+            this.releaseNameLbl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.releaseNameLbl.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
+            this.releaseNameLbl.ForeColor = System.Drawing.Color.Black;
+            this.releaseNameLbl.Location = new System.Drawing.Point(0, 62);
+            this.releaseNameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.releaseNameLbl.Name = "releaseNameLbl";
+            this.releaseNameLbl.Size = new System.Drawing.Size(864, 20);
+            this.releaseNameLbl.TabIndex = 24;
+            this.releaseNameLbl.Text = "Release Name";
+            this.releaseNameLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // label7
             // 
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -109,7 +121,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(864, 82);
             this.label7.TabIndex = 23;
-            this.label7.Text = "DSClient Menedżer usawień";
+            this.label7.Text = "DSClient Menedżer ustawień";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
@@ -120,6 +132,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(864, 39);
             this.panel2.TabIndex = 3;
+            // 
+            // footer1
+            // 
+            this.footer1.AutoSize = true;
+            this.footer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.footer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.footer1.Location = new System.Drawing.Point(0, 0);
+            this.footer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.footer1.Name = "footer1";
+            this.footer1.Size = new System.Drawing.Size(864, 39);
+            this.footer1.TabIndex = 0;
             // 
             // panel3
             // 
@@ -248,6 +271,39 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(427, 98);
             this.panel6.TabIndex = 3;
+            // 
+            // apiLbl
+            // 
+            this.apiLbl.AutoSize = true;
+            this.apiLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiLbl.ForeColor = System.Drawing.Color.Black;
+            this.apiLbl.Location = new System.Drawing.Point(73, 35);
+            this.apiLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.apiLbl.Name = "apiLbl";
+            this.apiLbl.Size = new System.Drawing.Size(24, 14);
+            this.apiLbl.TabIndex = 32;
+            this.apiLbl.Text = "API";
+            // 
+            // apiTxt
+            // 
+            this.apiTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.apiTxt.Location = new System.Drawing.Point(104, 33);
+            this.apiTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.apiTxt.Name = "apiTxt";
+            this.apiTxt.Size = new System.Drawing.Size(166, 20);
+            this.apiTxt.TabIndex = 33;
+            // 
+            // backendLbl
+            // 
+            this.backendLbl.AutoSize = true;
+            this.backendLbl.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
+            this.backendLbl.ForeColor = System.Drawing.Color.Black;
+            this.backendLbl.Location = new System.Drawing.Point(18, 7);
+            this.backendLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.backendLbl.Name = "backendLbl";
+            this.backendLbl.Size = new System.Drawing.Size(46, 10);
+            this.backendLbl.TabIndex = 31;
+            this.backendLbl.Text = "Backend";
             // 
             // panel5
             // 
@@ -402,6 +458,18 @@
             this.panel10.Size = new System.Drawing.Size(426, 98);
             this.panel10.TabIndex = 1;
             // 
+            // sstationGenBtn
+            // 
+            this.sstationGenBtn.BackColor = System.Drawing.Color.Transparent;
+            this.sstationGenBtn.BackgroundImage = global::KTA_Visor_DSClient.Properties.Resources.magicWand;
+            this.sstationGenBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.sstationGenBtn.Location = new System.Drawing.Point(283, 42);
+            this.sstationGenBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.sstationGenBtn.Name = "sstationGenBtn";
+            this.sstationGenBtn.Size = new System.Drawing.Size(24, 20);
+            this.sstationGenBtn.TabIndex = 32;
+            this.sstationGenBtn.UseVisualStyleBackColor = false;
+            // 
             // stationIdTxt
             // 
             this.stationIdTxt.BorderColor = System.Drawing.Color.SeaGreen;
@@ -468,6 +536,17 @@
             this.panel4.Size = new System.Drawing.Size(864, 45);
             this.panel4.TabIndex = 3;
             // 
+            // saveBtn
+            // 
+            this.saveBtn.Active = false;
+            this.saveBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.saveBtn.Location = new System.Drawing.Point(755, 11);
+            this.saveBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(109, 23);
+            this.saveBtn.TabIndex = 1;
+            this.saveBtn.Title = "Save";
+            // 
             // bunifuSeparator1
             // 
             this.bunifuSeparator1.BackColor = System.Drawing.Color.Transparent;
@@ -494,28 +573,6 @@
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
             // 
-            // saveBtn
-            // 
-            this.saveBtn.Active = false;
-            this.saveBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.saveBtn.Location = new System.Drawing.Point(755, 11);
-            this.saveBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(109, 23);
-            this.saveBtn.TabIndex = 1;
-            this.saveBtn.Title = "Save";
-            // 
-            // footer1
-            // 
-            this.footer1.AutoSize = true;
-            this.footer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.footer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.footer1.Location = new System.Drawing.Point(0, 0);
-            this.footer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.footer1.Name = "footer1";
-            this.footer1.Size = new System.Drawing.Size(864, 39);
-            this.footer1.TabIndex = 0;
-            // 
             // topBar
             // 
             this.topBar.AllowClose = true;
@@ -533,64 +590,6 @@
             this.topBar.Size = new System.Drawing.Size(864, 36);
             this.topBar.TabIndex = 1;
             this.topBar.Title = "KTA-VISOR-DSCLIENT";
-            // 
-            // releaseNameLbl
-            // 
-            this.releaseNameLbl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.releaseNameLbl.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
-            this.releaseNameLbl.ForeColor = System.Drawing.Color.Black;
-            this.releaseNameLbl.Location = new System.Drawing.Point(0, 62);
-            this.releaseNameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.releaseNameLbl.Name = "releaseNameLbl";
-            this.releaseNameLbl.Size = new System.Drawing.Size(864, 20);
-            this.releaseNameLbl.TabIndex = 24;
-            this.releaseNameLbl.Text = "Release Name";
-            this.releaseNameLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // sstationGenBtn
-            // 
-            this.sstationGenBtn.BackColor = System.Drawing.Color.Transparent;
-            this.sstationGenBtn.BackgroundImage = global::KTA_Visor_DSClient.Properties.Resources.magicWand;
-            this.sstationGenBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.sstationGenBtn.Location = new System.Drawing.Point(283, 42);
-            this.sstationGenBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.sstationGenBtn.Name = "sstationGenBtn";
-            this.sstationGenBtn.Size = new System.Drawing.Size(24, 20);
-            this.sstationGenBtn.TabIndex = 32;
-            this.sstationGenBtn.UseVisualStyleBackColor = false;
-            // 
-            // backendLbl
-            // 
-            this.backendLbl.AutoSize = true;
-            this.backendLbl.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
-            this.backendLbl.ForeColor = System.Drawing.Color.Black;
-            this.backendLbl.Location = new System.Drawing.Point(18, 7);
-            this.backendLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.backendLbl.Name = "backendLbl";
-            this.backendLbl.Size = new System.Drawing.Size(46, 10);
-            this.backendLbl.TabIndex = 31;
-            this.backendLbl.Text = "Backend";
-            // 
-            // apiLbl
-            // 
-            this.apiLbl.AutoSize = true;
-            this.apiLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.apiLbl.ForeColor = System.Drawing.Color.Black;
-            this.apiLbl.Location = new System.Drawing.Point(73, 35);
-            this.apiLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.apiLbl.Name = "apiLbl";
-            this.apiLbl.Size = new System.Drawing.Size(24, 14);
-            this.apiLbl.TabIndex = 32;
-            this.apiLbl.Text = "API";
-            // 
-            // apiTxt
-            // 
-            this.apiTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.apiTxt.Location = new System.Drawing.Point(104, 33);
-            this.apiTxt.Margin = new System.Windows.Forms.Padding(2);
-            this.apiTxt.Name = "apiTxt";
-            this.apiTxt.Size = new System.Drawing.Size(166, 20);
-            this.apiTxt.TabIndex = 33;
             // 
             // SettingsManager
             // 

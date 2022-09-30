@@ -32,13 +32,14 @@
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.signInPanel = new System.Windows.Forms.Panel();
             this.signUpLink = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.questionLbl = new System.Windows.Forms.Label();
             this.signInBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.passwordTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.emailTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.topBar1 = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.passwordLbl = new System.Windows.Forms.Label();
             this.emailLbl = new System.Windows.Forms.Label();
+            this.fullScreenLoader = new KTA_Visor_UI.component.basic.progressbar.FullScreenCircleLoader();
             this.signInPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,18 +54,18 @@
             this.signInPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.signInPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.signInPanel.Controls.Add(this.signUpLink);
-            this.signInPanel.Controls.Add(this.label1);
+            this.signInPanel.Controls.Add(this.questionLbl);
             this.signInPanel.Controls.Add(this.signInBtn);
             this.signInPanel.Controls.Add(this.passwordTxt);
             this.signInPanel.Controls.Add(this.emailTxt);
             this.signInPanel.Controls.Add(this.topBar1);
             this.signInPanel.Controls.Add(this.passwordLbl);
             this.signInPanel.Controls.Add(this.emailLbl);
-            this.signInPanel.Location = new System.Drawing.Point(324, 153);
+            this.signInPanel.Location = new System.Drawing.Point(507, 153);
             this.signInPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.signInPanel.MaximumSize = new System.Drawing.Size(331, 414);
+            this.signInPanel.MaximumSize = new System.Drawing.Size(331, 614);
             this.signInPanel.Name = "signInPanel";
-            this.signInPanel.Size = new System.Drawing.Size(331, 414);
+            this.signInPanel.Size = new System.Drawing.Size(331, 614);
             this.signInPanel.TabIndex = 13;
             // 
             // signUpLink
@@ -82,18 +83,18 @@
             this.signUpLink.TabIndex = 19;
             this.signUpLink.Text = "Zarejestruj się";
             // 
-            // label1
+            // questionLbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(62, 266);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 15);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Nie posiadasz  konta?";
+            this.questionLbl.AutoSize = true;
+            this.questionLbl.BackColor = System.Drawing.Color.Transparent;
+            this.questionLbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.questionLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.questionLbl.Location = new System.Drawing.Point(62, 266);
+            this.questionLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.questionLbl.Name = "questionLbl";
+            this.questionLbl.Size = new System.Drawing.Size(130, 15);
+            this.questionLbl.TabIndex = 18;
+            this.questionLbl.Text = "Nie posiadasz  konta?";
             // 
             // signInBtn
             // 
@@ -207,13 +208,23 @@
             this.emailLbl.TabIndex = 8;
             this.emailLbl.Text = "Adres e-mail *";
             // 
+            // fullScreenLoader
+            // 
+            this.fullScreenLoader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fullScreenLoader.Location = new System.Drawing.Point(0, 0);
+            this.fullScreenLoader.Name = "fullScreenLoader";
+            this.fullScreenLoader.Size = new System.Drawing.Size(1357, 954);
+            this.fullScreenLoader.TabIndex = 14;
+            this.fullScreenLoader.Visible = false;
+            // 
             // SignInView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(990, 688);
+            this.ClientSize = new System.Drawing.Size(1357, 954);
+            this.Controls.Add(this.fullScreenLoader);
             this.Controls.Add(this.signInPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -232,12 +243,13 @@
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private System.Windows.Forms.Panel signInPanel;
         private System.Windows.Forms.Label signUpLink;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label questionLbl;
         private Bunifu.Framework.UI.BunifuFlatButton signInBtn;
         private Bunifu.Framework.UI.BunifuMetroTextbox passwordTxt;
         private Bunifu.Framework.UI.BunifuMetroTextbox emailTxt;
         private KTA_Visor_UI.component.basic.topbar.TopBar topBar1;
         private System.Windows.Forms.Label passwordLbl;
         private System.Windows.Forms.Label emailLbl;
+        private KTA_Visor_UI.component.basic.progressbar.FullScreenCircleLoader fullScreenLoader;
     }
 }

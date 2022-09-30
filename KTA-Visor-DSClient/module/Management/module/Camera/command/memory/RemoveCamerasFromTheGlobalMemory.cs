@@ -39,8 +39,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
             _ = new CameraService().edit(cameraEntity?.data?.id, new EditCameraRequestTObject(
                   camera.Index,
                   camera.ID,
-                  Globals.STATION.data.stationId,
                   camera.BadgeId,
+                  "",
+                  Globals.STATION.data.stationId,
                   camera.Drive.Name,
                   false
             ));
