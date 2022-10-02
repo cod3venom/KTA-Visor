@@ -34,6 +34,10 @@ namespace KTAVisorAPISDK.module.camera.repository
             return await HttpClientUtil.securedClient.GET(String.Format("/api/hidden/cameras/badgeid/{0}", badgeId));
         }
 
+        public async Task<HttpResponseMessage> findByCardId(string cardID)
+        {
+            return await HttpClientUtil.securedClient.GET(String.Format("/api/hidden/cameras/cardid/{0}", cardID));
+        }
 
         public async Task<HttpResponseMessage> findByStationId(string stationId)
         {

@@ -13,8 +13,8 @@ using System.IO;
 using System.Threading;
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
-using static Falcon_Protocol.interop.FalconProtocolInteropService;
 using KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem;
+using static Falcon_Protocol.interop.FalconProtocolInteropService;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService
 {

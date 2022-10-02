@@ -34,7 +34,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Station
             );
 
             if (Globals.STATION?.data?.id != null) {
-                Globals.STATION = await this.update(Globals.STATION);
+                Globals.STATION = await this.update(Globals.STATION, true);
             }
             else {
                 Globals.STATION = await this.create();

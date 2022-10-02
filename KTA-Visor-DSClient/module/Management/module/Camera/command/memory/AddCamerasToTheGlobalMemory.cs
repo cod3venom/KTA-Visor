@@ -40,7 +40,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
             return false;
         }
 
-        private static void storeOnBackendAsActive(USBCameraDevice camera, ClientTunnel client)
+        private static void storeOnBackendAsActive(USBCameraDevice camera, ClientTunnel client = null)
         {
             _ = new CameraService().create(new CreateCameraRequestTObject(
                   camera.Index,
@@ -51,6 +51,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
                   camera.Drive?.Name
               ));
 
+            if (client == null)
+                return;
             client.Emit(new Request(
                 "response://cameras/refresh"    
             ));

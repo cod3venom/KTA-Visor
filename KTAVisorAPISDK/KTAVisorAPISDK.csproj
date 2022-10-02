@@ -63,9 +63,17 @@
     <Compile Include="module\logger\entity\LoggerEntity.cs" />
     <Compile Include="module\logger\repository\LoggerRepository.cs" />
     <Compile Include="module\logger\service\LoggerService.cs" />
+    <Compile Include="module\user\dto\request\UserPasswordRecoveryChangePasswordRequestTObject.cs" />
+    <Compile Include="module\user\dto\request\VerifyUserPasswordRecoveryCodeRequestTObject.cs" />
+    <Compile Include="module\user\dto\request\ForgotPasswordRequestTObject.cs" />
     <Compile Include="module\station\dto\RemoveInactiveCameraFromStationRequestTObject.cs" />
     <Compile Include="module\station\dto\AddActiveCameraToStationRequestTObject.cs" />
+    <Compile Include="module\user\dto\response\UserPasswordRecoveryChangePasswordResponseTObject .cs" />
+    <Compile Include="module\user\dto\response\VerifyUserPasswordRecoveryCodeResponseTObject.cs" />
+    <Compile Include="module\user\dto\response\UserForgotPasswordResponseTObject.cs" />
+    <Compile Include="module\user\repository\UserPasswordRecoveryRepository.cs" />
     <Compile Include="module\user\repository\UserRepository.cs" />
+    <Compile Include="module\user\service\UserPasswordRecoveryService.cs" />
     <Compile Include="module\user\service\UserService.cs" />
     <Compile Include="SDK.cs" />
     <Compile Include="kernel\module\HttpClientHelper\events\HttpUnauthorizedInterceptorEvent.cs" />

@@ -59,6 +59,15 @@ namespace KTAVisorAPISDK.module.camera.service
             return camera;
         }
 
+        public async Task<CameraEntity> findByCardId(string cardID)
+        {
+            
+            HttpResponseMessage result = await this.cameraRepository.findByCardId(cardID);
+            string responseBody = await result.Content.ReadAsStringAsync();
+            CameraEntity camera = JsonConvert.DeserializeObject<CameraEntity>(responseBody);
+
+            return camera;
+        }
 
         public async Task<CameraEntity> findByStationId(string stationId)
         {

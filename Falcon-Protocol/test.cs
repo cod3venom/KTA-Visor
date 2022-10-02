@@ -8,7 +8,7 @@ using static Falcon_Protocol.interop.FalconProtocolInteropService;
 
 namespace Falcon_Protocol
 {
-    internal static class Program
+    internal static class test
     {
 
         static void Main()

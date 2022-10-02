@@ -25,6 +25,7 @@ namespace KTAVisorAPISDK.module.camera.dto.request
         {
             this.camCustomId = camCustomId;
             this.badgeId = badgeId;
+            this.cardId = cardId;
             this.videoResolution = videoResolution;
             this.quality = quality;
             this.codecFormat = codecFormat;

@@ -84,9 +84,9 @@
             this.tunnelMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tunnelMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tunnelToolStripMenuItem,
+            this.kontoToolStripMenuItem,
             this.systemToolStripMenuItem1,
-            this.pomocToolStripMenuItem,
-            this.kontoToolStripMenuItem});
+            this.pomocToolStripMenuItem});
             this.tunnelMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.tunnelMenuStrip.Name = "tunnelMenuStrip";
             this.tunnelMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -109,21 +109,21 @@
             // 
             this.startTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startTunnelServerMenuItem.Image")));
             this.startTunnelServerMenuItem.Name = "startTunnelServerMenuItem";
-            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(133, 26);
             this.startTunnelServerMenuItem.Text = "Uruchom";
             // 
             // stopTunnelServerMenuItem
             // 
             this.stopTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopTunnelServerMenuItem.Image")));
             this.stopTunnelServerMenuItem.Name = "stopTunnelServerMenuItem";
-            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(133, 26);
             this.stopTunnelServerMenuItem.Text = "Zatrzymaj";
             // 
             // restartTunnelServerMenuItem
             // 
             this.restartTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restartTunnelServerMenuItem.Image")));
             this.restartTunnelServerMenuItem.Name = "restartTunnelServerMenuItem";
-            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(133, 26);
             this.restartTunnelServerMenuItem.Text = "Zresetuj";
             // 
             // systemToolStripMenuItem1
@@ -181,19 +181,19 @@
             // profilToolStripMenuItem
             // 
             this.profilToolStripMenuItem.Name = "profilToolStripMenuItem";
-            this.profilToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.profilToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.profilToolStripMenuItem.Text = "Profil";
             // 
             // bezpieczeństwoToolStripMenuItem
             // 
             this.bezpieczeństwoToolStripMenuItem.Name = "bezpieczeństwoToolStripMenuItem";
-            this.bezpieczeństwoToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.bezpieczeństwoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bezpieczeństwoToolStripMenuItem.Text = "Bezpieczeństwo";
             // 
             // wylogujSięToolStripMenuItem
             // 
             this.wylogujSięToolStripMenuItem.Name = "wylogujSięToolStripMenuItem";
-            this.wylogujSięToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.wylogujSięToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.wylogujSięToolStripMenuItem.Text = "Wyloguj się";
             // 
             // panel1

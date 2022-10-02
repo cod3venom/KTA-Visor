@@ -145,7 +145,7 @@
             this.passwordTxt.Name = "passwordTxt";
             this.passwordTxt.Size = new System.Drawing.Size(227, 30);
             this.passwordTxt.TabIndex = 16;
-            this.passwordTxt.Text = "admin123";
+            this.passwordTxt.Text = "admin1234";
             this.passwordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // emailTxt
@@ -224,8 +224,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1357, 954);
-            this.Controls.Add(this.fullScreenLoader);
             this.Controls.Add(this.signInPanel);
+            this.Controls.Add(this.fullScreenLoader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SignInView";

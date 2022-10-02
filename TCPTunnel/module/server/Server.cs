@@ -243,6 +243,7 @@ namespace TCPTunnel.module.server
 
             string ipAddress = e.Client.getSocket().RemoteEndPoint.ToString();
             if (this.clientsList.ContainsKey(ipAddress))
+               // e.Client.Disconnect();
                 return;
 
             this.clientsList.addClient(ipAddress, e.Client);
@@ -267,6 +268,7 @@ namespace TCPTunnel.module.server
                     this.clientsList.Remove(key);
                     this.logger.info(string.Format("Detected client disconnection when checkin HEARTBEAT: {0}", existedClient.getIpAddress()));
 
+                    //this.clientsList.removeClient(existedClient.getIpAddress());
                     this.onClientDisconnected?.Invoke(this, new TCPServerClientDisonnectedEvent(existedClient));
                 }
             }

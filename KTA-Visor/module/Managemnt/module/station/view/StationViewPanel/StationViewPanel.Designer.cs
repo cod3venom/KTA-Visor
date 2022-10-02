@@ -34,7 +34,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.table = new KTA_Visor_UI.component.basic.table.Table();
-            this.loader = new KTA_Visor_UI.component.basic.progressbar.FullScreenHorizontalLoader();
             this.tabControl.SuspendLayout();
             this.tabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -106,19 +105,10 @@
             this.table.TabIndex = 1;
             this.table.Title = "Stacje";
             // 
-            // loader
-            // 
-            this.loader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.loader.Location = new System.Drawing.Point(0, 0);
-            this.loader.Name = "loader";
-            this.loader.Size = new System.Drawing.Size(1439, 496);
-            this.loader.TabIndex = 4;
-            // 
             // StationViewPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.loader);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.table);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -140,6 +130,5 @@
         private System.Windows.Forms.Panel panel1;
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator1;
         public System.Windows.Forms.FlowLayoutPanel camerasFlowPanel;
-        private KTA_Visor_UI.component.basic.progressbar.FullScreenHorizontalLoader loader;
     }
 }

@@ -115,9 +115,9 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
 
                 this.deviceIdTxt.Text = this.camera.cameraCustomId;
                 this.badgeIdTxt.Text = this.camera.badgeId;
-                this.cardId.Text = this.camera.cardId;
+                this.cardIdtxt.Text = this.camera.cardId;
                 this.dateTimeTxt.Text = DateTime.Now.ToString();
-
+                this.camera.settings.aesEncryption = this.aes256chk.Checked ? 1 : 0;
                 
                 this.recordingResolutionCombo.DataSource = new Enums().ResolutionValues();
                 this.recordingResolutionCombo.SelectedIndex = this.camera.settings.resolution;
@@ -187,10 +187,10 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
 
             this.camera = camEntity.data;
 
-            Globals.ServerTunnelBackgroundWorker.sendRequest(this.station.data.stationIp, new Request(
-               "command://cameras/settings/change",
-               this.camera
-           ));
+           // Globals.ServerTunnelBackgroundWorker.sendRequest(this.station.data.stationIp, new Request(
+           //    "command://cameras/settings/change",
+           //    this.camera
+           //));
 
             this.Close();
         }

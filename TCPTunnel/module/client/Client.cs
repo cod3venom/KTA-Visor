@@ -30,7 +30,6 @@ namespace TCPTunnel.module.client
 
         private readonly ClientConfigTObject config;
         private readonly IPEndPoint ipEndpoint;
-
         private TCPClientTObject client;
 
         private readonly KTALogger.Logger logger;
@@ -65,7 +64,11 @@ namespace TCPTunnel.module.client
             }
             catch (SocketException)
             {
-                this.client.Disconnect();
+                if (this.client != null)
+                {
+                    this.client.getSocket().Shutdown(SocketShutdown.Both);
+                    this.client.getSocket().Dispose();
+                }
                 this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
             }
 
@@ -100,7 +103,8 @@ namespace TCPTunnel.module.client
 
             if (this.client.IsConnected())
             {
-                this.client.getSocket().Close();
+                this.client.getSocket().Shutdown(SocketShutdown.Both);
+                this.client.getSocket().Dispose();
             }
 
             return this;

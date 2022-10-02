@@ -37,7 +37,7 @@ namespace TCPTunnel.kernel.types
         /// <param name="key"></param>
         /// <param name="client"></param>
         /// <returns></returns>
-        public TCPClientList<TKey, TValue> removeClient(string key, TCPClientTObject client)
+        public TCPClientList<TKey, TValue> removeClient(string key)
         {
             if (this.ContainsKey(key)) this.Remove(key);
 

@@ -87,6 +87,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 
         private LocalSettingsTObject calibrateSettingsReader()
         {
+            if (!this.settingsFileOnDrive.Exists)
+            {
+                this.calibrateFileExistence();
+            }
             using(StreamReader reader = new StreamReader(this.settingsFileOnDrive.FullName))
             {
                 string settingsFromFile = reader.ReadToEnd();
@@ -103,8 +107,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                 settings = this.Settings;
             }
 
-            if (!File.Exists(this.settingsFileOnDrive.FullName))
-                return;
+          
             string settingsContent = JsonConvert.SerializeObject(settings);
             File.WriteAllText(this.settingsFileOnDrive.FullName, settingsContent);
         }

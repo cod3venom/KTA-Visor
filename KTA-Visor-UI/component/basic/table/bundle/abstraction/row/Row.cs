@@ -48,6 +48,8 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
                     break;
                 }
             }
+            if (rowIndex == -1)
+                return null;
             return this.Rows[rowIndex];
         }
 

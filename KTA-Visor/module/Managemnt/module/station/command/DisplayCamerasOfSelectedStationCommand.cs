@@ -18,12 +18,12 @@ namespace KTA_Visor.module.Managemnt.module.station.command
 {
     public class DisplayCamerasOfSelectedStationCommand
     {
-        public static async void Execute(CameraService cameraService, FlowLayoutPanel camerasFlowPanel, string stationCustomId)
+        public static async void Execute(FlowLayoutPanel camerasFlowPanel, string stationCustomId)
         {
             
             try
             {
-                CameraEntity camerasEntity = await cameraService.findByStationId(stationCustomId);
+                CameraEntity camerasEntity = await new CameraService().findByStationId(stationCustomId);
 
                 camerasFlowPanel.Invoke((MethodInvoker)delegate {
                     camerasFlowPanel.Controls.Clear();

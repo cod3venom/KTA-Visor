@@ -53,9 +53,8 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
  
         private async void initialize()
         {
-            await this.loader.Start(1000, 100);
-            this.hookEvents();
-            await this.loader.Stop(1000);
+             this.hookEvents();
+            this.fetchStations();
 
         }
         private void hookEvents()
@@ -68,9 +67,14 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
             this.stationController.OnRefreshCamerasList += onRefreshCamerasList;
         }
 
+        private void fetchStations()
+        {
+            DisplayFetchedStationInTableCommand.Execute(this.table);
+        }
+
         private void onStationConnected(object sender, events.OnClientConnected e)
         {
-            DisplayStationInTableCommand.Execute(this.table.DataGridView, e);
+            this.fetchStations();
             this.downloadSelectedStationCameras();
         }
 
@@ -99,10 +103,10 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
         private void downloadSelectedStationCameras()
         {
             string stationCustomId = this.getStationId();
-            DisplayCamerasOfSelectedStationCommand.Execute(this.cameraService, this.camerasFlowPanel, stationCustomId);
+            DisplayCamerasOfSelectedStationCommand.Execute(this.camerasFlowPanel, stationCustomId);
         }
 
-        private string getStationId()
+        public string getStationId()
         {
             if (this.table.DataGridView.SelectedRows.Count == 0)
                 return "";

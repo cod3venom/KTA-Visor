@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>KTA_Visor</RootNamespace>
     <AssemblyName>KTA-Visor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -355,6 +355,7 @@
     <Compile Include="module\Managemnt\module\auth\view\SignUpView\SignUpView.Designer.cs">
       <DependentUpon>SignUpView.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\camera\command\BlinkCameraInstationBasedOnCardIdCommand.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\CameraItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -382,6 +383,8 @@
     <Compile Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.Designer.cs">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\cardReader\CardReader.cs" />
+    <Compile Include="module\Managemnt\module\cardReader\events\OnCardReadedEvent.cs" />
     <Compile Include="module\Managemnt\module\fileHistory\view\FileHistoryViewPanel\FileHistoryViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -401,7 +404,8 @@
       <DependentUpon>LogsView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\station\command\DisplayCamerasOfSelectedStationCommand.cs" />
-    <Compile Include="module\Managemnt\module\station\command\DisplayStationInTableCommand.cs" />
+    <Compile Include="module\Managemnt\module\station\command\DisplayFetchedStationInTableCommand.cs" />
+    <Compile Include="module\Managemnt\module\station\command\RestartAllStationsConnectionsCommand.cs" />
     <Compile Include="module\Managemnt\module\station\components\ClientsList\ClientsList.cs">
       <SubType>UserControl</SubType>
     </Compile>

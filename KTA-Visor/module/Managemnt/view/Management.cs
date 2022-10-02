@@ -11,6 +11,10 @@ using System.ComponentModel;
 using KTA_Visor.install.settings;
 using KTAVisorAPISDK.module.user.entity;
 using KTAVisorAPISDK.module.user.service;
+using KTA_Visor.module.Managemnt.module.card;
+using KTA_Visor.module.Managemnt.module.card.events;
+using KTA_Visor.module.Managemnt.module.camera.command;
+using KTA_Visor.module.Managemnt.module.station.command;
 
 namespace KTA_Visor.module.Management.view
 {
@@ -18,7 +22,7 @@ namespace KTA_Visor.module.Management.view
     {
 
         private Settings settings;
-        private KeyboardReader keyboardReader;
+        private CardReader cardReader;
         private StationViewPanel stationPanel;
         private FileHistoryViewPanel filesHistoryPanel;
         private UserEntity userEntity;
@@ -28,7 +32,7 @@ namespace KTA_Visor.module.Management.view
 
             this.settings = new Settings();
             this.filesHistoryPanel = new FileHistoryViewPanel();
-            this.keyboardReader = new KeyboardReader();
+            this.cardReader = new CardReader();
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
             this.loggerView.ParentPanel = this.loggerPanel;
             this.stationPanel = new StationViewPanel();
@@ -75,7 +79,7 @@ namespace KTA_Visor.module.Management.view
             this.userProfileCard.OnLogsClick += onLogsClick;
             this.userProfileCard.OnLogOutclick += onLogoutClick;
             this.userProfileCard.OnFileExplorerClick += onFileExplorerClick;
-            this.keyboardReader.OnKeyboardInputChanged += onKeyboardInputChanged;
+            this.cardReader.OnCardReaded += onKeyboardInputChanged;
         }
 
        
@@ -127,6 +131,7 @@ namespace KTA_Visor.module.Management.view
             this.contentPanel.Controls.Clear();
             this.stationPanel.Dock = DockStyle.Fill;
             this.contentPanel.Controls.Add(this.stationPanel);
+            RestartAllStationsConnectionsCommand.Execute();
         }
 
         private void onFileHistoryClick(object sender, EventArgs e)
@@ -159,10 +164,15 @@ namespace KTA_Visor.module.Management.view
         }
 
 
-        private void onKeyboardInputChanged(object sender, KTA_RFID_Keyboard.module.reader.events.OnKeyboardReaderDataChanagedEvent e)
+        private void onKeyboardInputChanged(object sender, OnCardReadedEvent e)
         {
-            Globals.READED_CARD_INPUT = e.Input;
+            
+            
+            
+            Globals.READED_CARD_INPUT = e.CardId;
             Globals.Logger.info(String.Format("Scanned CARD INPUT: {0}", Globals.READED_CARD_INPUT));
+
+            BlinkCameraInstationBasedOnCardIdCommand.Execute(e.CardId);
         }
 
         private void onLogHasWritten(object sender, Logger.dto.LoggerEvent e)

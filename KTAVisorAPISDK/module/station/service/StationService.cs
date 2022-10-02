@@ -36,6 +36,11 @@ namespace KTAVisorAPISDK.module.station.service
             return station;
         }
 
+        public async Task<StationEntity> findByStationId(string stationId)
+        {
+            return await this.findByCustomId(stationId);
+        }
+
         public async Task<StationEntity> findByCustomId(string customId)
         {
             HttpResponseMessage result = await this.stationRepository.findByCustomId(customId);

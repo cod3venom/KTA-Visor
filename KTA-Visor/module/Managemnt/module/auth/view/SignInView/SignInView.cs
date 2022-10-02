@@ -61,7 +61,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
             try
             {
                 this.signInPanel.Visible = false;
-                await this.fullScreenLoader.Start(10000, 1);
+                await this.fullScreenLoader.Start(1000, 1);
                 SignInRequestTObject request = new SignInRequestTObject(this.emailTxt.Text, this.passwordTxt.Text);
                 SignInEntity signIn = await this.authService.signIn(request);
                 
@@ -79,6 +79,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
         private async void onLoaderFinished(object sender, EventArgs e)
         {
             UserEntity userEntity = await this.userService.me();
+            this.Hide();
             new Management.view.Management(userEntity).Show();
         }
 

@@ -106,20 +106,14 @@ namespace TCPTunnel.kernel.types
                 string body = request.toJson();
                 byte[] messageArray = Encoding.UTF8.GetBytes(body);
 
-                Thread sendThread = new Thread((ThreadStart)delegate
-                {
-                    this.socket.Send(messageArray);
-                });
-
-                sendThread.IsBackground = true;
-                sendThread.Start();
+                this.socket.Send(messageArray);
             }
         }
 
         public void Disconnect()
         {
+            this.socket.Disconnect(false);
             this.socket.Dispose();
-            //this.socket.Close();
         }
 
         public bool IsConnected()

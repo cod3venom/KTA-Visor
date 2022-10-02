@@ -19,12 +19,10 @@ namespace KTA_Visor.module.Managemnt.sub_window
         {
             InitializeComponent();
 
-            this.topBar1.Parent = this;
         }
 
         private void TunnelWindow_Load(object sender, EventArgs e)
         {
-            this.topBar1.onClose += onClose;
         }
 
         protected override void OnHandleCreated(EventArgs e)
