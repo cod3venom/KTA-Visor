@@ -1,10 +1,14 @@
-﻿using KTAVisorAPISDK.module.auth.dto.request;
+﻿using KTA_Visor_UI.component.custom.MessageWindow;
+using KTAVisorAPISDK.module.auth.dto.request;
 using KTAVisorAPISDK.module.auth.entity;
 using KTAVisorAPISDK.module.auth.service;
 using KTAVisorAPISDK.module.user.entity;
 using KTAVisorAPISDK.module.user.service;
+using KTAVisorAPISDK.Shared.Exceptions;
+using MetroFramework.Forms;
 using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,46 +17,51 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
     public partial class SignInView : Form
     {
         private readonly AuthService authService;
-        private readonly UserService userService;
         public SignInView()
         {
             InitializeComponent();
             this.authService = new AuthService();
-            this.userService = new UserService();
             this.topBar1.Parent = this;
         }
 
-        private async void SignInView_Load(object sender, EventArgs e)
+        private void SignInView_Load(object sender, EventArgs e)
         {
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
             this.initialize();
+            this.enterFullScreenMode();
         }
 
         private void initialize()
         {
+          
             this.hookEvents();
             this.centerisePanel();
         }
 
         private void hookEvents()
         {
-            this.topBar1.onClose += onClose;
-            this.topBar1.ResizeButton.Visible = false;
-            this.topBar1.MinimizeButton.Visible = false;
+
             this.signInBtn.Click += onSignIn;
             this.signUpLink.Click += onShowSignUpView;
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
-            this.fullScreenLoader.OnProgressEnd += onLoaderFinished;
         }
 
-      
-
-        private void centerisePanel()
+        private void enterFullScreenMode()
         {
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
+        }
+       
+        private void centerisePanel()
+        {
+            
             this.signInPanel.Location = new Point(
               this.ClientSize.Width / 2 - this.signInPanel.Size.Width / 2,
               this.ClientSize.Height / 2 - this.signInPanel.Size.Height / 2);
-            this.signInPanel.Anchor = AnchorStyles.None;
         }
 
 
@@ -60,29 +69,26 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
         {
             try
             {
-                this.signInPanel.Visible = false;
-                await this.fullScreenLoader.Start(1000, 1);
                 SignInRequestTObject request = new SignInRequestTObject(this.emailTxt.Text, this.passwordTxt.Text);
-                SignInEntity signIn = await this.authService.signIn(request);
-                
-                await this.fullScreenLoader.Stop(1000);
-                
+                SignInEntity signInEntity = await this.authService.signIn(request);
+
+                if (signInEntity.data == null)
+                {
+                    new AlertWindow("Coś poszło nie tak, upewnij się że wporwadzasz poprawne dane do logowania");
+                    return;
+                }
+
+                this.Hide();
+                new Management.view.Management(signInEntity).Show();
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                new AlertWindow(ex.Message);
             }
         }
-
-
-        
-        private async void onLoaderFinished(object sender, EventArgs e)
-        {
-            UserEntity userEntity = await this.userService.me();
-            this.Hide();
-            new Management.view.Management(userEntity).Show();
-        }
-
+ 
+ 
         private void onShowSignUpView(object sender, EventArgs e)
         {
             this.Hide();

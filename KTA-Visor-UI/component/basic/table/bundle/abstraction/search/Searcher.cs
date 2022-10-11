@@ -22,7 +22,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.search
         {
             this.table.DataGridView.AllowUserToAddRows = false;
             this.table.DataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.table.SearchTextBox.OnValueChanged += (delegate (object sender, EventArgs e)
+            this.table.SearchTextBox.TextChanged += (delegate (object sender, EventArgs e)
             {
                 this.searchKeyword = this.table.SearchTextBox.Text;
 

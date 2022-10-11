@@ -1,6 +1,6 @@
 ﻿using KTA_Visor_FileStorage_Watcher.shared.Global;
-using KTAVisorAPISDK.module.fileHistory.entity;
-using KTAVisorAPISDK.module.fileHistory.service;
+using KTAVisorAPISDK.module.fileManager.entity;
+using KTAVisorAPISDK.module.fileManager.service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
-using static KTAVisorAPISDK.module.fileHistory.entity.FileHistoryEntity;
+using static KTAVisorAPISDK.module.fileManager.entity.FileItemEntity;
 
 namespace KTA_Visor_FileStorage_Watcher.module.watcher
 {
@@ -18,11 +18,11 @@ namespace KTA_Visor_FileStorage_Watcher.module.watcher
         private System.Timers.Timer _timer;
         private DateTime _lastRun;
 
-        private readonly FileHistoryFileWatcherService fileHistoryFileWatcherService;
+        private readonly FileManagerWatcherService fileHistoryFileWatcherService;
         public FileWatcher()
         {
             this._lastRun = DateTime.Now.AddDays(-1);
-            this.fileHistoryFileWatcherService = new FileHistoryFileWatcherService();
+            this.fileHistoryFileWatcherService = new FileManagerWatcherService();
         }
 
         
@@ -52,13 +52,13 @@ namespace KTA_Visor_FileStorage_Watcher.module.watcher
 
         private async void checkFiles()
         {
-            FileHistoryEntity fileHistoryEntity = await this.fileHistoryFileWatcherService.all();
+            FileItemEntity fileHistoryEntity = await this.fileHistoryFileWatcherService.all();
 
             if (fileHistoryEntity.datas == null)
                 return;
 
 
-            foreach(FileHistoryEntity.FileHistory entity in fileHistoryEntity.datas)
+            foreach(FileItemEntity.FileHistory entity in fileHistoryEntity.datas)
             {
                 if (entity.isDeleted) continue;
 

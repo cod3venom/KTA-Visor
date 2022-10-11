@@ -29,9 +29,6 @@ namespace KTA_Visor.module.Managemnt.module.card
 
         private void onCardInputDetected(object sender, KTA_RFID_Keyboard.module.reader.events.OnKeyboardReaderDataChanagedEvent e)
         {
-            
-            
-            
             if (!this.isValidInput(e.Input))
                 return;
 
@@ -40,7 +37,7 @@ namespace KTA_Visor.module.Managemnt.module.card
 
 
         private bool isValidInput(string input)
-        {
+        {   
             Regex regex = new Regex(@"^-?[0-9][0-9,\.]+$");
             var res = regex.IsMatch(input);
             System.Console.WriteLine(res);

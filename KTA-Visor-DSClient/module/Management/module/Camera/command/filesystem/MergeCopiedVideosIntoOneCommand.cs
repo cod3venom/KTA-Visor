@@ -1,8 +1,8 @@
 ﻿
 using KTA_Visor_DSClient.module.Management.module.Camera.dto;
 using KTA_Visor_DSClient.module.Shared.Globals;
-using KTAVisorAPISDK.module.fileHistory.dto.request;
-using KTAVisorAPISDK.module.fileHistory.service;
+using KTAVisorAPISDK.module.fileManager.dto.request;
+using KTAVisorAPISDK.module.fileManager.service;
 using Splicer.Renderer;
 using Splicer.Timeline;
 using System;

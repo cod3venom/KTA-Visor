@@ -38,10 +38,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.messageLbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cancelBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
             this.okBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
             this.iconDrag = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.labelDrag = new Bunifu.Framework.UI.BunifuDragControl(this.components);
-            this.cancelBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -139,6 +139,16 @@
             this.panel3.Size = new System.Drawing.Size(437, 31);
             this.panel3.TabIndex = 2;
             // 
+            // cancelBtn
+            // 
+            this.cancelBtn.Active = false;
+            this.cancelBtn.Location = new System.Drawing.Point(271, 6);
+            this.cancelBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(73, 20);
+            this.cancelBtn.TabIndex = 1;
+            this.cancelBtn.Title = "Zamknij";
+            // 
             // okBtn
             // 
             this.okBtn.Active = false;
@@ -162,16 +172,6 @@
             this.labelDrag.Horizontal = true;
             this.labelDrag.TargetControl = this.titleLbl;
             this.labelDrag.Vertical = true;
-            // 
-            // cancelBtn
-            // 
-            this.cancelBtn.Active = false;
-            this.cancelBtn.Location = new System.Drawing.Point(271, 6);
-            this.cancelBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(73, 20);
-            this.cancelBtn.TabIndex = 1;
-            this.cancelBtn.Title = "Zamknij";
             // 
             // AlertWindow
             // 

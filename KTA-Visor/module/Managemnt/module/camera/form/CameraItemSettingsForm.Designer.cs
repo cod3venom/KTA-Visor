@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CameraItemSettingsForm));
             this.badgeIdTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.badgeLbl = new System.Windows.Forms.Label();
             this.dateTimeLbl = new System.Windows.Forms.Label();
@@ -45,8 +44,6 @@
             this.deviceIdLbl = new System.Windows.Forms.Label();
             this.deviceIdTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.saveBtn = new KTA_Visor_UI.component.basic.button.PrimaryButton();
-            this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.rightHeaderLbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.recordingResolutionCombo = new System.Windows.Forms.ComboBox();
@@ -64,16 +61,12 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.aes256chk = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.saveBtn = new MetroFramework.Controls.MetroButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // bunifuElipse1
-            // 
-            this.bunifuElipse1.ElipseRadius = 5;
-            this.bunifuElipse1.TargetControl = this;
             // 
             // badgeIdTxt
             // 
@@ -166,7 +159,7 @@
             this.panel1.Location = new System.Drawing.Point(2, 2);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(339, 380);
+            this.panel1.Size = new System.Drawing.Size(433, 465);
             this.panel1.TabIndex = 34;
             // 
             // label2
@@ -280,39 +273,11 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.saveBtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 516);
+            this.panel2.Location = new System.Drawing.Point(20, 499);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(858, 33);
+            this.panel2.Size = new System.Drawing.Size(874, 33);
             this.panel2.TabIndex = 35;
-            // 
-            // saveBtn
-            // 
-            this.saveBtn.Active = false;
-            this.saveBtn.Location = new System.Drawing.Point(739, 4);
-            this.saveBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(109, 25);
-            this.saveBtn.TabIndex = 0;
-            this.saveBtn.Title = "Zapisz";
-            // 
-            // topBar
-            // 
-            this.topBar.AllowClose = true;
-            this.topBar.AllowMinimize = true;
-            this.topBar.AllowResize = true;
-            this.topBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.topBar.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.topBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.topBar.Description = "Window";
-            this.topBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topBar.Location = new System.Drawing.Point(0, 0);
-            this.topBar.Margin = new System.Windows.Forms.Padding(2);
-            this.topBar.Name = "topBar";
-            this.topBar.Parent = null;
-            this.topBar.Size = new System.Drawing.Size(858, 36);
-            this.topBar.TabIndex = 0;
-            this.topBar.Title = "Window";
             // 
             // rightHeaderLbl
             // 
@@ -485,10 +450,10 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.rightHeaderLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(345, 2);
+            this.panel3.Location = new System.Drawing.Point(439, 2);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(339, 380);
+            this.panel3.Size = new System.Drawing.Size(433, 465);
             this.panel3.TabIndex = 36;
             // 
             // aes256chk
@@ -512,26 +477,38 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 29);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 30);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(686, 384);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(874, 469);
             this.tableLayoutPanel1.TabIndex = 37;
+            // 
+            // saveBtn
+            // 
+            this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveBtn.Location = new System.Drawing.Point(776, 6);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(86, 23);
+            this.saveBtn.TabIndex = 1;
+            this.saveBtn.Text = "Zapisz";
+            this.saveBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.saveBtn.UseSelectable = true;
             // 
             // CameraItemSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(858, 549);
+            this.ClientSize = new System.Drawing.Size(914, 552);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.topBar);
             this.Controls.Add(this.panel2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.DisplayHeader = false;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CameraItemSettingsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
+            this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "CameraControlForm";
             this.Load += new System.EventHandler(this.CameraItemForm_Load);
             this.panel1.ResumeLayout(false);
@@ -545,9 +522,6 @@
         }
 
         #endregion
-
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
-        private KTA_Visor_UI.component.basic.topbar.TopBar topBar;
         private System.Windows.Forms.Label dateTimeLbl;
         private Bunifu.Framework.UI.BunifuMetroTextbox badgeIdTxt;
         private System.Windows.Forms.Label badgeLbl;
@@ -555,7 +529,6 @@
         private Bunifu.Framework.UI.BunifuMetroTextbox dateTimeTxt;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private KTA_Visor_UI.component.basic.button.PrimaryButton saveBtn;
         private System.Windows.Forms.Button genDeviceId;
         private System.Windows.Forms.Label deviceIdLbl;
         private Bunifu.Framework.UI.BunifuMetroTextbox deviceIdTxt;
@@ -581,5 +554,6 @@
         private System.Windows.Forms.Label rightHeaderLbl;
         private System.Windows.Forms.CheckBox aes256chk;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private MetroFramework.Controls.MetroButton saveBtn;
     }
 }

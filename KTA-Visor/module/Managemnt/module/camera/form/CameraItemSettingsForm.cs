@@ -7,6 +7,7 @@ using KTAVisorAPISDK.module.camera.dto.request;
 using KTAVisorAPISDK.module.camera.entity;
 using KTAVisorAPISDK.module.camera.service;
 using KTAVisorAPISDK.module.station.entity;
+using MetroFramework.Forms;
 using System;
 using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
@@ -14,38 +15,21 @@ using static Falcon_Protocol.enums.Enums;
 
 namespace KTA_Visor.module.Managemnt.module.camera.form
 {
-    public partial class CameraItemSettingsForm : Form
+    public partial class CameraItemSettingsForm : MetroForm
     {
 
         public event EventHandler<EventArgs> OnCloseForm;
 
         private int MIN_ID_LENGTH = 15;
-        private  CameraEntity.Camera camera;
+        private CameraEntity.Camera camera;
         private readonly StationEntity station;
         private readonly CameraSettingsService cameraSettingsService;
         private readonly CameraService cameraService;
-
-        private const int CS_DROPSHADOW = 0x00020000;
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ClassStyle |= CS_DROPSHADOW;
-                return cp;
-            }
-        }
 
         public CameraItemSettingsForm(CameraEntity.Camera camera, StationEntity station)
         {
             InitializeComponent();
             this.camera = camera;
-            this.topBar.Parent = this;
-            this.topBar.MinimizeButton.Visible = false;
-            this.topBar.ResizeButton.Visible = false;
-            this.topBar.onClose += onClose;
-
-            this.topBar.Title = String.Format("Kamera - {0}", camera.badgeId);
             this.station = station;
             this.cameraSettingsService = new CameraSettingsService();
             this.cameraService = new CameraService();
@@ -94,8 +78,16 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
                     this.dateTimeTxt.Text = DateTime.Now.ToString();
                 });
                 this.recordingResolutionCombo.SelectionChangeCommitted += (delegate (object _sender, EventArgs _e) {
+                    string selectedValue = this.recordingResolutionCombo.SelectedValue.ToString();
+
+                    if (selectedValue == "1280x720P25")
+                    {
+                        selectedValue = "1280x720P20";
+                    }
+
                     this.camera.settings.resolution = (int)this.recordingResolutionCombo.SelectedIndex;
                 });
+
                 this.recordingQualityCombo.SelectionChangeCommitted += (delegate (object _sender, EventArgs _e) {
                     this.camera.settings.quality = (int)this.recordingQualityCombo.SelectedIndex;
                 });
@@ -132,7 +124,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
                 this.gpsChk.Checked = this.camera.settings.gps == 1;
                 this.wifiChk.Checked = this.camera.settings.wifi == 1;
 
-                this.saveBtn.OnClick += onSaveBtnClicked;
+                this.saveBtn.Click += onSaveBtnClicked;
             }
             catch(Exception ex)
             {
@@ -187,16 +179,11 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
 
             this.camera = camEntity.data;
 
-           // Globals.ServerTunnelBackgroundWorker.sendRequest(this.station.data.stationIp, new Request(
-           //    "command://cameras/settings/change",
-           //    this.camera
-           //));
+            Globals.ServerTunnelBackgroundWorker.sendRequest(this.station.data.stationIp, new Request(
+               "command://cameras/settings/change",
+               this.camera
+           ));
 
-            this.Close();
-        }
- 
-        private void onClose(object sender, EventArgs e)
-        {
             this.Close();
         }
     }

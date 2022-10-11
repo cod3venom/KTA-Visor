@@ -1,7 +1,9 @@
 ﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
+using KTA_Visor_DSClient.module.Management.module.Camera.service;
 using KTA_Visor_DSClient.module.Management.module.clientTunnel;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.dto.request;
+using KTAVisorAPISDK.module.camera.entity;
 using KTAVisorAPISDK.module.camera.service;
 using System;
 using TCPTunnel.kernel.extensions.router.dto;
@@ -40,9 +42,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
             return false;
         }
 
-        private static void storeOnBackendAsActive(USBCameraDevice camera, ClientTunnel client = null)
+        private static async void storeOnBackendAsActive(USBCameraDevice camera, ClientTunnel client = null)
         {
-            _ = new CameraService().create(new CreateCameraRequestTObject(
+           CameraEntity cameraEntity = await new CameraService().create(new CreateCameraRequestTObject(
                   camera.Index,
                   camera.ID,
                   camera.BadgeId,
@@ -53,10 +55,15 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
 
             if (client == null)
                 return;
+ 
             client.Emit(new Request(
                 "response://cameras/refresh"    
             ));
-            
+        }
+
+        private static void downloadCameraSettings(CameraEntity cameraEntity)
+        {
+            new CameraDeviceSettingsService().SetMenuConfig(cameraEntity.data);
         }
     }
 }

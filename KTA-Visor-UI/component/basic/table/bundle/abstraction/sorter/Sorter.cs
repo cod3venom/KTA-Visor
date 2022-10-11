@@ -32,26 +32,26 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.filter
 
             foreach (ColumnTObject column in this.columns)
             {
-                this.table.ColumnCombobx.AddItem(column.Name);
+                this.table.ColumnCombobx.Items.Add(column.Name);
             }
 
             this.FilterOptions.ForEach(column => {
 
-                this.table.ColumnSortByCombobx.AddItem(column);
+                this.table.ColumnSortByCombobx.Items.Add(column);
             });
 
-            this.table.ColumnCombobx.selectedIndex = 0;
-            this.table.ColumnSortByCombobx.selectedIndex = 0;
+            this.table.ColumnCombobx.SelectedIndex = 0;
+            this.table.ColumnSortByCombobx.SelectedIndex = 0;
 
              
-            this.table.ColumnCombobx.onItemSelected += (delegate (object sender, EventArgs e)
+            this.table.ColumnCombobx.SelectedIndexChanged += (delegate (object sender, EventArgs e)
             {
-                this.SelectedColumnIndex = this.table.ColumnCombobx.selectedIndex;
+                this.SelectedColumnIndex = this.table.ColumnCombobx.SelectedIndex;
             });
 
-            this.table.ColumnSortByCombobx.onItemSelected += (delegate (object sender, EventArgs e)
+            this.table.ColumnSortByCombobx.SelectedIndexChanged += (delegate (object sender, EventArgs e)
             {
-                this.SelectedFilterOptionIndex = this.table.ColumnSortByCombobx.selectedIndex;
+                this.SelectedFilterOptionIndex = this.table.ColumnSortByCombobx.SelectedIndex;
                 this.onStartSorting();
             });
         }
@@ -65,8 +65,8 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.filter
             }
 
 
-            string columnName = this.table.ColumnCombobx.selectedValue;
-            string filterOption = this.table.ColumnSortByCombobx.selectedValue;
+            string columnName = this.table.ColumnCombobx.SelectedValue.ToString();
+            string filterOption = this.table.ColumnSortByCombobx.SelectedValue.ToString();
 
             switch (filterOption)
             {

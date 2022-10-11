@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,6 +13,8 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
     public class Row : Searcher
     {
         private readonly Table table;
+
+        public event EventHandler<EventArgs> OnRowAdded;
 
         public Row(Table table): base(table)
         {
@@ -64,6 +67,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
             {
                 this.table.Invoke(new Action(() => {
                     this.table.DataGridView.Rows.Add(row.getCells());
+                    this.OnRowAdded?.Invoke(this, EventArgs.Empty);
                 }));
             }
             catch (Exception ex)
@@ -83,9 +87,12 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         {
             try
             {
-                this.table.Invoke(new Action(() => {
-                    this.table.DataGridView.Rows.Add(values);
-                }));
+                new Thread((ThreadStart) =>
+                {
+                    this.table.Invoke((MethodInvoker)delegate {
+                        this.table.DataGridView.Rows.Add(values);
+                    });
+                }).Start();
             }
              catch (Exception ex)
             {

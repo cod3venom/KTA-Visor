@@ -27,7 +27,10 @@ namespace KTA_Visor_UI.component.custom.FIleExplorer
             this.goBackBtn.Click += onGoBack;
             this.goForward.Click += onGoForward;
             this.currentLocationTxt.Text = this.WorkingDirectory;
-            this.webBrowser1.Url = new Uri(this.WorkingDirectory);
+
+            if (this.WorkingDirectory == "")
+                return;
+           // this.webBrowser1.Url = new Uri(this.WorkingDirectory);
         }
 
        
@@ -52,9 +55,6 @@ namespace KTA_Visor_UI.component.custom.FIleExplorer
             if(File.Exists(this.currentLocationTxt.Text))
             {
                 this.webBrowser1.Url = new Uri(this.currentLocationTxt.Text);
-            } else
-            {
-                MessageBox.Show("Wybrana scieżka nie istnieje");
             }
         }
       

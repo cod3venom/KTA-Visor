@@ -47,27 +47,31 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(405, 334);
+            this.pictureBox1.Size = new System.Drawing.Size(489, 456);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // improvedProgressBar1
             // 
-            this.improvedProgressBar1.Location = new System.Drawing.Point(172, 214);
+            this.improvedProgressBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(185)))), ((int)(((byte)(11)))));
+            this.improvedProgressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(185)))), ((int)(((byte)(11)))));
+            this.improvedProgressBar1.Location = new System.Drawing.Point(177, 295);
             this.improvedProgressBar1.Name = "improvedProgressBar1";
-            this.improvedProgressBar1.Size = new System.Drawing.Size(57, 10);
+            this.improvedProgressBar1.Size = new System.Drawing.Size(129, 10);
             this.improvedProgressBar1.TabIndex = 2;
             // 
             // KernelLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 334);
+            this.ClientSize = new System.Drawing.Size(489, 456);
             this.Controls.Add(this.improvedProgressBar1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "KernelLoader";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KernelLoader";
             this.Load += new System.EventHandler(this.KernelLoader_Load);

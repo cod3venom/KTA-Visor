@@ -30,16 +30,13 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
         public int findPortByBadgeId(string badgeId)
         {
             int originLength = Globals.CAMERAS_LIST.Count;
-            USBCameraDevice requestedDevice = Globals.CAMERAS_LIST.ToList().Find(x => x.BadgeId == badgeId);
-            if (requestedDevice == null)
-                return -1;
+            USBCameraDevice requestedDevice = Globals.CAMERAS_LIST.ToList().Find(requestedCamera => requestedCamera.BadgeId == badgeId);
+            
             foreach(int portNumber in this.Ports)
             {
                 if (!this.assignRelayPortToTheCamera(portNumber, ref requestedDevice))
                     continue;
-
-                Thread.Sleep(1000);
-                this.OnFoundPortByBadgeId?.Invoke(this, new events.OnFoundPortByBadgeId(portNumber, requestedDevice));
+                //this.OnFoundPortByBadgeId?.Invoke(this, new events.OnFoundPortByBadgeId(portNumber, requestedDevice));
                 return portNumber;
             }
             return -1;
@@ -53,7 +50,7 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
         /// <returns></returns>
         private bool assignRelayPortToTheCamera(int portNumber, ref USBCameraDevice requestedDevice)
         {
-            this.sendCommand(String.Format("C {0}", portNumber.ToString()));
+            this.turnOffByPort(portNumber);
             Thread.Sleep(100);
             
             if (!Directory.Exists(requestedDevice.Drive.Name))

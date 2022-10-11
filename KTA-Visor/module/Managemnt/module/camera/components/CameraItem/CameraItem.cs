@@ -49,10 +49,12 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         private void CameraItem_Load(object sender, EventArgs e)
         {
             this.Padding = new Padding(10, 10, 10, 20);
-            this.openBtn.Click += OpenBtn_Click;
+            this.settingsBtn.Click += OpenSettings_Click;
             this.form.OnCloseForm += onCloseForm;
             this.copyFilesToUSBMenuItem.Click += onCopyFilesToUSB;
             this.copyFilesToDVDMenuItem.Click += onCopyFilesToDVD;
+
+            this.handleStatus();
         }
 
         
@@ -85,7 +87,22 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             set { this.cameraIndexLbl.Text = value; }
         }
 
-        private void OpenBtn_Click(object sender, EventArgs e)
+        private void handleStatus()
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                if (this.Camera.active)
+                {
+                    this.statusIcon.Image = Properties.Resources.green_circle;
+                }
+                else
+                {
+                    this.statusIcon.Image = Properties.Resources.red_circle;
+                }
+            });
+        }
+
+        private void OpenSettings_Click(object sender, EventArgs e)
         {
             this.OnOpenCameraItem?.Invoke(sender, new OnOpenCameraItemEvent(this, this.Camera));
         }

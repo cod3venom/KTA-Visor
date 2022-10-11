@@ -9,6 +9,7 @@ using TCPTunnel.kernel.extensions.router.dto;
 using TCPTunnel.kernel.types;
 using TCPTunnel.module.server;
 using TCPTunnel.module.server.dto;
+using System.Windows.Forms;
 
 namespace KTA_Visor.module.Managemnt.workers.tunnel
 {
@@ -126,7 +127,10 @@ namespace KTA_Visor.module.Managemnt.workers.tunnel
         {
             TCPClientTObject client =  Globals.CLIENTS_LIST.ToList().Find((TCPClientTObject stationClient) => stationClient.IpAddress == ip);
             if (client == null)
+            {
+                MessageBox.Show("Nie udało się znaleść stacje o takim adresie IP");
                 return;
+            }
 
             Console.WriteLine(String.Format("Manager: Sending message to the {0} on endpoint {1}", client.getSocket().RemoteEndPoint, request.Endpoint));
 

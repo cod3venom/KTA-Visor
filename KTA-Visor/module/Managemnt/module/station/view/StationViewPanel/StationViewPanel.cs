@@ -1,4 +1,5 @@
 ﻿
+using KTA_Visor.kernel.module.ThreadPool;
 using KTA_Visor.module.Managemnt.module.station.command;
 using KTA_Visor.module.Managemnt.module.station.controller;
 using KTA_Visor.module.Shared.Global;
@@ -7,16 +8,16 @@ using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using KTAVisorAPISDK.module.camera.service;
 using KTAVisorAPISDK.module.station.service;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static KTA_Visor.module.Managemnt.module.station.command.HandleStationContextMenuClickEventCommand;
 
 namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
 {
     public partial class StationViewPanel : UserControl
     {
-        /// <summary>
-        /// 
-        /// </summary>
+
         private readonly ColumnTObject[] Columns = new ColumnTObject[] {
             new ColumnTObject(0, "IDENTYFIKATOR STACJI"),
             new ColumnTObject(1, "IP ADRES"),
@@ -43,35 +44,39 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
             this.table.Column.addMultiple(this.Columns);
         }
 
-      
-
-        private void StationViewPanel_Load(object sender, EventArgs e)
+        private async void StationViewPanel_Load(object sender, EventArgs e)
         {
-
+            await Task.Delay(3000);
             this.initialize();
         }
- 
+
         private async void initialize()
         {
-             this.hookEvents();
+            this.hookEvents();
             this.fetchStations();
 
         }
+
         private void hookEvents()
         {
             Globals.ServerTunnelBackgroundWorker.OnClientConnected += onStationConnected;
             Globals.ServerTunnelBackgroundWorker.OnClientDisconnected += onStationDisconnected;
             Globals.ServerTunnelBackgroundWorker.OnMessageReceivedFromClient += onResponseReceivedFromStation;
-            this.table.DataGridView.Cursor = Cursors.Hand;
+
             this.table.DataGridView.CellDoubleClick += onCellDoubleClick;
+            this.table.DataGridView.SelectionChanged += onSelectionChanged;
+            this.table.OnRefreshData += onRefreshTableData;
+
             this.stationController.OnRefreshCamerasList += onRefreshCamerasList;
-        }
 
-        private void fetchStations()
-        {
-            DisplayFetchedStationInTableCommand.Execute(this.table);
+            this.shutDownPowerSupplyMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.getStationId(), (int)StationContextMenuItem.POWER_SUPPLY_OFF);
+            this.resetPowerSupplyMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.getStationId(), (int)StationContextMenuItem.POWER_SUPPLY_RESTART);
+            this.disconnectFromTunnelMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.getStationId(), (int)StationContextMenuItem.TUNNEL_DISCONNECT);
+            this.resetTunnelMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.getStationId(), (int)StationContextMenuItem.TUNNEL_RESTART);
+            this.connectRemoteDesktopMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.getStationId(), (int)StationContextMenuItem.RDP_CONNECT);
         }
-
+ 
+       
         private void onStationConnected(object sender, events.OnClientConnected e)
         {
             this.fetchStations();
@@ -95,15 +100,36 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
            this.downloadSelectedStationCameras();
         }
 
+        private void onSelectionChanged(object sender, EventArgs e)
+        {
+            this.downloadSelectedStationCameras();
+        }
+
+
+        private async void onRefreshTableData(object sender, EventArgs e)
+        {
+            await Task.Delay(100);
+            this.fetchStations();
+            this.downloadSelectedStationCameras();
+        }
+
+
         private void onRefreshCamerasList(object sender, Station.events.OnRefreshCamerasListEvent e)
         {
             this.downloadSelectedStationCameras();
         }
 
+        private async void fetchStations()
+        {
+            DisplayFetchedStationInTableCommand.Execute(this.table);
+            return;
+        }
+
         private void downloadSelectedStationCameras()
         {
-            string stationCustomId = this.getStationId();
-            DisplayCamerasOfSelectedStationCommand.Execute(this.camerasFlowPanel, stationCustomId);
+            DisplayCamerasOfSelectedStationCommand.Execute(this.camerasFlowPanel, this.getStationId());
+            return;
+
         }
 
         public string getStationId()

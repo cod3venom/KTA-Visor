@@ -47,7 +47,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1065, 49);
+            this.panel1.Size = new System.Drawing.Size(687, 43);
             this.panel1.TabIndex = 0;
             // 
             // goForward
@@ -75,7 +75,7 @@
             this.currentLocationTxt.Location = new System.Drawing.Point(72, 6);
             this.currentLocationTxt.Margin = new System.Windows.Forms.Padding(4);
             this.currentLocationTxt.Name = "currentLocationTxt";
-            this.currentLocationTxt.Size = new System.Drawing.Size(989, 30);
+            this.currentLocationTxt.Size = new System.Drawing.Size(611, 30);
             this.currentLocationTxt.TabIndex = 16;
             this.currentLocationTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
@@ -95,9 +95,9 @@
             // 
             this.panel2.Controls.Add(this.webBrowser1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 49);
+            this.panel2.Location = new System.Drawing.Point(0, 43);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1065, 545);
+            this.panel2.Size = new System.Drawing.Size(687, 561);
             this.panel2.TabIndex = 1;
             // 
             // webBrowser1
@@ -106,15 +106,15 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(1065, 545);
+            this.webBrowser1.Size = new System.Drawing.Size(687, 561);
             this.webBrowser1.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 594);
+            this.panel3.Location = new System.Drawing.Point(0, 604);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1065, 56);
+            this.panel3.Size = new System.Drawing.Size(687, 16);
             this.panel3.TabIndex = 1;
             // 
             // FileExplorer
@@ -125,7 +125,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "FileExplorer";
-            this.Size = new System.Drawing.Size(1065, 650);
+            this.Size = new System.Drawing.Size(687, 620);
             this.Load += new System.EventHandler(this.FileExplorer_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -137,10 +137,10 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
         private Bunifu.Framework.UI.BunifuMetroTextbox currentLocationTxt;
         private System.Windows.Forms.Button goForward;
         private System.Windows.Forms.Button goBackBtn;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Panel panel3;
     }
 }

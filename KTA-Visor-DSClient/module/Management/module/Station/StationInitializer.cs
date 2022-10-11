@@ -1,4 +1,5 @@
 ﻿using KTA_Visor_DSClient.install.settings;
+using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
 using KTA_Visor_DSClient.module.Management.module.Station.events;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.station.dto;
@@ -28,6 +29,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Station
 
         public async Task<StationEntity> Initialize(bool isActive = true)
         {
+            if (!isActive)
+            {
+                RemoveAllCamerasFromTheGlobalMemory.Execute();
+            }
             
             Globals.STATION = await this.stationService.findByCustomId(
                 settings.SettingsObj.app.station.stationId

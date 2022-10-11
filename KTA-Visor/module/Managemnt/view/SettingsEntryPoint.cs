@@ -1,5 +1,6 @@
 ﻿using KTA_Visor.install.settings;
 using KTA_Visor_UI.component.custom.MessageWindow;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,18 +13,18 @@ using System.Windows.Forms;
 
 namespace KTA_Visor.module.Managemnt.view
 {
-    public partial class SettingsEntryPoint : Form
+    public partial class SettingsEntryPoint : MetroForm
     {
         private readonly Settings settings;
         public SettingsEntryPoint()
         {
             InitializeComponent();
-            this.topBar.Parent = this;
             this.settings = new Settings();
         }
 
         private void SettingsEntryPoint_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.None;
             this.releaseNameLbl.Text = this.settings.SettingsObj.app.releaseName;
         }
 
@@ -64,7 +65,7 @@ namespace KTA_Visor.module.Managemnt.view
                 this.fileSystemPathTxt.Text = folderBrowserDialog1.SelectedPath;
                 this.settings.SettingsObj.app.fileSystem.filesPath = folderBrowserDialog1.SelectedPath;
             });
-            this.saveBtn.OnClick += onSave;
+            this.saveBtn.Click += onSave;
         }
 
       

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,13 +11,11 @@ using System.Windows.Forms;
 
 namespace KTA_Visor.module.Managemnt.sub_window
 {
-    public partial class VersionWindow : Form
+    public partial class VersionWindow : MetroForm
     {
         public VersionWindow()
         {
             InitializeComponent();
-            this.topBar1.Parent = this;
-            this.topBar1.onClose += onClose;
         }
 
     

@@ -41,6 +41,8 @@
             this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuDragControl2 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuDragControl3 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -53,11 +55,12 @@
             // 
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.descriptionLbl);
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(825, 36);
+            this.panel1.Size = new System.Drawing.Size(825, 44);
             this.panel1.TabIndex = 0;
             // 
             // panel3
@@ -68,7 +71,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(150, 36);
+            this.panel3.Size = new System.Drawing.Size(150, 39);
             this.panel3.TabIndex = 2;
             // 
             // titleLbl
@@ -94,7 +97,7 @@
             this.descriptionLbl.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.descriptionLbl.Name = "descriptionLbl";
             this.descriptionLbl.Padding = new System.Windows.Forms.Padding(150, 0, 0, 0);
-            this.descriptionLbl.Size = new System.Drawing.Size(825, 36);
+            this.descriptionLbl.Size = new System.Drawing.Size(825, 39);
             this.descriptionLbl.TabIndex = 1;
             this.descriptionLbl.Text = "Window";
             this.descriptionLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -102,6 +105,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.panel2.Controls.Add(this.panel5);
             this.panel2.Controls.Add(this.minimizeBtn);
             this.panel2.Controls.Add(this.resizeBtn);
             this.panel2.Controls.Add(this.closeBtn);
@@ -109,7 +113,7 @@
             this.panel2.Location = new System.Drawing.Point(825, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(118, 36);
+            this.panel2.Size = new System.Drawing.Size(118, 44);
             this.panel2.TabIndex = 1;
             // 
             // minimizeBtn
@@ -175,6 +179,24 @@
             this.bunifuDragControl3.TargetControl = this.panel2;
             this.bunifuDragControl3.Vertical = true;
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 39);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(825, 5);
+            this.panel4.TabIndex = 3;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(0, 39);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(118, 5);
+            this.panel5.TabIndex = 6;
+            // 
             // TopBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,7 +207,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TopBar";
-            this.Size = new System.Drawing.Size(943, 36);
+            this.Size = new System.Drawing.Size(943, 44);
             this.Load += new System.EventHandler(this.TopBar_Load);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -211,5 +233,7 @@
         private Bunifu.Framework.UI.BunifuImageButton resizeBtn;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label titleLbl;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
     }
 }

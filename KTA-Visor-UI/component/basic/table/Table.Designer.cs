@@ -29,24 +29,33 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Table));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableControlsContainer = new System.Windows.Forms.Panel();
-            this.columnFilterByCombobx = new Bunifu.Framework.UI.BunifuDropdown();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.columnCombobx = new Bunifu.Framework.UI.BunifuDropdown();
+            this.controlsToolBarPanel = new System.Windows.Forms.Panel();
+            this.refreshTableBtn = new System.Windows.Forms.PictureBox();
+            this.orderByPanel = new System.Windows.Forms.Panel();
+            this.columnFilterByCombobx = new System.Windows.Forms.ComboBox();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.searchTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.orderColumnPanel = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.columnCombobx = new System.Windows.Forms.ComboBox();
             this.filterColumnLbl = new System.Windows.Forms.Label();
-            this.searchBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.searchPanel = new System.Windows.Forms.Panel();
+            this.searchTxt = new MetroFramework.Controls.MetroTextBox();
+            this.searchBtn = new MetroFramework.Controls.MetroButton();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.deletePanel = new System.Windows.Forms.Panel();
-            this.deleteBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.deleteBtn = new MetroFramework.Controls.MetroButton();
             this.editPanel = new System.Windows.Forms.Panel();
-            this.editBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.editBtn = new MetroFramework.Controls.MetroButton();
             this.addPanel = new System.Windows.Forms.Panel();
-            this.addBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.addBtn = new MetroFramework.Controls.MetroButton();
             this.dataGridView1 = new Bunifu.Framework.UI.BunifuCustomDataGrid();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
@@ -55,159 +64,219 @@
             this.roundedTextBox1 = new KTA_Visor_UI.component.basic.textbox.RoundedTextBox();
             this.horizontalSeparator1 = new KTA_Visor_UI.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
             this.horizontalSeparator3 = new KTA_Visor_UI.component.basic.table.components.HorizontalSeparator.HorizontalSeparator();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.progressBar = new KTA_Visor_UI.component.basic.progressbar.ImprovedProgressBar();
             this.tableControlsContainer.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.controlsToolBarPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshTableBtn)).BeginInit();
+            this.orderByPanel.SuspendLayout();
+            this.orderColumnPanel.SuspendLayout();
+            this.searchPanel.SuspendLayout();
             this.deletePanel.SuspendLayout();
             this.editPanel.SuspendLayout();
             this.addPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableControlsContainer
             // 
             this.tableControlsContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-            this.tableControlsContainer.Controls.Add(this.panel2);
+            this.tableControlsContainer.Controls.Add(this.controlsToolBarPanel);
             this.tableControlsContainer.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableControlsContainer.Location = new System.Drawing.Point(0, 42);
             this.tableControlsContainer.Margin = new System.Windows.Forms.Padding(0);
             this.tableControlsContainer.Name = "tableControlsContainer";
-            this.tableControlsContainer.Size = new System.Drawing.Size(1660, 51);
+            this.tableControlsContainer.Size = new System.Drawing.Size(1878, 41);
             this.tableControlsContainer.TabIndex = 1;
+            // 
+            // controlsToolBarPanel
+            // 
+            this.controlsToolBarPanel.Controls.Add(this.refreshTableBtn);
+            this.controlsToolBarPanel.Controls.Add(this.orderByPanel);
+            this.controlsToolBarPanel.Controls.Add(this.panel2);
+            this.controlsToolBarPanel.Controls.Add(this.orderColumnPanel);
+            this.controlsToolBarPanel.Controls.Add(this.searchPanel);
+            this.controlsToolBarPanel.Controls.Add(this.deletePanel);
+            this.controlsToolBarPanel.Controls.Add(this.editPanel);
+            this.controlsToolBarPanel.Controls.Add(this.addPanel);
+            this.controlsToolBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.controlsToolBarPanel.Location = new System.Drawing.Point(0, 0);
+            this.controlsToolBarPanel.Name = "controlsToolBarPanel";
+            this.controlsToolBarPanel.Size = new System.Drawing.Size(1878, 27);
+            this.controlsToolBarPanel.TabIndex = 14;
+            // 
+            // refreshTableBtn
+            // 
+            this.refreshTableBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.refreshTableBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.refreshTableBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshTableBtn.Image")));
+            this.refreshTableBtn.Location = new System.Drawing.Point(1832, 0);
+            this.refreshTableBtn.Name = "refreshTableBtn";
+            this.refreshTableBtn.Size = new System.Drawing.Size(46, 27);
+            this.refreshTableBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.refreshTableBtn.TabIndex = 16;
+            this.refreshTableBtn.TabStop = false;
+            // 
+            // orderByPanel
+            // 
+            this.orderByPanel.Controls.Add(this.columnFilterByCombobx);
+            this.orderByPanel.Controls.Add(this.panel6);
+            this.orderByPanel.Controls.Add(this.label1);
+            this.orderByPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.orderByPanel.Location = new System.Drawing.Point(1356, 0);
+            this.orderByPanel.Name = "orderByPanel";
+            this.orderByPanel.Size = new System.Drawing.Size(386, 27);
+            this.orderByPanel.TabIndex = 14;
             // 
             // columnFilterByCombobx
             // 
-            this.columnFilterByCombobx.BackColor = System.Drawing.Color.Transparent;
-            this.columnFilterByCombobx.BorderRadius = 3;
-            this.columnFilterByCombobx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.columnFilterByCombobx.DisabledColor = System.Drawing.Color.Gray;
-            this.columnFilterByCombobx.ForeColor = System.Drawing.Color.White;
-            this.columnFilterByCombobx.Items = new string[0];
-            this.columnFilterByCombobx.Location = new System.Drawing.Point(912, 4);
+            this.columnFilterByCombobx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.columnFilterByCombobx.FormattingEnabled = true;
+            this.columnFilterByCombobx.Location = new System.Drawing.Point(94, 0);
             this.columnFilterByCombobx.Name = "columnFilterByCombobx";
-            this.columnFilterByCombobx.NomalColor = System.Drawing.Color.Transparent;
-            this.columnFilterByCombobx.onHoverColor = System.Drawing.Color.Transparent;
-            this.columnFilterByCombobx.selectedIndex = -1;
-            this.columnFilterByCombobx.Size = new System.Drawing.Size(217, 30);
-            this.columnFilterByCombobx.TabIndex = 18;
+            this.columnFilterByCombobx.Size = new System.Drawing.Size(292, 21);
+            this.columnFilterByCombobx.TabIndex = 13;
             // 
-            // panel2
+            // panel6
             // 
-            this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.deletePanel);
-            this.panel2.Controls.Add(this.editPanel);
-            this.panel2.Controls.Add(this.addPanel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1489, 51);
-            this.panel2.TabIndex = 10;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.columnFilterByCombobx);
-            this.panel5.Controls.Add(this.columnCombobx);
-            this.panel5.Controls.Add(this.label1);
-            this.panel5.Controls.Add(this.searchTxt);
-            this.panel5.Controls.Add(this.filterColumnLbl);
-            this.panel5.Controls.Add(this.searchBtn);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(416, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1191, 51);
-            this.panel5.TabIndex = 13;
-            // 
-            // columnCombobx
-            // 
-            this.columnCombobx.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.columnCombobx.BackColor = System.Drawing.Color.Transparent;
-            this.columnCombobx.BorderRadius = 3;
-            this.columnCombobx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.columnCombobx.DisabledColor = System.Drawing.Color.Gray;
-            this.columnCombobx.ForeColor = System.Drawing.Color.White;
-            this.columnCombobx.Items = new string[0];
-            this.columnCombobx.Location = new System.Drawing.Point(580, 4);
-            this.columnCombobx.Name = "columnCombobx";
-            this.columnCombobx.NomalColor = System.Drawing.Color.Transparent;
-            this.columnCombobx.onHoverColor = System.Drawing.Color.Transparent;
-            this.columnCombobx.selectedIndex = -1;
-            this.columnCombobx.Size = new System.Drawing.Size(217, 30);
-            this.columnCombobx.TabIndex = 17;
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(84, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(10, 27);
+            this.panel6.TabIndex = 19;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(822, 10);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 15);
+            this.label1.Size = new System.Drawing.Size(84, 27);
             this.label1.TabIndex = 15;
             this.label1.Text = "Sortuj według";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // searchTxt
+            // panel2
             // 
-            this.searchTxt.BorderColorFocused = System.Drawing.Color.White;
-            this.searchTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.searchTxt.BorderColorMouseHover = System.Drawing.Color.White;
-            this.searchTxt.BorderThickness = 1;
-            this.searchTxt.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.searchTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.searchTxt.isPassword = false;
-            this.searchTxt.Location = new System.Drawing.Point(7, 4);
-            this.searchTxt.Margin = new System.Windows.Forms.Padding(4);
-            this.searchTxt.Name = "searchTxt";
-            this.searchTxt.Size = new System.Drawing.Size(347, 30);
-            this.searchTxt.TabIndex = 16;
-            this.searchTxt.Text = "...";
-            this.searchTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(1335, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(21, 27);
+            this.panel2.TabIndex = 15;
+            // 
+            // orderColumnPanel
+            // 
+            this.orderColumnPanel.Controls.Add(this.panel5);
+            this.orderColumnPanel.Controls.Add(this.columnCombobx);
+            this.orderColumnPanel.Controls.Add(this.filterColumnLbl);
+            this.orderColumnPanel.Controls.Add(this.panel4);
+            this.orderColumnPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.orderColumnPanel.Location = new System.Drawing.Point(907, 0);
+            this.orderColumnPanel.Name = "orderColumnPanel";
+            this.orderColumnPanel.Size = new System.Drawing.Size(428, 27);
+            this.orderColumnPanel.TabIndex = 13;
+            // 
+            // panel5
+            // 
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel5.Location = new System.Drawing.Point(129, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(10, 27);
+            this.panel5.TabIndex = 19;
+            // 
+            // columnCombobx
+            // 
+            this.columnCombobx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.columnCombobx.FormattingEnabled = true;
+            this.columnCombobx.Location = new System.Drawing.Point(129, 0);
+            this.columnCombobx.Name = "columnCombobx";
+            this.columnCombobx.Size = new System.Drawing.Size(299, 21);
+            this.columnCombobx.TabIndex = 12;
             // 
             // filterColumnLbl
             // 
-            this.filterColumnLbl.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.filterColumnLbl.AutoSize = true;
+            this.filterColumnLbl.Dock = System.Windows.Forms.DockStyle.Left;
             this.filterColumnLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterColumnLbl.Location = new System.Drawing.Point(509, 10);
+            this.filterColumnLbl.Location = new System.Drawing.Point(73, 0);
             this.filterColumnLbl.Name = "filterColumnLbl";
-            this.filterColumnLbl.Size = new System.Drawing.Size(56, 15);
+            this.filterColumnLbl.Size = new System.Drawing.Size(56, 27);
             this.filterColumnLbl.TabIndex = 14;
             this.filterColumnLbl.Text = "Kolumna";
+            this.filterColumnLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(73, 27);
+            this.panel4.TabIndex = 18;
+            // 
+            // searchPanel
+            // 
+            this.searchPanel.Controls.Add(this.searchTxt);
+            this.searchPanel.Controls.Add(this.searchBtn);
+            this.searchPanel.Controls.Add(this.panel7);
+            this.searchPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.searchPanel.Location = new System.Drawing.Point(416, 0);
+            this.searchPanel.Name = "searchPanel";
+            this.searchPanel.Size = new System.Drawing.Size(491, 27);
+            this.searchPanel.TabIndex = 13;
+            // 
+            // searchTxt
+            // 
+            // 
+            // 
+            // 
+            this.searchTxt.CustomButton.Image = null;
+            this.searchTxt.CustomButton.Location = new System.Drawing.Point(365, 1);
+            this.searchTxt.CustomButton.Name = "";
+            this.searchTxt.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.searchTxt.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.searchTxt.CustomButton.TabIndex = 1;
+            this.searchTxt.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.searchTxt.CustomButton.UseSelectable = true;
+            this.searchTxt.CustomButton.Visible = false;
+            this.searchTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchTxt.Lines = new string[] {
+        "..."};
+            this.searchTxt.Location = new System.Drawing.Point(17, 0);
+            this.searchTxt.MaxLength = 32767;
+            this.searchTxt.Name = "searchTxt";
+            this.searchTxt.PasswordChar = '\0';
+            this.searchTxt.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.searchTxt.SelectedText = "";
+            this.searchTxt.SelectionLength = 0;
+            this.searchTxt.SelectionStart = 0;
+            this.searchTxt.ShortcutsEnabled = true;
+            this.searchTxt.Size = new System.Drawing.Size(391, 27);
+            this.searchTxt.TabIndex = 12;
+            this.searchTxt.Text = "...";
+            this.searchTxt.UseSelectable = true;
+            this.searchTxt.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.searchTxt.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // searchBtn
             // 
-            this.searchBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-            this.searchBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.searchBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.searchBtn.BorderRadius = 6;
-            this.searchBtn.ButtonText = "Wyszukaj";
-            this.searchBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.searchBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.searchBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.searchBtn.Iconimage = null;
-            this.searchBtn.Iconimage_right = null;
-            this.searchBtn.Iconimage_right_Selected = null;
-            this.searchBtn.Iconimage_Selected = null;
-            this.searchBtn.IconMarginLeft = 0;
-            this.searchBtn.IconMarginRight = 0;
-            this.searchBtn.IconRightVisible = true;
-            this.searchBtn.IconRightZoom = 0D;
-            this.searchBtn.IconVisible = true;
-            this.searchBtn.IconZoom = 50D;
-            this.searchBtn.IsTab = false;
-            this.searchBtn.Location = new System.Drawing.Point(362, 4);
-            this.searchBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.searchBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.searchBtn.Location = new System.Drawing.Point(408, 0);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.searchBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.searchBtn.OnHoverTextColor = System.Drawing.Color.Black;
-            this.searchBtn.selected = false;
-            this.searchBtn.Size = new System.Drawing.Size(125, 30);
-            this.searchBtn.TabIndex = 10;
-            this.searchBtn.Text = "Wyszukaj";
-            this.searchBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.searchBtn.Textcolor = System.Drawing.Color.Black;
-            this.searchBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBtn.Size = new System.Drawing.Size(83, 27);
+            this.searchBtn.TabIndex = 19;
+            this.searchBtn.Text = "Szukaj";
+            this.searchBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.searchBtn.UseSelectable = true;
+            // 
+            // panel7
+            // 
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(17, 27);
+            this.panel7.TabIndex = 20;
             // 
             // deletePanel
             // 
@@ -215,43 +284,18 @@
             this.deletePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.deletePanel.Location = new System.Drawing.Point(274, 0);
             this.deletePanel.Name = "deletePanel";
-            this.deletePanel.Size = new System.Drawing.Size(142, 51);
+            this.deletePanel.Size = new System.Drawing.Size(142, 27);
             this.deletePanel.TabIndex = 12;
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-            this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.deleteBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.deleteBtn.BorderRadius = 6;
-            this.deleteBtn.ButtonText = "Usuń";
-            this.deleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.deleteBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.deleteBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.deleteBtn.Iconimage = null;
-            this.deleteBtn.Iconimage_right = null;
-            this.deleteBtn.Iconimage_right_Selected = null;
-            this.deleteBtn.Iconimage_Selected = null;
-            this.deleteBtn.IconMarginLeft = 0;
-            this.deleteBtn.IconMarginRight = 0;
-            this.deleteBtn.IconRightVisible = true;
-            this.deleteBtn.IconRightZoom = 0D;
-            this.deleteBtn.IconVisible = true;
-            this.deleteBtn.IconZoom = 50D;
-            this.deleteBtn.IsTab = false;
-            this.deleteBtn.Location = new System.Drawing.Point(17, 8);
-            this.deleteBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.deleteBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deleteBtn.Location = new System.Drawing.Point(0, 0);
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.deleteBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.deleteBtn.OnHoverTextColor = System.Drawing.Color.Black;
-            this.deleteBtn.selected = false;
-            this.deleteBtn.Size = new System.Drawing.Size(87, 27);
-            this.deleteBtn.TabIndex = 9;
+            this.deleteBtn.Size = new System.Drawing.Size(142, 27);
+            this.deleteBtn.TabIndex = 10;
             this.deleteBtn.Text = "Usuń";
-            this.deleteBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.deleteBtn.Textcolor = System.Drawing.Color.Black;
-            this.deleteBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteBtn.UseSelectable = true;
             // 
             // editPanel
             // 
@@ -259,43 +303,18 @@
             this.editPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.editPanel.Location = new System.Drawing.Point(136, 0);
             this.editPanel.Name = "editPanel";
-            this.editPanel.Size = new System.Drawing.Size(138, 51);
-            this.editPanel.TabIndex = 11;
+            this.editPanel.Size = new System.Drawing.Size(138, 27);
+            this.editPanel.TabIndex = 1;
             // 
             // editBtn
             // 
-            this.editBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-            this.editBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.editBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.editBtn.BorderRadius = 6;
-            this.editBtn.ButtonText = "Edycja";
-            this.editBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.editBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.editBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.editBtn.Iconimage = null;
-            this.editBtn.Iconimage_right = null;
-            this.editBtn.Iconimage_right_Selected = null;
-            this.editBtn.Iconimage_Selected = null;
-            this.editBtn.IconMarginLeft = 0;
-            this.editBtn.IconMarginRight = 0;
-            this.editBtn.IconRightVisible = true;
-            this.editBtn.IconRightZoom = 0D;
-            this.editBtn.IconVisible = true;
-            this.editBtn.IconZoom = 50D;
-            this.editBtn.IsTab = false;
-            this.editBtn.Location = new System.Drawing.Point(16, 8);
-            this.editBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.editBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editBtn.Location = new System.Drawing.Point(0, 0);
             this.editBtn.Name = "editBtn";
-            this.editBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.editBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.editBtn.OnHoverTextColor = System.Drawing.Color.Black;
-            this.editBtn.selected = false;
-            this.editBtn.Size = new System.Drawing.Size(87, 27);
-            this.editBtn.TabIndex = 8;
+            this.editBtn.Size = new System.Drawing.Size(138, 27);
+            this.editBtn.TabIndex = 1;
             this.editBtn.Text = "Edycja";
-            this.editBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.editBtn.Textcolor = System.Drawing.Color.Black;
-            this.editBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editBtn.UseSelectable = true;
             // 
             // addPanel
             // 
@@ -303,45 +322,18 @@
             this.addPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.addPanel.Location = new System.Drawing.Point(0, 0);
             this.addPanel.Name = "addPanel";
-            this.addPanel.Size = new System.Drawing.Size(136, 51);
-            this.addPanel.TabIndex = 10;
+            this.addPanel.Size = new System.Drawing.Size(136, 27);
+            this.addPanel.TabIndex = 0;
             // 
             // addBtn
             // 
-            this.addBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-            this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.addBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.addBtn.BorderRadius = 6;
-            this.addBtn.ButtonText = "Utwórz";
-            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.addBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.addBtn.Iconimage = null;
-            this.addBtn.Iconimage_right = null;
-            this.addBtn.Iconimage_right_Selected = null;
-            this.addBtn.Iconimage_Selected = null;
-            this.addBtn.IconMarginLeft = 0;
-            this.addBtn.IconMarginRight = 0;
-            this.addBtn.IconRightVisible = true;
-            this.addBtn.IconRightZoom = 0D;
-            this.addBtn.IconVisible = true;
-            this.addBtn.IconZoom = 50D;
-            this.addBtn.IsTab = false;
-            this.addBtn.Location = new System.Drawing.Point(14, 8);
-            this.addBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.addBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addBtn.Location = new System.Drawing.Point(0, 0);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.addBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.addBtn.OnHoverTextColor = System.Drawing.Color.Black;
-            this.addBtn.selected = false;
-            this.addBtn.Size = new System.Drawing.Size(87, 26);
-            this.addBtn.TabIndex = 7;
-            this.addBtn.Text = "Utwórz";
-            this.addBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.addBtn.Textcolor = System.Drawing.Color.Black;
-            this.addBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.Size = new System.Drawing.Size(136, 27);
+            this.addBtn.TabIndex = 0;
+            this.addBtn.Text = "Dodaj";
+            this.addBtn.UseSelectable = true;
             // 
             // dataGridView1
             // 
@@ -368,7 +360,7 @@
             this.dataGridView1.GridColor = System.Drawing.Color.White;
             this.dataGridView1.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(249)))), ((int)(((byte)(252)))));
             this.dataGridView1.HeaderForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 93);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -379,7 +371,7 @@
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(1)))), ((int)(((byte)(178)))), ((int)(((byte)(7)))));
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1660, 674);
+            this.dataGridView1.Size = new System.Drawing.Size(1878, 701);
             this.dataGridView1.TabIndex = 6;
             // 
             // bunifuElipse1
@@ -400,7 +392,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1660, 42);
+            this.panel1.Size = new System.Drawing.Size(1878, 42);
             this.panel1.TabIndex = 10;
             // 
             // titleLbl
@@ -409,7 +401,7 @@
             this.titleLbl.Font = new System.Drawing.Font("Inter Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLbl.Location = new System.Drawing.Point(0, 0);
             this.titleLbl.Name = "titleLbl";
-            this.titleLbl.Size = new System.Drawing.Size(1660, 42);
+            this.titleLbl.Size = new System.Drawing.Size(1878, 42);
             this.titleLbl.TabIndex = 0;
             this.titleLbl.Text = "title";
             this.titleLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -445,23 +437,45 @@
             this.horizontalSeparator3.Size = new System.Drawing.Size(1310, 2);
             this.horizontalSeparator3.TabIndex = 8;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.progressBar);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 784);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1878, 27);
+            this.panel3.TabIndex = 11;
+            // 
+            // progressBar
+            // 
+            this.progressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(185)))), ((int)(((byte)(11)))));
+            this.progressBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(185)))), ((int)(((byte)(11)))));
+            this.progressBar.Location = new System.Drawing.Point(4, 9);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(290, 11);
+            this.progressBar.TabIndex = 0;
+            // 
             // Table
             // 
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.tableControlsContainer);
             this.Controls.Add(this.panel1);
             this.Name = "Table";
-            this.Size = new System.Drawing.Size(1660, 767);
+            this.Size = new System.Drawing.Size(1878, 811);
             this.Load += new System.EventHandler(this.Table_Load);
             this.tableControlsContainer.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.controlsToolBarPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.refreshTableBtn)).EndInit();
+            this.orderByPanel.ResumeLayout(false);
+            this.orderColumnPanel.ResumeLayout(false);
+            this.searchPanel.ResumeLayout(false);
             this.deletePanel.ResumeLayout(false);
             this.editPanel.ResumeLayout(false);
             this.addPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -471,24 +485,34 @@
         private components.HorizontalSeparator.HorizontalSeparator horizontalSeparator1;
         private components.HorizontalSeparator.HorizontalSeparator horizontalSeparator3;
         private Bunifu.Framework.UI.BunifuCustomDataGrid dataGridView1;
-        private Bunifu.Framework.UI.BunifuFlatButton addBtn;
         private textbox.RoundedTextBox roundedTextBox1;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse2;
-        private Bunifu.Framework.UI.BunifuFlatButton deleteBtn;
-        private Bunifu.Framework.UI.BunifuFlatButton editBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label titleLbl;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel deletePanel;
         private System.Windows.Forms.Panel editPanel;
         private System.Windows.Forms.Panel addPanel;
-        private Bunifu.Framework.UI.BunifuFlatButton searchBtn;
-        private Bunifu.Framework.UI.BunifuMetroTextbox searchTxt;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label filterColumnLbl;
-        private Bunifu.Framework.UI.BunifuDropdown columnCombobx;
-        private Bunifu.Framework.UI.BunifuDropdown columnFilterByCombobx;
+        private MetroFramework.Controls.MetroButton searchBtn;
+        private MetroFramework.Controls.MetroButton deleteBtn;
+        private MetroFramework.Controls.MetroButton editBtn;
+        private MetroFramework.Controls.MetroButton addBtn;
+        private System.Windows.Forms.Panel orderByPanel;
+        private System.Windows.Forms.Panel orderColumnPanel;
+        private System.Windows.Forms.Panel searchPanel;
+        private System.Windows.Forms.Panel controlsToolBarPanel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel4;
+        private MetroFramework.Controls.MetroTextBox searchTxt;
+        private System.Windows.Forms.ComboBox columnCombobx;
+        private System.Windows.Forms.ComboBox columnFilterByCombobx;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.PictureBox refreshTableBtn;
+        private System.Windows.Forms.Panel panel3;
+        private progressbar.ImprovedProgressBar progressBar;
     }
 }

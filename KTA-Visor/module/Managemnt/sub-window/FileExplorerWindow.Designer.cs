@@ -28,64 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.topBar1 = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.fileExplorer1 = new KTA_Visor_UI.component.custom.FIleExplorer.FileExplorer();
             this.SuspendLayout();
-            // 
-            // bunifuElipse1
-            // 
-            this.bunifuElipse1.ElipseRadius = 5;
-            this.bunifuElipse1.TargetControl = this;
-            // 
-            // topBar1
-            // 
-            this.topBar1.AllowClose = true;
-            this.topBar1.AllowMinimize = false;
-            this.topBar1.AllowResize = false;
-            this.topBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.topBar1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.topBar1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.topBar1.Description = "";
-            this.topBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topBar1.Location = new System.Drawing.Point(0, 0);
-            this.topBar1.Margin = new System.Windows.Forms.Padding(2);
-            this.topBar1.Name = "topBar1";
-            this.topBar1.Parent = null;
-            this.topBar1.Size = new System.Drawing.Size(1384, 36);
-            this.topBar1.TabIndex = 0;
-            this.topBar1.Title = "Wersja";
             // 
             // fileExplorer1
             // 
             this.fileExplorer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileExplorer1.Location = new System.Drawing.Point(0, 36);
+            this.fileExplorer1.Location = new System.Drawing.Point(20, 30);
             this.fileExplorer1.Name = "fileExplorer1";
-            this.fileExplorer1.Size = new System.Drawing.Size(1384, 414);
-            this.fileExplorer1.TabIndex = 1;
-            this.fileExplorer1.WorkingDirectory = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE";
+            this.fileExplorer1.Size = new System.Drawing.Size(760, 400);
+            this.fileExplorer1.TabIndex = 0;
+            this.fileExplorer1.WorkingDirectory = null;
             // 
             // FileExplorerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1384, 450);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.fileExplorer1);
-            this.Controls.Add(this.topBar1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.DisplayHeader = false;
             this.Name = "FileExplorerWindow";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "VersionWindow";
-            this.Load += new System.EventHandler(this.FileExplorerWindow_Load);
+            this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
+            this.Style = MetroFramework.MetroColorStyle.Orange;
+            this.Text = "FileExplorerWindow";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
-        private KTA_Visor_UI.component.basic.topbar.TopBar topBar1;
         private KTA_Visor_UI.component.custom.FIleExplorer.FileExplorer fileExplorer1;
     }
 }

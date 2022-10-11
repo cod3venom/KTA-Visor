@@ -12,8 +12,8 @@ namespace KTA_Visor
     internal static class Program
     {
     
-        [STAThread]
         [HandleProcessCorruptedStateExceptions]
+        [STAThread]
         static void Main()
         {
 
@@ -21,7 +21,8 @@ namespace KTA_Visor
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-            if (Environment.OSVersion.Version.Major >= 6) {
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
                 SetProcessDPIAware();
             }
 

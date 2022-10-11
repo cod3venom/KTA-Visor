@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,33 +25,45 @@ namespace KTA_Visor.module.Managemnt.module.station.command
             try
             {
                 CameraEntity camerasEntity = await new CameraService().findByStationId(stationCustomId);
+                StationEntity station = await new StationService().findByCustomId(stationCustomId);
+                
+                if (camerasEntity.datas == null){
+                    return;
+                }
 
                 camerasFlowPanel.Invoke((MethodInvoker)delegate {
                     camerasFlowPanel.Controls.Clear();
                 });
 
-                if (camerasEntity.datas == null)
-                    return;
 
                 foreach (CameraEntity.Camera camera in camerasEntity.datas)
                 {
-                    if (Globals.ALL_STATION_CAMERAS.Contains(camera))
+                    if (Globals.ALL_STATION_CAMERAS.Contains(camera)){
                         continue;
+                    }
 
-                    Globals.ALL_STATION_CAMERAS.Add(camera);
 
-                    camerasFlowPanel.Invoke((MethodInvoker)async delegate
+                    Thread thr = new Thread(() =>
                     {
-                        StationEntity station = await new StationService().findByCustomId(camera.stationId);
-                        CameraItem item = new CameraItem(camera, station);
-
-                        item.OnOpenCameraItem += (delegate (Object _sender, OnOpenCameraItemEvent e)
+                        camerasFlowPanel.Invoke((MethodInvoker)async delegate
                         {
-                            new CameraItemSettingsForm(e.Camera, station).ShowDialog();
+                            CameraItem item = new CameraItem(camera, station);
+
+                            item.OnOpenCameraItem += (delegate (Object _sender, OnOpenCameraItemEvent e)
+                            {
+                                new CameraItemSettingsForm(e.Camera, station).ShowDialog();
+                            });
+                            camerasFlowPanel.Controls.Add(item);
+                            Globals.ALL_STATION_CAMERAS.Add(camera);
+
+                            Thread.Sleep(100);
                         });
-                        camerasFlowPanel.Controls.Add(item);
                     });
-                }
+
+                    thr.IsBackground = true;
+                    thr.Start();
+                 }
+             
             }
             catch(Exception ex)
             {

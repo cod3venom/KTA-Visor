@@ -57,10 +57,12 @@ namespace KTA_RFID_Keyboard.module.RFIDKeyboardReader
                 return;
             }
 
+            
             string windowTitle = GetActiveWindowTitle();
 
-            if (windowTitle != "StationsView")
-                return;
+            
+            //if (windowTitle != "StationsView")
+            //    return;
             
             
             this.OnKeyboardInputChanged?.Invoke(sender, new OnKeyboardReaderDataChanagedEvent(KeyboardReader.Input));

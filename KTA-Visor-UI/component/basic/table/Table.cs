@@ -1,6 +1,7 @@
 ﻿using KTA_Visor_UI.component.basic.button;
 using KTA_Visor_UI.component.basic.table.bundle;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
+using MetroFramework.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,7 +21,9 @@ namespace KTA_Visor_UI.component.basic.table
         public event EventHandler OnAddButton;
         public event EventHandler OnEditButton;
         public event EventHandler OnDeleteButton;
+        public event EventHandler OnRefreshData;
 
+        public bool AllowProgressBar { get; set; } 
 
         [DllImport("user32.dll")]
         static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, Int32 wParam, Int32 lParam);
@@ -32,6 +36,7 @@ namespace KTA_Visor_UI.component.basic.table
             this.Table = this;
             this.Column = new bundle.abstraction.column.Column(this);
             this.Row = new bundle.abstraction.row.Row(this);
+            this.AllowProgressBar = true;
         }
 
         
@@ -40,21 +45,41 @@ namespace KTA_Visor_UI.component.basic.table
         {
 
             this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.addBtn.Click += onAddBtn;
-            this.editBtn.Click += onEditBtn;
-            this.deleteBtn.Click += onDeleteBtn;
             SetComboBoxHeight(columnFilterByCombobx.Handle, 25);
             SetComboBoxHeight(columnCombobx.Handle, 25);
             columnFilterByCombobx.Refresh();
-            columnCombobx.Refresh();
-
+            columnCombobx.Refresh(); 
         }
+
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            this.hookEvents();
         }
+
+        private void hookEvents()
+        {
+            this.addBtn.Click += onAddBtn;
+            this.editBtn.Click += onEditBtn;
+            this.deleteBtn.Click += onDeleteBtn;
+            this.refreshTableBtn.Click += onRefreshDataBtn;
+            this.DataGridView.RowsAdded += onRowAdded;
+        }
+
  
+        private void onRowAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (!this.AllowProgressBar)
+            {
+                this.progressBar.Visible = false;
+                return;
+            }
+
+            this.progressBar.Visible = true;
+            this.progressBar.Start();
+        }
+
         private void SetComboBoxHeight(IntPtr comboBoxHandle, Int32 comboBoxDesiredHeight)
         {
             SendMessage(comboBoxHandle, CB_SETITEMHEIGHT, -1, comboBoxDesiredHeight);
@@ -75,34 +100,41 @@ namespace KTA_Visor_UI.component.basic.table
             this.OnDeleteButton?.Invoke(this, e);
         }
 
+
+        private void onRefreshDataBtn(object sender, EventArgs e)
+        {
+            this.OnRefreshData?.Invoke(this, new EventArgs());
+            return;
+        }
+
         public bool AllowAdd
         {
-            get { return this.addBtn.Visible; }
+            get { return this.addBtn.Enabled; }
             set
             {
-                this.addBtn.Visible = value;
-                this.addPanel.Visible = value;
+                this.addBtn.Enabled = value;
+              //  this.addPanel.Visible = value;
             }
         }
 
         public bool AllowEdit
         {
-            get { return this.editBtn.Visible; }
+            get { return this.editBtn.Enabled; }
             set
             {
-                this.editBtn.Visible = value;
-                this.editPanel.Visible = value;
+                this.editBtn.Enabled= value;
+                //this.editPanel.Visible = value;
 
             }
         }
 
         public bool AllowDelete
         {
-            get { return this.deleteBtn.Visible; }
+            get { return this.deleteBtn.Enabled; }
             set
             {
-                this.deleteBtn.Visible = value;
-                this.deletePanel.Visible = value;
+                this.deleteBtn.Enabled = value;
+                //this.deletePanel.Visible = value;
             }
         }
 
@@ -118,13 +150,13 @@ namespace KTA_Visor_UI.component.basic.table
             get { return this.titleLbl.Text; }
         }
 
-        public Bunifu.Framework.UI.BunifuMetroTextbox SearchTextBox
+        public  MetroTextBox SearchTextBox
         {
             get { return this.searchTxt; }
             set { this.searchTxt = value; }
         }
 
-        public Bunifu.Framework.UI.BunifuFlatButton SearchButton
+        public MetroFramework.Controls.MetroButton SearchButton
         {
             get { return this.searchBtn; }
             set { this.searchBtn = value; }
@@ -137,13 +169,13 @@ namespace KTA_Visor_UI.component.basic.table
                 this.Column.addMultiple(value); ;
             }
         }
-        public Bunifu.Framework.UI.BunifuDropdown ColumnCombobx
+        public ComboBox ColumnCombobx
         {
             get { return this.columnCombobx; }
             set { this.columnCombobx = value; }
         }
 
-        public Bunifu.Framework.UI.BunifuDropdown ColumnSortByCombobx
+        public ComboBox ColumnSortByCombobx
         {
             get { return this.columnFilterByCombobx; }
             set { this.columnFilterByCombobx = value; }

@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>\\DESKTOP-U3IGIUN\Users\docking_station_1\Desktop\shared_for_remote_debugging\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,6 +35,9 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
@@ -42,18 +45,9 @@
     <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <HintPath>..\packages\Splicer.1.1\lib\net45\DirectShowLib-2005.dll</HintPath>
     </Reference>
-    <Reference Include="Falcon">
-      <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Falcon.dll</HintPath>
-    </Reference>
-    <Reference Include="Falcon_USB">
-      <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon_USB\Falcon_USB\bin\Debug\Falcon_USB.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Sdk.Core">
-      <HintPath>..\..\FalconSetupManager\FalconSDK\Falcon\Falcon\bin\Debug\Sdk.Core.dll</HintPath>
     </Reference>
     <Reference Include="Splicer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a66524ed949429f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Splicer.1.1\lib\net45\Splicer.dll</HintPath>
@@ -88,8 +82,10 @@
     <Compile Include="kernel\Hardware\DeviceWatcher\events\DriveChangedEventArgs.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\events\OnFoundPortByBadgeId.cs" />
     <Compile Include="module\Management\module\Camera\CameraDeviceWatcher.cs" />
+    <Compile Include="module\Management\module\Camera\command\memory\RemoveAllCamerasFromTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
+    <Compile Include="module\Management\module\Camera\service\CameraPowerService.cs" />
     <Compile Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\LocalSettingsTObject.cs" />
     <Compile Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\USBCameraDeviceSettings.cs" />
     <Compile Include="module\Management\module\Camera\types\USBCameraDevice\USBCameraDevice.cs" />
@@ -127,6 +123,8 @@
     <Compile Include="module\Management\module\Camera\service\CameraDeviceSettingsService.cs" />
     <Compile Include="module\Management\module\PowerSupply\PowerSupplyInitializer.cs" />
     <Compile Include="module\Management\module\PowerSupply\PowerSupplyWatcher.cs" />
+    <Compile Include="module\Management\module\PowerSupply\controller\PowerSupplyController.cs" />
+    <Compile Include="module\Management\module\PowerSupply\service\PowerSupplyService.cs" />
     <Compile Include="module\Management\module\Station\events\OnStationAbstraction.cs" />
     <Compile Include="module\Management\module\Station\events\OnUnableToRegisterStation.cs" />
     <Compile Include="module\Management\module\Station\events\OnStationUpdatedEvent.cs" />
@@ -184,6 +182,7 @@
     <EmbeddedResource Include="install\settings\Settings.json">
       <CustomToolNamespace>KTA_Visor_DSClient.install.settings.Settings.json</CustomToolNamespace>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\LocalSettings.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -207,7 +206,6 @@
   <ItemGroup>
     <Folder Include="kernel\CameraDevice\" />
     <Folder Include="module\Management\module\Camera\types\USBCameraDevice\interfaces\" />
-    <Folder Include="module\Management\module\PowerSupply\service\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

@@ -33,13 +33,21 @@ namespace Falcon_Protocol.wrapper
         /// <returns></returns>
         public bool Connect()
         {
-            byte idCode = new byte();
-            int[] iRet = new int[1];
+           try
+            {
+                byte idCode = new byte();
+                int[] iRet = new int[1];
 
-            FalconProtocolInteropService.Init_Device(ref idCode, iRet);
-            this.SyncDevTime();
+                FalconProtocolInteropService.Init_Device(ref idCode, iRet);
+                this.SyncDevTime();
 
-            return this.calcIRet(iRet);
+                return this.calcIRet(iRet);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
         }
 
         /// <summary>

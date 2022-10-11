@@ -65,7 +65,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="sPwd"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "Init_Device", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "Init_Device", CallingConvention = CallingConvention.Cdecl)]
         public static extern int Eylog_Login(ref int[] user_type, ref byte[] sPwd, int[] iRet);
 
 		/// <summary>
@@ -74,14 +74,14 @@ namespace Falcon_Protocol.interop
 		/// <param name="IDCode"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-        [DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "Init_Device", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("dll\\h22_4g_pc.dll", EntryPoint = "Init_Device", CallingConvention = CallingConvention.Cdecl)]
         public static extern int Init_Device(ref byte IDCode, int[] iRet);
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="iRet"></param>
-		[DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "UnInit_Device", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "UnInit_Device", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void UnInit_Device(int[] iRet);
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="sPwd"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "SetMSDC", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "SetMSDC", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetMSDC(ref byte[] sPwd, int[] iRet);
         
 		/// <summary>
@@ -100,7 +100,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="config_len"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-        [DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "Eylog_GetMenuConfig", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("dll\\h22_4g_pc.dll", EntryPoint = "Eylog_GetMenuConfig", CallingConvention = CallingConvention.Cdecl)]
         public static extern int Eylog_GetMenuConfig(ref MENU_CONFIG menu_conf, int config_len, int[] iRet);
 
 		/// <summary>
@@ -110,7 +110,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="config_len"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-        [DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "Eylog_SetMenuConfig", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("dll\\h22_4g_pc.dll", EntryPoint = "Eylog_SetMenuConfig", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int Eylog_SetMenuConfig(ref MENU_CONFIG menu_conf, int config_len, int[] iRet);
 
 
@@ -122,7 +122,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="sPwd"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "ReadDeviceResolution", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "ReadDeviceResolution", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ReadDeviceResolution(int[] Width, int[] Height, ref byte[] sPwd, int[] iRet);
     
 		/// <summary>
@@ -132,7 +132,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="sPwd"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "ReadDeviceBatteryDumpEnergy", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "ReadDeviceBatteryDumpEnergy", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ReadDeviceBatteryDumpEnergy(ref int Battery, ref byte[] sPwd, int[] iRet);
 
 		/// <summary>
@@ -141,7 +141,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="sPwd"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", EntryPoint = "SyncDevTime", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "SyncDevTime", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int SyncDevTime(ref byte[] sPwd, int[] iRet);
 
 		/// <summary>
@@ -151,7 +151,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="iRet"></param>
 		/// <param name="Usb_TotalNum"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Init_Device_UsbTotal")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Init_Device_UsbTotal")]
 		public static extern int Init_Device_UsbTotal(byte[] IDCode, int[] iRet, int[] Usb_TotalNum);
 
 		/// <summary>
@@ -162,7 +162,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="iRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Eylog_SetMenuConfig_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Eylog_SetMenuConfig_ByIndex")]
 		public static extern int Eylog_SetMenuConfig_ByIndex(ref MENU_CONFIG menu_conf, int config_len, int[] iRet, int usb_index);
 
 		/// <summary>
@@ -173,7 +173,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="iRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Eylog_GetMenuConfig_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Eylog_GetMenuConfig_ByIndex")]
 		public static extern int Eylog_GetMenuConfig_ByIndex(ref MENU_CONFIG menu_conf, int config_len, int[] iRet, int usb_index);
 
 		/// <summary>
@@ -184,7 +184,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="iRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "GetZFYInfo_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "GetZFYInfo_ByIndex")]
 		public static extern int GetZFYInfo_ByIndex(ref ZFY_INFO info, byte[] sPwd, int[] iRet, int usb_index);
 
 		/// <summary>
@@ -195,7 +195,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="iRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
 		public static extern int WriteZFYInfo_ByIndex(ref ZFY_INFO info, byte[] sPwd, int[] iRet, int usb_index);
 
 		/// <summary>
@@ -205,7 +205,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="IRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
 		public static extern int Eylog_FormatTFCard_ByIndex(byte[] sPwd, int[] IRet, int usb_index);
 
 		/// <summary>
@@ -215,7 +215,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="IRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
 		public static extern int SetMSDC_ByIndex(byte[] sPwd, int[] IRet, int usb_index);
 
 		/// <summary>
@@ -226,7 +226,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="IRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
 		public static extern int Eylog_SN_Info_ByIndex(int r_w, byte[] sn, int[] IRet, int usb_index);
 
 		/// <summary>
@@ -235,7 +235,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="IRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
 		public static extern int Eylog_FactoryDefault_ByIndex(int[] IRet, int usb_index);
 
 		/// <summary>
@@ -246,7 +246,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="IRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("DLL\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
 		public static extern int ReadDeviceBatteryDumpEnergy_ByIndex(int[] Battery,ref  byte[] sPwd, int[] IRet, int usb_index);
 
 	}

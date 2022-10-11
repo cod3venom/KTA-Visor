@@ -95,6 +95,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.COMConnector
 
             byte[] msg = Encoding.ASCII.GetBytes(message);
             this.client.Write(msg, 0, msg.Length);
+            this.logger.info(string.Format("Sending command OVER {0} : {1}", this.portName, message));
 
             Thread.Sleep(1);
             return this;

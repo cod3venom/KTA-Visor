@@ -46,6 +46,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
                   false
             ));
 
+            if (client == null)
+                return;
+
             client.Emit(new Request(
                "response://cameras/refresh"
            ));

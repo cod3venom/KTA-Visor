@@ -52,17 +52,18 @@
     <Compile Include="module\camera\entity\CameraSettingsEntity.cs" />
     <Compile Include="module\camera\repository\CameraSettingsRepository.cs" />
     <Compile Include="module\camera\service\CameraSettingsService.cs" />
-    <Compile Include="module\fileHistory\dto\request\EditFileHistoryRequestTObject.cs" />
-    <Compile Include="module\fileHistory\dto\request\CreateFileHistoryRequestTObject.cs" />
-    <Compile Include="module\fileHistory\entity\FileHistoryEntity.cs" />
-    <Compile Include="module\fileHistory\repository\FileHistoryFileWatcherRepository.cs" />
-    <Compile Include="module\fileHistory\repository\FileHistoryRepository.cs" />
-    <Compile Include="module\fileHistory\service\FileHistoryFileWatcherService.cs" />
-    <Compile Include="module\fileHistory\service\FileHistoryService.cs" />
+    <Compile Include="module\fileManager\dto\request\EditFileHistoryRequestTObject.cs" />
+    <Compile Include="module\fileManager\dto\request\CreateFileHistoryRequestTObject.cs" />
+    <Compile Include="module\fileManager\entity\FileItemEntity.cs" />
+    <Compile Include="module\fileManager\repository\FileManagerWatcherRepository.cs" />
+    <Compile Include="module\fileManager\repository\FileManagerRepository.cs" />
+    <Compile Include="module\fileManager\service\FileManagerWatcherService.cs" />
+    <Compile Include="module\fileManager\service\FileManagerService.cs" />
     <Compile Include="module\logger\dto\GetLogsInRangeRequestTObject.cs" />
     <Compile Include="module\logger\entity\LoggerEntity.cs" />
     <Compile Include="module\logger\repository\LoggerRepository.cs" />
     <Compile Include="module\logger\service\LoggerService.cs" />
+    <Compile Include="module\user\abstraction\UserDataAbstraction.cs" />
     <Compile Include="module\user\dto\request\UserPasswordRecoveryChangePasswordRequestTObject.cs" />
     <Compile Include="module\user\dto\request\VerifyUserPasswordRecoveryCodeRequestTObject.cs" />
     <Compile Include="module\user\dto\request\ForgotPasswordRequestTObject.cs" />
@@ -123,11 +124,12 @@
     <Folder Include="module\card\entity\" />
     <Folder Include="module\card\repository\" />
     <Folder Include="module\card\service\" />
-    <Folder Include="module\fileHistory\command\" />
+    <Folder Include="module\fileManager\command\" />
     <Folder Include="module\officer\command\" />
     <Folder Include="module\station\command\" />
     <Folder Include="module\user\command\" />
     <Folder Include="Shared\Component\" />
+    <Folder Include="Shared\interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

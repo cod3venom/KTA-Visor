@@ -19,10 +19,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
 
         private readonly CameraDeviceSettingsService cameraDeviceSettingsService;
 
+        private readonly CameraPowerService cameraPowerService;
         public CameraController()
         {
             this.cameraService = new CameraService();
             this.cameraDeviceSettingsService = new CameraDeviceSettingsService();
+            this.cameraPowerService = new CameraPowerService();
         }
 
         public void Watch(Request request)
@@ -30,11 +32,15 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
             switch(request.Endpoint)
             {
                 case "command://cameras/all":
-                    this.getAllCameras(request);
+                    this.onGetAllCameras(request);
                     break;
 
                 case "command://cameras/settings/change":
-                    this.changeSettings(request);
+                    this.onChangeSettings(request);
+                    break;
+
+                case "command://cameras/card/blink":
+                    this.onBlinkCamera(request);
                     break;
             }
         }
@@ -44,7 +50,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
         /// 
         /// </summary>
         /// <param name="request"></param>
-        private void getAllCameras(Request request)
+        private void onGetAllCameras(Request request)
         {
             CameraEntity entity = new CameraEntity();
             entity.datas = new List<CameraEntity.Camera>();
@@ -60,17 +66,20 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
             ));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        private async void changeSettings(Request request)
+        private async void onChangeSettings(Request request)
         {
             string json = JsonConvert.SerializeObject(request.Body).ToString();
             CameraEntity.Camera cameraEntityFromTunnel = JsonConvert.DeserializeObject<CameraEntity.Camera>(json);
             CameraEntity camera = await this.cameraService.findByCustomId(cameraEntityFromTunnel.cameraCustomId);
 
             this.cameraDeviceSettingsService.SetMenuConfig(camera.data);
+        }
+
+        private void onBlinkCamera(Request request)
+        {
+            string json = JsonConvert.SerializeObject(request.Body).ToString();
+            CameraEntity cameraEntityFromTunnel = JsonConvert.DeserializeObject<CameraEntity>(json);
+            this.cameraPowerService.Blink(cameraEntityFromTunnel);
         }
 
     }

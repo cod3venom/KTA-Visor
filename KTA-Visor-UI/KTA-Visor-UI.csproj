@@ -33,6 +33,10 @@
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MetroFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,20 +67,15 @@
     <Compile Include="component\basic\button\SecondaryButton.Designer.cs">
       <DependentUpon>SecondaryButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="component\basic\progressbar\FullScreenHorizontalLoader.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\basic\progressbar\FullScreenHorizontalLoader.Designer.cs">
-      <DependentUpon>FullScreenHorizontalLoader.cs</DependentUpon>
-    </Compile>
-    <Compile Include="component\basic\progressbar\FullScreenCircleLoader.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\basic\progressbar\FullScreenCircleLoader.Designer.cs">
-      <DependentUpon>FullScreenCircleLoader.cs</DependentUpon>
-    </Compile>
+    <Compile Include="component\basic\progressbar\events\OnProgressChangedEvent.cs" />
     <Compile Include="component\basic\progressbar\ImprovedProgressBar.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="component\basic\progressbar\ImprovedProgressBarWithPercentage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\progressbar\ImprovedProgressBarWithPercentage.Designer.cs">
+      <DependentUpon>ImprovedProgressBarWithPercentage.cs</DependentUpon>
     </Compile>
     <Compile Include="component\basic\separator\VerticalSeparator.cs">
       <SubType>UserControl</SubType>
@@ -243,11 +242,8 @@
     <EmbeddedResource Include="component\basic\button\SecondaryButton.resx">
       <DependentUpon>SecondaryButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="component\basic\progressbar\FullScreenHorizontalLoader.resx">
-      <DependentUpon>FullScreenHorizontalLoader.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="component\basic\progressbar\FullScreenCircleLoader.resx">
-      <DependentUpon>FullScreenCircleLoader.cs</DependentUpon>
+    <EmbeddedResource Include="component\basic\progressbar\ImprovedProgressBarWithPercentage.resx">
+      <DependentUpon>ImprovedProgressBarWithPercentage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\basic\separator\VerticalSeparator.resx">
       <DependentUpon>VerticalSeparator.cs</DependentUpon>
@@ -322,6 +318,7 @@
     <Folder Include="component\custom\Security\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\hand_cursor.png" />
   </ItemGroup>
   <ItemGroup>

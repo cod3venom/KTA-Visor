@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AFBB0CB8-F29A-4B20-8DC7-C2C5A4A1EB28}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>KTA_Visor</RootNamespace>
     <AssemblyName>KTA-Visor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -36,7 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>KTA_Visor.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>KTA-Visor_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Avalonia, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
@@ -95,9 +98,6 @@
       <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.OpenGL.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Avalonia.Remote.Protocol, Version=0.10.15.0, Culture=neutral, PublicKeyToken=7ecde292c616a9f3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Avalonia.Remote.Protocol.0.10.15\lib\netstandard2.0\Avalonia.Remote.Protocol.dll</HintPath>
-    </Reference>
     <Reference Include="Avalonia.Styling, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
       <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.Styling.dll</HintPath>
       <Private>True</Private>
@@ -116,12 +116,6 @@
     </Reference>
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
-    </Reference>
-    <Reference Include="CircularProgressBar, Version=2.8.0.16, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
-      <HintPath>..\packages\CircularProgressBar.2.8.0.16\lib\net40\CircularProgressBar.dll</HintPath>
-    </Reference>
-    <Reference Include="Device.Net, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Device.Net.4.2.1\lib\net45\Device.Net.dll</HintPath>
     </Reference>
     <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
@@ -221,9 +215,6 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WinFormAnimation, Version=1.6.0.4, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
-      <HintPath>..\packages\WinFormAnimation.1.6.0.4\lib\net40\WinFormAnimation.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="component\basic\button\ImageButton.cs">
@@ -328,7 +319,7 @@
     <Compile Include="kernel\module\HttpClientHelper\events\HttpUnauthorizedInterceptorEvent.cs" />
     <Compile Include="kernel\module\HttpClientHelper\HttpClientHelper.cs" />
     <Compile Include="kernel\module\HttpClientHelper\interfaces\IHttpClient.cs" />
-    <Compile Include="kernel\module\VirtualRFID\VirtualRFID.cs" />
+    <Compile Include="kernel\module\ThreadPool\ThreadPoolManager.cs" />
     <Compile Include="kernel\sharedKernel\bootstrap\Bootstrap.cs" />
     <Compile Include="kernel\sharedKernel\bootstrap\watcher\Watcher.cs" />
     <Compile Include="kernel\sharedKernel\bootstrap\watcher\watchers\UnauthorizedWatcher.cs" />
@@ -385,16 +376,16 @@
     </Compile>
     <Compile Include="module\Managemnt\module\cardReader\CardReader.cs" />
     <Compile Include="module\Managemnt\module\cardReader\events\OnCardReadedEvent.cs" />
-    <Compile Include="module\Managemnt\module\fileHistory\view\FileHistoryViewPanel\FileHistoryViewPanel.cs">
+    <Compile Include="module\Managemnt\module\fileManager\view\FileManagerViewPanel\FileManagerViewPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\fileHistory\view\FileHistoryViewPanel\FileHistoryViewPanel.Designer.cs">
-      <DependentUpon>FileHistoryViewPanel.cs</DependentUpon>
+    <Compile Include="module\Managemnt\module\fileManager\view\FileManagerViewPanel\FileManagerViewPanel.Designer.cs">
+      <DependentUpon>FileManagerViewPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\fileHistory\view\form\FileHistoryRecordForm.cs">
+    <Compile Include="module\Managemnt\module\fileManager\view\form\FileHistoryRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\fileHistory\view\form\FileHistoryRecordForm.Designer.cs">
+    <Compile Include="module\Managemnt\module\fileManager\view\form\FileHistoryRecordForm.Designer.cs">
       <DependentUpon>FileHistoryRecordForm.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\logs\view\LogsView.cs">
@@ -405,6 +396,7 @@
     </Compile>
     <Compile Include="module\Managemnt\module\station\command\DisplayCamerasOfSelectedStationCommand.cs" />
     <Compile Include="module\Managemnt\module\station\command\DisplayFetchedStationInTableCommand.cs" />
+    <Compile Include="module\Managemnt\module\station\command\HandleStationContextMenuClickEventCommand.cs" />
     <Compile Include="module\Managemnt\module\station\command\RestartAllStationsConnectionsCommand.cs" />
     <Compile Include="module\Managemnt\module\station\components\ClientsList\ClientsList.cs">
       <SubType>UserControl</SubType>
@@ -444,6 +436,12 @@
     </Compile>
     <Compile Include="module\Managemnt\sub-window\TunnelWindow.Designer.cs">
       <DependentUpon>TunnelWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\sub-window\UserProfileWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\sub-window\UserProfileWindow.Designer.cs">
+      <DependentUpon>UserProfileWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\sub-window\VersionWindow.cs">
       <SubType>Form</SubType>
@@ -538,10 +536,10 @@
     <EmbeddedResource Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.resx">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\fileHistory\view\FileHistoryViewPanel\FileHistoryViewPanel.resx">
-      <DependentUpon>FileHistoryViewPanel.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\fileManager\view\FileManagerViewPanel\FileManagerViewPanel.resx">
+      <DependentUpon>FileManagerViewPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\fileHistory\view\form\FileHistoryRecordForm.resx">
+    <EmbeddedResource Include="module\Managemnt\module\fileManager\view\form\FileHistoryRecordForm.resx">
       <DependentUpon>FileHistoryRecordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\logs\view\LogsView.resx">
@@ -564,6 +562,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\sub-window\TunnelWindow.resx">
       <DependentUpon>TunnelWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\sub-window\UserProfileWindow.resx">
+      <DependentUpon>UserProfileWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\sub-window\VersionWindow.resx">
       <DependentUpon>VersionWindow.cs</DependentUpon>
@@ -689,6 +690,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\notification.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="falcon-user-128x128.ico" />
+    <Content Include="KTA-Visor_icon.ico" />
+    <Content Include="policeBadge.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />

@@ -31,11 +31,16 @@ namespace KTA_Visor.module.Managemnt.view
             this.settings = new Settings();
         }
 
-        private void KernelLoader_Load(object sender, EventArgs e)
+        private async void KernelLoader_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.Gray;
             this.TransparencyKey = Color.Gray;
             this.improvedProgressBar1.OnProgressEnd += onProgressEnd;
+
+            this.improvedProgressBar1.Start();
+            this.installer.FullInstall();
+            await this.initializeKTAVISORAPISDK();
+            await this.initializeServerTunnel();
         }
 
         
@@ -45,19 +50,9 @@ namespace KTA_Visor.module.Managemnt.view
             base.OnPaintBackground(e);
             e.Graphics.FillRectangle(Brushes.LimeGreen, e.ClipRectangle);
         }
+ 
 
-        protected override async void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-
-            this.improvedProgressBar1.Start();
-            this.installer.FullInstall();
-            await this.initializeKTAVISORAPISDK();
-            await this.initializeServerTunnel();
-            await Task.Delay(1000);
-        }
-
-        private void onProgressEnd(object sender, EventArgs e)
+        private async void onProgressEnd(object sender, EventArgs e)
         {
             this.Hide();
 

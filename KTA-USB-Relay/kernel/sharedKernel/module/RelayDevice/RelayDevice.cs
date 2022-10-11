@@ -121,9 +121,9 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         {
             foreach (int port in this.Ports)
             {
-                this.sendCommand(String.Format("S {0}", port.ToString()));
+                this.sendCommand(String.Format("C {0}", port.ToString()));
+                Thread.Sleep(1000);
             }
-            Thread.SpinWait(3000);
             this.OnTurnedOnAll?.Invoke(this, EventArgs.Empty);
         }
         
@@ -135,7 +135,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         {
             foreach(int port in this.Ports)
             {
-                this.sendCommand(String.Format("C {0}", port.ToString()));
+                this.sendCommand(String.Format("S {0}", port.ToString()));
             }
 
             Thread.SpinWait(3000);
@@ -148,7 +148,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         /// <param name="portNumber"></param>
         public void turnOnByPort(int portNumber)
         {
-            this.sendCommand(String.Format("S {0}", portNumber.ToString()));
+            this.sendCommand(String.Format("C {0}", portNumber.ToString()));
             this.OnTurnedOnSingle?.Invoke(this, EventArgs.Empty);
 
         }
@@ -159,7 +159,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
         /// <param name="portNumber"></param>
         public void turnOffByPort(int portNumber)
         {
-            this.sendCommand(String.Format("C {0}", portNumber.ToString()));
+            this.sendCommand(String.Format("S {0}", portNumber.ToString()));
             this.OnTurnedOffSingle?.Invoke(this, EventArgs.Empty);
         }
 

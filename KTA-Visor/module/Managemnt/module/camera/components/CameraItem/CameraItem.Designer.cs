@@ -33,29 +33,30 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.batteryLbl = new System.Windows.Forms.Label();
+            this.statusIcon = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cameraIndexLbl = new System.Windows.Forms.Label();
+            this.settingsBtn = new MetroFramework.Controls.MetroButton();
             this.stationIdLbl = new System.Windows.Forms.Label();
             this.badgeIdLbl = new System.Windows.Forms.Label();
             this.cameraIdLbl = new System.Windows.Forms.Label();
             this.stationIdTextLbl = new System.Windows.Forms.Label();
             this.cameraIdTextLbl = new System.Windows.Forms.Label();
             this.badgeIdTextLbl = new System.Windows.Forms.Label();
-            this.openBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.cameraItemMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.systemPlikówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyFilesToUSBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyFilesToDVDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.targetDriveDevicePathDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.nasStorageFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.cameraIndexLbl = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).BeginInit();
             this.panel3.SuspendLayout();
             this.cameraItemMenuStrip.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -84,8 +85,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.batteryLbl);
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -93,44 +93,56 @@
             this.panel1.Size = new System.Drawing.Size(265, 27);
             this.panel1.TabIndex = 3;
             // 
-            // pictureBox1
+            // statusIcon
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(207, 6);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(21, 17);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // batteryLbl
-            // 
-            this.batteryLbl.AutoSize = true;
-            this.batteryLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.batteryLbl.Location = new System.Drawing.Point(231, 8);
-            this.batteryLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.batteryLbl.Name = "batteryLbl";
-            this.batteryLbl.Size = new System.Drawing.Size(28, 14);
-            this.batteryLbl.TabIndex = 0;
-            this.batteryLbl.Text = "10%";
+            this.statusIcon.Image = global::KTA_Visor.Properties.Resources.green_circle;
+            this.statusIcon.Location = new System.Drawing.Point(9, 3);
+            this.statusIcon.Margin = new System.Windows.Forms.Padding(2);
+            this.statusIcon.Name = "statusIcon";
+            this.statusIcon.Size = new System.Drawing.Size(21, 17);
+            this.statusIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.statusIcon.TabIndex = 1;
+            this.statusIcon.TabStop = false;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.cameraIndexLbl);
+            this.panel3.Controls.Add(this.settingsBtn);
             this.panel3.Controls.Add(this.stationIdLbl);
             this.panel3.Controls.Add(this.badgeIdLbl);
             this.panel3.Controls.Add(this.cameraIdLbl);
             this.panel3.Controls.Add(this.stationIdTextLbl);
             this.panel3.Controls.Add(this.cameraIdTextLbl);
             this.panel3.Controls.Add(this.badgeIdTextLbl);
-            this.panel3.Controls.Add(this.openBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 125);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(265, 135);
             this.panel3.TabIndex = 5;
+            // 
+            // cameraIndexLbl
+            // 
+            this.cameraIndexLbl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cameraIndexLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraIndexLbl.Location = new System.Drawing.Point(248, 0);
+            this.cameraIndexLbl.Name = "cameraIndexLbl";
+            this.cameraIndexLbl.Size = new System.Drawing.Size(17, 112);
+            this.cameraIndexLbl.TabIndex = 12;
+            this.cameraIndexLbl.Text = "-1";
+            this.cameraIndexLbl.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // settingsBtn
+            // 
+            this.settingsBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.settingsBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.settingsBtn.Location = new System.Drawing.Point(0, 112);
+            this.settingsBtn.Name = "settingsBtn";
+            this.settingsBtn.Size = new System.Drawing.Size(265, 23);
+            this.settingsBtn.TabIndex = 13;
+            this.settingsBtn.Text = "Ustawienia";
+            this.settingsBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.settingsBtn.UseSelectable = true;
             // 
             // stationIdLbl
             // 
@@ -192,42 +204,6 @@
             this.badgeIdTextLbl.TabIndex = 5;
             this.badgeIdTextLbl.Text = "NR Odznaki: ";
             // 
-            // openBtn
-            // 
-            this.openBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.openBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.openBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.openBtn.BorderRadius = 0;
-            this.openBtn.ButtonText = "Otwórz";
-            this.openBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.openBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.openBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.openBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(84)))), ((int)(((byte)(89)))));
-            this.openBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.openBtn.Iconimage = null;
-            this.openBtn.Iconimage_right = null;
-            this.openBtn.Iconimage_right_Selected = null;
-            this.openBtn.Iconimage_Selected = null;
-            this.openBtn.IconMarginLeft = 0;
-            this.openBtn.IconMarginRight = 0;
-            this.openBtn.IconRightVisible = true;
-            this.openBtn.IconRightZoom = 0D;
-            this.openBtn.IconVisible = true;
-            this.openBtn.IconZoom = 90D;
-            this.openBtn.IsTab = false;
-            this.openBtn.Location = new System.Drawing.Point(0, 114);
-            this.openBtn.Name = "openBtn";
-            this.openBtn.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.openBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.openBtn.OnHoverTextColor = System.Drawing.Color.White;
-            this.openBtn.selected = false;
-            this.openBtn.Size = new System.Drawing.Size(265, 21);
-            this.openBtn.TabIndex = 4;
-            this.openBtn.Text = "Otwórz";
-            this.openBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.openBtn.Textcolor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(84)))), ((int)(((byte)(89)))));
-            this.openBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // 
             // cameraItemMenuStrip
             // 
             this.cameraItemMenuStrip.BackColor = System.Drawing.Color.Silver;
@@ -265,16 +241,14 @@
             this.nasStorageFileDialog.FileName = "Wybierz pliki które chcesz skopiować";
             this.nasStorageFileDialog.Multiselect = true;
             // 
-            // cameraIndexLbl
+            // panel4
             // 
-            this.cameraIndexLbl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cameraIndexLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cameraIndexLbl.Location = new System.Drawing.Point(248, 0);
-            this.cameraIndexLbl.Name = "cameraIndexLbl";
-            this.cameraIndexLbl.Size = new System.Drawing.Size(17, 114);
-            this.cameraIndexLbl.TabIndex = 12;
-            this.cameraIndexLbl.Text = "-1";
-            this.cameraIndexLbl.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.panel4.Controls.Add(this.statusIcon);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(228, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(37, 27);
+            this.panel4.TabIndex = 2;
             // 
             // CameraItem
             // 
@@ -292,11 +266,11 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.cameraItemMenuStrip.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -305,10 +279,8 @@
 
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label batteryLbl;
+        private System.Windows.Forms.PictureBox statusIcon;
         private System.Windows.Forms.Panel panel3;
-        private Bunifu.Framework.UI.BunifuFlatButton openBtn;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.ContextMenuStrip cameraItemMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem systemPlikówToolStripMenuItem;
@@ -323,5 +295,7 @@
         private System.Windows.Forms.Label cameraIdTextLbl;
         private System.Windows.Forms.Label badgeIdTextLbl;
         private System.Windows.Forms.Label cameraIndexLbl;
+        private MetroFramework.Controls.MetroButton settingsBtn;
+        private System.Windows.Forms.Panel panel4;
     }
 }

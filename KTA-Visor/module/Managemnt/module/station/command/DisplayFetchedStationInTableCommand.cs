@@ -26,20 +26,22 @@ namespace KTA_Visor.module.Managemnt.module.station.command
                 return;
             
             Globals.STATIONS_LIST.Clear();
-            table.DataGridView.Rows.Clear();
 
-            foreach(StationEntity.Station stationData in station?.datas)
+            table.Invoke((MethodInvoker)delegate
             {
-                if (!stationData.active)
-                    continue;
-
+                table.DataGridView.Rows.Clear();
+            });
+            foreach (StationEntity.Station stationData in station?.datas)
+            {
+                
                 table.Invoke((MethodInvoker)delegate
                 {
+                    bool active = Globals.STATIONS_LIST.Find((stationClient) => stationClient.stationIp == stationData.stationIp) != null;
                     table.DataGridView.Rows.Add(
                        stationData?.stationId,
                        stationData.stationIp,
                        stationData.stationIp,
-                       stationData.active ? "Tak" : "Nie",
+                       active ? "Tak" : "Nie",
                        stationData.updatedAt,
                        stationData.createdAt
                    );

@@ -145,11 +145,6 @@ namespace KTALogger
 
             try
             {
-                using (StreamWriter writer = new StreamWriter(@"C:\Users\venom\source\repos\KTA-Visor\KTA-Visor-FileStorage-Watcher\bin\Debug\logs\log.txt"))
-                {
-                    writer.WriteLine(this.loggerFile.FullName);
-                }
-
                 using (StreamWriter sw = this.loggerFile.AppendText())
                 {
                     sw.WriteLine(fullText);
@@ -162,10 +157,7 @@ namespace KTALogger
                 }
             }
             catch(Exception ex) {
-                using (StreamWriter writer = new StreamWriter(@"C:\Users\venom\source\repos\KTA-Visor\KTA-Visor-FileStorage-Watcher\bin\Debug\logs\log.txt"))
-                {
-                    writer.WriteLine(ex.ToString());
-                }
+                Console.WriteLine(ex.Message);
             }
         }
     }

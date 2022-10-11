@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUpView));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.firstNameLbl = new System.Windows.Forms.Label();
             this.lastNameLbl = new System.Windows.Forms.Label();
             this.emailLbl = new System.Windows.Forms.Label();
             this.passwordLbl = new System.Windows.Forms.Label();
             this.signupPanel = new System.Windows.Forms.Panel();
+            this.signUpBtn = new MetroFramework.Controls.MetroButton();
+            this.firstNameTxt = new MetroFramework.Controls.MetroTextBox();
+            this.passwordTxt = new MetroFramework.Controls.MetroTextBox();
             this.signInLink = new System.Windows.Forms.Label();
+            this.emailTxt = new MetroFramework.Controls.MetroTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.signUpBtn = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.passwordTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
-            this.emailTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
-            this.lastNameText = new Bunifu.Framework.UI.BunifuMetroTextbox();
-            this.firstNameTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.lastNameText = new MetroFramework.Controls.MetroTextBox();
             this.topBar1 = new KTA_Visor_UI.component.basic.topbar.TopBar();
             this.signupPanel.SuspendLayout();
             this.SuspendLayout();
@@ -104,24 +105,95 @@
             this.signupPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.signupPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.signupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.signupPanel.Controls.Add(this.signInLink);
-            this.signupPanel.Controls.Add(this.label1);
             this.signupPanel.Controls.Add(this.signUpBtn);
-            this.signupPanel.Controls.Add(this.passwordTxt);
-            this.signupPanel.Controls.Add(this.emailTxt);
-            this.signupPanel.Controls.Add(this.lastNameText);
             this.signupPanel.Controls.Add(this.firstNameTxt);
+            this.signupPanel.Controls.Add(this.passwordTxt);
+            this.signupPanel.Controls.Add(this.signInLink);
+            this.signupPanel.Controls.Add(this.emailTxt);
+            this.signupPanel.Controls.Add(this.label1);
+            this.signupPanel.Controls.Add(this.lastNameText);
             this.signupPanel.Controls.Add(this.topBar1);
             this.signupPanel.Controls.Add(this.lastNameLbl);
             this.signupPanel.Controls.Add(this.passwordLbl);
             this.signupPanel.Controls.Add(this.firstNameLbl);
             this.signupPanel.Controls.Add(this.emailLbl);
-            this.signupPanel.Location = new System.Drawing.Point(308, 245);
-            this.signupPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.signupPanel.Location = new System.Drawing.Point(334, 140);
+            this.signupPanel.Margin = new System.Windows.Forms.Padding(2);
             this.signupPanel.MaximumSize = new System.Drawing.Size(331, 414);
             this.signupPanel.Name = "signupPanel";
             this.signupPanel.Size = new System.Drawing.Size(331, 414);
             this.signupPanel.TabIndex = 12;
+            // 
+            // signUpBtn
+            // 
+            this.signUpBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.signUpBtn.Location = new System.Drawing.Point(55, 328);
+            this.signUpBtn.Name = "signUpBtn";
+            this.signUpBtn.Size = new System.Drawing.Size(224, 23);
+            this.signUpBtn.TabIndex = 27;
+            this.signUpBtn.Text = "Zarejestruj się";
+            this.signUpBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.signUpBtn.UseSelectable = true;
+            // 
+            // firstNameTxt
+            // 
+            // 
+            // 
+            // 
+            this.firstNameTxt.CustomButton.Image = null;
+            this.firstNameTxt.CustomButton.Location = new System.Drawing.Point(205, 1);
+            this.firstNameTxt.CustomButton.Name = "";
+            this.firstNameTxt.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.firstNameTxt.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.firstNameTxt.CustomButton.TabIndex = 1;
+            this.firstNameTxt.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.firstNameTxt.CustomButton.UseSelectable = true;
+            this.firstNameTxt.CustomButton.Visible = false;
+            this.firstNameTxt.Lines = new string[0];
+            this.firstNameTxt.Location = new System.Drawing.Point(52, 70);
+            this.firstNameTxt.MaxLength = 32767;
+            this.firstNameTxt.Name = "firstNameTxt";
+            this.firstNameTxt.PasswordChar = '\0';
+            this.firstNameTxt.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.firstNameTxt.SelectedText = "";
+            this.firstNameTxt.SelectionLength = 0;
+            this.firstNameTxt.SelectionStart = 0;
+            this.firstNameTxt.ShortcutsEnabled = true;
+            this.firstNameTxt.Size = new System.Drawing.Size(227, 23);
+            this.firstNameTxt.TabIndex = 23;
+            this.firstNameTxt.UseSelectable = true;
+            this.firstNameTxt.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.firstNameTxt.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // passwordTxt
+            // 
+            // 
+            // 
+            // 
+            this.passwordTxt.CustomButton.Image = null;
+            this.passwordTxt.CustomButton.Location = new System.Drawing.Point(205, 1);
+            this.passwordTxt.CustomButton.Name = "";
+            this.passwordTxt.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.passwordTxt.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.passwordTxt.CustomButton.TabIndex = 1;
+            this.passwordTxt.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.passwordTxt.CustomButton.UseSelectable = true;
+            this.passwordTxt.CustomButton.Visible = false;
+            this.passwordTxt.Lines = new string[0];
+            this.passwordTxt.Location = new System.Drawing.Point(52, 273);
+            this.passwordTxt.MaxLength = 32767;
+            this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.PasswordChar = '\0';
+            this.passwordTxt.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.passwordTxt.SelectedText = "";
+            this.passwordTxt.SelectionLength = 0;
+            this.passwordTxt.SelectionStart = 0;
+            this.passwordTxt.ShortcutsEnabled = true;
+            this.passwordTxt.Size = new System.Drawing.Size(227, 23);
+            this.passwordTxt.TabIndex = 26;
+            this.passwordTxt.UseSelectable = true;
+            this.passwordTxt.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.passwordTxt.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // signInLink
             // 
@@ -131,12 +203,42 @@
             this.signInLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.signInLink.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signInLink.ForeColor = System.Drawing.Color.Gray;
-            this.signInLink.Location = new System.Drawing.Point(186, 375);
+            this.signInLink.Location = new System.Drawing.Point(211, 367);
             this.signInLink.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.signInLink.Name = "signInLink";
             this.signInLink.Size = new System.Drawing.Size(68, 15);
             this.signInLink.TabIndex = 19;
             this.signInLink.Text = "Zaloguj się";
+            // 
+            // emailTxt
+            // 
+            // 
+            // 
+            // 
+            this.emailTxt.CustomButton.Image = null;
+            this.emailTxt.CustomButton.Location = new System.Drawing.Point(205, 1);
+            this.emailTxt.CustomButton.Name = "";
+            this.emailTxt.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.emailTxt.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.emailTxt.CustomButton.TabIndex = 1;
+            this.emailTxt.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.emailTxt.CustomButton.UseSelectable = true;
+            this.emailTxt.CustomButton.Visible = false;
+            this.emailTxt.Lines = new string[0];
+            this.emailTxt.Location = new System.Drawing.Point(52, 204);
+            this.emailTxt.MaxLength = 32767;
+            this.emailTxt.Name = "emailTxt";
+            this.emailTxt.PasswordChar = '\0';
+            this.emailTxt.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.emailTxt.SelectedText = "";
+            this.emailTxt.SelectionLength = 0;
+            this.emailTxt.SelectionStart = 0;
+            this.emailTxt.ShortcutsEnabled = true;
+            this.emailTxt.Size = new System.Drawing.Size(227, 23);
+            this.emailTxt.TabIndex = 25;
+            this.emailTxt.UseSelectable = true;
+            this.emailTxt.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.emailTxt.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // label1
             // 
@@ -144,114 +246,42 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(70, 375);
+            this.label1.Location = new System.Drawing.Point(95, 367);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(126, 15);
             this.label1.TabIndex = 18;
             this.label1.Text = "Posiadasz już konto?";
             // 
-            // signUpBtn
-            // 
-            this.signUpBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.signUpBtn.BackColor = System.Drawing.Color.Gray;
-            this.signUpBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.signUpBtn.BorderRadius = 0;
-            this.signUpBtn.ButtonText = "Rejestracja";
-            this.signUpBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.signUpBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.signUpBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.signUpBtn.Iconimage = null;
-            this.signUpBtn.Iconimage_right = null;
-            this.signUpBtn.Iconimage_right_Selected = null;
-            this.signUpBtn.Iconimage_Selected = null;
-            this.signUpBtn.IconMarginLeft = 0;
-            this.signUpBtn.IconMarginRight = 0;
-            this.signUpBtn.IconRightVisible = true;
-            this.signUpBtn.IconRightZoom = 0D;
-            this.signUpBtn.IconVisible = true;
-            this.signUpBtn.IconZoom = 90D;
-            this.signUpBtn.IsTab = false;
-            this.signUpBtn.Location = new System.Drawing.Point(52, 329);
-            this.signUpBtn.Name = "signUpBtn";
-            this.signUpBtn.Normalcolor = System.Drawing.Color.Gray;
-            this.signUpBtn.OnHovercolor = System.Drawing.Color.Silver;
-            this.signUpBtn.OnHoverTextColor = System.Drawing.Color.White;
-            this.signUpBtn.selected = false;
-            this.signUpBtn.Size = new System.Drawing.Size(227, 30);
-            this.signUpBtn.TabIndex = 17;
-            this.signUpBtn.Text = "Rejestracja";
-            this.signUpBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.signUpBtn.Textcolor = System.Drawing.Color.White;
-            this.signUpBtn.TextFont = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // 
-            // passwordTxt
-            // 
-            this.passwordTxt.BorderColorFocused = System.Drawing.Color.White;
-            this.passwordTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.passwordTxt.BorderColorMouseHover = System.Drawing.Color.White;
-            this.passwordTxt.BorderThickness = 1;
-            this.passwordTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.passwordTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.passwordTxt.isPassword = true;
-            this.passwordTxt.Location = new System.Drawing.Point(52, 274);
-            this.passwordTxt.Name = "passwordTxt";
-            this.passwordTxt.Size = new System.Drawing.Size(227, 30);
-            this.passwordTxt.TabIndex = 16;
-            this.passwordTxt.Text = "admin123";
-            this.passwordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // emailTxt
-            // 
-            this.emailTxt.BorderColorFocused = System.Drawing.Color.White;
-            this.emailTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.emailTxt.BorderColorMouseHover = System.Drawing.Color.White;
-            this.emailTxt.BorderThickness = 1;
-            this.emailTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.emailTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.emailTxt.isPassword = false;
-            this.emailTxt.Location = new System.Drawing.Point(52, 205);
-            this.emailTxt.Name = "emailTxt";
-            this.emailTxt.Size = new System.Drawing.Size(227, 30);
-            this.emailTxt.TabIndex = 15;
-            this.emailTxt.Text = "levan@skillsforge.pl";
-            this.emailTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
             // lastNameText
             // 
-            this.lastNameText.BorderColorFocused = System.Drawing.Color.White;
-            this.lastNameText.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lastNameText.BorderColorMouseHover = System.Drawing.Color.White;
-            this.lastNameText.BorderThickness = 1;
-            this.lastNameText.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lastNameText.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastNameText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lastNameText.isPassword = false;
+            // 
+            // 
+            // 
+            this.lastNameText.CustomButton.Image = null;
+            this.lastNameText.CustomButton.Location = new System.Drawing.Point(205, 1);
+            this.lastNameText.CustomButton.Name = "";
+            this.lastNameText.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.lastNameText.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.lastNameText.CustomButton.TabIndex = 1;
+            this.lastNameText.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.lastNameText.CustomButton.UseSelectable = true;
+            this.lastNameText.CustomButton.Visible = false;
+            this.lastNameText.Lines = new string[0];
             this.lastNameText.Location = new System.Drawing.Point(52, 137);
+            this.lastNameText.MaxLength = 32767;
             this.lastNameText.Name = "lastNameText";
-            this.lastNameText.Size = new System.Drawing.Size(227, 30);
-            this.lastNameText.TabIndex = 14;
-            this.lastNameText.Text = "Ostrovski";
-            this.lastNameText.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // firstNameTxt
-            // 
-            this.firstNameTxt.BorderColorFocused = System.Drawing.Color.White;
-            this.firstNameTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.firstNameTxt.BorderColorMouseHover = System.Drawing.Color.White;
-            this.firstNameTxt.BorderThickness = 1;
-            this.firstNameTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.firstNameTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.firstNameTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.firstNameTxt.isPassword = false;
-            this.firstNameTxt.Location = new System.Drawing.Point(52, 71);
-            this.firstNameTxt.Name = "firstNameTxt";
-            this.firstNameTxt.Size = new System.Drawing.Size(227, 30);
-            this.firstNameTxt.TabIndex = 13;
-            this.firstNameTxt.Text = "Levan";
-            this.firstNameTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.lastNameText.PasswordChar = '\0';
+            this.lastNameText.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.lastNameText.SelectedText = "";
+            this.lastNameText.SelectionLength = 0;
+            this.lastNameText.SelectionStart = 0;
+            this.lastNameText.ShortcutsEnabled = true;
+            this.lastNameText.Size = new System.Drawing.Size(227, 23);
+            this.lastNameText.TabIndex = 24;
+            this.lastNameText.UseSelectable = true;
+            this.lastNameText.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lastNameText.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // topBar1
             // 
@@ -275,11 +305,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(990, 688);
             this.Controls.Add(this.signupPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SignUpView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SignUpView";
@@ -301,10 +333,10 @@
         private KTA_Visor_UI.component.basic.topbar.TopBar topBar1;
         private System.Windows.Forms.Label signInLink;
         private System.Windows.Forms.Label label1;
-        private Bunifu.Framework.UI.BunifuFlatButton signUpBtn;
-        private Bunifu.Framework.UI.BunifuMetroTextbox passwordTxt;
-        private Bunifu.Framework.UI.BunifuMetroTextbox emailTxt;
-        private Bunifu.Framework.UI.BunifuMetroTextbox lastNameText;
-        private Bunifu.Framework.UI.BunifuMetroTextbox firstNameTxt;
+        private MetroFramework.Controls.MetroTextBox passwordTxt;
+        private MetroFramework.Controls.MetroTextBox emailTxt;
+        private MetroFramework.Controls.MetroTextBox lastNameText;
+        private MetroFramework.Controls.MetroTextBox firstNameTxt;
+        private MetroFramework.Controls.MetroButton signUpBtn;
     }
 }

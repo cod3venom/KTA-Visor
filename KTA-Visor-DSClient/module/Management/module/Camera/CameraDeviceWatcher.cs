@@ -5,8 +5,7 @@ using KTA_Visor_DSClient.module.Management.module.Camera.Resource.Camera.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.factory;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
 using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
-using Sdk.Core.DevicesDetection;
-using Sdk.Core.Enums;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +14,11 @@ using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
 using KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem;
 using static Falcon_Protocol.interop.FalconProtocolInteropService;
+using Falcon_Protocol;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService
 {
-    public class CameraDeviceWatcher : Falcon_Protocol.FalconProtocol
+    public class CameraDeviceWatcher : FalconProtocol
     {
         public event EventHandler<CameraConnectedEvent> OnCameraConnectedEvent;
         public event EventHandler<CameraDisconnectedEvent> OnCameraDisconnectedEvent;
@@ -38,6 +38,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             this.deviceWatcher.OnDeviceConnected += OnDeviceConnected;
             this.deviceWatcher.OnDeviceDisconnected += OnDeviceDisconnected;
             this.deviceWatcher.OnDeviceConnectedOrDisconnected += onDeviceConnectedOrDisconnected;
+            this.Connect();
+            this.TryToMountDevice();
             this.deviceWatcher.LoadConnectedDevices();
         }
 
@@ -56,6 +58,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             if (!this.isValidCameraDevice(e.Drive)) return;
 
             this.Connect();
+            this.TryToMountDevice();
+
             this.currentDeviceInfo = this.GetDeviceInfo(Globals.CAMERAS_LIST.Count);
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive, Globals.USB_CAMERA_DEVICES_LIST.Count);
 
@@ -80,6 +84,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         {
             try
             {
+                this.Disconnect();
+                this.TryToMountDevice();
+
                 USBCameraDevice camera = Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Name == e.Drive);
 
           

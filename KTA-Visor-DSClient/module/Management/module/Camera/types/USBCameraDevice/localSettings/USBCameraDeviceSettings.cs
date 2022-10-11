@@ -1,117 +1,79 @@
 ﻿using KTA_Visor_DSClient.kernel.generator;
-using KTA_Visor_DSClient.kernel.helper;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice.localSettings
 {
     public class USBCameraDeviceSettings
     {
 
-        private readonly DriveInfo driveInfo;
-        private readonly FileInfo settingsFileOnDrive;
-        private readonly FileInfo IDFileOnDrive;
-
-        /// <summary>
-        /// 
-        /// </summary>
         protected string cameraId = "";
         protected string cameraBadgeId = "";
-        public LocalSettingsTObject Settings { get; set; }
+        private string settingsFilePath;
 
+        public LocalSettingsTObject Settings { get; set; }
+        private readonly DriveInfo driveInfo;
         public USBCameraDeviceSettings(DriveInfo drive)
         {
             this.driveInfo = drive;
-            this.settingsFileOnDrive = new FileInfo(driveInfo.Name + "LocalSettings.json");
-            this.IDFileOnDrive = new FileInfo(drive.Name + "ID.txt");
             this.Settings = new LocalSettingsTObject();
 
             this.initialize();
         }
-       
+
         private void initialize()
         {
-            this.calibrateFileExistence();
-            this.calibrateSettingsReader();
+            this.initializeSettingsFile();
         }
 
-
-        private FileInfo calibrateFileExistence()
+        private void initializeSettingsFile()
         {
-            if (!this.settingsFileOnDrive.Exists)
+            try
             {
-                this.Settings.ID = RandomData.RandomString(20);
-                this.Settings.BadgeId = RandomData.RandomString(15);
-                this.Settings.IsSelected = false;
-                this.SaveSettings();
-            }
-            else
-            {
-                using (StreamReader reader = new StreamReader(this.settingsFileOnDrive.FullName))
+                this.settingsFilePath = string.Format(@"{0}LocalSettings.json", this.driveInfo.Name);
+                if (!File.Exists(this.settingsFilePath))
                 {
-                    string settingsFromFile = reader.ReadToEnd();
-                    this.Settings = JsonConvert.DeserializeObject<LocalSettingsTObject>(settingsFromFile);
-                    reader.Close();
-                }
-            }
+                    File.WriteAllText(this.settingsFilePath, "");
+                    this.Settings.ID = RandomData.RandomString(20);
+                    this.Settings.BadgeId = RandomData.RandomString(15);
+                    this.Settings.IsSelected = false;
 
-            if (!this.IDFileOnDrive.Exists)
-            {
-                using(StreamWriter writer = new StreamWriter(this.IDFileOnDrive.FullName))
+                    this.SaveSettings();
+                }
+                else
                 {
-                    writer.WriteLine(this.Settings.ID);
-                    writer.WriteLine(this.Settings.BadgeId);
-                    writer.Close();
-
+                    this.loadSettings();
                 }
             }
-            else
+            catch(Exception ex)
             {
-                string idFileContent = File.ReadAllText(this.IDFileOnDrive.FullName).Split('\n')[0];
-                if (idFileContent != this.Settings.ID)
-                {
-                    using (StreamWriter writer = new StreamWriter(this.IDFileOnDrive.FullName))
-                    {
-                        writer.Write(string.Format("{0}\n {1}", this.Settings.ID, this.Settings.BadgeId));
-                        writer.Close();
-                    }
-                }
+                Console.WriteLine(ex);
             }
-            return this.settingsFileOnDrive;
         }
 
-        private LocalSettingsTObject calibrateSettingsReader()
+        private void loadSettings()
         {
-            if (!this.settingsFileOnDrive.Exists)
-            {
-                this.calibrateFileExistence();
+            if (!File.Exists(this.settingsFilePath)){
+                this.initializeSettingsFile();
             }
-            using(StreamReader reader = new StreamReader(this.settingsFileOnDrive.FullName))
-            {
-                string settingsFromFile = reader.ReadToEnd();
-                this.Settings = JsonConvert.DeserializeObject<LocalSettingsTObject>(settingsFromFile);
-                reader.Close();
-            }
-            return this.Settings;
+
+            string settingsFromFile = File.ReadAllText(this.settingsFilePath);
+            this.Settings = JsonConvert.DeserializeObject<LocalSettingsTObject>(settingsFromFile);
         }
 
         public void SaveSettings(LocalSettingsTObject settings = null)
         {
-            if (settings == null)
-            {
+            if (settings == null) {
                 settings = this.Settings;
             }
 
-          
-            string settingsContent = JsonConvert.SerializeObject(settings);
-            File.WriteAllText(this.settingsFileOnDrive.FullName, settingsContent);
-        }
+            if (!File.Exists(this.settingsFilePath)){
+                return;
+            }
 
-   
+            string settingsContent = JsonConvert.SerializeObject(settings);
+            File.WriteAllText(this.settingsFilePath, settingsContent);
+        }
     }
 }

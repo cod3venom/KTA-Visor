@@ -30,7 +30,7 @@ namespace KTAVisorAPISDK.module.auth.service
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> signUp(SignUpRequestTObject request) 
+        public async Task<SignUpEntity> signUp(SignUpRequestTObject request) 
         {
             if (request.email == null)
             {
@@ -65,7 +65,7 @@ namespace KTAVisorAPISDK.module.auth.service
 
                 SaveSessionCommand.Execute(signUp.data.token);
 
-                return (signUp.data.token != null);
+                return signUp;
 
             }
             catch(Exception)
@@ -85,12 +85,12 @@ namespace KTAVisorAPISDK.module.auth.service
         {
             if (request.email == null)
             {
-                throw new BadRequestException(nameof(request.email) + " can't be empty");
+                throw new BadRequestException(nameof(request.email) + " nie może być puste");
             }
 
             if (request.password == null)
             {
-                throw new BadRequestException(nameof(request.password) + " can't be empty");
+                throw new BadRequestException(nameof(request.password) + " nie może być puste");
             }
 
             try
@@ -101,7 +101,7 @@ namespace KTAVisorAPISDK.module.auth.service
 
                 if (sisgnIn == null || sisgnIn?.data?.jwt == null)
                 {
-                    throw new WrongCredentialsException("Unable to sign-in, please try later");
+                    throw new WrongCredentialsException("Nie udało się zalogować, wprowadz poprawne dane.");
                 }
 
                 SaveSessionCommand.Execute(sisgnIn.data.jwt);
@@ -111,7 +111,7 @@ namespace KTAVisorAPISDK.module.auth.service
             }
             catch (Exception)
             {
-                throw new Exception("Something went wrong");
+                throw new Exception("Coś poszło nie tak");
             }
 
         }

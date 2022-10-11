@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TunnelWindow));
             this.panel3 = new System.Windows.Forms.Panel();
-            this.stopBtn = new System.Windows.Forms.Button();
-            this.startBtn = new System.Windows.Forms.Button();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.closeBtn = new MetroFramework.Controls.MetroButton();
+            this.startBtn = new System.Windows.Forms.PictureBox();
+            this.stopBtn = new System.Windows.Forms.PictureBox();
             this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.startBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -44,65 +47,84 @@
             this.panel3.Controls.Add(this.stopBtn);
             this.panel3.Controls.Add(this.startBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Location = new System.Drawing.Point(23, 35);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(637, 37);
+            this.panel3.Size = new System.Drawing.Size(697, 40);
             this.panel3.TabIndex = 4;
-            // 
-            // stopBtn
-            // 
-            this.stopBtn.FlatAppearance.BorderSize = 0;
-            this.stopBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopBtn.Image = ((System.Drawing.Image)(resources.GetObject("stopBtn.Image")));
-            this.stopBtn.Location = new System.Drawing.Point(37, 9);
-            this.stopBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.stopBtn.Name = "stopBtn";
-            this.stopBtn.Size = new System.Drawing.Size(20, 20);
-            this.stopBtn.TabIndex = 5;
-            this.stopBtn.UseVisualStyleBackColor = true;
-            this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
-            // 
-            // startBtn
-            // 
-            this.startBtn.FlatAppearance.BorderSize = 0;
-            this.startBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.startBtn.Image = ((System.Drawing.Image)(resources.GetObject("startBtn.Image")));
-            this.startBtn.Location = new System.Drawing.Point(8, 9);
-            this.startBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.startBtn.Name = "startBtn";
-            this.startBtn.Size = new System.Drawing.Size(20, 20);
-            this.startBtn.TabIndex = 4;
-            this.startBtn.UseVisualStyleBackColor = true;
-            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
             // 
             // richTextBox
             // 
             this.richTextBox.BackColor = System.Drawing.Color.White;
             this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox.Location = new System.Drawing.Point(0, 37);
+            this.richTextBox.Location = new System.Drawing.Point(23, 75);
+            this.richTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(637, 315);
+            this.richTextBox.Size = new System.Drawing.Size(697, 257);
             this.richTextBox.TabIndex = 0;
             this.richTextBox.Text = "";
             // 
-            // bunifuElipse1
+            // panel1
             // 
-            this.bunifuElipse1.ElipseRadius = 5;
-            this.bunifuElipse1.TargetControl = this;
+            this.panel1.Controls.Add(this.closeBtn);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(23, 332);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(697, 33);
+            this.panel1.TabIndex = 5;
+            // 
+            // closeBtn
+            // 
+            this.closeBtn.Location = new System.Drawing.Point(599, 6);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(85, 23);
+            this.closeBtn.TabIndex = 0;
+            this.closeBtn.Text = "Zamknij";
+            this.closeBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.closeBtn.UseSelectable = true;
+            // 
+            // startBtn
+            // 
+            this.startBtn.Image = ((System.Drawing.Image)(resources.GetObject("startBtn.Image")));
+            this.startBtn.Location = new System.Drawing.Point(6, 10);
+            this.startBtn.Name = "startBtn";
+            this.startBtn.Size = new System.Drawing.Size(23, 24);
+            this.startBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.startBtn.TabIndex = 5;
+            this.startBtn.TabStop = false;
+            // 
+            // stopBtn
+            // 
+            this.stopBtn.Image = ((System.Drawing.Image)(resources.GetObject("stopBtn.Image")));
+            this.stopBtn.Location = new System.Drawing.Point(35, 10);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(23, 24);
+            this.stopBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.stopBtn.TabIndex = 6;
+            this.stopBtn.TabStop = false;
             // 
             // TunnelWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(743, 387);
+            this.ControlBox = false;
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.panel3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Controls.Add(this.panel1);
+            this.DisplayHeader = false;
+            this.Font = new System.Drawing.Font("Inter", 8.25F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "TunnelWindow";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Padding = new System.Windows.Forms.Padding(23, 35, 23, 22);
+            this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "TunnelWindow";
             this.Load += new System.EventHandler(this.TunnelWindow_Load);
             this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.startBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopBtn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -110,8 +132,9 @@
         #endregion
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RichTextBox richTextBox;
-        private System.Windows.Forms.Button stopBtn;
-        private System.Windows.Forms.Button startBtn;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
+        private System.Windows.Forms.Panel panel1;
+        private MetroFramework.Controls.MetroButton closeBtn;
+        private System.Windows.Forms.PictureBox startBtn;
+        private System.Windows.Forms.PictureBox stopBtn;
     }
 }

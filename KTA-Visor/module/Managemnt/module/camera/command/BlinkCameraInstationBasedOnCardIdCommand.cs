@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
 using TCPTunnel.kernel.types;
 namespace KTA_Visor.module.Managemnt.module.camera.command
@@ -17,6 +18,13 @@ namespace KTA_Visor.module.Managemnt.module.camera.command
         public static async void Execute(string cardId)
         {
             
+            if (cardId.Length > 15)
+            {
+                MessageBox.Show("ID Karty nie moze wynosic wiecej niz 15 znaków");
+                return;
+            }
+
+
             CameraEntity camera = await new CameraService().findByCardId(cardId);
             if (camera.data == null)
                 return;
@@ -28,9 +36,12 @@ namespace KTA_Visor.module.Managemnt.module.camera.command
                 return;
 
             TCPClientTObject stationClient = Globals.CLIENTS_LIST.Find((TCPClientTObject client) => client.getIpAddress() == station.data.stationIp);
-            
+
+            if (stationClient == null)
+                return;
+
             stationClient.Send(new Request(
-                "command://station/cameras/card/blink",
+                "command://cameras/card/blink",
                 camera
             ));
         }

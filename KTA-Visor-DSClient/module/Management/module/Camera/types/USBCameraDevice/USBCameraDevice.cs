@@ -1,16 +1,12 @@
 ﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.Device.exception;
 using KTA_Visor_DSClient.kernel.helper;
-using Falcon;
-using Falcon.Enums;
+using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice.localSettings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using KTA_Visor_DSClient.kernel.generator;
-using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice.localSettings;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice
 {

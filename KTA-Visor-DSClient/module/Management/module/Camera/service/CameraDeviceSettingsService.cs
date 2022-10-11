@@ -53,6 +53,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 
         public void SetMenuConfig(CameraEntity.Camera camera)
         {
+            if (!Globals.IS_ALL_COPYING_PROCESS_ARE_END)
+                return;
+
             USBCameraDevice device = Globals.CAMERAS_LIST.ToList().Find((USBCameraDevice dev) => dev.Drive.Name.Contains(camera.driveName));
             if (device == null)
                 return;
@@ -60,6 +63,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             Globals.ALLOW_FS_MOUNTING = false;
             int portNumber = Globals.Relay.findPortByBadgeId(device.BadgeId);
 
+            if (portNumber == -1)
+            {
+                Globals.Logger.error(String.Format("Unable to find selected cameras port number: returned {0}", portNumber.ToString()));
+                Globals.Relay.turnOnAll();
+                return;
+            }
             Globals.Relay.turnOffAll();
 
             Thread.Sleep(8000);
