@@ -325,6 +325,8 @@
     <Compile Include="kernel\sharedKernel\bootstrap\watcher\watchers\UnauthorizedWatcher.cs" />
     <Compile Include="kernel\sharedKernel\helper\DTOHelper\util\DTOHelperStruct.cs" />
     <Compile Include="kernel\sharedKernel\helper\LocalStorage\LocalStorage.cs" />
+    <Compile Include="kernel\sharedKernel\interfaces\IModuleInterface.cs" />
+    <Compile Include="kernel\sharedKernel\interfaces\ISharedKernelInterface.cs" />
     <Compile Include="kernel\sharedKernel\SharedKernel.cs" />
     <Compile Include="kernel\sharedKernel\util\HttpClientUtil.cs" />
     <Compile Include="module\Managemnt\command\RemoveClientToTheGlobalMemoryCommand.cs" />
@@ -334,6 +336,7 @@
     <Compile Include="module\Managemnt\events\OnServerStartedEvent.cs" />
     <Compile Include="module\Managemnt\events\OnClientDisconnected.cs" />
     <Compile Include="module\Managemnt\events\OnClientConnected.cs" />
+    <Compile Include="module\Managemnt\interfaces\IModuleInterface.cs" />
     <Compile Include="module\Managemnt\module\auth\view\SignInView\SignInView.cs">
       <SubType>Form</SubType>
     </Compile>

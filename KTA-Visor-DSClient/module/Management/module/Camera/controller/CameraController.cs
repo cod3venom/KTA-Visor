@@ -62,7 +62,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
 
             request.Client.Send(new Request(
                 "response://cameras/all",
-                entity
+                entity,
+                request.Client
             ));
         }
 

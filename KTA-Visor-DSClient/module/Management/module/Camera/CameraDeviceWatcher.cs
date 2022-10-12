@@ -24,11 +24,14 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         public event EventHandler<CameraDisconnectedEvent> OnCameraDisconnectedEvent;
 
         private readonly CameraService cameraService;
+        private readonly CamerasGlobalMemoryHandler camerasGlobalMemoryHandler;
+
         private DeviceWatcher deviceWatcher;
         private ZFY_INFO currentDeviceInfo;
         public CameraDeviceWatcher()
         {     
             this.cameraService = new CameraService();
+            this.camerasGlobalMemoryHandler = new CamerasGlobalMemoryHandler(this.cameraService);
         }
 
         
@@ -55,7 +58,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         private void OnDeviceConnected(object sender, DriveChangedEventArgs e)
         {
 
-            if (!this.isValidCameraDevice(e.Drive)) return;
+            if (!this.isValidCameraDevice(e.Drive)){
+                return;
+            }
 
             this.Connect();
             this.TryToMountDevice();
@@ -64,16 +69,22 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive, Globals.USB_CAMERA_DEVICES_LIST.Count);
 
 
-            if (this.isCameraAlreadyAdded(camera)) return;
+            if (this.isCameraAlreadyAdded(camera)){
+                return;
+            }
 
-            AddCamerasToTheGlobalMemory.Execute(camera, Globals.ClientTunnel);
-            CopyCameraFilesToNetworkStorageCommand.Execute(
-                Globals.STATION?.data?.stationId,
-                camera.ID,
-                camera.BadgeId,
-                camera.getFilesAsDict(),
-                Globals.settings.SettingsObj?.app?.fileSystem?.filesPath
-            );
+            this.camerasGlobalMemoryHandler.Add(camera, Globals.ClientTunnel);
+
+            if (Globals.ALLOW_FS_MOUNTING)
+            {
+                CopyCameraFilesToNetworkStorageCommand.Execute(
+                    Globals.STATION?.data?.stationId,
+                    camera.ID,
+                    camera.BadgeId,
+                    camera.getFilesAsDict(),
+                    Globals.settings.SettingsObj?.app?.fileSystem?.filesPath
+                );
+            }
 
             Globals.Logger.success(String.Format("Camera with badge id {0} was inserted successfully", camera.BadgeId));
             this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
@@ -90,13 +101,14 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                 USBCameraDevice camera = Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Name == e.Drive);
 
           
-                if (camera == null)
+                if (camera == null) {
                     return;
+                }
 
-                RemoveCamerasFromTheGlobalMemory.Execute(camera.BadgeId, Globals.ClientTunnel);
-                Globals.Logger.warn(String.Format("Camera with badge id {0} was removed successfully", camera.BadgeId));
-
+                this.camerasGlobalMemoryHandler.Remove(camera.BadgeId, Globals.ClientTunnel);
                 this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(camera));
+
+                Globals.Logger.warn(String.Format("Camera with badge id {0} was removed successfully", camera.BadgeId));
             }
             catch (Exception ex)
             {
@@ -109,7 +121,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             if (Globals.ALLOW_FS_MOUNTING)
             {
                 new Thread(() => this.Mount()).Start();
-                Thread.Sleep(2500);
+                //Thread.Sleep(1500);
             }
         }
 

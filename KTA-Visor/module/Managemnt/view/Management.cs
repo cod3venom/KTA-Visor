@@ -22,31 +22,39 @@ using System.Threading;
 using KTAVisorAPISDK.module.user.abstraction;
 using KTA_Visor.kernel.module.ThreadPool;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using KTA_Visor.kernel.sharedKernel.interfaces;
 
 namespace KTA_Visor.module.Management.view
 {
     public partial class Management : MetroForm
     {
 
+        private UserDataAbstraction user;
+        
         private Settings settings;
         private CardReader cardReader;
+
         private StationViewPanel stationPanel;
-        private FileManagerViewPanel filesHistoryPanel;
-        private UserDataAbstraction user;
+        private FileManagerViewPanel fileManagerView;
+        
+
+        private readonly List<ISharedKernelInterface> modules;
         public Management(UserDataAbstraction user)
         {
             InitializeComponent();
 
             this.settings = new Settings();
-            this.filesHistoryPanel = new FileManagerViewPanel();
             this.cardReader = new CardReader();
-            this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
-            this.loggerView.ParentPanel = this.loggerPanel;
             this.stationPanel = new StationViewPanel();
-            this.stationPanel.Dock = DockStyle.Fill;
-            this.contentPanel.Controls.Add(this.stationPanel);
+            this.fileManagerView = new FileManagerViewPanel();
             this.user = user;
-            this.FormBorderStyle = FormBorderStyle.None;
+
+            this.modules = new List<ISharedKernelInterface>()
+            {
+                this.fileManagerView,
+                this.stationPanel,
+            };
         }
 
         private async void StationsView_Load(object sender, EventArgs e)
@@ -58,10 +66,17 @@ namespace KTA_Visor.module.Management.view
         private void initialize()
         {
             this.hookEvents();
+            this.initializeUI();
             this.renderData();
         }
 
  
+        private void initializeUI()
+        {
+            this.stationPanel.Dock = DockStyle.Fill;
+            this.loggerView.ParentPanel = this.loggerPanel;
+            this.contentPanel.Controls.Add(this.stationPanel);
+        }
         private void renderData()
         {
             this.userProfileCard.FirstAndLastName = String.Format("{0} {1}", this.user.data?.firstName, this.user.data?.lastName);
@@ -72,6 +87,7 @@ namespace KTA_Visor.module.Management.view
             Globals.Logger.OnLogHasWritten += onLogHasWritten;
             Globals.ServerTunnelBackgroundWorker.OnServerStarted += onServerStarted;
             Globals.ServerTunnelBackgroundWorker.OnServerStopped += onServerStopped;
+            Globals.ServerTunnelBackgroundWorker.OnMessageReceivedFromClient += onRequestReceived;
             Globals.ServerTunnelBackgroundWorker.Run();
 
             this.startTunnelServerMenuItem.Click += onStartTunnelServerMenuItemClick;
@@ -95,9 +111,11 @@ namespace KTA_Visor.module.Management.view
             this.cardReader.OnCardReaded += onKeyboardInputChanged;
         }
 
-       
+        private void onRequestReceived(object sender, OnMessageReceivedFromClient e)
+        {
+            this.modules.ForEach(module => module.Watch(e.Request));
+        }
 
-       
         private void onServerStarted(object sender, OnServerStartedEvent e)
         {
             this.tunnelIndicator.running(true, "Uruchomiony");
@@ -153,8 +171,8 @@ namespace KTA_Visor.module.Management.view
 
         private void onFileHistoryClick(object sender, EventArgs e)
         {
-            this.filesHistoryPanel = new FileManagerViewPanel();
-            this.displayPanel(this.filesHistoryPanel);
+            this.fileManagerView = new FileManagerViewPanel();
+            this.displayPanel(this.fileManagerView);
         }
 
         private void onTunneClick(object sender, EventArgs e)
@@ -194,9 +212,7 @@ namespace KTA_Visor.module.Management.view
 
         private void onLogHasWritten(object sender, Logger.dto.LoggerEvent e)
         {
-            ThreadPoolManager.Run(this, ((Action)delegate {
-                this.loggerView.append(e.Log, e.Color);
-            }));
+            this.loggerView.append(e.Log, e.Color);
         }
 
         private void onLogoutClick(object sender, EventArgs e)

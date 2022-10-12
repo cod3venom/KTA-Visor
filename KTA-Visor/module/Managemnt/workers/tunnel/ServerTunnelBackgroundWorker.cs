@@ -91,6 +91,7 @@ namespace KTA_Visor.module.Managemnt.workers.tunnel
             if (!AddClientToTheGlobalMemoryCommand.Execute(e.Client))
                 return;
 
+            Globals.Logger.info(String.Format("New client has been connected: {0}", e.Client.IpAddress));
             this.OnClientConnected.Invoke(this, new OnClientConnected(e.Client));
         }
 
@@ -104,6 +105,8 @@ namespace KTA_Visor.module.Managemnt.workers.tunnel
             if (!RemoveClientToTheGlobalMemoryCommand.Execute(e.Client))
                 return;
 
+            Globals.Logger.warn(String.Format("Existed client has been disconnected: {0}", e.Client.IpAddress));
+
             this.OnClientDisconnected.Invoke(this,new events.OnClientDisconnected(e.Client));
         }
 
@@ -115,6 +118,8 @@ namespace KTA_Visor.module.Managemnt.workers.tunnel
         private void onMessageReceived(object sender, TCPServerClientMessageReceivedEvent e)
         {
             this.controller.Watch(e.Request);
+
+            Globals.Logger.info(String.Format("Received request: {0}", e.Request.toJson()));
             this.OnMessageReceivedFromClient?.Invoke(sender, new OnMessageReceivedFromClient(e.Request));
         }
         
@@ -135,6 +140,8 @@ namespace KTA_Visor.module.Managemnt.workers.tunnel
             Console.WriteLine(String.Format("Manager: Sending message to the {0} on endpoint {1}", client.getSocket().RemoteEndPoint, request.Endpoint));
 
             client.Send(request);
+            Globals.Logger.info(String.Format("Sent request request to {0} with params \n{1}", request.Endpoint, request.toJson()));
+
         }
 
         public void sendRequestToAll(Request request)

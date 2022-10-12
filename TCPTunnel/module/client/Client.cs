@@ -47,6 +47,11 @@ namespace TCPTunnel.module.client
 
         public bool IsAutoReconnectEnabled { get; set; }
 
+        public TCPClientTObject getClientObject()
+        {
+            return this.client;
+        }
+
         public Client connect()
         {
             try
@@ -82,7 +87,7 @@ namespace TCPTunnel.module.client
             {
                 while (this.client.IsConnected())
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
 
                     Thread onReceiveThread = new Thread(() => this.OnReceiveMessage(this.client));
                     onReceiveThread.IsBackground = true;
@@ -158,8 +163,6 @@ namespace TCPTunnel.module.client
                 }
 
                 request = null;
-
-                Thread.Sleep(3000);
             }
             catch (Exception ex)
             {
@@ -171,7 +174,7 @@ namespace TCPTunnel.module.client
 
         public void send(Request request)
         {
-            this.client.Send(request);
+            new Thread(() => this.client.Send(request)).Start();
 
             this.logger.info("Sent request on: " + request.Endpoint + "\n with body: " + request.Body);
         }
@@ -184,7 +187,7 @@ namespace TCPTunnel.module.client
 
         private void OnAuthCommandReceived(object sender, OnAuthCommandReceived e)
         {
-            client.Send(new Request(Endpoints.AUTH_NEED_RESPONSE_ENDPOINT, this.config.AuthData));
+            client.Send(new Request(Endpoints.AUTH_NEED_RESPONSE_ENDPOINT, this.config.AuthData, e.Client));
         }
 
         private void OnAuthCommandSent(object sender, OnAuthResponseDataSent e)

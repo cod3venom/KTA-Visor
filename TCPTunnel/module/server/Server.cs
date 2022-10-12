@@ -91,7 +91,6 @@ namespace TCPTunnel.module.server
                 this.serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 this.serverSocket.Bind(this.ipEndpoint);
                 this.serverSocket.Listen(this.serverConfig.listenInterval);
-                // on server started
 
                 this.serverSocketThread = new Thread(waitForClient);
                 this.serverSocketThread.IsBackground = true;
@@ -153,7 +152,7 @@ namespace TCPTunnel.module.server
 
             this.tempClientList.addClient(ipAddress, client);
 
-            Request authCommandRequest = new Request(Endpoints.AUTH_NEED_COMMAND_ENDPOINT);
+            Request authCommandRequest = new Request(Endpoints.AUTH_NEED_COMMAND_ENDPOINT, "", client);
             client.Send(authCommandRequest);
             this.onAuthCommandSent.Invoke(this, new shared.events.OnAuthCommandSent(client, authCommandRequest));
 
@@ -162,11 +161,6 @@ namespace TCPTunnel.module.server
             messengerThread.Start();
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="client"></param>
         public void OnReceiveMessage(TCPClientTObject client)
         {
             while (client.IsConnected())
@@ -195,6 +189,8 @@ namespace TCPTunnel.module.server
                         this.onMessageReceived.Invoke(this, new TCPServerClientMessageReceivedEvent(request));
                     }
 
+                    this.logger.info(string.Format("Received new request: {0}", request.toJson()));
+
                 }
                 catch (SocketException ex)
                 {
@@ -207,21 +203,11 @@ namespace TCPTunnel.module.server
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OnAuthCommandSent(object sender, OnAuthCommandSent e)
         {
             Console.WriteLine(String.Format("Client {0} Asked for authentication on : {1}", e.Client.getIpAddress(), e.Request.Endpoint));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OnAuthResponseDataReceived(object sender, OnAuthResponseDataReceived e)
         {
             if (e.Request.Body == null)
@@ -229,22 +215,17 @@ namespace TCPTunnel.module.server
             this.onAuthIsOk.Invoke(this, new OnAuthIsOK(e.Client, e.Request));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OnAuthIsOk(object sender, OnAuthIsOK e)
         {
             JObject jb = (JObject)e.Request.Body;
             dynamic authData = jb.ToObject<AuthData>();
-            e.Client.Send(new Request(Endpoints.AUTH_IS_OK_COMMAND_ENDPOINT));
+            e.Client.Send(new Request(Endpoints.AUTH_IS_OK_COMMAND_ENDPOINT, null, e.Client));
             e.Client.AuthData = authData;
 
             string ipAddress = e.Client.getSocket().RemoteEndPoint.ToString();
-            if (this.clientsList.ContainsKey(ipAddress))
-               // e.Client.Disconnect();
+            if (this.clientsList.ContainsKey(ipAddress)){
                 return;
+            }
 
             this.clientsList.addClient(ipAddress, e.Client);
 
@@ -268,15 +249,9 @@ namespace TCPTunnel.module.server
                     this.clientsList.Remove(key);
                     this.logger.info(string.Format("Detected client disconnection when checkin HEARTBEAT: {0}", existedClient.getIpAddress()));
 
-                    //this.clientsList.removeClient(existedClient.getIpAddress());
                     this.onClientDisconnected?.Invoke(this, new TCPServerClientDisonnectedEvent(existedClient));
                 }
             }
-        }
-
-        private void handleMessages(Object client)
-        {
-
         }
     }
 }

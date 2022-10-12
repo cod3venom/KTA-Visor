@@ -15,7 +15,9 @@ namespace KTA_Visor.module.Managemnt.module.station.command
            Globals.CLIENTS_LIST.ToList().ForEach(delegate (TCPClientTObject client)
            {
                client.Send(new TCPTunnel.kernel.extensions.router.dto.Request(
-                    "command://client/connection/restart"     
+                    "command://client/connection/restart",
+                    null,
+                    client
                ));
            });
         }

@@ -82,6 +82,7 @@
     <Compile Include="kernel\Hardware\DeviceWatcher\events\DriveChangedEventArgs.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\events\OnFoundPortByBadgeId.cs" />
     <Compile Include="module\Management\module\Camera\CameraDeviceWatcher.cs" />
+    <Compile Include="module\Management\module\Camera\command\memory\CamerasGlobalMemoryHandler.cs" />
     <Compile Include="module\Management\module\Camera\command\memory\RemoveAllCamerasFromTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
@@ -136,9 +137,7 @@
     <Compile Include="module\Management\view\SettingsManager.Designer.cs">
       <DependentUpon>SettingsManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Management\module\Camera\command\memory\AddCamerasToTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\command\filesystem\CopyCameraFilesToNetworkStorageCommand.cs" />
-    <Compile Include="module\Management\module\Camera\command\memory\RemoveCamerasFromTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\consts\CameraSettingsConsts.cs" />
     <Compile Include="module\Management\module\Camera\dto\CopiedCameraFileTObject.cs" />
     <Compile Include="module\Management\module\Camera\dto\GetCameraFilesRequestTObject.cs" />

@@ -8,6 +8,7 @@ using System;
 using System.Threading;
 using KTA_Visor_DSClient.module.Shared;
 using TCPTunnel.kernel.extensions.router.dto;
+using TCPTunnel.kernel.types;
 
 namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
 {
@@ -42,7 +43,10 @@ namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
             this._client = new Client(tunnelConnectionSettings, Globals.Logger);
         }
         
-        
+        public TCPClientTObject ClientObject
+        {
+            get { return this._client.getClientObject(); }
+        }
 
         public void Connect()
         {

@@ -65,7 +65,9 @@ namespace KTA_Visor.module.Managemnt.module.station.command
                 return;
 
             client.Send(new Request(
-                "command://power-supply/off"
+                "command://power-supply/off",
+                null,
+                client
             ));
         }
 
@@ -78,7 +80,9 @@ namespace KTA_Visor.module.Managemnt.module.station.command
                 return;
 
             client.Send(new Request(
-               "command://power-supply/restart"
+               "command://power-supply/restart",
+               null,
+               client
            ));
         }
 

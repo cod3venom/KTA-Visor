@@ -43,7 +43,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
                 return;
 
             Globals.ClientTunnel.Emit(new Request(
-               "response://cameras/refresh"
+               "response://cameras/refresh",
+               null,
+               Globals.ClientTunnel.ClientObject
            ));
         }
     }

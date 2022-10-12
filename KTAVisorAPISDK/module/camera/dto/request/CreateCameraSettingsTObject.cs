@@ -19,6 +19,7 @@ namespace KTAVisorAPISDK.module.camera.dto.request
            int preRecording = 0,
            int timeZone = 0,
            int wifi = 0,
+           int silentMode = 0,
            int aesEncryption = 0
        )
         {
@@ -31,6 +32,7 @@ namespace KTAVisorAPISDK.module.camera.dto.request
             this.preRecording = preRecording;
             this.timeZone = timeZone;
             this.wifi = wifi;
+            this.silentMode = silentMode;
             this.aesEncryption = aesEncryption;
         }
 
@@ -52,6 +54,7 @@ namespace KTAVisorAPISDK.module.camera.dto.request
         public int timeZone { get; set; }
         public int gps { get; set; }
         public int wifi { get; set; }
+        public int silentMode { get; set; }
         public int aesEncryption { get; set; }
     }
 }

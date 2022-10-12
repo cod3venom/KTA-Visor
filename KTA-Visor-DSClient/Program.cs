@@ -29,28 +29,35 @@ namespace KTA_Visor_DSClient
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            Entrypoint entrypoint = new Entrypoint();
+            entrypoint.OnExceptionOccured += Entrypoint_OnExceptionOccured;
+            Application.Run(entrypoint);
+        }
 
-            Application.Run(new Entrypoint());
+        private static void Entrypoint_OnExceptionOccured(object sender, OnExceptionOccuredEvent e)
+        {
+            Program.HandleException(e);
         }
 
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-#if DEBUG
-            Console.WriteLine(e);
-            Console.ReadLine();
-#endif
-            _ = new StationInitializer().Initialize(false);
-            Application.Restart();
+            Program.HandleException(e);
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            Program.HandleException(e);
+        }
+
+
+        private static void HandleException(dynamic exception)
+        {
 #if DEBUG
-            Console.WriteLine(e);
+            Console.WriteLine(exception);
             Console.ReadLine();
 #endif
             _ = new StationInitializer().Initialize(false);
-            Application.Restart();   
+            Application.Restart();
         }
 
     }

@@ -50,7 +50,6 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         {
             this.Padding = new Padding(10, 10, 10, 20);
             this.settingsBtn.Click += OpenSettings_Click;
-            this.form.OnCloseForm += onCloseForm;
             this.copyFilesToUSBMenuItem.Click += onCopyFilesToUSB;
             this.copyFilesToDVDMenuItem.Click += onCopyFilesToDVD;
 

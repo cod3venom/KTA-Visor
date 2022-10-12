@@ -11,10 +11,10 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander.interfaces
     {
         void Open();
 
-        void turnOnAll();
-        void turnOffAll();
-        void turnOnByPort(int portNumber);
-        void turnOffByPort(int portNumber);
-        void isTurnedOn(int portNumber);
+        void turnOnAll(int transition = 1000);
+        void turnOffAll(int transition = 1000);
+        void turnOnByPort(int portNumber, int transition = 1000);
+        void turnOffByPort(int portNumber, int transition = 1000);
+        void isTurnedOn(int portNumber, int transition = 1000);
     }
 }

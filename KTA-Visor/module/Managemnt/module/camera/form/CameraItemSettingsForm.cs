@@ -1,5 +1,6 @@
 ﻿using Falcon_Protocol.enums;
 using KTA_Visor.kernel.generator;
+using KTA_Visor.kernel.sharedKernel.interfaces;
 using KTA_Visor.module.Shared.Global;
 using KTA_Visor_UI.component.custom.MessageWindow;
 using KTAVisorAPISDK.module.camera.dto.reques;
@@ -11,14 +12,13 @@ using MetroFramework.Forms;
 using System;
 using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
+using TCPTunnel.kernel.types;
 using static Falcon_Protocol.enums.Enums;
 
 namespace KTA_Visor.module.Managemnt.module.camera.form
 {
-    public partial class CameraItemSettingsForm : MetroForm
+    public partial class CameraItemSettingsForm : MetroForm, ISharedKernelInterface
     {
-
-        public event EventHandler<EventArgs> OnCloseForm;
 
         private int MIN_ID_LENGTH = 15;
         private CameraEntity.Camera camera;
@@ -35,7 +35,12 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
             this.cameraService = new CameraService();
         }
 
-  
+
+        public void Watch(Request request)
+        {
+         
+        }
+
         private void CameraItemForm_Load(object sender, EventArgs e)
         {
             try
@@ -104,7 +109,9 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
                     this.camera.settings.wifi = this.wifiChk.Checked ? 1 : 0;
                 });
 
-
+                this.silentModeChk.CheckStateChanged += (delegate (object _sender, EventArgs _e) {
+                    this.camera.settings.silentMode = this.silentModeChk.Checked ? 1 : 0;
+                });
                 this.deviceIdTxt.Text = this.camera.cameraCustomId;
                 this.badgeIdTxt.Text = this.camera.badgeId;
                 this.cardIdtxt.Text = this.camera.cardId;
@@ -174,15 +181,18 @@ namespace KTA_Visor.module.Managemnt.module.camera.form
                 this.camera.settings.timeZone,
                 this.camera.settings.gps,
                 this.camera.settings.wifi,
+                this.camera.settings.silentMode,
                 this.camera.settings.aesEncryption
             ));
 
             this.camera = camEntity.data;
 
-            Globals.ServerTunnelBackgroundWorker.sendRequest(this.station.data.stationIp, new Request(
+            TCPClientTObject client = Globals.CLIENTS_LIST.Find((TCPClientTObject obj) => obj.IpAddress == this.station.data.stationIp);
+            client.Send(new Request(
                "command://cameras/settings/change",
-               this.camera
-           ));
+               this.camera,
+               client
+            ));
 
             this.Close();
         }

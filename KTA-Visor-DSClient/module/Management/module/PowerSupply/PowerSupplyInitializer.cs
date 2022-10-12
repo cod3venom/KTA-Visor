@@ -2,10 +2,7 @@
 using KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace KTA_Visor_DSClient.module.Management.module.PowerSupply
 {
@@ -38,10 +35,9 @@ namespace KTA_Visor_DSClient.module.Management.module.PowerSupply
             this.usbRelay.OnUnableToConnect += onUnableToConnect;
             Globals.Relay = this.usbRelay;
             Globals.Relay.Open();
-            Globals.Relay.turnOnAll();
+            Globals.Relay.turnOnAll(50);
         }
 
-        
         private void onSuccessfullyConnected(object sender, EventArgs e)
         {
             this.OnPowerSupplyInitialized?.Invoke(sender, e);

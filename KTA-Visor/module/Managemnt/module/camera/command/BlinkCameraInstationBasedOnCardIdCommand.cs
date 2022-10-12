@@ -42,7 +42,8 @@ namespace KTA_Visor.module.Managemnt.module.camera.command
 
             stationClient.Send(new Request(
                 "command://cameras/card/blink",
-                camera
+                camera,
+                stationClient
             ));
         }
     }

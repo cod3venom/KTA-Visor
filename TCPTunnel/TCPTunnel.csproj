@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="kernel\extensions\router\helpers\IPAddressConverter.cs" />
     <Compile Include="kernel\extensions\router\interfaces\IRouteController.cs" />
+    <Compile Include="kernel\extensions\router\helpers\IPEndPointConverter.cs" />
     <Compile Include="kernel\helpers\JSON.cs" />
     <Compile Include="kernel\helpers\Network.cs" />
     <Compile Include="module\client\Client.cs" />
@@ -87,6 +89,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="kernel\sharedKernel\" />
     <Folder Include="module\client\types\" />
   </ItemGroup>
   <ItemGroup>

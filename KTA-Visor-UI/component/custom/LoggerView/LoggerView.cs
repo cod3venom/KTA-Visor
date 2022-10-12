@@ -33,24 +33,30 @@ namespace KTA_Visor_UI.component.custom.LoggerView
         {
             if (this.InvokeRequired)
             {
-                this.BeginInvoke((MethodInvoker)delegate
-                {
-                    if (color == null)
-                    {
-                        color = Color.Black;
-                    }
-
-                    richTextBox.SelectionStart = richTextBox.TextLength;
-                    richTextBox.SelectionLength = 0;
-
-                    richTextBox.SelectionColor = color;
-                    richTextBox.AppendText(message + Environment.NewLine);
-                    richTextBox.SelectionColor = richTextBox.ForeColor;
-                    this.richTextBox.ScrollToCaret();
+                this.Invoke((MethodInvoker)delegate{ 
+                    this.appendLog(message, color);
                 });
             }
+            else
+            {
+                this.appendLog(message, color);
+            }
+        }
 
-             
+        private void appendLog(string message, Color color)
+        {
+
+            if (color == null)
+            {
+                color = Color.Black;
+            }
+            richTextBox.SelectionStart = richTextBox.TextLength;
+            richTextBox.SelectionLength = 0;
+
+            richTextBox.SelectionColor = color;
+            richTextBox.AppendText(message + Environment.NewLine);
+            richTextBox.SelectionColor = richTextBox.ForeColor;
+            this.richTextBox.ScrollToCaret();
         }
 
         private void cleanBtn_Click(object sender, EventArgs e)

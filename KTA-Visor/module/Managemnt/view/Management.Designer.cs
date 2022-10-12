@@ -1,4 +1,6 @@
-﻿namespace KTA_Visor.module.Management.view
+﻿using System.Windows.Forms;
+
+namespace KTA_Visor.module.Management.view
 {
     partial class Management
     {
@@ -63,6 +65,10 @@
             this.panel1.SuspendLayout();
             this.footerPanel.SuspendLayout();
             this.loggerPanel.SuspendLayout();
+
+            this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.FormBorderStyle = FormBorderStyle.None;
+
             this.SuspendLayout();
             // 
             // topBarPanel

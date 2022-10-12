@@ -42,23 +42,16 @@ namespace KTA_Visor_DSClient.module.Shared.Globals
 
         public  void Load()
         {
-            try
-            {
-                this.initializeBackendSettings();
-                this.initializeStationOnBackend();
+            this.initializeBackendSettings();
+            this.initializeStationOnBackend();
 
-                this.initializePowerSupply();
+            this.initializePowerSupply();
 
-                Thread initializeTunnelClient = new Thread(this.initializeClientTunnel);
-                initializeTunnelClient.Start();
-                
-                
-                this.initializeCamerasWatcher();
+            Thread initializeTunnelClient = new Thread(this.initializeClientTunnel);
+            initializeTunnelClient.Start();
 
-            }
-            catch (Exception ex) {
-                                
-            }
+
+            this.initializeCamerasWatcher();
         }
 
         private  void initializeBackendSettings()

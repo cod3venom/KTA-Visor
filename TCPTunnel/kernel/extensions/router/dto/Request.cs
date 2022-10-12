@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCPTunnel.kernel.extensions.router.helpers;
 using TCPTunnel.kernel.types;
 
 namespace TCPTunnel.kernel.extensions.router.dto
@@ -54,7 +56,15 @@ namespace TCPTunnel.kernel.extensions.router.dto
 
         public string toJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            dynamic schema = new ExpandoObject();
+            schema.endpoint = this.Endpoint;
+            schema.body = this.Body;
+            schema.targetIp = this.Client?.IpAddress;
+
+            string js = JsonConvert.SerializeObject(schema, Formatting.Indented);
+            return js;
         }
+
+        
     }
 }

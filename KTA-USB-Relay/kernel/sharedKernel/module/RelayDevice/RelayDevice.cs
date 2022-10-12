@@ -35,10 +35,6 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
             this.connector = new COMConnector.COMConnector(portName, baudRate, parity, dataBits, stopBit, logger);
         }
 
-
-        /// <summary>
-        /// Connect to the device
-        /// </summary>
         public void Open()
         {
             try
@@ -53,29 +49,17 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
             }
         }
 
-        /// <summary>
-        /// Connect to the device
-        /// </summary>
         public void Close()
         {
             this.connector.OnDataReceived -= OnReceivedMessageFromRelayDevice;
             this.connector.disconnect();
         }
 
-        /// <summary>
-        /// Connect to the device
-        /// </summary>
         public void Reconnect()
         {
             this.connector.reconnect();
         }
 
-        /// <summary>
-        /// This method is used to handle received data
-        /// from the USB relay device
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OnReceivedMessageFromRelayDevice(object sender, COMConnector.events.OnDataReceivedEvent e)
         {
             Console.WriteLine(String.Format("Received message from USBRelay: {0}", e.Message));
@@ -88,78 +72,58 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
             }
         }
 
-      
-
-        /// <summary>
-        /// Check the state of the selected
-        /// port
-        /// </summary>
-        /// <param name="portNumber"></param>
-        public void isTurnedOn(int portNumber)
+        public void isTurnedOn(int portNumber, int transition = 1000)
         {
             this.sendCommand("L " + portNumber.ToString(), false);
+            Thread.Sleep(transition);
         }
 
-        /// <summary>
-        /// Check the state of the selected
-        /// port
-        /// </summary>
-        /// <param name="portNumber"></param>
         public void getAllStatuses(int transition = 100)
         {
             foreach (int port in this.Ports)
             {
                 this.sendCommand(String.Format("L {0}", port.ToString()));
+                Thread.Sleep(transition);
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="transition"></param>
-        public void turnOnAll()
+        public void turnOnAll(int transition = 1000)
         {
             foreach (int port in this.Ports)
             {
                 this.sendCommand(String.Format("C {0}", port.ToString()));
-                Thread.Sleep(1000);
+                Console.WriteLine(string.Format("Turned ON Port {0}", port.ToString()));
+
+                Thread.Sleep(transition);
             }
             this.OnTurnedOnAll?.Invoke(this, EventArgs.Empty);
         }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="transition"></param>
-        public void turnOffAll()
+        public void turnOffAll(int transition = 1000)
         {
             foreach(int port in this.Ports)
             {
                 this.sendCommand(String.Format("S {0}", port.ToString()));
+                Thread.Sleep(transition);
             }
 
-            Thread.SpinWait(3000);
             this.OnTurnedOffAll?.Invoke(this, EventArgs.Empty);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="portNumber"></param>
-        public void turnOnByPort(int portNumber)
+        public void turnOnByPort(int portNumber, int transition = 1000)
         {
             this.sendCommand(String.Format("C {0}", portNumber.ToString()));
+            Thread.Sleep(transition);
+
             this.OnTurnedOnSingle?.Invoke(this, EventArgs.Empty);
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="portNumber"></param>
-        public void turnOffByPort(int portNumber)
+        public void turnOffByPort(int portNumber, int transition = 1000)
         {
             this.sendCommand(String.Format("S {0}", portNumber.ToString()));
+            Thread.Sleep(transition);
+
             this.OnTurnedOffSingle?.Invoke(this, EventArgs.Empty);
         }
 
@@ -177,12 +141,7 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
             this.turnOnByPort(portNumber);
         }
 
-        /// <summary>
-        /// Main private method for
-        /// sending the of commands
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="withResolver"></param>
+
         public void sendCommand(string command, bool withResolver = true)
         {
             if (!this.connector.isConnected)

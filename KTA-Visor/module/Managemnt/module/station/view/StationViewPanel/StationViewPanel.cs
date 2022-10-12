@@ -1,21 +1,21 @@
-﻿
+﻿using static KTA_Visor.module.Managemnt.module.station.command.HandleStationContextMenuClickEventCommand;
 using KTA_Visor.kernel.module.ThreadPool;
+using KTA_Visor.kernel.sharedKernel.interfaces;
+using KTA_Visor.module.Managemnt.interfaces;
 using KTA_Visor.module.Managemnt.module.station.command;
 using KTA_Visor.module.Managemnt.module.station.controller;
 using KTA_Visor.module.Shared.Global;
-using KTA_Visor_UI.component.basic.table;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using KTAVisorAPISDK.module.camera.service;
 using KTAVisorAPISDK.module.station.service;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static KTA_Visor.module.Managemnt.module.station.command.HandleStationContextMenuClickEventCommand;
+using TCPTunnel.kernel.extensions.router.dto;
 
 namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
 {
-    public partial class StationViewPanel : UserControl
+    public partial class StationViewPanel : UserControl, ISharedKernelInterface
     {
 
         private readonly ColumnTObject[] Columns = new ColumnTObject[] {
@@ -27,17 +27,13 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
             new ColumnTObject(5, "UTWORZONO")
         };
 
-        private readonly StationService stationService;
         private readonly StationController stationController;
-        private readonly CameraService cameraService;
 
 
         public StationViewPanel()
         {
             InitializeComponent();
-            this.stationService = new StationService();
             this.stationController = new StationController(this);
-            this.cameraService = new CameraService();
             this.table.AllowAdd = false;
             this.table.AllowEdit = false;
             this.table.AllowDelete = false;
@@ -61,7 +57,6 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
         {
             Globals.ServerTunnelBackgroundWorker.OnClientConnected += onStationConnected;
             Globals.ServerTunnelBackgroundWorker.OnClientDisconnected += onStationDisconnected;
-            Globals.ServerTunnelBackgroundWorker.OnMessageReceivedFromClient += onResponseReceivedFromStation;
 
             this.table.DataGridView.CellDoubleClick += onCellDoubleClick;
             this.table.DataGridView.SelectionChanged += onSelectionChanged;
@@ -90,9 +85,10 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
         }
 
 
-        private void onResponseReceivedFromStation(object sender, events.OnMessageReceivedFromClient e)
+
+        public void Watch(Request request)
         {
-            this.stationController.Watch(e.Request);
+            this.stationController.Watch(request);
         }
 
         private void onCellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -142,5 +138,6 @@ namespace KTA_Visor.module.Managemnt.module.station.view.StationViewPanel
 
             return this.table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
         }
+ 
     }
 }

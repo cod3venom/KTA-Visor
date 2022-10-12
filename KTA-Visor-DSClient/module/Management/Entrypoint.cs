@@ -16,7 +16,7 @@ namespace KTA_Visor_DSClient.module.Management
         private Settings settings;
         private readonly BootLoader bootLoader;
         private readonly SettingsManager settingsManagerView;
-        private GlobalController globalController;
+
         public Entrypoint()
         {
             InitializeComponent();

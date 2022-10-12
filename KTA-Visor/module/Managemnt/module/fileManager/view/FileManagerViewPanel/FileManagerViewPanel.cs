@@ -1,26 +1,19 @@
 ﻿using static KTAVisorAPISDK.module.fileManager.entity.FileItemEntity;
 using KTAVisorAPISDK.module.fileManager.service;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using KTAVisorAPISDK.module.fileManager.entity;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using KTA_Visor.module.Managemnt.module.fileManager.view.form;
 using KTA_Visor.kernel.module.ThreadPool;
+using TCPTunnel.kernel.extensions.router.dto;
+using KTA_Visor.kernel.sharedKernel.interfaces;
 
 namespace KTA_Visor.module.Managemnt.module.fileManager.view.FileHistoryViewPanel
 {
-    public partial class FileManagerViewPanel : UserControl
+    public partial class FileManagerViewPanel : UserControl, ISharedKernelInterface
     {
-        /// <summary>
-        /// 
-        /// </summary>
+
         private readonly ColumnTObject[] Columns = new ColumnTObject[] {
             new ColumnTObject(0, "ID"),
             new ColumnTObject(1, "LOKALIZACJA"),
@@ -32,9 +25,7 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.FileHistoryViewPane
             new ColumnTObject(7, "DATA WGRYWANIA"),
         };
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         private readonly FileHistoryService fileHistoryService;
 
 
@@ -84,6 +75,10 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.FileHistoryViewPane
                     );
                 }
             }));
+        }
+
+        public void Watch(Request request)
+        {
         }
 
         private string ID

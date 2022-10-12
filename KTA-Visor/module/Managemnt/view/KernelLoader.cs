@@ -37,6 +37,8 @@ namespace KTA_Visor.module.Managemnt.view
             this.TransparencyKey = Color.Gray;
             this.improvedProgressBar1.OnProgressEnd += onProgressEnd;
 
+            await Task.Delay(1000);
+
             this.improvedProgressBar1.Start();
             this.installer.FullInstall();
             await this.initializeKTAVISORAPISDK();
