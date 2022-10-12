@@ -86,6 +86,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             menuStruct.aes_crypto = Convert.ToByte(camera.settings.aesEncryption);
             menuStruct.gps = Convert.ToByte(camera.settings.gps);
             menuStruct.wifi = Convert.ToByte(camera.settings.wifi);
+            menuStruct.rec_warning = Convert.ToByte(camera.settings.silentMode);
 
             device.Settings.ID = camera.cameraCustomId;
             device.Settings.BadgeId = camera.badgeId;
