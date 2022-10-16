@@ -62,8 +62,6 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
 
         private void OnReceivedMessageFromRelayDevice(object sender, COMConnector.events.OnDataReceivedEvent e)
         {
-            Console.WriteLine(String.Format("Received message from USBRelay: {0}", e.Message));
-
             if (e.Message == "") return;
 
             if (ParsePowerStatusCommand.Execute(e.Message, ref RelayDevice.USBRelayDeviceStatusList) == true)

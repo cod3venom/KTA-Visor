@@ -1,4 +1,5 @@
-﻿using KTAVisorAPISDK.module.auth.dto.request;
+﻿using KTA_Visor_UI.component.custom.MessageWindow;
+using KTAVisorAPISDK.module.auth.dto.request;
 using KTAVisorAPISDK.module.auth.entity;
 using KTAVisorAPISDK.module.auth.service;
 using KTAVisorAPISDK.module.user.entity;
@@ -58,6 +59,11 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignUpView
                    this.passwordTxt.Text
                ));
 
+                if (user == null)
+                {
+                    new AlertWindow("Nie udało się zarejestrować, sprawdż poprawnośc danych lub skontaktuj się z Administratorem");
+                    return;
+                }
                 this.Hide();
                 new Management.view.Management(user).Show();
             }

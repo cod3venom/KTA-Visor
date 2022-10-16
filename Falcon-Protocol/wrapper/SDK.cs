@@ -1,4 +1,5 @@
 ﻿using Falcon_Protocol.interop;
+using Falcon_Protocol.modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using static Falcon_Protocol.interop.FalconProtocolInteropService;
 
 namespace Falcon_Protocol.wrapper
 {
-    public class SDK 
+    public class SDK : ModulesManager
     {
 
         private event EventHandler<EventArgs> OnDeviceMounted;

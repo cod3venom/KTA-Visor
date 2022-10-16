@@ -1,0 +1,71 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Button.xaml"/>
+    <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+  <Style TargetType="{x:Type controls:ModernDialog}">
+    <Setter Property="controls:ModernDialog.BackgroundContent"
+            Value="{DynamicResource WindowBackgroundContent}"/>
+    <Setter Property="Control.FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
+    <Setter Property="Control.FontSize" Value="{DynamicResource DefaultFontSize}"/>
+    <Setter Property="Control.Foreground" Value="{DynamicResource WindowText}"/>
+    <Setter Property="FrameworkElement.MaxWidth" Value="640"/>
+    <Setter Property="FrameworkElement.MaxHeight" Value="640"/>
+    <Setter Property="FrameworkElement.MinWidth" Value="240"/>
+    <Setter Property="FrameworkElement.MinHeight" Value="240"/>
+    <Setter Property="Window.ShowInTaskbar" Value="false"/>
+    <Setter Property="Window.ResizeMode" Value="NoResize"/>
+    <Setter Property="Window.SizeToContent" Value="WidthAndHeight"/>
+    <Setter Property="FrameworkElement.UseLayoutRounding" Value="true"/>
+    <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:ModernDialog}">
+          <Border Background="{DynamicResource WindowBackground}"
+                  Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}">
+            <Grid>
+              <Border BorderBrush="{DynamicResource WindowBorder}" BorderThickness="1">
+                <AdornerDecorator>
+                  <Grid>
+                    <ContentControl Content="{TemplateBinding controls:ModernDialog.BackgroundContent}"/>
+                    <Canvas>
+                      <Rectangle Fill="{DynamicResource Accent}" Canvas.Top="18" Canvas.Left="24" Width="100" Height="6"/>
+                    </Canvas>
+                    <Grid Margin="24">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <TextBlock DataContext="{TemplateBinding Window.Title}" FontFamily="Segoe UI" FontSize="24"
+                                 TextOptions.TextFormattingMode="Ideal" TextTrimming="CharacterEllipsis"
+                                 Text="{Binding Converter={StaticResource ToUpperConverter}}"/>
+                      <controls:TransitioningContentControl Grid.Row="1" Margin="0,20" Content="{TemplateBinding ContentControl.Content}"/>
+                      <ItemsControl Grid.Row="2" ItemsSource="{TemplateBinding controls:ModernDialog.Buttons}"
+                                    HorizontalAlignment="Right">
+                        <ItemsControl.ItemsPanel>
+                          <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                          </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                      </ItemsControl>
+                    </Grid>
+                  </Grid>
+                </AdornerDecorator>
+              </Border>
+              <Border BorderBrush="{DynamicResource WindowBorderActive}" BorderThickness="1"
+                      Visibility="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="WindowChrome.WindowChrome">
+      <Setter.Value>
+        <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="false"/>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

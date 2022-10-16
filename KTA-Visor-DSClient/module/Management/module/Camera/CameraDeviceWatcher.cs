@@ -4,17 +4,19 @@ using KTAVisorAPISDK.module.camera.dto.request;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.Camera.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.factory;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
-using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using KTA_Visor_DSClient.kernel.Hardware.DeviceWatcher.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
 using KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem;
 using static Falcon_Protocol.interop.FalconProtocolInteropService;
 using Falcon_Protocol;
+using Sdk.Core.DevicesDetection;
+using Sdk.Core.Enums;
+using KTA_Visor_DSClient.module.Management.module.Camera.handler;
+using KTA_Visor_DSClient.install.settings;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService
 {
@@ -23,84 +25,84 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         public event EventHandler<CameraConnectedEvent> OnCameraConnectedEvent;
         public event EventHandler<CameraDisconnectedEvent> OnCameraDisconnectedEvent;
 
+        private readonly Settings settings;
+        private readonly FalconProtocol falconProtocol;
         private readonly CameraService cameraService;
         private readonly CamerasGlobalMemoryHandler camerasGlobalMemoryHandler;
+        private readonly CameraFilesTransferingHandler cameraFilesTransferHandler;
 
-        private DeviceWatcher deviceWatcher;
-        private ZFY_INFO currentDeviceInfo;
-        public CameraDeviceWatcher()
-        {     
+        public CameraDeviceWatcher(Settings settings)
+        {
+            this.settings = settings;
+            this.falconProtocol = new FalconProtocol();
             this.cameraService = new CameraService();
             this.camerasGlobalMemoryHandler = new CamerasGlobalMemoryHandler(this.cameraService);
+            this.cameraFilesTransferHandler = new CameraFilesTransferingHandler(this.settings.SettingsObj?.app?.fileSystem?.filesPath);
         }
 
         
         public void Start()
         {
-            this.deviceWatcher = new DeviceWatcher();
-            this.deviceWatcher.OnDeviceConnected += OnDeviceConnected;
-            this.deviceWatcher.OnDeviceDisconnected += OnDeviceDisconnected;
-            this.deviceWatcher.OnDeviceConnectedOrDisconnected += onDeviceConnectedOrDisconnected;
-            this.Connect();
-            this.TryToMountDevice();
-            this.deviceWatcher.LoadConnectedDevices();
+            this.falconProtocol.Detector.OnDeviceDetected += onDeviceConnectedOrDisconnected;
+            this.falconProtocol.Detector.OnDeviceMounted += OnDeviceMounted;
+            this.falconProtocol.Detector.OnDeviceRemoved += OnDeviceDisconnected;
+            this.falconProtocol.Detector.Run();
+            this.watch();
+            this.falconProtocol.Detector.LoadConnectedDevices();
         }
 
-        private void onDeviceConnectedOrDisconnected(object sender, EventArgs e)
+
+        private void watch()
+        {
+            Thread watchThread = new Thread((ThreadStart)delegate
+            {
+                while(Globals.ALLOW_FS_MOUNTING)
+                {
+                    this.Connect();
+                    this.TryToMountDevice();
+                }
+            });
+
+            watchThread.IsBackground = true;
+            watchThread.Start();
+        }
+
+        private void onDeviceConnectedOrDisconnected(DeviceDetectedInformation detectedInformation, VolumeChangeEventType changeEventType)
         {
             this.Connect();
-            this.currentDeviceInfo = this.GetDeviceInfo(Globals.CAMERAS_LIST.Count);
-
             this.TryToMountDevice();
+            this.falconProtocol.Detector.LoadConnectedDevices();
+
             Globals.Logger.print("Device action detected");
         }
 
-        private void OnDeviceConnected(object sender, DriveChangedEventArgs e)
-        {
 
-            if (!this.isValidCameraDevice(e.Drive)){
+        private void OnDeviceMounted(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
+        {
+            
+            if (!this.isValidCameraDevice(e.DriveLetter)){
                 return;
             }
 
-            this.Connect();
-            this.TryToMountDevice();
-
-            this.currentDeviceInfo = this.GetDeviceInfo(Globals.CAMERAS_LIST.Count);
-            USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive, Globals.USB_CAMERA_DEVICES_LIST.Count);
-
+            USBCameraDevice camera = USBCameraDeviceFactory.create(e.DriveLetter, Globals.USB_CAMERA_DEVICES_LIST.Count);
 
             if (this.isCameraAlreadyAdded(camera)){
                 return;
             }
 
+            this.cameraFilesTransferHandler.Transfer(camera.Files, camera.Drive.Name);
             this.camerasGlobalMemoryHandler.Add(camera, Globals.ClientTunnel);
-
-            if (Globals.ALLOW_FS_MOUNTING)
-            {
-                CopyCameraFilesToNetworkStorageCommand.Execute(
-                    Globals.STATION?.data?.stationId,
-                    camera.ID,
-                    camera.BadgeId,
-                    camera.getFilesAsDict(),
-                    Globals.settings.SettingsObj?.app?.fileSystem?.filesPath
-                );
-            }
 
             Globals.Logger.success(String.Format("Camera with badge id {0} was inserted successfully", camera.BadgeId));
             this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
         }
 
 
-        private void OnDeviceDisconnected(object sender, DriveChangedEventArgs e)
+        private void OnDeviceDisconnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
         {
             try
             {
-                this.Disconnect();
-                this.TryToMountDevice();
-
-                USBCameraDevice camera = Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Name == e.Drive);
-
-          
+                USBCameraDevice camera = Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Name == e.DriveLetter);
                 if (camera == null) {
                     return;
                 }
@@ -121,7 +123,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             if (Globals.ALLOW_FS_MOUNTING)
             {
                 new Thread(() => this.Mount()).Start();
-                //Thread.Sleep(1500);
+                Thread.Sleep(2500);
             }
         }
 
@@ -133,15 +135,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 
         private bool isCameraAlreadyAdded(USBCameraDevice camera)
         {
-            foreach(KeyValuePair<string, USBCameraDevice> kvp in Globals.USB_CAMERA_DEVICES_LIST)
-            {
-                if (kvp.Key == camera.BadgeId)
-                {
-                    return true;
-                }
-                continue;
-            }
-            return false;
+            return Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Drive == camera.Drive) != null;
         }
     }
 }

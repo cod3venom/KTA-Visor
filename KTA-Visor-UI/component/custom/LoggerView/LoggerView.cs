@@ -24,7 +24,6 @@ namespace KTA_Visor_UI.component.custom.LoggerView
         {
             this.richTextBox.Margin = new Padding(24, 24, 24, 0);
             this.richTextBox.ReadOnly = true;
-
         }
 
         public Panel ParentPanel { get; set; }
@@ -66,6 +65,17 @@ namespace KTA_Visor_UI.component.custom.LoggerView
 
         private void minimizeBtn_Click(object sender, EventArgs e)
         {
+            this.Minimize();
+        }
+
+        private void maximizeBtn_Click(object sender, EventArgs e)
+        {
+            this.Maximize();
+        }
+
+
+        public void Minimize()
+        {
             this.maximizePanel.Visible = true;
             this.minimizePanel.Visible = false;
 
@@ -80,7 +90,7 @@ namespace KTA_Visor_UI.component.custom.LoggerView
             }
         }
 
-        private void maximizeBtn_Click(object sender, EventArgs e)
+        public void Maximize()
         {
             this.minimizePanel.Visible = true;
             this.maximizePanel.Visible = false;

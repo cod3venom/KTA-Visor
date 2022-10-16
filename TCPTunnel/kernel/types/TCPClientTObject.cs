@@ -10,97 +10,33 @@ using TCPTunnel.module.shared.entity;
 
 namespace TCPTunnel.kernel.types
 {
-    public class TCPClientTObject
+    public class TCPClientTObject : IDisposable
     {
         private string ipAddress;
         private Socket socket;
-        private Thread thread;
-        private readonly string asWho;
-        private bool isBlocked;
 
-        private readonly KTALogger.Logger logger;
-        public TCPClientTObject(string ipAddress, Socket socket, Thread thread = null, string asWho = "Client", bool isBlocked = false)
+
+        public TCPClientTObject(string ipAddress, Socket socket = null)
         {
             this.ipAddress = ipAddress;
             this.socket = socket;
-            this.thread = thread;
-            this.asWho = asWho;
-            this.isBlocked = isBlocked;
-            this.logger = new KTALogger.Logger();
+
+            if (this.socket == null){
+                this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            }
+            this.IsDisposed = false;
+
         }
 
         public AuthData AuthData { get; set; }
+        public string IpAddress {get { return this.ipAddress.Split(':')[0]; }}
+        public int Port { get { return Int32.Parse(this.ipAddress.Split(':')[1]); }}
+        public Socket Socket { get { return this.socket; }}
+        public bool IsDisposed { get; set; }
 
-        public string getIpAddress()
-        {
-            return this.ipAddress.Split(':')[0];
-        }
-
-        public string IpAddress
-        {
-            get { return this.ipAddress.Split(':')[0]; }
-        }
-        
-        public int Port
-        {
-            get { return Int32.Parse(this.ipAddress.Split(':')[1]); }
-        }
-
-        public string FullAddress
-        {
-            get { return this.ipAddress; }
-        }
-
-
-
-        public Socket Sock
-        {
-            get { return this.socket; }
-        }
-
-        public Socket getSocket()
-        {
-            return this.socket;
-        }
-
-        public TCPClientTObject setThread(Thread thread)
-        {
-            this.thread = thread;
-
-            return this;
-        }
-
-        public Thread getThread()
-        {
-            return this.thread;
-        }
-
-        public TCPClientTObject block()
-        {
-            this.isBlocked = true;
-
-            return this;
-        }
-
-        public TCPClientTObject unblock()
-        {
-            this.isBlocked = false;
-
-            return this;
-        }
-
-        public bool isblocked()
-        {
-            return this.isBlocked;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
         public void Send(Request request)
         {
-            if (this.IsConnected())
+            if (this.IsConnected)
             {
                
                 string body = request.toJson();
@@ -115,17 +51,31 @@ namespace TCPTunnel.kernel.types
             if (this.socket == null)
                 return;
 
-            this.socket.Dispose();
+           if (this.socket.Connected)
+            {
+                this.socket?.Shutdown(SocketShutdown.Both);
+                this.socket?.Close();
+            }
+            this.Dispose();
         }
 
-        public bool IsConnected()
+        public void Dispose()
         {
-            try
+            this.socket?.Dispose();
+            this.IsDisposed = true;
+        }
+
+        public bool IsConnected
+        {
+            get
             {
-                return !(this.socket.Poll(1, SelectMode.SelectRead) && this.socket.Available == 0);
+                try
+                {
+                    return !(this.socket.Poll(1, SelectMode.SelectRead) && this.socket.Available == 0);
+                }
+                catch (SocketException) { return false; }
+                catch (Exception) { return false; }
             }
-            catch (SocketException) { return false; }
-            catch(Exception) { return false; }
         }
     }
 }

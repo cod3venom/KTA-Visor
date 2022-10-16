@@ -140,7 +140,7 @@
             this.DisplayHeader = false;
             this.Name = "VersionWindow";
             this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
-            this.Style = MetroFramework.MetroColorStyle.Orange;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "VersionWindow";
             this.Load += new System.EventHandler(this.VersionWindow_Load);
             this.panel1.ResumeLayout(false);

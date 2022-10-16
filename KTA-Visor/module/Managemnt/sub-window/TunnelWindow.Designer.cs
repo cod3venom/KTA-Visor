@@ -30,15 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TunnelWindow));
             this.panel3 = new System.Windows.Forms.Panel();
+            this.stopBtn = new System.Windows.Forms.PictureBox();
+            this.startBtn = new System.Windows.Forms.PictureBox();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.closeBtn = new MetroFramework.Controls.MetroButton();
-            this.startBtn = new System.Windows.Forms.PictureBox();
-            this.stopBtn = new System.Windows.Forms.PictureBox();
             this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.startBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stopBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startBtn)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -52,6 +52,26 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(697, 40);
             this.panel3.TabIndex = 4;
+            // 
+            // stopBtn
+            // 
+            this.stopBtn.Image = ((System.Drawing.Image)(resources.GetObject("stopBtn.Image")));
+            this.stopBtn.Location = new System.Drawing.Point(35, 10);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(23, 24);
+            this.stopBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.stopBtn.TabIndex = 6;
+            this.stopBtn.TabStop = false;
+            // 
+            // startBtn
+            // 
+            this.startBtn.Image = ((System.Drawing.Image)(resources.GetObject("startBtn.Image")));
+            this.startBtn.Location = new System.Drawing.Point(6, 10);
+            this.startBtn.Name = "startBtn";
+            this.startBtn.Size = new System.Drawing.Size(23, 24);
+            this.startBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.startBtn.TabIndex = 5;
+            this.startBtn.TabStop = false;
             // 
             // richTextBox
             // 
@@ -83,26 +103,6 @@
             this.closeBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.closeBtn.UseSelectable = true;
             // 
-            // startBtn
-            // 
-            this.startBtn.Image = ((System.Drawing.Image)(resources.GetObject("startBtn.Image")));
-            this.startBtn.Location = new System.Drawing.Point(6, 10);
-            this.startBtn.Name = "startBtn";
-            this.startBtn.Size = new System.Drawing.Size(23, 24);
-            this.startBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.startBtn.TabIndex = 5;
-            this.startBtn.TabStop = false;
-            // 
-            // stopBtn
-            // 
-            this.stopBtn.Image = ((System.Drawing.Image)(resources.GetObject("stopBtn.Image")));
-            this.stopBtn.Location = new System.Drawing.Point(35, 10);
-            this.stopBtn.Name = "stopBtn";
-            this.stopBtn.Size = new System.Drawing.Size(23, 24);
-            this.stopBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.stopBtn.TabIndex = 6;
-            this.stopBtn.TabStop = false;
-            // 
             // TunnelWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -118,13 +118,13 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "TunnelWindow";
             this.Padding = new System.Windows.Forms.Padding(23, 35, 23, 22);
-            this.Style = MetroFramework.MetroColorStyle.Orange;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "TunnelWindow";
             this.Load += new System.EventHandler(this.TunnelWindow_Load);
             this.panel3.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.startBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stopBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startBtn)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -1,48 +1,43 @@
 ﻿using KTA_Visor_DSClient.install.settings;
-
+using KTA_Visor_DSClient.module.Management.bootloader;
 using KTA_Visor_DSClient.module.Management.events;
 using KTA_Visor_DSClient.module.Management.view;
 using KTA_Visor_DSClient.module.Shared;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using System;
-using System.Windows.Forms;
+using System.Threading;
 
 namespace KTA_Visor_DSClient.module.Management
 {
-    public partial class Entrypoint : Form
+    internal class EntryPoint
     {
         public event EventHandler<OnExceptionOccuredEvent> OnExceptionOccured;
 
-        private Settings settings;
-        private readonly BootLoader bootLoader;
+        private readonly Settings _settings;
+        private readonly KTALogger.Logger _logger;
+        private readonly Bootloader _bootLoader;
         private readonly SettingsManager settingsManagerView;
 
-        public Entrypoint()
+        public EntryPoint(KTALogger.Logger logger)
         {
-            InitializeComponent();
-            this.settings = new Settings();
-            this.bootLoader = new BootLoader();
-            this.settingsManagerView = new SettingsManager(Globals.Logger, this.settings);
+            this._settings = new Settings();
+            this._logger = logger;
+
+            this._bootLoader = new Bootloader(this._settings, this._logger);
+            this.settingsManagerView = new SettingsManager(this._logger, this._settings);
         }
 
-        private void Entry_Load(object sender, EventArgs e)
+        public void Run()
         {
-            try
+            if (!this._settings.SettingsObj.app.installed && !this._settings.SettingsObj.app.configured)
             {
-                if (!this.settings.SettingsObj.app.installed && !this.settings.SettingsObj.app.configured)
-                {
-                    this.settingsManagerView.ShowDialog();
-                    return;
-                }
-
-
-                this.bootLoader.Load();
+                this.settingsManagerView.ShowDialog();
+                return;
             }
-            catch (Exception ex)
-            {
-                this.OnExceptionOccured?.Invoke(this, new OnExceptionOccuredEvent(ex));
-            }
+
+            this._bootLoader.Load();
         }
- 
+
+   
     }
 }

@@ -42,13 +42,18 @@ typedef struct
 {
 	char video_res;			
 	/* Video resolution. 
-		0: 2560x1440P30 
-		1: 2304x1296P30 
-		2: 1920x1080P30 
-		3: 1280x720P30 
-		4: 848x480P30
+		0:2688x1512P30
+		1: 2560x1440P30 
+		2: 2304x1296P30 
+		3: 1920x1080P30 
+		4: 1280x720P30 
+		5: 848x480P30
+		6:1920x1080P20
+		7:1280X720P20
+		8:848X480XP20
 	*/
-	char video_quality;		
+	char video_quality;	
+
 	/* Video quality	
 		0: Super Fine 
 		1: Fine 

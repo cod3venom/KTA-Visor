@@ -78,8 +78,8 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
                     return;
                 }
 
-                this.Hide();
                 new Management.view.Management(signInEntity).Show();
+                this.Close();
 
             }
             catch (Exception ex)

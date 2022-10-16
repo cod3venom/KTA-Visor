@@ -1,5 +1,7 @@
 ﻿using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.filter.command;
+using MetroFramework;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,10 +62,13 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.filter
         {
             if (this.SelectedColumnIndex == -1)
             {
-                MessageBox.Show("Proszę najpierw wybrać kolumnę na którą chcesz dokonać filtrowanie");
+                MessageBox.Show("Proszę najpierw wybrać kolumnę na którą chcesz dokonać filtrowanie", "Błąd");
                 return;
             }
 
+            if (this.table.ColumnCombobx.SelectedValue == null || this.table.ColumnSortByCombobx.SelectedValue == null){
+                return;
+            }
 
             string columnName = this.table.ColumnCombobx.SelectedValue.ToString();
             string filterOption = this.table.ColumnSortByCombobx.SelectedValue.ToString();

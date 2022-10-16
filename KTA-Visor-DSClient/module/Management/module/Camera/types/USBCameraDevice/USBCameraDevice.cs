@@ -50,15 +50,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("Files")]
-        public FileInfo[] Files
-        {
-            get { return this.getFiles(); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public int Index { get; set; }
 
 
@@ -117,10 +108,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             return this;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         private string getDiskUsage()
         {
             string totalSpaceGB = FileSizeHelper.convertSize(this.Drive.TotalSize);
@@ -129,63 +116,16 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             return string.Format("{0}/{1}", usedSpaceGB.ToString(), totalSpaceGB.ToString());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public FileInfo[] getFiles()
+        public List<FileInfo> Files
         {
-            DirectoryInfo directory = new DirectoryInfo(this.Drive + @"\DCIM\100MEDIA\");
-            if (!directory.Exists) return new FileInfo[] { };
-
-            return directory.GetFiles();
-        }
-
-        public Dictionary<string, FileInfo> getFilesAsDict()
-        {
-            Dictionary<string, FileInfo> dict = new Dictionary<string, FileInfo>();
-            this.getFiles().ToArray().ToList().ForEach((file) => dict.Add(file.Name, file));
-            return dict;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="destination"></param>
-        /// <returns></returns>
-        /// <exception cref="CameraUSBDeviceDirectoryNotFoundException"></exception>
-        public USBCameraDevice copyFilesTo(string destination)
-        {
-            if (!Directory.Exists(destination)) 
-                throw new CameraUSBDeviceDirectoryNotFoundException("Destination folder not found");
-
-            DirectoryInfo destinationDir = new DirectoryInfo(destination);
-
-            foreach(FileInfo file in this.getFiles())
+            get
             {
-                if (!file.Exists) continue;
-                if (destinationDir.GetFiles().Contains(file)) continue;
+                DirectoryInfo directory = new DirectoryInfo(this.Drive + @"\DCIM\100MEDIA\");
+                if (!directory.Exists) return new List<FileInfo>() { };
 
-                destination = String.Format("{0}{1}", destination, file.Name);
-                File.Copy(file.FullName, destination);
+                return directory.GetFiles().ToList();
             }
-            return this;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() 
-        {
-            return new StringBuilder()
-                .Append("<USBCameraDevice: ")
-                .Append("SerialNumber: " + this.SerialNumber)
-                .Append(", DriveLetter: " + this.Drive?.Name)
-                .Append(", TotalFiles: " + this.getFiles().Length)
-                .Append("/>")
-                .ToString();
-        }
-
          
     }
 }

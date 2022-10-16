@@ -12,13 +12,28 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>\\DESKTOP-U3IGIUN\Users\docking_station_1\Desktop\shared_for_remote_debugging\</OutputPath>
+    <OutputPath>C:\Users\venom\source\repos\KTA-Visor\KTA-Visor-DSClient\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -39,7 +54,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bunifu_UI_v1.5.3">
+    <Reference Include="Bunifu_UI_v1.5.3, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
     <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
@@ -48,6 +64,10 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sdk.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Falcon-Legacy_DLLS\Sdk.Core\Sdk.Core\bin\Debug\Sdk.Core.dll</HintPath>
     </Reference>
     <Reference Include="Splicer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a66524ed949429f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Splicer.1.1\lib\net45\Splicer.dll</HintPath>
@@ -70,22 +90,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="components\basic\table\Table.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="components\basic\table\Table.Designer.cs">
-      <DependentUpon>Table.cs</DependentUpon>
-    </Compile>
     <Compile Include="install\Installer.cs" />
     <Compile Include="install\settings\dto\SettingsFileTObject.cs" />
     <Compile Include="install\settings\Settings.cs" />
-    <Compile Include="kernel\Hardware\DeviceWatcher\events\DriveChangedEventArgs.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\events\OnFoundPortByBadgeId.cs" />
+    <Compile Include="kernel\sharedKernel\ThreadPool\ThreadPoolManager.cs" />
+    <Compile Include="module\Management\bootloader\Bootloader.cs" />
+    <Compile Include="module\Management\bootloader\handlers\StationInitHandler.cs" />
+    <Compile Include="module\Management\bootloader\handlers\TunnelInitHandler.cs" />
+    <Compile Include="module\Management\bootloader\handlers\CamerasWatcherInitHandler.cs" />
+    <Compile Include="module\Management\bootloader\handlers\PowerSupplyInitHandler.cs" />
+    <Compile Include="module\Management\bootloader\handlers\AutoStartHandler.cs" />
+    <Compile Include="module\Management\bootloader\handlers\BackendInitHandler.cs" />
+    <Compile Include="module\Management\bootloader\interfaces\IBootLoaderHandler.cs" />
+    <Compile Include="module\Management\EntryPoint.cs" />
     <Compile Include="module\Management\module\Camera\CameraDeviceWatcher.cs" />
     <Compile Include="module\Management\module\Camera\command\memory\CamerasGlobalMemoryHandler.cs" />
     <Compile Include="module\Management\module\Camera\command\memory\RemoveAllCamerasFromTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
+    <Compile Include="module\Management\module\Camera\handler\CameraFilesTransferingHandler.cs" />
     <Compile Include="module\Management\module\Camera\service\CameraPowerService.cs" />
     <Compile Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\LocalSettingsTObject.cs" />
     <Compile Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\USBCameraDeviceSettings.cs" />
@@ -96,7 +120,6 @@
     <Compile Include="module\Management\module\Camera\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
     <Compile Include="module\Management\module\Camera\types\USBCameraDevice\USBCameraDeviceList.cs" />
     <Compile Include="kernel\generator\RandomData.cs" />
-    <Compile Include="kernel\Hardware\DeviceWatcher\DeviceWatcher.cs" />
     <Compile Include="kernel\Hardware\Hardware.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\USBDeviceRelay.cs" />
     <Compile Include="kernel\helper\EmbededFileHelper.cs" />
@@ -112,12 +135,6 @@
     <Compile Include="kernel\sharedKernel\LocalStorage\LocalStorage.cs" />
     <Compile Include="module\Management\module\clientTunnel\ClientTunnel.cs" />
     <Compile Include="module\Management\module\clientTunnel\events\OnRequestReceivedInTunnelEvent.cs" />
-    <Compile Include="module\Management\Entrypoint.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Management\Entrypoint.Designer.cs">
-      <DependentUpon>Entrypoint.cs</DependentUpon>
-    </Compile>
     <Compile Include="module\Management\events\OnExceptionOccuredEvent.cs" />
     <Compile Include="module\Management\module\Camera\command\filesystem\MergeCopiedVideosIntoOneCommand.cs" />
     <Compile Include="module\Management\module\Camera\controller\CameraController.cs" />
@@ -154,19 +171,10 @@
       <DependentUpon>USBRelayItem.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Shared\GlobalController.cs" />
-    <Compile Include="module\Shared\Globals\events\OnStationInitializedEvent.cs" />
-    <Compile Include="module\Shared\Globals\events\OnBackendInitializedEvent.cs" />
     <Compile Include="module\Shared\Globals\Globals.cs" />
-    <Compile Include="module\Shared\Globals\BootLoader.cs" />
     <Compile Include="module\Shared\Util\HttpClientUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="components\basic\table\Table.resx">
-      <DependentUpon>Table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Management\Entrypoint.resx">
-      <DependentUpon>Entrypoint.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="module\Management\module\PowerSupply\component\USBRelayItem\USBRelayItem.resx">
       <DependentUpon>USBRelayItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +190,7 @@
       <CustomToolNamespace>KTA_Visor_DSClient.install.settings.Settings.json</CustomToolNamespace>
     </EmbeddedResource>
     <None Include="app.manifest" />
+    <None Include="log4net.config" />
     <None Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\LocalSettings.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -203,7 +212,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="kernel\CameraDevice\" />
+    <Folder Include="components\" />
     <Folder Include="module\Management\module\Camera\types\USBCameraDevice\interfaces\" />
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +255,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\magicWand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,27 +16,26 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         public async void Blink(CameraEntity cameraEntity)
         {
             USBCameraDevice cameraDevice = Globals.CAMERAS_LIST.Find((camera) => camera.BadgeId == cameraEntity?.data?.badgeId);
-            if (cameraDevice == null)
+            if (cameraDevice == null){
                 return;
+            }
 
             int portNumber = Globals.Relay.findPortByBadgeId(cameraEntity?.data?.badgeId);
 
-            if (portNumber == 0)
+            if (portNumber == 0){
                 return;
+            }
 
 
-            Thread.Sleep(1000);
-            Globals.Relay.turnOffAll();
-            Thread.Sleep(3000);
+            Globals.Relay.turnOffAll(0);
 
             for (int i = 0; i <= 10; i++)
             {
                 Globals.Relay.turnOffByPort(portNumber);
-                Thread.Sleep(1000);
+                Thread.Sleep(10);
                 Globals.Relay.turnOnByPort(portNumber);
             }
 
-            Thread.Sleep(8000);
             Globals.ALLOW_FS_MOUNTING = true;
             Globals.Relay.turnOnAll();
         }

@@ -62,32 +62,16 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
                 camera.Drive?.Name
              ));
 
-            this.notifyMaster(client);
         }
 
-        private async void editOnBackend(USBCameraDevice camera, ClientTunnel client)
+        private void editOnBackend(USBCameraDevice camera, ClientTunnel client)
         {
-            var result = await this.cameraService.editByCustomId(camera.ID, new EditCameraRequestTObject(camera.Index, camera.ID, camera.BadgeId, "",
+            _ = this.cameraService.editByCustomId(camera.ID, new EditCameraRequestTObject(camera.Index, camera.ID, camera.BadgeId, "",
                 Globals.STATION.data.stationId,
                 camera.Drive.Name,
                 false
             ));
 
-            this.notifyMaster(client);
-        }
-
-        private void notifyMaster(ClientTunnel client)
-        {
-            if (client == null)
-            {
-                return;
-            }
-
-            client.Emit(new Request(
-               "response://cameras/refresh",
-               null,
-               client.ClientObject
-           ));
         }
     }
 }

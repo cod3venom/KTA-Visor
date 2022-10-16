@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style TargetType="{x:Type Hyperlink}">
+    <Setter Property="TextElement.Foreground" Value="{DynamicResource Hyperlink}"/>
+    <Setter Property="Inline.TextDecorations" Value="Underline"/>
+    <Style.Triggers>
+      <Trigger Property="ContentElement.IsMouseOver" Value="true">
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource HyperlinkHover}"/>
+      </Trigger>
+      <Trigger Property="ContentElement.IsEnabled" Value="false">
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource HyperlinkDisabled}"/>
+      </Trigger>
+      <Trigger Property="ContentElement.IsEnabled" Value="true">
+        <Setter Property="FrameworkContentElement.Cursor" Value="Hand"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>

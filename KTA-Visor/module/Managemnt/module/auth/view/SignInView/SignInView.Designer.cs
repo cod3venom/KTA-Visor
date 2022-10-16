@@ -98,7 +98,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
             this.passwordTxt.CustomButton.UseSelectable = true;
             this.passwordTxt.CustomButton.Visible = false;
             this.passwordTxt.Lines = new string[] {
-        "admin1234"};
+        "admin123"};
             this.passwordTxt.Location = new System.Drawing.Point(54, 174);
             this.passwordTxt.MaxLength = 32767;
             this.passwordTxt.Name = "passwordTxt";
@@ -110,7 +110,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
             this.passwordTxt.ShortcutsEnabled = true;
             this.passwordTxt.Size = new System.Drawing.Size(227, 23);
             this.passwordTxt.TabIndex = 23;
-            this.passwordTxt.Text = "admin1234";
+            this.passwordTxt.Text = "admin123";
             this.passwordTxt.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.passwordTxt.UseSelectable = true;
             this.passwordTxt.UseSystemPasswordChar = true;
@@ -191,7 +191,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
             this.signUpLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.signUpLink.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpLink.ForeColor = System.Drawing.Color.Gray;
-            this.signUpLink.Location = new System.Drawing.Point(193, 260);
+            this.signUpLink.Location = new System.Drawing.Point(192, 260);
             this.signUpLink.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.signUpLink.Name = "signUpLink";
             this.signUpLink.Size = new System.Drawing.Size(86, 15);
@@ -204,7 +204,7 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
             this.questionLbl.BackColor = System.Drawing.Color.Transparent;
             this.questionLbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.questionLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.questionLbl.Location = new System.Drawing.Point(63, 260);
+            this.questionLbl.Location = new System.Drawing.Point(66, 260);
             this.questionLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.questionLbl.Name = "questionLbl";
             this.questionLbl.Size = new System.Drawing.Size(130, 15);

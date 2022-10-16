@@ -40,16 +40,22 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column
             DataGridViewColumn columnUI = new DataGridViewColumn();
             switch(column.Type)
             {
-                case "text":
+                case enums.ColumnType.TEXT:
                     columnUI = new DataGridViewTextBoxColumn();
                     break;
 
-                case "checkbox":
+                case enums.ColumnType.CHECKBOX:
                     columnUI = new DataGridViewCheckBoxColumn();
                     break;
 
-                case "button":
+                case enums.ColumnType.BUTTON:
                     columnUI = new DataGridViewButtonColumn();
+                    break;
+
+                case enums.ColumnType.IMAGE:
+                    DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+                    imageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                    columnUI = imageColumn;
                     break;
 
             }
@@ -57,6 +63,11 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column
             columnUI.Name = column.Name;
             columnUI.HeaderText = column.Name;
             columnUI.ReadOnly = column.ReadOnly;
+
+            if (column.Width != - 1)
+            {
+                columnUI.Width = column.Width;
+            }
 
             this.table.DataGridView.Columns.Add(columnUI);
 

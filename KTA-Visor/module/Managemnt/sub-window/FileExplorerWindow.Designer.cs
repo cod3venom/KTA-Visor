@@ -49,7 +49,7 @@
             this.DisplayHeader = false;
             this.Name = "FileExplorerWindow";
             this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
-            this.Style = MetroFramework.MetroColorStyle.Orange;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "FileExplorerWindow";
             this.ResumeLayout(false);
 

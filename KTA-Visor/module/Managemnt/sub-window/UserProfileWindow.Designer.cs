@@ -29,17 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.nameTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
-            this.nameLbl = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lastNameTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.emailTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
-            this.emailLbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.bunifuCustomTextbox1 = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,10 +37,21 @@
             this.bunifuCustomTextbox3 = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.passwordLbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.emailTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.emailLbl = new System.Windows.Forms.Label();
+            this.lastNameTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nameTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.nameLbl = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.metroButton2 = new MetroFramework.Controls.MetroButton();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -68,126 +68,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(862, 571);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.metroButton2);
-            this.panel1.Controls.Add(this.metroButton1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(20, 564);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(862, 37);
-            this.panel1.TabIndex = 1;
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Location = new System.Drawing.Point(755, 8);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(93, 23);
-            this.metroButton1.Style = MetroFramework.MetroColorStyle.Orange;
-            this.metroButton1.TabIndex = 0;
-            this.metroButton1.Text = "Zapisz";
-            this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
-            // metroButton2
-            // 
-            this.metroButton2.Location = new System.Drawing.Point(645, 8);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(93, 23);
-            this.metroButton2.Style = MetroFramework.MetroColorStyle.Orange;
-            this.metroButton2.TabIndex = 1;
-            this.metroButton2.Text = "Zamknij";
-            this.metroButton2.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.emailTxt);
-            this.panel2.Controls.Add(this.emailLbl);
-            this.panel2.Controls.Add(this.lastNameTxt);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.nameTxt);
-            this.panel2.Controls.Add(this.nameLbl);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(425, 565);
-            this.panel2.TabIndex = 0;
-            // 
-            // nameTxt
-            // 
-            this.nameTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.nameTxt.Location = new System.Drawing.Point(101, 46);
-            this.nameTxt.Margin = new System.Windows.Forms.Padding(2);
-            this.nameTxt.Name = "nameTxt";
-            this.nameTxt.Size = new System.Drawing.Size(186, 20);
-            this.nameTxt.TabIndex = 39;
-            // 
-            // nameLbl
-            // 
-            this.nameLbl.AutoSize = true;
-            this.nameLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLbl.ForeColor = System.Drawing.Color.Black;
-            this.nameLbl.Location = new System.Drawing.Point(58, 46);
-            this.nameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.nameLbl.Name = "nameLbl";
-            this.nameLbl.Size = new System.Drawing.Size(29, 14);
-            this.nameLbl.TabIndex = 40;
-            this.nameLbl.Text = "Imię";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(14, 11);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 10);
-            this.label2.TabIndex = 41;
-            this.label2.Text = "Profil";
-            // 
-            // lastNameTxt
-            // 
-            this.lastNameTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.lastNameTxt.Location = new System.Drawing.Point(101, 85);
-            this.lastNameTxt.Margin = new System.Windows.Forms.Padding(2);
-            this.lastNameTxt.Name = "lastNameTxt";
-            this.lastNameTxt.Size = new System.Drawing.Size(186, 20);
-            this.lastNameTxt.TabIndex = 42;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(30, 87);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 14);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "Nazwisko";
-            // 
-            // emailTxt
-            // 
-            this.emailTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.emailTxt.Location = new System.Drawing.Point(101, 126);
-            this.emailTxt.Margin = new System.Windows.Forms.Padding(2);
-            this.emailTxt.Name = "emailTxt";
-            this.emailTxt.Size = new System.Drawing.Size(186, 20);
-            this.emailTxt.TabIndex = 44;
-            // 
-            // emailLbl
-            // 
-            this.emailLbl.AutoSize = true;
-            this.emailLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailLbl.ForeColor = System.Drawing.Color.Black;
-            this.emailLbl.Location = new System.Drawing.Point(13, 129);
-            this.emailLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.emailLbl.Name = "emailLbl";
-            this.emailLbl.Size = new System.Drawing.Size(74, 14);
-            this.emailLbl.TabIndex = 45;
-            this.emailLbl.Text = "Adres E-mail";
             // 
             // panel3
             // 
@@ -279,6 +159,128 @@
             this.label6.TabIndex = 41;
             this.label6.Text = "Profil";
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.emailTxt);
+            this.panel2.Controls.Add(this.emailLbl);
+            this.panel2.Controls.Add(this.lastNameTxt);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.nameTxt);
+            this.panel2.Controls.Add(this.nameLbl);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(425, 565);
+            this.panel2.TabIndex = 0;
+            // 
+            // emailTxt
+            // 
+            this.emailTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.emailTxt.Location = new System.Drawing.Point(101, 126);
+            this.emailTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.emailTxt.Name = "emailTxt";
+            this.emailTxt.Size = new System.Drawing.Size(186, 20);
+            this.emailTxt.TabIndex = 44;
+            // 
+            // emailLbl
+            // 
+            this.emailLbl.AutoSize = true;
+            this.emailLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailLbl.ForeColor = System.Drawing.Color.Black;
+            this.emailLbl.Location = new System.Drawing.Point(13, 129);
+            this.emailLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.emailLbl.Name = "emailLbl";
+            this.emailLbl.Size = new System.Drawing.Size(74, 14);
+            this.emailLbl.TabIndex = 45;
+            this.emailLbl.Text = "Adres E-mail";
+            // 
+            // lastNameTxt
+            // 
+            this.lastNameTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.lastNameTxt.Location = new System.Drawing.Point(101, 85);
+            this.lastNameTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.lastNameTxt.Name = "lastNameTxt";
+            this.lastNameTxt.Size = new System.Drawing.Size(186, 20);
+            this.lastNameTxt.TabIndex = 42;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(30, 87);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 14);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "Nazwisko";
+            // 
+            // nameTxt
+            // 
+            this.nameTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.nameTxt.Location = new System.Drawing.Point(101, 46);
+            this.nameTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.nameTxt.Name = "nameTxt";
+            this.nameTxt.Size = new System.Drawing.Size(186, 20);
+            this.nameTxt.TabIndex = 39;
+            // 
+            // nameLbl
+            // 
+            this.nameLbl.AutoSize = true;
+            this.nameLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLbl.ForeColor = System.Drawing.Color.Black;
+            this.nameLbl.Location = new System.Drawing.Point(58, 46);
+            this.nameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.nameLbl.Name = "nameLbl";
+            this.nameLbl.Size = new System.Drawing.Size(29, 14);
+            this.nameLbl.TabIndex = 40;
+            this.nameLbl.Text = "Imię";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(14, 11);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 10);
+            this.label2.TabIndex = 41;
+            this.label2.Text = "Profil";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.metroButton2);
+            this.panel1.Controls.Add(this.metroButton1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(20, 564);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(862, 37);
+            this.panel1.TabIndex = 1;
+            // 
+            // metroButton2
+            // 
+            this.metroButton2.Location = new System.Drawing.Point(645, 8);
+            this.metroButton2.Name = "metroButton2";
+            this.metroButton2.Size = new System.Drawing.Size(93, 23);
+            this.metroButton2.Style = MetroFramework.MetroColorStyle.Orange;
+            this.metroButton2.TabIndex = 1;
+            this.metroButton2.Text = "Zamknij";
+            this.metroButton2.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroButton2.UseSelectable = true;
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(755, 8);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(93, 23);
+            this.metroButton1.Style = MetroFramework.MetroColorStyle.Orange;
+            this.metroButton1.TabIndex = 0;
+            this.metroButton1.Text = "Zapisz";
+            this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroButton1.UseSelectable = true;
+            // 
             // UserProfileWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,15 +291,15 @@
             this.DisplayHeader = false;
             this.Name = "UserProfileWindow";
             this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
-            this.Style = MetroFramework.MetroColorStyle.Orange;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "UserProfileWindow";
             this.Load += new System.EventHandler(this.UserProfileWindow_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

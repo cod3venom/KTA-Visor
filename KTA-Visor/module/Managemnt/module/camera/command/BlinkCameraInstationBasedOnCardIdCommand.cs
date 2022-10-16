@@ -27,7 +27,10 @@ namespace KTA_Visor.module.Managemnt.module.camera.command
 
             CameraEntity camera = await new CameraService().findByCardId(cardId);
             if (camera.data == null)
+            {
+                MessageBox.Show("Nie znależiono kamery o takim ID");
                 return;
+            }
 
 
             StationEntity station = await new StationService().findByStationId(camera.data.stationId);
@@ -35,7 +38,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.command
             if (station.data == null)
                 return;
 
-            TCPClientTObject stationClient = Globals.CLIENTS_LIST.Find((TCPClientTObject client) => client.getIpAddress() == station.data.stationIp);
+            TCPClientTObject stationClient = Globals.Server.Clients.Find((TCPClientTObject client) => client.IpAddress == station.data.stationIp);
 
             if (stationClient == null)
                 return;

@@ -1,6 +1,7 @@
 ﻿using KTA_Visor.install;
 using KTA_Visor.install.settings;
 using KTA_Visor.module.Managemnt.module.auth.view.SignInView;
+using KTA_Visor.module.Managemnt.server;
 using KTA_Visor.module.Managemnt.workers.tunnel;
 using KTA_Visor.module.Shared.Global;
 using KTAVisorAPISDK.kernel.module.HttpClientHelper;
@@ -71,14 +72,14 @@ namespace KTA_Visor.module.Managemnt.view
  
         private async Task<HttpClientHelper> initializeKTAVISORAPISDK()
         {
-            HttpClientUtil.initializeHttpClient("http://localhost:8000/api");
-            HttpClientUtil.initializeSecuredClient("http://localhost:8000/api");
+            HttpClientUtil.initializeHttpClient("https://api.kta-visor.stage.skillsforge.pl");
+            HttpClientUtil.initializeSecuredClient("https://api.kta-visor.stage.skillsforge.pl"); ;
             return HttpClientUtil.httpClient;
         }
 
-        private async Task<ServerTunnelBackgroundWorker> initializeServerTunnel()
+        private async Task<ServerTunnel> initializeServerTunnel()
         {
-            Globals.ServerTunnelBackgroundWorker = new ServerTunnelBackgroundWorker(new ServerConfigTObject(
+            Globals.Server = new ServerTunnel(new ServerConfigTObject(
                     "Management",
                      settings.SettingsObj?.app?.tunnel?.serverIp,
                      settings.SettingsObj.app.tunnel.serverPort
@@ -86,7 +87,7 @@ namespace KTA_Visor.module.Managemnt.view
                 Globals.Logger
             );
 
-            return Globals.ServerTunnelBackgroundWorker;
+            return Globals.Server;
         }
     }
 }

@@ -24,15 +24,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         public CameraDeviceSettingsService()
         {
             this.falconProtocol = new FalconProtocol();
-            this.hookEvents();
         }
 
- 
-        private void hookEvents()
-        {
-            
-            Globals.Relay.OnFoundPortByBadgeId += onFoundPortNumberByBadgeId;
-        }
 
         private void onFoundPortNumberByBadgeId(object sender, OnFoundPortByBadgeId e)
         {
@@ -75,7 +68,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             Globals.Relay.turnOnByPort(portNumber);
 
             Thread.Sleep(8000);
-            bool isConnected = this.falconProtocol.Connect();
+            this.falconProtocol.Connect();
          
             var menuStruct = this.falconProtocol.GetMenuConfig(device.Index);
             menuStruct.video_res = Convert.ToByte(camera.settings.resolution);

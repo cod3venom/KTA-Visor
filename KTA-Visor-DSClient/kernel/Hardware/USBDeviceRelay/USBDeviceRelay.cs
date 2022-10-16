@@ -16,7 +16,6 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
 {
     public class USBDeviceRelay: KTA_USB_Relay.Relay
     {
-        public event EventHandler<OnFoundPortByBadgeId> OnFoundPortByBadgeId;
 
         public USBDeviceRelay(string portName,int baudRate, Parity parity, int dataBits, StopBits stopBit, KTALogger.Logger logger): base(portName, baudRate, parity, dataBits, stopBit, logger)
         {
@@ -36,7 +35,6 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
             {
                 if (!this.assignRelayPortToTheCamera(portNumber, ref requestedDevice))
                     continue;
-                //this.OnFoundPortByBadgeId?.Invoke(this, new events.OnFoundPortByBadgeId(portNumber, requestedDevice));
                 return portNumber;
             }
             return -1;

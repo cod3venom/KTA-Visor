@@ -6,42 +6,44 @@ using System.Threading.Tasks;
 
 namespace TCPTunnel.kernel.types
 {
-    public class TCPClientList<TKey, TValue> : Dictionary<string, TCPClientTObject>
+    public class TCPClientList: List<TCPClientTObject>
     {
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="client"></param>
-        /// <param name="allowDuplicate"></param>
-        /// <returns></returns>
-        public TCPClientList<TKey, TValue> addClient(string key, TCPClientTObject client, bool allowDuplicate = false)
+        public TCPClientList addClient(TCPClientTObject client, bool allowDuplicate = false)
         {
             if (allowDuplicate)
             {
-                this.Add(key, client);
+                this.Add(client);
                 return this;
             }
 
 
-            if (!this.ContainsKey(key)) this.Add(key, client);
-
+            TCPClientTObject existedClient = this.Find((TCPClientTObject _client)=> _client.IpAddress == client.IpAddress);
+            if (existedClient == null)
+            {
+                this.Add(client);
+            }
             return this;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="client"></param>
-        /// <returns></returns>
-        public TCPClientList<TKey, TValue> removeClient(string key)
+        public TCPClientList removeClient(TCPClientTObject client)
         {
-            if (this.ContainsKey(key)) this.Remove(key);
-
+            TCPClientTObject existedClient = this.Find((TCPClientTObject _client)=> _client.IpAddress == client.IpAddress);
+            this.Remove(existedClient);
             return this;
+        }
+
+        public TCPClientTObject findByStationCustomId(string customId)
+        {
+            foreach(TCPClientTObject client in this)
+            {
+                if (client.AuthData?.Identificator == customId)
+                {
+                    return client;
+                }
+            }
+
+            return null;
         }
     }
 }

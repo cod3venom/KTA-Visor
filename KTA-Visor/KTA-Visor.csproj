@@ -325,18 +325,18 @@
     <Compile Include="kernel\sharedKernel\bootstrap\watcher\watchers\UnauthorizedWatcher.cs" />
     <Compile Include="kernel\sharedKernel\helper\DTOHelper\util\DTOHelperStruct.cs" />
     <Compile Include="kernel\sharedKernel\helper\LocalStorage\LocalStorage.cs" />
+    <Compile Include="kernel\sharedKernel\interfaces\IControllerInterface.cs" />
     <Compile Include="kernel\sharedKernel\interfaces\IModuleInterface.cs" />
     <Compile Include="kernel\sharedKernel\interfaces\ISharedKernelInterface.cs" />
     <Compile Include="kernel\sharedKernel\SharedKernel.cs" />
+    <Compile Include="kernel\sharedKernel\types\ModulesManager.cs" />
     <Compile Include="kernel\sharedKernel\util\HttpClientUtil.cs" />
-    <Compile Include="module\Managemnt\command\RemoveClientToTheGlobalMemoryCommand.cs" />
-    <Compile Include="module\Managemnt\command\AddClientToTheGlobalMemoryCommand.cs" />
     <Compile Include="module\Managemnt\events\OnMessageReceivedFromClient.cs" />
     <Compile Include="module\Managemnt\events\OnServerStoppedEvent.cs" />
     <Compile Include="module\Managemnt\events\OnServerStartedEvent.cs" />
     <Compile Include="module\Managemnt\events\OnClientDisconnected.cs" />
     <Compile Include="module\Managemnt\events\OnClientConnected.cs" />
-    <Compile Include="module\Managemnt\interfaces\IModuleInterface.cs" />
+    <Compile Include="module\Managemnt\interfaces\IUIHandlerInterface.cs" />
     <Compile Include="module\Managemnt\module\auth\view\SignInView\SignInView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,11 +356,16 @@
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\CameraItem.Designer.cs">
       <DependentUpon>CameraItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\camera\components\CameraItem\commands\filesystem\CopyFilesToUSBCommand.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\ContextMenu\ContextMenuCopyFilesToDiskClickEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\OnCloseCameraItemFormEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\ContextMenu\ContextMenuCopyFilesToUSBClickEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\OnOpenCameraItemEvent.cs" />
+    <Compile Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.Designer.cs">
+      <DependentUpon>ZipperForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\Managemnt\module\camera\components\CameraNotification\CameraNotificationWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,25 +376,54 @@
     <Compile Include="module\Managemnt\module\camera\components\CameraNotification\events\CameraNotificationViewNextPositionEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraNotification\globals\CameraNotificationWindowGlobals.cs" />
     <Compile Include="module\Managemnt\module\camera\events\OnCameraCRUDEvent.cs" />
-    <Compile Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.cs">
+    <Compile Include="module\Managemnt\module\camera\form\Settings\CameraItemSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.Designer.cs">
+    <Compile Include="module\Managemnt\module\camera\form\Settings\CameraItemSettingsForm.Designer.cs">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\cardReader\CardReader.cs" />
+    <Compile Include="module\Managemnt\module\camera\form\FileEncryption\events\OnSaveFileEncryptionPasswordsEvent.cs" />
+    <Compile Include="module\Managemnt\module\camera\form\FileEncryption\FileEncryptionWithPasswordWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\camera\form\FileEncryption\FileEncryptionWithPasswordWindow.Designer.cs">
+      <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\Managemnt\module\cardReader\events\OnCardReadedEvent.cs" />
-    <Compile Include="module\Managemnt\module\fileManager\view\FileManagerViewPanel\FileManagerViewPanel.cs">
+    <Compile Include="module\Managemnt\module\cardReader\form\CardModeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\cardReader\form\CardModeWindow.Designer.cs">
+      <DependentUpon>CardModeWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\clientsManager\ClientsManagerModule.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\fileManager\view\FileManagerViewPanel\FileManagerViewPanel.Designer.cs">
-      <DependentUpon>FileManagerViewPanel.cs</DependentUpon>
+    <Compile Include="module\Managemnt\module\clientsManager\view\ClientsManagerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\clientsManager\view\ClientsManagerView.Designer.cs">
+      <DependentUpon>ClientsManagerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\fileManager\FileManagerModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\fileManager\view\FileManagerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\fileManager\view\FileManagerView.Designer.cs">
+      <DependentUpon>FileManagerView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\fileManager\view\form\FileHistoryRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\Managemnt\module\fileManager\view\form\FileHistoryRecordForm.Designer.cs">
       <DependentUpon>FileHistoryRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\hardReset\command\HardResetCommand.cs" />
+    <Compile Include="module\Managemnt\module\hardReset\HardResetModule.cs" />
+    <Compile Include="module\Managemnt\module\logs\LogsModule.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\Managemnt\module\logs\view\LogsView.cs">
       <SubType>Form</SubType>
@@ -398,9 +432,7 @@
       <DependentUpon>LogsView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\station\command\DisplayCamerasOfSelectedStationCommand.cs" />
-    <Compile Include="module\Managemnt\module\station\command\DisplayFetchedStationInTableCommand.cs" />
     <Compile Include="module\Managemnt\module\station\command\HandleStationContextMenuClickEventCommand.cs" />
-    <Compile Include="module\Managemnt\module\station\command\RestartAllStationsConnectionsCommand.cs" />
     <Compile Include="module\Managemnt\module\station\components\ClientsList\ClientsList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -421,11 +453,16 @@
     </Compile>
     <Compile Include="module\Managemnt\module\station\controller\StationController.cs" />
     <Compile Include="module\Managemnt\module\station\events\OnRefreshCamerasListEvent.cs" />
-    <Compile Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.cs">
+    <Compile Include="module\Managemnt\module\station\handlers\CamerasUIHandler.cs" />
+    <Compile Include="module\Managemnt\module\station\handlers\StationsUIHandler.cs" />
+    <Compile Include="module\Managemnt\module\station\StationModule.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.Designer.cs">
-      <DependentUpon>StationViewPanel.cs</DependentUpon>
+    <Compile Include="module\Managemnt\module\station\view\StationView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\station\view\StationView.Designer.cs">
+      <DependentUpon>StationView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\user\consts\UserRole.cs" />
     <Compile Include="module\Managemnt\sub-window\FileExplorerWindow.cs">
@@ -452,6 +489,12 @@
     <Compile Include="module\Managemnt\sub-window\VersionWindow.Designer.cs">
       <DependentUpon>VersionWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\uiHandler\ClientListUIHandler.cs" />
+    <Compile Include="module\Managemnt\uiHandler\DefaultViewUIHandler.cs" />
+    <Compile Include="module\Managemnt\uiHandler\LogsUIHandler.cs" />
+    <Compile Include="module\Managemnt\uiHandler\RequestsFlowUIHandler.cs" />
+    <Compile Include="module\Managemnt\uiHandler\TopBarMenuUIHandler.cs" />
+    <Compile Include="module\Managemnt\uiHandler\SideBarUIHandler.cs" />
     <Compile Include="module\Managemnt\view\KernelLoader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -470,8 +513,8 @@
     <Compile Include="module\Managemnt\view\SettingsEntryPoint.Designer.cs">
       <DependentUpon>SettingsEntryPoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\workers\tunnel\controller\ServerTunnelController.cs" />
-    <Compile Include="module\Managemnt\workers\tunnel\ServerTunnelBackgroundWorker.cs" />
+    <Compile Include="module\Managemnt\server\controller\ServerTunnelController.cs" />
+    <Compile Include="module\Managemnt\server\ServerTunnel.cs" />
     <Compile Include="module\Shared\Exceptions\WrongCredentialsException.cs" />
     <Compile Include="module\Shared\Exceptions\BadRequestException.cs" />
     <Compile Include="module\Shared\Exceptions\RecordNotFoundException.cs" />
@@ -533,14 +576,23 @@
     <EmbeddedResource Include="module\Managemnt\module\camera\components\CameraItem\CameraItem.resx">
       <DependentUpon>CameraItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.resx">
+      <DependentUpon>ZipperForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\camera\components\CameraNotification\CameraNotificationWindow.resx">
       <DependentUpon>CameraNotificationWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\camera\form\CameraItemSettingsForm.resx">
+    <EmbeddedResource Include="module\Managemnt\module\camera\form\Settings\CameraItemSettingsForm.resx">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\fileManager\view\FileManagerViewPanel\FileManagerViewPanel.resx">
-      <DependentUpon>FileManagerViewPanel.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\camera\form\FileEncryption\FileEncryptionWithPasswordWindow.resx">
+      <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\cardReader\form\CardModeWindow.resx">
+      <DependentUpon>CardModeWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\fileManager\view\FileManagerView.resx">
+      <DependentUpon>FileManagerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\fileManager\view\form\FileHistoryRecordForm.resx">
       <DependentUpon>FileHistoryRecordForm.cs</DependentUpon>
@@ -557,8 +609,8 @@
     <EmbeddedResource Include="module\Managemnt\module\station\components\TCPServerUI\TCPServerUI.resx">
       <DependentUpon>TCPServerUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\station\view\StationViewPanel\StationViewPanel.resx">
-      <DependentUpon>StationViewPanel.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\station\view\StationView.resx">
+      <DependentUpon>StationView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\sub-window\FileExplorerWindow.resx">
       <DependentUpon>FileExplorerWindow.cs</DependentUpon>
@@ -611,7 +663,7 @@
     <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
-    <Folder Include="module\Managemnt\helper\" />
+    <Folder Include="module\Managemnt\module\camera\components\CameraItem\form\" />
     <Folder Include="module\Managemnt\module\user\entity\" />
     <Folder Include="module\Shared\Component\" />
   </ItemGroup>

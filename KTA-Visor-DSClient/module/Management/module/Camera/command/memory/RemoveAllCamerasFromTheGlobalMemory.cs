@@ -38,15 +38,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
                   camera.Drive.Name,
                   false
             ));
-
-            if (Globals.ClientTunnel == null)
-                return;
-
-            Globals.ClientTunnel.Emit(new Request(
-               "response://cameras/refresh",
-               null,
-               Globals.ClientTunnel.ClientObject
-           ));
         }
     }
 }

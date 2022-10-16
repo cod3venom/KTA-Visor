@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace KTAVisorAPISDK.module.fileManager.service
 {
-    public class FileHistoryService
+    public class FileManagerService
     {
-        private readonly FileManagerRepository fileHistoryRepository;
+        private readonly FileManagerRepository fileManagerRepository;
 
-        public FileHistoryService()
+        public FileManagerService()
         {
-            this.fileHistoryRepository = new FileManagerRepository();
+            this.fileManagerRepository = new FileManagerRepository();
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace KTAVisorAPISDK.module.fileManager.service
         /// <returns></returns>
         public async Task<FileItemEntity> all()
         {
-            HttpResponseMessage result = await this.fileHistoryRepository.all();
+            HttpResponseMessage result = await this.fileManagerRepository.all();
             string responseBody = await result.Content.ReadAsStringAsync();
             FileItemEntity fileHistories = JsonConvert.DeserializeObject<FileItemEntity>(responseBody);
 
@@ -40,7 +40,7 @@ namespace KTAVisorAPISDK.module.fileManager.service
         /// <returns></returns>
         public async Task<FileItemEntity> findbyid(string id)
         {
-            HttpResponseMessage result = await this.fileHistoryRepository.findByid(id);
+            HttpResponseMessage result = await this.fileManagerRepository.findByid(id);
             string responseBody = await result.Content.ReadAsStringAsync();
             FileItemEntity fileHistories = JsonConvert.DeserializeObject<FileItemEntity>(responseBody);
 
@@ -53,7 +53,7 @@ namespace KTAVisorAPISDK.module.fileManager.service
         /// <returns></returns>
         public async Task<FileItemEntity> create(CreateFileHistoryRequestTObject request)
         {
-            HttpResponseMessage result = await this.fileHistoryRepository.create(request);
+            HttpResponseMessage result = await this.fileManagerRepository.create(request);
             string responseBody = await result.Content.ReadAsStringAsync();
             FileItemEntity fileHistory = JsonConvert.DeserializeObject<FileItemEntity>(responseBody);
 
@@ -67,7 +67,7 @@ namespace KTAVisorAPISDK.module.fileManager.service
         /// <returns></returns>
         public async Task<FileItemEntity> edit(string id, EditFileHistoryRequestTObject request)
         {
-            HttpResponseMessage result = await this.fileHistoryRepository.edit(id, request);
+            HttpResponseMessage result = await this.fileManagerRepository.edit(id, request);
             string responseBody = await result.Content.ReadAsStringAsync();
             FileItemEntity fileHistory = JsonConvert.DeserializeObject<FileItemEntity>(responseBody);
 
@@ -80,7 +80,7 @@ namespace KTAVisorAPISDK.module.fileManager.service
         /// <returns></returns>
         public async Task<FileItemEntity> delete(string id)
         {
-            HttpResponseMessage result = await this.fileHistoryRepository.delete(id);
+            HttpResponseMessage result = await this.fileManagerRepository.delete(id);
             string responseBody = await result.Content.ReadAsStringAsync();
             FileItemEntity fileHistory = JsonConvert.DeserializeObject<FileItemEntity>(responseBody);
 

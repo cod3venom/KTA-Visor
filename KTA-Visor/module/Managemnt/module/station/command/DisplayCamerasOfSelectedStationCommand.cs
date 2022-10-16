@@ -1,4 +1,5 @@
 ﻿using KTA_Visor.module.Managemnt.module.camera.form;
+using KTA_Visor.module.Managemnt.module.camera.form.settings;
 using KTA_Visor.module.Managemnt.module.Camera.component.CameraItem;
 using KTA_Visor.module.Managemnt.module.Camera.component.CameraItem.events;
 using KTA_Visor.module.Shared.Global;
@@ -19,6 +20,8 @@ namespace KTA_Visor.module.Managemnt.module.station.command
 {
     public class DisplayCamerasOfSelectedStationCommand
     {
+        public static List<CameraEntity.Camera> ALL_STATION_CAMERAS = new List<CameraEntity.Camera>();
+
         public static async void Execute(FlowLayoutPanel camerasFlowPanel, string stationCustomId)
         {
             
@@ -38,25 +41,22 @@ namespace KTA_Visor.module.Managemnt.module.station.command
 
                 foreach (CameraEntity.Camera camera in camerasEntity.datas)
                 {
-                    if (Globals.ALL_STATION_CAMERAS.Contains(camera)){
+                    if (DisplayCamerasOfSelectedStationCommand.ALL_STATION_CAMERAS.Contains(camera)){
                         continue;
                     }
-
 
                     Thread thr = new Thread(() =>
                     {
                         camerasFlowPanel.Invoke((MethodInvoker)async delegate
                         {
                             CameraItem item = new CameraItem(camera, station);
-
-                            item.OnOpenCameraItem += (delegate (Object _sender, OnOpenCameraItemEvent e)
-                            {
+                            item.OnOpenCameraItem += (delegate (Object _sender, OnOpenCameraItemEvent e){
                                 new CameraItemSettingsForm(e.Camera, station).ShowDialog();
                             });
-                            camerasFlowPanel.Controls.Add(item);
-                            Globals.ALL_STATION_CAMERAS.Add(camera);
+                            await Task.Delay(100);
 
-                            Thread.Sleep(100);
+                            DisplayCamerasOfSelectedStationCommand.ALL_STATION_CAMERAS.Add(camera);
+                            camerasFlowPanel.Controls.Add(item);
                         });
                     });
 

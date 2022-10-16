@@ -1,6 +1,7 @@
 ﻿using KTALogger;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -21,183 +22,153 @@ namespace TCPTunnel.module.client
     public class Client : ExtensionManager
     {
 
-        public event EventHandler<TCPClientConnectedEvent> onClientConnected;
-        public event EventHandler<EventArgs> onClientDisconnected;
-        public event EventHandler<TCPClientMessageReceivedEvent> onReceivedMessage;
-        public event EventHandler<OnAuthCommandReceived> onAuthCommandReceived;
-        public event EventHandler<OnAuthIsOK> onAuthIsOk;
-        public event EventHandler<OnClientExceptionHappend> OnException;
+        public event EventHandler<TCPClientConnectedEvent> OnClientConnected;
+        public event EventHandler<EventArgs> OnConnectionWasTerminated;
 
-        private readonly ClientConfigTObject config;
-        private readonly IPEndPoint ipEndpoint;
-        private TCPClientTObject client;
+        public event EventHandler<TCPClientMessageReceivedEvent> OnDataReceived;
+        public event EventHandler<OnClientExceptionHappend> OnExceptionOccured;
 
-        private readonly KTALogger.Logger logger;
+        private readonly ClientConfigTObject _config;
+        private readonly KTALogger.Logger _logger;
+        private BackgroundWorker _transmissionWorker;
+        private TCPClientTObject _client;
+        private readonly IPEndPoint _ipEndpoint;
+        private bool _isConnected;
+
 
         public Client(ClientConfigTObject config, KTALogger.Logger logger)
         {
-            this.config = config;
-            this.ipEndpoint = new IPEndPoint(IPAddress.Parse(config.IpAddress), config.Port);
-            this.logger = logger;
-
-            this.onAuthCommandReceived += OnAuthCommandReceived;
-            this.onAuthIsOk += OnAuthIsOk;
-            this.onClientDisconnected += onClientDisconnectedHandler;
+            this._config = config;
+            this._logger = logger;
+            this._transmissionWorker = new BackgroundWorker{
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            this._client = new TCPClientTObject(config.IpAddress);
+            this._ipEndpoint = new IPEndPoint(IPAddress.Parse(config.IpAddress), config.Port);
+            this._isConnected = false;
         }
 
-        public bool IsAutoReconnectEnabled { get; set; }
-
-        public TCPClientTObject getClientObject()
-        {
-            return this.client;
-        }
-
-        public Client connect()
+        public void Connect()
         {
             try
             {
-                Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                clientSocket.Connect(this.ipEndpoint);
-
-                this.client = new TCPClientTObject(clientSocket.RemoteEndPoint.ToString(), clientSocket);
-
-                this.logger.success("Successfully connected to: " + this.config.IpAddress);
-
-                Thread listeningThread = new Thread(() => this.listening());
-                listeningThread.Start();
-
-            }
-            catch (SocketException)
-            {
-                if (this.client != null)
-                {
-                    this.client.getSocket().Shutdown(SocketShutdown.Both);
-                    this.client.getSocket().Dispose();
-                }
-                this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
-            }
-
-            return this;
-        }
-
-
-        private void listening()
-        {
-            try
-            {
-                while (this.client.IsConnected())
-                {
-                    Thread.Sleep(100);
-
-                    Thread onReceiveThread = new Thread(() => this.OnReceiveMessage(this.client));
-                    onReceiveThread.IsBackground = true;
-                    onReceiveThread.Start();
-                }
-
-                this.onClientDisconnected?.Invoke(this, EventArgs.Empty);
-            }
-            catch(Exception exception) {
-                this.OnException?.Invoke(this, new OnClientExceptionHappend(exception));
-            }
-        }
-
-        public Client disconnect()
-        {
-            if (this.client == null)
-                return this;
-
-            if (this.client.IsConnected())
-            {
-                this.client.getSocket().Shutdown(SocketShutdown.Both);
-                this.client.getSocket().Dispose();
-            }
-
-            return this;
-        }
-
-
-
-        private void onClientDisconnectedHandler(object sender, EventArgs e)
-        {
-            if (!this.IsAutoReconnectEnabled)
-                return;
-            if (!this.isConnected())
-                return;
-
-            Thread.Sleep(1000);
-            this.connect();
-        }
-
-        private void OnReceiveMessage(TCPClientTObject client)
-        {
-            try
-            {
-
-                byte[] receiveMessageArray = new byte[4096];
-
-                int length = client.getSocket().Receive(receiveMessageArray);
-                string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);
-                this.logger.hidden("Plain message: " + message);
-
-                Request request = this.Router.ParseRoute(client, message);
-
-                if (request == null)
-                {
+                if (this._isConnected){
                     return;
                 }
-                this.logger.print(String.Format("Received Command on: {0}, {1}", request.Endpoint, request.Body));
+                if (this._client.IsDisposed){
+                    this._client = new TCPClientTObject(this._config.IpAddress);
+                }
+                if (this._transmissionWorker.IsBusy)
+                {
+                    this._transmissionWorker.CancelAsync();
+                    this._transmissionWorker = new BackgroundWorker{
+                        WorkerReportsProgress = true,
+                        WorkerSupportsCancellation = true
+                    };
+                }
+                
+
+                this._client.Socket.Connect(this._ipEndpoint);
+                this._isConnected = true;
+                this._logger.info("Successfully connected to: " + this._config.IpAddress);
+
+                this._transmissionWorker.DoWork += WatchTransmission;
+                this._transmissionWorker.RunWorkerAsync();
+
+            }
+            catch(ObjectDisposedException exception)
+            {
+                this._logger.error("Client disconnected from the: " + this._config.IpAddress);
+                this.HandleException(exception);
+            }
+            catch (SocketException exception)
+            {
+                this._logger.error("Client disconnected from the: " + this._config.IpAddress);
+                this.HandleException(exception);
+            }
+        }
+
+        public void Reconnect(int delay = 1000)
+        {
+            Thread.Sleep(delay);
+            this.Connect();
+        }
+
+        private void WatchTransmission(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker transmissionWorker = (BackgroundWorker)sender;
+            while (!transmissionWorker.CancellationPending)
+            {
+                this.HandleData();
+                Thread.Sleep(1000);
+            }
+        }
+ 
+
+        private void HandleData()
+        {
+            try
+            {
+                byte[] receiveMessageArray = new byte[4096];
+                int length = this._client.Socket.Receive(receiveMessageArray);
+                string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);
+                Request request = this.Router.ParseRoute(this._client, message);
+
+                if (request == null) {
+                    return;
+                }
+
+                this._logger.print(String.Format("Received Request on: {0}, {1}", request.Endpoint, request.Body));
 
                 if (request.Endpoint == Endpoints.AUTH_NEED_COMMAND_ENDPOINT)
                 {
-                    this.onAuthCommandReceived?.Invoke(this, new OnAuthCommandReceived(client, request));
+                    this.OnAuthCommandReceived(new OnAuthCommandReceived(this._client, request));
                     return;
                 }
+
                 if (request.Endpoint == Endpoints.AUTH_IS_OK_COMMAND_ENDPOINT)
                 {
-                    this.onAuthIsOk?.Invoke(this, new OnAuthIsOK(client, request));
+                    this.OnAuthIsOk(new OnAuthIsOK(this._client, request));
                     return;
                 }
                 else
                 {
-                    this.onReceivedMessage?.Invoke(this, new TCPClientMessageReceivedEvent(request));
+                    this.OnDataReceived?.Invoke(this, new TCPClientMessageReceivedEvent(request));
                 }
-
-                request = null;
             }
-            catch (Exception ex)
+
+            catch(Exception exception)
             {
-                this.client.Disconnect();
-                Console.WriteLine(ex.Message);
+               this.HandleException(exception);
             }
+
         }
 
-
-        public void send(Request request)
+        private void OnAuthCommandReceived(OnAuthCommandReceived e)
         {
-            new Thread(() => this.client.Send(request)).Start();
-
-            this.logger.info("Sent request on: " + request.Endpoint + "\n with body: " + request.Body);
+            this._client.Send(new Request(Endpoints.AUTH_NEED_RESPONSE_ENDPOINT, this._config.AuthData, e.Client));
         }
 
-        public bool isConnected()
+        private void OnAuthIsOk(OnAuthIsOK e)
         {
-            bool connected = this.client.IsConnected();
-            return connected;
+            this.OnClientConnected?.Invoke(this, new TCPClientConnectedEvent(this._client));
         }
 
-        private void OnAuthCommandReceived(object sender, OnAuthCommandReceived e)
+        public void Send(Request request)
         {
-            client.Send(new Request(Endpoints.AUTH_NEED_RESPONSE_ENDPOINT, this.config.AuthData, e.Client));
-        }
+            if (!this._isConnected){
+                this._logger.warn("Unable to send request trought DISCONNECTED CLIENT");
+                return;
+            }
 
-        private void OnAuthCommandSent(object sender, OnAuthResponseDataSent e)
-        {
-            Console.WriteLine(String.Format("Sent auth request from {0}", e.Client.getIpAddress()));
+            this._client.Send(request);
         }
-
-        private void OnAuthIsOk(object sender, OnAuthIsOK e)
+        private void HandleException(Exception exception)
         {
-            this.onClientConnected?.Invoke(this, new TCPClientConnectedEvent(this.client));
+            this._isConnected = false;
+            this._client.Disconnect();
+            this.OnExceptionOccured?.Invoke(this, new OnClientExceptionHappend(exception));
         }
     }
 }

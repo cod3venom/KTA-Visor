@@ -1,4 +1,4 @@
-﻿using KTA_Visor.module.Managemnt.module.station.view.StationViewPanel;
+﻿using KTA_Visor.module.Managemnt.module.station.view;
 using KTA_Visor.module.Shared.Global;
 using KTAVisorAPISDK.module.station.entity;
 using KTAVisorAPISDK.module.station.service;
@@ -26,7 +26,7 @@ namespace KTA_Visor.module.Managemnt.module.station.command
             RDP_CONNECT = 4,
         }
 
-        public static void Execute(object sender, EventArgs e,  StationViewPanel stationViewPanel, string stationId, int option)
+        public static void Execute(object sender, EventArgs e,  StationView stationViewPanel, string stationId, int option)
         {
             var selectedOption = (StationContextMenuItem)option;
             
@@ -109,7 +109,7 @@ namespace KTA_Visor.module.Managemnt.module.station.command
 
         private static async Task<TCPClientTObject> GetClient(string ipAddress)
         {
-            return Globals.CLIENTS_LIST.Find((TCPClientTObject _client) => _client.getIpAddress() == ipAddress);
+            return Globals.Server.Clients.Find((TCPClientTObject _client) => _client.IpAddress == ipAddress);
         }
     }
 }

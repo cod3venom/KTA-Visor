@@ -14,7 +14,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle
         {
         }
 
-        protected Table Table { get; set; }
+        protected Table TableC { get; set; }
  
     }
 }

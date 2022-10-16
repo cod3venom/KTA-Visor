@@ -9,6 +9,9 @@ namespace KTA_Visor.kernel.sharedKernel.interfaces
 {
     public interface IModuleInterface
     {
+        string GetModuleName();
         void Watch(Request request);
+        void ShowDialog();
+        void Show();
     }
 }

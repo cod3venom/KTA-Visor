@@ -34,15 +34,15 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.titleLbl = new System.Windows.Forms.Label();
             this.descriptionLbl = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.minimizeBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.resizeBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.closeBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuDragControl2 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuDragControl3 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -65,13 +65,13 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.panel3.Controls.Add(this.titleLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(150, 39);
+            this.panel3.Size = new System.Drawing.Size(150, 42);
             this.panel3.TabIndex = 2;
             // 
             // titleLbl
@@ -89,7 +89,7 @@
             // 
             // descriptionLbl
             // 
-            this.descriptionLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.descriptionLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.descriptionLbl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.descriptionLbl.Font = new System.Drawing.Font("Inter Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(150)))), ((int)(((byte)(158)))));
@@ -97,14 +97,24 @@
             this.descriptionLbl.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.descriptionLbl.Name = "descriptionLbl";
             this.descriptionLbl.Padding = new System.Windows.Forms.Padding(150, 0, 0, 0);
-            this.descriptionLbl.Size = new System.Drawing.Size(825, 39);
+            this.descriptionLbl.Size = new System.Drawing.Size(825, 42);
             this.descriptionLbl.TabIndex = 1;
             this.descriptionLbl.Text = "Window";
             this.descriptionLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panel4
+            // 
+            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(115)))), ((int)(((byte)(119)))));
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 42);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(825, 2);
+            this.panel4.TabIndex = 3;
+            // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.panel2.Controls.Add(this.panel5);
             this.panel2.Controls.Add(this.minimizeBtn);
             this.panel2.Controls.Add(this.resizeBtn);
@@ -115,6 +125,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(118, 44);
             this.panel2.TabIndex = 1;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(115)))), ((int)(((byte)(119)))));
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(0, 42);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(118, 2);
+            this.panel5.TabIndex = 6;
             // 
             // minimizeBtn
             // 
@@ -178,24 +197,6 @@
             this.bunifuDragControl3.Horizontal = true;
             this.bunifuDragControl3.TargetControl = this.panel2;
             this.bunifuDragControl3.Vertical = true;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 39);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(825, 5);
-            this.panel4.TabIndex = 3;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 39);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(118, 5);
-            this.panel5.TabIndex = 6;
             // 
             // TopBar
             // 

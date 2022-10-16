@@ -22,6 +22,15 @@ namespace KTA_Visor.module.Managemnt.sub_window
 
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            using (Brush b = new SolidBrush(Color.DarkCyan)){
+                int borderWidth = 5;
+                e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
+            }
+        }
+
         private void TunnelWindow_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.None;
@@ -30,6 +39,7 @@ namespace KTA_Visor.module.Managemnt.sub_window
             this.closeBtn.Click += onClose;
 
             this.HandleCreated += onHandleCreated;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.renderCorrectColor();
         }
  
@@ -41,13 +51,13 @@ namespace KTA_Visor.module.Managemnt.sub_window
 
         private void onStart(object sender, EventArgs e)
         {
-            Globals.ServerTunnelBackgroundWorker.Run();
+            Globals.Server.Start();
             this.renderCorrectColor();
         }
 
         private void onStop(object sender, EventArgs e)
         {
-            Globals.ServerTunnelBackgroundWorker.Run();
+            Globals.Server.Start();
             this.renderCorrectColor();
         }
 

@@ -21,9 +21,11 @@ namespace KTALogger
         public Logger(DirectoryInfo directory = null)
         {
             this.startDate = this.currentDate;
-            if (directory == null) {
+            if (directory == null)
+            {
                 this.loggerFileDirectory = new DirectoryInfo(String.Format("{0}\\kta_logger", Directory.GetCurrentDirectory()));
-            } else
+            }
+            else
             {
                 this.loggerFileDirectory = directory;
             }
@@ -31,19 +33,17 @@ namespace KTALogger
             this.initialize();
         }
 
-   
+
         private void initialize()
         {
             this.calibrateLogger();
-            Thread dateWatcherThr = new Thread(this.dateWatcher);
-            dateWatcherThr.IsBackground = true;
-            dateWatcherThr.Start();
+            new Thread(() => this.dateWatcher()).Start();
         }
 
 
         private void dateWatcher()
         {
-            while(true)
+            while (true)
             {
                 this.calibrateLogger();
                 Thread.Sleep(100);
@@ -56,19 +56,21 @@ namespace KTALogger
             try
             {
                 this.startDate = this.currentDate;
-                if (!this.loggerFileDirectory.Exists){
+                if (!this.loggerFileDirectory.Exists)
+                {
                     this.loggerFileDirectory.Create();
                 }
 
                 this.loggerFile = new FileInfo(string.Format("{0}\\log_{1}.KTALogger", this.loggerFileDirectory.FullName, this.startDate));
 
-                if (!File.Exists(this.loggerFile.FullName)) {
+                if (!File.Exists(this.loggerFile.FullName))
+                {
                     File.WriteAllText(this.loggerFile.FullName, "");
                 }
             }
-            catch(IOException exception)
+            catch (IOException exception)
             {
-                Console.WriteLine(exception.ToString());    
+                Console.WriteLine(exception.ToString());
             }
             catch (Exception exception)
             {
@@ -140,7 +142,7 @@ namespace KTALogger
             }
 
             string fullText = String.Format(loggerFormat, this.currentTime, type, caller, message);
-            
+
             this.OnLogHasWritten?.Invoke(this, new LoggerEvent(type, fullText, message));
 
             try
@@ -156,7 +158,12 @@ namespace KTALogger
                     }
                 }
             }
-            catch(Exception ex) {
+            catch(IOException e)
+            {
+                //Console.Write(e.ToString());
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
             }
         }

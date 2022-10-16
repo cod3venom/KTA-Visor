@@ -42,18 +42,20 @@ namespace KTA_Visor.module.Management.view
             this.securityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cardModeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ustawieniaFabryczneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutUsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.userProfileCard = new KTA_Visor_UI.component.custom.User.UserProfile.UserProfileCard();
+            this.sideBar = new KTA_Visor_UI.component.custom.User.UserProfile.UserProfileCard();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.footerPanel = new System.Windows.Forms.Panel();
             this.tunnelIndicator = new KTA_Visor_UI.component.basic.StatusIndicator.StatusIndicator();
             this.footer1 = new KTA_Visor_UI.component.custom.Footer.Footer();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.clientsManagerPanel = new System.Windows.Forms.Panel();
             this.loggerPanel = new System.Windows.Forms.Panel();
             this.loggerView = new KTA_Visor_UI.component.custom.LoggerView.LoggerView();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -65,10 +67,6 @@ namespace KTA_Visor.module.Management.view
             this.panel1.SuspendLayout();
             this.footerPanel.SuspendLayout();
             this.loggerPanel.SuspendLayout();
-
-            this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
-            this.FormBorderStyle = FormBorderStyle.None;
-
             this.SuspendLayout();
             // 
             // topBarPanel
@@ -76,10 +74,10 @@ namespace KTA_Visor.module.Management.view
             this.topBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.topBarPanel.Controls.Add(this.tunnelMenuStrip);
             this.topBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topBarPanel.Location = new System.Drawing.Point(335, 41);
+            this.topBarPanel.Location = new System.Drawing.Point(336, 52);
             this.topBarPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topBarPanel.Name = "topBarPanel";
-            this.topBarPanel.Size = new System.Drawing.Size(893, 28);
+            this.topBarPanel.Size = new System.Drawing.Size(1063, 35);
             this.topBarPanel.TabIndex = 0;
             // 
             // tunnelMenuStrip
@@ -94,8 +92,8 @@ namespace KTA_Visor.module.Management.view
             this.pomocToolStripMenuItem});
             this.tunnelMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.tunnelMenuStrip.Name = "tunnelMenuStrip";
-            this.tunnelMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.tunnelMenuStrip.Size = new System.Drawing.Size(893, 28);
+            this.tunnelMenuStrip.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
+            this.tunnelMenuStrip.Size = new System.Drawing.Size(1063, 35);
             this.tunnelMenuStrip.TabIndex = 1;
             this.tunnelMenuStrip.Text = "menuStrip1";
             // 
@@ -107,28 +105,28 @@ namespace KTA_Visor.module.Management.view
             this.restartTunnelServerMenuItem});
             this.tunnelToolStripMenuItem.Font = new System.Drawing.Font("Inter", 9F);
             this.tunnelToolStripMenuItem.Name = "tunnelToolStripMenuItem";
-            this.tunnelToolStripMenuItem.Size = new System.Drawing.Size(50, 24);
+            this.tunnelToolStripMenuItem.Size = new System.Drawing.Size(63, 31);
             this.tunnelToolStripMenuItem.Text = "Tunel";
             // 
             // startTunnelServerMenuItem
             // 
             this.startTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startTunnelServerMenuItem.Image")));
             this.startTunnelServerMenuItem.Name = "startTunnelServerMenuItem";
-            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(161, 26);
             this.startTunnelServerMenuItem.Text = "Uruchom";
             // 
             // stopTunnelServerMenuItem
             // 
             this.stopTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopTunnelServerMenuItem.Image")));
             this.stopTunnelServerMenuItem.Name = "stopTunnelServerMenuItem";
-            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(161, 26);
             this.stopTunnelServerMenuItem.Text = "Zatrzymaj";
             // 
             // restartTunnelServerMenuItem
             // 
             this.restartTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restartTunnelServerMenuItem.Image")));
             this.restartTunnelServerMenuItem.Name = "restartTunnelServerMenuItem";
-            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(161, 26);
             this.restartTunnelServerMenuItem.Text = "Zresetuj";
             // 
             // kontoToolStripMenuItem
@@ -139,21 +137,21 @@ namespace KTA_Visor.module.Management.view
             this.logoutMenuItem});
             this.kontoToolStripMenuItem.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kontoToolStripMenuItem.Name = "kontoToolStripMenuItem";
-            this.kontoToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
+            this.kontoToolStripMenuItem.Size = new System.Drawing.Size(64, 31);
             this.kontoToolStripMenuItem.Text = "Konto";
             // 
             // profileMenuItem
             // 
             this.profileMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("profileMenuItem.Image")));
             this.profileMenuItem.Name = "profileMenuItem";
-            this.profileMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.profileMenuItem.Size = new System.Drawing.Size(209, 26);
             this.profileMenuItem.Text = "Profil";
             // 
             // securityMenuItem
             // 
             this.securityMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("securityMenuItem.Image")));
             this.securityMenuItem.Name = "securityMenuItem";
-            this.securityMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.securityMenuItem.Size = new System.Drawing.Size(209, 26);
             this.securityMenuItem.Text = "Bezpieczeństwo";
             // 
             // logoutMenuItem
@@ -161,24 +159,40 @@ namespace KTA_Visor.module.Management.view
             this.logoutMenuItem.BackColor = System.Drawing.Color.Red;
             this.logoutMenuItem.ForeColor = System.Drawing.Color.White;
             this.logoutMenuItem.Name = "logoutMenuItem";
-            this.logoutMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.logoutMenuItem.Size = new System.Drawing.Size(209, 26);
             this.logoutMenuItem.Text = "Wyloguj się";
             // 
             // systemToolStripMenuItem1
             // 
             this.systemToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.logsMenuItem});
+            this.cardModeMenuItem,
+            this.logsMenuItem,
+            this.ustawieniaFabryczneToolStripMenuItem});
             this.systemToolStripMenuItem1.Font = new System.Drawing.Font("Inter", 9F);
             this.systemToolStripMenuItem1.Name = "systemToolStripMenuItem1";
-            this.systemToolStripMenuItem1.Size = new System.Drawing.Size(61, 24);
+            this.systemToolStripMenuItem1.Size = new System.Drawing.Size(76, 31);
             this.systemToolStripMenuItem1.Text = "System";
+            // 
+            // cardModeMenuItem
+            // 
+            this.cardModeMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cardModeMenuItem.Image")));
+            this.cardModeMenuItem.Name = "cardModeMenuItem";
+            this.cardModeMenuItem.Size = new System.Drawing.Size(248, 26);
+            this.cardModeMenuItem.Text = "Tryb Karty";
             // 
             // logsMenuItem
             // 
             this.logsMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("logsMenuItem.Image")));
             this.logsMenuItem.Name = "logsMenuItem";
-            this.logsMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.logsMenuItem.Size = new System.Drawing.Size(248, 26);
             this.logsMenuItem.Text = "Logi";
+            // 
+            // ustawieniaFabryczneToolStripMenuItem
+            // 
+            this.ustawieniaFabryczneToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ustawieniaFabryczneToolStripMenuItem.Image")));
+            this.ustawieniaFabryczneToolStripMenuItem.Name = "ustawieniaFabryczneToolStripMenuItem";
+            this.ustawieniaFabryczneToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
+            this.ustawieniaFabryczneToolStripMenuItem.Text = "Ustawienia Fabryczne";
             // 
             // pomocToolStripMenuItem
             // 
@@ -187,58 +201,59 @@ namespace KTA_Visor.module.Management.view
             this.aboutUsMenuItem});
             this.pomocToolStripMenuItem.Font = new System.Drawing.Font("Inter", 9F);
             this.pomocToolStripMenuItem.Name = "pomocToolStripMenuItem";
-            this.pomocToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            this.pomocToolStripMenuItem.Size = new System.Drawing.Size(72, 31);
             this.pomocToolStripMenuItem.Text = "Pomoc";
             // 
             // versionMenuItem
             // 
             this.versionMenuItem.Name = "versionMenuItem";
-            this.versionMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.versionMenuItem.Size = new System.Drawing.Size(140, 26);
             this.versionMenuItem.Text = "Wersja";
             // 
             // aboutUsMenuItem
             // 
             this.aboutUsMenuItem.Name = "aboutUsMenuItem";
-            this.aboutUsMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.aboutUsMenuItem.Size = new System.Drawing.Size(140, 26);
             this.aboutUsMenuItem.Text = "O nas";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.panel1.Controls.Add(this.userProfileCard);
+            this.panel1.Controls.Add(this.sideBar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(20, 30);
+            this.panel1.Location = new System.Drawing.Point(25, 52);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(304, 738);
+            this.panel1.Size = new System.Drawing.Size(297, 908);
             this.panel1.TabIndex = 1;
             // 
-            // userProfileCard
+            // sideBar
             // 
-            this.userProfileCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userProfileCard.FirstAndLastName = "Imię i Nazwisko";
-            this.userProfileCard.Location = new System.Drawing.Point(0, 0);
-            this.userProfileCard.Name = "userProfileCard";
-            this.userProfileCard.Size = new System.Drawing.Size(304, 738);
-            this.userProfileCard.TabIndex = 8;
-            this.userProfileCard.Version = "1.2.3.v.5";
+            this.sideBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sideBar.FirstAndLastName = "Imię i Nazwisko";
+            this.sideBar.Location = new System.Drawing.Point(0, 0);
+            this.sideBar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.sideBar.Name = "sideBar";
+            this.sideBar.Size = new System.Drawing.Size(297, 908);
+            this.sideBar.TabIndex = 8;
+            this.sideBar.Version = "1.2.3.v.5";
             // 
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(335, 30);
+            this.panel2.Location = new System.Drawing.Point(25, 38);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(904, 11);
+            this.panel2.Size = new System.Drawing.Size(1632, 14);
             this.panel2.TabIndex = 2;
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(324, 30);
+            this.panel3.Location = new System.Drawing.Point(322, 52);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(11, 738);
+            this.panel3.Size = new System.Drawing.Size(14, 908);
             this.panel3.TabIndex = 3;
             // 
             // footerPanel
@@ -246,10 +261,10 @@ namespace KTA_Visor.module.Management.view
             this.footerPanel.Controls.Add(this.tunnelIndicator);
             this.footerPanel.Controls.Add(this.footer1);
             this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.footerPanel.Location = new System.Drawing.Point(335, 740);
+            this.footerPanel.Location = new System.Drawing.Point(336, 925);
             this.footerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.footerPanel.Name = "footerPanel";
-            this.footerPanel.Size = new System.Drawing.Size(915, 28);
+            this.footerPanel.Size = new System.Drawing.Size(1075, 35);
             this.footerPanel.TabIndex = 3;
             // 
             // tunnelIndicator
@@ -257,10 +272,10 @@ namespace KTA_Visor.module.Management.view
             this.tunnelIndicator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.tunnelIndicator.Icon = ((System.Drawing.Image)(resources.GetObject("tunnelIndicator.Icon")));
             this.tunnelIndicator.Label = "Status";
-            this.tunnelIndicator.Location = new System.Drawing.Point(2, 5);
+            this.tunnelIndicator.Location = new System.Drawing.Point(2, 6);
             this.tunnelIndicator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tunnelIndicator.Name = "tunnelIndicator";
-            this.tunnelIndicator.Size = new System.Drawing.Size(182, 18);
+            this.tunnelIndicator.Size = new System.Drawing.Size(228, 22);
             this.tunnelIndicator.TabIndex = 1;
             // 
             // footer1
@@ -271,26 +286,26 @@ namespace KTA_Visor.module.Management.view
             this.footer1.Location = new System.Drawing.Point(0, 0);
             this.footer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.footer1.Name = "footer1";
-            this.footer1.Size = new System.Drawing.Size(915, 28);
+            this.footer1.Size = new System.Drawing.Size(1075, 35);
             this.footer1.TabIndex = 0;
             // 
-            // panel6
+            // clientsManagerPanel
             // 
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(1239, 30);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(11, 710);
-            this.panel6.TabIndex = 5;
+            this.clientsManagerPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.clientsManagerPanel.Location = new System.Drawing.Point(1411, 52);
+            this.clientsManagerPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.clientsManagerPanel.Name = "clientsManagerPanel";
+            this.clientsManagerPanel.Size = new System.Drawing.Size(246, 908);
+            this.clientsManagerPanel.TabIndex = 5;
             // 
             // loggerPanel
             // 
             this.loggerPanel.Controls.Add(this.loggerView);
             this.loggerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.loggerPanel.Location = new System.Drawing.Point(335, 534);
+            this.loggerPanel.Location = new System.Drawing.Point(336, 667);
             this.loggerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.loggerPanel.Name = "loggerPanel";
-            this.loggerPanel.Size = new System.Drawing.Size(893, 195);
+            this.loggerPanel.Size = new System.Drawing.Size(1063, 244);
             this.loggerPanel.TabIndex = 5;
             // 
             // loggerView
@@ -300,62 +315,62 @@ namespace KTA_Visor.module.Management.view
             this.loggerView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.loggerView.Name = "loggerView";
             this.loggerView.ParentPanel = null;
-            this.loggerView.Size = new System.Drawing.Size(893, 195);
+            this.loggerView.Size = new System.Drawing.Size(1063, 244);
             this.loggerView.TabIndex = 0;
             // 
             // panel10
             // 
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel10.Location = new System.Drawing.Point(335, 729);
+            this.panel10.Location = new System.Drawing.Point(336, 911);
             this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(904, 11);
+            this.panel10.Size = new System.Drawing.Size(1075, 14);
             this.panel10.TabIndex = 6;
             // 
             // panel7
             // 
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(1228, 41);
+            this.panel7.Location = new System.Drawing.Point(1399, 52);
             this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(11, 688);
+            this.panel7.Size = new System.Drawing.Size(12, 859);
             this.panel7.TabIndex = 8;
             // 
             // panel8
             // 
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(335, 523);
+            this.panel8.Location = new System.Drawing.Point(336, 653);
             this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(893, 11);
+            this.panel8.Size = new System.Drawing.Size(1063, 14);
             this.panel8.TabIndex = 9;
             // 
             // contentPanel
             // 
             this.contentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(335, 41);
+            this.contentPanel.Location = new System.Drawing.Point(336, 52);
             this.contentPanel.Margin = new System.Windows.Forms.Padding(2);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(893, 482);
+            this.contentPanel.Size = new System.Drawing.Size(1063, 601);
             this.contentPanel.TabIndex = 10;
             // 
             // Management
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1270, 788);
+            this.ClientSize = new System.Drawing.Size(1682, 985);
             this.Controls.Add(this.topBarPanel);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.loggerPanel);
             this.Controls.Add(this.panel7);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel10);
-            this.Controls.Add(this.panel6);
             this.Controls.Add(this.footerPanel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.clientsManagerPanel);
+            this.Controls.Add(this.panel2);
             this.DisplayHeader = false;
             this.DoubleBuffered = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -363,9 +378,9 @@ namespace KTA_Visor.module.Management.view
             this.MainMenuStrip = this.tunnelMenuStrip;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Management";
-            this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
-            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-            this.Style = MetroFramework.MetroColorStyle.Orange;
+            this.Padding = new System.Windows.Forms.Padding(25, 38, 25, 25);
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "StationsView";
             this.Load += new System.EventHandler(this.StationsView_Load);
             this.topBarPanel.ResumeLayout(false);
@@ -388,28 +403,30 @@ namespace KTA_Visor.module.Management.view
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel footerPanel;
         private KTA_Visor_UI.component.custom.Footer.Footer footer1;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel clientsManagerPanel;
         private System.Windows.Forms.Panel loggerPanel;
         private System.Windows.Forms.Panel panel10;
         private KTA_Visor_UI.component.custom.LoggerView.LoggerView loggerView;
         private System.Windows.Forms.MenuStrip tunnelMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem tunnelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startTunnelServerMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stopTunnelServerMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem restartTunnelServerMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem startTunnelServerMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem stopTunnelServerMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem restartTunnelServerMenuItem;
         private System.Windows.Forms.Panel panel7;
         private KTA_Visor_UI.component.basic.StatusIndicator.StatusIndicator tunnelIndicator;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel contentPanel;
-        private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem logsMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pomocToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem versionMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutUsMenuItem;
-        private KTA_Visor_UI.component.custom.User.UserProfile.UserProfileCard userProfileCard;
-        private System.Windows.Forms.ToolStripMenuItem kontoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem profileMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem securityMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logoutMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem1;
+        public System.Windows.Forms.ToolStripMenuItem logsMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem pomocToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem versionMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem aboutUsMenuItem;
+        private KTA_Visor_UI.component.custom.User.UserProfile.UserProfileCard sideBar;
+        public System.Windows.Forms.ToolStripMenuItem kontoToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem profileMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem securityMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem logoutMenuItem;
+        public ToolStripMenuItem ustawieniaFabryczneToolStripMenuItem;
+        public ToolStripMenuItem tunnelToolStripMenuItem;
+        public ToolStripMenuItem cardModeMenuItem;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KTA_Visor.kernel.sharedKernel.interfaces
 {
-    public interface ISharedKernelInterface : IModuleInterface
+    public interface ISharedKernelInterface
     {
     }
 }

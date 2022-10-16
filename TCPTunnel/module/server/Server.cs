@@ -36,8 +36,8 @@ namespace TCPTunnel.module.server
         private Thread heardBeatThread;
         private IPEndPoint ipEndpoint;
 
-        private TCPClientList<string, TCPClientTObject> tempClientList;
-        private TCPClientList<string, TCPClientTObject> clientsList;
+        private TCPClientList tempClientList;
+        private TCPClientList clientsList;
         private bool isServerEnabled;
         private KTALogger.Logger logger;
 
@@ -47,8 +47,13 @@ namespace TCPTunnel.module.server
             this.serverConfig = serverConfig;
             this.logger = logger;
             this.isServerEnabled = true;
-            this.tempClientList = new TCPClientList<string, TCPClientTObject>();
-            this.clientsList = new TCPClientList<string, TCPClientTObject>();
+            this.tempClientList = new TCPClientList();
+            this.clientsList = new TCPClientList();
+        }
+
+        public TCPClientList Clients
+        {
+            get { return this.clientsList; }
         }
 
         public void StartServer()
@@ -145,12 +150,9 @@ namespace TCPTunnel.module.server
 
 
             string ipAddress = newConnection.RemoteEndPoint.ToString();
-            TCPClientTObject client = new TCPClientTObject(ipAddress, newConnection, null, "Server");
+            TCPClientTObject client = new TCPClientTObject(ipAddress, newConnection);
 
-            if (this.tempClientList.ContainsKey(ipAddress))
-                return;
-
-            this.tempClientList.addClient(ipAddress, client);
+            this.tempClientList.addClient(client, false);
 
             Request authCommandRequest = new Request(Endpoints.AUTH_NEED_COMMAND_ENDPOINT, "", client);
             client.Send(authCommandRequest);
@@ -163,14 +165,14 @@ namespace TCPTunnel.module.server
 
         public void OnReceiveMessage(TCPClientTObject client)
         {
-            while (client.IsConnected())
+            while (client.IsConnected)
             {
 
                 try
                 {
                     Thread.Sleep(100);
                     byte[] receiveMessageArray = new byte[this.serverSocket.ReceiveBufferSize];
-                    int length = client.getSocket().Receive(receiveMessageArray);
+                    int length = client.Socket.Receive(receiveMessageArray);
                     string message = Encoding.ASCII.GetString(receiveMessageArray, 0, length);
 
                     Request request = this.Router.ParseRoute(client, message);
@@ -205,7 +207,7 @@ namespace TCPTunnel.module.server
 
         private void OnAuthCommandSent(object sender, OnAuthCommandSent e)
         {
-            Console.WriteLine(String.Format("Client {0} Asked for authentication on : {1}", e.Client.getIpAddress(), e.Request.Endpoint));
+            Console.WriteLine(String.Format("Client {0} Asked for authentication on : {1}", e.Client.IpAddress, e.Request.Endpoint));
         }
 
         private void OnAuthResponseDataReceived(object sender, OnAuthResponseDataReceived e)
@@ -222,34 +224,38 @@ namespace TCPTunnel.module.server
             e.Client.Send(new Request(Endpoints.AUTH_IS_OK_COMMAND_ENDPOINT, null, e.Client));
             e.Client.AuthData = authData;
 
-            string ipAddress = e.Client.getSocket().RemoteEndPoint.ToString();
-            if (this.clientsList.ContainsKey(ipAddress)){
-                return;
-            }
+            string ipAddress = e.Client.Socket.RemoteEndPoint.ToString();
+            this.clientsList.addClient(e.Client, false);
 
-            this.clientsList.addClient(ipAddress, e.Client);
-
-            this.logger.info(string.Format("Successfully authenticated and added client in CLIENTLIST", e.Client.getIpAddress()));
-
+            this.logger.info(string.Format("Successfully authenticated and added client in CLIENTLIST", e.Client.IpAddress));
             this.onClientConnected.Invoke(e, new TCPServerClientConnectedEvent(e.Client));
         }
 
         private void checkHeartBeat()
         {
+            TCPClientList toBeDeleted = new TCPClientList();
             while (this.isServerEnabled)
             {
                 Thread.Sleep(100);
 
-                foreach (var existedClient in this.clientsList.Values.ToList())
+                foreach (var existedClient in this.clientsList)
                 {
                     if (existedClient is null) continue;
-                    if (existedClient.IsConnected()) continue;
+                    if (existedClient.IsConnected) continue;
 
-                    var key = this.clientsList.Where(pair => pair.Value == existedClient).Select(pair => pair.Key).FirstOrDefault();
-                    this.clientsList.Remove(key);
-                    this.logger.info(string.Format("Detected client disconnection when checkin HEARTBEAT: {0}", existedClient.getIpAddress()));
+                    toBeDeleted.Add(existedClient);
+                    this.logger.info(string.Format("Detected client disconnection when checkin HEARTBEAT: {0}", existedClient.IpAddress));
 
                     this.onClientDisconnected?.Invoke(this, new TCPServerClientDisonnectedEvent(existedClient));
+                }
+
+                foreach(var disconnectedClient in toBeDeleted)
+                {
+                    if (disconnectedClient != null && disconnectedClient.Socket.Connected)
+                    {
+                        disconnectedClient.Socket.Shutdown(SocketShutdown.Both);
+                    }
+                    this.clientsList.Remove(disconnectedClient);
                 }
             }
         }

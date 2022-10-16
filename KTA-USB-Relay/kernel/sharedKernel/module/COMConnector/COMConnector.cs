@@ -87,6 +87,9 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.COMConnector
         {
             string receivedData = this.client.ReadExisting();
             this.logger.info(string.Format("Received from {0} : {1}", this.portName, receivedData));
+#if DEBUG
+            this.logger.info(string.Format("Received from {0} : {1}", this.portName, receivedData));
+#endif
             this.OnDataReceived?.Invoke(sender, new OnDataReceivedEvent(this.client, receivedData));
         }
 
@@ -95,8 +98,10 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.COMConnector
 
             byte[] msg = Encoding.ASCII.GetBytes(message);
             this.client.Write(msg, 0, msg.Length);
-            this.logger.info(string.Format("Sending command OVER {0} : {1}", this.portName, message));
 
+#if DEBUG
+            this.logger.info(string.Format("Sending command OVER {0} : {1}", this.portName, message));
+#endif
             Thread.Sleep(1);
             return this;
         }

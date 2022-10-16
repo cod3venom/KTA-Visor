@@ -1,14 +1,17 @@
 ﻿
-using KTA_Visor.module.Managemnt.module.camera.components.CameraItem.commands.filesystem;
 using KTA_Visor.module.Managemnt.module.camera.form;
+using KTA_Visor.module.Managemnt.module.camera.form.settings;
+using KTA_Visor.module.Managemnt.module.camera.form.Zipper;
 using KTA_Visor.module.Managemnt.module.Camera.component.CameraItem.events;
 using KTAVisorAPISDK.module.camera.entity;
 using KTAVisorAPISDK.module.station.entity;
+using MetroFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -124,14 +127,33 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         private void onCopyFilesToUSB(object sender, EventArgs e)
         {
             this.nasStorageFileDialog.ShowDialog();
+
+            if (this.nasStorageFileDialog.FileNames == null)
+            {
+                MetroMessageBox.Show(this, "Nie wybrano żadnych plików", "Błąd");
+                return;
+            }
+
             this.targetDriveDevicePathDialog.ShowDialog();
 
+            if (this.targetDriveDevicePathDialog.SelectedPath == null)
+            {
+                MetroMessageBox.Show(this, "Nie wybrano żadnej scieżki", "Błąd");
+                return;
+            }
 
-            CopyFilesToUSBCommand.Execute(
+            if (!Directory.Exists(this.targetDriveDevicePathDialog.SelectedPath))
+            {
+                MetroMessageBox.Show(this, "Nie udało się wykryć wybrany nośnik", "Błąd");
+                return;
+            }
+
+            ZipperForm copyingForm = new ZipperForm();
+            copyingForm.Show();
+            copyingForm.Zip(
                 this.targetDriveDevicePathDialog.SelectedPath,
                 this.nasStorageFileDialog.FileNames
             );
-
             this.OnCopyToUSBClicked?.Invoke(this, new OnCloseCameraItemFormEvent(this, this.Camera));
         }
 

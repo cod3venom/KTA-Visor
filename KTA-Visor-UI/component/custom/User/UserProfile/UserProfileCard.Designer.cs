@@ -40,6 +40,11 @@
             this.settingsBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.bunifuSeparator4 = new Bunifu.Framework.UI.BunifuSeparator();
+            this.label5 = new System.Windows.Forms.Label();
+            this.accountSecurityBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.profileBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.logoutBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -52,19 +57,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.stationBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.fileHistoryBtn = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.bunifuSeparator4 = new Bunifu.Framework.UI.BunifuSeparator();
-            this.label5 = new System.Windows.Forms.Label();
-            this.accountSecurityBtn = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.profileBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusPicBox)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // firstAndLastNameLbl
@@ -73,7 +73,7 @@
             this.firstAndLastNameLbl.Font = new System.Drawing.Font("Inter Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.firstAndLastNameLbl.Location = new System.Drawing.Point(12, 5);
             this.firstAndLastNameLbl.Name = "firstAndLastNameLbl";
-            this.firstAndLastNameLbl.Size = new System.Drawing.Size(104, 14);
+            this.firstAndLastNameLbl.Size = new System.Drawing.Size(126, 17);
             this.firstAndLastNameLbl.TabIndex = 1;
             this.firstAndLastNameLbl.Text = "Imię i Nazwisko";
             // 
@@ -199,7 +199,7 @@
             this.label4.Font = new System.Drawing.Font("Inter Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(5, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 14);
+            this.label4.Size = new System.Drawing.Size(101, 17);
             this.label4.TabIndex = 3;
             this.label4.Text = "Zarządzania";
             // 
@@ -219,6 +219,115 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(297, 1020);
             this.panel4.TabIndex = 5;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.bunifuSeparator4);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.accountSecurityBtn);
+            this.panel5.Controls.Add(this.profileBtn);
+            this.panel5.Location = new System.Drawing.Point(22, 167);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(258, 145);
+            this.panel5.TabIndex = 5;
+            // 
+            // bunifuSeparator4
+            // 
+            this.bunifuSeparator4.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuSeparator4.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
+            this.bunifuSeparator4.LineThickness = 1;
+            this.bunifuSeparator4.Location = new System.Drawing.Point(8, 23);
+            this.bunifuSeparator4.Name = "bunifuSeparator4";
+            this.bunifuSeparator4.Size = new System.Drawing.Size(240, 13);
+            this.bunifuSeparator4.TabIndex = 9;
+            this.bunifuSeparator4.Transparency = 255;
+            this.bunifuSeparator4.Vertical = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Inter Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(5, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 17);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Konto";
+            // 
+            // accountSecurityBtn
+            // 
+            this.accountSecurityBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
+            this.accountSecurityBtn.BackColor = System.Drawing.Color.White;
+            this.accountSecurityBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.accountSecurityBtn.BorderRadius = 0;
+            this.accountSecurityBtn.ButtonText = "Beżpieczeństwo";
+            this.accountSecurityBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.accountSecurityBtn.DisabledColor = System.Drawing.Color.Gray;
+            this.accountSecurityBtn.Font = new System.Drawing.Font("Inter Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accountSecurityBtn.Iconcolor = System.Drawing.Color.Transparent;
+            this.accountSecurityBtn.Iconimage = ((System.Drawing.Image)(resources.GetObject("accountSecurityBtn.Iconimage")));
+            this.accountSecurityBtn.Iconimage_right = null;
+            this.accountSecurityBtn.Iconimage_right_Selected = null;
+            this.accountSecurityBtn.Iconimage_Selected = null;
+            this.accountSecurityBtn.IconMarginLeft = 0;
+            this.accountSecurityBtn.IconMarginRight = 0;
+            this.accountSecurityBtn.IconRightVisible = true;
+            this.accountSecurityBtn.IconRightZoom = 0D;
+            this.accountSecurityBtn.IconVisible = true;
+            this.accountSecurityBtn.IconZoom = 50D;
+            this.accountSecurityBtn.IsTab = false;
+            this.accountSecurityBtn.Location = new System.Drawing.Point(8, 85);
+            this.accountSecurityBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.accountSecurityBtn.Name = "accountSecurityBtn";
+            this.accountSecurityBtn.Normalcolor = System.Drawing.Color.White;
+            this.accountSecurityBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
+            this.accountSecurityBtn.OnHoverTextColor = System.Drawing.Color.White;
+            this.accountSecurityBtn.selected = false;
+            this.accountSecurityBtn.Size = new System.Drawing.Size(240, 42);
+            this.accountSecurityBtn.TabIndex = 9;
+            this.accountSecurityBtn.Text = "Beżpieczeństwo";
+            this.accountSecurityBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.accountSecurityBtn.Textcolor = System.Drawing.Color.Black;
+            this.accountSecurityBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accountSecurityBtn.Click += new System.EventHandler(this.accountSecurityBtn_Click);
+            // 
+            // profileBtn
+            // 
+            this.profileBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
+            this.profileBtn.BackColor = System.Drawing.Color.White;
+            this.profileBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.profileBtn.BorderRadius = 0;
+            this.profileBtn.ButtonText = "Konto";
+            this.profileBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.profileBtn.DisabledColor = System.Drawing.Color.Gray;
+            this.profileBtn.Font = new System.Drawing.Font("Inter Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.profileBtn.Iconcolor = System.Drawing.Color.Transparent;
+            this.profileBtn.Iconimage = ((System.Drawing.Image)(resources.GetObject("profileBtn.Iconimage")));
+            this.profileBtn.Iconimage_right = null;
+            this.profileBtn.Iconimage_right_Selected = null;
+            this.profileBtn.Iconimage_Selected = null;
+            this.profileBtn.IconMarginLeft = 0;
+            this.profileBtn.IconMarginRight = 0;
+            this.profileBtn.IconRightVisible = true;
+            this.profileBtn.IconRightZoom = 0D;
+            this.profileBtn.IconVisible = true;
+            this.profileBtn.IconZoom = 50D;
+            this.profileBtn.IsTab = false;
+            this.profileBtn.Location = new System.Drawing.Point(8, 36);
+            this.profileBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.profileBtn.Name = "profileBtn";
+            this.profileBtn.Normalcolor = System.Drawing.Color.White;
+            this.profileBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
+            this.profileBtn.OnHoverTextColor = System.Drawing.Color.White;
+            this.profileBtn.selected = false;
+            this.profileBtn.Size = new System.Drawing.Size(240, 42);
+            this.profileBtn.TabIndex = 6;
+            this.profileBtn.Text = "Konto";
+            this.profileBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.profileBtn.Textcolor = System.Drawing.Color.Black;
+            this.profileBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
             // 
             // logoutBtn
             // 
@@ -243,7 +352,7 @@
             this.logoutBtn.IconVisible = true;
             this.logoutBtn.IconZoom = 50D;
             this.logoutBtn.IsTab = false;
-            this.logoutBtn.Location = new System.Drawing.Point(20, 937);
+            this.logoutBtn.Location = new System.Drawing.Point(20, 933);
             this.logoutBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.logoutBtn.Name = "logoutBtn";
             this.logoutBtn.Normalcolor = System.Drawing.Color.Red;
@@ -262,7 +371,7 @@
             // panel9
             // 
             this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(20, 979);
+            this.panel9.Location = new System.Drawing.Point(20, 975);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(260, 24);
             this.panel9.TabIndex = 11;
@@ -272,7 +381,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel8.Location = new System.Drawing.Point(280, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(21, 1003);
+            this.panel8.Size = new System.Drawing.Size(21, 999);
             this.panel8.TabIndex = 10;
             // 
             // panel7
@@ -280,7 +389,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(20, 1003);
+            this.panel7.Size = new System.Drawing.Size(20, 999);
             this.panel7.TabIndex = 9;
             // 
             // panel6
@@ -321,7 +430,7 @@
             this.fileExplorerBtn.IconVisible = true;
             this.fileExplorerBtn.IconZoom = 50D;
             this.fileExplorerBtn.IsTab = false;
-            this.fileExplorerBtn.Location = new System.Drawing.Point(8, 183);
+            this.fileExplorerBtn.Location = new System.Drawing.Point(8, 135);
             this.fileExplorerBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.fileExplorerBtn.Name = "fileExplorerBtn";
             this.fileExplorerBtn.Normalcolor = System.Drawing.Color.White;
@@ -358,7 +467,7 @@
             this.logsBtn.IconVisible = true;
             this.logsBtn.IconZoom = 50D;
             this.logsBtn.IsTab = false;
-            this.logsBtn.Location = new System.Drawing.Point(8, 232);
+            this.logsBtn.Location = new System.Drawing.Point(8, 86);
             this.logsBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.logsBtn.Name = "logsBtn";
             this.logsBtn.Normalcolor = System.Drawing.Color.White;
@@ -395,7 +504,7 @@
             this.tunnelBtn.IconVisible = true;
             this.tunnelBtn.IconZoom = 50D;
             this.tunnelBtn.IsTab = false;
-            this.tunnelBtn.Location = new System.Drawing.Point(8, 87);
+            this.tunnelBtn.Location = new System.Drawing.Point(8, 233);
             this.tunnelBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tunnelBtn.Name = "tunnelBtn";
             this.tunnelBtn.Normalcolor = System.Drawing.Color.White;
@@ -428,7 +537,7 @@
             this.label6.Font = new System.Drawing.Font("Inter Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(5, 9);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 14);
+            this.label6.Size = new System.Drawing.Size(63, 17);
             this.label6.TabIndex = 3;
             this.label6.Text = "Module";
             // 
@@ -491,7 +600,7 @@
             this.fileHistoryBtn.IconVisible = true;
             this.fileHistoryBtn.IconZoom = 50D;
             this.fileHistoryBtn.IsTab = false;
-            this.fileHistoryBtn.Location = new System.Drawing.Point(8, 135);
+            this.fileHistoryBtn.Location = new System.Drawing.Point(8, 183);
             this.fileHistoryBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.fileHistoryBtn.Name = "fileHistoryBtn";
             this.fileHistoryBtn.Normalcolor = System.Drawing.Color.White;
@@ -505,115 +614,6 @@
             this.fileHistoryBtn.Textcolor = System.Drawing.Color.Black;
             this.fileHistoryBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fileHistoryBtn.Click += new System.EventHandler(this.fileHistoryBtn_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.bunifuSeparator4);
-            this.panel5.Controls.Add(this.label5);
-            this.panel5.Controls.Add(this.accountSecurityBtn);
-            this.panel5.Controls.Add(this.profileBtn);
-            this.panel5.Location = new System.Drawing.Point(22, 167);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(258, 145);
-            this.panel5.TabIndex = 5;
-            // 
-            // bunifuSeparator4
-            // 
-            this.bunifuSeparator4.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuSeparator4.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
-            this.bunifuSeparator4.LineThickness = 1;
-            this.bunifuSeparator4.Location = new System.Drawing.Point(8, 23);
-            this.bunifuSeparator4.Name = "bunifuSeparator4";
-            this.bunifuSeparator4.Size = new System.Drawing.Size(240, 13);
-            this.bunifuSeparator4.TabIndex = 9;
-            this.bunifuSeparator4.Transparency = 255;
-            this.bunifuSeparator4.Vertical = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Inter Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 14);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Konto";
-            // 
-            // accountSecurityBtn
-            // 
-            this.accountSecurityBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
-            this.accountSecurityBtn.BackColor = System.Drawing.Color.White;
-            this.accountSecurityBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.accountSecurityBtn.BorderRadius = 0;
-            this.accountSecurityBtn.ButtonText = "Beżpieczeństwo";
-            this.accountSecurityBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.accountSecurityBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.accountSecurityBtn.Font = new System.Drawing.Font("Inter Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accountSecurityBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.accountSecurityBtn.Iconimage = ((System.Drawing.Image)(resources.GetObject("accountSecurityBtn.Iconimage")));
-            this.accountSecurityBtn.Iconimage_right = null;
-            this.accountSecurityBtn.Iconimage_right_Selected = null;
-            this.accountSecurityBtn.Iconimage_Selected = null;
-            this.accountSecurityBtn.IconMarginLeft = 0;
-            this.accountSecurityBtn.IconMarginRight = 0;
-            this.accountSecurityBtn.IconRightVisible = true;
-            this.accountSecurityBtn.IconRightZoom = 0D;
-            this.accountSecurityBtn.IconVisible = true;
-            this.accountSecurityBtn.IconZoom = 50D;
-            this.accountSecurityBtn.IsTab = false;
-            this.accountSecurityBtn.Location = new System.Drawing.Point(8, 85);
-            this.accountSecurityBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.accountSecurityBtn.Name = "accountSecurityBtn";
-            this.accountSecurityBtn.Normalcolor = System.Drawing.Color.White;
-            this.accountSecurityBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
-            this.accountSecurityBtn.OnHoverTextColor = System.Drawing.Color.White;
-            this.accountSecurityBtn.selected = false;
-            this.accountSecurityBtn.Size = new System.Drawing.Size(240, 42);
-            this.accountSecurityBtn.TabIndex = 9;
-            this.accountSecurityBtn.Text = "Beżpieczeństwo";
-            this.accountSecurityBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.accountSecurityBtn.Textcolor = System.Drawing.Color.Black;
-            this.accountSecurityBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accountSecurityBtn.Click += new System.EventHandler(this.accountSecurityBtn_Click);
-            // 
-            // profileBtn
-            // 
-            this.profileBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
-            this.profileBtn.BackColor = System.Drawing.Color.White;
-            this.profileBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.profileBtn.BorderRadius = 0;
-            this.profileBtn.ButtonText = "Profil";
-            this.profileBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.profileBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.profileBtn.Font = new System.Drawing.Font("Inter Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.profileBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.profileBtn.Iconimage = ((System.Drawing.Image)(resources.GetObject("profileBtn.Iconimage")));
-            this.profileBtn.Iconimage_right = null;
-            this.profileBtn.Iconimage_right_Selected = null;
-            this.profileBtn.Iconimage_Selected = null;
-            this.profileBtn.IconMarginLeft = 0;
-            this.profileBtn.IconMarginRight = 0;
-            this.profileBtn.IconRightVisible = true;
-            this.profileBtn.IconRightZoom = 0D;
-            this.profileBtn.IconVisible = true;
-            this.profileBtn.IconZoom = 50D;
-            this.profileBtn.IsTab = false;
-            this.profileBtn.Location = new System.Drawing.Point(8, 36);
-            this.profileBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.profileBtn.Name = "profileBtn";
-            this.profileBtn.Normalcolor = System.Drawing.Color.White;
-            this.profileBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
-            this.profileBtn.OnHoverTextColor = System.Drawing.Color.White;
-            this.profileBtn.selected = false;
-            this.profileBtn.Size = new System.Drawing.Size(240, 42);
-            this.profileBtn.TabIndex = 6;
-            this.profileBtn.Text = "Profil";
-            this.profileBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.profileBtn.Textcolor = System.Drawing.Color.Black;
-            this.profileBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
             // 
             // UserProfileCard
             // 
@@ -631,10 +631,10 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }

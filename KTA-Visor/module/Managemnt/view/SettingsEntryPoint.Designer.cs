@@ -403,7 +403,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsEntryPoint";
             this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
-            this.Style = MetroFramework.MetroColorStyle.Orange;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "SettingsEntryPoint";
             this.Load += new System.EventHandler(this.SettingsEntryPoint_Load);
             this.panel2.ResumeLayout(false);

@@ -21,9 +21,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Station
 
         private readonly Settings settings;
         private readonly StationService stationService;
-        public StationInitializer()
+        public StationInitializer(Settings settings)
         {
-            this.settings = new Settings();
+            this.settings = settings;
             this.stationService = new StationService();
         }
 

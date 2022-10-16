@@ -34,8 +34,13 @@
       <HintPath>..\..\..\..\Desktop\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\MetroFramework.dll</HintPath>
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -100,6 +105,13 @@
     <Compile Include="component\basic\table\bundle\abstraction\sorter\command\SortByDescending.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\sorter\command\SortByAscending.cs" />
     <Compile Include="component\basic\table\bundle\abstraction\sorter\Sorter.cs" />
+    <Compile Include="component\basic\table\enums\ColumnType.cs" />
+    <Compile Include="component\basic\table\Table.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\basic\table\Table.Designer.cs">
+      <DependentUpon>Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="component\basic\textbox\DefaultTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,12 +143,6 @@
     <Compile Include="component\basic\table\components\PositionCounter\PositionCounter.Designer.cs">
       <DependentUpon>PositionCounter.cs</DependentUpon>
     </Compile>
-    <Compile Include="component\basic\table\Table.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\basic\table\Table.Designer.cs">
-      <DependentUpon>Table.cs</DependentUpon>
-    </Compile>
     <Compile Include="component\basic\textbox\RoundedTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -154,6 +160,18 @@
     </Compile>
     <Compile Include="component\custom\CircleImageButton\CircleImageButton.Designer.cs">
       <DependentUpon>CircleImageButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\ClientsList\ClientsList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\ClientsList\ClientsList.Designer.cs">
+      <DependentUpon>ClientsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="component\custom\ClientsList\sub-components\Client\ClientItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\ClientsList\sub-components\Client\ClientItem.Designer.cs">
+      <DependentUpon>ClientItem.cs</DependentUpon>
     </Compile>
     <Compile Include="component\custom\FIleExplorer\FileExplorer.cs">
       <SubType>UserControl</SubType>
@@ -278,6 +296,12 @@
     <EmbeddedResource Include="component\custom\CircleImageButton\CircleImageButton.resx">
       <DependentUpon>CircleImageButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\ClientsList\ClientsList.resx">
+      <DependentUpon>ClientsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\ClientsList\sub-components\Client\ClientItem.resx">
+      <DependentUpon>ClientItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="component\custom\FIleExplorer\FileExplorer.resx">
       <DependentUpon>FileExplorer.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +339,7 @@
     <Folder Include="component\basic\table\bundle\abstraction\row\exception\" />
     <Folder Include="component\basic\table\components\VerticalSeparator\" />
     <Folder Include="component\basic\table\dto\" />
+    <Folder Include="component\custom\ClientsList\sub-components\Client\events\" />
     <Folder Include="component\custom\Security\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
@@ -323,12 +348,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hand_cursor.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\green_circle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\red_circle.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\usbPort_off.png" />
@@ -345,6 +364,9 @@
     <Content Include="icons\falcon-icon-camera.ico" />
     <Content Include="icons\falcon-user-128x128.ico" />
     <Content Include="icons\question.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\green_circle.png" />
+    <None Include="Resources\red_circle.png" />
     <None Include="Resources\hide.png" />
     <None Include="Resources\show.png" />
     <None Include="Resources\notification.wav" />

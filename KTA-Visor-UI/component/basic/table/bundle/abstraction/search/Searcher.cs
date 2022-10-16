@@ -28,6 +28,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.search
 
                 if (this.searchKeyword == "")
                 {
+                    this.table.DataGridView.ClearSelection();
                     this.showAllRows();
                 }
             });

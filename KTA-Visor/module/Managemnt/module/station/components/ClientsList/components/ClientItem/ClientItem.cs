@@ -22,7 +22,7 @@ namespace KTA_Visor.module.Station.components.ClientsList.components.ClientItem
         {
             InitializeComponent();
             this.Client = client;
-            this.IpAddress = client.getIpAddress();
+            this.IpAddress = client.IpAddress;
         }
 
         private void ClientItem_Load(object sender, EventArgs e)

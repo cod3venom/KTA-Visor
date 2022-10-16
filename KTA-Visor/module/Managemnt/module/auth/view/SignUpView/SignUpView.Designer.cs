@@ -183,7 +183,7 @@
             this.passwordTxt.Location = new System.Drawing.Point(52, 273);
             this.passwordTxt.MaxLength = 32767;
             this.passwordTxt.Name = "passwordTxt";
-            this.passwordTxt.PasswordChar = '\0';
+            this.passwordTxt.PasswordChar = '●';
             this.passwordTxt.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.passwordTxt.SelectedText = "";
             this.passwordTxt.SelectionLength = 0;
@@ -192,6 +192,7 @@
             this.passwordTxt.Size = new System.Drawing.Size(227, 23);
             this.passwordTxt.TabIndex = 26;
             this.passwordTxt.UseSelectable = true;
+            this.passwordTxt.UseSystemPasswordChar = true;
             this.passwordTxt.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.passwordTxt.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 

@@ -120,9 +120,6 @@
   <metadata name="tunnelMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="tunnelMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="startTunnelServerMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -256,6 +253,21 @@
         4qXvtlHU/wAZpyJqrXLBlQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="cardModeMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAh5JREFUSEvt
+        lU9PE1EUxZ98Cz+DibLQvQvtDIq602AiiSEkCspO2GkTA53SoInBGmEBhhaBAlqqRrQsNLXTFiUpWJpW
+        Ov5LXSjGJhBbJp0e322mC+gs2s4sWHiTX3Jz7s2c3teXd9n/2IdhtzcJUrRdkMJPBaccsAz6nhS9yIAD
+        THS8O9Y3q+QXUkW82ChZBn3vxozy99RgrJm1SPKZmbWCYaNZplcL4NOcZuKAfHb2445h014KRdQc1O/j
+        P942EG4tm/h0k8+5aiwzqUyyL0zqpaHjqhfDSazGcBIzBNIa5hIq5tdVPOM5aYaT9HjTuPIoWabH+6km
+        7ZonhZv+b+ieSKN3Plumi+ekjcg588fVOZZEl1dBfzCHkQ8avKsaPBzKSbvqyeDcnfcrpo6rczyFB8tF
+        vM5oSG5q2PhTKkM5aVRrH13/vWuS28+zuLXwvWbIxB0rIvGr+laSRrVLDxMJZjPxdvXNfcFwVMXyj2qT
+        WFbDcERFm3vtMTvpDB3t9Sn5QAOv8NDST9wN5bHIj2avCWm8Vmp1xS4zeu/520/75AnfA/56sDnCi92T
+        ijoR15Dh/0XFgHLSrk993RKk0CF9czUWdjuaWpzRoOvNNt8fGhRuQPh5TprojLykHr298RD63x7sGE8p
+        lVv2Sr9VHWPpDNX0NvMhOOQT/Kpu35N3QPB8S3TIx/WydcE34JHz7vjShfvxoOiKHNZlHoz9A840xldM
+        TbcwAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="logsMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAABGdBTUEAALGPC/xhBQAAA1BJREFUWEft
@@ -274,6 +286,29 @@
         EHbQdviEIXzAkTczu9eKHikUdqVNSuPNVaEbbJFRSAsTRg8w3A8DqVpvJFvrjcq3vVGFeysMcz1RmWKW
         Y2w6Y4E4RxpIC3uoQo983C1DJdUtwVJOlcdfRoi5vlflkVjtcmugnOJCjPNiru/xXeRJC3sMdWxHw1yu
         v1TiR/7k91gHAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="ustawieniaFabryczneToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAABCJJREFUOE99
+        lH9MVWUYxw/rx+Zcf9SW/7Q185+2XDY79xC3H5OKJLzccwG7XLmcc+4P4FJyQWLhQIjs5yIx24ygWqig
+        bhGQoMUsKxJHLeaQzdi6KoMUDBAU5KJc4X57nvce2xjVu313frzv83me93me95X+a1idzhWK3bNWtmtp
+        FrsnwOJ3/me1OleYy/5/yHLgrnXp+irZYbgV1WizqFqfRdXPW1Tjz5j4XetTVK3NYtey1qf47k9M3Hmn
+        ab50rNuorySj9QSrJcNzpHB8mhF92pmDJG0rns9+BU+95IfiMKI8Rw5D9PyYbdjWxMTGI07n3Y+neWSa
+        bCfdjE/zRJM9QRglVajaU4+6gy2obWxGWfVeuLdVCAcxsHGTbdiWGSaO8pVqPCA79H0WhxF5It2DTb5t
+        aGw9hgvDlzAbnsN1Ej9ZA+cGsffAlyLieIcBinLeYjcaHiOGiZMk8lJKGuHIGHaq9wzGJ6fQc7of1fX7
+        kVf+DgqqqkWkZwZC+GtiEs3ffI9ns/KhqDpFqo2QSgVMsfnX0Mcp9pRIC3Z91oTL41fQ0NwBV7Acz7lf
+        ptzlgHP5gr4V+Tvew8+/nsbE5FW8X7cfKd4iJGT45sm+W7G510iUCxd9DJKEkW/7m6j5/CDU3BIkpHt5
+        S0sUfOMDdBEwcusW/hgcxr6Wo8gqquC5QSU12yXJql5jsevjvJjzl7glgI16AawZvmUwFm+f8xiNRrGw
+        uIhuSk9msAzMYBblT28lXePFnJPK3XWobWrGi55CruQy4AZXHl7/sF4UiPPMubVuFs6Z0SrJduMovUxT
+        QaBTm5wfuijyU/xWjei726DbYiecjpZvT5Djr5BsBOmfmJumKDu4wk0U6pQ991W0dv6A+UhEbOW3/rPI
+        Lq5cBmQ9udkPm794SWqYYXHojRKVvZx+jHLDfn38J1wcHcPCwgJ6+3+nKHcvg/FOOB0VNZ8Ih1xIc26U
+        WVzlJAp1YMOWQJSTy9u4Oj2DH3t6EdjxLriVuFgMeiYzF468EurNA6Lp93xxSMxT20WZodiMJOlhVb2H
+        6EdIc5wfPgHHT/6CsStTVME+KkAd0vNfE6eHW+bId10YGZvA2dAFZBaUxbZs128QtJ1Z3NtxsqrZ6Njx
+        zSIiSfEV4VB7J4ZHLiM8dwMzs2HMXJ8VleVT0tnVA1dhuYDRNiFsHfomZjFQWpvsvI9g22ny0j9QbyFy
+        y97GRw2HRVQdJ07i08NtKNy5C1xAbhWubszGKH3U5r5XwMwRF2/XH5JVTyVFGyJvEQYnZHhFb6bmFAsI
+        3zJcYZ4jRejCDVF1KxPSvKtNzpIRx5crefNTTroJOkRG3Kx8ThdN0bt2TczRGsXh8dFduIptY4h/GU6n
+        8w45VX+QwbQdPkXDpLCQQxuK/TP8vIbXmmbmkKS/AfjP3VoKweKfAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tunnelIndicator.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

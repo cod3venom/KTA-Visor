@@ -18,7 +18,7 @@ namespace KTA_Visor_DSClient.module.Shared.Globals
         public static ClientTunnel ClientTunnel;
         
         public static StationEntity STATION = new StationEntity();
-        public static Dictionary<string, USBCameraDevice> USB_CAMERA_DEVICES_LIST = new Dictionary<string, USBCameraDevice>();
+        public static USBCameraDeviceList<USBCameraDevice> USB_CAMERA_DEVICES_LIST = new USBCameraDeviceList<USBCameraDevice>();
         public static List<USBCameraDevice> CAMERAS_LIST = new List<USBCameraDevice>();
 
         public static bool IS_IN_SETTINGS_MODE = false;

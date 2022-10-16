@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TCPTunnel.kernel.extensions.router.dto;
 
@@ -31,10 +32,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
         {
             switch(request.Endpoint)
             {
-                case "command://cameras/all":
-                    this.onGetAllCameras(request);
-                    break;
-
                 case "command://cameras/settings/change":
                     this.onChangeSettings(request);
                     break;
@@ -44,28 +41,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
                     break;
             }
         }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        private void onGetAllCameras(Request request)
-        {
-            CameraEntity entity = new CameraEntity();
-            entity.datas = new List<CameraEntity.Camera>();
-            Globals.CAMERAS_LIST.ToList().ForEach(async delegate (USBCameraDevice cameraDevice)
-            {
-                CameraEntity cameraEntity = await this.cameraService.findByCustomId(cameraDevice.ID);
-                entity.datas.Add(cameraEntity.data);
-            });
-
-            request.Client.Send(new Request(
-                "response://cameras/all",
-                entity,
-                request.Client
-            ));
-        }
+ 
 
         private async void onChangeSettings(Request request)
         {
@@ -73,7 +49,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
             CameraEntity.Camera cameraEntityFromTunnel = JsonConvert.DeserializeObject<CameraEntity.Camera>(json);
             CameraEntity camera = await this.cameraService.findByCustomId(cameraEntityFromTunnel.cameraCustomId);
 
-            this.cameraDeviceSettingsService.SetMenuConfig(camera.data);
+            new Thread(() => this.cameraDeviceSettingsService.SetMenuConfig(camera.data)).Start();
         }
 
         private void onBlinkCamera(Request request)

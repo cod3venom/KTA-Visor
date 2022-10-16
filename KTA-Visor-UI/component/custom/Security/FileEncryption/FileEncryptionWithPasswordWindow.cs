@@ -1,4 +1,5 @@
 ﻿using KTA_Visor_UI.component.custom.Security.FileEncryption.events;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace KTA_Visor_UI.component.custom.Security.FileEncryption
 {
-    public partial class FileEncryptionWithPasswordWindow : Form
+    public partial class FileEncryptionWithPasswordWindow : MetroForm
     {
 
 
@@ -20,45 +21,19 @@ namespace KTA_Visor_UI.component.custom.Security.FileEncryption
         public event EventHandler<EventArgs> OnPasswordAndRepeatedPasswordDoesntMatch;
         public event EventHandler<OnSaveFileEncryptionPasswordsEvent> OnSaveFileEncryptionPasswords;
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                const int CS_DROPSHADOW = 0x20000;
-                CreateParams cp = base.CreateParams;
-                cp.ClassStyle |= CS_DROPSHADOW;
-                return cp;
-            }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public FileEncryptionWithPasswordWindow()
         {
             InitializeComponent();
-
-            this.topBar1.Parent = this;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void FileEncryptionWithPasswordWindow_Load(object sender, EventArgs e)
         {
-            this.topBar1.onClose += onClose;
             this.showHidePasswordBtn.Click += onShowHidepassword;
             this.showHideRepeatedPasswordBtn.Click += onShowHideRepeatedPassword;
-            this.saveBtn.OnClick += onSave;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void onShowHidepassword(object sender, EventArgs e)
         {
            if (this.filePasswordtxt.isPassword)
@@ -75,11 +50,6 @@ namespace KTA_Visor_UI.component.custom.Security.FileEncryption
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void onShowHideRepeatedPassword(object sender, EventArgs e)
         {
             if (this.filePasswordRepeatTxt.isPassword)
@@ -97,11 +67,7 @@ namespace KTA_Visor_UI.component.custom.Security.FileEncryption
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void onSave(object sender, EventArgs e)
         {
             if (this.filePasswordtxt.Text != this.filePasswordRepeatTxt.Text)
@@ -123,11 +89,6 @@ namespace KTA_Visor_UI.component.custom.Security.FileEncryption
             this.Close();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void onClose(object sender, EventArgs e)
         {
             this.Close();

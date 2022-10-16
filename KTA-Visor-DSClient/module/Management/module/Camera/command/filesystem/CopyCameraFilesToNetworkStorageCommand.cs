@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem
@@ -36,6 +37,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem
             {
                 FileInfo file = kvp.Value;
                 FileInfo destFile = new FileInfo(String.Format("{0}\\{1}", networkDriveLocation, file.Name));
+
+                Console.WriteLine("Kopiowanie pliku: " + file.Name);
+                Thread.Sleep(100);
                 
                 if (File.Exists(destFile.FullName))
                 {
@@ -49,26 +53,25 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem
 
                 if (File.Exists(destFile.FullName) && destFile.Length == file.Length)
                 {
-                    //file.Delete();
+                    file.Delete();
 
-                    if (copiedFiles.ContainsKey(destFile.Name))
-                    {
+                    if (copiedFiles.ContainsKey(destFile.Name)){
                         continue;
                     }
 
 
-                    FileHistoryService fileHistoryService = new FileHistoryService();
                     copiedFiles.Add(destFile.Name, new CopiedCameraFileTObject(destFile, true));
+                   // FileManagerService fileManagerService= new FileManagerService();
 
-                    _ = fileHistoryService.create(new CreateFileHistoryRequestTObject(
-                        stationCustomId,
-                        cameraCustomId,
-                        badgeId,
-                        file.Name,
-                        file.FullName,
-                        destFile.FullName,
-                        destFile.Length
-                    ));
+                    //_ = fileManagerService.create(new CreateFileHistoryRequestTObject(
+                    //    stationCustomId,
+                    //    cameraCustomId,
+                    //    badgeId,
+                    //    file.Name,
+                    //    file.FullName,
+                    //    destFile.FullName,
+                    //    destFile.Length
+                    //));
 
                     Globals.Logger.success(String.Format("Successfully copied File {0} from the {1} to the {2} folder", file.Name, file.DirectoryName, networkDriveLocation));
                 }

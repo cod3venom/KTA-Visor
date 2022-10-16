@@ -20,11 +20,13 @@ namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
         private readonly Settings settings;
         private readonly AuthData authData;
         private readonly GlobalController globalController;
-        private  Client _client;
 
-        public ClientTunnel()
+        private ClientConfigTObject connectionConfig;
+        private Client _client;
+
+        public ClientTunnel(Settings settings)
         {
-            this.settings = new Settings();
+            this.settings = settings;
             this.authData = new AuthData();
             this.globalController = new GlobalController(this);
         }
@@ -34,20 +36,15 @@ namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
             this.authData.Identificator = Globals.STATION?.data?.stationId;
             authData.AdditionalData.Add("station", Globals.STATION);
 
-            ClientConfigTObject tunnelConnectionSettings = new ClientConfigTObject(
+            this.connectionConfig = new ClientConfigTObject(
                 this.settings.SettingsObj.app.management.serverIp,
                 this.settings.SettingsObj.app.management.serverPort,
                 this.authData
             );
 
-            this._client = new Client(tunnelConnectionSettings, Globals.Logger);
+            this._client = new Client(this.connectionConfig, Globals.Logger);
         }
-        
-        public TCPClientTObject ClientObject
-        {
-            get { return this._client.getClientObject(); }
-        }
-
+      
         public void Connect()
         {
             if (this.authData.AdditionalData.Count == 0)
@@ -55,42 +52,37 @@ namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
                 this.initialize();
             }
 
-            this._client.onClientConnected += onClientconnected;
-            this._client.onClientDisconnected += onClientDisconnected;
-            this._client.onReceivedMessage += onMessageReceived;
-
-            Globals.Logger.warn("Client trying to connect to the tunnel");
-            this._client.connect();
-            Globals.ClientTunnel = this;
+            this._client.OnDataReceived += onDataReceived;
+            this._client.OnConnectionWasTerminated += onConnectionWasTerminated;
+            this._client.OnExceptionOccured += onExceptionOccured;
+            this._client.Connect();
         }
 
-        public void Disconnect()
-        {
-            this._client.disconnect();
+       
 
-            this._client.onClientConnected -= onClientconnected;
-            this._client.onClientDisconnected -= onClientDisconnected;
-            this._client.onReceivedMessage -= onMessageReceived;
+        private void onAllowedtoReconnect(object sender, EventArgs e)
+        {
+            this.Connect();
         }
 
         public void Emit(Request request)
         {
-            this._client.send(request);
+            this._client.Send(request);
         }
-        
-        private void onClientconnected(object sender, TCPClientConnectedEvent e)
+ 
+        private void onConnectionWasTerminated(object sender, EventArgs e)
         {
-            Globals.Logger.success("Client successfully connected to the tunnel");
+            Globals.Logger.warn("Reconnecting when : ConnectionWasTerminnated");
+            this._client.Reconnect();
         }
 
-        private void onClientDisconnected(object sender, EventArgs e)
+        private void onExceptionOccured(object sender, OnClientExceptionHappend e)
         {
-            Globals.Logger.error("Client has been disconnected from the tunnel");
-            Thread.Sleep(4000);
-            this.Connect();
+            Globals.Logger.warn("Reconnecting when : ExceptionOccured");
+            this._client.Reconnect();
         }
 
-        private void onMessageReceived(object sender, TCPClientMessageReceivedEvent e)
+        private void onDataReceived(object sender, TCPClientMessageReceivedEvent e)
         {
             this.globalController.Watch(e.Request);
             this.OnRequestReceivedInTunnelEvent?.Invoke(this, e);

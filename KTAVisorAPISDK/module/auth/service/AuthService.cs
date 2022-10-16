@@ -52,26 +52,18 @@ namespace KTAVisorAPISDK.module.auth.service
                 throw new ArgumentNullException(nameof(request.password) + " can't be empty");
             }
 
-            try
+            HttpResponseMessage result = await this.authRepository.signUp(request);
+            string responseBody = await result.Content.ReadAsStringAsync();
+            SignUpEntity signUp = JsonConvert.DeserializeObject<SignUpEntity>(responseBody);
+
+            if (signUp == null || signUp.data == null)
             {
-                HttpResponseMessage result = await this.authRepository.signUp(request);
-                string responseBody = await result.Content.ReadAsStringAsync();
-                SignUpEntity signUp = JsonConvert.DeserializeObject<SignUpEntity>(responseBody);
-
-                if (signUp == null || signUp.data.token == null)
-                {
-                    throw new Exception("Unable to sign up, please try later");
-                }
-
-                SaveSessionCommand.Execute(signUp.data.token);
-
-                return signUp;
-
+                throw new Exception("Nie udało się zarejestrować, spróbuj póżniej lub skontaktuj się z Administratorem");
             }
-            catch(Exception)
-            {
-                throw new Exception("Something went wrong");
-            }
+
+            SaveSessionCommand.Execute(signUp.data.token);
+
+            return signUp;
         }
 
         /// <summary>
@@ -93,26 +85,25 @@ namespace KTAVisorAPISDK.module.auth.service
                 throw new BadRequestException(nameof(request.password) + " nie może być puste");
             }
 
-            try
+          
+            HttpResponseMessage result = await this.authRepository.signIn(request);
+            string responseBody = await result.Content.ReadAsStringAsync();
+            SignInEntity sisgnIn = JsonConvert.DeserializeObject<SignInEntity>(responseBody);
+
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                HttpResponseMessage result = await this.authRepository.signIn(request);
-                string responseBody = await result.Content.ReadAsStringAsync();
-                SignInEntity sisgnIn = JsonConvert.DeserializeObject<SignInEntity>(responseBody);
-
-                if (sisgnIn == null || sisgnIn?.data?.jwt == null)
-                {
-                    throw new WrongCredentialsException("Nie udało się zalogować, wprowadz poprawne dane.");
-                }
-
-                SaveSessionCommand.Execute(sisgnIn.data.jwt);
-
-                return sisgnIn;
-
+                throw new WrongCredentialsException("Nie udało się zalogować, wprowadz poprawne dane.");
             }
-            catch (Exception)
+            if (sisgnIn == null || sisgnIn?.data?.jwt == null)
             {
-                throw new Exception("Coś poszło nie tak");
+                throw new WrongCredentialsException("Nie udało się zalogować, wprowadz poprawne dane.");
             }
+
+            SaveSessionCommand.Execute(sisgnIn.data.jwt);
+
+            return sisgnIn;
+
+        
 
         }
     }

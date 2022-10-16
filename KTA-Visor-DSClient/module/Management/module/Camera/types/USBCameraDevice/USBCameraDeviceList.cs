@@ -6,21 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice
 {
-    public class USBCameraDeviceList<T> : List<T>
+    public class USBCameraDeviceList<USBCameraDevice> : List<USBCameraDevice>
     {
         public USBCameraDeviceList(): base()
         {
             
         }
 
-        public USBCameraDeviceList<T> refresh()
+        public USBCameraDeviceList<USBCameraDevice> refresh()
         {
             this.loadCameras();
 
             return this;
         }
 
-        public USBCameraDeviceList<T> loadCameras()
+        public USBCameraDeviceList<USBCameraDevice> loadCameras()
         {
             return this;
         }

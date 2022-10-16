@@ -25,13 +25,12 @@ namespace KTA_Visor_DSClient
 
             Installer installer = new Installer();
             installer.FullInstall();
+            
+            Globals.Logger = new KTALogger.Logger();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            Entrypoint entrypoint = new Entrypoint();
+            EntryPoint entrypoint = new EntryPoint(Globals.Logger);
             entrypoint.OnExceptionOccured += Entrypoint_OnExceptionOccured;
-            Application.Run(entrypoint);
+            entrypoint.Run();
         }
 
         private static void Entrypoint_OnExceptionOccured(object sender, OnExceptionOccuredEvent e)
@@ -52,12 +51,17 @@ namespace KTA_Visor_DSClient
 
         private static void HandleException(dynamic exception)
         {
+            Globals.Logger.error("Global exception handler", exception);
+            _ = new StationInitializer(new install.settings.Settings()).Initialize(false);
+
 #if DEBUG
-            Console.WriteLine(exception);
-            Console.ReadLine();
+            Console.WriteLine(exception.ToString());
+            Console.ReadKey();
 #endif
-            _ = new StationInitializer().Initialize(false);
+
+#if !DEBUG
             Application.Restart();
+#endif
         }
 
     }

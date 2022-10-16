@@ -20,14 +20,23 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.form
 
         private readonly FileHistory fileHistory;
 
-        private readonly FileHistoryService fileHistoryService;
+        private readonly FileManagerService fileManagerService;
 
         public FileHistoryRecordForm(FileHistory fileHistory)
         {
             InitializeComponent();
 
             this.fileHistory = fileHistory;
-            this.fileHistoryService = new FileHistoryService();
+            this.fileManagerService = new FileManagerService();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            using (Brush b = new SolidBrush(Color.DarkCyan)){
+                int borderWidth = 5;
+                e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
+            }
         }
 
         private void FileHistoryRecordForm_Load(object sender, EventArgs e)
@@ -50,7 +59,7 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.form
         {
             this.fileHistory.evidence = this.isEvidenceChk.Checked;
             this.fileHistory.removableEvidence = this.isRemovableEvidenceChk.Checked;
-            _ = this.fileHistoryService.edit(this.fileHistory.id, new EditFileHistoryRequestTObject(
+            _ = this.fileManagerService.edit(this.fileHistory.id, new EditFileHistoryRequestTObject(
                     this.fileHistory.evidence,
                     this.fileHistory.removableEvidence,
                     this.descriptionTxt.Text
