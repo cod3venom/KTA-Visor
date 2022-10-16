@@ -33,6 +33,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.statusIcon = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.cameraIndexLbl = new System.Windows.Forms.Label();
@@ -49,14 +50,15 @@
             this.copyFilesToDVDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.targetDriveDevicePathDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.nasStorageFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.oprogramowanieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.upgradeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).BeginInit();
             this.panel3.SuspendLayout();
             this.cameraItemMenuStrip.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -92,6 +94,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(265, 27);
             this.panel1.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.statusIcon);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(228, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(37, 27);
+            this.panel4.TabIndex = 2;
             // 
             // statusIcon
             // 
@@ -150,7 +161,7 @@
             this.stationIdLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stationIdLbl.Location = new System.Drawing.Point(70, 73);
             this.stationIdLbl.Name = "stationIdLbl";
-            this.stationIdLbl.Size = new System.Drawing.Size(47, 14);
+            this.stationIdLbl.Size = new System.Drawing.Size(60, 17);
             this.stationIdLbl.TabIndex = 10;
             this.stationIdLbl.Text = "123456";
             // 
@@ -160,7 +171,7 @@
             this.badgeIdLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.badgeIdLbl.Location = new System.Drawing.Point(70, 25);
             this.badgeIdLbl.Name = "badgeIdLbl";
-            this.badgeIdLbl.Size = new System.Drawing.Size(47, 14);
+            this.badgeIdLbl.Size = new System.Drawing.Size(60, 17);
             this.badgeIdLbl.TabIndex = 9;
             this.badgeIdLbl.Text = "123456";
             // 
@@ -170,7 +181,7 @@
             this.cameraIdLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cameraIdLbl.Location = new System.Drawing.Point(70, 49);
             this.cameraIdLbl.Name = "cameraIdLbl";
-            this.cameraIdLbl.Size = new System.Drawing.Size(47, 14);
+            this.cameraIdLbl.Size = new System.Drawing.Size(60, 17);
             this.cameraIdLbl.TabIndex = 8;
             this.cameraIdLbl.Text = "123456";
             // 
@@ -180,7 +191,7 @@
             this.stationIdTextLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stationIdTextLbl.Location = new System.Drawing.Point(17, 73);
             this.stationIdTextLbl.Name = "stationIdTextLbl";
-            this.stationIdTextLbl.Size = new System.Drawing.Size(53, 14);
+            this.stationIdTextLbl.Size = new System.Drawing.Size(66, 17);
             this.stationIdTextLbl.TabIndex = 7;
             this.stationIdTextLbl.Text = "ID Stacji:";
             // 
@@ -190,7 +201,7 @@
             this.cameraIdTextLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cameraIdTextLbl.Location = new System.Drawing.Point(7, 49);
             this.cameraIdTextLbl.Name = "cameraIdTextLbl";
-            this.cameraIdTextLbl.Size = new System.Drawing.Size(63, 14);
+            this.cameraIdTextLbl.Size = new System.Drawing.Size(80, 17);
             this.cameraIdTextLbl.TabIndex = 6;
             this.cameraIdTextLbl.Text = "ID Kamery:";
             // 
@@ -200,17 +211,19 @@
             this.badgeIdTextLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.badgeIdTextLbl.Location = new System.Drawing.Point(3, 25);
             this.badgeIdTextLbl.Name = "badgeIdTextLbl";
-            this.badgeIdTextLbl.Size = new System.Drawing.Size(73, 14);
+            this.badgeIdTextLbl.Size = new System.Drawing.Size(95, 17);
             this.badgeIdTextLbl.TabIndex = 5;
             this.badgeIdTextLbl.Text = "NR Odznaki: ";
             // 
             // cameraItemMenuStrip
             // 
             this.cameraItemMenuStrip.BackColor = System.Drawing.Color.Silver;
+            this.cameraItemMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cameraItemMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.systemPlikówToolStripMenuItem});
+            this.systemPlikówToolStripMenuItem,
+            this.oprogramowanieToolStripMenuItem});
             this.cameraItemMenuStrip.Name = "cameraItemMenuStrip";
-            this.cameraItemMenuStrip.Size = new System.Drawing.Size(151, 26);
+            this.cameraItemMenuStrip.Size = new System.Drawing.Size(215, 84);
             // 
             // systemPlikówToolStripMenuItem
             // 
@@ -219,21 +232,21 @@
             this.copyFilesToDVDMenuItem});
             this.systemPlikówToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("systemPlikówToolStripMenuItem.Image")));
             this.systemPlikówToolStripMenuItem.Name = "systemPlikówToolStripMenuItem";
-            this.systemPlikówToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.systemPlikówToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
             this.systemPlikówToolStripMenuItem.Text = "System Plików";
             // 
             // copyFilesToUSBMenuItem
             // 
             this.copyFilesToUSBMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyFilesToUSBMenuItem.Image")));
             this.copyFilesToUSBMenuItem.Name = "copyFilesToUSBMenuItem";
-            this.copyFilesToUSBMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.copyFilesToUSBMenuItem.Size = new System.Drawing.Size(265, 26);
             this.copyFilesToUSBMenuItem.Text = "Zgrywanie na Nosnik USB";
             // 
             // copyFilesToDVDMenuItem
             // 
             this.copyFilesToDVDMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyFilesToDVDMenuItem.Image")));
             this.copyFilesToDVDMenuItem.Name = "copyFilesToDVDMenuItem";
-            this.copyFilesToDVDMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.copyFilesToDVDMenuItem.Size = new System.Drawing.Size(265, 26);
             this.copyFilesToDVDMenuItem.Text = "Zgrywanie na Nosnik DVD";
             // 
             // nasStorageFileDialog
@@ -241,14 +254,21 @@
             this.nasStorageFileDialog.FileName = "Wybierz pliki które chcesz skopiować";
             this.nasStorageFileDialog.Multiselect = true;
             // 
-            // panel4
+            // oprogramowanieToolStripMenuItem
             // 
-            this.panel4.Controls.Add(this.statusIcon);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(228, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(37, 27);
-            this.panel4.TabIndex = 2;
+            this.oprogramowanieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.upgradeMenuItem});
+            this.oprogramowanieToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("oprogramowanieToolStripMenuItem.Image")));
+            this.oprogramowanieToolStripMenuItem.Name = "oprogramowanieToolStripMenuItem";
+            this.oprogramowanieToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.oprogramowanieToolStripMenuItem.Text = "Oprogramowanie";
+            // 
+            // upgradeMenuItem
+            // 
+            this.upgradeMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("upgradeMenuItem.Image")));
+            this.upgradeMenuItem.Name = "upgradeMenuItem";
+            this.upgradeMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.upgradeMenuItem.Text = "Aktualizacja";
             // 
             // CameraItem
             // 
@@ -266,11 +286,11 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.cameraItemMenuStrip.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -297,5 +317,7 @@
         private System.Windows.Forms.Label cameraIndexLbl;
         private MetroFramework.Controls.MetroButton settingsBtn;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ToolStripMenuItem oprogramowanieToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem upgradeMenuItem;
     }
 }

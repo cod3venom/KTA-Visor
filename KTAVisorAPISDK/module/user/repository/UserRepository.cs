@@ -1,4 +1,6 @@
 ﻿using KTAVisorAPISDK.kernel.sharedKernel.util;
+using KTAVisorAPISDK.module.user.dto.request;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +17,10 @@ namespace KTAVisorAPISDK.module.user.repository
             return await HttpClientUtil.securedClient.GET("/api/me");
         }
 
+        public async Task<HttpResponseMessage> edit(EditUserRequestTObject request)
+        {
+            string payload = JsonConvert.SerializeObject(request);
+            return await HttpClientUtil.securedClient.PUT("/api/me", payload);
+        }
     }
 }

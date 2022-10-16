@@ -1,4 +1,5 @@
-﻿using KTAVisorAPISDK.module.user.entity;
+﻿using KTAVisorAPISDK.module.user.dto.request;
+using KTAVisorAPISDK.module.user.entity;
 using KTAVisorAPISDK.module.user.repository;
 using Newtonsoft.Json;
 using System;
@@ -22,6 +23,15 @@ namespace KTAVisorAPISDK.module.user.service
         public async Task<UserEntity> me()
         {
             HttpResponseMessage result = await this.userRepository.me();
+            string responseBody = await result.Content.ReadAsStringAsync();
+            UserEntity user = JsonConvert.DeserializeObject<UserEntity>(responseBody);
+
+            return user;
+        }
+
+        public async Task<UserEntity> edit(EditUserRequestTObject request)
+        {
+            HttpResponseMessage result = await this.userRepository.edit(request);
             string responseBody = await result.Content.ReadAsStringAsync();
             UserEntity user = JsonConvert.DeserializeObject<UserEntity>(responseBody);
 

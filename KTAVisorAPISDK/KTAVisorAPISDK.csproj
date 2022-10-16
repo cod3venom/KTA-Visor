@@ -64,6 +64,7 @@
     <Compile Include="module\logger\repository\LoggerRepository.cs" />
     <Compile Include="module\logger\service\LoggerService.cs" />
     <Compile Include="module\user\abstraction\UserDataAbstraction.cs" />
+    <Compile Include="module\user\dto\request\EditUserRequestTObject.cs" />
     <Compile Include="module\user\dto\request\UserPasswordRecoveryChangePasswordRequestTObject.cs" />
     <Compile Include="module\user\dto\request\VerifyUserPasswordRecoveryCodeRequestTObject.cs" />
     <Compile Include="module\user\dto\request\ForgotPasswordRequestTObject.cs" />

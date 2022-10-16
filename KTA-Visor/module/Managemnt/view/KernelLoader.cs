@@ -72,8 +72,8 @@ namespace KTA_Visor.module.Managemnt.view
  
         private async Task<HttpClientHelper> initializeKTAVISORAPISDK()
         {
-            HttpClientUtil.initializeHttpClient("https://api.kta-visor.stage.skillsforge.pl");
-            HttpClientUtil.initializeSecuredClient("https://api.kta-visor.stage.skillsforge.pl"); ;
+            HttpClientUtil.initializeHttpClient(this.settings.SettingsObj?.app?.api?.url);
+            HttpClientUtil.initializeSecuredClient(this.settings.SettingsObj?.app?.api?.url); ;
             return HttpClientUtil.httpClient;
         }
 

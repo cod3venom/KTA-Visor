@@ -1,5 +1,6 @@
 ﻿
 using KTA_Visor.module.Managemnt.module.camera.form;
+using KTA_Visor.module.Managemnt.module.camera.form.FWUpgrade;
 using KTA_Visor.module.Managemnt.module.camera.form.settings;
 using KTA_Visor.module.Managemnt.module.camera.form.Zipper;
 using KTA_Visor.module.Managemnt.module.Camera.component.CameraItem.events;
@@ -55,11 +56,14 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             this.settingsBtn.Click += OpenSettings_Click;
             this.copyFilesToUSBMenuItem.Click += onCopyFilesToUSB;
             this.copyFilesToDVDMenuItem.Click += onCopyFilesToDVD;
-
+            this.upgradeMenuItem.Click += onUpgradeClick;
             this.handleStatus();
         }
 
-        
+        private void onUpgradeClick(object sender, EventArgs e)
+        {
+            new FWUpgradeForm(this.Camera).ShowDialog();
+        }
 
         public CameraEntity.Camera Camera { get; set; }
 

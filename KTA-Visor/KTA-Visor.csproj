@@ -360,6 +360,12 @@
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\OnCloseCameraItemFormEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\ContextMenu\ContextMenuCopyFilesToUSBClickEvent.cs" />
     <Compile Include="module\Managemnt\module\camera\components\CameraItem\events\OnOpenCameraItemEvent.cs" />
+    <Compile Include="module\Managemnt\module\camera\form\FWUpgrade\FWUpgradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\camera\form\FWUpgrade\FWUpgradeForm.Designer.cs">
+      <DependentUpon>FWUpgradeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -521,7 +527,6 @@
     <Compile Include="module\Shared\Exceptions\UnableToEditRecordException.cs" />
     <Compile Include="module\Shared\Exceptions\UnableToCreateRecordException .cs" />
     <Compile Include="module\Shared\Exceptions\UnableToRemoveRecordException.cs" />
-    <Compile Include="module\Shared\Global\Bootloader.cs" />
     <Compile Include="module\Shared\Global\Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -575,6 +580,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\camera\components\CameraItem\CameraItem.resx">
       <DependentUpon>CameraItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\camera\form\FWUpgrade\FWUpgradeForm.resx">
+      <DependentUpon>FWUpgradeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.resx">
       <DependentUpon>ZipperForm.cs</DependentUpon>

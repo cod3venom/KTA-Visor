@@ -30,11 +30,9 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.bunifuCustomTextbox1 = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.bunifuCustomTextbox2 = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
-            this.repeatPasswordTxt = new System.Windows.Forms.Label();
-            this.bunifuCustomTextbox3 = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.repeatPasswordTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.repeatPasswordlbl = new System.Windows.Forms.Label();
+            this.passwordTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.passwordLbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -46,8 +44,8 @@
             this.nameLbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.cancelBtn = new MetroFramework.Controls.MetroButton();
+            this.saveBtn = new MetroFramework.Controls.MetroButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -71,11 +69,9 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.bunifuCustomTextbox1);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.bunifuCustomTextbox2);
             this.panel3.Controls.Add(this.repeatPasswordTxt);
-            this.panel3.Controls.Add(this.bunifuCustomTextbox3);
+            this.panel3.Controls.Add(this.repeatPasswordlbl);
+            this.panel3.Controls.Add(this.passwordTxt);
             this.panel3.Controls.Add(this.passwordLbl);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -84,66 +80,47 @@
             this.panel3.Size = new System.Drawing.Size(425, 565);
             this.panel3.TabIndex = 1;
             // 
-            // bunifuCustomTextbox1
-            // 
-            this.bunifuCustomTextbox1.BorderColor = System.Drawing.Color.SeaGreen;
-            this.bunifuCustomTextbox1.Location = new System.Drawing.Point(106, 126);
-            this.bunifuCustomTextbox1.Margin = new System.Windows.Forms.Padding(2);
-            this.bunifuCustomTextbox1.Name = "bunifuCustomTextbox1";
-            this.bunifuCustomTextbox1.Size = new System.Drawing.Size(186, 20);
-            this.bunifuCustomTextbox1.TabIndex = 44;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(13, 129);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 14);
-            this.label3.TabIndex = 45;
-            this.label3.Text = "Adres E-mail";
-            // 
-            // bunifuCustomTextbox2
-            // 
-            this.bunifuCustomTextbox2.BorderColor = System.Drawing.Color.SeaGreen;
-            this.bunifuCustomTextbox2.Location = new System.Drawing.Point(106, 83);
-            this.bunifuCustomTextbox2.Margin = new System.Windows.Forms.Padding(2);
-            this.bunifuCustomTextbox2.Name = "bunifuCustomTextbox2";
-            this.bunifuCustomTextbox2.Size = new System.Drawing.Size(186, 20);
-            this.bunifuCustomTextbox2.TabIndex = 42;
-            // 
             // repeatPasswordTxt
             // 
-            this.repeatPasswordTxt.AutoSize = true;
-            this.repeatPasswordTxt.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repeatPasswordTxt.ForeColor = System.Drawing.Color.Black;
-            this.repeatPasswordTxt.Location = new System.Drawing.Point(12, 87);
-            this.repeatPasswordTxt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.repeatPasswordTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.repeatPasswordTxt.Location = new System.Drawing.Point(118, 83);
+            this.repeatPasswordTxt.Margin = new System.Windows.Forms.Padding(2);
             this.repeatPasswordTxt.Name = "repeatPasswordTxt";
-            this.repeatPasswordTxt.Size = new System.Drawing.Size(83, 14);
-            this.repeatPasswordTxt.TabIndex = 43;
-            this.repeatPasswordTxt.Text = "Powtórz hasło";
+            this.repeatPasswordTxt.Size = new System.Drawing.Size(186, 20);
+            this.repeatPasswordTxt.TabIndex = 42;
+            this.repeatPasswordTxt.UseSystemPasswordChar = true;
             // 
-            // bunifuCustomTextbox3
+            // repeatPasswordlbl
             // 
-            this.bunifuCustomTextbox3.BorderColor = System.Drawing.Color.SeaGreen;
-            this.bunifuCustomTextbox3.Location = new System.Drawing.Point(106, 45);
-            this.bunifuCustomTextbox3.Margin = new System.Windows.Forms.Padding(2);
-            this.bunifuCustomTextbox3.Name = "bunifuCustomTextbox3";
-            this.bunifuCustomTextbox3.Size = new System.Drawing.Size(186, 20);
-            this.bunifuCustomTextbox3.TabIndex = 39;
+            this.repeatPasswordlbl.AutoSize = true;
+            this.repeatPasswordlbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repeatPasswordlbl.ForeColor = System.Drawing.Color.Black;
+            this.repeatPasswordlbl.Location = new System.Drawing.Point(12, 87);
+            this.repeatPasswordlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.repeatPasswordlbl.Name = "repeatPasswordlbl";
+            this.repeatPasswordlbl.Size = new System.Drawing.Size(96, 16);
+            this.repeatPasswordlbl.TabIndex = 43;
+            this.repeatPasswordlbl.Text = "Powtórz hasło";
+            // 
+            // passwordTxt
+            // 
+            this.passwordTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.passwordTxt.Location = new System.Drawing.Point(118, 45);
+            this.passwordTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.Size = new System.Drawing.Size(186, 20);
+            this.passwordTxt.TabIndex = 39;
+            this.passwordTxt.UseSystemPasswordChar = true;
             // 
             // passwordLbl
             // 
             this.passwordLbl.AutoSize = true;
             this.passwordLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLbl.ForeColor = System.Drawing.Color.Black;
-            this.passwordLbl.Location = new System.Drawing.Point(58, 46);
+            this.passwordLbl.Location = new System.Drawing.Point(66, 46);
             this.passwordLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.passwordLbl.Name = "passwordLbl";
-            this.passwordLbl.Size = new System.Drawing.Size(37, 14);
+            this.passwordLbl.Size = new System.Drawing.Size(42, 16);
             this.passwordLbl.TabIndex = 40;
             this.passwordLbl.Text = "Hasło";
             // 
@@ -155,7 +132,7 @@
             this.label6.Location = new System.Drawing.Point(14, 11);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 10);
+            this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 41;
             this.label6.Text = "Profil";
             // 
@@ -191,7 +168,7 @@
             this.emailLbl.Location = new System.Drawing.Point(13, 129);
             this.emailLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.emailLbl.Name = "emailLbl";
-            this.emailLbl.Size = new System.Drawing.Size(74, 14);
+            this.emailLbl.Size = new System.Drawing.Size(86, 16);
             this.emailLbl.TabIndex = 45;
             this.emailLbl.Text = "Adres E-mail";
             // 
@@ -212,7 +189,7 @@
             this.label1.Location = new System.Drawing.Point(30, 87);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 14);
+            this.label1.Size = new System.Drawing.Size(67, 16);
             this.label1.TabIndex = 43;
             this.label1.Text = "Nazwisko";
             // 
@@ -233,7 +210,7 @@
             this.nameLbl.Location = new System.Drawing.Point(58, 46);
             this.nameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.nameLbl.Name = "nameLbl";
-            this.nameLbl.Size = new System.Drawing.Size(29, 14);
+            this.nameLbl.Size = new System.Drawing.Size(32, 16);
             this.nameLbl.TabIndex = 40;
             this.nameLbl.Text = "Imię";
             // 
@@ -245,41 +222,41 @@
             this.label2.Location = new System.Drawing.Point(14, 11);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 10);
+            this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 41;
             this.label2.Text = "Profil";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.metroButton2);
-            this.panel1.Controls.Add(this.metroButton1);
+            this.panel1.Controls.Add(this.cancelBtn);
+            this.panel1.Controls.Add(this.saveBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(20, 564);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(862, 37);
             this.panel1.TabIndex = 1;
             // 
-            // metroButton2
+            // cancelBtn
             // 
-            this.metroButton2.Location = new System.Drawing.Point(645, 8);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(93, 23);
-            this.metroButton2.Style = MetroFramework.MetroColorStyle.Orange;
-            this.metroButton2.TabIndex = 1;
-            this.metroButton2.Text = "Zamknij";
-            this.metroButton2.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroButton2.UseSelectable = true;
+            this.cancelBtn.Location = new System.Drawing.Point(645, 8);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(93, 23);
+            this.cancelBtn.Style = MetroFramework.MetroColorStyle.Orange;
+            this.cancelBtn.TabIndex = 1;
+            this.cancelBtn.Text = "Zamknij";
+            this.cancelBtn.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.cancelBtn.UseSelectable = true;
             // 
-            // metroButton1
+            // saveBtn
             // 
-            this.metroButton1.Location = new System.Drawing.Point(755, 8);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(93, 23);
-            this.metroButton1.Style = MetroFramework.MetroColorStyle.Orange;
-            this.metroButton1.TabIndex = 0;
-            this.metroButton1.Text = "Zapisz";
-            this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroButton1.UseSelectable = true;
+            this.saveBtn.Location = new System.Drawing.Point(755, 8);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(93, 23);
+            this.saveBtn.Style = MetroFramework.MetroColorStyle.Orange;
+            this.saveBtn.TabIndex = 0;
+            this.saveBtn.Text = "Zapisz";
+            this.saveBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.saveBtn.UseSelectable = true;
             // 
             // UserProfileWindow
             // 
@@ -308,8 +285,8 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private MetroFramework.Controls.MetroButton metroButton1;
-        private MetroFramework.Controls.MetroButton metroButton2;
+        private MetroFramework.Controls.MetroButton saveBtn;
+        private MetroFramework.Controls.MetroButton cancelBtn;
         private System.Windows.Forms.Panel panel2;
         private WindowsFormsControlLibrary1.BunifuCustomTextbox nameTxt;
         private System.Windows.Forms.Label nameLbl;
@@ -319,11 +296,9 @@
         private WindowsFormsControlLibrary1.BunifuCustomTextbox emailTxt;
         private System.Windows.Forms.Label emailLbl;
         private System.Windows.Forms.Panel panel3;
-        private WindowsFormsControlLibrary1.BunifuCustomTextbox bunifuCustomTextbox1;
-        private System.Windows.Forms.Label label3;
-        private WindowsFormsControlLibrary1.BunifuCustomTextbox bunifuCustomTextbox2;
-        private System.Windows.Forms.Label repeatPasswordTxt;
-        private WindowsFormsControlLibrary1.BunifuCustomTextbox bunifuCustomTextbox3;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox repeatPasswordTxt;
+        private System.Windows.Forms.Label repeatPasswordlbl;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox passwordTxt;
         private System.Windows.Forms.Label passwordLbl;
         private System.Windows.Forms.Label label6;
     }

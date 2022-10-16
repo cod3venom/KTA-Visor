@@ -74,10 +74,10 @@ namespace KTA_Visor.module.Management.view
             this.topBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.topBarPanel.Controls.Add(this.tunnelMenuStrip);
             this.topBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topBarPanel.Location = new System.Drawing.Point(336, 52);
+            this.topBarPanel.Location = new System.Drawing.Point(463, 52);
             this.topBarPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topBarPanel.Name = "topBarPanel";
-            this.topBarPanel.Size = new System.Drawing.Size(1063, 35);
+            this.topBarPanel.Size = new System.Drawing.Size(936, 35);
             this.topBarPanel.TabIndex = 0;
             // 
             // tunnelMenuStrip
@@ -92,8 +92,7 @@ namespace KTA_Visor.module.Management.view
             this.pomocToolStripMenuItem});
             this.tunnelMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.tunnelMenuStrip.Name = "tunnelMenuStrip";
-            this.tunnelMenuStrip.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
-            this.tunnelMenuStrip.Size = new System.Drawing.Size(1063, 35);
+            this.tunnelMenuStrip.Size = new System.Drawing.Size(936, 35);
             this.tunnelMenuStrip.TabIndex = 1;
             this.tunnelMenuStrip.Text = "menuStrip1";
             // 
@@ -224,7 +223,7 @@ namespace KTA_Visor.module.Management.view
             this.panel1.Location = new System.Drawing.Point(25, 52);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(297, 908);
+            this.panel1.Size = new System.Drawing.Size(424, 908);
             this.panel1.TabIndex = 1;
             // 
             // sideBar
@@ -232,9 +231,9 @@ namespace KTA_Visor.module.Management.view
             this.sideBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sideBar.FirstAndLastName = "Imię i Nazwisko";
             this.sideBar.Location = new System.Drawing.Point(0, 0);
-            this.sideBar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.sideBar.Margin = new System.Windows.Forms.Padding(5);
             this.sideBar.Name = "sideBar";
-            this.sideBar.Size = new System.Drawing.Size(297, 908);
+            this.sideBar.Size = new System.Drawing.Size(424, 908);
             this.sideBar.TabIndex = 8;
             this.sideBar.Version = "1.2.3.v.5";
             // 
@@ -250,7 +249,7 @@ namespace KTA_Visor.module.Management.view
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(322, 52);
+            this.panel3.Location = new System.Drawing.Point(449, 52);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(14, 908);
@@ -261,10 +260,10 @@ namespace KTA_Visor.module.Management.view
             this.footerPanel.Controls.Add(this.tunnelIndicator);
             this.footerPanel.Controls.Add(this.footer1);
             this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.footerPanel.Location = new System.Drawing.Point(336, 925);
+            this.footerPanel.Location = new System.Drawing.Point(463, 925);
             this.footerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.footerPanel.Name = "footerPanel";
-            this.footerPanel.Size = new System.Drawing.Size(1075, 35);
+            this.footerPanel.Size = new System.Drawing.Size(948, 35);
             this.footerPanel.TabIndex = 3;
             // 
             // tunnelIndicator
@@ -286,7 +285,7 @@ namespace KTA_Visor.module.Management.view
             this.footer1.Location = new System.Drawing.Point(0, 0);
             this.footer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.footer1.Name = "footer1";
-            this.footer1.Size = new System.Drawing.Size(1075, 35);
+            this.footer1.Size = new System.Drawing.Size(948, 35);
             this.footer1.TabIndex = 0;
             // 
             // clientsManagerPanel
@@ -302,10 +301,10 @@ namespace KTA_Visor.module.Management.view
             // 
             this.loggerPanel.Controls.Add(this.loggerView);
             this.loggerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.loggerPanel.Location = new System.Drawing.Point(336, 667);
+            this.loggerPanel.Location = new System.Drawing.Point(463, 667);
             this.loggerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.loggerPanel.Name = "loggerPanel";
-            this.loggerPanel.Size = new System.Drawing.Size(1063, 244);
+            this.loggerPanel.Size = new System.Drawing.Size(936, 244);
             this.loggerPanel.TabIndex = 5;
             // 
             // loggerView
@@ -315,16 +314,16 @@ namespace KTA_Visor.module.Management.view
             this.loggerView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.loggerView.Name = "loggerView";
             this.loggerView.ParentPanel = null;
-            this.loggerView.Size = new System.Drawing.Size(1063, 244);
+            this.loggerView.Size = new System.Drawing.Size(936, 244);
             this.loggerView.TabIndex = 0;
             // 
             // panel10
             // 
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel10.Location = new System.Drawing.Point(336, 911);
+            this.panel10.Location = new System.Drawing.Point(463, 911);
             this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1075, 14);
+            this.panel10.Size = new System.Drawing.Size(948, 14);
             this.panel10.TabIndex = 6;
             // 
             // panel7
@@ -339,20 +338,20 @@ namespace KTA_Visor.module.Management.view
             // panel8
             // 
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(336, 653);
+            this.panel8.Location = new System.Drawing.Point(463, 653);
             this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1063, 14);
+            this.panel8.Size = new System.Drawing.Size(936, 14);
             this.panel8.TabIndex = 9;
             // 
             // contentPanel
             // 
             this.contentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(336, 52);
+            this.contentPanel.Location = new System.Drawing.Point(463, 52);
             this.contentPanel.Margin = new System.Windows.Forms.Padding(2);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1063, 601);
+            this.contentPanel.Size = new System.Drawing.Size(936, 601);
             this.contentPanel.TabIndex = 10;
             // 
             // Management
