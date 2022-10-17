@@ -20,8 +20,7 @@ namespace KTA_Visor_UI.component.custom.User.UserProfile
 
         public event EventHandler<EventArgs> OnStationsClick;
         public event EventHandler<EventArgs> OnTunnelClick;
-        public event EventHandler<EventArgs> OnFileHistoryClick;
-        public event EventHandler<EventArgs> OnFileExplorerClick;
+        public event EventHandler<EventArgs> OnRecordingsClick;
         public event EventHandler<EventArgs> OnLogsClick;
 
         public event EventHandler<EventArgs> OnProfileClick;
@@ -57,9 +56,9 @@ namespace KTA_Visor_UI.component.custom.User.UserProfile
             this.OnStationsClick?.Invoke(this, e);
         }
 
-        private void fileHistoryBtn_Click(object sender, EventArgs e)
+        private void recordingsBtn_Click(object sender, EventArgs e)
         {
-            this.OnFileHistoryClick?.Invoke(this, e);
+            this.OnRecordingsClick?.Invoke(this, e);
         }
 
         private void tunnelBtn_Click(object sender, EventArgs e)
@@ -101,12 +100,6 @@ namespace KTA_Visor_UI.component.custom.User.UserProfile
             {
                 this.statusPicBox.Image = Properties.Resources.green_circle;
             }
-        }
-
- 
-        private void fileExplorerBtn_Click(object sender, EventArgs e)
-        {
-            this.OnFileExplorerClick?.Invoke(this, e);
         }
     }
 }

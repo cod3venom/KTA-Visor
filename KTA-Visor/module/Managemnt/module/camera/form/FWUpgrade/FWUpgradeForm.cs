@@ -78,7 +78,6 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.FWUpgrade
                 return;
             }
 
-
             client.Send(new Request(
                 "command://cameras/firmware/upgrade"    
             ));

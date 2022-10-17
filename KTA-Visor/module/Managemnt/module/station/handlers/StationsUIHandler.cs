@@ -18,12 +18,18 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
 
         private readonly StationView stationView;
         private readonly StationService stationService;
+
         public StationsUIHandler(StationView stationView)
         {
             this.stationView = stationView;
             this.stationService = new StationService();
+            this.hookEvents();
         }
 
+        private void hookEvents()
+        {
+        }
+        
         public  void Load()
         {
             Thread loadingThread = new Thread(async () =>
@@ -40,10 +46,6 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
             loadingThread.IsBackground = true;
             loadingThread.Start();
         }
-
-
-        
-        
         private async Task<List<StationEntity.Station>> allStations()
         {
             StationEntity station = await this.stationService.all();
@@ -54,7 +56,6 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
             return station.datas;
         }
 
-
         private void cleanTable()
         {
             this.stationView.Table.Invoke((MethodInvoker)delegate
@@ -62,6 +63,7 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
                 this.stationView.Table.DataGridView.Rows.Clear();
             });
         }
+
         private void addToTable(StationEntity.Station station)
         {
             this.stationView.Table.Invoke((MethodInvoker)delegate
@@ -77,5 +79,19 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
                );
             });
         }
-    }
+
+        public string StationId
+        {
+            get
+            {
+                if (this.stationView.Table.DataGridView.SelectedRows.Count == 0)
+                    return "";
+
+                if (this.stationView.Table.DataGridView.SelectedRows[0].Cells[0]?.Value == null)
+                    return "";
+
+                return this.stationView.Table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
+            }
+        }
+}
 }

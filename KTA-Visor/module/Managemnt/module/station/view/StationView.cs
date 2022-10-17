@@ -13,6 +13,7 @@ using KTA_Visor_UI.component.basic.table;
 using KTA_Visor.module.Managemnt.module.station.handlers;
 using MetroFramework;
 using KTA_Visor_UI.component.basic.table.enums;
+using TCPTunnel.kernel.types;
 
 namespace KTA_Visor.module.Managemnt.module.station.view
 {
@@ -30,6 +31,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         private readonly StationController stationController;
         private readonly StationsUIHandler stationsUIHandler;
         private readonly CamerasUIHandler camerasUIHandler;
+        
         public StationView()
         {
             InitializeComponent();
@@ -69,13 +71,16 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.resetTunnelMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.StationId, (int)StationContextMenuItem.TUNNEL_RESTART);
             this.connectRemoteDesktopMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.StationId, (int)StationContextMenuItem.RDP_CONNECT);
         }
+ 
 
-       
-        
-        private async void fetchStations()
+        private void fetchStations()
         {
             this.stationsUIHandler.Load();
-            return;
+        }
+ 
+        private void onRefreshTableData(object sender, EventArgs e)
+        {
+            this.fetchStations();
         }
 
         private void fetchStationCameras()
@@ -83,34 +88,22 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.camerasUIHandler.Load(this.StationId);
         }
 
-        private void onRefreshTableData(object sender, EventArgs e)
-        {
-            this.fetchStations();
-        }
-
         private void onCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (!this.IsSelectedStationActive)
-            //{
-            //    MetroMessageBox.Show(this, "Wybrana stacja jest nie aktywna", "Informacja",  MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    return;
-            //}
+            if (!this.IsSelectedStationActive)
+            {
+                MetroMessageBox.Show(this, "Wybrana stacja jest nie aktywna", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             this.fetchStationCameras();
         }
-
 
         private bool IsSelectedStationActive
         {
             get
             {
-                if (this.table.DataGridView.SelectedRows.Count == 0)
-                    return false;
-
-                if (this.table.DataGridView.SelectedRows[0].Cells[3]?.Value == null)
-                    return false;
-
-                return this.table.DataGridView.SelectedRows[0].Cells[4]?.Value.ToString() == "Tak";
+                return Globals.Server.Clients.Find((TCPClientTObject _client) => _client.IpAddress == this.StationIp) != null;
             }
         }
 
@@ -125,6 +118,20 @@ namespace KTA_Visor.module.Managemnt.module.station.view
                     return "";
 
                 return this.table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
+            }
+        }
+
+        public string StationIp
+        {
+            get
+            {
+                if (this.table.DataGridView.SelectedRows.Count == 0)
+                    return "";
+
+                if (this.table.DataGridView.SelectedRows[0].Cells[1]?.Value == null)
+                    return "";
+
+                return this.table.DataGridView.SelectedRows[0].Cells[1]?.Value.ToString();
             }
         }
     }

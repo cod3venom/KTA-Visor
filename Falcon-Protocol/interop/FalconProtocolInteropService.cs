@@ -39,7 +39,8 @@ namespace Falcon_Protocol.interop
 			public byte post_rec_flag;
 			public byte split_time_flag;
 			public byte aes_crypto;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 23)]
+			public byte vibrate;
+			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 22)]
 			public byte[] reserved;
 		};
 

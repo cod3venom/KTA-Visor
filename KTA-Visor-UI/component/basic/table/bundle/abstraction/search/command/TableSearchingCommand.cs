@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.search.command
@@ -19,7 +14,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.search.command
                 {
                     if (cell.Value == null) continue;
 
-                    if (cell.Value.ToString().Contains(keyword))
+                    if (cell.Value.ToString().ToLower().Contains(keyword.ToLower()))
                     {
                         results.Add(row);
                     }

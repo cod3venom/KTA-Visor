@@ -23,11 +23,11 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
             this._logger = logger;
             this._handlers = new List<IBootLoaderHandler>()
             {
+                new CamerasWatcherInitHandler(this._settings, this._logger),
                 new AutoStartHandler(),
                 new PowerSupplyInitHandler(this._settings, this._logger),
                 new BackendInitHandler(this._settings),
                 new StationInitHandler(this._settings),
-                new CamerasWatcherInitHandler(this._settings),
                 new TunnelInitHandler(this._settings, this._logger),
             };
         }
@@ -37,11 +37,14 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
         {
             this.keepAlive();
 
-            foreach (IBootLoaderHandler handler in this._handlers)
+            ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 10 };
+            Parallel.ForEach(this._handlers, options , handler =>
             {
+                Thread handlerThread = new Thread(() => handler.Handle());
+                handlerThread.IsBackground = true;
+                handlerThread.Start();
                 this._logger.info(String.Format("Initialized : {0}", handler.GetName()));
-                handler.Handle();
-            }
+            });
         }
 
         private void keepAlive()

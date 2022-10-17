@@ -17,12 +17,20 @@ namespace KTA_Visor.module.Managemnt.module.camera.command
     {
         public static async void Execute(string cardId)
         {
+
+            if (cardId.Length > 15)
+            {
+                cardId = cardId.Substring(0, 15);
+            }
+
+            
             
             if (cardId.Length > 15)
             {
                 MessageBox.Show("ID Karty nie moze wynosic wiecej niz 15 znaków");
                 return;
             }
+
 
 
             CameraEntity camera = await new CameraService().findByCardId(cardId);

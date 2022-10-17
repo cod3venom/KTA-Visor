@@ -71,6 +71,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             this.falconProtocol.Connect();
          
             var menuStruct = this.falconProtocol.GetMenuConfig(device.Index);
+            var zfyInfo = this.falconProtocol.GetDeviceInfo(device.Index);
+
             menuStruct.video_res = Convert.ToByte(camera.settings.resolution);
             menuStruct.video_quality = Convert.ToByte(camera.settings.quality);
             menuStruct.video_format = Convert.ToByte(camera.settings.codecFormat);
@@ -81,11 +83,15 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             menuStruct.wifi = Convert.ToByte(camera.settings.wifi);
             menuStruct.rec_warning = Convert.ToByte(camera.settings.silentMode);
 
+            zfyInfo.userNo = Encoding.ASCII.GetBytes(camera.badgeId);
+            zfyInfo.cSerial = camera.cameraCustomId.ToCharArray();
+
             device.Settings.ID = camera.cameraCustomId;
             device.Settings.BadgeId = camera.badgeId;
             device.SaveSettings();
 
-            this.falconProtocol.SetMenuConfig(menuStruct, device.Index) ;
+            this.falconProtocol.SetMenuConfig(menuStruct, device.Index);
+            this.falconProtocol.SetDeviceInfo(zfyInfo, device.Index);
 
             Globals.ALLOW_FS_MOUNTING = true;
             Globals.Relay.turnOffAll();

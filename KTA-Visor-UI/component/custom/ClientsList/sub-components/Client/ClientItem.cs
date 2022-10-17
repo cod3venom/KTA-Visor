@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,7 +26,16 @@ namespace KTA_Visor_UI.component.custom.ClientsList.sub_components.Client
             {
                 this.Title = this.Client.RemoteEndPoint.ToString();
                 this.Online = this.Client.Connected;
+                this.Pulse();
             }
+        }
+
+
+        private async void Pulse()
+        {
+            this.statusPic.Image = Properties.Resources.green_circle_pulse_on_gray;
+            await Task.Delay(5000);
+            this.statusPic.Image = Properties.Resources.green_circle;
         }
 
         public Socket Client{get; set;}

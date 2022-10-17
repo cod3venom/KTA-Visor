@@ -364,6 +364,9 @@
     <Content Include="icons\falcon-icon-camera.ico" />
     <Content Include="icons\falcon-user-128x128.ico" />
     <Content Include="icons\question.png" />
+    <None Include="Resources\recordings.png" />
+    <None Include="Resources\green_circle_pulse_on_gray.gif" />
+    <None Include="Resources\green_circle_pulse.gif" />
     <None Include="Resources\refresh.png" />
     <None Include="Resources\green_circle.png" />
     <None Include="Resources\red_circle.png" />

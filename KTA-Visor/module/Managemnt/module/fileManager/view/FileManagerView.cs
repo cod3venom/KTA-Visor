@@ -21,7 +21,8 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
             new ColumnTObject(4, "ZEZWOLENIE NA USUWANIE"),
             new ColumnTObject(5, "ID KAMERY"),
             new ColumnTObject(6, "NUMER ODZNAKI"),
-            new ColumnTObject(7, "DATA WGRYWANIA"),
+            new ColumnTObject(7, "SUMA KONTROLNA"),
+            new ColumnTObject(8, "DATA WGRYWANIA"),
         };
 
 
@@ -34,16 +35,16 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
             this.fileManagerService = new FileManagerService();
         }
 
-        public void Watch(Request request)
+        protected override void OnPaint(PaintEventArgs e)
         {
-        }
-
-        private void FileHistoryViewPanel_Load(object sender, EventArgs e)
-        {
+            base.OnPaint(e);
             this.table.Column.addMultiple(this.Columns);
+            this.fetch();
+        }
+        private void FileHistoryViewPanel_Load(object sender, EventArgs e)
+        {            
             this.table.AllowProgressBar = false;
             this.table.DataGridView.CellDoubleClick += onOpenSelectedRecord;
-            this.fetch();
         }
 
         private async void onOpenSelectedRecord(object sender, DataGridViewCellEventArgs e)
@@ -64,6 +65,10 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
             ThreadPoolManager.Run(this, ((Action)async delegate {
                 this.table.Row.clear();
                 FileItemEntity files = await this.fileManagerService.all();
+
+                if (files.datas == null){
+                    return;
+                }
                 foreach (FileHistory file in files.datas)
                 {
                     this.table.Row.Add(
@@ -86,5 +91,8 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
         }
 
 
+        public void Watch(Request request)
+        {
+        }
     }
 }

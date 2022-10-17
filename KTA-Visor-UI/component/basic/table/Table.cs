@@ -57,10 +57,14 @@ namespace KTA_Visor_UI.component.basic.table
         {
             this.searchTxt.Click += (delegate (object sender, EventArgs e)
             {
-                if (this.searchTxt.Text == "...")
-                {
+                if (this.searchTxt.Text == "...") {
                     this.searchTxt.Text = "";
                 }
+            });
+
+
+            this.refreshBtn.Click += (delegate (object sender, EventArgs e){
+                this.OnRefreshData?.Invoke(this, EventArgs.Empty);
             });
         }
         public bool AllowAdd

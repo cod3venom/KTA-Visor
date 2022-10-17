@@ -33,10 +33,9 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             this.managementForm.SideBar.OnProfileClick += onProfileClick;
             this.managementForm.SideBar.OnAccountSecurityClick += onAccountSecurityClick;
             this.managementForm.SideBar.OnStationsClick += onStationsClick;
-            this.managementForm.SideBar.OnFileHistoryClick += onFileHistoryClick;
+            this.managementForm.SideBar.OnRecordingsClick += onRecordingsClick;
             this.managementForm.SideBar.OnTunnelClick += onTunneClick;
             this.managementForm.SideBar.OnLogsClick += onLogsClick;
-            this.managementForm.SideBar.OnFileExplorerClick += onFileExplorerClick;
             this.managementForm.SideBar.OnSettingsClick += onSettingsClick;
             this.managementForm.SideBar.OnLogOutclick += onLogoutClick;
         }
@@ -63,7 +62,7 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             this.displayPanel(this.managementForm.Modules.Get(StationModule.ModuleName));
         }
 
-        private void onFileHistoryClick(object sender, EventArgs e)
+        private void onRecordingsClick(object sender, EventArgs e)
         {
             this.displayPanel(this.managementForm.Modules.Get(FileManagerModule.ModuleName));
         }
@@ -72,12 +71,7 @@ namespace KTA_Visor.module.Managemnt.uiHandler
         {
             new TunnelWindow().ShowDialog();
         }
-
-        private void onFileExplorerClick(object sender, EventArgs e)
-        {
-            new FileExplorerWindow(this.managementForm.Settings.SettingsObj.app?.fileSystem?.filesPath).ShowDialog();
-        }
-
+ 
         private void onLogsClick(object sender, EventArgs e)
         {
             this.managementForm.Modules.Get(LogsModule.ModuleName).ShowDialog();

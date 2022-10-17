@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.module.Management.bootloader.handlers
@@ -42,7 +43,7 @@ namespace KTA_Visor_DSClient.module.Management.bootloader.handlers
             // and logger never will be called
             this._logger.info(String.Format("Initialized : {0}", this.GetName()));
 
-            Globals.ClientTunnel.Connect();
+            new Thread(() => Globals.ClientTunnel.Connect()).Start();
         }
     }
 }

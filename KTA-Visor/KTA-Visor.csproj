@@ -366,6 +366,7 @@
     <Compile Include="module\Managemnt\module\camera\form\FWUpgrade\FWUpgradeForm.Designer.cs">
       <DependentUpon>FWUpgradeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\camera\form\Settings\handlers\SettingsHandler.cs" />
     <Compile Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -471,12 +472,6 @@
       <DependentUpon>StationView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\user\consts\UserRole.cs" />
-    <Compile Include="module\Managemnt\sub-window\FileExplorerWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\sub-window\FileExplorerWindow.Designer.cs">
-      <DependentUpon>FileExplorerWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="module\Managemnt\sub-window\TunnelWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -619,9 +614,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\station\view\StationView.resx">
       <DependentUpon>StationView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\sub-window\FileExplorerWindow.resx">
-      <DependentUpon>FileExplorerWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\sub-window\TunnelWindow.resx">
       <DependentUpon>TunnelWindow.cs</DependentUpon>

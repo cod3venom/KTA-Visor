@@ -111,6 +111,26 @@ namespace KTA_Visor_UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap green_circle_pulse {
+            get {
+                object obj = ResourceManager.GetObject("green_circle_pulse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap green_circle_pulse_on_gray {
+            get {
+                object obj = ResourceManager.GetObject("green_circle_pulse_on_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon hand_cursor {
@@ -146,6 +166,16 @@ namespace KTA_Visor_UI.Properties {
         internal static System.IO.UnmanagedMemoryStream notification {
             get {
                 return ResourceManager.GetStream("notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap recordings {
+            get {
+                object obj = ResourceManager.GetObject("recordings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -16,7 +16,8 @@ namespace KTAVisorAPISDK.module.fileManager.dto.request
             string fileName,
             string fileSourcePath,
             string fileDestPath,
-            double fileSize
+            double fileSize,
+            string checkSum
         )
         {
             this.stationId = stationId;
@@ -26,6 +27,7 @@ namespace KTAVisorAPISDK.module.fileManager.dto.request
             this.fileSourcePath = fileSourcePath;
             this.fileDestPath = fileDestPath;
             this.fileSize = fileSize;
+            this.checkSum = checkSum;
         }
         
         public string stationId { get; set; }
@@ -35,6 +37,8 @@ namespace KTAVisorAPISDK.module.fileManager.dto.request
         public string fileSourcePath { get; set; }
         public string fileDestPath { get; set; }
         public double fileSize { get; set; }
+        public string checkSum { get; set; }
+
 
     }
 }

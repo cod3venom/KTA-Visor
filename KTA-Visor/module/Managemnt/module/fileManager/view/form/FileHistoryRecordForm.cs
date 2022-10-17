@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KTAVisorAPISDK.module.fileManager.dto.request;
 using MetroFramework.Forms;
+using System.Diagnostics;
+using System.IO;
+using MetroFramework;
 
 namespace KTA_Visor.module.Managemnt.module.fileManager.view.form
 {
@@ -18,16 +21,35 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.form
     {
         public event EventHandler<EventArgs> OnClose;
 
-        private readonly FileHistory fileHistory;
+        private readonly FileHistory _fileHistory;
+        private readonly FileManagerService _fileManagerService;
 
-        private readonly FileManagerService fileManagerService;
+        private readonly List<Control> _basedOnPermissionControls;
+        private readonly bool _canEdit;
 
-        public FileHistoryRecordForm(FileHistory fileHistory)
+        public FileHistoryRecordForm(FileHistory fileHistory, bool canEdit = false)
         {
             InitializeComponent();
 
-            this.fileHistory = fileHistory;
-            this.fileManagerService = new FileManagerService();
+            this._fileHistory = fileHistory;
+            this._fileManagerService = new FileManagerService();
+            this._canEdit = canEdit;
+
+            this._basedOnPermissionControls = new List<Control>{
+                 this.stationIdTxt,
+                this.cameraCustomIdTxt,
+                this.badgeIdTxt,
+                this.fileNameTxt,
+                this.fileSourceTxt,
+                this.fileDestPathTxt,
+                this.fileSizeTxt,
+                this.isEvidenceChk,
+                this.isRemovableEvidenceChk,
+                this.checkSumTxt,
+                this.createdAtTxt,
+                this.descriptionTxt,
+                this.saveBtn
+            };
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -41,27 +63,59 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.form
 
         private void FileHistoryRecordForm_Load(object sender, EventArgs e)
         {
-            this.stationIdTxt.Text = fileHistory.stationId;
-            this.cameraCustomIdTxt.Text = fileHistory.cameraCustomId;
-            this.badgeIdTxt.Text = fileHistory.badgeId;
-            this.fileNameTxt.Text = fileHistory.fileName;
-            this.fileSourceTxt.Text = fileHistory.fileSourcePath;
-            this.fileDestPathTxt.Text = fileHistory.fileDestPath;
-            this.fileSizeTxt.Text = fileHistory.fileSize.ToString();
-            this.isEvidenceChk.Checked = this.fileHistory.evidence;
-            this.isRemovableEvidenceChk.Checked = this.fileHistory.removableEvidence;
-            this.createdAtTxt.Text = fileHistory.createdAt.ToString();
+            this.hookEvents();
+            this.initializePermissions();
+            this.renderData();
+           
+        }
 
+
+        private void hookEvents()
+        {
+            this.playVideoBtn.Click += onPlay;
             this.saveBtn.Click += onSave;
+        }
+
+     
+        private void renderData()
+        {
+            this.stationIdTxt.Text = this._fileHistory.stationId;
+            this.cameraCustomIdTxt.Text = this._fileHistory.cameraCustomId;
+            this.badgeIdTxt.Text = this._fileHistory.badgeId;
+            this.fileNameTxt.Text = this._fileHistory.fileName;
+            this.fileSourceTxt.Text = this._fileHistory.fileSourcePath;
+            this.fileDestPathTxt.Text = this._fileHistory.fileDestPath;
+            this.fileSizeTxt.Text = this._fileHistory.fileSize.ToString();
+            this.isEvidenceChk.Checked = this._fileHistory.evidence;
+            this.checkSumTxt.Text = this._fileHistory.checksum;
+            this.isRemovableEvidenceChk.Checked = this._fileHistory.removableEvidence;
+            this.createdAtTxt.Text = this._fileHistory.createdAt.ToString();
+            this.descriptionTxt.Text = this._fileHistory.description;
+        }
+        private void initializePermissions()
+        {
+            if (!this._canEdit){
+                this._basedOnPermissionControls.ForEach((Control control) => control.Enabled = false);
+            }
+        }
+
+        private void onPlay(object sender, EventArgs e)
+        {
+            if (!File.Exists(this._fileHistory.fileDestPath)){
+                MetroMessageBox.Show(this, "Nagranie nie został odnależiony, skontaktuj się z Administratorem", "Nagranie");
+                return;
+            }
+
+            Process.Start(this._fileHistory.fileDestPath);
         }
 
         private void onSave(object sender, EventArgs e)
         {
-            this.fileHistory.evidence = this.isEvidenceChk.Checked;
-            this.fileHistory.removableEvidence = this.isRemovableEvidenceChk.Checked;
-            _ = this.fileManagerService.edit(this.fileHistory.id, new EditFileHistoryRequestTObject(
-                    this.fileHistory.evidence,
-                    this.fileHistory.removableEvidence,
+            this._fileHistory.evidence = this.isEvidenceChk.Checked;
+            this._fileHistory.removableEvidence = this.isRemovableEvidenceChk.Checked;
+            _ = this._fileManagerService.edit(this._fileHistory.id, new EditFileHistoryRequestTObject(
+                    this._fileHistory.evidence,
+                    this._fileHistory.removableEvidence,
                     this.descriptionTxt.Text
             ));
 
