@@ -277,10 +277,10 @@
             // 
             // 
             this.searchTxt.CustomButton.Image = null;
-            this.searchTxt.CustomButton.Location = new System.Drawing.Point(1440, 1);
+            this.searchTxt.CustomButton.Location = new System.Drawing.Point(1080, 1);
             this.searchTxt.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchTxt.CustomButton.Name = "";
-            this.searchTxt.CustomButton.Size = new System.Drawing.Size(41, 38);
+            this.searchTxt.CustomButton.Size = new System.Drawing.Size(31, 31);
             this.searchTxt.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.searchTxt.CustomButton.TabIndex = 1;
             this.searchTxt.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -367,6 +367,7 @@
             // dataGridView
             // 
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -407,7 +408,7 @@
             this.bunifuSeparator1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             this.bunifuSeparator1.LineThickness = 1;
             this.bunifuSeparator1.Location = new System.Drawing.Point(0, 12);
-            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
             this.bunifuSeparator1.Size = new System.Drawing.Size(1247, 20);
             this.bunifuSeparator1.TabIndex = 1;
@@ -419,7 +420,7 @@
             this.panel8.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 0);
-            this.panel8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1247, 12);
             this.panel8.TabIndex = 2;

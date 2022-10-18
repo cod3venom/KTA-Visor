@@ -35,7 +35,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                 if (!File.Exists(this.settingsFilePath))
                 {
                     File.WriteAllText(this.settingsFilePath, "");
-                    this.Settings.ID = RandomData.RandomString(20);
+                    this.Settings.ID = RandomData.RandomString(15);
                     this.Settings.BadgeId = RandomData.RandomString(15);
                     this.Settings.IsSelected = false;
 

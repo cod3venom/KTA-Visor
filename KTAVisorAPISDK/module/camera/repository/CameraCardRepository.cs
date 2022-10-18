@@ -15,7 +15,7 @@ namespace KTAVisorAPISDK.module.camera.repository
     {
         public async Task<HttpResponseMessage> hasDuplicates(string cardId)
         {
-            return await HttpClientUtil.securedClient.GET(String.Format("/api/cameras/card/{0}/has-duplicaates", cardId));
+            return await HttpClientUtil.securedClient.GET(String.Format("/api/cameras/card/{0}/has-duplicates", cardId));
         }
  
     }

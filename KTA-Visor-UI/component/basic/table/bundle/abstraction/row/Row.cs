@@ -39,7 +39,12 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
         {
             get { return this.table.DataGridView.Rows; }
         }
-        
+
+        public DataGridViewSelectedRowCollection SelectedRows
+        {
+            get { return this.table.DataGridView.SelectedRows; }
+        }
+
         public DataGridViewRow FindRowByCellValue(string value)
         {
             int rowIndex = -1;

@@ -1,21 +1,10 @@
 ﻿
-using KTA_Visor.module.Managemnt.module.camera.form;
 using KTA_Visor.module.Managemnt.module.camera.form.FWUpgrade;
 using KTA_Visor.module.Managemnt.module.camera.form.settings;
-using KTA_Visor.module.Managemnt.module.camera.form.Zipper;
 using KTA_Visor.module.Managemnt.module.Camera.component.CameraItem.events;
 using KTAVisorAPISDK.module.camera.entity;
 using KTAVisorAPISDK.module.station.entity;
-using MetroFramework;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
@@ -44,8 +33,6 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             this.Camera = camera;
             this.Badge = camera?.badgeId;
             this.CamCustomId = camera?.cameraCustomId;
-            this.StationCustomId = this.station?.data?.stationId;
-            this.CameraIndex = camera?.index.ToString();
             this.station = station;
             this.form = new CameraItemSettingsForm(camera, station);
         }
@@ -54,8 +41,6 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         {
             this.Padding = new Padding(10, 10, 10, 20);
             this.settingsBtn.Click += OpenSettings_Click;
-            this.copyFilesToUSBMenuItem.Click += onCopyFilesToUSB;
-            this.copyFilesToDVDMenuItem.Click += onCopyFilesToDVD;
             this.upgradeMenuItem.Click += onUpgradeClick;
             this.handleStatus();
         }
@@ -79,18 +64,6 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         {
             get { return this.cameraIdLbl.Text; }
             set { this.cameraIdLbl.Text = value; }
-        }
-
-        public string StationCustomId
-        {
-            get { return this.stationIdLbl.Text; }
-            set { this.stationIdLbl.Text = value; }
-        }
-
-        public string CameraIndex
-        {
-            get { return this.cameraIndexLbl.Text; }
-            set { this.cameraIndexLbl.Text = value; }
         }
 
         private void handleStatus()
@@ -128,38 +101,7 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             this.BackColor = System.Drawing.ColorTranslator.FromHtml("#556C95");
         }
 
-        private void onCopyFilesToUSB(object sender, EventArgs e)
-        {
-            this.nasStorageFileDialog.ShowDialog();
-
-            if (this.nasStorageFileDialog.FileNames == null)
-            {
-                MetroMessageBox.Show(this, "Nie wybrano żadnych plików", "Błąd");
-                return;
-            }
-
-            this.targetDriveDevicePathDialog.ShowDialog();
-
-            if (this.targetDriveDevicePathDialog.SelectedPath == null)
-            {
-                MetroMessageBox.Show(this, "Nie wybrano żadnej scieżki", "Błąd");
-                return;
-            }
-
-            if (!Directory.Exists(this.targetDriveDevicePathDialog.SelectedPath))
-            {
-                MetroMessageBox.Show(this, "Nie udało się wykryć wybrany nośnik", "Błąd");
-                return;
-            }
-
-            ZipperForm copyingForm = new ZipperForm();
-            copyingForm.Show();
-            copyingForm.Zip(
-                this.targetDriveDevicePathDialog.SelectedPath,
-                this.nasStorageFileDialog.FileNames
-            );
-            this.OnCopyToUSBClicked?.Invoke(this, new OnCloseCameraItemFormEvent(this, this.Camera));
-        }
+ 
 
         private void onCopyFilesToDVD(object sender, EventArgs e)
         {

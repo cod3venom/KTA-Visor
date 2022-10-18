@@ -149,9 +149,11 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         {
             string selectedValue = this.recordingResolutionCombo.SelectedValue.ToString();
 
-            if (selectedValue == "1280X720P25")
-            {
+            if (selectedValue == "1280X720P25"){
                 selectedValue = "1280X720P20";
+            }
+            if (!selectedValue.Contains("Resolution")){
+                selectedValue = "Resolution" + selectedValue;
             }
             this.camera.settings.resolution = (int)(VideoResolutions)Enum.Parse(typeof(VideoResolutions), selectedValue);
         }
@@ -171,15 +173,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         private void onCodecChanged(object sender, EventArgs e)
         {
             string selectedValue = this.recordingQualityCombo.SelectedValue.ToString();
-
-            if (selectedValue == CodecFormats.H265.ToString())
-            {
-                this.Quality = (int)(Qualitys)Enum.Parse(typeof(Qualitys), "Fine");
-            }
-            else if (selectedValue == CodecFormats.H264.ToString())
-            {
-                this.Quality = (int)(Qualitys)Enum.Parse(typeof(Qualitys), "Normal");
-            }
+            this.Codec = (int)(Qualitys)Enum.Parse(typeof(Qualitys), selectedValue);
         }
 
         private void onSaveBtnClicked(object sender, EventArgs e)
@@ -195,7 +189,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
 
         public string GetModuleName()
         {
-            throw new NotImplementedException();
+            return "";
         }
     }
 }

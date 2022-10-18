@@ -8,6 +8,10 @@ using KTA_Visor.module.Managemnt.module.fileManager.view.form;
 using KTA_Visor.kernel.module.ThreadPool;
 using TCPTunnel.kernel.extensions.router.dto;
 using KTA_Visor.kernel.sharedKernel.interfaces;
+using KTA_Visor_UI.component.basic.table;
+using KTA_Visor.module.Managemnt.module.fileManager.handlers;
+using System.Collections.Generic;
+using KTA_Visor.module.Managemnt.module.fileManager.interfaces;
 
 namespace KTA_Visor.module.Managemnt.module.fileManager.view
 {
@@ -25,72 +29,59 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
             new ColumnTObject(8, "DATA WGRYWANIA"),
         };
 
-
-        private readonly FileManagerService fileManagerService;
-
-
+        private readonly List<IFileManagerUIHandler> _uiHandlers;
         public FileManagerView()
         {
             InitializeComponent();
-            this.fileManagerService = new FileManagerService();
+            this._uiHandlers = new List<IFileManagerUIHandler>(){
+                new FileManagerUIHandler(this),
+                new FileManagerZipHandler(this),
+            };
+           
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            this.table.Column.addMultiple(this.Columns);
-            this.fetch();
-        }
         private void FileHistoryViewPanel_Load(object sender, EventArgs e)
-        {            
-            this.table.AllowProgressBar = false;
-            this.table.DataGridView.CellDoubleClick += onOpenSelectedRecord;
+        {
+            this.table.Column.addMultiple(this.Columns);
+            this._uiHandlers.ForEach((IFileManagerUIHandler handler) => {
+                handler.Handle();
+            });
         }
 
-        private async void onOpenSelectedRecord(object sender, DataGridViewCellEventArgs e)
+        protected override void OnParentChanged(EventArgs e)
         {
-            ThreadPoolManager.Run(this, ((Action) async delegate {
-                FileItemEntity selectedHistory = await this.fileManagerService.findbyid(this.ID);
-                FileHistoryRecordForm fileHistoryRecordForm = new FileHistoryRecordForm(selectedHistory.data);
-                fileHistoryRecordForm.OnClose += (delegate (object _sender, EventArgs _e)
+            base.OnParentChanged(e);
+        }
+
+        public List<string> SelectedFiles
+        {
+
+            get
+            {
+                List<string> files = new List<string>();
+
+                foreach(DataGridViewRow row in this.table.DataGridView.SelectedRows)
                 {
-                    this.fetch();
-                });
-                fileHistoryRecordForm.ShowDialog();
-            }));
-        }
-
-        private void fetch()
-        {
-            ThreadPoolManager.Run(this, ((Action)async delegate {
-                this.table.Row.clear();
-                FileItemEntity files = await this.fileManagerService.all();
-
-                if (files.datas == null){
-                    return;
+                    files.Add(row.Cells["LOKALIZACJA"].Value.ToString());
                 }
-                foreach (FileHistory file in files.datas)
-                {
-                    this.table.Row.Add(
-                        file.id,
-                        file.fileDestPath,
-                        file.fileSize.ToString(),
-                        file.evidence ? "Tak" : "Nie",
-                        file.removableEvidence ? "Tak" : "Nie",
-                        file.cameraCustomId,
-                        file.badgeId,
-                        file.createdAt
-                    );
-                }
-            }));
+                return files;
+            }
         }
-
-        private string ID
+        public Table Table
         {
-            get { return this.table.Row.SelectedRow.Cells["ID"].Value.ToString(); }
+            get { return this.table; }
         }
 
+        public ContextMenuStrip RecordMenu
+        {
+            get { return this.contextMenu; }
+        }
 
+        public ToolStripMenuItem CopyToUSB
+        {
+            get { return this.copyFilesToUSBMenuItem; }
+        }
+         
         public void Watch(Request request)
         {
         }

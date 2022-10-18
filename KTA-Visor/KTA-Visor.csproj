@@ -367,12 +367,6 @@
       <DependentUpon>FWUpgradeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\camera\form\Settings\handlers\SettingsHandler.cs" />
-    <Compile Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.Designer.cs">
-      <DependentUpon>ZipperForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="module\Managemnt\module\camera\components\CameraNotification\CameraNotificationWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -389,13 +383,23 @@
     <Compile Include="module\Managemnt\module\camera\form\Settings\CameraItemSettingsForm.Designer.cs">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Managemnt\module\camera\form\FileEncryption\events\OnSaveFileEncryptionPasswordsEvent.cs" />
-    <Compile Include="module\Managemnt\module\camera\form\FileEncryption\FileEncryptionWithPasswordWindow.cs">
+    <Compile Include="module\Managemnt\module\fileManager\forms\Zipper\events\OnPasswordsAreOkEvent.cs" />
+    <Compile Include="module\Managemnt\module\fileManager\forms\Zipper\ZipPasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="module\Managemnt\module\camera\form\FileEncryption\FileEncryptionWithPasswordWindow.Designer.cs">
-      <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
+    <Compile Include="module\Managemnt\module\fileManager\forms\Zipper\ZipPasswordForm.Designer.cs">
+      <DependentUpon>ZipPasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\fileManager\forms\Zipper\ZipperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\fileManager\forms\Zipper\ZipperForm.Designer.cs">
+      <DependentUpon>ZipperForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\cardReader\CardReaderModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\cardReader\controller\CardController.cs" />
     <Compile Include="module\Managemnt\module\cardReader\events\OnCardReadedEvent.cs" />
     <Compile Include="module\Managemnt\module\cardReader\form\CardModeWindow.cs">
       <SubType>Form</SubType>
@@ -415,6 +419,9 @@
     <Compile Include="module\Managemnt\module\fileManager\FileManagerModule.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="module\Managemnt\module\fileManager\handlers\FileManagerUIHandler.cs" />
+    <Compile Include="module\Managemnt\module\fileManager\handlers\FileManagerZipHandler.cs" />
+    <Compile Include="module\Managemnt\module\fileManager\interfaces\IFileManagerUIHandler.cs" />
     <Compile Include="module\Managemnt\module\fileManager\view\FileManagerView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -579,17 +586,17 @@
     <EmbeddedResource Include="module\Managemnt\module\camera\form\FWUpgrade\FWUpgradeForm.resx">
       <DependentUpon>FWUpgradeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\camera\form\Zipper\ZipperForm.resx">
-      <DependentUpon>ZipperForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\camera\components\CameraNotification\CameraNotificationWindow.resx">
       <DependentUpon>CameraNotificationWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\camera\form\Settings\CameraItemSettingsForm.resx">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="module\Managemnt\module\camera\form\FileEncryption\FileEncryptionWithPasswordWindow.resx">
-      <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
+    <EmbeddedResource Include="module\Managemnt\module\fileManager\forms\Zipper\ZipPasswordForm.resx">
+      <DependentUpon>ZipPasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\fileManager\forms\Zipper\ZipperForm.resx">
+      <DependentUpon>ZipperForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\cardReader\form\CardModeWindow.resx">
       <DependentUpon>CardModeWindow.cs</DependentUpon>

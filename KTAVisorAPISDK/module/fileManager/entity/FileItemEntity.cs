@@ -23,7 +23,7 @@ namespace KTAVisorAPISDK.module.fileManager.entity
             public double fileSize { get; set; }
             public bool evidence { get; set; }
             public bool removableEvidence { get; set; }
-            public string checksum { get; set; }
+            public string checkSum { get; set; }
             public bool isDeleted { get; set; }
             public string description{ get; set; }
             public string createdAt { get; set; }

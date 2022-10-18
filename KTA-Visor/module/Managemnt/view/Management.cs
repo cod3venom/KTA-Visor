@@ -28,6 +28,7 @@ using KTA_Visor.module.Managemnt.uiHandler;
 using KTA_Visor_UI.component.basic.StatusIndicator;
 using KTA_Visor_UI.component.custom.LoggerView;
 using System.Drawing;
+using KTA_Visor.module.Managemnt.module.cardReader;
 
 namespace KTA_Visor.module.Management.view
 {
@@ -49,7 +50,8 @@ namespace KTA_Visor.module.Management.view
                 this.ClientsManagerModule,
                 new StationModule(),
                 new FileManagerModule(),
-                new LogsModule()
+                new LogsModule(),
+                new CardReaderModule()
             };
 
             this.FormBorderStyle = FormBorderStyle.None;

@@ -64,7 +64,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
             }
 
            return await this.cameraService.create(new CreateCameraRequestTObject(camera.Index, camera.ID, camera.BadgeId, "",
-                Globals.STATION.data.stationId,
+                Globals.STATION?.data?.stationId,
                 camera.Drive?.Name
             ));
 

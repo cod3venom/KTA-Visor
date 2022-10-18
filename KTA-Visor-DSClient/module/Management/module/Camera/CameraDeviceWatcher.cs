@@ -18,6 +18,7 @@ using Sdk.Core.Enums;
 using KTA_Visor_DSClient.module.Management.module.Camera.handler;
 using KTA_Visor_DSClient.install.settings;
 using KTAVisorAPISDK.module.camera.entity;
+using Falcon_Protocol.modules.detector.events;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService
 {
@@ -48,7 +49,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         {
             this.watch();
             this.falconProtocol.Detector.OnExceptionOccured += onExceptionOccured;
-            this.falconProtocol.Detector.OnDeviceDetected += onDeviceConnectedOrDisconnected;
             this.falconProtocol.Detector.OnDeviceMounted += OnDeviceMounted;
             this.falconProtocol.Detector.OnDeviceRemoved += OnDeviceDisconnected;
             this.falconProtocol.Detector.LoadConnectedDevices();
@@ -60,8 +60,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         {
             Thread watchThread = new Thread((ThreadStart)delegate
             {
-                while(Globals.ALLOW_FS_MOUNTING)
+                while(true)
                 {
+                    if (!Globals.ALLOW_FS_MOUNTING){
+                        continue;
+                    }
+
                     this.Connect();
                     this.TryToMountDevice();
                 }
@@ -71,24 +75,15 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             watchThread.Start();
         }
 
-        private void onDeviceConnectedOrDisconnected(DeviceDetectedInformation detectedInformation, VolumeChangeEventType changeEventType)
-        {
-            this.Connect();
-            this.TryToMountDevice();
-            this.falconProtocol.Detector.LoadConnectedDevices();
 
-            this._logger.print("Device action detected");
-        }
-
-
-        private async void OnDeviceMounted(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
+        private async void OnDeviceMounted(object sender, OnDeviceMountedEvent e)
         {
             
-            if (!this.isValidCameraDevice(e.DriveLetter)){
+            if (!this.isValidCameraDevice(e.Drive.Name)){
                 return;
             }
 
-            USBCameraDevice camera = USBCameraDeviceFactory.create(e.DriveLetter, Globals.USB_CAMERA_DEVICES_LIST.Count);
+            USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.Name, Globals.CAMERAS_LIST.Count);
 
             if (this.isCameraAlreadyAdded(camera)){
                 return;
@@ -104,16 +99,16 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         }
 
 
-        private void OnDeviceDisconnected(DeviceDetectedInformation e, VolumeChangeEventType changeEventType)
+        private void OnDeviceDisconnected(object sender, OnDeviceRemoved e)
         {
             try
             {
-                USBCameraDevice camera = Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Name == e.DriveLetter);
+                USBCameraDevice camera = Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Name == e.Drive?.Name);
                 if (camera == null) {
                     return;
                 }
 
-                this.camerasGlobalMemoryHandler.Remove(camera.BadgeId, Globals.ClientTunnel);
+                _ = this.camerasGlobalMemoryHandler.Remove(camera.BadgeId, Globals.ClientTunnel);
                 this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(camera));
 
                 this._logger.warn(String.Format("Camera with badge id {0} was removed successfully", camera.BadgeId));

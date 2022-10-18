@@ -41,29 +41,11 @@ typedef struct
 typedef struct
 {
 	char video_res;			
-	/* Video resolution. 
-		0:2688x1512P30
-		1: 2560x1440P30 
-		2: 2304x1296P30 
-		3: 1920x1080P30 
-		4: 1280x720P30 
-		5: 848x480P30
-		6:1920x1080P20
-		7:1280X720P20
-		8:848X480XP20
-	*/
-	char video_quality;	
 
-	/* Video quality	
-		0: Super Fine 
-		1: Fine 
-		2: Normal
-	*/
+	char video_quality;		
+
 	char video_format;		
-	/* Video format		
-		0: H.264	
-		1: H.265
-	*/
+
 	char split_time;
 	char loop_record;
 	char pre_record;
@@ -80,8 +62,89 @@ typedef struct
 	char motion_detect;
 	char livestream_res;
 	char livestream_format;
-	char reserved[32];
+	char gsensor;
+	char eis;
+	char res_flag[2];
+	char photo_size_flag[2];
+	char post_rec_flag;
+	char split_time_flag;
+	char aes_crypto;
+	char reserved[23];
 }MENU_CONFIG;
+//config reference
+	/* Video format		
+		0: H.264	
+		1: H.265
+	*/
+	/* Video quality	
+		0: Super Fine 
+		1: Fine 
+		2: Normal
+	*/
+	/*
+	res_flag[0]
+	bit0:2688x1512 30P->0
+	bit1:2560x1440 30P->1
+	bit2:2304x1296 30P->1
+	bit3:1920x1080 60P->0
+	bit4:1920x1080 30P->1
+	bit5:1440x1080 30P->0
+	bit6:1280x720 60P->0
+	bit7:1280x720 30P->1
+	res_flag[1]
+	bit0:848x480 60P->0
+	bit1:848x480 30P->1
+	bit2:720x480 30P->0
+	*/
+
+	/*
+	photo_size_flag[0]
+	bit0:5M->1
+	bit1:8M->0
+	bit2:10M->0
+	bit3:12M->1
+	bit4:16M->0
+	bit5:20M->1
+	bit6:21M->0
+	bit7:23M->0
+	photo_size_flag[1]
+	bit0:25M->1
+	bit1:28M->0
+	bit2:30M->1
+	bit3:32M->0
+	bit4:36M->0
+	bit5:40M->1
+	bit6:50M->0
+	bit7:64M->0
+	*/
+
+	
+	//if photo_size  bit7 =1,using user-defined photo size,
+	//otherwise using default value-> 5,12,25,30,40
+
+
+	/*
+	post_rec_flag
+	bit0:OFF->1
+	bit1:5 Sec->1
+	bit2:1 Min->1
+	bit3:10Min->1
+	bit4:20Min->1
+	bit5:35Min->1
+	*/
+
+
+	/*
+	split_time_flag
+	bit0:1 Min->1
+	bit1:3 Min->1
+	bit2:5 Min->1
+	bit3:10Min->1
+	bit4:15Min->1
+	bit5:30Min->1
+	bit6:45Min->1
+	*/
+
 
 // Acknowledges From BWC
 typedef enum 
@@ -342,7 +405,21 @@ extern "C"
  *	
  *  @return 1 success, 0 failure
  */		
-	EYLOG_DLLIMPORT int  ReadDeviceBatteryDumpEnergy(int *Battery, char *sPwd, int *iRet);
+EYLOG_DLLIMPORT int  ReadDeviceBatteryDumpEnergy(int *Battery, char *sPwd, int *iRet);
+
+
+/****************Add APIs for usb connect by index*********************/
+EYLOG_DLLIMPORT int Init_Device_UsbTotal(char *IDCode, int *iRet, int *Usb_TotalNum);
+EYLOG_DLLIMPORT int	Eylog_SetMenuConfig_ByIndex(void *menu_conf, int config_len, int *iRet, int usb_index);
+EYLOG_DLLIMPORT int	Eylog_GetMenuConfig_ByIndex(void *menu_conf, int config_len, int *iRet, int usb_index);
+EYLOG_DLLIMPORT int GetZFYInfo_ByIndex(ZFY_INFO *info, char *sPwd, int *iRet, int usb_index);
+EYLOG_DLLIMPORT int WriteZFYInfo_ByIndex(ZFY_INFO *info, char *sPwd, int *iRet, int usb_index);
+EYLOG_DLLIMPORT int	Eylog_FormatTFCard_ByIndex(char *sPwd, int *iRet, int usb_index);
+EYLOG_DLLIMPORT int SetMSDC_ByIndex(char *sPwd, int *iRet, int usb_index);
+EYLOG_DLLIMPORT int	Eylog_SN_Info_ByIndex(int r_w, char *sn, int *iRet, int usb_index);
+EYLOG_DLLIMPORT int	Eylog_FactoryDefault_ByIndex(int *iRet, int usb_index);
+EYLOG_DLLIMPORT int ReadDeviceBatteryDumpEnergy_ByIndex(int *Battery, char *sPwd, int *iRet, int usb_index);
+
 	
 #ifdef __cplusplus
 }

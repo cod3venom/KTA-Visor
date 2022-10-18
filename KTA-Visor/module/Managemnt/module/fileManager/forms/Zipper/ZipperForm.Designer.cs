@@ -1,4 +1,4 @@
-﻿namespace KTA_Visor.module.Managemnt.module.camera.form.Zipper
+﻿namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
 {
     partial class ZipperForm
     {
@@ -28,30 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flesCounterLbl = new System.Windows.Forms.Label();
             this.currentFileLbl = new System.Windows.Forms.Label();
             this.closeBtn = new MetroFramework.Controls.MetroButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.metroProgressBar = new MetroFramework.Controls.MetroProgressBar();
+            this.destinationFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // flesCounterLbl
-            // 
-            this.flesCounterLbl.AutoSize = true;
-            this.flesCounterLbl.Font = new System.Drawing.Font("Inter Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flesCounterLbl.Location = new System.Drawing.Point(494, 141);
-            this.flesCounterLbl.Name = "flesCounterLbl";
-            this.flesCounterLbl.Size = new System.Drawing.Size(33, 14);
-            this.flesCounterLbl.TabIndex = 1;
-            this.flesCounterLbl.Text = "0/17";
             // 
             // currentFileLbl
             // 
             this.currentFileLbl.AutoSize = true;
             this.currentFileLbl.Location = new System.Drawing.Point(21, 89);
             this.currentFileLbl.Name = "currentFileLbl";
-            this.currentFileLbl.Size = new System.Drawing.Size(52, 14);
+            this.currentFileLbl.Size = new System.Drawing.Size(64, 17);
             this.currentFileLbl.TabIndex = 2;
             this.currentFileLbl.Text = "File.mp4";
             // 
@@ -62,7 +52,6 @@
             this.closeBtn.Size = new System.Drawing.Size(75, 23);
             this.closeBtn.TabIndex = 3;
             this.closeBtn.Text = "Zamknij";
-            this.closeBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.closeBtn.UseSelectable = true;
             // 
             // panel1
@@ -81,17 +70,19 @@
             this.metroProgressBar.Size = new System.Drawing.Size(503, 23);
             this.metroProgressBar.Style = MetroFramework.MetroColorStyle.Silver;
             this.metroProgressBar.TabIndex = 5;
-            this.metroProgressBar.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // destinationFolder
+            // 
+            this.destinationFolder.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
             // ZipperForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(551, 269);
             this.Controls.Add(this.metroProgressBar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.currentFileLbl);
-            this.Controls.Add(this.flesCounterLbl);
             this.DisplayHeader = false;
             this.Font = new System.Drawing.Font("Inter", 8.25F);
             this.Name = "ZipperForm";
@@ -105,10 +96,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label flesCounterLbl;
         private System.Windows.Forms.Label currentFileLbl;
         private MetroFramework.Controls.MetroButton closeBtn;
         private System.Windows.Forms.Panel panel1;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar;
+        private System.Windows.Forms.FolderBrowserDialog destinationFolder;
     }
 }

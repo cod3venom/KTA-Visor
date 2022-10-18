@@ -33,7 +33,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>\\DESKTOP-3KKTTRM\debugging</OutputPath>
+    <OutputPath>C:\Users\venom\source\repos\KTA-Visor\KTA-Visor-DSClient\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -95,6 +95,7 @@
     <Compile Include="install\settings\Settings.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\events\OnFoundPortByBadgeId.cs" />
     <Compile Include="kernel\helper\FileChecksum.cs" />
+    <Compile Include="kernel\helper\MD5Helper.cs" />
     <Compile Include="kernel\sharedKernel\ThreadPool\ThreadPoolManager.cs" />
     <Compile Include="module\Management\bootloader\Bootloader.cs" />
     <Compile Include="module\Management\bootloader\handlers\StationInitHandler.cs" />

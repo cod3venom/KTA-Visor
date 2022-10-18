@@ -45,7 +45,9 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
 
                 ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 10 };
                 Parallel.ForEach(stationCameras, options, camera => {
-                    this.addToBoard(camera);
+                    if (camera.active){
+                        this.addToBoard(camera);
+                    }
                 });
             });
 

@@ -48,15 +48,15 @@ namespace Falcon_Protocol.interop
 		public struct ZFY_INFO
 		{
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
-			public char[] cSerial;   /* Serial No	(Example: "1234567"	)	*/
+			public char[] cSerial;   /* Serial No (Example: "1234567" )  执法记录仪产品序号，不可为空*/
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 7)]
-			public byte[] userNo;    /* User Id	(Example: "123456")			*/
+			public byte[] userNo;    /* User Id (Example: "123456")   执法记录仪使用者警号，不可为空*/
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 33)]
-			public byte[] userName; /* User Name (Example: "HERO1234")		*/
+			public byte[] userName; /* User Name (Example: "HERO1234")  执法记录仪使用者姓名，管理系统使用警号关联时可为空*/
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 13)]
-			public byte[] unitNo;   /* Unit Id	(Example: "123456")			*/
+			public byte[] unitNo;   /* Unit Id (Example: "123456")   执法记录仪使用者单位编号，管理系统使用警号关联时可为空*/
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 33)]
-			public byte[] unitName; /* Unit Name	(Example: "WEST STATION")*/
+			public byte[] unitName; /* Unit Name (Example: "WEST STATION") 执法记录仪使用者单位名称，管理系统使用警号关联时可为空*/
 		}
 
 		/// <summary>
@@ -176,6 +176,27 @@ namespace Falcon_Protocol.interop
 		/// <returns></returns>
 		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Eylog_GetMenuConfig_ByIndex")]
 		public static extern int Eylog_GetMenuConfig_ByIndex(ref MENU_CONFIG menu_conf, int config_len, int[] iRet, int usb_index);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="sPwd"></param>
+		/// <param name="iRet"></param>
+		/// <returns></returns>
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "GetZFYInfo")]
+		public static extern int GetZFYInfo(ref ZFY_INFO info, byte[] sPwd, int[] iRet);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="sPwd"></param>
+		/// <param name="iRet"></param>
+		/// <returns></returns>
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo")]
+		public static extern int WriteZFYInfo(ref ZFY_INFO info, byte[] sPwd, int[] iRet);
+
 
 		/// <summary>
 		/// 

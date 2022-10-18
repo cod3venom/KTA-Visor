@@ -1,5 +1,7 @@
-﻿using KTA_Visor.module.Managemnt.events;
+﻿using KTA_Visor.kernel.sharedKernel.interfaces;
+using KTA_Visor.module.Managemnt.events;
 using KTA_Visor.module.Managemnt.interfaces;
+using KTA_Visor.module.Managemnt.module.cardReader;
 using KTA_Visor.module.Managemnt.module.cardReader.form;
 using KTA_Visor.module.Managemnt.module.fileManager;
 using KTA_Visor.module.Managemnt.module.logs;
@@ -70,7 +72,9 @@ namespace KTA_Visor.module.Managemnt.uiHandler
 
         private void onCardModeClick(object sender, EventArgs e)
         {
-            new CardModeWindow().ShowDialog();
+            this.managementForm.Modules.Find(
+                (IModuleInterface module) => module.GetModuleName() == CardReaderModule.ModuleName
+            ).ShowDialog();
         }
 
         private void onVersionMenuItemClick(object sender, EventArgs e)

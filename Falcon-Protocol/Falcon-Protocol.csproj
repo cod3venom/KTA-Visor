@@ -59,15 +59,16 @@
     <Compile Include="interop\FalconProtocolInteropService.cs" />
     <Compile Include="modules\detector\DeviceDetector.cs" />
     <Compile Include="interfaces\IModuleInterface.cs" />
+    <Compile Include="modules\detector\enums\DriveEventType.cs" />
+    <Compile Include="modules\detector\events\OnDeviceRemoved.cs" />
+    <Compile Include="modules\detector\events\OnDeviceMountedEvent.cs" />
     <Compile Include="modules\ModulesManager.cs" />
     <Compile Include="types\ModulesPack.cs" />
     <Compile Include="test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="wrapper\SDK.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="modules\detector\events\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

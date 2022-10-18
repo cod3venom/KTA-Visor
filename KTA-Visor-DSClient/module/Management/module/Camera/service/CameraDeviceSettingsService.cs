@@ -17,50 +17,104 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 {
     public class CameraDeviceSettingsService
     {
-        private readonly FalconProtocol falconProtocol;
-        private USBCameraDevice selectedCameraDevice;
-        private int selectedCameraPortNumber = -1;
+        private readonly FalconProtocol _falconProtocol;
+        private USBCameraDevice _selectedCameraDevice;
+        private CameraEntity.Camera _cameraEntity;
 
         public CameraDeviceSettingsService()
         {
-            this.falconProtocol = new FalconProtocol();
+            this._falconProtocol = new FalconProtocol();
         }
 
-
-        private void onFoundPortNumberByBadgeId(object sender, OnFoundPortByBadgeId e)
+        public void AssignValues(CameraEntity.Camera cameraEntity)
         {
-            this.selectedCameraDevice = e.Camera;
-            this.selectedCameraPortNumber = e.PortNumber;
+            this._cameraEntity = cameraEntity;
+        }
+  
 
-            Globals.Relay.turnOffAll();
-            Globals.Relay.turnOnByPort(this.selectedCameraPortNumber);
+        public void SaveSettings()
+        {
+
+            this._selectedCameraDevice = this.findCorrectCamera();
+            if (this._selectedCameraDevice == null){
+                return;
+            }
+
+            this._falconProtocol.Disconnect();
+
+            ZFY_INFO identifiers = this.configureIdentificators();
+            Thread.Sleep(10000);
+            MENU_CONFIG tweaks = this.configureTweaks();
+            this.configureLocalIdentificators();
+
+            Globals.ALLOW_FS_MOUNTING = true;
+            Globals.Relay.turnOnAll();
         }
         
- 
-
-        public MENU_CONFIG GetMenuConfig( int index = -1)
+        
+        private ZFY_INFO configureIdentificators()
         {
-            this.falconProtocol.SetIndex(index);
-            return this.falconProtocol.GetMenuConfig();
+            this._falconProtocol.Connect();
+            ZFY_INFO zfyInfo = this._falconProtocol.GetDeviceInfo();
+
+            byte[] camCustomIdCharArray = Encoding.ASCII.GetBytes(this._cameraEntity.cameraCustomId);
+            byte[] badgeIdCharArray = Encoding.ASCII.GetBytes(this._cameraEntity.badgeId);
+
+            Array.Copy(camCustomIdCharArray, zfyInfo.unitName, camCustomIdCharArray.Length);
+            Array.Copy(badgeIdCharArray, zfyInfo.userName, badgeIdCharArray.Length);
+            zfyInfo = this._falconProtocol.SetDeviceInfo(zfyInfo);
+
+            this._falconProtocol.Disconnect();
+
+            return zfyInfo;
         }
 
-        public void SetMenuConfig(CameraEntity.Camera camera)
+        private MENU_CONFIG configureTweaks()
         {
-            if (!Globals.IS_ALL_COPYING_PROCESS_ARE_END)
-                return;
+            this._falconProtocol.Connect();
+            MENU_CONFIG menuStruct = this._falconProtocol.GetMenuConfig();
+            menuStruct.video_res = Convert.ToByte(this._cameraEntity.settings.resolution);
+            menuStruct.video_quality = Convert.ToByte(this._cameraEntity.settings.quality);
+            menuStruct.video_format = Convert.ToByte(this._cameraEntity.settings.codecFormat);
+            menuStruct.time_zone = Convert.ToByte(this._cameraEntity.settings.timeZone);
+            menuStruct.wifi = Convert.ToByte(this._cameraEntity.settings.wifi);
+            menuStruct.aes_crypto = Convert.ToByte(this._cameraEntity.settings.aesEncryption);
+            menuStruct.gps = Convert.ToByte(this._cameraEntity.settings.gps);
+            menuStruct.wifi = Convert.ToByte(this._cameraEntity.settings.wifi);
+            menuStruct.vibrate = Convert.ToByte(this._cameraEntity.settings.silentMode);
 
-            USBCameraDevice device = Globals.CAMERAS_LIST.ToList().Find((USBCameraDevice dev) => dev.Drive.Name.Contains(camera.driveName));
-            if (device == null)
-                return;
+            menuStruct = this._falconProtocol.SetMenuConfig(menuStruct);
+            this._falconProtocol.Disconnect();
+            return menuStruct;
+        }
+
+        private void configureLocalIdentificators()
+        {
+            this._selectedCameraDevice.Settings.ID = this._cameraEntity.cameraCustomId;
+            this._selectedCameraDevice.Settings.BadgeId = this._cameraEntity.badgeId;
+            this._selectedCameraDevice.SaveSettings();
+        }
+        private USBCameraDevice findCorrectCamera()
+        {
+            if (!Globals.IS_ALL_COPYING_PROCESS_ARE_END){
+                return null;
+            }
+
+            USBCameraDevice device = Globals.CAMERAS_LIST.ToList().Find(
+                (USBCameraDevice dev) => dev.Drive.Name.Contains(this._cameraEntity.driveName)
+            );
+
+            if (device == null){
+                return null;
+            }
 
             Globals.ALLOW_FS_MOUNTING = false;
-            int portNumber = Globals.Relay.findPortByBadgeId(device.BadgeId);
+            int portNumber = Globals.Relay.FindPortByCameraCustomId(device.ID);
 
-            if (portNumber == -1)
-            {
+            if (portNumber == -1){
                 Globals.Logger.error(String.Format("Unable to find selected cameras port number: returned {0}", portNumber.ToString()));
                 Globals.Relay.turnOnAll();
-                return;
+                return null;
             }
             Globals.Relay.turnOffAll();
 
@@ -68,37 +122,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             Globals.Relay.turnOnByPort(portNumber);
 
             Thread.Sleep(8000);
-            this.falconProtocol.Connect();
-         
-            var menuStruct = this.falconProtocol.GetMenuConfig(device.Index);
-            var zfyInfo = this.falconProtocol.GetDeviceInfo(device.Index);
-
-            menuStruct.video_res = Convert.ToByte(camera.settings.resolution);
-            menuStruct.video_quality = Convert.ToByte(camera.settings.quality);
-            menuStruct.video_format = Convert.ToByte(camera.settings.codecFormat);
-            menuStruct.time_zone = Convert.ToByte(camera.settings.timeZone);
-            menuStruct.wifi = Convert.ToByte(camera.settings.wifi);
-            menuStruct.aes_crypto = Convert.ToByte(camera.settings.aesEncryption);
-            menuStruct.gps = Convert.ToByte(camera.settings.gps);
-            menuStruct.wifi = Convert.ToByte(camera.settings.wifi);
-            menuStruct.rec_warning = Convert.ToByte(camera.settings.silentMode);
-
-            zfyInfo.userNo = Encoding.ASCII.GetBytes(camera.badgeId);
-            zfyInfo.cSerial = camera.cameraCustomId.ToCharArray();
-
-            device.Settings.ID = camera.cameraCustomId;
-            device.Settings.BadgeId = camera.badgeId;
-            device.SaveSettings();
-
-            this.falconProtocol.SetMenuConfig(menuStruct, device.Index);
-            this.falconProtocol.SetDeviceInfo(zfyInfo, device.Index);
-
-            Globals.ALLOW_FS_MOUNTING = true;
-            Globals.Relay.turnOffAll();
-            Thread.Sleep(10000);
-            Globals.Relay.turnOnAll();
+            return device;
         }
-
 
     }
 }

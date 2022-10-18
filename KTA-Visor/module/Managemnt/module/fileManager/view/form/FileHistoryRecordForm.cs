@@ -87,7 +87,7 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.form
             this.fileDestPathTxt.Text = this._fileHistory.fileDestPath;
             this.fileSizeTxt.Text = this._fileHistory.fileSize.ToString();
             this.isEvidenceChk.Checked = this._fileHistory.evidence;
-            this.checkSumTxt.Text = this._fileHistory.checksum;
+            this.checkSumTxt.Text = this._fileHistory.checkSum;
             this.isRemovableEvidenceChk.Checked = this._fileHistory.removableEvidence;
             this.createdAtTxt.Text = this._fileHistory.createdAt.ToString();
             this.descriptionTxt.Text = this._fileHistory.description;

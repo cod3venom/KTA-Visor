@@ -20,6 +20,7 @@ namespace KTA_Visor.module.Managemnt.module.clientsManager
 
         public void ShowDialog()
         {
+            this.ShowDialog();
         }
     }
 }

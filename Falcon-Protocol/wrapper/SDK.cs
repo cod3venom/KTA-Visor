@@ -18,9 +18,14 @@ namespace Falcon_Protocol.wrapper
         /// <summary>
         /// 
         /// </summary>
-        private byte[] pwd = Encoding.ASCII.GetBytes("000000");
+        
 
         private int index = 0;
+
+        private byte[] getPwd()
+        {
+            return Encoding.ASCII.GetBytes("000000");
+        }
 
         public SDK SetIndex(int index)
         {
@@ -70,6 +75,7 @@ namespace Falcon_Protocol.wrapper
         /// <returns></returns>
         public bool Login()
         {
+            byte[] pwd = this.getPwd();
             int[] userType = new int[1];
             int[] iRet= new int[1];
 
@@ -86,7 +92,9 @@ namespace Falcon_Protocol.wrapper
         public bool Mount()
         {
             int[] iRet = new int[1];
-            FalconProtocolInteropService.SetMSDC(ref this.pwd, iRet);
+            byte[] pwd = this.getPwd();
+
+            FalconProtocolInteropService.SetMSDC(ref pwd, iRet);
             this.OnDeviceMounted?.Invoke(this, EventArgs.Empty);
 
             return this.calcIRet(iRet);
@@ -95,7 +103,8 @@ namespace Falcon_Protocol.wrapper
         public bool SyncDevTime()
         {
             int[] iRet = new int[1];
-            FalconProtocolInteropService.SyncDevTime(ref this.pwd, iRet);
+            byte[] pwd = this.getPwd();
+            FalconProtocolInteropService.SyncDevTime(ref pwd, iRet);
 
             return this.calcIRet(iRet);
         }
@@ -134,34 +143,51 @@ namespace Falcon_Protocol.wrapper
             int config_len = Marshal.SizeOf(menuStruct);
             int[] iret = new int[1];
 
-            if (deviceIndex != -1)
-            {
-                FalconProtocolInteropService.Eylog_SetMenuConfig_ByIndex(ref menuStruct, config_len, iret, deviceIndex);
-            }
-            else
+            if (deviceIndex == -1)
             {
                 FalconProtocolInteropService.Eylog_SetMenuConfig(ref menuStruct, config_len, iret);
+                FalconProtocolInteropService.Eylog_GetMenuConfig(ref menuStruct, config_len, iret);
+                return menuStruct;
             }
+           
+            FalconProtocolInteropService.Eylog_SetMenuConfig_ByIndex(ref menuStruct, config_len, iret, deviceIndex);
+            FalconProtocolInteropService.Eylog_GetMenuConfig_ByIndex(ref menuStruct, config_len, iret, deviceIndex);
+
             return menuStruct;
         }
 
-        public ZFY_INFO GetDeviceInfo(int deviceIndex)
+        public ZFY_INFO GetDeviceInfo(int deviceIndex = -1)
         {
             
             ZFY_INFO info = new ZFY_INFO();
             int[] iret = new int[1];
+            byte[] pwd = this.getPwd();
 
-            FalconProtocolInteropService.GetZFYInfo_ByIndex(ref info, this.pwd, iret, deviceIndex);
+            if (deviceIndex == -1)
+            {
+                FalconProtocolInteropService.GetZFYInfo(ref info, pwd, iret);
+                return info;
+            }
+            FalconProtocolInteropService.GetZFYInfo_ByIndex(ref info, pwd, iret, deviceIndex);
             return info;
         }
 
 
-        public ZFY_INFO SetDeviceInfo(ZFY_INFO info, int deviceIndex)
+        public ZFY_INFO SetDeviceInfo(ZFY_INFO info, int deviceIndex = -1)
         {
 
             int[] iret = new int[1];
+            byte[] pwd = this.getPwd();
 
-            FalconProtocolInteropService.WriteZFYInfo_ByIndex(ref info, this.pwd, iret, deviceIndex);
+            if (deviceIndex == -1)
+            {
+                byte[] _pwd = Encoding.ASCII.GetBytes("000000");
+                FalconProtocolInteropService.WriteZFYInfo(ref info, _pwd, iret);
+                FalconProtocolInteropService.GetZFYInfo(ref info, _pwd, iret);
+                return info;
+            }
+            FalconProtocolInteropService.WriteZFYInfo_ByIndex(ref info, pwd, iret, deviceIndex);
+            FalconProtocolInteropService.GetZFYInfo_ByIndex(ref info, pwd, iret, deviceIndex);
             return info;
         }
 

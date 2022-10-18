@@ -39,7 +39,12 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.Settings.handlers
 
         public async void Save()
         {
-            bool hasDuplicates = await this.cameraCardService.hasDuplicates(this._form.CardId);
+            bool hasDuplicates = false;
+
+            if (this._form.CardId != "")
+            {
+                hasDuplicates = await this.cameraCardService.hasDuplicates(this._form.CardId);
+            }
 
             if (hasDuplicates){
                 MetroMessageBox.Show(this._form, "Wybrana karta jest przypisana do innej kamery i nie może być ponownie użyta", "Karta");

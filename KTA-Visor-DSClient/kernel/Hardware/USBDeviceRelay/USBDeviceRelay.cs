@@ -26,37 +26,25 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
         /// </summary>
         /// <param name="badgeId"></param>
         /// <returns></returns>
-        public int findPortByBadgeId(string badgeId)
+        public int FindPortByCameraCustomId(string cameraCustomId)
         {
-            int originLength = Globals.CAMERAS_LIST.Count;
-            USBCameraDevice requestedDevice = Globals.CAMERAS_LIST.ToList().Find(requestedCamera => requestedCamera.BadgeId == badgeId);
+            USBCameraDevice requestedDevice = Globals.CAMERAS_LIST.Find(
+                (USBCameraDevice requestedCamera) => requestedCamera.ID == cameraCustomId
+            );
             
             foreach(int portNumber in this.Ports)
             {
-                if (!this.assignRelayPortToTheCamera(portNumber, ref requestedDevice))
-                    continue;
-                return portNumber;
+                this.turnOffByPort(portNumber, 100);
+                Thread.Sleep(100);
+
+                bool driveExists = DriveInfo.GetDrives().Any(x => x.Name == requestedDevice?.Drive?.Name);
+
+                if (!driveExists){
+                    requestedDevice.RelayPort = portNumber;
+                    return requestedDevice.RelayPort;
+                }
             }
             return -1;
-        }
- 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="portNumber"></param>
-        /// <param name="requestedDevice"></param>
-        /// <returns></returns>
-        private bool assignRelayPortToTheCamera(int portNumber, ref USBCameraDevice requestedDevice)
-        {
-            this.turnOffByPort(portNumber);
-            Thread.Sleep(100);
-            
-            if (!Directory.Exists(requestedDevice.Drive.Name))
-            {
-                requestedDevice.RelayPort = portNumber;
-                return true;
-            }
-            return false;
         }
     }
 }

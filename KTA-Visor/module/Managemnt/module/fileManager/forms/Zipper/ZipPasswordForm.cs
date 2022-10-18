@@ -1,4 +1,4 @@
-﻿using KTA_Visor.module.Managemnt.module.camera.form.FileEncryption.events;
+﻿using KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper.events;
 using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
@@ -10,23 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KTA_Visor.module.Managemnt.module.camera.form.FileEncryption
+namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
 {
-    public partial class FileEncryptionWithPasswordWindow : MetroForm
+    public partial class ZipPasswordForm : MetroForm
     {
 
 
         public event EventHandler<EventArgs> OnClose;
         public event EventHandler<EventArgs> OnPasswordLengthIsLessThanAllowed;
         public event EventHandler<EventArgs> OnPasswordAndRepeatedPasswordDoesntMatch;
-        public event EventHandler<OnSaveFileEncryptionPasswordsEvent> OnSaveFileEncryptionPasswords;
+        public event EventHandler<OnPasswordsAreOkEvent> OnPasswordAreOk;
 
- 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public FileEncryptionWithPasswordWindow()
+        public ZipPasswordForm()
         {
             InitializeComponent();
         }
@@ -40,33 +35,29 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.FileEncryption
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
-            // custom draw the top border
-            using (Brush b = new SolidBrush(Color.DarkCyan))
-            {
-                int borderWidth = 5; // MetroFramework source code
+            using (Brush b = new SolidBrush(Color.DarkCyan)){
+                int borderWidth = 5;
                 e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
             }
         }
 
         private void onSave(object sender, EventArgs e)
         {
-            if (this.filePasswordtxt.Text != this.filePasswordRepeatTxt.Text)
-            {
+            if (this.filePasswordtxt.Text != this.filePasswordRepeatTxt.Text){
                 this.OnPasswordAndRepeatedPasswordDoesntMatch?.Invoke(sender, e);
                 return;
             }
 
-            if (this.filePasswordtxt.Text.Length < 8)
-            {
+            if (this.filePasswordtxt.Text.Length < 8){
                 this.OnPasswordLengthIsLessThanAllowed?.Invoke(sender, e);
                 return;
             }
 
-            this.OnSaveFileEncryptionPasswords?.Invoke(sender, new OnSaveFileEncryptionPasswordsEvent(
+            this.OnPasswordAreOk?.Invoke(sender, new OnPasswordsAreOkEvent(
                 this.filePasswordtxt.Text,
                 this.filePasswordRepeatTxt.Text
             ));
+
             this.Close();
         }
 

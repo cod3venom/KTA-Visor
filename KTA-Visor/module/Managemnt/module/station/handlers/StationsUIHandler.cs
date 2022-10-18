@@ -28,6 +28,7 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
 
         private void hookEvents()
         {
+
         }
         
         public  void Load()
@@ -35,6 +36,7 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
             Thread loadingThread = new Thread(async () =>
             {
                 List<StationEntity.Station> stations = await this.allStations();
+                
                 this.cleanTable();
 
                 ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 10 };
@@ -46,6 +48,7 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
             loadingThread.IsBackground = true;
             loadingThread.Start();
         }
+
         private async Task<List<StationEntity.Station>> allStations()
         {
             StationEntity station = await this.stationService.all();
