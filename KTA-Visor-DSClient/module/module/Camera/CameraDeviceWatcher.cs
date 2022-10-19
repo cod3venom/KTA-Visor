@@ -1,33 +1,38 @@
 ﻿using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.service;
+using KTAVisorAPISDK.module.camera.dto.request;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.Camera.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.factory;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
+using KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem;
+using static Falcon_Protocol.interop.FalconProtocolInteropService;
 using Falcon_Protocol;
+using Sdk.Core.DevicesDetection;
+using Sdk.Core.Enums;
 using KTA_Visor_DSClient.module.Management.module.Camera.handler;
 using KTA_Visor_DSClient.install.settings;
 using KTAVisorAPISDK.module.camera.entity;
 using Falcon_Protocol.modules.detector.events;
 
-using System;
-using System.IO;
-using System.Threading;
-using System.Collections.Generic;
-using KTA_Visor_DSClient.kernel.interfaces;
-using KTA_Visor_DSClient.module.Management.module.Camera.observer;
-
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService
 {
     public class CameraDeviceWatcher : FalconProtocol
     {
+        public event EventHandler<CameraConnectedEvent> OnCameraConnectedEvent;
+        public event EventHandler<CameraDisconnectedEvent> OnCameraDisconnectedEvent;
 
         private readonly Settings settings;
         private readonly KTALogger.Logger _logger;
         private readonly FalconProtocol falconProtocol;
         private readonly CameraService cameraService;
         private readonly CamerasGlobalMemoryHandler camerasGlobalMemoryHandler;
-        private readonly CamerasListObserver _camersasListObserver;
+        private readonly CameraFilesTransferingHandler cameraFilesTransferHandler;
 
         public CameraDeviceWatcher(Settings settings, KTALogger.Logger logger)
         {
@@ -36,13 +41,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             this.falconProtocol = new FalconProtocol();
             this.cameraService = new CameraService();
             this.camerasGlobalMemoryHandler = new CamerasGlobalMemoryHandler(this.cameraService);
-            this._camersasListObserver = new CamerasListObserver(this.settings, logger);
+            this.cameraFilesTransferHandler = new CameraFilesTransferingHandler(this.settings.SettingsObj?.app?.fileSystem?.filesPath, logger);
         }
 
         
         public void Start()
         {
-            this._camersasListObserver.Observe();
             this.watch();
             this.falconProtocol.Detector.OnExceptionOccured += onExceptionOccured;
             this.falconProtocol.Detector.OnDeviceMounted += OnDeviceMounted;
@@ -71,16 +75,27 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             watchThread.Start();
         }
 
-        private void OnDeviceMounted(object sender, OnDeviceMountedEvent e)
+
+        private async void OnDeviceMounted(object sender, OnDeviceMountedEvent e)
         {
             
             if (!this.isValidCameraDevice(e.Drive.Name)){
                 return;
             }
 
-            USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.Name);
-            Globals.CAMERAS_LIST.Push(camera);
+            USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.Name, Globals.CAMERAS_LIST.Count);
+
+            if (this.isCameraAlreadyAdded(camera)){
+                return;
+            }
+
+            CameraEntity cameraEntity = await this.camerasGlobalMemoryHandler.Add(camera, Globals.ClientTunnel);
+            this.cameraFilesTransferHandler.Transfer(camera, cameraEntity);
+
+            this._logger.success(String.Format("Camera with badge id {0} was inserted successfully", camera.BadgeId));
+            this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
         }
+
 
         private void OnDeviceDisconnected(object sender, OnDeviceRemoved e)
         {
@@ -91,7 +106,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                     return;
                 }
 
-                Globals.CAMERAS_LIST.Delete(camera);
+                _ = this.camerasGlobalMemoryHandler.Remove(camera.BadgeId, Globals.ClientTunnel);
+                this.OnCameraDisconnectedEvent?.Invoke(this, new CameraDisconnectedEvent(camera));
+
+                this._logger.warn(String.Format("Camera with badge id {0} was removed successfully", camera.BadgeId));
             }
             catch (Exception ex)
             {
@@ -117,6 +135,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             return File.Exists(cameraVolumeLabel + @":\\ID.txt");
         }
 
+        private bool isCameraAlreadyAdded(USBCameraDevice camera)
+        {
+            return Globals.CAMERAS_LIST.GetByDrive(camera.Drive.Name) != null;
+        }
 
         private void onExceptionOccured(object sender, Exception exception)
         {

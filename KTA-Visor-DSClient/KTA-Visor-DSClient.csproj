@@ -96,6 +96,7 @@
     <Compile Include="kernel\Hardware\USBDeviceRelay\events\OnFoundPortByBadgeId.cs" />
     <Compile Include="kernel\helper\FileChecksum.cs" />
     <Compile Include="kernel\helper\MD5Helper.cs" />
+    <Compile Include="kernel\interfaces\IObserverInterface.cs" />
     <Compile Include="kernel\sharedKernel\ThreadPool\ThreadPoolManager.cs" />
     <Compile Include="module\Management\bootloader\Bootloader.cs" />
     <Compile Include="module\Management\bootloader\handlers\StationInitHandler.cs" />
@@ -111,9 +112,13 @@
     <Compile Include="module\Management\module\Camera\command\memory\RemoveAllCamerasFromTheGlobalMemory.cs" />
     <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
-    <Compile Include="module\Management\module\Camera\handler\CameraFilesTransferingHandler.cs" />
+    <Compile Include="module\Management\module\Camera\handler\CameraBackendSyncHandler.cs" />
+    <Compile Include="module\Management\module\Camera\transfer\CameraFilesTransferingHandler.cs" />
+    <Compile Include="module\Management\module\Camera\interfaces\ICameraHandler.cs" />
+    <Compile Include="module\Management\module\Camera\observer\CamerasListObserver.cs" />
     <Compile Include="module\Management\module\Camera\service\CameraPowerService.cs" />
-    <Compile Include="module\Management\module\Camera\types\device\events\AddedCameraInListEvent.cs" />
+    <Compile Include="module\Management\module\Camera\types\device\events\CameraRemovedFromTheMemoryEvent.cs" />
+    <Compile Include="module\Management\module\Camera\types\device\events\CameraAddedToTheMemoryEvent.cs" />
     <Compile Include="module\Management\module\Camera\types\device\localSettings\LocalSettingsTObject.cs" />
     <Compile Include="module\Management\module\Camera\types\device\localSettings\USBCameraDeviceSettings.cs" />
     <Compile Include="module\Management\module\Camera\types\device\USBCameraDevice.cs" />

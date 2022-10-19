@@ -10,14 +10,16 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 {
     public class USBCameraDeviceFactory
     {
-        public static USBCameraDevice create(string driveLetter)
+        public static USBCameraDevice create(string driveLetter, int index = 0)
         {
-            return new USBCameraDevice(new DriveInfo(driveLetter));
+
+            return new USBCameraDevice(new DriveInfo(driveLetter), index);
         }
 
-        public static USBCameraDevice create(DriveInfo driveInfo)
+        public static USBCameraDevice create(DriveInfo driveInfo, string serialNumber, int index = 0)
         {
-            return new USBCameraDevice(driveInfo);
+
+            return new USBCameraDevice(driveInfo, serialNumber, index);
         }
  
     }

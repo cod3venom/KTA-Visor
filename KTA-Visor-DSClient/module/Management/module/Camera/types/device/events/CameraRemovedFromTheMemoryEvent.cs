@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.types.device.events
 {
-    public class AddedCameraInListEvent: EventArgs
+    public class CameraRemovedFromTheMemoryEvent : EventArgs
     {
 
-        public AddedCameraInListEvent(USBCameraDevice cameraDevice)
+        public CameraRemovedFromTheMemoryEvent(USBCameraDevice camera)
         {
-
+            this.Camera = camera;
         }
 
-        public
+        public USBCameraDevice Camera { get; set; }
     }
 }

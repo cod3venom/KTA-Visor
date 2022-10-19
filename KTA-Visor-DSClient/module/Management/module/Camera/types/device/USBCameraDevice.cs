@@ -12,110 +12,33 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 {
     public class USBCameraDevice : USBCameraDeviceSettings
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        public USBCameraDevice(DriveInfo device, string serialNumber, int index = 0):base(device)
+
+        public USBCameraDevice(DriveInfo device):base(device)
         {
-            this.Index = index;
             this.ID = this.Settings.ID;
             this.Name = device.Name;
             this.Drive = device;
             this.BadgeId = this.Settings.BadgeId;
-            this.SerialNumber = serialNumber;
-
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        public USBCameraDevice(DriveInfo device,  int index = 0) : base(device)
-        {
-            this.Index = index;
-            this.ID = this.Settings.ID;
-            this.Name = device.Name;
-            this.Drive = device;
-            this.BadgeId = this.Settings.BadgeId;
-            this.SerialNumber = "";
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("Drive")]
         public DriveInfo Drive { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public int Index { get; set; }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string SerialNumber { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public string ID { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
         public string BadgeId { get; set; }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string DiskUsage
+        public string DiskUsage 
         {
-            get { return this.getDiskUsage();  }
-        }
+            get 
+            {
+                string totalSpaceGB = FileSizeHelper.convertSize(this.Drive.TotalSize);
+                string usedSpaceGB = FileSizeHelper.convertSize(this.Drive.AvailableFreeSpace);
 
+                return string.Format("{0}/{1}", usedSpaceGB.ToString(), totalSpaceGB.ToString());
+            }
+        }
         public int RelayPort { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public DriveInfo getDriveInfo()
-        {
-            return this.Drive;
-        }
- 
-
-        public USBCameraDevice Select()
-        {
-            this.Settings.IsSelected = true;
-            this.SaveSettings();
-            return this;
-        }
-
-        public USBCameraDevice Deselect()
-        {
-            this.Settings.IsSelected = false;
-            this.SaveSettings();
-            return this;
-        }
-
-        private string getDiskUsage()
-        {
-            string totalSpaceGB = FileSizeHelper.convertSize(this.Drive.TotalSize);
-            string usedSpaceGB = FileSizeHelper.convertSize(this.Drive.AvailableFreeSpace);
-
-            return string.Format("{0}/{1}", usedSpaceGB.ToString(), totalSpaceGB.ToString());
-        }
-
+        public bool Active { get; set; }
         public List<FileInfo> Files
         {
             get

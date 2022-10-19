@@ -105,26 +105,7 @@ namespace KTAVisorAPISDK.module.camera.service
 
             return camera;
         }
-
-        public async Task<CameraEntity> selectCurrentCameraInStation(SelectCurrentCameraInStationRequestTObject request)
-        {
-            HttpResponseMessage result = await this.cameraRepository.selectCurrentCameraInStation(request);
-            string responseBody = await result.Content.ReadAsStringAsync();
-            CameraEntity camera = JsonConvert.DeserializeObject<CameraEntity>(responseBody);
-
-            return camera;
-        }
-
-
-        public async Task<CameraEntity> deselectAllCamerasForGivenStation(DeselectAllCamerasFromTheStationTObject request)
-        {
-            HttpResponseMessage result = await this.cameraRepository.deselectAllCamerasForGivenStation(request);
-            string responseBody = await result.Content.ReadAsStringAsync();
-            CameraEntity camera = JsonConvert.DeserializeObject<CameraEntity>(responseBody);
-
-            return camera;
-        }
-
+ 
         public async Task<HttpResponseMessage> delete(string id)
         {
             HttpResponseMessage response = await this.cameraRepository.delete(id);

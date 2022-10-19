@@ -4,15 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device
 {
     public class USBCameraDeviceList : List<USBCameraDevice>
     {
-        public event EventHandler<CameraAddedToTheMemoryEvent> OnCameraAddedInMemory;
-        public event EventHandler<CameraRemovedFromTheMemoryEvent> OnCameraRemovedFromMemory;
-            
+        public event EventHandler<CameraAddedInListEvent> OnCameraAddedInList;
+        public event EventHandler<CameraRemovedFromListEvent> OnCameraRemovedFromList;
         private int _index;
 
         public USBCameraDeviceList(): base()
@@ -27,25 +25,17 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                 return;
             }
             this._index++;
-
-            camera.Index = this._index;
-            camera.Active = true;
+            camera.Index = this._index; 
 
             this.Add(camera);
-
-            Thread addingThread = new Thread(() => this.OnCameraAddedInMemory?.Invoke(this, new CameraAddedToTheMemoryEvent(camera)));
-            addingThread.IsBackground = true;
-            addingThread.Start();
+            this.OnCameraAddedInList?.Invoke(this, new CameraAddedInListEvent(camera));
         }
         
         public void Delete(USBCameraDevice camera)
         {
             this.Remove(camera);
-            camera.Active = false;
+            this.OnCameraRemovedFromList?.Invoke(this, new CameraRemovedFromListEvent(camera));
 
-            Thread removingThread = new Thread(() => this.OnCameraRemovedFromMemory?.Invoke(this, new CameraRemovedFromTheMemoryEvent(camera)));
-            removingThread.IsBackground = true;
-            removingThread.Start();   
         }
 
         public USBCameraDevice GetByDrive(string driveName)
