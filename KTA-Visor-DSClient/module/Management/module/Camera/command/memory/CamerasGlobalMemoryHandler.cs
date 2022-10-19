@@ -1,4 +1,4 @@
-﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
+﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
 using KTA_Visor_DSClient.module.Management.module.clientTunnel;
 using KTA_Visor_DSClient.module.Management.module.Station;
 using KTA_Visor_DSClient.module.Shared.Globals;
@@ -29,18 +29,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
 
         public async Task<CameraEntity> Add(USBCameraDevice camera, ClientTunnel client)
         {
+            Globals.CAMERAS_LIST.Push(camera);
+            Globals.Logger.success(String.Format("Successfully Added Camera {0} from the global CAMERAS_LIST", camera.BadgeId));
 
-            USBCameraDevice existedCameraDevice = Globals.CAMERAS_LIST.Find((USBCameraDevice device) => (device.Drive?.Name == camera.Drive?.Name));
-
-            if (existedCameraDevice == null)
-            {
-                camera.Index = Globals.CAMERAS_LIST.Count + 1;
-                Globals.CAMERAS_LIST.Add(camera);
-                Globals.Logger.success(String.Format("Successfully Added Camera {0} from the global CAMERAS_LIST", camera.BadgeId));
-
-                return await this.createOnBackend(camera, client); ;
-            }
-            return null;
+            return await this.createOnBackend(camera, client); ;
         }
 
         public async Task<CameraEntity> Remove(string badgeId, ClientTunnel client)

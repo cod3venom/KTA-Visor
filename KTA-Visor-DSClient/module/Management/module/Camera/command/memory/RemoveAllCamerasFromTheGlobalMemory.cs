@@ -1,4 +1,4 @@
-﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
+﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
 using KTA_Visor_DSClient.module.Management.module.clientTunnel;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.dto.reques;

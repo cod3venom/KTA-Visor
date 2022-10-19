@@ -1,7 +1,7 @@
 ﻿using Falcon_Protocol;
 using KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay.events;
 using KTA_Visor_DSClient.module.Management.module.Camera;
-using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
+using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.entity;
 using System;

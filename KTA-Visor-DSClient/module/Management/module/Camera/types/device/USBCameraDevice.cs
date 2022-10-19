@@ -1,6 +1,6 @@
 ﻿using KTA_Visor_DSClient.module.Management.module.Camera.Resource.Device.exception;
 using KTA_Visor_DSClient.kernel.helper;
-using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice.localSettings;
+using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device.localSettings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice
+namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device
 {
     public class USBCameraDevice : USBCameraDeviceSettings
     {

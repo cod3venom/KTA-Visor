@@ -1,5 +1,5 @@
 ﻿using KTA_Visor_DSClient.install.settings;
-using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
+using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
 using KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay;
 using KTAVisorAPISDK.module.camera.entity;
 using KTAVisorAPISDK.module.station.entity;
@@ -18,7 +18,7 @@ namespace KTA_Visor_DSClient.module.Shared.Globals
         public static ClientTunnel ClientTunnel;
         
         public static StationEntity STATION = new StationEntity();
-        public static List<USBCameraDevice> CAMERAS_LIST = new List<USBCameraDevice>();
+        public static USBCameraDeviceList CAMERAS_LIST = new USBCameraDeviceList();
 
         public static bool IS_IN_SETTINGS_MODE = false;
         public static bool IS_ALL_COPYING_PROCESS_ARE_END = true;

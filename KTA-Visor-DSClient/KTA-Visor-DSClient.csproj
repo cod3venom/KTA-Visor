@@ -113,14 +113,15 @@
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
     <Compile Include="module\Management\module\Camera\handler\CameraFilesTransferingHandler.cs" />
     <Compile Include="module\Management\module\Camera\service\CameraPowerService.cs" />
-    <Compile Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\LocalSettingsTObject.cs" />
-    <Compile Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\USBCameraDeviceSettings.cs" />
-    <Compile Include="module\Management\module\Camera\types\USBCameraDevice\USBCameraDevice.cs" />
+    <Compile Include="module\Management\module\Camera\types\device\events\AddedCameraInListEvent.cs" />
+    <Compile Include="module\Management\module\Camera\types\device\localSettings\LocalSettingsTObject.cs" />
+    <Compile Include="module\Management\module\Camera\types\device\localSettings\USBCameraDeviceSettings.cs" />
+    <Compile Include="module\Management\module\Camera\types\device\USBCameraDevice.cs" />
     <Compile Include="module\Management\module\Camera\events\CameraConnectedEvent.cs" />
     <Compile Include="module\Management\module\Camera\exception\DeviceIsNotFalconCameraException.cs" />
     <Compile Include="module\Management\module\Camera\exception\CameraUSBDeviceFileNotFoundException.cs" />
     <Compile Include="module\Management\module\Camera\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
-    <Compile Include="module\Management\module\Camera\types\USBCameraDevice\USBCameraDeviceList.cs" />
+    <Compile Include="module\Management\module\Camera\types\device\USBCameraDeviceList.cs" />
     <Compile Include="kernel\generator\RandomData.cs" />
     <Compile Include="kernel\Hardware\Hardware.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\USBDeviceRelay.cs" />
@@ -193,7 +194,7 @@
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="log4net.config" />
-    <None Include="module\Management\module\Camera\types\USBCameraDevice\localSettings\LocalSettings.json" />
+    <None Include="module\Management\module\Camera\types\device\localSettings\LocalSettings.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -215,7 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="components\" />
-    <Folder Include="module\Management\module\Camera\types\USBCameraDevice\interfaces\" />
+    <Folder Include="module\Management\module\Camera\types\device\interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

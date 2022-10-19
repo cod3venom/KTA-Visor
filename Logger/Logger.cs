@@ -81,7 +81,7 @@ namespace KTALogger
 
         private string loggerFormat
         {
-            get { return "[{0}] [{1}] {2} # $ {3}"; }
+            get { return "[{0}] [{1}] {2} # $ {3} \n {4}"; }
         }
 
 
@@ -124,6 +124,21 @@ namespace KTALogger
             this.write("print", caller, message, context);
         }
 
+        public void report(string message, string level = "success", object context = null)
+        {
+            string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
+            message = new StringBuilder()
+                .Append(Environment.NewLine)
+                .Append("===========================================================================")
+                .Append(Environment.NewLine)
+                .Append(message)
+                .Append(Environment.NewLine)
+                .Append("===========================================================================")
+                .ToString();
+
+            this.write(level, caller, message, context);
+        }
+
         public void hidden(string message, object context = null)
         {
             string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
@@ -141,7 +156,7 @@ namespace KTALogger
                 case "print": Console.ForegroundColor = ConsoleColor.DarkGray; break;
             }
 
-            string fullText = String.Format(loggerFormat, this.currentTime, type, caller, message);
+            string fullText = String.Format(loggerFormat, this.currentTime, type, caller, message, context);
 
             this.OnLogHasWritten?.Invoke(this, new LoggerEvent(type, fullText, message));
 

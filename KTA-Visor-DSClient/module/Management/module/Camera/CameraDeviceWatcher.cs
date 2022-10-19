@@ -3,7 +3,7 @@ using KTAVisorAPISDK.module.camera.service;
 using KTAVisorAPISDK.module.camera.dto.request;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.Camera.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.factory;
-using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.USBCameraDevice;
+using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
 
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             this.falconProtocol = new FalconProtocol();
             this.cameraService = new CameraService();
             this.camerasGlobalMemoryHandler = new CamerasGlobalMemoryHandler(this.cameraService);
-            this.cameraFilesTransferHandler = new CameraFilesTransferingHandler(this.settings.SettingsObj?.app?.fileSystem?.filesPath);
+            this.cameraFilesTransferHandler = new CameraFilesTransferingHandler(this.settings.SettingsObj?.app?.fileSystem?.filesPath, logger);
         }
 
         
@@ -90,9 +90,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             }
 
             CameraEntity cameraEntity = await this.camerasGlobalMemoryHandler.Add(camera, Globals.ClientTunnel);
-
-            this.cameraFilesTransferHandler.AssignValues(camera, cameraEntity);
-            this.cameraFilesTransferHandler.Transfer();
+            this.cameraFilesTransferHandler.Transfer(camera, cameraEntity);
 
             this._logger.success(String.Format("Camera with badge id {0} was inserted successfully", camera.BadgeId));
             this.OnCameraConnectedEvent?.Invoke(this, new CameraConnectedEvent(camera));
@@ -103,7 +101,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         {
             try
             {
-                USBCameraDevice camera = Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Name == e.Drive?.Name);
+                USBCameraDevice camera = Globals.CAMERAS_LIST.GetByDrive(e.Drive?.Name);
                 if (camera == null) {
                     return;
                 }
@@ -130,19 +128,21 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 
         private bool isValidCameraDevice(string cameraVolumeLabel)
         {
-            if (cameraVolumeLabel.Length > 0) cameraVolumeLabel = cameraVolumeLabel[0].ToString();
+            if (cameraVolumeLabel.Length > 0){
+                cameraVolumeLabel = cameraVolumeLabel[0].ToString();
+            }
+
             return File.Exists(cameraVolumeLabel + @":\\ID.txt");
         }
 
         private bool isCameraAlreadyAdded(USBCameraDevice camera)
         {
-            return Globals.CAMERAS_LIST.Find((USBCameraDevice device) => device.Drive == camera.Drive) != null;
+            return Globals.CAMERAS_LIST.GetByDrive(camera.Drive.Name) != null;
         }
 
         private void onExceptionOccured(object sender, Exception exception)
         {
             this._logger.error(exception.Message, exception.ToString());
         }
-
     }
 }
