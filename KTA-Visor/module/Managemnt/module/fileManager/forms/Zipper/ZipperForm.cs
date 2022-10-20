@@ -18,11 +18,13 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
     public partial class ZipperForm : MetroForm
     {
 
-        private readonly List<string> _filesToZip;
         private readonly BackgroundWorker _zipperBackgroundWorker;
         private ZipPasswordForm _passwordForm;
+        private int _progressIterator = 0;
         private string _zipPassword = "";
         private string _destinationFilePath;
+        private  List<string> _filesToZip;
+        
         public ZipperForm(List<string> filesToZip)
         {
             InitializeComponent();
@@ -95,26 +97,33 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
 
                 this.combineFiles(zip, sender as BackgroundWorker);
 
-                zip.Save(this._destinationFilePath);
+                new Thread(() => zip.Save(this._destinationFilePath)).Start();
+                this.Invoke((MethodInvoker)delegate {
+                    this.metroProgressBar.Value = (100 * (int)this._progressIterator) / this._filesToZip.Count;
+                });
             }
 
             MetroMessageBox.Show(this, "Proces kopiowania został zakonczony", "Kopiowanie nagrań");
-            this.onClose();
+            this.Invoke((MethodInvoker)delegate
+            {
+                this.Close();
+            });
         }
 
         private void combineFiles(ZipFile zip, BackgroundWorker worker)
         {
-            ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 10 };
-            Parallel.ForEach(this._filesToZip, async (file, state, index) =>
+         
+            this._filesToZip = this._filesToZip.Distinct().ToList();
+            this._filesToZip.ForEach(file =>
             {
                 if (File.Exists(file))
                 {
                     zip.AddFile(file, @"");
-
-                    this.Invoke((MethodInvoker)delegate{
+                    this._progressIterator++;
+                    this.Invoke((MethodInvoker)delegate {
                         this.CurrentFile = new FileInfo(file).Name;
-                        this.metroProgressBar.Value = (100 * (int)index) / this._filesToZip.Count;
                     });
+                    Thread.Sleep(100);
                 }
                 else
                 {
@@ -122,13 +131,6 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
                         MessageBox.Show(String.Format("Scieżka do pliku {0} nie została odnależiona", file));
                     });
                 }
-            });
-        }
- 
-        private void onClose(object sender = null, EventArgs e = null)
-        {
-            this.Invoke((MethodInvoker)delegate{
-                this.Close();
             });
         }
     }
