@@ -50,5 +50,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             }
         }
          
+        public void Blink(int interval = 10)
+        {
+
+        }
     }
 }

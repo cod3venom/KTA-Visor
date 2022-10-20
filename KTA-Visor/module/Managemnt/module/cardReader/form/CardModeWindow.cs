@@ -102,7 +102,7 @@ namespace KTA_Visor.module.Managemnt.module.cardReader.form
 
         void IModuleInterface.ShowDialog()
         {
-             
+            this.ShowDialog();
         }
     }
 }

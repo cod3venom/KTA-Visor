@@ -44,6 +44,14 @@ namespace Falcon_Protocol.interop
 			public byte[] reserved;
 		};
 
+		public enum S_DEV_CMD_CUSTOMIZED
+		{
+			CUSTOMIZED_CMD_RED_LED_CTRL = 0x40,
+			CUSTOMIZED_CMD_GREEN_LED_CTRL = 0x41,
+			CUSTOMIZED_CMD_END = 0x4f,
+		}
+
+
 		// BWC Info
 		public struct ZFY_INFO
 		{
@@ -125,17 +133,29 @@ namespace Falcon_Protocol.interop
 		/// <returns></returns>
 		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "ReadDeviceResolution", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ReadDeviceResolution(int[] Width, int[] Height, ref byte[] sPwd, int[] iRet);
-    
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="cmd"></param>
+		/// <param name="cmd_params"></param>
+		/// <param name="iRet"></param>
+		/// <param name="usb_index"></param>
+		/// <returns></returns>
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Eylog_Customized_Command")]
+		public static extern int Eylog_Customized_Command(char cmd, byte[] cmd_params, int[] iRet, int usb_index);
+
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="Battery"></param>
 		/// <param name="sPwd"></param>
 		/// <param name="iRet"></param>
+		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "ReadDeviceBatteryDumpEnergy", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int ReadDeviceBatteryDumpEnergy(ref int Battery, ref byte[] sPwd, int[] iRet);
-
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ReadDeviceBatteryDumpEnergy_ByIndex")]
+		public static extern int ReadDeviceBatteryDumpEnergy_ByIndex(int[] Battery, byte[] sPwd, int[] iRet, int usb_index);
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -197,7 +217,6 @@ namespace Falcon_Protocol.interop
 		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo")]
 		public static extern int WriteZFYInfo(ref ZFY_INFO info, byte[] sPwd, int[] iRet);
 
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -227,7 +246,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="IRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Eylog_FormatTFCard_ByIndex")]
 		public static extern int Eylog_FormatTFCard_ByIndex(byte[] sPwd, int[] IRet, int usb_index);
 
 		/// <summary>

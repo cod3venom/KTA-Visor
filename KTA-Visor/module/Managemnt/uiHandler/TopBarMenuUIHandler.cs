@@ -75,6 +75,7 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             this.managementForm.Modules.Find(
                 (IModuleInterface module) => module.GetModuleName() == CardReaderModule.ModuleName
             ).ShowDialog();
+             
         }
 
         private void onVersionMenuItemClick(object sender, EventArgs e)

@@ -20,12 +20,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
 
         private readonly CameraDeviceSettingsService cameraDeviceSettingsService;
 
-        private readonly CameraPowerService cameraPowerService;
+        private readonly service.CameraCardService cameraPowerService;
         public CameraController()
         {
             this.cameraService = new CameraService();
             this.cameraDeviceSettingsService = new CameraDeviceSettingsService();
-            this.cameraPowerService = new CameraPowerService();
+            this.cameraPowerService = new service.CameraCardService();
         }
 
         public void Watch(Request request)

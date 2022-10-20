@@ -35,7 +35,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         public void SaveSettings()
         {
 
-            this._selectedCameraDevice = this.findCorrectCamera();
+            this._selectedCameraDevice = Globals.CAMERAS_LIST.GetByDrive(this._cameraEntity.driveName);
             if (this._selectedCameraDevice == null){
                 return;
             }
@@ -43,12 +43,11 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             this._falconProtocol.Disconnect();
 
             ZFY_INFO identifiers = this.configureIdentificators();
-            Thread.Sleep(10000);
+            
+            Thread.Sleep(2500);
+
             MENU_CONFIG tweaks = this.configureTweaks();
             this.configureLocalIdentificators();
-
-            Globals.ALLOW_FS_MOUNTING = true;
-            Globals.Relay.turnOnAll();
         }
         
         
@@ -94,36 +93,5 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             this._selectedCameraDevice.Settings.BadgeId = this._cameraEntity.badgeId;
             this._selectedCameraDevice.SaveSettings();
         }
-        private USBCameraDevice findCorrectCamera()
-        {
-            if (!Globals.IS_ALL_COPYING_PROCESS_ARE_END){
-                return null;
-            }
-
-            USBCameraDevice device = Globals.CAMERAS_LIST.ToList().Find(
-                (USBCameraDevice dev) => dev.Drive.Name.Contains(this._cameraEntity.driveName)
-            );
-
-            if (device == null){
-                return null;
-            }
-
-            Globals.ALLOW_FS_MOUNTING = false;
-            int portNumber = Globals.Relay.FindPortByCameraCustomId(device.ID);
-
-            if (portNumber == -1){
-                Globals.Logger.error(String.Format("Unable to find selected cameras port number: returned {0}", portNumber.ToString()));
-                Globals.Relay.turnOnAll();
-                return null;
-            }
-            Globals.Relay.turnOffAll();
-
-            Thread.Sleep(8000);
-            Globals.Relay.turnOnByPort(portNumber);
-
-            Thread.Sleep(8000);
-            return device;
-        }
-
     }
 }

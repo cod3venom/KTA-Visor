@@ -23,8 +23,8 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
         private int _progressIterator = 0;
         private string _zipPassword = "";
         private string _destinationFilePath;
-        private  List<string> _filesToZip;
-        
+        private List<string> _filesToZip;
+        private bool _isHandleCreated = false;
         public ZipperForm(List<string> filesToZip)
         {
             InitializeComponent();
@@ -48,7 +48,12 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
             set { this.currentFileLbl.Text = value; }
             get { return this.currentFileLbl.Text; }
         }
- 
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            this._isHandleCreated = true;
+        }
 
         private void FilesCopyingForm_Load(object sender, EventArgs e)
         {
@@ -70,8 +75,8 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
             this._passwordForm.OnPasswordAreOk += onPasswordsAreOk;
             this._passwordForm.ShowDialog();
         }
- 
 
+       
         private void onPasswordsDoesntMatch(object sender, EventArgs e)
         {
             MetroMessageBox.Show(this, "Wprowadziłeś błędne hasła", "Hasło");
@@ -104,10 +109,7 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
             }
 
             MetroMessageBox.Show(this, "Proces kopiowania został zakonczony", "Kopiowanie nagrań");
-            this.Invoke((MethodInvoker)delegate
-            {
-                this.Close();
-            });
+            this.onClose(this, EventArgs.Empty);
         }
 
         private void combineFiles(ZipFile zip, BackgroundWorker worker)
@@ -133,5 +135,17 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
                 }
             });
         }
+
+        private void onClose(object sender, EventArgs e)
+        {
+            if (!this._isHandleCreated){
+                return;
+            }
+            this.Invoke(new MethodInvoker(delegate { 
+                this.Close();
+            }));
+
+        }
+
     }
 }

@@ -168,7 +168,7 @@ namespace FastTests
 
                 }
 
-
+                Console.WriteLine("Battery :" + bat[0].ToString());
                 Thread.Sleep(1000);
             }
 

@@ -192,6 +192,39 @@ namespace Falcon_Protocol.wrapper
         }
 
 
+        public void Blink(int usbIndex = 0, int interval = 10)
+        {
+            int[] iret = new int[1];
+            byte[] cmd_params = new byte[1];
+            FalconProtocolInteropService.UnInit_Device(iret);
+            for (int i = 0; i < interval; i++)
+            {
+                for (int j = 0; j < interval; j++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        cmd_params[0] = 0;
+                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_RED_LED_CTRL, cmd_params, iret, usbIndex);
+                        cmd_params[0] = 1;
+                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, usbIndex);
+                    }
+                    else
+                    {
+                        cmd_params[0] = 1;
+                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_RED_LED_CTRL, cmd_params, iret, usbIndex);
+                        cmd_params[0] = 0;
+                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, usbIndex);
+                    }
+                }
+            }
+        }
+
+
+        public int GetBatteryLevel()
+        {
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
