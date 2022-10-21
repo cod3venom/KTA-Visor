@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="abstraction\ReporterAbstraction.cs" />
     <Compile Include="enums\OutputFileTypeEnum.cs" />
     <Compile Include="exception\TemplateNotFoundException.cs" />
     <Compile Include="interfaces\IReporter.cs" />

@@ -1,6 +1,7 @@
 ﻿using KTA_REPORTER.enums;
 using KTA_REPORTER.exception;
 using KTA_REPORTER.interfaces;
+using KTA_REPORTER.reporters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,37 +13,38 @@ namespace KTA_REPORTER
 {
     public class Reporter
     {
-        private string _content;
+        private string _template;
 
         public Reporter()
         {
-            this._content = "";
+            this._template = "";
         }
+ 
 
-        public void Load(string template = "")
+        public void Assign(string template, Dictionary<string, string> args)
         {
-            if (!File.Exists(template)){
-                throw new TemplateNotFoundException("Provided template not found");
-            }
+            this._template = template;
 
-            this._content = File.ReadAllText(template);
-        }
-
-        public void Assign(Dictionary<string, string> args)
-        {
-            foreach(KeyValuePair<string, string> arg in args)
+            foreach (KeyValuePair<string, string> arg in args)
             {
-                if (!this._content.Contains(arg.Key)){
+                if (!this._template.Contains(arg.Key)){
                     continue;
                 }
 
-                this._content.Replace(arg.Key, arg.Value);
+                this._template = this._template.Replace(arg.Key, arg.Value);
             }
         }
 
-        public void Report(OutputFileTypeEnum type)
+        public void Report(string path, OutputFileTypeEnum type)
         {
-            throw new NotImplementedException();
+            switch(type)
+            {
+                case OutputFileTypeEnum.HTML:
+                    new HTMLReporter().Report(this._template, path);
+                    break;
+                case OutputFileTypeEnum.PDF:
+                    break;
+            }
         }
  
     }

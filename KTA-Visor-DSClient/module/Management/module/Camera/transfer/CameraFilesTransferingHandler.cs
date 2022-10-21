@@ -1,7 +1,9 @@
 ﻿using KTA_Visor_DSClient.kernel.helper;
 using KTA_Visor_DSClient.kernel.sharedKernel.ThreadPool;
 using KTA_Visor_DSClient.module.Management.module.Camera.interfaces;
+using KTA_Visor_DSClient.module.Management.module.Camera.reports.TransferedFiles;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
+using KTA_Visor_DSClient.module.Management.module.Camera.transfer.events;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.entity;
 using KTAVisorAPISDK.module.camera.service;
@@ -23,22 +25,23 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
         public event EventHandler<Exception> OnTransferingExceptionOccured;
 
         private event EventHandler<Exception> _onDiskIsFull;
-        private event EventHandler<List<FileInfo>> _onCopyingFinished;
-        private event EventHandler<List<FileInfo>> _onFilesAreNotCopied;
+        private event EventHandler<OnFilesTransferingFinishedEvent> _onCopyingFinished;
 
         private USBCameraDevice _cameraDevice;
 
         private readonly FileManagerService _fileManagerService;
         private readonly string _destination;
         private readonly KTALogger.Logger _logger;
+        private readonly TransferedFilesReport _transferedFilesReport;
         private bool _canCopy = true;
         private List<FileInfo> _filesToBeCopied;
 
         public CameraFilesTransferingHandler(string destination, KTALogger.Logger logger)
         {
             this._destination = destination;
-            this._fileManagerService = new FileManagerService();
             this._logger = logger;
+            this._fileManagerService = new FileManagerService();
+            this._transferedFilesReport = new TransferedFilesReport(this._logger);
             this.hookEvents();
         }
 
@@ -47,7 +50,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
         {
             this._onDiskIsFull += onDiskIsFull;
             this._onCopyingFinished += onCopyingFinished;
-            this._onFilesAreNotCopied += onFilesAreNotCopied;
         }
 
  
@@ -81,7 +83,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
 
             this._filesToBeCopied = files;
 
-            List<FileInfo> totalCopiedFiles = new List<FileInfo>();
+            List<FileInfo> copiedFiles = new List<FileInfo>();
+            List<FileInfo> duplicateFiles = new List<FileInfo>();
+            List<FileInfo> failedFiles = new List<FileInfo>();
+
             ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 10 };
             Parallel.ForEach(this._filesToBeCopied, options, fileToBeCopied => {
 
@@ -99,16 +104,22 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
                         this.copyFile(fileToBeCopied, destinationFile);
 
                         if (File.Exists(destinationFile.FullName)) {
-                            totalCopiedFiles.Add(destinationFile);
+                            copiedFiles.Add(fileToBeCopied);
                             this.addTransferedFileToBackend(fileToBeCopied, destinationFile);
 
                             //file.Delete();
                         }
                     }
+                    else
+                    {
+                        duplicateFiles.Add(fileToBeCopied);
+                    }
 
                 }
                 catch(IOException exception)
                 {
+                    failedFiles.Add(fileToBeCopied);
+
                     if (this.isDiskFull(exception)){
                         this._canCopy = false;
                         this._onDiskIsFull?.Invoke(this, exception);
@@ -117,12 +128,24 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
                     }
                     Globals.IS_ALL_COPYING_PROCESS_ARE_END = true;
                 }
-
             });
 
-            this._onCopyingFinished(this, totalCopiedFiles);
+            this._onCopyingFinished(this, new OnFilesTransferingFinishedEvent(
+                this._cameraDevice,
+                Globals.STATION, 
+                copiedFiles, 
+                duplicateFiles,
+                failedFiles
+            ));
         }
 
+        /// <summary>
+        /// Copy file based on FileStream
+        /// Class, which is much faster than
+        /// File.Copy method
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="destinationFile"></param>
         private void copyFile(FileInfo file, FileInfo destinationFile)
         {
             int bufferSize = 1024 * 1024;
@@ -157,6 +180,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
             ));
         }
 
+        /// <summary>
+        /// Current method checks if there is enought
+        /// space on disk to copy file
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
         private bool isDiskFull(Exception ex)
         {
             const int ERROR_HANDLE_DISK_FULL = 0x27;
@@ -166,41 +195,11 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
             return win32ErrorCode == ERROR_HANDLE_DISK_FULL || win32ErrorCode == ERROR_DISK_FULL;
         }
 
-        private void onFilesAreNotCopied(object sender, List<FileInfo> e)
+
+
+        private void onCopyingFinished(object sender, OnFilesTransferingFinishedEvent e)
         {
-            StringBuilder files = new StringBuilder();
-
-            foreach (FileInfo copiedFiles in e)
-            {
-                files.Append(copiedFiles.FullName)
-                   .Append(Environment.NewLine);
-            }
-
-
-            StringBuilder log = new StringBuilder()
-                .Append(String.Format("Unabled copied {0} of {1} files", e.Count.ToString(), this._filesToBeCopied.Count.ToString()))
-                .Append(files.ToString());
-
-            this._logger.report(log.ToString(), "warn");
-        }
-
-        private void onCopyingFinished(object sender, List<FileInfo> e)
-        {
-            StringBuilder files = new StringBuilder();
-
-            foreach (FileInfo copiedFiles in e)
-            {
-                files.Append(copiedFiles.FullName)
-                   .Append(Environment.NewLine);
-            }
-
-
-            StringBuilder log = new StringBuilder()
-                .Append(String.Format("Transfering procedure has been finished for: {0}", this._cameraDevice?.Drive?.Name))
-                .Append(files.ToString())
-                .Append(String.Format("Successfully copied {0} of {1} files", e.Count.ToString(), this._filesToBeCopied.Count.ToString()));
-
-            this._logger.report(log.ToString(), "success");
+            this._transferedFilesReport.Report(e);
         }
 
         private void onDiskIsFull(object sender, Exception e)
