@@ -34,9 +34,10 @@ namespace KTA_Visor.module.Management.view
 {
     public partial class Management : MetroForm
     {
+        public event EventHandler<EventArgs> OnClose;
 
         private List<IUIHandlerInterface> UIHandlers;
-
+ 
         public Management(UserDataAbstraction user)
         {
             InitializeComponent();
@@ -44,14 +45,18 @@ namespace KTA_Visor.module.Management.view
             this.User = user;
             this.Settings = new Settings();
             this.ClientsManagerModule = new ClientsManagerModule();
-            
+
+            this.StationModule = new StationModule();
+            this.FileManagerModule = new FileManagerModule();
+            this.LogsModule = new LogsModule();
+            this.CardReaderModule = new CardReaderModule();
             this.Modules = new ModulesManager()
             {
                 this.ClientsManagerModule,
-                new StationModule(),
-                new FileManagerModule(),
-                new LogsModule(),
-                new CardReaderModule()
+                this.StationModule,
+                this.FileManagerModule,
+                this.LogsModule,
+                this.CardReaderModule
             };
 
             this.FormBorderStyle = FormBorderStyle.None;
@@ -71,36 +76,45 @@ namespace KTA_Visor.module.Management.view
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            
-            // custom draw the top border
             using (Brush b = new SolidBrush(Color.DarkCyan))
             {
-                int borderWidth = 5; // MetroFramework source code
+                int borderWidth = 5; 
                 e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
             }
         }
-
         private async void StationsView_Load(object sender, EventArgs e)
         {
             await Task.Delay(500);
+            this.hookEvents();
             this.initialize();
+        }
+
+        private void hookEvents()
+        {
+            this.FormClosing += onClosing;
+        }
+
+        private void onClosing(object sender, FormClosingEventArgs e)
+        {
+            base.OnClosing(e);
+            Globals.Server.Stop();
+            this.OnClose?.Invoke(this, e);
         }
 
         private void initialize()
         {
             this.UIHandlers.ForEach((IUIHandlerInterface handler) => handler.Handle());
         }
-
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            Globals.Server.Stop();
-            base.OnClosing(e);
-        }
-
+ 
         public UserDataAbstraction User { get; set; }
         public Settings Settings { get; set; }
         public ModulesManager Modules { get; set; }
+
+
+        public StationModule StationModule { get; set; }
+        public FileManagerModule FileManagerModule { get; set; }
+        public LogsModule LogsModule { get; set; }
+        public CardReaderModule CardReaderModule { get; set; }
         public ClientsManagerModule ClientsManagerModule { get; set; }
 
         public UserProfileCard SideBar { get { return this.sideBar; } }

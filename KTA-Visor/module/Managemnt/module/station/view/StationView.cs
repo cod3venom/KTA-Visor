@@ -29,15 +29,13 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         };
 
         private readonly StationController stationController;
-        private readonly StationsUIHandler stationsUIHandler;
-        private readonly CamerasUIHandler camerasUIHandler;
         
         public StationView()
         {
             InitializeComponent();
             this.stationController = new StationController(this);
-            this.stationsUIHandler = new StationsUIHandler(this);
-            this.camerasUIHandler = new CamerasUIHandler(this);
+            this.StationsUIHandler = new StationsUIHandler(this);
+            this.CamerasUIHandler= new CamerasUIHandler(this);
 
             this.table.AllowAdd = false;
             this.table.AllowEdit = false;
@@ -75,7 +73,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
 
         private void fetchStations()
         {
-            this.stationsUIHandler.Load();
+            this.StationsUIHandler.Load();
         }
  
         private void onRefreshTableData(object sender, EventArgs e)
@@ -85,7 +83,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
 
         private void fetchStationCameras()
         {
-            this.camerasUIHandler.Load(this.StationId);
+            this.CamerasUIHandler.Load(this.StationId);
         }
 
         private void onCellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -107,6 +105,8 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             }
         }
 
+        public StationsUIHandler StationsUIHandler { get; set; }
+        public CamerasUIHandler CamerasUIHandler{ get; set; }
         public string StationId
         {
             get
@@ -120,7 +120,6 @@ namespace KTA_Visor.module.Managemnt.module.station.view
                 return this.table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
             }
         }
-
         public string StationIp
         {
             get

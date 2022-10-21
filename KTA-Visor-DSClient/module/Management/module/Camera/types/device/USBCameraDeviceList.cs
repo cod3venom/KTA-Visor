@@ -1,4 +1,5 @@
-﻿using KTA_Visor_DSClient.module.Management.module.Camera.types.device.events;
+﻿using Falcon_Protocol;
+using KTA_Visor_DSClient.module.Management.module.Camera.types.device.events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,23 +13,25 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
     {
         public event EventHandler<CameraAddedToTheMemoryEvent> OnCameraAddedInMemory;
         public event EventHandler<CameraRemovedFromTheMemoryEvent> OnCameraRemovedFromMemory;
-            
-        private int _index;
 
+
+        private readonly FalconProtocol _falconProtocol;
+        
         public USBCameraDeviceList(): base()
         {
-            this._index = -1;
+            this._falconProtocol = new FalconProtocol();
         }
 
         public void Push(USBCameraDevice camera)
         {
             USBCameraDevice existedCamera = this.GetByDrive(camera.Drive.Name);
             if (existedCamera != null){
-                return;
+                this.Remove(existedCamera);
             }
-            this._index++;
 
-            camera.Index = this._index;
+            this._falconProtocol.Connect();
+
+            camera.Index = this._falconProtocol.GetTotalConnectedDevices()[0];
             camera.Active = true;
 
             this.Add(camera);
@@ -47,6 +50,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             removingThread.IsBackground = true;
             removingThread.Start();   
         }
+
+        public USBCameraDevice GetByCardID(string cardId)
+        {
+            return this.Find((USBCameraDevice device) => device.Name == cardId);
+        }
+
 
         public USBCameraDevice GetByDrive(string driveName)
         {

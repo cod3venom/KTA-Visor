@@ -148,9 +148,10 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         private void onRecordingResolutionChanged(object sender, EventArgs e)
         {
             string selectedValue = this.recordingResolutionCombo.SelectedValue.ToString();
-
+            int optionIndex = 0;
             if (selectedValue == "1280X720P25"){
                 selectedValue = "1280X720P20";
+                optionIndex = 7;
             }
             if (!selectedValue.Contains("Resolution")){
                 selectedValue = "Resolution" + selectedValue;
@@ -172,8 +173,8 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
 
         private void onCodecChanged(object sender, EventArgs e)
         {
-            string selectedValue = this.recordingQualityCombo.SelectedValue.ToString();
-            this.Codec = (int)(Qualitys)Enum.Parse(typeof(Qualitys), selectedValue);
+            var selectedValue = this.recordingCodecFormatCombo.SelectedValue.ToString();
+            this.Codec = (int)(CodecFormats)Enum.Parse(typeof(CodecFormats), selectedValue);
         }
 
         private void onSaveBtnClicked(object sender, EventArgs e)

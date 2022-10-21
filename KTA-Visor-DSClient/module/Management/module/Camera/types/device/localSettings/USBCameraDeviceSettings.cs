@@ -37,7 +37,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                     File.WriteAllText(this.settingsFilePath, "");
                     this.Settings.ID = RandomData.RandomString(15);
                     this.Settings.BadgeId = RandomData.RandomString(15);
-                    this.Settings.IsSelected = false;
+                    this.Settings.CardId = "0000000000";
 
                     this.SaveSettings();
                 }

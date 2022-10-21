@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KTA_Visor_UI.component.custom.LoggerView
@@ -44,6 +38,10 @@ namespace KTA_Visor_UI.component.custom.LoggerView
 
         private void appendLog(string message, Color color)
         {
+            if (this.richTextBox.IsDisposed)
+            {
+                this.richTextBox = new RichTextBox();
+            }
 
             if (color == null)
             {

@@ -2,20 +2,16 @@
 using KTAVisorAPISDK.module.auth.dto.request;
 using KTAVisorAPISDK.module.auth.entity;
 using KTAVisorAPISDK.module.auth.service;
-using KTAVisorAPISDK.module.user.entity;
-using KTAVisorAPISDK.module.user.service;
-using KTAVisorAPISDK.Shared.Exceptions;
-using MetroFramework.Forms;
 using System;
 using System.Drawing;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
 {
     public partial class SignInView : Form
     {
+        public event EventHandler<EventArgs> OnClose;
+
         private readonly AuthService authService;
         public SignInView()
         {
@@ -38,14 +34,12 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
 
         private void initialize()
         {
-          
             this.hookEvents();
             this.centerisePanel();
         }
 
         private void hookEvents()
         {
-
             this.signInBtn.Click += onSignIn;
             this.signUpLink.Click += onShowSignUpView;
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
@@ -57,11 +51,11 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
         }
        
         private void centerisePanel()
-        {
-            
+        { 
             this.signInPanel.Location = new Point(
               this.ClientSize.Width / 2 - this.signInPanel.Size.Width / 2,
-              this.ClientSize.Height / 2 - this.signInPanel.Size.Height / 2);
+              this.ClientSize.Height / 2 - this.signInPanel.Size.Height / 2
+            );
         }
 
 
@@ -78,8 +72,10 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
                     return;
                 }
 
-                new Management.view.Management(signInEntity).Show();
-                this.Close();
+                this.Hide();
+                Form form = new Management.view.Management(signInEntity);
+                form.FormClosing += onClosing;
+                form.ShowDialog();
 
             }
             catch (Exception ex)
@@ -88,16 +84,19 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
             }
         }
  
- 
         private void onShowSignUpView(object sender, EventArgs e)
         {
             this.Hide();
-            new SignUpView.SignUpView().Show();
+            Form form = new SignUpView.SignUpView();
+            form.FormClosing += onClosing;
+            form.ShowDialog();
         }
 
-        private void onClose(object sender, EventArgs e)
+
+        private void onClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            this.OnClose?.Invoke(this, e);
         }
+ 
     }
 }

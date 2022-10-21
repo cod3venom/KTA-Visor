@@ -152,26 +152,29 @@
     <Compile Include="module\Management\bootloader\handlers\BackendInitHandler.cs" />
     <Compile Include="module\Management\bootloader\interfaces\IBootLoaderHandler.cs" />
     <Compile Include="module\Management\EntryPoint.cs" />
-    <Compile Include="module\Management\module\Camera\CameraDeviceWatcher.cs" />
-    <Compile Include="module\Management\module\Camera\command\memory\CamerasGlobalMemoryHandler.cs" />
-    <Compile Include="module\Management\module\Camera\command\memory\RemoveAllCamerasFromTheGlobalMemory.cs" />
-    <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
-    <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
-    <Compile Include="module\Management\module\Camera\handler\CameraBackendSyncHandler.cs" />
-    <Compile Include="module\Management\module\Camera\transfer\CameraFilesTransferingHandler.cs" />
-    <Compile Include="module\Management\module\Camera\interfaces\ICameraHandler.cs" />
-    <Compile Include="module\Management\module\Camera\observer\CamerasListObserver.cs" />
-    <Compile Include="module\Management\module\Camera\service\CameraCardService.cs" />
-    <Compile Include="module\Management\module\Camera\types\device\events\CameraRemovedFromTheMemoryEvent.cs" />
-    <Compile Include="module\Management\module\Camera\types\device\events\CameraAddedToTheMemoryEvent.cs" />
-    <Compile Include="module\Management\module\Camera\types\device\localSettings\LocalSettingsTObject.cs" />
-    <Compile Include="module\Management\module\Camera\types\device\localSettings\USBCameraDeviceSettings.cs" />
-    <Compile Include="module\Management\module\Camera\types\device\USBCameraDevice.cs" />
-    <Compile Include="module\Management\module\Camera\events\CameraConnectedEvent.cs" />
-    <Compile Include="module\Management\module\Camera\exception\DeviceIsNotFalconCameraException.cs" />
-    <Compile Include="module\Management\module\Camera\exception\CameraUSBDeviceFileNotFoundException.cs" />
-    <Compile Include="module\Management\module\Camera\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
-    <Compile Include="module\Management\module\Camera\types\device\USBCameraDeviceList.cs" />
+    <Compile Include="module\Management\module\camera\CameraDeviceWatcher.cs" />
+    <Compile Include="module\Management\module\camera\command\memory\CamerasGlobalMemoryHandler.cs" />
+    <Compile Include="module\Management\module\camera\command\memory\RemoveAllCamerasFromTheGlobalMemory.cs" />
+    <Compile Include="module\Management\module\camera\events\CameraDisconnectedEvent.cs" />
+    <Compile Include="module\Management\module\camera\factory\USBCameraDeviceFactory.cs" />
+    <Compile Include="module\Management\module\camera\handler\CameraBackendSyncHandler.cs" />
+    <Compile Include="module\Management\module\Reporter\interfaces\IReporterInterface.cs" />
+    <Compile Include="module\Management\module\Reporter\reporters\AutoCopyReport.cs" />
+    <Compile Include="module\Management\module\Reporter\Reporter.cs" />
+    <Compile Include="module\Management\module\camera\transfer\CameraFilesTransferingHandler.cs" />
+    <Compile Include="module\Management\module\camera\interfaces\ICameraHandler.cs" />
+    <Compile Include="module\Management\module\camera\observer\CamerasListObserver.cs" />
+    <Compile Include="module\Management\module\camera\service\CameraCardService.cs" />
+    <Compile Include="module\Management\module\camera\types\device\events\CameraRemovedFromTheMemoryEvent.cs" />
+    <Compile Include="module\Management\module\camera\types\device\events\CameraAddedToTheMemoryEvent.cs" />
+    <Compile Include="module\Management\module\camera\types\device\localSettings\LocalSettingsTObject.cs" />
+    <Compile Include="module\Management\module\camera\types\device\localSettings\USBCameraDeviceSettings.cs" />
+    <Compile Include="module\Management\module\camera\types\device\USBCameraDevice.cs" />
+    <Compile Include="module\Management\module\camera\events\CameraConnectedEvent.cs" />
+    <Compile Include="module\Management\module\camera\exception\DeviceIsNotFalconCameraException.cs" />
+    <Compile Include="module\Management\module\camera\exception\CameraUSBDeviceFileNotFoundException.cs" />
+    <Compile Include="module\Management\module\camera\exception\CameraUSBDeviceDirectoryNotFoundException.cs" />
+    <Compile Include="module\Management\module\camera\types\device\USBCameraDeviceList.cs" />
     <Compile Include="kernel\generator\RandomData.cs" />
     <Compile Include="kernel\Hardware\Hardware.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\USBDeviceRelay.cs" />
@@ -189,9 +192,9 @@
     <Compile Include="module\Management\module\clientTunnel\ClientTunnel.cs" />
     <Compile Include="module\Management\module\clientTunnel\events\OnRequestReceivedInTunnelEvent.cs" />
     <Compile Include="module\Management\events\OnExceptionOccuredEvent.cs" />
-    <Compile Include="module\Management\module\Camera\command\filesystem\MergeCopiedVideosIntoOneCommand.cs" />
-    <Compile Include="module\Management\module\Camera\controller\CameraController.cs" />
-    <Compile Include="module\Management\module\Camera\service\CameraDeviceSettingsService.cs" />
+    <Compile Include="module\Management\module\camera\command\filesystem\MergeCopiedVideosIntoOneCommand.cs" />
+    <Compile Include="module\Management\module\camera\controller\CameraController.cs" />
+    <Compile Include="module\Management\module\camera\service\CameraDeviceSettingsService.cs" />
     <Compile Include="module\Management\module\PowerSupply\PowerSupplyInitializer.cs" />
     <Compile Include="module\Management\module\PowerSupply\PowerSupplyWatcher.cs" />
     <Compile Include="module\Management\module\PowerSupply\controller\PowerSupplyController.cs" />
@@ -207,13 +210,13 @@
     <Compile Include="module\Management\view\SettingsManager.Designer.cs">
       <DependentUpon>SettingsManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="module\Management\module\Camera\command\filesystem\CopyCameraFilesToNetworkStorageCommand.cs" />
-    <Compile Include="module\Management\module\Camera\consts\CameraSettingsConsts.cs" />
-    <Compile Include="module\Management\module\Camera\dto\CopiedCameraFileTObject.cs" />
-    <Compile Include="module\Management\module\Camera\dto\GetCameraFilesRequestTObject.cs" />
-    <Compile Include="module\Management\module\Camera\dto\GetSelectedCameraFilesRequestTObject.cs" />
-    <Compile Include="module\Management\module\Camera\flags\WMEvents.cs" />
-    <Compile Include="module\Management\module\Camera\flags\WMQuery.cs" />
+    <Compile Include="module\Management\module\camera\command\filesystem\CopyCameraFilesToNetworkStorageCommand.cs" />
+    <Compile Include="module\Management\module\camera\consts\CameraSettingsConsts.cs" />
+    <Compile Include="module\Management\module\camera\dto\CopiedCameraFileTObject.cs" />
+    <Compile Include="module\Management\module\camera\dto\GetCameraFilesRequestTObject.cs" />
+    <Compile Include="module\Management\module\camera\dto\GetSelectedCameraFilesRequestTObject.cs" />
+    <Compile Include="module\Management\module\camera\flags\WMEvents.cs" />
+    <Compile Include="module\Management\module\camera\flags\WMQuery.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnCheckStateEvent.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnTurnOffPowerEvent.cs" />
     <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnTurnOnPowerEvent.cs" />
@@ -244,7 +247,7 @@
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="log4net.config" />
-    <None Include="module\Management\module\Camera\types\device\localSettings\LocalSettings.json" />
+    <None Include="module\Management\module\camera\types\device\localSettings\LocalSettings.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -266,7 +269,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="components\" />
-    <Folder Include="module\Management\module\Camera\types\device\interfaces\" />
+    <Folder Include="module\Management\module\camera\types\device\interfaces\" />
+    <Folder Include="module\Management\module\Reporter\template\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

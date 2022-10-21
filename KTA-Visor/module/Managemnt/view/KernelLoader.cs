@@ -58,17 +58,19 @@ namespace KTA_Visor.module.Managemnt.view
         private async void onProgressEnd(object sender, EventArgs e)
         {
             this.Hide();
-
+            Form form;
             if (!this.settings.SettingsObj.app.configured)
             {
-                new SettingsEntryPoint().ShowDialog();
+                form = new SettingsEntryPoint();
             }
             else
             {
-                new SignInView().ShowDialog();
+                form = new SignInView();
             }
-        }
 
+            form.FormClosing += onClosing;
+            form.ShowDialog();
+        }
  
         private async Task<HttpClientHelper> initializeKTAVISORAPISDK()
         {
@@ -89,5 +91,13 @@ namespace KTA_Visor.module.Managemnt.view
 
             return Globals.Server;
         }
+
+
+        private void onClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.DoEvents();
+            Environment.Exit(0);
+        }
+
     }
 }

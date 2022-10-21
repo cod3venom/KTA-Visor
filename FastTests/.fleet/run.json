@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "Run FastTest",
+      "type": "dotnet",
+      "projectPath": "FastTests.csproj",
+        "exePath": "bin/Debug/FastTests.exe",
+      "args": []
+    }
+  ]
+}

@@ -34,23 +34,27 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 
         public void SaveSettings()
         {
+            Globals.ALLOW_FS_MOUNTING = false;
+            this.configureLocalIdentificators();
+
+            Globals.Relay.turnOffAll(10);
+            Thread.Sleep(2500);
+            Globals.Relay.turnOnAll(1000);
+
 
             this._selectedCameraDevice = Globals.CAMERAS_LIST.GetByDrive(this._cameraEntity.driveName);
-            if (this._selectedCameraDevice == null){
+            if (this._selectedCameraDevice == null)
+            {
                 return;
             }
 
-            this._falconProtocol.Disconnect();
-
             ZFY_INFO identifiers = this.configureIdentificators();
-            
             Thread.Sleep(2500);
-
             MENU_CONFIG tweaks = this.configureTweaks();
-            this.configureLocalIdentificators();
+            Globals.ALLOW_FS_MOUNTING = true;
         }
-        
-        
+
+
         private ZFY_INFO configureIdentificators()
         {
             this._falconProtocol.Connect();
@@ -91,6 +95,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         {
             this._selectedCameraDevice.Settings.ID = this._cameraEntity.cameraCustomId;
             this._selectedCameraDevice.Settings.BadgeId = this._cameraEntity.badgeId;
+            this._selectedCameraDevice.Settings.CardId = this._cameraEntity.cardId;
+
             this._selectedCameraDevice.SaveSettings();
         }
     }

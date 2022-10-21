@@ -16,22 +16,28 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
     public class StationsUIHandler
     {
 
-        private readonly StationView stationView;
-        private readonly StationService stationService;
+        private readonly StationView _stationView;
+        private readonly StationService _stationService;
 
         public StationsUIHandler(StationView stationView)
         {
-            this.stationView = stationView;
-            this.stationService = new StationService();
+            this._stationView = stationView;
+            this._stationService = new StationService();
             this.hookEvents();
         }
 
         private void hookEvents()
         {
-
+            Globals.Server.OnClientConnected += onStationConnected;
         }
-        
-        public  void Load()
+
+        private void onStationConnected(object sender, events.OnClientConnected e)
+        {
+            this.Load();
+        }
+
+
+        public void Load()
         {
             Thread loadingThread = new Thread(async () =>
             {
@@ -44,6 +50,8 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
                 {
                     this.addToTable(station);
                 });
+
+                this._stationView.CamerasUIHandler.Load(this.StationId);
             });
             loadingThread.IsBackground = true;
             loadingThread.Start();
@@ -51,7 +59,7 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
 
         private async Task<List<StationEntity.Station>> allStations()
         {
-            StationEntity station = await this.stationService.all();
+            StationEntity station = await this._stationService.all();
             if (station.datas == null){
                 return new List<StationEntity.Station>();
             }
@@ -61,18 +69,21 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
 
         private void cleanTable()
         {
-            this.stationView.Table.Invoke((MethodInvoker)delegate
+            if (!this._stationView.IsHandleCreated){
+                return;
+            }
+            this._stationView.Table.Invoke((MethodInvoker)delegate
             {
-                this.stationView.Table.DataGridView.Rows.Clear();
+                this._stationView.Table.DataGridView.Rows.Clear();
             });
         }
 
         private void addToTable(StationEntity.Station station)
         {
-            this.stationView.Table.Invoke((MethodInvoker)delegate
+            this._stationView.Table.Invoke((MethodInvoker)delegate
             {
                 bool active = Globals.Server.Clients.Find((TCPClientTObject stationClient) => stationClient.IpAddress == station.stationIp) != null;
-                this.stationView.Table.DataGridView.Rows.Add(
+                this._stationView.Table.DataGridView.Rows.Add(
                    station?.stationId,
                    station.stationIp,
                    station.stationIp,
@@ -87,14 +98,14 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
         {
             get
             {
-                if (this.stationView.Table.DataGridView.SelectedRows.Count == 0)
+                if (this._stationView.Table.DataGridView.SelectedRows.Count == 0)
                     return "";
 
-                if (this.stationView.Table.DataGridView.SelectedRows[0].Cells[0]?.Value == null)
+                if (this._stationView.Table.DataGridView.SelectedRows[0].Cells[0]?.Value == null)
                     return "";
 
-                return this.stationView.Table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
+                return this._stationView.Table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
             }
         }
-}
+    }
 }

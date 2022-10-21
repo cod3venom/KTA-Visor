@@ -2,9 +2,11 @@
 using Falcon_Protocol.modules;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static Falcon_Protocol.interop.FalconProtocolInteropService;
 
@@ -192,37 +194,54 @@ namespace Falcon_Protocol.wrapper
         }
 
 
-        public void Blink(int usbIndex = 0, int interval = 10)
+        public int[] GetTotalConnectedDevices()
         {
+            int[] devices = new int[1];
+            byte[] idcode = new byte[6];
+            int[] iret = new int[1];
+            FalconProtocolInteropService.Init_Device_UsbTotal(idcode, iret, devices);
+            return devices;
+        }
+
+        public void Blink(int[] usb_totalnum, int interval = 1000)
+        {
+            
             int[] iret = new int[1];
             byte[] cmd_params = new byte[1];
-            FalconProtocolInteropService.UnInit_Device(iret);
-            for (int i = 0; i < interval; i++)
+            int[] bat = new int[1];
+          
+
+
+            for (int i = 0; i < 50; i++)
             {
-                for (int j = 0; j < interval; j++)
+                for (int j = 0; j < usb_totalnum[0]; j++)
                 {
                     if (i % 2 == 0)
                     {
                         cmd_params[0] = 0;
-                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_RED_LED_CTRL, cmd_params, iret, usbIndex);
+                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_RED_LED_CTRL, cmd_params, iret, j);
                         cmd_params[0] = 1;
-                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, usbIndex);
+                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, j);
                     }
                     else
                     {
                         cmd_params[0] = 1;
-                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_RED_LED_CTRL, cmd_params, iret, usbIndex);
+                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_RED_LED_CTRL, cmd_params, iret, j);
                         cmd_params[0] = 0;
-                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, usbIndex);
+                        FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, j);
                     }
+                    FalconProtocolInteropService.ReadDeviceBatteryDumpEnergy_ByIndex(bat, this.getPwd(), iret, j);
+
                 }
+
+                Console.WriteLine("Battery :" + bat[0].ToString());
+                Thread.Sleep(100);
             }
         }
 
-
         public int GetBatteryLevel()
         {
-
+            return 0;
         }
 
         /// <summary>

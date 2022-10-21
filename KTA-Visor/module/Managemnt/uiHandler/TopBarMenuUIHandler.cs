@@ -2,20 +2,10 @@
 using KTA_Visor.module.Managemnt.events;
 using KTA_Visor.module.Managemnt.interfaces;
 using KTA_Visor.module.Managemnt.module.cardReader;
-using KTA_Visor.module.Managemnt.module.cardReader.form;
-using KTA_Visor.module.Managemnt.module.fileManager;
-using KTA_Visor.module.Managemnt.module.logs;
-using KTA_Visor.module.Managemnt.module.station;
 using KTA_Visor.module.Managemnt.sub_window;
-using KTA_Visor.module.Managemnt.view;
 using KTA_Visor.module.Shared.Global;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TCPTunnel.kernel.extensions.router.dto;
+
 
 namespace KTA_Visor.module.Managemnt.uiHandler
 {
@@ -42,8 +32,11 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             this.managementForm.restartTunnelServerMenuItem.Click += onRestartTunnelServerMenuItemClick;
             this.managementForm.cardModeMenuItem.Click += onCardModeClick;
             this.managementForm.versionMenuItem.Click += onVersionMenuItemClick;
+            this.managementForm.aboutUsMenuItem.Click += onAboutUsMenuItemClick;
         }
- 
+
+      
+
         private void onServerStarted(object sender, OnServerStartedEvent e)
         {
             this.managementForm.TunnelIndicator.running(true, "Uruchomiony");
@@ -72,15 +65,21 @@ namespace KTA_Visor.module.Managemnt.uiHandler
 
         private void onCardModeClick(object sender, EventArgs e)
         {
-            this.managementForm.Modules.Find(
-                (IModuleInterface module) => module.GetModuleName() == CardReaderModule.ModuleName
-            ).ShowDialog();
-             
+            if (!this.managementForm.CardReaderModule.IsHandleCreated || this.managementForm.CardReaderModule.IsDisposed)
+            {
+                this.managementForm.CardReaderModule = new CardReaderModule();
+            }
+            this.managementForm.CardReaderModule.ShowDialog();
         }
 
         private void onVersionMenuItemClick(object sender, EventArgs e)
         {
             new VersionWindow().ShowDialog();
+        }
+
+        private void onAboutUsMenuItemClick(object sender, EventArgs e)
+        {
+            new AboutUsWindow().ShowDialog();
         }
     }
 }

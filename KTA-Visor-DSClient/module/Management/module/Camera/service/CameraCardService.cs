@@ -24,12 +24,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 
         public async void Blink(CameraEntity cameraEntity)
         {
-            USBCameraDevice camera = Globals.CAMERAS_LIST.Find(
-                   (device) =>
-                   device.ID == cameraEntity?.data?.cameraCustomId ||
-                   device.BadgeId == cameraEntity?.data?.badgeId ||
-                   device.Index == cameraEntity?.data.index
-               );
+            USBCameraDevice camera = Globals.CAMERAS_LIST.Find( (device) =>
+                   device.CardId == cameraEntity?.data?.cardId
+            );
 
             if (camera == null)
             {
@@ -40,7 +37,16 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
                 return;
             }
 
-            this._falconProtocol.Blink(camera.Index, 100);
+            Globals.ALLOW_FS_MOUNTING = false;
+
+            Globals.Relay.turnOffAll(1);
+            Thread.Sleep(2500);
+            Globals.Relay.turnOnAll(1200);
+            this._falconProtocol.Connect();
+            int[] usb_totalnum = new int[] { camera.Index };
+            this._falconProtocol.Blink(usb_totalnum);
+
+            Globals.ALLOW_FS_MOUNTING = true;
         }
     }
 }

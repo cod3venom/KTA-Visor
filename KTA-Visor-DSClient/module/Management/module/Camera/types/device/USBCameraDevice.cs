@@ -13,12 +13,14 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
     public class USBCameraDevice : USBCameraDeviceSettings
     {
 
+
         public USBCameraDevice(DriveInfo device):base(device)
         {
             this.ID = this.Settings.ID;
             this.Name = device.Name;
             this.Drive = device;
             this.BadgeId = this.Settings.BadgeId;
+            this.CardId = this.Settings.CardId;
         }
 
 
@@ -26,6 +28,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         public int Index { get; set; }
         public string ID { get; set; }
         public string BadgeId { get; set; }
+        public string CardId { get; set; }
         public string Name { get; set; }
         public string DiskUsage 
         {

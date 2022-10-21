@@ -4,6 +4,6 @@
     {
         public string ID { get; set; }
         public string BadgeId { get; set; }
-        public bool IsSelected { get; set; }
+        public string CardId { get; set; }
     }
 }
