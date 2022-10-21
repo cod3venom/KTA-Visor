@@ -34,9 +34,13 @@
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.systemPlikówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyFilesToUSBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.oprogramowanieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.upgradeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.reportsBtn = new MetroFramework.Controls.MetroButton();
             this.contextMenu.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // table
@@ -50,7 +54,7 @@
             this.table.Location = new System.Drawing.Point(0, 0);
             this.table.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.table.Name = "table";
-            this.table.Size = new System.Drawing.Size(1750, 827);
+            this.table.Size = new System.Drawing.Size(1045, 639);
             this.table.TabIndex = 0;
             this.table.Title = "Historia Plików";
             // 
@@ -60,9 +64,9 @@
             this.contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.systemPlikówToolStripMenuItem,
-            this.oprogramowanieToolStripMenuItem});
+            this.reportsMenuItem});
             this.contextMenu.Name = "cameraItemMenuStrip";
-            this.contextMenu.Size = new System.Drawing.Size(200, 56);
+            this.contextMenu.Size = new System.Drawing.Size(183, 56);
             // 
             // systemPlikówToolStripMenuItem
             // 
@@ -70,7 +74,7 @@
             this.copyFilesToUSBMenuItem});
             this.systemPlikówToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("systemPlikówToolStripMenuItem.Image")));
             this.systemPlikówToolStripMenuItem.Name = "systemPlikówToolStripMenuItem";
-            this.systemPlikówToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            this.systemPlikówToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.systemPlikówToolStripMenuItem.Text = "System Plików";
             // 
             // copyFilesToUSBMenuItem
@@ -80,32 +84,55 @@
             this.copyFilesToUSBMenuItem.Size = new System.Drawing.Size(261, 26);
             this.copyFilesToUSBMenuItem.Text = "Zgrywanie na Nosnik USB";
             // 
-            // oprogramowanieToolStripMenuItem
+            // reportsMenuItem
             // 
-            this.oprogramowanieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.upgradeMenuItem});
-            this.oprogramowanieToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("oprogramowanieToolStripMenuItem.Image")));
-            this.oprogramowanieToolStripMenuItem.Name = "oprogramowanieToolStripMenuItem";
-            this.oprogramowanieToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-            this.oprogramowanieToolStripMenuItem.Text = "Oprogramowanie";
+            this.reportsMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsMenuItem.Image")));
+            this.reportsMenuItem.Name = "reportsMenuItem";
+            this.reportsMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.reportsMenuItem.Text = "Raporty plików";
             // 
-            // upgradeMenuItem
+            // panel1
             // 
-            this.upgradeMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("upgradeMenuItem.Image")));
-            this.upgradeMenuItem.Name = "upgradeMenuItem";
-            this.upgradeMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.upgradeMenuItem.Text = "Aktualizacja";
+            this.panel1.Controls.Add(this.reportsBtn);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 639);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1045, 70);
+            this.panel1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.table);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1045, 639);
+            this.panel2.TabIndex = 2;
+            // 
+            // reportsBtn
+            // 
+            this.reportsBtn.Location = new System.Drawing.Point(14, 15);
+            this.reportsBtn.Name = "reportsBtn";
+            this.reportsBtn.Size = new System.Drawing.Size(112, 33);
+            this.reportsBtn.Style = MetroFramework.MetroColorStyle.White;
+            this.reportsBtn.TabIndex = 0;
+            this.reportsBtn.Text = "Raporty";
+            this.reportsBtn.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.reportsBtn.UseSelectable = true;
             // 
             // FileManagerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.table);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FileManagerView";
-            this.Size = new System.Drawing.Size(1750, 827);
+            this.Size = new System.Drawing.Size(1045, 709);
             this.Load += new System.EventHandler(this.FileHistoryViewPanel_Load);
             this.contextMenu.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -116,7 +143,9 @@
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem systemPlikówToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyFilesToUSBMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oprogramowanieToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem upgradeMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportsMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private MetroFramework.Controls.MetroButton reportsBtn;
+        private System.Windows.Forms.Panel panel2;
     }
 }
