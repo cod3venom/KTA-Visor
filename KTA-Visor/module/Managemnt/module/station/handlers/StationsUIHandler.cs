@@ -30,6 +30,7 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
         {
             Globals.Server.OnClientConnected += onStationConnected;
         }
+ 
 
         private void onStationConnected(object sender, events.OnClientConnected e)
         {

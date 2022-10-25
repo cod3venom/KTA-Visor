@@ -35,6 +35,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             InitializeComponent();
             this.stationController = new StationController(this);
             this.StationsUIHandler = new StationsUIHandler(this);
+            this.StationContextMenuUIHandler = new StationContextMenuUIHandler(this, this.stationContextMenu);
             this.CamerasUIHandler= new CamerasUIHandler(this);
 
             this.table.AllowAdd = false;
@@ -55,7 +56,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         {
             await Task.Delay(1000);
             this.hookEvents();
-            this.fetchStations();
+            this.initialize();
         }
  
         private void hookEvents()
@@ -71,14 +72,16 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         }
  
 
-        private void fetchStations()
+        private void initialize()
         {
+            this.StationContextMenuUIHandler.Handle();
             this.StationsUIHandler.Load();
         }
- 
+
+
         private void onRefreshTableData(object sender, EventArgs e)
         {
-            this.fetchStations();
+            this.StationsUIHandler.Load();
         }
 
         private void fetchStationCameras()
@@ -106,7 +109,9 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         }
 
         public StationsUIHandler StationsUIHandler { get; set; }
+        public StationContextMenuUIHandler StationContextMenuUIHandler { get; set; }
         public CamerasUIHandler CamerasUIHandler{ get; set; }
+        
         public string StationId
         {
             get

@@ -484,6 +484,7 @@
     <Compile Include="module\Managemnt\module\station\controller\StationController.cs" />
     <Compile Include="module\Managemnt\module\station\events\OnRefreshCamerasListEvent.cs" />
     <Compile Include="module\Managemnt\module\station\handlers\CamerasUIHandler.cs" />
+    <Compile Include="module\Managemnt\module\station\handlers\StationContextMenuUIHandler.cs" />
     <Compile Include="module\Managemnt\module\station\handlers\StationsUIHandler.cs" />
     <Compile Include="module\Managemnt\module\station\StationModule.cs">
       <SubType>UserControl</SubType>
