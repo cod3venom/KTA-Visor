@@ -52,7 +52,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.memory
         private async Task<CameraEntity> createOnBackend(USBCameraDevice camera, ClientTunnel client = null)
         {
             if (Globals.STATION == null || Globals.STATION.data == null){
-                _ = this.stationInitializer.Initialize();
+                 this.stationInitializer.init();
             }
 
            return await this.cameraService.create(new CreateCameraRequestTObject(camera.Index, camera.ID, camera.BadgeId, "",

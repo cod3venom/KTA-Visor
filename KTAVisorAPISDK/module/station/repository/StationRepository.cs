@@ -32,10 +32,10 @@ namespace KTAVisorAPISDK.module.station.repository
             return await HttpClientUtil.securedClient.GET(String.Format("/api/hidden/stations/ip/{0}", ip));
         }
 
-        public async Task<HttpResponseMessage> create(CreateStationRequestTObject request)
+        public async Task<HttpResponseMessage> init(InitStationRequestTObject request)
         {
             string payload = JsonConvert.SerializeObject(request);
-            return await HttpClientUtil.securedClient.POST("/api/hidden/stations", payload);
+            return await HttpClientUtil.securedClient.POST("/api/hidden/stations/init", payload);
         }
 
         public async Task<HttpResponseMessage> addActiveCamerasToStation(string id, AddActiveCameraToStationRequestTObject request)

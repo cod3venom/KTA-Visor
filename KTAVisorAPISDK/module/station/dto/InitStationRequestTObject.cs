@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KTAVisorAPISDK.module.station.dto
 {
-    public class CreateStationRequestTObject
+    public class InitStationRequestTObject
     {
-        public CreateStationRequestTObject(string stationId, string stationIp, string rdpUserName, string rdpPassword)
+        public InitStationRequestTObject(string stationId, string stationIp, string rdpUserName, string rdpPassword)
         {
             this.stationId = stationId;
             this.stationIp = stationIp;

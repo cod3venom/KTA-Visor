@@ -31,61 +31,22 @@ namespace KTA_Visor_DSClient.module.Management.module.Station
             this.stationService = new StationService();
         }
 
-        public async Task<StationEntity> Initialize(bool isActive = true)
+        public async void init(bool isActive = true)
         {
-            if (!isActive)
-            {
-                RemoveAllCamerasFromTheGlobalMemory.Execute();
-            }
-            
-            Globals.STATION = await this.stationService.findByCustomId(
-                settings.SettingsObj.app.station.stationId
-            );
+            StationEntity entity = await this.stationService.init(new InitStationRequestTObject(
+               settings.SettingsObj.app.station.stationId,
+               settings.SettingsObj.app.station.ipAddress,
+               settings.SettingsObj.app.rdp.userName,
+               settings.SettingsObj.app.rdp.password
+            ));
 
-            if (Globals.STATION?.data?.id != null) {
-                Globals.STATION = await this.update(Globals.STATION, true);
-            }
-            else {
-                Globals.STATION = await this.create();
+            if (entity.data == null){
+                Globals.Logger.error("Unable to initialize station");
+                throw new Exception("Unable to initialize station");
             }
 
-          
-
-            if (Globals.STATION.data == null || Globals.STATION.data?.id == null)
-            {
-                this.OnUnableToRegisterStation?.Invoke(this, new OnUnableToRegisterStation());
-            }
-            return Globals.STATION;
+            Globals.STATION = entity;
         }
-
-        private async Task<StationEntity> create()
-        {
-            StationEntity entity = await this.stationService.create(new CreateStationRequestTObject(
-                 settings.SettingsObj.app.station.stationId,
-                 settings.SettingsObj.app.station.ipAddress,
-                 settings.SettingsObj.app.rdp.userName,
-                 settings.SettingsObj.app.rdp.password
-             ));
-
-            if (entity.data != null){
-                this.OnStationCreated?.Invoke(this, new OnStationCreatedEvent(entity));
-            }
-            return entity;
-        }
-
-        private async Task<StationEntity> update(StationEntity entity, bool isActive = false)
-        {
-            entity = await this.stationService.edit(entity.data.id, new EditStationRequestTObject(
-                    settings.SettingsObj.app.station.stationId,
-                    settings.SettingsObj.app.station.ipAddress,
-                    isActive
-           ));
-
-            if (entity.data != null && entity.data?.id != null)
-            {
-                this.OnStationUpdated?.Invoke(this, new OnStationUpdatedEvent(entity));
-            }
-            return entity;
-        }
+ 
     }
 }

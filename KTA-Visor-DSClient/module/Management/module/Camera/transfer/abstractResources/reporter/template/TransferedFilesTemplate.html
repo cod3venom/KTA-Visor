@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Raport</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        html, body {
+            background-color: #FEFFFF;
+            margin: 0;
+            padding: 60px;
+            color: #505459;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .top-header {
+            font-size: 2rem;
+            font-weight: bolder;
+            color: #90969E;
+        }
+
+        .section-header {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .default-text {
+            font-size: 1rem;
+        }
+
+        .mt-5 {
+            margin-top: 5px;
+        }
+
+        .mt-10 {
+            margin-top: 10px;
+        }
+
+        .mt-15 {
+            margin-top: 15px;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .divider {
+            width: 100%;
+            height: 2px;
+            background-color: #DBDDDE;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .table-header {
+            padding: 5px 15px;
+            border-radius: 3px;
+            background-color: #E3E5E8;
+            color: #9A9DA0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="top-header">
+            KTAvisor 1.0
+        </div>
+
+        <!--  Results sections  -->
+        <div class="section-header">
+            Raport transferu plików
+        </div>
+
+        <table class="mt-5 default-text">
+            <tr>
+                <td style="width: 500px">Data wygenerowania raportu</td>
+                <td class="bold">$REPORT_DATE</td>
+            </tr>
+        </table>
+
+        <table class="mt-15 default-text">
+            <tr>
+                <td style="width: 50px"><img style="height: 30px" src="$SUCCESS_ICON" alt="icon"></td>
+                <td style="width: 500px">Przesłanych plików</td>
+                <td class="bold">$TOTAL_SUCCESS_FILES</td>
+            </tr>
+            <tr>
+                <td style="width: 50px"><img style="height: 30px" src="$FAIL_ICON" alt="icon"></td>
+                <td style="width: 500px">Błędów</td>
+                <td class="bold">$TOTAL_FAILED_FILES</td>
+            </tr>
+            <tr>
+                <td style="width: 50px"><img style="height: 30px" src="$DUPLICATE_ICON" alt="icon"></td>
+                <td style="width: 500px">Duplikatów</td>
+                <td class="bold">$TOTAL_DUPLICATED_FILES</td>
+            </tr>
+        </table>
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- Camera info section -->
+    <section>
+        <!--  Results sections  -->
+        <div class="section-header">
+            Informacje o kamerze
+        </div>
+
+        <table class="mt-15 default-text">
+            <tr>
+                <td style="width: 500px">Identyfikator kamery</td>
+                <td class="bold">$CAMERA_CUSTOM_ID</td>
+            </tr>
+            <tr>
+                <td style="width: 500px">Numer odznaki</td>
+                <td class="bold">$BADGE_ID</td>
+            </tr>
+            <tr>
+                <td style="width: 500px">Data rejestracji kamery</td>
+                <td class="bold">$REPORT_DATE</td>
+            </tr>
+        </table>
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- Success transfers -->
+    <section>
+        <div class="section-header">
+            Lista przesłanych plików
+        </div>
+
+        <table class="mt-15 default-text">
+            <tr class="table-header" style="height: 40px">
+                <td style="width: 50px"></td>
+                <td class="bold">NAZWA PLIKU</td>
+                <td class="bold">DATA UTWORZENIA</td>
+                <td class="bold">ROZMIAR</td>
+            </tr>
+
+            <!-- Data -->
+            $SUCCES_ROWS
+
+        </table>
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- Failed transfers -->
+    <section>
+        <div class="section-header">
+            Lista nieudanych przesłanych plików
+        </div>
+
+        <table class="mt-15 default-text">
+            <tr class="table-header" style="height: 40px">
+                <td style="width: 50px"></td>
+                <td class="bold">NAZWA PLIKU</td>
+                <td class="bold">DATA UTWORZENIA</td>
+                <td class="bold">ROZMIAR</td>
+            </tr>
+
+            <!-- Data -->
+            $FAILED_ROWS
+
+        </table>
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- Duplicated transfers -->
+    <section>
+        <div class="section-header">
+            Lista duplikatów
+        </div>
+
+        <table class="mt-15 default-text">
+            <tr class="table-header" style="height: 40px">
+                <td style="width: 50px"></td>
+                <td class="bold">NAZWA PLIKU</td>
+                <td class="bold">DATA UTWORZENIA</td>
+                <td class="bold">ROZMIAR</td>
+            </tr>
+
+            <!-- Data -->
+            $DUPLICATED_ROWS
+
+        </table>
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- Footer -->
+    <section>
+        <table class="mt-5 default-text">
+            <tr>
+                <td>Raport transferu z kamery $CAMERA_CUSTOM_ID • $REPORT_DATE • KTAvisor</td>
+            </tr>
+        </table>
+    </section>
+</body>
+</html>

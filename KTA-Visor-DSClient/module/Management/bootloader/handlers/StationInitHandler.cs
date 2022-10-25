@@ -31,7 +31,7 @@ namespace KTA_Visor_DSClient.module.Management.bootloader.handlers
         
         private void initializeStation()
         {
-            _ = this._stationInitializer.Initialize();
+            this._stationInitializer.init();
         }
     }
 }

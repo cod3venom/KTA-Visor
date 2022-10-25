@@ -45,14 +45,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="kernel\sharedKernel\helper\Notepad\NotepadHelper.cs" />
+    <Compile Include="module\camera\dto\request\CreateCameraTransferredFileReportRequestTObject.cs" />
     <Compile Include="module\camera\dto\request\DeselectAllCamerasFromTheStationTObject.cs" />
     <Compile Include="module\camera\dto\request\SelectCurrentCameraInStationRequestTObject.cs" />
     <Compile Include="module\camera\dto\request\EditCameraSettingsTObject.cs" />
     <Compile Include="module\camera\dto\request\CreateCameraSettingsTObject.cs" />
     <Compile Include="module\camera\dto\response\CameraHasCardDuplicatesResponseTObject.cs" />
     <Compile Include="module\camera\entity\CameraSettingsEntity.cs" />
+    <Compile Include="module\camera\entity\CameraTransferredFilesReportEntity.cs" />
     <Compile Include="module\camera\repository\CameraCardRepository.cs" />
     <Compile Include="module\camera\repository\CameraSettingsRepository.cs" />
+    <Compile Include="module\camera\repository\CameraTransferredFilesReportRepository.cs" />
+    <Compile Include="module\camera\service\CameraTransferredFilesReportService.cs" />
     <Compile Include="module\camera\service\CameraCardService.cs" />
     <Compile Include="module\camera\service\CameraSettingsService.cs" />
     <Compile Include="module\fileManager\dto\request\EditFileHistoryRequestTObject.cs" />
@@ -105,7 +109,7 @@
     <Compile Include="module\officer\events\OnOfficerCRUDEvent.cs" />
     <Compile Include="module\officer\repository\OfficerRepository.cs" />
     <Compile Include="module\officer\service\OfficerService.cs" />
-    <Compile Include="module\station\dto\CreateStationRequestTObject.cs" />
+    <Compile Include="module\station\dto\InitStationRequestTObject.cs" />
     <Compile Include="module\station\dto\EditStationRequestTObject.cs" />
     <Compile Include="module\station\dto\GetCameraFilesRequestTObject.cs" />
     <Compile Include="module\station\dto\GetSelectedCameraFilesRequestTObject.cs" />

@@ -67,7 +67,7 @@ namespace KTA_Visor_DSClient
         private static void HandleException(dynamic exception)
         {
             Globals.Logger.error("Global exception handler", exception);
-            _ = new StationInitializer(new install.settings.Settings()).Initialize(false);
+            new StationInitializer(new install.settings.Settings()).init(false);
 
 #if DEBUG
             Console.WriteLine(exception.ToString());

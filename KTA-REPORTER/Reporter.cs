@@ -21,7 +21,7 @@ namespace KTA_REPORTER
         }
  
 
-        public void Assign(string template, Dictionary<string, string> args)
+        public string Assign(string template, Dictionary<string, string> args)
         {
             this._template = template;
 
@@ -33,6 +33,7 @@ namespace KTA_REPORTER
 
                 this._template = this._template.Replace(arg.Key, arg.Value);
             }
+            return this._template;
         }
 
         public void Report(string path, OutputFileTypeEnum type)

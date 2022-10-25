@@ -21,12 +21,10 @@ namespace KTALogger
         public Logger(DirectoryInfo directory = null)
         {
             this.startDate = this.currentDate;
-            if (directory == null)
-            {
+            if (directory == null){
                 this.loggerFileDirectory = new DirectoryInfo(String.Format("{0}\\kta_logger", Directory.GetCurrentDirectory()));
             }
-            else
-            {
+            else{
                 this.loggerFileDirectory = directory;
             }
 
@@ -81,7 +79,7 @@ namespace KTALogger
 
         private string loggerFormat
         {
-            get { return "[{0}] [{1}] {2} # $ {3} \n {4}"; }
+            get { return "  [{0}] [{1}] {2} # $ {3} \n {4}"; }
         }
 
 
@@ -124,21 +122,6 @@ namespace KTALogger
             this.write("print", caller, message, context);
         }
 
-        public void report(string message, string level = "success", object context = null)
-        {
-            string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
-            message = new StringBuilder()
-                .Append(Environment.NewLine)
-                .Append("===========================================================================")
-                .Append(Environment.NewLine)
-                .Append(message)
-                .Append(Environment.NewLine)
-                .Append("===========================================================================")
-                .ToString();
-
-            this.write(level, caller, message, context);
-        }
-
         public void hidden(string message, object context = null)
         {
             string caller = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
@@ -147,15 +130,7 @@ namespace KTALogger
 
         private void write(string type, string caller, string message, dynamic context = null)
         {
-            switch (type)
-            {
-                case "success": Console.ForegroundColor = ConsoleColor.DarkGreen; break;
-                case "info": Console.ForegroundColor = ConsoleColor.DarkBlue; break;
-                case "warn": Console.ForegroundColor = ConsoleColor.DarkYellow; break;
-                case "error": Console.ForegroundColor = ConsoleColor.DarkRed; break;
-                case "print": Console.ForegroundColor = ConsoleColor.DarkGray; break;
-            }
-
+            
             string fullText = String.Format(loggerFormat, this.currentTime, type, caller, message, context);
 
             this.OnLogHasWritten?.Invoke(this, new LoggerEvent(type, fullText, message));
@@ -175,7 +150,6 @@ namespace KTALogger
             }
             catch(IOException e)
             {
-                //Console.Write(e.ToString());
             }
             catch (Exception ex)
             {

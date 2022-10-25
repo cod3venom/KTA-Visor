@@ -37,7 +37,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.handler
         {
 
             if (Globals.STATION == null || Globals.STATION.data == null){
-                _ = this._stationInitializer.Initialize();
+                 this._stationInitializer.init();
             }
 
             bool exists = await this.isCameraAlreadyRegistered();

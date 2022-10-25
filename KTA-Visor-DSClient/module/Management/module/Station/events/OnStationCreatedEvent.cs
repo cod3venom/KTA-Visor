@@ -9,7 +9,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Station.events
 {
     public class OnStationCreatedEvent: OnStationAbstraction
     {
-        public OnStationCreatedEvent(StationEntity station) : base(station, "create")
+        public OnStationCreatedEvent(StationEntity station) : base(station, "init")
         {
         }
     }

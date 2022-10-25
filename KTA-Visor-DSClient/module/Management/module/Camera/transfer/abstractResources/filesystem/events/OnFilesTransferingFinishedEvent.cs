@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.events
+namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem.events
 {
     public class OnFilesTransferingFinishedEvent : EventArgs
     {

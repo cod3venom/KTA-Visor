@@ -46,9 +46,10 @@
             // 
             // lbl
             // 
-            this.lbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.lbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
             this.lbl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl.ForeColor = System.Drawing.Color.White;
             this.lbl.Location = new System.Drawing.Point(0, 0);
             this.lbl.Name = "lbl";
             this.lbl.Size = new System.Drawing.Size(185, 31);
@@ -58,7 +59,7 @@
             // 
             // picBox
             // 
-            this.picBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.picBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
             this.picBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.picBox.Image = global::KTA_Visor_UI.Properties.Resources.red_circle;
             this.picBox.Location = new System.Drawing.Point(0, 0);

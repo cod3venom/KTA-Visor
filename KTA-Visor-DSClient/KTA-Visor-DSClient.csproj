@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Users\venom\source\repos\KTA-Visor\KTA-Visor-DSClient\bin\Debug</OutputPath>
+    <OutputPath>\\DESKTOP-7C1SU6S\dsclient\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -139,6 +139,7 @@
     <Compile Include="install\settings\dto\SettingsFileTObject.cs" />
     <Compile Include="install\settings\Settings.cs" />
     <Compile Include="kernel\Hardware\USBDeviceRelay\events\OnFoundPortByBadgeId.cs" />
+    <Compile Include="kernel\helper\DiskHelper.cs" />
     <Compile Include="kernel\helper\FileChecksum.cs" />
     <Compile Include="kernel\helper\MD5Helper.cs" />
     <Compile Include="kernel\interfaces\IObserverInterface.cs" />
@@ -159,11 +160,14 @@
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
     <Compile Include="module\Management\module\Camera\handler\CameraBackendSyncHandler.cs" />
     <Compile Include="module\Management\module\Camera\reports\TransferedFiles\TransferedFilesReport.cs" />
-    <Compile Include="module\Management\module\Camera\transfer\CameraFilesTransferingHandler.cs" />
+    <Compile Include="module\Management\module\Camera\transfer\AbstractResource.cs" />
+    <Compile Include="module\Management\module\Camera\transfer\abstractResources\filesystem\FileSystem.cs" />
+    <Compile Include="module\Management\module\Camera\transfer\abstractResources\reporter\Reporter.cs" />
+    <Compile Include="module\Management\module\Camera\transfer\FilesTransferManager.cs" />
     <Compile Include="module\Management\module\Camera\interfaces\ICameraHandler.cs" />
     <Compile Include="module\Management\module\Camera\observer\CamerasListObserver.cs" />
     <Compile Include="module\Management\module\Camera\service\CameraCardService.cs" />
-    <Compile Include="module\Management\module\Camera\transfer\events\OnFilesTransferingFinishedEvent.cs" />
+    <Compile Include="module\Management\module\Camera\transfer\abstractResources\filesystem\events\OnFilesTransferingFinishedEvent.cs" />
     <Compile Include="module\Management\module\Camera\types\device\events\CameraRemovedFromTheMemoryEvent.cs" />
     <Compile Include="module\Management\module\Camera\types\device\events\CameraAddedToTheMemoryEvent.cs" />
     <Compile Include="module\Management\module\Camera\types\device\localSettings\LocalSettingsTObject.cs" />
@@ -333,6 +337,16 @@
   <ItemGroup>
     <EmbeddedResource Include="module\Management\module\Camera\reports\TransferedFiles\TransferedFilesTemplate.html">
       <CustomToolNamespace>KTA_Visor_DSClient.module.Management.module.Camera.reports.TransferedFiles.TransferedFilesTemplate.html</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="module\Management\module\Camera\transfer\abstractResources\reporter\template\TransferedFilesTemplate.html">
+      <CustomToolNamespace>KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.reporter.template.TransferedFilesTemplate.html</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="module\Management\module\Camera\transfer\abstractResources\reporter\template\component\Row.html">
+      <CustomToolNamespace>KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.reporter.template.component.Row.html</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

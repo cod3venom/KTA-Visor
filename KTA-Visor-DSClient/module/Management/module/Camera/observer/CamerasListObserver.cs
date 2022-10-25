@@ -19,14 +19,15 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.observer
         private readonly Settings _settings;
         private readonly KTALogger.Logger _logger;
         private readonly CameraBackendSyncHandler _cameraBackendSyncHandler;
-        private readonly CameraFilesTransferingHandler _cameraFilesTransferingHandler;
+        private readonly FilesTransferManager _cameraFilesTransferingHandler;
         public CamerasListObserver(Settings settings, KTALogger.Logger logger)
         {
             this._settings = settings;
             this._logger = logger;
 
             this._cameraBackendSyncHandler = new CameraBackendSyncHandler();
-            this._cameraFilesTransferingHandler = new CameraFilesTransferingHandler(
+            this._cameraFilesTransferingHandler = new FilesTransferManager(
+                this._settings,
                 this._settings.SettingsObj?.app?.fileSystem?.filesPath,
                 logger
             );

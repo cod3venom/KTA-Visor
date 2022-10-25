@@ -63,7 +63,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.command.filesystem
                     copiedFiles.Add(destFile.Name, new CopiedCameraFileTObject(destFile, true));
                    // FileManagerService fileManagerService= new FileManagerService();
 
-                    //_ = fileManagerService.create(new CreateFileHistoryRequestTObject(
+                    //_ = fileManagerService.init(new CreateFileHistoryRequestTObject(
                     //    stationCustomId,
                     //    cameraCustomId,
                     //    badgeId,

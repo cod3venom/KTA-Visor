@@ -59,9 +59,9 @@ namespace KTAVisorAPISDK.module.station.service
             return station;
         }
 
-        public async Task<StationEntity> create(CreateStationRequestTObject request)
+        public async Task<StationEntity> init(InitStationRequestTObject request)
         {
-            HttpResponseMessage result = await this.stationRepository.create(request);
+            HttpResponseMessage result = await this.stationRepository.init(request);
             string responseBody = await result.Content.ReadAsStringAsync();
             StationEntity station = JsonConvert.DeserializeObject<StationEntity>(responseBody);
 

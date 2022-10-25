@@ -1,17 +1,10 @@
 ﻿using KTA_REPORTER;
 using KTA_Visor_DSClient.install.settings;
 using KTA_Visor_DSClient.kernel.helper;
-using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
-using KTA_Visor_DSClient.module.Management.module.Camera.transfer.events;
-using KTA_Visor_DSClient.module.Shared.Globals;
-using KTAVisorAPISDK.module.camera.entity;
-using KTAVisorAPISDK.module.station.entity;
+using KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem.events;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.reports.TransferedFiles
 {

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KTA_Visor_UI.component.basic.StatusIndicator
@@ -17,6 +11,12 @@ namespace KTA_Visor_UI.component.basic.StatusIndicator
             InitializeComponent();
         }
 
+        public Color BackgroundColor
+        {
+            get { return this.BackColor; }
+            set { this.BackColor = value; }
+        }
+
         private void StatusIndicator_Load(object sender, EventArgs e)
         {
 
@@ -26,7 +26,7 @@ namespace KTA_Visor_UI.component.basic.StatusIndicator
         {
             if (flag)
             {
-                this.Icon = Properties.Resources.green_circle;
+                this.Icon = Properties.Resources.green_circle_pulse_on_gray;
             } else
             {
                 this.Icon = Properties.Resources.red_circle;

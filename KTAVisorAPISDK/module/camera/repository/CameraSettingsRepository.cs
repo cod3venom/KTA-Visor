@@ -23,7 +23,6 @@ namespace KTAVisorAPISDK.module.camera.repository
             return await HttpClientUtil.securedClient.GET("/api/hidden/cameras/{id}/settings"+id);
         }
 
-
         public async Task<HttpResponseMessage> create(string cameraId, CreateCameraSettingsTObject request)
         {
             string payload = JsonConvert.SerializeObject(request);

@@ -61,13 +61,7 @@ namespace KTAVisorAPISDK.module.camera.repository
             string payload = JsonConvert.SerializeObject(request);
             return await HttpClientUtil.httpClient.PUT("/api/hidden/cameras/customid/" + customId, payload);
         }
-
-        public async Task<HttpResponseMessage> deselectAllCamerasForGivenStation(DeselectAllCamerasFromTheStationTObject request)
-        {
-            string payload = JsonConvert.SerializeObject(request);
-            return await HttpClientUtil.httpClient.POST("/api/hidden/cameras/deselect/all", payload);
-        }
-
+ 
         public async Task<HttpResponseMessage> delete(string id)
         {
             return await HttpClientUtil.httpClient.DELETE("/api/hidden/cameras/" + id);
