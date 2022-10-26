@@ -9,6 +9,9 @@ using System.Threading;
 using KTA_Visor_DSClient.module.Shared;
 using TCPTunnel.kernel.extensions.router.dto;
 using TCPTunnel.kernel.types;
+using KTA_Visor_DSClient.kernel.interfaces;
+using System.Collections.Generic;
+using KTA_Visor_DSClient.module.Management.module.Station.controller;
 
 namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
 {
@@ -19,16 +22,21 @@ namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
         
         private readonly Settings settings;
         private readonly AuthData authData;
-        private readonly GlobalController globalController;
 
         private ClientConfigTObject connectionConfig;
         private Client _client;
+
+        private readonly List<IControllerInterface> _controllers;
 
         public ClientTunnel(Settings settings)
         {
             this.settings = settings;
             this.authData = new AuthData();
-            this.globalController = new GlobalController(this);
+
+            this._controllers = new List<IControllerInterface>()
+            {
+                new StationController()
+            };
         }
 
         private void initialize()
@@ -58,6 +66,16 @@ namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
             this._client.Connect();
         }
 
+        public void Disconnect()
+        {
+            this._client.Disconnect();
+        }
+
+        public void Restart()
+        {
+            this._client.Restart();
+        }
+
        
 
         private void onAllowedtoReconnect(object sender, EventArgs e)
@@ -84,7 +102,7 @@ namespace KTA_Visor_DSClient.module.Management.module.clientTunnel
 
         private void onDataReceived(object sender, TCPClientMessageReceivedEvent e)
         {
-            this.globalController.Watch(e.Request);
+            this._controllers.ForEach((IControllerInterface controller) => controller.Watch(e.Request));
             this.OnRequestReceivedInTunnelEvent?.Invoke(this, e);
         }
 

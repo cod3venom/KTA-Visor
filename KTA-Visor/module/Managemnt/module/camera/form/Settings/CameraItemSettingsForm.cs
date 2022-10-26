@@ -148,14 +148,10 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         private void onRecordingResolutionChanged(object sender, EventArgs e)
         {
             string selectedValue = this.recordingResolutionCombo.SelectedValue.ToString();
-            int optionIndex = 0;
-            if (selectedValue == "1280X720P25"){
-                selectedValue = "1280X720P20";
-                optionIndex = 7;
+            if (selectedValue == "Resolution1280X720P25"){
+                selectedValue = "Resolution1280X720P20";
             }
-            if (!selectedValue.Contains("Resolution")){
-                selectedValue = "Resolution" + selectedValue;
-            }
+
             this.camera.settings.resolution = (int)(VideoResolutions)Enum.Parse(typeof(VideoResolutions), selectedValue);
         }
 
@@ -163,10 +159,10 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         {
             string selectedValue = this.recordingQualityCombo.SelectedValue.ToString();
 
-            if (selectedValue == "Najwyższa")
-            {
+            if (selectedValue == "Najwyższa"){
                 selectedValue = "Normal";
             }
+
             this.Quality = (int)(Qualitys)Enum.Parse(typeof(Qualitys), selectedValue);
         }
 

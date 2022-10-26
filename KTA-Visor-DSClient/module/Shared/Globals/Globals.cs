@@ -21,7 +21,7 @@ namespace KTA_Visor_DSClient.module.Shared.Globals
         public static USBCameraDeviceList CAMERAS_LIST = new USBCameraDeviceList();
 
         public static bool IS_IN_SETTINGS_MODE = false;
-        public static bool IS_ALL_COPYING_PROCESS_ARE_END = true;
+        public static bool IS_ALL_COPYING_PROCESS_ARE_END = false;
         public static bool IS_CONNECTED_TO_TUNNEL = false;
         public static bool ALLOW_LISTENING_FOR_POWER_SUPPLY = false;
         public static bool ALLOW_FS_MOUNTING = true;

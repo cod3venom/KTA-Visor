@@ -44,6 +44,7 @@ namespace FastTests
         public byte post_rec_flag;
         public byte split_time_flag;
         public byte aes_crypto;
+        public byte vibrate;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 23)]
         public byte[] reserved;
     }
@@ -92,6 +93,18 @@ namespace FastTests
         [DllImport("h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ReadDeviceBatteryDumpEnergy_ByIndex")]
         public static extern int ReadDeviceBatteryDumpEnergy_ByIndex(int[] Battery, byte[] sPwd, int[] iRet, int usb_index);
 
+        [DllImport("h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetMSDC_ByIndex")]
+        public static extern int SetMSDC_ByIndex(byte[] sPwd, int[] iRet, int usb_index);
+
+        [DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?ConnectStorageDevice@@YAHDPAPAX@Z")]
+        public static extern int ConnectStorageDevice(char drv_letter, IntPtr[] filehandle);
+
+        [DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?PassWordCheck@@YAHPAXPADPAH@Z")]
+        public static extern int PassWordCheck(IntPtr filehandle, byte[] sPwd, int[] iRet);
+
+        [DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?SetBWC_MSC@@YAHPAXPAH@Z")]
+        public static extern int SetBWC_MSC_Return(IntPtr filehandle, int[] iRet);
+
     }
     static class Program
     {
@@ -115,12 +128,12 @@ namespace FastTests
 
             var zfy_info = new ZFY_INFO();
             byte[] spwd = new byte[6];
-            spwd[0] = 0x48;
-            spwd[1] = 0x48;
-            spwd[2] = 0x48;
-            spwd[3] = 0x48;
-            spwd[4] = 0x48;
-            spwd[5] = 0x48;
+            spwd[0] = 0x30;
+            spwd[1] = 0x30;
+            spwd[2] = 0x30;
+            spwd[3] = 0x30;
+            spwd[4] = 0x30;
+            spwd[5] = 0x30;
 
             int usb_index = 0;
 
@@ -140,13 +153,14 @@ namespace FastTests
             CameraCtrl.Eylog_GetMenuConfig_ByIndex(ref menu_config, config_len, iret, usb_index);
 
             menu_config.gps = 1;
+            menu_config.vibrate = 0;
             CameraCtrl.Eylog_SetMenuConfig_ByIndex(ref menu_config, config_len, iret, usb_index);
 
 
 
             byte[] cmd_params = new byte[1];
             int[] bat = new int[1];
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < usb_totalnum[0]; j++)
                 {
@@ -168,10 +182,20 @@ namespace FastTests
 
                 }
 
-                Console.WriteLine("Battery :" + bat[0].ToString());
+
                 Thread.Sleep(1000);
             }
+            CameraCtrl.SetMSDC_ByIndex(spwd, iret, 0);
 
+
+
+            Thread.Sleep(5000);// delay time depend on PC performance or  connecting it by drive letter in your application flow.
+            IntPtr[] filehandle = new IntPtr[1];//if two or more u disk,you can increase the array to two or more,max is 20.
+            CameraCtrl.ConnectStorageDevice('F', filehandle);
+
+            CameraCtrl.PassWordCheck(filehandle[0], spwd, iret);
+
+            CameraCtrl.SetBWC_MSC_Return(filehandle[0], iret);
 
 
             Application.Run(new Form());

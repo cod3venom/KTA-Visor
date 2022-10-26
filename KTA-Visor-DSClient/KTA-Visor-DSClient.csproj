@@ -142,6 +142,7 @@
     <Compile Include="kernel\helper\DiskHelper.cs" />
     <Compile Include="kernel\helper\FileChecksum.cs" />
     <Compile Include="kernel\helper\MD5Helper.cs" />
+    <Compile Include="kernel\interfaces\IControllerInterface.cs" />
     <Compile Include="kernel\interfaces\IObserverInterface.cs" />
     <Compile Include="kernel\sharedKernel\ThreadPool\ThreadPoolManager.cs" />
     <Compile Include="module\Management\bootloader\Bootloader.cs" />
@@ -200,8 +201,8 @@
     <Compile Include="module\Management\module\Camera\service\CameraDeviceSettingsService.cs" />
     <Compile Include="module\Management\module\PowerSupply\PowerSupplyInitializer.cs" />
     <Compile Include="module\Management\module\PowerSupply\PowerSupplyWatcher.cs" />
-    <Compile Include="module\Management\module\PowerSupply\controller\PowerSupplyController.cs" />
     <Compile Include="module\Management\module\PowerSupply\service\PowerSupplyService.cs" />
+    <Compile Include="module\Management\module\Station\controller\StationController.cs" />
     <Compile Include="module\Management\module\Station\events\OnStationAbstraction.cs" />
     <Compile Include="module\Management\module\Station\events\OnUnableToRegisterStation.cs" />
     <Compile Include="module\Management\module\Station\events\OnStationUpdatedEvent.cs" />
@@ -220,23 +221,10 @@
     <Compile Include="module\Management\module\Camera\dto\GetSelectedCameraFilesRequestTObject.cs" />
     <Compile Include="module\Management\module\Camera\flags\WMEvents.cs" />
     <Compile Include="module\Management\module\Camera\flags\WMQuery.cs" />
-    <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnCheckStateEvent.cs" />
-    <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnTurnOffPowerEvent.cs" />
-    <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\events\OnTurnOnPowerEvent.cs" />
-    <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\USBRelayItem.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="module\Management\module\PowerSupply\component\USBRelayItem\USBRelayItem.Designer.cs">
-      <DependentUpon>USBRelayItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="module\Shared\GlobalController.cs" />
     <Compile Include="module\Shared\Globals\Globals.cs" />
     <Compile Include="module\Shared\Util\HttpClientUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="module\Management\module\PowerSupply\component\USBRelayItem\USBRelayItem.resx">
-      <DependentUpon>USBRelayItem.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="module\Management\view\SettingsManager.resx">
       <DependentUpon>SettingsManager.cs</DependentUpon>
     </EmbeddedResource>

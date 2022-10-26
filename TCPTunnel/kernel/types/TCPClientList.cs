@@ -9,6 +9,11 @@ namespace TCPTunnel.kernel.types
     public class TCPClientList: List<TCPClientTObject>
     {
 
+        public TCPClientTObject Get(string ip)
+        {
+            return this.Find((TCPClientTObject client) => client.IpAddress == ip);
+        }
+
         public TCPClientList addClient(TCPClientTObject client, bool allowDuplicate = false)
         {
             if (allowDuplicate)

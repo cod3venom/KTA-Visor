@@ -29,9 +29,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                 this.Remove(existedCamera);
             }
 
-            this._falconProtocol.Connect();
-
-            camera.Index = this._falconProtocol.GetTotalConnectedDevices()[0];
             camera.Active = true;
 
             this.Add(camera);

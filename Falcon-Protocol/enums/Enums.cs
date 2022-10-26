@@ -18,7 +18,7 @@ namespace Falcon_Protocol.enums
             Resolution848x480P30,
             Resolution1920x1080P20,
             Resolution1280X720P25,
-            Resolution1280X720P20, //9
+            Resolution1280X720P20,
             Resolution848X480XP20,
         }
 

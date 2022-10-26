@@ -26,8 +26,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         private readonly KTALogger.Logger _logger;
         private readonly FalconProtocol falconProtocol;
         private readonly CameraService cameraService;
-        private readonly CamerasGlobalMemoryHandler camerasGlobalMemoryHandler;
         private readonly CamerasListObserver _camersasListObserver;
+        private int _indexIterator = 0;
 
         public CameraDeviceWatcher(Settings settings, KTALogger.Logger logger)
         {
@@ -35,7 +35,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             this._logger = logger;
             this.falconProtocol = new FalconProtocol();
             this.cameraService = new CameraService();
-            this.camerasGlobalMemoryHandler = new CamerasGlobalMemoryHandler(this.cameraService);
             this._camersasListObserver = new CamerasListObserver(this.settings, logger);
         }
 
@@ -56,6 +55,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         {
             Thread watchThread = new Thread((ThreadStart)delegate
             {
+                int tmpIndex = this._indexIterator;
                 while(true)
                 {
                     if (!Globals.ALLOW_FS_MOUNTING){
@@ -63,6 +63,13 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                     }
 
                     this.Connect();
+                    if (tmpIndex != this._indexIterator)
+                    {
+                        tmpIndex = this._indexIterator;
+
+                        Console.WriteLine("Current index is : " + tmpIndex);
+                    }
+                    this._indexIterator = this.GetTotalConnectedDevices();
                     this.TryToMountDevice();
                 }
             });
@@ -79,6 +86,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             }
 
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.Name);
+            camera.Index = this._indexIterator;
             Globals.CAMERAS_LIST.Push(camera);
         }
 

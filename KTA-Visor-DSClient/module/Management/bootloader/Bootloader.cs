@@ -1,12 +1,16 @@
 ﻿using KTA_Visor_DSClient.install.settings;
+using KTA_Visor_DSClient.kernel.interfaces;
 using KTA_Visor_DSClient.module.Management.bootloader.handlers;
 using KTA_Visor_DSClient.module.Management.bootloader.interfaces;
+using KTA_Visor_DSClient.module.Management.module.Station.controller;
+using KTA_Visor_DSClient.module.Shared.Globals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TCPTunnel.module.client.events;
 
 namespace KTA_Visor_DSClient.module.Management.bootloader
 {
@@ -23,7 +27,7 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
             this._logger = logger;
             this._handlers = new List<IBootLoaderHandler>()
             {
-                new AutoStartHandler(),
+                new AutoStartHandler(this._logger),
                 new PowerSupplyInitHandler(this._settings, this._logger),
                 new StationInitHandler(this._settings),
                 new BackendInitHandler(this._settings),
@@ -44,8 +48,10 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
                 handlerThread.Start();
                 this._logger.info(String.Format("Initialized : {0}", handler.GetName()));
             });
+
         }
 
+ 
         private void keepAlive()
         {
             Thread lifeThread = new Thread((ThreadStart)delegate {

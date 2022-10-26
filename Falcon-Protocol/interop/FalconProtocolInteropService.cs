@@ -101,7 +101,17 @@ namespace Falcon_Protocol.interop
 		/// <returns></returns>
 		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "SetMSDC", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetMSDC(ref byte[] sPwd, int[] iRet);
-        
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sPwd"></param>
+		/// <param name="IRet"></param>
+		/// <param name="usb_index"></param>
+		/// <returns></returns>
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
+		public static extern int SetMSDC_ByIndex(byte[] sPwd, int[] IRet, int usb_index);
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -109,7 +119,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="config_len"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-        [DllImport("dll\\h22_4g_pc.dll", EntryPoint = "Eylog_GetMenuConfig", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("dll\\h22_4g_pc.dll", EntryPoint = "Eylog_GetMenuConfig", CallingConvention = CallingConvention.Cdecl)]
         public static extern int Eylog_GetMenuConfig(ref MENU_CONFIG menu_conf, int config_len, int[] iRet);
 
 		/// <summary>
@@ -249,15 +259,7 @@ namespace Falcon_Protocol.interop
 		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Eylog_FormatTFCard_ByIndex")]
 		public static extern int Eylog_FormatTFCard_ByIndex(byte[] sPwd, int[] IRet, int usb_index);
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sPwd"></param>
-		/// <param name="IRet"></param>
-		/// <param name="usb_index"></param>
-		/// <returns></returns>
-		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
-		public static extern int SetMSDC_ByIndex(byte[] sPwd, int[] IRet, int usb_index);
+
 
 		/// <summary>
 		/// 
@@ -289,6 +291,34 @@ namespace Falcon_Protocol.interop
 		/// <returns></returns>
 		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
 		public static extern int ReadDeviceBatteryDumpEnergy_ByIndex(int[] Battery,ref  byte[] sPwd, int[] IRet, int usb_index);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="drv_letter"></param>
+		/// <param name="filehandle"></param>
+		/// <returns></returns>
+		[DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?ConnectStorageDevice@@YAHDPAPAX@Z")]
+		public static extern int ConnectStorageDevice(char drv_letter, IntPtr[] filehandle);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="filehandle"></param>
+		/// <param name="sPwd"></param>
+		/// <param name="iRet"></param>
+		/// <returns></returns>
+		[DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?PassWordCheck@@YAHPAXPADPAH@Z")]
+		public static extern int PassWordCheck(IntPtr filehandle, byte[] sPwd, int[] iRet);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="filehandle"></param>
+		/// <param name="iRet"></param>
+		/// <returns></returns>
+		[DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?SetBWC_MSC@@YAHPAXPAH@Z")]
+		public static extern int SetBWC_MSC_Return(IntPtr filehandle, int[] iRet);
 
 	}
 }

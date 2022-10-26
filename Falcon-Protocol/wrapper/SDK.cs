@@ -15,30 +15,14 @@ namespace Falcon_Protocol.wrapper
     public class SDK : ModulesManager
     {
 
-        private event EventHandler<EventArgs> OnDeviceMounted;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        
-
-        private int index = 0;
+        public static int CurrentIndex = 0;
 
         private byte[] getPwd()
         {
             return Encoding.ASCII.GetBytes("000000");
         }
 
-        public SDK SetIndex(int index)
-        {
-            this.index = index;
-            return this;
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public bool Connect()
         {
            try
@@ -47,9 +31,13 @@ namespace Falcon_Protocol.wrapper
                 int[] iRet = new int[1];
 
                 FalconProtocolInteropService.Init_Device(ref idCode, iRet);
-                this.SyncDevTime();
+                bool connected = this.calcIRet(iRet);
 
-                return this.calcIRet(iRet);
+                if (connected)
+                {
+                    SDK.CurrentIndex += 1;
+                }
+                return connected;
             }
             catch (Exception ex)
             {
@@ -58,10 +46,6 @@ namespace Falcon_Protocol.wrapper
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public bool Disconnect()
         {
             int[] iRet = new int[1];
@@ -71,10 +55,6 @@ namespace Falcon_Protocol.wrapper
             return this.calcIRet(iRet);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public bool Login()
         {
             byte[] pwd = this.getPwd();
@@ -86,18 +66,17 @@ namespace Falcon_Protocol.wrapper
             return this.calcIRet(iRet);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool Mount()
+        public bool Mount(int index = -1)
         {
             int[] iRet = new int[1];
             byte[] pwd = this.getPwd();
 
-            FalconProtocolInteropService.SetMSDC(ref pwd, iRet);
-            this.OnDeviceMounted?.Invoke(this, EventArgs.Empty);
+            if (index > -1){
+                FalconProtocolInteropService.SetMSDC_ByIndex(pwd, iRet, index);
+            }
+            else{
+                FalconProtocolInteropService.SetMSDC(ref pwd, iRet);
+            }
 
             return this.calcIRet(iRet);
         }
@@ -111,11 +90,6 @@ namespace Falcon_Protocol.wrapper
             return this.calcIRet(iRet);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public MENU_CONFIG GetMenuConfig(int deviceIndex = -1)
         {
             var menuStruct = new MENU_CONFIG();
@@ -134,12 +108,6 @@ namespace Falcon_Protocol.wrapper
             return menuStruct;
         }
 
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="menuStruct"></param>
-        /// <returns></returns>
         public MENU_CONFIG SetMenuConfig(MENU_CONFIG menuStruct, int deviceIndex = -1)
         {
             int config_len = Marshal.SizeOf(menuStruct);
@@ -194,13 +162,13 @@ namespace Falcon_Protocol.wrapper
         }
 
 
-        public int[] GetTotalConnectedDevices()
+        public int GetTotalConnectedDevices()
         {
             int[] devices = new int[1];
             byte[] idcode = new byte[6];
             int[] iret = new int[1];
             FalconProtocolInteropService.Init_Device_UsbTotal(idcode, iret, devices);
-            return devices;
+            return devices[0];
         }
 
         public void Blink(int[] usb_totalnum, int interval = 1000)
@@ -244,11 +212,7 @@ namespace Falcon_Protocol.wrapper
             return 0;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="iRet"></param>
-        /// <returns></returns>
+
         private bool calcIRet(int[] iRet)
         {
             return iRet[0] > 0; ;

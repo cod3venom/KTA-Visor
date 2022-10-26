@@ -38,15 +38,14 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.panel1 = new System.Windows.Forms.Panel();
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.stationContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.table = new KTA_Visor_UI.component.basic.table.Table();
             this.powerSupplyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shutDownPowerSupplyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetPowerSupplyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tunnelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.disconnectFromTunnelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetTunnelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remoteDesktopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectRemoteDesktopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.table = new KTA_Visor_UI.component.basic.table.Table();
+            this.deleteStationMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -59,7 +58,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.Location = new System.Drawing.Point(0, 32);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1919, 336);
@@ -69,9 +68,9 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             // 
             this.tabPage.Controls.Add(this.camerasFlowPanel);
             this.tabPage.Location = new System.Drawing.Point(4, 26);
-            this.tabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage.Name = "tabPage";
-            this.tabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage.Size = new System.Drawing.Size(1911, 306);
             this.tabPage.TabIndex = 0;
             this.tabPage.Text = "Kamery";
@@ -82,7 +81,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.camerasFlowPanel.AutoScroll = true;
             this.camerasFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.camerasFlowPanel.Location = new System.Drawing.Point(4, 4);
-            this.camerasFlowPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.camerasFlowPanel.Margin = new System.Windows.Forms.Padding(4);
             this.camerasFlowPanel.Name = "camerasFlowPanel";
             this.camerasFlowPanel.Size = new System.Drawing.Size(1903, 298);
             this.camerasFlowPanel.TabIndex = 0;
@@ -93,7 +92,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.panel1.Controls.Add(this.bunifuSeparator1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 741);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1919, 368);
             this.panel1.TabIndex = 3;
@@ -105,7 +104,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.bunifuSeparator1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             this.bunifuSeparator1.LineThickness = 1;
             this.bunifuSeparator1.Location = new System.Drawing.Point(0, 0);
-            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
             this.bunifuSeparator1.Size = new System.Drawing.Size(1919, 32);
             this.bunifuSeparator1.TabIndex = 3;
@@ -118,26 +117,33 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.stationContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.powerSupplyMenuItem,
             this.tunnelMenuItem,
-            this.remoteDesktopMenuItem});
+            this.remoteDesktopMenuItem,
+            this.deleteStationMenuItem});
             this.stationContextMenu.Name = "metroContextMenu1";
-            this.stationContextMenu.Size = new System.Drawing.Size(171, 82);
+            this.stationContextMenu.Size = new System.Drawing.Size(215, 136);
+            // 
+            // table
+            // 
+            this.table.AllowAdd = true;
+            this.table.AllowDelete = true;
+            this.table.AllowEdit = true;
+            this.table.AllowProgressBar = true;
+            this.table.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.table.Location = new System.Drawing.Point(0, 0);
+            this.table.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.table.Name = "table";
+            this.table.Size = new System.Drawing.Size(1919, 741);
+            this.table.TabIndex = 4;
+            this.table.Title = "title";
             // 
             // powerSupplyMenuItem
             // 
             this.powerSupplyMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.shutDownPowerSupplyMenuItem,
             this.resetPowerSupplyMenuItem});
             this.powerSupplyMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("powerSupplyMenuItem.Image")));
             this.powerSupplyMenuItem.Name = "powerSupplyMenuItem";
             this.powerSupplyMenuItem.Size = new System.Drawing.Size(214, 26);
             this.powerSupplyMenuItem.Text = "Zaśilanie";
-            // 
-            // shutDownPowerSupplyMenuItem
-            // 
-            this.shutDownPowerSupplyMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("shutDownPowerSupplyMenuItem.Image")));
-            this.shutDownPowerSupplyMenuItem.Name = "shutDownPowerSupplyMenuItem";
-            this.shutDownPowerSupplyMenuItem.Size = new System.Drawing.Size(168, 26);
-            this.shutDownPowerSupplyMenuItem.Text = "Wyłączyć";
             // 
             // resetPowerSupplyMenuItem
             // 
@@ -149,25 +155,17 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             // tunnelMenuItem
             // 
             this.tunnelMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.disconnectFromTunnelMenuItem,
             this.resetTunnelMenuItem});
             this.tunnelMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("tunnelMenuItem.Image")));
             this.tunnelMenuItem.Name = "tunnelMenuItem";
             this.tunnelMenuItem.Size = new System.Drawing.Size(214, 26);
             this.tunnelMenuItem.Text = "Tunel";
             // 
-            // disconnectFromTunnelMenuItem
-            // 
-            this.disconnectFromTunnelMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("disconnectFromTunnelMenuItem.Image")));
-            this.disconnectFromTunnelMenuItem.Name = "disconnectFromTunnelMenuItem";
-            this.disconnectFromTunnelMenuItem.Size = new System.Drawing.Size(145, 26);
-            this.disconnectFromTunnelMenuItem.Text = "Rozłącz";
-            // 
             // resetTunnelMenuItem
             // 
             this.resetTunnelMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetTunnelMenuItem.Image")));
             this.resetTunnelMenuItem.Name = "resetTunnelMenuItem";
-            this.resetTunnelMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.resetTunnelMenuItem.Size = new System.Drawing.Size(224, 26);
             this.resetTunnelMenuItem.Text = "Zresetuj";
             // 
             // remoteDesktopMenuItem
@@ -183,22 +181,15 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             // 
             this.connectRemoteDesktopMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("connectRemoteDesktopMenuItem.Image")));
             this.connectRemoteDesktopMenuItem.Name = "connectRemoteDesktopMenuItem";
-            this.connectRemoteDesktopMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.connectRemoteDesktopMenuItem.Size = new System.Drawing.Size(224, 26);
             this.connectRemoteDesktopMenuItem.Text = "Połącz się";
             // 
-            // table
+            // deleteStationMenuItem
             // 
-            this.table.AllowAdd = true;
-            this.table.AllowDelete = true;
-            this.table.AllowEdit = true;
-            this.table.AllowProgressBar = true;
-            this.table.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.table.Location = new System.Drawing.Point(0, 0);
-            this.table.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.table.Name = "table";
-            this.table.Size = new System.Drawing.Size(1919, 741);
-            this.table.TabIndex = 4;
-            this.table.Title = "title";
+            this.deleteStationMenuItem.Image = global::KTA_Visor.Properties.Resources.red_circle;
+            this.deleteStationMenuItem.Name = "deleteStationMenuItem";
+            this.deleteStationMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.deleteStationMenuItem.Text = "Usuń";
             // 
             // StationView
             // 
@@ -226,13 +217,12 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         public System.Windows.Forms.FlowLayoutPanel camerasFlowPanel;
         private ContextMenuStrip stationContextMenu;
         private System.Windows.Forms.ToolStripMenuItem powerSupplyMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem shutDownPowerSupplyMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resetPowerSupplyMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tunnelMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem disconnectFromTunnelMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resetTunnelMenuItem;
         private System.Windows.Forms.ToolStripMenuItem remoteDesktopMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem connectRemoteDesktopMenuItem;
         private KTA_Visor_UI.component.basic.table.Table table;
+        public ToolStripMenuItem resetPowerSupplyMenuItem;
+        public ToolStripMenuItem resetTunnelMenuItem;
+        public ToolStripMenuItem connectRemoteDesktopMenuItem;
+        public ToolStripMenuItem deleteStationMenuItem;
     }
 }

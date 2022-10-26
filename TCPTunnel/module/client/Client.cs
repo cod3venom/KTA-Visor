@@ -89,8 +89,20 @@ namespace TCPTunnel.module.client
             }
         }
 
+        public void Disconnect()
+        {
+            this._client.Disconnect();
+        }
+
         public void Reconnect(int delay = 1000)
         {
+            Thread.Sleep(delay);
+            this.Connect();
+        }
+
+        public void Restart(int delay = 2000)
+        {
+            this.Disconnect();
             Thread.Sleep(delay);
             this.Connect();
         }

@@ -1,6 +1,4 @@
-﻿using static KTA_Visor.module.Managemnt.module.station.command.HandleStationContextMenuClickEventCommand;
-using KTA_Visor.kernel.sharedKernel.interfaces;
-using KTA_Visor.module.Managemnt.module.station.command;
+﻿using KTA_Visor.kernel.sharedKernel.interfaces;
 using KTA_Visor.module.Managemnt.module.station.controller;
 using KTA_Visor.module.Shared.Global;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
@@ -8,7 +6,6 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
-using KTA_Visor.module.Station.events;
 using KTA_Visor_UI.component.basic.table;
 using KTA_Visor.module.Managemnt.module.station.handlers;
 using MetroFramework;
@@ -20,7 +17,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
     public partial class StationView : UserControl, IControllerInterface
     {
         private readonly ColumnTObject[] Columns = new ColumnTObject[] {
-            new ColumnTObject(0, "IDENTYFIKATOR STACJI"), // stationCustomId
+            new ColumnTObject(0, "IDENTYFIKATOR STACJI"),
             new ColumnTObject(1, "IP ADRES"),
             new ColumnTObject(2, "IP Klienta"),
             new ColumnTObject(3, "AKTYWNY", ColumnType.IMAGE, true, 50),
@@ -63,12 +60,6 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         {
             this.table.DataGridView.CellDoubleClick += onCellDoubleClick;
             this.table.OnRefreshData += onRefreshTableData;
-
-            this.shutDownPowerSupplyMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.StationId, (int)StationContextMenuItem.POWER_SUPPLY_OFF);
-            this.resetPowerSupplyMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.StationId, (int)StationContextMenuItem.POWER_SUPPLY_RESTART);
-            this.disconnectFromTunnelMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.StationId, (int)StationContextMenuItem.TUNNEL_DISCONNECT);
-            this.resetTunnelMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.StationId, (int)StationContextMenuItem.TUNNEL_RESTART);
-            this.connectRemoteDesktopMenuItem.Click += (sender, e) => HandleStationContextMenuClickEventCommand.Execute(sender, e, this, this.StationId, (int)StationContextMenuItem.RDP_CONNECT);
         }
  
 

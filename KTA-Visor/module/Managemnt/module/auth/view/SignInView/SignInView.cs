@@ -42,8 +42,11 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
         {
             this.signInBtn.Click += onSignIn;
             this.signUpLink.Click += onShowSignUpView;
+            this.forgotPasswordLbl.Click += onShowForgotPasswordForm;
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
+
+      
 
         private void enterFullScreenMode()
         {
@@ -92,6 +95,14 @@ namespace KTA_Visor.module.Managemnt.module.auth.view.SignInView
             form.ShowDialog();
         }
 
+
+        private void onShowForgotPasswordForm(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form form = new ForgotPasswordView.ForgotPasswordView();
+            form.FormClosing += onClosing;
+            form.ShowDialog();
+        }
 
         private void onClosing(object sender, FormClosingEventArgs e)
         {

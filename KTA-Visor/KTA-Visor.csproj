@@ -353,6 +353,12 @@
     <Compile Include="module\Managemnt\events\OnClientDisconnected.cs" />
     <Compile Include="module\Managemnt\events\OnClientConnected.cs" />
     <Compile Include="module\Managemnt\interfaces\IUIHandlerInterface.cs" />
+    <Compile Include="module\Managemnt\module\auth\view\ForgotPasswordView\ForgotPasswordView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\auth\view\ForgotPasswordView\ForgotPasswordView.Designer.cs">
+      <DependentUpon>ForgotPasswordView.cs</DependentUpon>
+    </Compile>
     <Compile Include="module\Managemnt\module\auth\view\SignInView\SignInView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -462,7 +468,6 @@
       <DependentUpon>LogsView.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\station\command\DisplayCamerasOfSelectedStationCommand.cs" />
-    <Compile Include="module\Managemnt\module\station\command\HandleStationContextMenuClickEventCommand.cs" />
     <Compile Include="module\Managemnt\module\station\components\ClientsList\ClientsList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -494,6 +499,12 @@
     </Compile>
     <Compile Include="module\Managemnt\module\station\view\StationView.Designer.cs">
       <DependentUpon>StationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\station\window\RDPClientWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\station\window\RDPClientWindow.Designer.cs">
+      <DependentUpon>RDPClientWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="module\Managemnt\module\user\consts\UserRole.cs" />
     <Compile Include="module\Managemnt\sub-window\AboutUsWindow.cs">
@@ -597,6 +608,9 @@
     <EmbeddedResource Include="component\custom\VerticalTab\VerticalTab.resx">
       <DependentUpon>VerticalTab.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\auth\view\ForgotPasswordView\ForgotPasswordView.resx">
+      <DependentUpon>ForgotPasswordView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\auth\view\SignInView\SignInView.resx">
       <DependentUpon>SignInView.cs</DependentUpon>
     </EmbeddedResource>
@@ -644,6 +658,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\station\view\StationView.resx">
       <DependentUpon>StationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\station\window\RDPClientWindow.resx">
+      <DependentUpon>RDPClientWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\sub-window\AboutUsWindow.resx">
       <DependentUpon>AboutUsWindow.cs</DependentUpon>
