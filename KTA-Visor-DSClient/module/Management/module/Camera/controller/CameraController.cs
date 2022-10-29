@@ -49,8 +49,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
             CameraEntity.Camera cameraEntityFromTunnel = JsonConvert.DeserializeObject<CameraEntity.Camera>(json);
             CameraEntity camera = await this._cameraService.findByCustomId(cameraEntityFromTunnel.cameraCustomId);
 
-            this._cameraDeviceSettingsService.AssignValues(camera.data);
-            this._cameraDeviceSettingsService.SaveSettings();
+            this._cameraDeviceSettingsService.SaveSettings(camera.data);
         }
 
         private void onBlinkCamera(Request request)

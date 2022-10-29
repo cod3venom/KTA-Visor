@@ -15,13 +15,12 @@ namespace Falcon_Protocol.wrapper
     public class SDK : ModulesManager
     {
 
-        public static int CurrentIndex = 0;
+        private static int[] usb_totalnum = new int[1];
 
         private byte[] getPwd()
         {
             return Encoding.ASCII.GetBytes("000000");
         }
-
 
         public bool Connect()
         {
@@ -31,13 +30,7 @@ namespace Falcon_Protocol.wrapper
                 int[] iRet = new int[1];
 
                 FalconProtocolInteropService.Init_Device(ref idCode, iRet);
-                bool connected = this.calcIRet(iRet);
-
-                if (connected)
-                {
-                    SDK.CurrentIndex += 1;
-                }
-                return connected;
+                return this.calcIRet(iRet);
             }
             catch (Exception ex)
             {
@@ -62,21 +55,6 @@ namespace Falcon_Protocol.wrapper
             int[] iRet= new int[1];
 
             FalconProtocolInteropService.Eylog_Login(ref userType, ref pwd, iRet);
-
-            return this.calcIRet(iRet);
-        }
-
-        public bool Mount(int index = -1)
-        {
-            int[] iRet = new int[1];
-            byte[] pwd = this.getPwd();
-
-            if (index > -1){
-                FalconProtocolInteropService.SetMSDC_ByIndex(pwd, iRet, index);
-            }
-            else{
-                FalconProtocolInteropService.SetMSDC(ref pwd, iRet);
-            }
 
             return this.calcIRet(iRet);
         }
@@ -142,7 +120,6 @@ namespace Falcon_Protocol.wrapper
             return info;
         }
 
-
         public ZFY_INFO SetDeviceInfo(ZFY_INFO info, int deviceIndex = -1)
         {
 
@@ -161,14 +138,20 @@ namespace Falcon_Protocol.wrapper
             return info;
         }
 
-
-        public int GetTotalConnectedDevices()
+        public List<int> GetTotalConnectedDevices()
         {
-            int[] devices = new int[1];
+            List<int> devices = new List<int>();
             byte[] idcode = new byte[6];
             int[] iret = new int[1];
-            FalconProtocolInteropService.Init_Device_UsbTotal(idcode, iret, devices);
-            return devices[0];
+            FalconProtocolInteropService.Init_Device_UsbTotal(idcode, iret, SDK.usb_totalnum);
+
+            int usb_index = SDK.usb_totalnum[0];
+            for(int i = 0; i <= usb_index; i++)
+            {
+                devices.Add(i);
+            }
+
+            return devices;
         }
 
         public void Blink(int[] usb_totalnum, int interval = 1000)
@@ -212,6 +195,35 @@ namespace Falcon_Protocol.wrapper
             return 0;
         }
 
+        public bool SetUDiskMode()
+        {
+            int[] iRet = new int[1];
+            byte[] pwd = this.getPwd();
+
+       
+            FalconProtocolInteropService.SetMSDC(ref pwd, iRet);
+       
+            return this.calcIRet(iRet);
+        }
+
+        public bool SetUDiskMode(int index)
+        {
+            int[] iRet = new int[1];
+            byte[] pwd = this.getPwd();
+
+            FalconProtocolInteropService.SetMSDC_ByIndex(pwd, iRet, index);
+            return this.calcIRet(iRet);
+        }
+
+        public void SetAPIMode(string drive_letter)
+        {
+            IntPtr[] filehandle = new IntPtr[1];
+            int[] iret = new int[1];
+
+            FalconProtocolInteropService.ConnectStorageDevice(drive_letter[0], filehandle);
+            FalconProtocolInteropService.PassWordCheck(filehandle[0], this.getPwd(), iret);
+            FalconProtocolInteropService.SetBWC_MSC_Return(filehandle[0], iret);
+        }
 
         private bool calcIRet(int[] iRet)
         {

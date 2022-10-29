@@ -160,6 +160,7 @@
     <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
     <Compile Include="module\Management\module\Camera\handler\CameraBackendSyncHandler.cs" />
+    <Compile Include="module\Management\module\Camera\observer\CamerasAutoSyncObserver.cs" />
     <Compile Include="module\Management\module\Camera\reports\TransferedFiles\TransferedFilesReport.cs" />
     <Compile Include="module\Management\module\Camera\transfer\AbstractResource.cs" />
     <Compile Include="module\Management\module\Camera\transfer\abstractResources\filesystem\FileSystem.cs" />

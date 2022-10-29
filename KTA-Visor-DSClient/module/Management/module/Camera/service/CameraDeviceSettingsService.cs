@@ -26,31 +26,22 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             this._falconProtocol = new FalconProtocol();
         }
 
-        public void AssignValues(CameraEntity.Camera cameraEntity)
+ 
+
+        public void SaveSettings(CameraEntity.Camera cameraEntity)
         {
             this._cameraEntity = cameraEntity;
-        }
-  
-
-        public void SaveSettings()
-        {
             Globals.ALLOW_FS_MOUNTING = false;
+            this._selectedCameraDevice = Globals.CAMERAS_LIST.GetByID(cameraEntity?.cameraCustomId);
             this.configureLocalIdentificators();
 
-            Globals.Relay.turnOffAll(10);
-            Thread.Sleep(2500);
-            Globals.Relay.turnOnAll(1000);
+            this._falconProtocol.SetAPIMode(cameraEntity?.driveName.ToString());
+            
+            Thread.Sleep(100);
 
+            this.configureIdentificators();
+            this.configureTweaks();
 
-            this._selectedCameraDevice = Globals.CAMERAS_LIST.GetByDrive(this._cameraEntity.driveName);
-            if (this._selectedCameraDevice == null)
-            {
-                return;
-            }
-
-            ZFY_INFO identifiers = this.configureIdentificators();
-            Thread.Sleep(2500);
-            MENU_CONFIG tweaks = this.configureTweaks();
             Globals.ALLOW_FS_MOUNTING = true;
         }
 

@@ -28,9 +28,9 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
             this._handlers = new List<IBootLoaderHandler>()
             {
                 new AutoStartHandler(this._logger),
+                new BackendInitHandler(this._settings),
                 new PowerSupplyInitHandler(this._settings, this._logger),
                 new StationInitHandler(this._settings),
-                new BackendInitHandler(this._settings),
                 new CamerasWatcherInitHandler(this._settings, this._logger),
                 new TunnelInitHandler(this._settings, this._logger),
             };

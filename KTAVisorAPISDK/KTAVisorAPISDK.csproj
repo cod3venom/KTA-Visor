@@ -50,12 +50,15 @@
     <Compile Include="module\camera\dto\request\SelectCurrentCameraInStationRequestTObject.cs" />
     <Compile Include="module\camera\dto\request\EditCameraSettingsTObject.cs" />
     <Compile Include="module\camera\dto\request\CreateCameraSettingsTObject.cs" />
+    <Compile Include="module\camera\dto\request\SyncCamerasRequestTObject.cs" />
     <Compile Include="module\camera\dto\response\CameraHasCardDuplicatesResponseTObject.cs" />
     <Compile Include="module\camera\entity\CameraSettingsEntity.cs" />
     <Compile Include="module\camera\entity\CameraTransferredFilesReportEntity.cs" />
     <Compile Include="module\camera\repository\CameraCardRepository.cs" />
+    <Compile Include="module\camera\repository\CameraSyncRepository.cs" />
     <Compile Include="module\camera\repository\CameraSettingsRepository.cs" />
     <Compile Include="module\camera\repository\CameraTransferredFilesReportRepository.cs" />
+    <Compile Include="module\camera\service\CameraSyncService.cs" />
     <Compile Include="module\camera\service\CameraTransferredFilesReportService.cs" />
     <Compile Include="module\camera\service\CameraCardService.cs" />
     <Compile Include="module\camera\service\CameraSettingsService.cs" />

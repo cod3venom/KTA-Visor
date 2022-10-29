@@ -109,8 +109,8 @@ namespace Falcon_Protocol.interop
 		/// <param name="IRet"></param>
 		/// <param name="usb_index"></param>
 		/// <returns></returns>
-		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WriteZFYInfo_ByIndex")]
-		public static extern int SetMSDC_ByIndex(byte[] sPwd, int[] IRet, int usb_index);
+		[DllImport("dll\\h22_4g_pc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetMSDC_ByIndex")]
+		public static extern int SetMSDC_ByIndex(byte[] sPwd, int[] iRet, int usb_index);
 
 		/// <summary>
 		/// 
@@ -298,7 +298,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="drv_letter"></param>
 		/// <param name="filehandle"></param>
 		/// <returns></returns>
-		[DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?ConnectStorageDevice@@YAHDPAPAX@Z")]
+		[DllImport("dll\\msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?ConnectStorageDevice@@YAHDPAPAX@Z")]
 		public static extern int ConnectStorageDevice(char drv_letter, IntPtr[] filehandle);
 
 		/// <summary>
@@ -308,7 +308,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="sPwd"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-		[DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?PassWordCheck@@YAHPAXPADPAH@Z")]
+		[DllImport("dll\\msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?PassWordCheck@@YAHPAXPADPAH@Z")]
 		public static extern int PassWordCheck(IntPtr filehandle, byte[] sPwd, int[] iRet);
 
 		/// <summary>
@@ -317,7 +317,7 @@ namespace Falcon_Protocol.interop
 		/// <param name="filehandle"></param>
 		/// <param name="iRet"></param>
 		/// <returns></returns>
-		[DllImport("msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?SetBWC_MSC@@YAHPAXPAH@Z")]
+		[DllImport("dll\\msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?SetBWC_MSC@@YAHPAXPAH@Z")]
 		public static extern int SetBWC_MSC_Return(IntPtr filehandle, int[] iRet);
 
 	}

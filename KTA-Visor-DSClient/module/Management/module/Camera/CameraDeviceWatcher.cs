@@ -16,6 +16,7 @@ using System.Threading;
 using System.Collections.Generic;
 using KTA_Visor_DSClient.kernel.interfaces;
 using KTA_Visor_DSClient.module.Management.module.Camera.observer;
+using Falcon_Protocol.wrapper;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService
 {
@@ -27,8 +28,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         private readonly FalconProtocol falconProtocol;
         private readonly CameraService cameraService;
         private readonly CamerasListObserver _camersasListObserver;
-        private int _indexIterator = 0;
-
+        private readonly CamerasAutoSyncObserver _camerasautosyncObserver;
         public CameraDeviceWatcher(Settings settings, KTALogger.Logger logger)
         {
             this.settings = settings;
@@ -36,12 +36,15 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             this.falconProtocol = new FalconProtocol();
             this.cameraService = new CameraService();
             this._camersasListObserver = new CamerasListObserver(this.settings, logger);
+            this._camerasautosyncObserver = new CamerasAutoSyncObserver();
         }
 
         
         public void Start()
         {
             this._camersasListObserver.Observe();
+            this._camerasautosyncObserver.Observe();
+
             this.watch();
             this.falconProtocol.Detector.OnExceptionOccured += onExceptionOccured;
             this.falconProtocol.Detector.OnDeviceMounted += OnDeviceMounted;
@@ -55,7 +58,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         {
             Thread watchThread = new Thread((ThreadStart)delegate
             {
-                int tmpIndex = this._indexIterator;
                 while(true)
                 {
                     if (!Globals.ALLOW_FS_MOUNTING){
@@ -63,13 +65,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                     }
 
                     this.Connect();
-                    if (tmpIndex != this._indexIterator)
-                    {
-                        tmpIndex = this._indexIterator;
-
-                        Console.WriteLine("Current index is : " + tmpIndex);
-                    }
-                    this._indexIterator = this.GetTotalConnectedDevices();
                     this.TryToMountDevice();
                 }
             });
@@ -86,8 +81,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             }
 
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.Name);
-            camera.Index = this._indexIterator;
+            camera.Index = this.GetTotalConnectedDevices().Count;
             Globals.CAMERAS_LIST.Push(camera);
+
+            Console.WriteLine("Added camera with index is : " + camera.Index);
         }
 
         private void OnDeviceDisconnected(object sender, OnDeviceRemoved e)
@@ -100,6 +97,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                 }
 
                 Globals.CAMERAS_LIST.Delete(camera);
+                Console.WriteLine("Removed camera with index is : " + camera.Index);
+
             }
             catch (Exception ex)
             {
@@ -111,7 +110,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         {
             if (Globals.ALLOW_FS_MOUNTING)
             {
-                new Thread(() => this.Mount()).Start();
+                this.SetUDiskMode(this.GetTotalConnectedDevices().Count);
                 Thread.Sleep(2500);
             }
         }

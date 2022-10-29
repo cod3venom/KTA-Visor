@@ -48,20 +48,24 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             removingThread.Start();   
         }
 
-        public USBCameraDevice GetByCardID(string cardId)
+        public USBCameraDevice GetByID (string id)
         {
-            return this.Find((USBCameraDevice device) => device.Name == cardId);
+            return this.Find((USBCameraDevice device) => device?.ID == id);
         }
 
+        public USBCameraDevice GetByCardID(string cardId)
+        {
+            return this.Find((USBCameraDevice device) => device?.Name == cardId);
+        }
 
         public USBCameraDevice GetByDrive(string driveName)
         {
-            return this.Find((USBCameraDevice device) => device.Name == driveName);
+            return this.Find((USBCameraDevice device) => device?.Name == driveName);
         }
 
         public USBCameraDevice GetByBadge(string badgeId)
         {
-            return this.Find((USBCameraDevice device) => device.BadgeId == badgeId);
+            return this.Find((USBCameraDevice device) => device?.BadgeId == badgeId);
         }
 
     }
