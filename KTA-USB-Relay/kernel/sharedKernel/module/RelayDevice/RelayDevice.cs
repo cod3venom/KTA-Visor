@@ -90,7 +90,6 @@ namespace KTA_USB_Relay.kernel.sharedKernel.module.commander
             foreach (int port in this.Ports)
             {
                 this.sendCommand(String.Format("C {0}", port.ToString()));
-                Console.WriteLine(string.Format("Turned ON Port {0}", port.ToString()));
 
                 Thread.Sleep(transition);
             }

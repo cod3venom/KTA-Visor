@@ -32,13 +32,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
         {
             this._cameraEntity = cameraEntity;
             Globals.ALLOW_FS_MOUNTING = false;
-            this._selectedCameraDevice = Globals.CAMERAS_LIST.GetByID(cameraEntity?.cameraCustomId);
+            this._selectedCameraDevice = Globals.CAMERAS_LIST.GetByDrive(cameraEntity?.driveName);
             this.configureLocalIdentificators();
-
             this._falconProtocol.SetAPIMode(cameraEntity?.driveName.ToString());
-            
-            Thread.Sleep(100);
-
             this.configureIdentificators();
             this.configureTweaks();
 
@@ -84,7 +80,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 
         private void configureLocalIdentificators()
         {
-            this._selectedCameraDevice.Settings.ID = this._cameraEntity.cameraCustomId;
+            this._selectedCameraDevice.Settings.ID = this._cameraEntity.id;
+            this._selectedCameraDevice.Settings.CustomId = this._cameraEntity.cameraCustomId;
             this._selectedCameraDevice.Settings.BadgeId = this._cameraEntity.badgeId;
             this._selectedCameraDevice.Settings.CardId = this._cameraEntity.cardId;
 

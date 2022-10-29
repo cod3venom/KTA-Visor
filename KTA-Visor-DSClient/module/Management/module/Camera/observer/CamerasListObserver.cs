@@ -18,14 +18,14 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.observer
     {
         private readonly Settings _settings;
         private readonly KTALogger.Logger _logger;
-        private readonly CameraBackendSyncHandler _cameraBackendSyncHandler;
+        private readonly CameraBackendInit _cameraBackendSyncHandler;
         private readonly FilesTransferManager _cameraFilesTransferingHandler;
         public CamerasListObserver(Settings settings, KTALogger.Logger logger)
         {
             this._settings = settings;
             this._logger = logger;
 
-            this._cameraBackendSyncHandler = new CameraBackendSyncHandler();
+            this._cameraBackendSyncHandler = new CameraBackendInit();
             this._cameraFilesTransferingHandler = new FilesTransferManager(
                 this._settings,
                 this._settings.SettingsObj?.app?.fileSystem?.filesPath,
@@ -39,7 +39,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.observer
             Globals.CAMERAS_LIST.OnCameraRemovedFromMemory += onCameraRemovedFromTheMemory;
         }
 
-       
         private void onCameraAddedToTheMemory(object sender, CameraAddedToTheMemoryEvent e)
         {
             this._cameraBackendSyncHandler.Handle(e.Camera);

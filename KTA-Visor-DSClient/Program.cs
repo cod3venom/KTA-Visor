@@ -50,21 +50,21 @@ namespace KTA_Visor_DSClient
 
         private static void Entrypoint_OnExceptionOccured(object sender, OnExceptionOccuredEvent e)
         {
-            Program.HandleException(e);
+            Program.HandleException(e.Exception);
         }
 
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            Program.HandleException(e);
+            Program.HandleException(e.Exception);
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Program.HandleException(e);
+            Program.HandleException((Exception)e.ExceptionObject);
         }
 
 
-        private static void HandleException(dynamic exception)
+        private static void HandleException(Exception exception)
         {
             Globals.Logger.error("Global exception handler", exception);
             new StationInitializer(new install.settings.Settings()).init(false);

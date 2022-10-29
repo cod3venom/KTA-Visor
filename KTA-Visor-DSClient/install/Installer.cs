@@ -16,15 +16,16 @@ namespace KTA_Visor_DSClient.install
 
         public Installer()
         {
-            this.currentPath = Directory.GetCurrentDirectory();
+            this.currentPath = Environment.CurrentDirectory;
         }
         private void writeSettingsFile()
         {
             
             DirectoryInfo dirInfo = new DirectoryInfo(string.Format("{0}/settings", this.currentPath));
             FileInfo fileInfo = new FileInfo(string.Format("{0}/settings/settings.json", this.currentPath));
-            if (!dirInfo.Exists)
+            if (!dirInfo.Exists){
                 dirInfo.Create();
+            }
 
             if (!fileInfo.Exists)
             {

@@ -152,7 +152,7 @@ namespace TCPTunnel.module.server
             string ipAddress = newConnection.RemoteEndPoint.ToString();
             TCPClientTObject client = new TCPClientTObject(ipAddress, newConnection);
 
-            this.tempClientList.addClient(client, false);
+            this.tempClientList.AddClient(client, false);
 
             Request authCommandRequest = new Request(Endpoints.AUTH_NEED_COMMAND_ENDPOINT, "", client);
             client.Send(authCommandRequest);
@@ -225,7 +225,7 @@ namespace TCPTunnel.module.server
             e.Client.AuthData = authData;
 
             string ipAddress = e.Client.Socket.RemoteEndPoint.ToString();
-            this.clientsList.addClient(e.Client, false);
+            this.clientsList.AddClient(e.Client, false);
 
             this.logger.info(string.Format("Successfully authenticated and added client in CLIENTLIST", e.Client.IpAddress));
             this.onClientConnected.Invoke(e, new TCPServerClientConnectedEvent(e.Client));

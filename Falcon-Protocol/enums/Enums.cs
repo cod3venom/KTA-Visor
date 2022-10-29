@@ -21,8 +21,9 @@ namespace Falcon_Protocol.enums
             Resolution1280X720P20,
             Resolution848X480XP20,
         }
+        
 
-        public List<VideoResolutions> Resolutions 
+        public static List<VideoResolutions> Resolutions 
         {
            get
             {
@@ -42,7 +43,7 @@ namespace Falcon_Protocol.enums
 		    Normal
         }
 
-        public List<string> Qualities
+        public static List<string> Qualities
         {
             get
             {

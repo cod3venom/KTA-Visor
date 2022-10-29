@@ -12,12 +12,10 @@ namespace KTA_Visor_DSClient.module.Management.module.PowerSupply
         public event EventHandler<EventArgs> OnPowerSupplyInitialized;
         public event EventHandler<EventArgs> OnUnableToInitializePowerSupply;
 
-        private readonly Settings settings;
         private USBDeviceRelay usbRelay;
 
         public PowerSupplyInitializer()
         {
-            this.settings = new Settings();
         }
 
         public void Initailize()

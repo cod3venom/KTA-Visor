@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace KTAVisorAPISDK.module.camera.dto.request
 {
-    public class CreateCameraRequestTObject
+    public class InitCameraRequestTObject
     {
+      
 
-        public CreateCameraRequestTObject(
+        public InitCameraRequestTObject(
+            int id = 0,
+            string markerId = "",
             string camCustomId = "",
             string badgeId = "",
             string cardId = "",
@@ -18,15 +16,19 @@ namespace KTAVisorAPISDK.module.camera.dto.request
             bool active = true
         )
         {
+            this.id = id;
+            this.markerId = markerId;
             this.camCustomId = camCustomId;
             this.badgeId = badgeId;
             this.cardId = cardId;
             this.stationId = stationId;
             this.driveName = driveName;
             this.active = active;
-     
+
         }
 
+        public int id { get; set; }
+        public string markerId { get; set; }
         public string camCustomId { get; set; }
         public string badgeId { get; set; }
         public string cardId { get; set; }

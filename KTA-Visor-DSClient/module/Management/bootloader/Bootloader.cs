@@ -30,9 +30,9 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
                 new AutoStartHandler(this._logger),
                 new BackendInitHandler(this._settings),
                 new PowerSupplyInitHandler(this._settings, this._logger),
+                new TunnelInitHandler(this._settings, this._logger),
                 new StationInitHandler(this._settings),
                 new CamerasWatcherInitHandler(this._settings, this._logger),
-                new TunnelInitHandler(this._settings, this._logger),
             };
         }
 
@@ -46,6 +46,9 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
                 Thread handlerThread = new Thread(() => handler.Handle());
                 handlerThread.IsBackground = true;
                 handlerThread.Start();
+
+                Thread.Sleep(1500);
+
                 this._logger.info(String.Format("Initialized : {0}", handler.GetName()));
             });
 

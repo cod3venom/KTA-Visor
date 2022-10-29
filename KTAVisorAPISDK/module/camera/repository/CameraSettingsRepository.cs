@@ -18,21 +18,21 @@ namespace KTAVisorAPISDK.module.camera.repository
             return await HttpClientUtil.securedClient.GET("/api/hidden/cameras");
         }
 
-        public async Task<HttpResponseMessage> findById(string id)
+        public async Task<HttpResponseMessage> findById(int id)
         {
             return await HttpClientUtil.securedClient.GET("/api/hidden/cameras/{id}/settings"+id);
         }
 
-        public async Task<HttpResponseMessage> create(string cameraId, CreateCameraSettingsTObject request)
+        public async Task<HttpResponseMessage> create(int id, CreateCameraSettingsTObject request)
         {
             string payload = JsonConvert.SerializeObject(request);
-            return await HttpClientUtil.securedClient.POST(String.Format("/api/hidden/cameras/{0}/settings", cameraId), payload);
+            return await HttpClientUtil.securedClient.POST(String.Format("/api/hidden/cameras/{0}/settings", id), payload);
         }
 
-        public async Task<HttpResponseMessage> edit(string cameraId, EditCameraSettingsTObject request)
+        public async Task<HttpResponseMessage> edit(int id, EditCameraSettingsTObject request)
         {
             string payload = JsonConvert.SerializeObject(request);
-            return await HttpClientUtil.securedClient.PUT(String.Format("/api/hidden/cameras/{0}/settings", cameraId), payload);
+            return await HttpClientUtil.securedClient.PUT(String.Format("/api/hidden/cameras/{0}/settings", id), payload);
         }
 
     }

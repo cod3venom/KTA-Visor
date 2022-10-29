@@ -11,12 +11,14 @@ namespace KTA_REPORTER.abstraction
     {
         protected void Save(string content, string path, bool withProgress = true)
         {
-            using (StreamWriter writer = new StreamWriter(path))
+            FileStream fs = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+            using (StreamWriter writer = new StreamWriter(fs))
             {
-                writer.Write(content);
-                writer.Flush();
+                writer.WriteLine(content);
                 writer.Close();
+                fs.Close();
             }
+            
         }
 
         private void renderProgress(int progress)

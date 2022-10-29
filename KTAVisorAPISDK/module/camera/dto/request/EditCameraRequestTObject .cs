@@ -9,7 +9,6 @@ namespace KTAVisorAPISDK.module.camera.dto.reques
     public class EditCameraRequestTObject
     {
         public EditCameraRequestTObject(
-           int index = 0,
            string camCustomId = "",
            string badgeId = "",
            string cardId = "",

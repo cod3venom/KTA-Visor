@@ -30,6 +30,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -50,14 +68,17 @@
     <Compile Include="module\camera\dto\request\SelectCurrentCameraInStationRequestTObject.cs" />
     <Compile Include="module\camera\dto\request\EditCameraSettingsTObject.cs" />
     <Compile Include="module\camera\dto\request\CreateCameraSettingsTObject.cs" />
+    <Compile Include="module\camera\dto\request\InitCameraRequestTObject.cs" />
     <Compile Include="module\camera\dto\request\SyncCamerasRequestTObject.cs" />
     <Compile Include="module\camera\dto\response\CameraHasCardDuplicatesResponseTObject.cs" />
     <Compile Include="module\camera\entity\CameraSettingsEntity.cs" />
     <Compile Include="module\camera\entity\CameraTransferredFilesReportEntity.cs" />
     <Compile Include="module\camera\repository\CameraCardRepository.cs" />
+    <Compile Include="module\camera\repository\CameraInitRepository.cs" />
     <Compile Include="module\camera\repository\CameraSyncRepository.cs" />
     <Compile Include="module\camera\repository\CameraSettingsRepository.cs" />
     <Compile Include="module\camera\repository\CameraTransferredFilesReportRepository.cs" />
+    <Compile Include="module\camera\service\CameraInitService.cs" />
     <Compile Include="module\camera\service\CameraSyncService.cs" />
     <Compile Include="module\camera\service\CameraTransferredFilesReportService.cs" />
     <Compile Include="module\camera\service\CameraCardService.cs" />

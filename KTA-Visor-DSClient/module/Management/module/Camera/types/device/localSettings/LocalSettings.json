@@ -1,5 +1,7 @@
 ﻿{
-  "ID": "",
+  "ID":  0,
+  "CustomId": "",
   "BadgeID": "",
-  "CardId": ""
+  "CardId": "",
+  "MarkerId": ""
 }

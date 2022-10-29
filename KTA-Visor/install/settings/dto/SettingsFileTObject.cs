@@ -19,6 +19,7 @@ namespace KTA_Visor.install.settings.dto
             public API api { get; set; }        
             public Tunnel tunnel{ get; set; }
             public FileSystem fileSystem { get; set; }
+            public CardMode cardMode { get; set; }
         }
          
         public class API
@@ -43,6 +44,11 @@ namespace KTA_Visor.install.settings.dto
         {
             public string filesPath { get; set; }
             public bool autoCopy { get; set; }
+        }
+
+        public class CardMode
+        {
+            public string password { get; set; }
         }
     }
 }

@@ -30,17 +30,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.observer
 
         private void autoSync()
         {
-            while(true)
-            {
-                List<string> activeCameraIds = new List<string>();
-                foreach(USBCameraDevice camera in Globals.CAMERAS_LIST)
-                {
-                    activeCameraIds.Add(camera.ID);
-                }
-
-                _ = this._cameraSyncService.sync(new SyncCamerasRequestTObject(Globals.STATION?.data?.stationId, activeCameraIds));
-                Thread.Sleep(15000);
-            }
         }
     }
 }

@@ -18,11 +18,10 @@ namespace KTAVisorAPISDK.module.camera.repository
             return await HttpClientUtil.securedClient.GET("/api/hidden/cameras");
         }
 
-        public async Task<HttpResponseMessage> findById(string id)
+        public async Task<HttpResponseMessage> findById(int id)
         {
             return await HttpClientUtil.httpClient.GET("/api/hidden/cameras/"+id);
         }
-
         
         public async Task<HttpResponseMessage> findByCustomId(string customId)
         {
@@ -50,18 +49,12 @@ namespace KTAVisorAPISDK.module.camera.repository
             return await HttpClientUtil.httpClient.POST("/api/hidden/cameras", payload);
         }
 
-        public async Task<HttpResponseMessage> edit(string id, EditCameraRequestTObject request)
+        public async Task<HttpResponseMessage> edit(int id, EditCameraRequestTObject request)
         {
             string payload = JsonConvert.SerializeObject(request);
             return await HttpClientUtil.httpClient.PUT("/api/hidden/cameras/" + id, payload);
         }
 
-        public async Task<HttpResponseMessage> editByCustomId(string customId, EditCameraRequestTObject request)
-        {
-            string payload = JsonConvert.SerializeObject(request);
-            return await HttpClientUtil.httpClient.PUT("/api/hidden/cameras/customid/" + customId, payload);
-        }
- 
         public async Task<HttpResponseMessage> delete(string id)
         {
             return await HttpClientUtil.httpClient.DELETE("/api/hidden/cameras/" + id);

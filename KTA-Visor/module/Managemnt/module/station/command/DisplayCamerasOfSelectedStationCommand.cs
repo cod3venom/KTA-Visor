@@ -70,22 +70,5 @@ namespace KTA_Visor.module.Managemnt.module.station.command
                 Console.WriteLine(ex.ToString());
             }
         }
-
-        private void displayfakeRecords()
-        {
-            CameraEntity entity1 = new CameraEntity();
-            entity1.data = new CameraEntity.Camera();
-            entity1.data.id = "1";
-            entity1.data.index = 1;
-            entity1.data.cameraCustomId = "1234";
-            entity1.data.badgeId= "1234";
-            entity1.data.driveName= "1";
-            entity1.data.active = true;
-            entity1.data.stationId = "1111";
-            entity1.data.updatedAt = "11.01.2022";
-            entity1.data.createdAt= "12.01.2022";
-
-            //for (int i = 0; i <)
-        }
     }
 }

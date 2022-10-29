@@ -11,21 +11,24 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem
 {
     public class FileSystem
     {
+        public event EventHandler<OnTransferProgressChanged> OnTransferProgressChanged;
         public event EventHandler<OnFilesTransferingFinishedEvent> OnCopyingFinished;
 
         private USBCameraDevice _cameraDevice;
         private readonly FileManagerService _fileManagerService;
-        private List<FileInfo> _filesToBeCopied;
-        private bool _canCopy = true;
 
         private readonly string _destination;
         private readonly KTALogger.Logger _logger;
+
+        private long _totalFilesSize = 0;
+        private long _totalCopiedSize = 0;
 
         public FileSystem(string destination, KTALogger.Logger logger)
         {
@@ -33,7 +36,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
             this._logger = logger;
             this._fileManagerService = new FileManagerService();
         }
-
 
         public void MoveFilesToStorage(USBCameraDevice cameraDevice)
         {
@@ -44,6 +46,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
             }
 
             Globals.IS_ALL_COPYING_PROCESS_ARE_END = false;
+            this._totalFilesSize = this._cameraDevice.Files.Sum(file => Convert.ToInt32(file.Length));
 
             this.CopyFilesWithParalels(this._cameraDevice.Files);
             Globals.IS_ALL_COPYING_PROCESS_ARE_END = true;
@@ -51,48 +54,41 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
 
         private void CopyFilesWithParalels(List<FileInfo> files)
         {
-            this._filesToBeCopied = files;
 
             List<FileInfo> copiedFiles = new List<FileInfo>();
             List<FileInfo> duplicateFiles = new List<FileInfo>();
             List<FileInfo> failedFiles = new List<FileInfo>();
 
-            ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 10 };
-            Parallel.ForEach(this._filesToBeCopied, options, fileToBeCopied => {
-
+            foreach(FileInfo file in files)
+            {
                 try
                 {
-                    if (!this._canCopy){
-                        return;
-                    }
-
-                    FileInfo destinationFile = new FileInfo(String.Format("{0}\\{1}", this._destination, fileToBeCopied.Name));
+                    FileInfo destinationFile = new FileInfo(String.Format("{0}\\{1}", this._destination, file.Name));
 
                     if (!File.Exists(destinationFile.FullName))
                     {
-                        this._logger.info(string.Format("Transfering {0} >> to >> {1}", fileToBeCopied.Name, destinationFile.FullName));
-                        this.copyFile(fileToBeCopied, destinationFile);
+                        this.copyFile(file, destinationFile);
 
                         if (File.Exists(destinationFile.FullName))
                         {
-                            copiedFiles.Add(fileToBeCopied);
-                            this.addTransferedFileToBackend(fileToBeCopied, destinationFile);
-
+                            copiedFiles.Add(file);
+                            this.addTransferedFileToBackend(file, destinationFile);
                             //file.Delete();
                         }
                     }
                     else
                     {
-                        duplicateFiles.Add(fileToBeCopied);
+                        duplicateFiles.Add(file);
                     }
 
                 }
                 catch (IOException exception)
                 {
-                    failedFiles.Add(fileToBeCopied);
-                    Globals.IS_ALL_COPYING_PROCESS_ARE_END = true;                
+                    failedFiles.Add(file);
+                    Globals.IS_ALL_COPYING_PROCESS_ARE_END = true;
                 }
-            });
+            }
+             
 
             this.OnCopyingFinished?.Invoke(this, new OnFilesTransferingFinishedEvent(
                 this._cameraDevice,
@@ -118,17 +114,29 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
                 while ((bytesRead = fs.Read(bytes, 0, bufferSize)) > 0)
                 {
                     fileStream.Write(bytes, 0, bytesRead);
+                    this._totalCopiedSize += bytesRead;
+
+                    this.OnTransferProgressChanged?.Invoke(this, new OnTransferProgressChanged(
+                        file,
+                        this._totalFilesSize,
+                        this._totalCopiedSize
+                    ));
                 }
+
+                this._totalCopiedSize = 0;
             }
         }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="originFile"></param>
+        /// <param name="destFile"></param>
         protected void addTransferedFileToBackend(FileInfo originFile, FileInfo destFile)
         {
             _ = this._fileManagerService.create(new CreateFileHistoryRequestTObject(
                 Globals.STATION.data?.stationId,
-                this._cameraDevice.ID,
+                this._cameraDevice.CustomId,
                 this._cameraDevice.BadgeId,
                 originFile.Name,
                 originFile.FullName,

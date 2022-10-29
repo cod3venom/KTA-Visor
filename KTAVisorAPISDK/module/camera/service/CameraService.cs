@@ -32,7 +32,7 @@ namespace KTAVisorAPISDK.module.camera.service
             return cameras;
         }
 
-        public async Task<CameraEntity> findById(string id)
+        public async Task<CameraEntity> findById(int id)
         {
             HttpResponseMessage result = await this.cameraRepository.findById(id);
             string responseBody = await result.Content.ReadAsStringAsync();
@@ -88,7 +88,7 @@ namespace KTAVisorAPISDK.module.camera.service
         }
 
 
-        public async Task<CameraEntity> edit(string id, EditCameraRequestTObject request)
+        public async Task<CameraEntity> edit(int id, EditCameraRequestTObject request)
         {
             HttpResponseMessage result = await this.cameraRepository.edit(id, request);
             string responseBody = await result.Content.ReadAsStringAsync();
@@ -97,15 +97,6 @@ namespace KTAVisorAPISDK.module.camera.service
             return camera;
         }
 
-        public async Task<CameraEntity> editByCustomId(string customId, EditCameraRequestTObject request)
-        {
-            HttpResponseMessage result = await this.cameraRepository.editByCustomId(customId, request);
-            string responseBody = await result.Content.ReadAsStringAsync();
-            CameraEntity camera = JsonConvert.DeserializeObject<CameraEntity>(responseBody);
-
-            return camera;
-        }
- 
         public async Task<HttpResponseMessage> delete(string id)
         {
             HttpResponseMessage response = await this.cameraRepository.delete(id);

@@ -10,8 +10,8 @@ namespace KTAVisorAPISDK.module.camera.entity
     {
         public class Camera
         {
-            public string id { get; set; }
-            public int index { get; set; }
+            public int id { get; set; }
+            public string markerId { get; set; }
             public string cameraCustomId { get; set; }
             public string badgeId { get; set; }
             public string cardId { get; set; }

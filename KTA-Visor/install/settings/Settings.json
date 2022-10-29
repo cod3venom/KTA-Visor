@@ -19,6 +19,9 @@
     "fileSystem": {
       "filesPath": "",
       "autoCopy": true
+    },
+    "cardMode": {
+      "password": "admin123"
     }
   }
 }

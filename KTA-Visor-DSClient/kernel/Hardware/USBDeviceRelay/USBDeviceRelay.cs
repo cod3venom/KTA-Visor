@@ -20,31 +20,5 @@ namespace KTA_Visor_DSClient.kernel.Hardware.USBDeviceRelay
         public USBDeviceRelay(string portName,int baudRate, Parity parity, int dataBits, StopBits stopBit, KTALogger.Logger logger): base(portName, baudRate, parity, dataBits, stopBit, logger)
         {
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="badgeId"></param>
-        /// <returns></returns>
-        public int FindPortByCameraCustomId(string cameraCustomId)
-        {
-            USBCameraDevice requestedDevice = Globals.CAMERAS_LIST.Find(
-                (USBCameraDevice requestedCamera) => requestedCamera.ID == cameraCustomId
-            );
-            
-            foreach(int portNumber in this.Ports)
-            {
-                this.turnOffByPort(portNumber, 100);
-                Thread.Sleep(100);
-
-                bool driveExists = DriveInfo.GetDrives().Any(x => x.Name == requestedDevice?.Drive?.Name);
-
-                if (!driveExists){
-                    requestedDevice.RelayPort = portNumber;
-                    return requestedDevice.RelayPort;
-                }
-            }
-            return -1;
-        }
     }
 }

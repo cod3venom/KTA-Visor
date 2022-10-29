@@ -35,6 +35,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.tabControl = new MetroFramework.Controls.MetroTabControl();
             this.tabPage = new System.Windows.Forms.TabPage();
             this.camerasFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.fileTransfersTab = new MetroFramework.Controls.MetroTabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.stationContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -46,11 +47,14 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.connectRemoteDesktopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteStationMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.table = new KTA_Visor_UI.component.basic.table.Table();
-            this.fileTransfersTab = new MetroFramework.Controls.MetroTabPage();
+            this.camerasFlowPanelContextMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.refreshCamerasFlowPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyczysśćToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPage.SuspendLayout();
             this.panel1.SuspendLayout();
             this.stationContextMenu.SuspendLayout();
+            this.camerasFlowPanelContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -64,8 +68,8 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 1;
-            this.tabControl.Size = new System.Drawing.Size(1919, 336);
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(958, 336);
             this.tabControl.Style = MetroFramework.MetroColorStyle.Silver;
             this.tabControl.TabIndex = 2;
             this.tabControl.UseSelectable = true;
@@ -73,11 +77,11 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             // tabPage
             // 
             this.tabPage.Controls.Add(this.camerasFlowPanel);
-            this.tabPage.Location = new System.Drawing.Point(4, 41);
+            this.tabPage.Location = new System.Drawing.Point(4, 37);
             this.tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage.Name = "tabPage";
             this.tabPage.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage.Size = new System.Drawing.Size(1911, 291);
+            this.tabPage.Size = new System.Drawing.Size(950, 295);
             this.tabPage.TabIndex = 0;
             this.tabPage.Text = "Kamery";
             this.tabPage.UseVisualStyleBackColor = true;
@@ -85,12 +89,27 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             // camerasFlowPanel
             // 
             this.camerasFlowPanel.AutoScroll = true;
+            this.camerasFlowPanel.ContextMenuStrip = this.camerasFlowPanelContextMenu;
             this.camerasFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.camerasFlowPanel.Location = new System.Drawing.Point(4, 4);
             this.camerasFlowPanel.Margin = new System.Windows.Forms.Padding(4);
             this.camerasFlowPanel.Name = "camerasFlowPanel";
-            this.camerasFlowPanel.Size = new System.Drawing.Size(1903, 283);
+            this.camerasFlowPanel.Size = new System.Drawing.Size(942, 287);
             this.camerasFlowPanel.TabIndex = 0;
+            // 
+            // fileTransfersTab
+            // 
+            this.fileTransfersTab.HorizontalScrollbarBarColor = true;
+            this.fileTransfersTab.HorizontalScrollbarHighlightOnWheel = false;
+            this.fileTransfersTab.HorizontalScrollbarSize = 10;
+            this.fileTransfersTab.Location = new System.Drawing.Point(4, 37);
+            this.fileTransfersTab.Name = "fileTransfersTab";
+            this.fileTransfersTab.Size = new System.Drawing.Size(950, 295);
+            this.fileTransfersTab.TabIndex = 1;
+            this.fileTransfersTab.Text = "Transfer danych";
+            this.fileTransfersTab.VerticalScrollbarBarColor = true;
+            this.fileTransfersTab.VerticalScrollbarHighlightOnWheel = false;
+            this.fileTransfersTab.VerticalScrollbarSize = 10;
             // 
             // panel1
             // 
@@ -100,7 +119,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.panel1.Location = new System.Drawing.Point(0, 741);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1919, 368);
+            this.panel1.Size = new System.Drawing.Size(958, 368);
             this.panel1.TabIndex = 3;
             // 
             // bunifuSeparator1
@@ -112,7 +131,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.bunifuSeparator1.Location = new System.Drawing.Point(0, 0);
             this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
-            this.bunifuSeparator1.Size = new System.Drawing.Size(1919, 32);
+            this.bunifuSeparator1.Size = new System.Drawing.Size(958, 32);
             this.bunifuSeparator1.TabIndex = 3;
             this.bunifuSeparator1.Transparency = 255;
             this.bunifuSeparator1.Vertical = false;
@@ -193,23 +212,30 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.table.Location = new System.Drawing.Point(0, 0);
             this.table.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.table.Name = "table";
-            this.table.Size = new System.Drawing.Size(1919, 741);
+            this.table.Size = new System.Drawing.Size(958, 741);
             this.table.TabIndex = 4;
             this.table.Title = "title";
             // 
-            // fileTransfersTab
+            // camerasFlowPanelContextMenu
             // 
-            this.fileTransfersTab.HorizontalScrollbarBarColor = true;
-            this.fileTransfersTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.fileTransfersTab.HorizontalScrollbarSize = 10;
-            this.fileTransfersTab.Location = new System.Drawing.Point(4, 41);
-            this.fileTransfersTab.Name = "fileTransfersTab";
-            this.fileTransfersTab.Size = new System.Drawing.Size(1911, 291);
-            this.fileTransfersTab.TabIndex = 1;
-            this.fileTransfersTab.Text = "Transfer danych";
-            this.fileTransfersTab.VerticalScrollbarBarColor = true;
-            this.fileTransfersTab.VerticalScrollbarHighlightOnWheel = false;
-            this.fileTransfersTab.VerticalScrollbarSize = 10;
+            this.camerasFlowPanelContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.camerasFlowPanelContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshCamerasFlowPanelMenuItem,
+            this.wyczysśćToolStripMenuItem});
+            this.camerasFlowPanelContextMenu.Name = "camerasFlowPanelContextMenu";
+            this.camerasFlowPanelContextMenu.Size = new System.Drawing.Size(140, 52);
+            // 
+            // refreshCamerasFlowPanelMenuItem
+            // 
+            this.refreshCamerasFlowPanelMenuItem.Name = "refreshCamerasFlowPanelMenuItem";
+            this.refreshCamerasFlowPanelMenuItem.Size = new System.Drawing.Size(139, 24);
+            this.refreshCamerasFlowPanelMenuItem.Text = "Odśwież";
+            // 
+            // wyczysśćToolStripMenuItem
+            // 
+            this.wyczysśćToolStripMenuItem.Name = "wyczysśćToolStripMenuItem";
+            this.wyczysśćToolStripMenuItem.Size = new System.Drawing.Size(139, 24);
+            this.wyczysśćToolStripMenuItem.Text = "Wyczysść";
             // 
             // StationView
             // 
@@ -219,12 +245,13 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "StationView";
-            this.Size = new System.Drawing.Size(1919, 1109);
+            this.Size = new System.Drawing.Size(958, 1109);
             this.Load += new System.EventHandler(this.StationViewPanel_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.stationContextMenu.ResumeLayout(false);
+            this.camerasFlowPanelContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -245,5 +272,8 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         public ToolStripMenuItem connectRemoteDesktopMenuItem;
         public ToolStripMenuItem deleteStationMenuItem;
         private MetroFramework.Controls.MetroTabPage fileTransfersTab;
+        private MetroFramework.Controls.MetroContextMenu camerasFlowPanelContextMenu;
+        private ToolStripMenuItem wyczysśćToolStripMenuItem;
+        public ToolStripMenuItem refreshCamerasFlowPanelMenuItem;
     }
 }

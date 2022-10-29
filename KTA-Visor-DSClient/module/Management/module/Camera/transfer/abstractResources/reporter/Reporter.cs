@@ -44,7 +44,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
             string duplicatedRows = this.generateRow(orangeIcon, duplicates);
            
             this._reporter.Assign(reportHTML, new Dictionary<string, string> {
-                {"$CAMERA_CUSTOM_ID", camera.ID},
+                {"$CAMERA_CUSTOM_ID", camera.CustomId},
                 {"$BADGE_ID", camera.BadgeId },
                 {"$REPORT_DATE", currentDate},
                 {"$SUCCESS_ICON", greenIcon},

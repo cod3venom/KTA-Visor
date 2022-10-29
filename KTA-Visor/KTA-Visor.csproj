@@ -42,6 +42,26 @@
   <PropertyGroup>
     <ApplicationIcon>KTA-Visor_icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Avalonia, Version=0.10.15.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b, processorArchitecture=MSIL">
       <HintPath>..\packages\Avalonia.0.10.15\lib\net461\Avalonia.dll</HintPath>
@@ -405,6 +425,14 @@
     <Compile Include="module\Managemnt\module\camera\form\Settings\CameraItemSettingsForm.Designer.cs">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="module\Managemnt\module\cardReader\form\passwordCheckerForm\CardModeAuthChecker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="module\Managemnt\module\cardReader\form\passwordCheckerForm\CardModeAuthChecker.Designer.cs">
+      <DependentUpon>CardModeAuthChecker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="module\Managemnt\module\cardReader\form\passwordCheckerForm\events\OnWrongPasswordProvidedEvent.cs" />
+    <Compile Include="module\Managemnt\module\cardReader\form\passwordCheckerForm\events\OnPassworCheckerPassedEvent.cs" />
     <Compile Include="module\Managemnt\module\cardReader\window\CardModeWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -489,6 +517,7 @@
     <Compile Include="module\Managemnt\module\station\controller\StationController.cs" />
     <Compile Include="module\Managemnt\module\station\events\OnRefreshCamerasListEvent.cs" />
     <Compile Include="module\Managemnt\module\station\handlers\CamerasUIHandler.cs" />
+    <Compile Include="module\Managemnt\module\station\handlers\CamerasFlowPanelContextMenuUIHandler.cs" />
     <Compile Include="module\Managemnt\module\station\handlers\StationContextMenuUIHandler.cs" />
     <Compile Include="module\Managemnt\module\station\handlers\StationsUIHandler.cs" />
     <Compile Include="module\Managemnt\module\station\StationModule.cs">
@@ -628,6 +657,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\camera\form\Settings\CameraItemSettingsForm.resx">
       <DependentUpon>CameraItemSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="module\Managemnt\module\cardReader\form\passwordCheckerForm\CardModeAuthChecker.resx">
+      <DependentUpon>CardModeAuthChecker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="module\Managemnt\module\cardReader\window\CardModeWindow.resx">
       <DependentUpon>CardModeWindow.cs</DependentUpon>

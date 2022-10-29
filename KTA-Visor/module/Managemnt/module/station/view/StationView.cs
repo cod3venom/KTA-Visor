@@ -33,12 +33,14 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.stationController = new StationController(this);
             this.StationsUIHandler = new StationsUIHandler(this);
             this.StationContextMenuUIHandler = new StationContextMenuUIHandler(this, this.stationContextMenu);
+            this.CamerasFlowBoardContextMenuUIHandler = new CamerasFlowPanelContextMenuUIHandler(this, this.camerasFlowPanelContextMenu);
             this.CamerasUIHandler= new CamerasUIHandler(this);
 
             this.table.AllowAdd = false;
             this.table.AllowEdit = false;
             this.table.AllowDelete = false;
             this.table.Column.addMultiple(this.Columns);
+            this.tabControl.SelectedIndex = 0;
         }
 
         public Table Table { get { return this.table; } }
@@ -66,6 +68,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         private void initialize()
         {
             this.StationContextMenuUIHandler.Handle();
+            this.CamerasFlowBoardContextMenuUIHandler.Handle();
             this.StationsUIHandler.Load();
         }
 
@@ -101,6 +104,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
 
         public StationsUIHandler StationsUIHandler { get; set; }
         public StationContextMenuUIHandler StationContextMenuUIHandler { get; set; }
+        public CamerasFlowPanelContextMenuUIHandler CamerasFlowBoardContextMenuUIHandler { get; set; }
         public CamerasUIHandler CamerasUIHandler{ get; set; }
         
         public string StationId

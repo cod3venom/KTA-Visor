@@ -62,6 +62,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.aes256chk = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.idTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.markerIdTitleLbl = new System.Windows.Forms.Label();
+            this.markerIdLbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -92,7 +95,7 @@
             this.badgeLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.badgeLbl.Location = new System.Drawing.Point(37, 132);
             this.badgeLbl.Name = "badgeLbl";
-            this.badgeLbl.Size = new System.Drawing.Size(92, 15);
+            this.badgeLbl.Size = new System.Drawing.Size(116, 19);
             this.badgeLbl.TabIndex = 16;
             this.badgeLbl.Text = "Numer odznaki";
             // 
@@ -103,7 +106,7 @@
             this.dateTimeLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimeLbl.Location = new System.Drawing.Point(37, 226);
             this.dateTimeLbl.Name = "dateTimeLbl";
-            this.dateTimeLbl.Size = new System.Drawing.Size(88, 15);
+            this.dateTimeLbl.Size = new System.Drawing.Size(109, 19);
             this.dateTimeLbl.TabIndex = 20;
             this.dateTimeLbl.Text = "Data i godzina";
             // 
@@ -114,7 +117,7 @@
             this.leftHeaderLbl.Font = new System.Drawing.Font("Inter SemiBold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.leftHeaderLbl.Location = new System.Drawing.Point(12, 26);
             this.leftHeaderLbl.Name = "leftHeaderLbl";
-            this.leftHeaderLbl.Size = new System.Drawing.Size(86, 17);
+            this.leftHeaderLbl.Size = new System.Drawing.Size(103, 20);
             this.leftHeaderLbl.TabIndex = 30;
             this.leftHeaderLbl.Text = "Urządzenie";
             // 
@@ -164,7 +167,7 @@
             this.label2.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(37, 183);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 15);
+            this.label2.Size = new System.Drawing.Size(89, 19);
             this.label2.TabIndex = 41;
             this.label2.Text = "Przepustka";
             // 
@@ -216,7 +219,7 @@
             this.deviceIdLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deviceIdLbl.Location = new System.Drawing.Point(37, 82);
             this.deviceIdLbl.Name = "deviceIdLbl";
-            this.deviceIdLbl.Size = new System.Drawing.Size(144, 15);
+            this.deviceIdLbl.Size = new System.Drawing.Size(180, 19);
             this.deviceIdLbl.TabIndex = 32;
             this.deviceIdLbl.Text = "Identyfikator urządzenia";
             // 
@@ -240,6 +243,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.markerIdLbl);
+            this.panel2.Controls.Add(this.markerIdTitleLbl);
             this.panel2.Controls.Add(this.saveBtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(27, 613);
@@ -268,7 +273,7 @@
             this.rightHeaderLbl.Font = new System.Drawing.Font("Inter SemiBold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rightHeaderLbl.Location = new System.Drawing.Point(23, 26);
             this.rightHeaderLbl.Name = "rightHeaderLbl";
-            this.rightHeaderLbl.Size = new System.Drawing.Size(84, 17);
+            this.rightHeaderLbl.Size = new System.Drawing.Size(98, 20);
             this.rightHeaderLbl.TabIndex = 32;
             this.rightHeaderLbl.Text = "Ustawienia";
             // 
@@ -279,7 +284,7 @@
             this.label1.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(23, 79);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 15);
+            this.label1.Size = new System.Drawing.Size(111, 19);
             this.label1.TabIndex = 33;
             this.label1.Text = "Rozdzielczość";
             // 
@@ -299,7 +304,7 @@
             this.label3.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(23, 124);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 15);
+            this.label3.Size = new System.Drawing.Size(123, 19);
             this.label3.TabIndex = 37;
             this.label3.Text = "Jakość nagrania";
             // 
@@ -319,7 +324,7 @@
             this.label4.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(23, 166);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 15);
+            this.label4.Size = new System.Drawing.Size(112, 19);
             this.label4.TabIndex = 39;
             this.label4.Text = "Kodek formatu";
             // 
@@ -339,7 +344,7 @@
             this.label10.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(23, 208);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(126, 15);
+            this.label10.Size = new System.Drawing.Size(158, 19);
             this.label10.TabIndex = 52;
             this.label10.Text = "Nagrywanie wstępne";
             // 
@@ -349,7 +354,7 @@
             this.preRecordingChk.Location = new System.Drawing.Point(231, 209);
             this.preRecordingChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.preRecordingChk.Name = "preRecordingChk";
-            this.preRecordingChk.Size = new System.Drawing.Size(15, 14);
+            this.preRecordingChk.Size = new System.Drawing.Size(18, 17);
             this.preRecordingChk.TabIndex = 53;
             this.preRecordingChk.UseVisualStyleBackColor = true;
             // 
@@ -360,7 +365,7 @@
             this.gpsLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpsLbl.Location = new System.Drawing.Point(23, 251);
             this.gpsLbl.Name = "gpsLbl";
-            this.gpsLbl.Size = new System.Drawing.Size(32, 15);
+            this.gpsLbl.Size = new System.Drawing.Size(40, 19);
             this.gpsLbl.TabIndex = 54;
             this.gpsLbl.Text = "GPS";
             // 
@@ -370,7 +375,7 @@
             this.gpsChk.Location = new System.Drawing.Point(231, 252);
             this.gpsChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gpsChk.Name = "gpsChk";
-            this.gpsChk.Size = new System.Drawing.Size(15, 14);
+            this.gpsChk.Size = new System.Drawing.Size(18, 17);
             this.gpsChk.TabIndex = 55;
             this.gpsChk.UseVisualStyleBackColor = true;
             // 
@@ -381,7 +386,7 @@
             this.wifiLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.wifiLbl.Location = new System.Drawing.Point(23, 290);
             this.wifiLbl.Name = "wifiLbl";
-            this.wifiLbl.Size = new System.Drawing.Size(31, 15);
+            this.wifiLbl.Size = new System.Drawing.Size(40, 19);
             this.wifiLbl.TabIndex = 56;
             this.wifiLbl.Text = "WiFi";
             // 
@@ -391,7 +396,7 @@
             this.wifiChk.Location = new System.Drawing.Point(231, 292);
             this.wifiChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.wifiChk.Name = "wifiChk";
-            this.wifiChk.Size = new System.Drawing.Size(15, 14);
+            this.wifiChk.Size = new System.Drawing.Size(18, 17);
             this.wifiChk.TabIndex = 57;
             this.wifiChk.UseVisualStyleBackColor = true;
             // 
@@ -438,7 +443,7 @@
             this.silentModeChk.Location = new System.Drawing.Point(232, 330);
             this.silentModeChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.silentModeChk.Name = "silentModeChk";
-            this.silentModeChk.Size = new System.Drawing.Size(15, 14);
+            this.silentModeChk.Size = new System.Drawing.Size(18, 17);
             this.silentModeChk.TabIndex = 63;
             this.silentModeChk.UseVisualStyleBackColor = true;
             // 
@@ -449,7 +454,7 @@
             this.label6.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(24, 328);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 15);
+            this.label6.Size = new System.Drawing.Size(82, 19);
             this.label6.TabIndex = 62;
             this.label6.Text = "Tryb cichy";
             // 
@@ -462,7 +467,7 @@
             this.aes256chk.Location = new System.Drawing.Point(230, 371);
             this.aes256chk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.aes256chk.Name = "aes256chk";
-            this.aes256chk.Size = new System.Drawing.Size(15, 14);
+            this.aes256chk.Size = new System.Drawing.Size(18, 17);
             this.aes256chk.TabIndex = 61;
             this.aes256chk.UseVisualStyleBackColor = true;
             // 
@@ -483,11 +488,52 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1165, 576);
             this.tableLayoutPanel1.TabIndex = 37;
             // 
+            // idTxt
+            // 
+            this.idTxt.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.idTxt.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.idTxt.BorderColorMouseHover = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.idTxt.BorderThickness = 1;
+            this.idTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.idTxt.Enabled = false;
+            this.idTxt.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.idTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.idTxt.isPassword = false;
+            this.idTxt.Location = new System.Drawing.Point(27, 8);
+            this.idTxt.Margin = new System.Windows.Forms.Padding(5);
+            this.idTxt.Name = "idTxt";
+            this.idTxt.Size = new System.Drawing.Size(33, 25);
+            this.idTxt.TabIndex = 42;
+            this.idTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // markerIdTitleLbl
+            // 
+            this.markerIdTitleLbl.AutoSize = true;
+            this.markerIdTitleLbl.BackColor = System.Drawing.Color.Transparent;
+            this.markerIdTitleLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.markerIdTitleLbl.Location = new System.Drawing.Point(3, 7);
+            this.markerIdTitleLbl.Name = "markerIdTitleLbl";
+            this.markerIdTitleLbl.Size = new System.Drawing.Size(71, 19);
+            this.markerIdTitleLbl.TabIndex = 21;
+            this.markerIdTitleLbl.Text = "Marker : ";
+            // 
+            // markerIdLbl
+            // 
+            this.markerIdLbl.AutoSize = true;
+            this.markerIdLbl.BackColor = System.Drawing.Color.Transparent;
+            this.markerIdLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.markerIdLbl.Location = new System.Drawing.Point(70, 7);
+            this.markerIdLbl.Name = "markerIdLbl";
+            this.markerIdLbl.Size = new System.Drawing.Size(16, 19);
+            this.markerIdLbl.TabIndex = 22;
+            this.markerIdLbl.Text = "-";
+            // 
             // CameraItemSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1219, 679);
+            this.Controls.Add(this.idTxt);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel2);
             this.DisplayHeader = false;
@@ -501,6 +547,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -542,5 +589,8 @@
         private MetroFramework.Controls.MetroButton saveBtn;
         private System.Windows.Forms.CheckBox silentModeChk;
         private System.Windows.Forms.Label label6;
+        private Bunifu.Framework.UI.BunifuMetroTextbox idTxt;
+        private System.Windows.Forms.Label markerIdTitleLbl;
+        private System.Windows.Forms.Label markerIdLbl;
     }
 }

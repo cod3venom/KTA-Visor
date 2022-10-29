@@ -18,9 +18,9 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
 
 
 
-        private readonly StationEntity station;
-
-        public readonly CameraItemSettingsForm form;
+        public readonly CameraItemSettingsForm _form;
+        private readonly StationEntity _station;
+        private CameraEntity.Camera _camera;
 
         public CameraItem()
         {
@@ -30,11 +30,9 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         public CameraItem(CameraEntity.Camera camera, StationEntity station)
         {
             InitializeComponent();
-            this.Camera = camera;
-            this.Badge = camera?.badgeId;
-            this.CamCustomId = camera?.cameraCustomId;
-            this.station = station;
-            this.form = new CameraItemSettingsForm(camera, station);
+            this._camera = camera;
+            this._station = station;
+            this._form = new CameraItemSettingsForm(camera, station);
         }
 
         private void CameraItem_Load(object sender, EventArgs e)
@@ -42,17 +40,31 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             this.Padding = new Padding(10, 10, 10, 20);
             this.settingsBtn.Click += OpenSettings_Click;
             this.upgradeMenuItem.Click += onUpgradeClick;
+
+            this.ID = this._camera.id.ToString();
+            this.Badge = this._camera?.badgeId;
+            this.CamCustomId = this._camera?.cameraCustomId;
+            this.DriveName= this._camera?.driveName;
+            this.Marker = this._camera?.markerId;
             this.handleStatus();
         }
 
-        private void onUpgradeClick(object sender, EventArgs e)
+        public CameraEntity.Camera Camera 
         {
-            new FWUpgradeForm(this.Camera).ShowDialog();
+            get { return this._camera; } 
         }
 
-        public CameraEntity.Camera Camera { get; set; }
+        public string ID
+        {
+            get { return this.idTxt.Text; }
+            set { this.idTxt.Text = value.ToString(); }
+        }
 
-         
+        public string Marker
+        {
+            get { return this.markerLbl.Text; }
+            set { this.markerLbl.Text = value.ToString(); }
+        }
 
         public string Badge
         {
@@ -66,16 +78,20 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             set { this.cameraIdLbl.Text = value; }
         }
 
+        public string DriveName
+        {
+            get { return this.driveNameLbl.Text; }
+            set { this.driveNameLbl.Text = value.ToString(); }
+        }
+
         private void handleStatus()
         {
             this.Invoke((MethodInvoker)delegate
             {
-                if (this.Camera.active)
-                {
+                if (this.Camera.active){
                     this.statusIcon.Image = Properties.Resources.green_circle;
                 }
-                else
-                {
+                else{
                     this.statusIcon.Image = Properties.Resources.red_circle;
                 }
             });
@@ -101,13 +117,14 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
             this.BackColor = System.Drawing.ColorTranslator.FromHtml("#556C95");
         }
 
- 
-
         private void onCopyFilesToDVD(object sender, EventArgs e)
         {
             this.OnCopyToDVDClicked?.Invoke(this, new OnCloseCameraItemFormEvent(this, this.Camera));
         }
 
-
+        private void onUpgradeClick(object sender, EventArgs e)
+        {
+            new FWUpgradeForm(this.Camera).ShowDialog();
+        }
     }
 }

@@ -14,14 +14,13 @@ namespace TCPTunnel.kernel.types
             return this.Find((TCPClientTObject client) => client.IpAddress == ip);
         }
 
-        public TCPClientList addClient(TCPClientTObject client, bool allowDuplicate = false)
+        public TCPClientList AddClient(TCPClientTObject client, bool allowDuplicate = false)
         {
             if (allowDuplicate)
             {
                 this.Add(client);
                 return this;
             }
-
 
             TCPClientTObject existedClient = this.Find((TCPClientTObject _client)=> _client.IpAddress == client.IpAddress);
             if (existedClient == null)
@@ -31,14 +30,14 @@ namespace TCPTunnel.kernel.types
             return this;
         }
 
-        public TCPClientList removeClient(TCPClientTObject client)
+        public TCPClientList RemoveClient(TCPClientTObject client)
         {
             TCPClientTObject existedClient = this.Find((TCPClientTObject _client)=> _client.IpAddress == client.IpAddress);
             this.Remove(existedClient);
             return this;
         }
 
-        public TCPClientTObject findByStationCustomId(string customId)
+        public TCPClientTObject FinByStationCustomId(string customId)
         {
             foreach(TCPClientTObject client in this)
             {
@@ -49,6 +48,11 @@ namespace TCPTunnel.kernel.types
             }
 
             return null;
+        }
+
+        public TCPClientTObject FindByIP(string ip)
+        {
+            return this.Find((TCPClientTObject obj) => obj.IpAddress == ip);
         }
     }
 }

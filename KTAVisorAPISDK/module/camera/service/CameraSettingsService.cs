@@ -28,9 +28,9 @@ namespace KTAVisorAPISDK.module.camera.service
         /// <param name="cameraId"></param>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<CameraSettingsEntity> create(string cameraId, CreateCameraSettingsTObject request)
+        public async Task<CameraSettingsEntity> create(int id, CreateCameraSettingsTObject request)
         {
-            HttpResponseMessage result = await this.cameraSettingsRepository.create(cameraId, request);
+            HttpResponseMessage result = await this.cameraSettingsRepository.create(id, request);
             string responseBody = await result.Content.ReadAsStringAsync();
             CameraSettingsEntity settings = JsonConvert.DeserializeObject<CameraSettingsEntity>(responseBody);
 
@@ -44,9 +44,9 @@ namespace KTAVisorAPISDK.module.camera.service
         /// <param name="cameraId"></param>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<CameraSettingsEntity> edit(string cameraId, EditCameraSettingsTObject request)
+        public async Task<CameraSettingsEntity> edit(int id, EditCameraSettingsTObject request)
         {
-            HttpResponseMessage result = await this.cameraSettingsRepository.edit(cameraId, request);
+            HttpResponseMessage result = await this.cameraSettingsRepository.edit(id, request);
             string responseBody = await result.Content.ReadAsStringAsync();
             CameraSettingsEntity settings = JsonConvert.DeserializeObject<CameraSettingsEntity>(responseBody);
 

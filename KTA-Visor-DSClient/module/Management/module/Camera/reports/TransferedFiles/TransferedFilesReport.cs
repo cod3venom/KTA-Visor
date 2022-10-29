@@ -39,7 +39,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.reports.TransferedF
             string duplicates = String.Join("<br/>", e.Duplicates);
             string failed = String.Join("<br/>", e.Failed);
 
-            parameters.Add("$ID", e.Camera?.ID);
+            parameters.Add("$ID", e.Camera?.CustomId);
             parameters.Add("$BADGE", e.Camera?.BadgeId);
             parameters.Add("$CARD", e.Camera?.CardId);
             parameters.Add("$COPIED", copied);

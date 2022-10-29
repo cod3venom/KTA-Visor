@@ -2,8 +2,10 @@
 {
     public class LocalSettingsTObject
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
+        public string CustomId { get; set; }
         public string BadgeId { get; set; }
         public string CardId { get; set; }
+        public string MarkerId { get; set; }
     }
 }

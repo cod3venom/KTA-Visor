@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.IO;
-using System.Text;
+
+
+
 
 namespace WindowsFormsApp1
 {
@@ -106,7 +107,11 @@ namespace WindowsFormsApp1
 
         [DllImport("dll\\msc_con.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "?SetBWC_MSC@@YAHPAXPAH@Z")]
         public static extern int SetBWC_MSC_Return(IntPtr filehandle, int[] iRet);
+
+
     }
+
+
 
 
     static class Program
@@ -117,45 +122,93 @@ namespace WindowsFormsApp1
         [STAThread]
         static void Main()
         {
-            setApiMode("E");
-       
-        }
 
-        public static void setUdiskMode()
-        {
-            byte[] spwd = Encoding.ASCII.GetBytes("000000");
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
             byte[] idcode = new byte[6];
             int[] iret = new int[1];
             int[] usb_totalnum = new int[1];
+
+            CameraCtrl.Init_Device_UsbTotal(idcode, iret, usb_totalnum);
+            CameraCtrl.Init_Device_UsbTotal(idcode, iret, usb_totalnum);
+
+
+            var zfy_info = new ZFY_INFO();
+            byte[] spwd = new byte[6];
+            spwd[0] = 0x30;
+            spwd[1] = 0x30;
+            spwd[2] = 0x30;
+            spwd[3] = 0x30;
+            spwd[4] = 0x30;
+            spwd[5] = 0x30;
+
             int usb_index = 0;
-            while (true)
+
+            CameraCtrl.GetZFYInfo_ByIndex(ref zfy_info, spwd, iret, usb_index);
+
+            string cSerial = "12345";//the length must match and limit with the zfy_info.cSerial which you get from camera.
+            char[] cSerial_tmp = cSerial.ToCharArray();
+            Array.Copy(cSerial_tmp, zfy_info.cSerial, cSerial.Length);
+
+            CameraCtrl.GetZFYInfo_ByIndex(ref zfy_info, spwd, iret, usb_index);
+
+
+            var menu_config = new MENU_CONFIG();
+            int config_len = Marshal.SizeOf(menu_config);
+
+            usb_index = 0;
+            CameraCtrl.Eylog_GetMenuConfig_ByIndex(ref menu_config, config_len, iret, usb_index);
+
+            menu_config.gps = 1;
+            menu_config.vibrate = 0;
+            CameraCtrl.Eylog_SetMenuConfig_ByIndex(ref menu_config, config_len, iret, usb_index);
+
+
+
+            byte[] cmd_params = new byte[1];
+            int[] bat = new int[1];
+            for (int i = 0; i < 10; i++)
             {
-                CameraCtrl.Init_Device_UsbTotal(idcode, iret, usb_totalnum);
+                for (int j = 0; j < usb_totalnum[0]; j++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        cmd_params[0] = 0;
+                        CameraCtrl.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_RED_LED_CTRL, cmd_params, iret, j);
+                        cmd_params[0] = 1;
+                        CameraCtrl.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, j);
+                    }
+                    else
+                    {
+                        cmd_params[0] = 1;
+                        CameraCtrl.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_RED_LED_CTRL, cmd_params, iret, j);
+                        cmd_params[0] = 0;
+                        CameraCtrl.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, j);
+                    }
+                    CameraCtrl.ReadDeviceBatteryDumpEnergy_ByIndex(bat, spwd, iret, j);
 
-                usb_index = usb_totalnum.ToList().Count - 1;
+                }
 
 
-                Console.WriteLine("USB_INDEX BEFORE MOUNT: " + usb_index.ToString());
-                CameraCtrl.SetMSDC_ByIndex(spwd, iret, usb_index);
-                Console.WriteLine("USB_INDEX AFTER MOUNT: " + usb_index.ToString());
-
-                Thread.Sleep(3000);
+                Thread.Sleep(1000);
             }
-        }
-        public static void setApiMode(string driveName)
-        {
-            byte[] spwd = Encoding.ASCII.GetBytes("000000");
-            int[] iret = new int[1];
+            CameraCtrl.SetMSDC_ByIndex(spwd, iret, 0);
 
-            IntPtr[] filehandle = new IntPtr[1];
-            char driveChar = driveName[0];
-            CameraCtrl.ConnectStorageDevice(driveChar, filehandle);
+
+
+            Thread.Sleep(10000);// delay time depend on PC performance or  connecting it by drive letter in your application flow.
+            IntPtr[] filehandle = new IntPtr[1];//if two or more u disk,you can increase the array to two or more,max is 20.
+            CameraCtrl.ConnectStorageDevice('F', filehandle);
+
+            CameraCtrl.PassWordCheck(filehandle[0], spwd, iret);
+            CameraCtrl.ConnectStorageDevice('E', filehandle);
 
             CameraCtrl.PassWordCheck(filehandle[0], spwd, iret);
 
             CameraCtrl.SetBWC_MSC_Return(filehandle[0], iret);
 
+            Application.Run(new Form());
         }
     }
 }

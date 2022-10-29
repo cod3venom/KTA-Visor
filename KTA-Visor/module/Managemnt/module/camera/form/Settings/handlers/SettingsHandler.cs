@@ -60,17 +60,10 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.Settings.handlers
                 return;
             }
 
-            
-            TCPClientTObject client = Globals.Server.Clients.Find(
-                (TCPClientTObject obj) => obj.IpAddress == this._station.data.stationIp
-            );
 
-            if (client == null) {
-                MetroMessageBox.Show(this._form, "Coś poszło nie tak, zresetuj stacje lub skontaktuj się z Administratorem");
-                return;
-            }
-
-            CameraEntity syncedCamera = await this.cameraService.findByCustomId(this._camera.cameraCustomId);
+            TCPClientTObject client = Globals.Server.Clients.FindByIP(this._station.data.stationIp);
+            CameraEntity syncedCamera = await this.cameraService.findById(this._camera.id);
+           
             client.Send(new Request(
                "command://cameras/settings/change",
                syncedCamera.data,
@@ -82,14 +75,14 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.Settings.handlers
 
         private async Task<bool> saveCamera()
         {
-            CameraEntity camera = await this.cameraService.edit(this._camera.id, new EditCameraRequestTObject(
-                this._camera.index,
-                this._form.CameraId,
-                this._form.BadgeId,
-                this._form.CardId,
-                this._camera.stationId,
-                this._camera.driveName,
-                this._camera.active
+            CameraEntity camera = await this.cameraService.edit(this._camera.id, 
+                new EditCameraRequestTObject(
+                    this._form.CameraId,
+                    this._form.BadgeId,
+                    this._form.CardId,
+                    this._camera.stationId,
+                    this._camera.driveName,
+                    this._camera.active
             ));
 
             if (camera == null || camera.data == null){
@@ -103,19 +96,20 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.Settings.handlers
 
         private async Task<bool> saveCameraSettings()
         {
-           CameraSettingsEntity settings = await this.cameraSettingsService.edit(this._camera.id, new EditCameraSettingsTObject(
-               this._form.CameraId,
-               this._form.BadgeId,
-               this._form.CardId,
-               this._form.Resolution,
-               this._form.Quality,
-               this._form.Codec,
-               this._form.PreRecording ? 1 : 0,
-               0,
-               this._form.GPS ? 1:0,
-               this._form.WIFI ? 1 : 0,
-               this._form.SilentMode ? 1 : 0,
-               this._form.AES ? 1 : 0
+           CameraSettingsEntity settings = await this.cameraSettingsService.edit(this._camera.id, 
+               new EditCameraSettingsTObject(
+                   this._form.CameraId,
+                   this._form.BadgeId,
+                   this._form.CardId,
+                   this._form.Resolution,
+                   this._form.Quality,
+                   this._form.Codec,
+                   this._form.PreRecording ? 1 : 0,
+                   0,
+                   this._form.GPS ? 1:0,
+                   this._form.WIFI ? 1 : 0,
+                   this._form.SilentMode ? 1 : 0,
+                   this._form.AES ? 1 : 0
            ));
 
             if (settings == null)

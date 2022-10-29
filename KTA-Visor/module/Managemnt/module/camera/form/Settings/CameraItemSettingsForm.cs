@@ -43,6 +43,18 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         public int Codec { get; set; }
         public int TimeZone { get; set; }
 
+        public string ID
+        {
+            set { this.idTxt.Text = value; }
+            get { return this.idTxt.Text; }
+        }
+
+        public string MarkerId
+        {
+            set { this.markerIdLbl.Text = value; }
+            get { return this.markerIdLbl.Text; }
+        }
+
         public string CameraId 
         {
             set { this.deviceIdTxt.Text = value;  }
@@ -111,20 +123,17 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
 
         private void renderValues()
         {
+            this.ID = this.camera.id.ToString();
+            this.MarkerId = this.camera.markerId;
             this.CameraId = this.camera.cameraCustomId;
             this.BadgeId = this.camera.badgeId;
             this.CardId = this.camera.cardId;
             this.DateAndTime = DateTime.Now.ToString();
             this.aes256chk.Checked = true;
 
-            this.recordingResolutionCombo.DataSource = new Enums().Resolutions;
-            this.recordingResolutionCombo.SelectedIndex = this.camera.settings.resolution;
-
-            this.recordingQualityCombo.DataSource = new Enums().Qualities;
-            this.recordingQualityCombo.SelectedIndex = this.camera.settings.quality;
-
+            this.recordingResolutionCombo.DataSource = Enums.Resolutions;
+            this.recordingQualityCombo.DataSource = Enums.Qualities;
             this.recordingCodecFormatCombo.DataSource = Enum.GetValues(typeof(CodecFormats));
-            this.recordingCodecFormatCombo.SelectedIndex = this.camera.settings.codecFormat;
 
             this.PreRecording = this.camera.settings.preRecording;
             this.GPS = this.camera.settings.gps == 1;
@@ -175,14 +184,12 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
 
         private void onSaveBtnClicked(object sender, EventArgs e)
         {
-
             this.settingsHandler.Save();
         }
 
         public void Watch(Request request)
         {
         }
-
 
         public string GetModuleName()
         {

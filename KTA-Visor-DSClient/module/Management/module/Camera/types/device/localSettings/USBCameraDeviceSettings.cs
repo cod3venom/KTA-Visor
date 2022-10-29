@@ -8,20 +8,20 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
     public class USBCameraDeviceSettings
     {
 
-        protected string cameraId = "";
-        protected string cameraBadgeId = "";
-        private string settingsFilePath;
+      
 
-        public LocalSettingsTObject Settings { get; set; }
         private readonly DriveInfo driveInfo;
+      
+        private string settingsFilePath;
         public USBCameraDeviceSettings(DriveInfo drive)
         {
             this.driveInfo = drive;
             this.Settings = new LocalSettingsTObject();
-
             this.initialize();
         }
 
+        public LocalSettingsTObject Settings { get; set; }
+        
         private void initialize()
         {
             this.initializeSettingsFile();
@@ -35,10 +35,11 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                 if (!File.Exists(this.settingsFilePath))
                 {
                     File.WriteAllText(this.settingsFilePath, "");
-                    this.Settings.ID = RandomData.RandomString(15);
+                    this.Settings.ID = 0;
+                    this.Settings.CustomId = RandomData.RandomString(15);
                     this.Settings.BadgeId = RandomData.RandomString(15);
                     this.Settings.CardId = "0000000000";
-
+                    this.Settings.MarkerId = RandomData.RandomString(15);
                     this.SaveSettings();
                 }
                 else

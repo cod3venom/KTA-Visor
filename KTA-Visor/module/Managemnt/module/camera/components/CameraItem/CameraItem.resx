@@ -117,7 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="cameraItemMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="oprogramowanieToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAnxJREFUOE+V
+        lF9LFFEYxsdbr4W+QOAH6AsIC7vjhV1USGAtSfQFosTWi9bE3TmhQbRrQrVudyVZkKi5FUrqzOwq5G6r
+        7VJuF4Kw0R9CClcdX88zc6adnZ0VfeCFwznv+5tz3nOekY6SPLDYGlDUoMz0W35F7w0w/XIgqp4Wy8cV
+        NbUzretqspgNTZZpeOEfjWT2eezR0Ie/FHpdpu5EIdOuaB2ioLHahuZaLo58mo28/0OjKwaNfTTo7YZB
+        2qYVGGMOawOp39QZzz3vCK80i/JatYXnWq48KeRi+i49XTVo7fsBGQdUJ8yt8zXk3Fd3qGs0v+gBpSbs
+        7AGHjecN2q6IaiH9yy8znEIOcgE9H1sdEyBLsrJ0CcdM8q+6YRCbKtFdHm4hFzW3Z36QPKj6BE6ScAHo
+        S75cPePwdInuzViQeOqbGZBzHkINaoOP1t+ZMDwN3GaCN9vZMxRee5yjhcJP6p8o0J2XRXOMOScQNajt
+        ebVl+Ab1U1JASQfxNGa/GiKlKgB6nn2m7NaOGRhjzq03vJbNb5PMtHMcqIXwzlT+LCCNNx/9whGxM4Ai
+        kxs8SuYYO8UacuyLQm0svUv88d+Q4II64LTVMwtYMWE2sN8G8hwnEH30R5fCEuwEB6QaHtmCIhodGbVV
+        IPcm7HTkpfBdVS8l63kp/4FQd6KYwQTcYeu4zwY1qK0ByhHtLLwJO530YaOmDgjB6LDR+NoJrMdzbVgd
+        EAaH0QHFV/EDcPbUFuZwTOfOPIEQoBdi2SS8iQT37yvl+H254+HyPvmZ1idQtZKZ6oM3YSc4IJ7e84TY
+        Adj1F5sVf1Q/IxDegjdhJ5mlb+I4DYPvzIJJ0iGiOk5oQKROWgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="targetDriveDevicePathDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>356, 17</value>
+  </metadata>
+  <metadata name="nasStorageFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>190, 17</value>
+  </metadata>
+  <data name="upgradeMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAIxJREFUOE9j
+        8KnY7OBXtbmBGhhkFgOI0b39w39qYJBZYANzZlz6Tw0MNnBAgGfZNhnfmk2KUC5lAGRYcv/J2yAMYkOF
+        yQMwwzq3vvsPwhQZimwYLBbJNhSbYWQbClIYULvjdvb0i/DkADMMxgfJgdSQ7FIQQE74VElnowaOGkgG
+        oLqByFUEuIjHCxgYAMuyacFR+a25AAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -158,37 +191,4 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="cameraItemMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="upgradeMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAIxJREFUOE9j
-        8KnY7OBXtbmBGhhkFgOI0b39w39qYJBZYANzZlz6Tw0MNnBAgGfZNhnfmk2KUC5lAGRYcv/J2yAMYkOF
-        yQMwwzq3vvsPwhQZimwYLBbJNhSbYWQbClIYULvjdvb0i/DkADMMxgfJgdSQ7FIQQE74VElnowaOGkgG
-        oLqByFUEuIjHCxgYAMuyacFR+a25AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="oprogramowanieToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAnxJREFUOE+V
-        lF9LFFEYxsdbr4W+QOAH6AsIC7vjhV1USGAtSfQFosTWi9bE3TmhQbRrQrVudyVZkKi5FUrqzOwq5G6r
-        7VJuF4Kw0R9CClcdX88zc6adnZ0VfeCFwznv+5tz3nOekY6SPLDYGlDUoMz0W35F7w0w/XIgqp4Wy8cV
-        NbUzretqspgNTZZpeOEfjWT2eezR0Ie/FHpdpu5EIdOuaB2ioLHahuZaLo58mo28/0OjKwaNfTTo7YZB
-        2qYVGGMOawOp39QZzz3vCK80i/JatYXnWq48KeRi+i49XTVo7fsBGQdUJ8yt8zXk3Fd3qGs0v+gBpSbs
-        7AGHjecN2q6IaiH9yy8znEIOcgE9H1sdEyBLsrJ0CcdM8q+6YRCbKtFdHm4hFzW3Z36QPKj6BE6ScAHo
-        S75cPePwdInuzViQeOqbGZBzHkINaoOP1t+ZMDwN3GaCN9vZMxRee5yjhcJP6p8o0J2XRXOMOScQNajt
-        ebVl+Ab1U1JASQfxNGa/GiKlKgB6nn2m7NaOGRhjzq03vJbNb5PMtHMcqIXwzlT+LCCNNx/9whGxM4Ai
-        kxs8SuYYO8UacuyLQm0svUv88d+Q4II64LTVMwtYMWE2sN8G8hwnEH30R5fCEuwEB6QaHtmCIhodGbVV
-        IPcm7HTkpfBdVS8l63kp/4FQd6KYwQTcYeu4zwY1qK0ByhHtLLwJO530YaOmDgjB6LDR+NoJrMdzbVgd
-        EAaH0QHFV/EDcPbUFuZwTOfOPIEQoBdi2SS8iQT37yvl+H254+HyPvmZ1idQtZKZ6oM3YSc4IJ7e84TY
-        Adj1F5sVf1Q/IxDegjdhJ5mlb+I4DYPvzIJJ0iGiOk5oQKROWgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="targetDriveDevicePathDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>356, 17</value>
-  </metadata>
-  <metadata name="nasStorageFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>190, 17</value>
-  </metadata>
 </root>

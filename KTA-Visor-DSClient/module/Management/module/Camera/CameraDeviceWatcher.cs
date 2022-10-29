@@ -1,22 +1,16 @@
 ﻿using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.service;
-using KTA_Visor_DSClient.module.Management.module.Camera.Resource.Camera.events;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.factory;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
-using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
 using Falcon_Protocol;
-using KTA_Visor_DSClient.module.Management.module.Camera.handler;
 using KTA_Visor_DSClient.install.settings;
-using KTAVisorAPISDK.module.camera.entity;
 using Falcon_Protocol.modules.detector.events;
 
 using System;
 using System.IO;
 using System.Threading;
-using System.Collections.Generic;
-using KTA_Visor_DSClient.kernel.interfaces;
 using KTA_Visor_DSClient.module.Management.module.Camera.observer;
-using Falcon_Protocol.wrapper;
+using KTA_Visor_DSClient.module.Management.module.Camera.controller;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService
 {
@@ -26,24 +20,21 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         private readonly Settings settings;
         private readonly KTALogger.Logger _logger;
         private readonly FalconProtocol falconProtocol;
-        private readonly CameraService cameraService;
+        private readonly CameraController _cameraController;
         private readonly CamerasListObserver _camersasListObserver;
-        private readonly CamerasAutoSyncObserver _camerasautosyncObserver;
         public CameraDeviceWatcher(Settings settings, KTALogger.Logger logger)
         {
             this.settings = settings;
             this._logger = logger;
             this.falconProtocol = new FalconProtocol();
-            this.cameraService = new CameraService();
+            this._cameraController = new CameraController();
             this._camersasListObserver = new CamerasListObserver(this.settings, logger);
-            this._camerasautosyncObserver = new CamerasAutoSyncObserver();
         }
 
         
         public void Start()
         {
             this._camersasListObserver.Observe();
-            this._camerasautosyncObserver.Observe();
 
             this.watch();
             this.falconProtocol.Detector.OnExceptionOccured += onExceptionOccured;
@@ -51,9 +42,15 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             this.falconProtocol.Detector.OnDeviceRemoved += OnDeviceDisconnected;
             this.falconProtocol.Detector.LoadConnectedDevices();
             this.falconProtocol.Detector.Run();
+
+            Globals.ClientTunnel.OnRequestReceivedInTunnelEvent += onRequesTreceived;
         }
 
-       
+        private void onRequesTreceived(object sender, TCPTunnel.module.client.events.TCPClientMessageReceivedEvent e)
+        {
+            this._cameraController.Watch(e.Request);
+        }
+
         private void watch()
         {
             Thread watchThread = new Thread((ThreadStart)delegate
@@ -75,16 +72,12 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
 
         private void OnDeviceMounted(object sender, OnDeviceMountedEvent e)
         {
-            
             if (!this.isValidCameraDevice(e.Drive.Name)){
                 return;
             }
 
             USBCameraDevice camera = USBCameraDeviceFactory.create(e.Drive.Name);
-            camera.Index = this.GetTotalConnectedDevices().Count;
             Globals.CAMERAS_LIST.Push(camera);
-
-            Console.WriteLine("Added camera with index is : " + camera.Index);
         }
 
         private void OnDeviceDisconnected(object sender, OnDeviceRemoved e)
@@ -97,8 +90,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
                 }
 
                 Globals.CAMERAS_LIST.Delete(camera);
-                Console.WriteLine("Removed camera with index is : " + camera.Index);
-
             }
             catch (Exception ex)
             {
@@ -110,7 +101,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         {
             if (Globals.ALLOW_FS_MOUNTING)
             {
-                this.SetUDiskMode(this.GetTotalConnectedDevices().Count);
+                this.SetUDiskMode();
                 Thread.Sleep(2500);
             }
         }

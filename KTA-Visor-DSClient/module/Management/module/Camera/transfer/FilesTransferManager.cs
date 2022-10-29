@@ -39,8 +39,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
  
         private void hookEvents()
         {
+            this._fileSystem.OnTransferProgressChanged += onCopyingFilesProgressChanged;
             this._fileSystem.OnCopyingFinished += onFilesCopyingFinished;
         }
+ 
 
         public void Handle(USBCameraDevice camera)
         {
@@ -50,6 +52,11 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
         private void copyFiles(USBCameraDevice camera)
         {
             this._fileSystem.MoveFilesToStorage(camera);
+        }
+
+        private void onCopyingFilesProgressChanged(object sender, OnTransferProgressChanged e)
+        {
+           this._logger.info(string.Format("COPYING: {0} => PROGRESS => {1}%", e.CurrentFile.FullName, e.Progress));     
         }
 
         private void onFilesCopyingFinished(object sender, OnFilesTransferingFinishedEvent e)

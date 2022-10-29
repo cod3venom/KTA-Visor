@@ -1,15 +1,11 @@
 ﻿using KTA_Visor_DSClient.install.settings;
-using KTA_Visor_DSClient.module.Management.module.Camera.command.memory;
+using KTA_Visor_DSClient.module.Management.module.Station.controller;
 using KTA_Visor_DSClient.module.Management.module.Station.events;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.station.dto;
 using KTAVisorAPISDK.module.station.entity;
 using KTAVisorAPISDK.module.station.service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KTA_Visor_DSClient.module.Management.module.Station
 {
@@ -21,6 +17,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Station
 
         private readonly Settings settings;
         private readonly StationService stationService;
+        private readonly StationController _stationController;
         public StationInitializer(Settings settings = null)
         {
             if (settings == null){
@@ -29,24 +26,26 @@ namespace KTA_Visor_DSClient.module.Management.module.Station
 
             this.settings = settings;
             this.stationService = new StationService();
+            this._stationController = new StationController();
         }
 
-        public async void init(bool isActive = true)
+        public async void init(bool active = true)
         {
-            StationEntity entity = await this.stationService.init(new InitStationRequestTObject(
+            StationEntity stationEntity = await this.stationService.init(new InitStationRequestTObject(
                settings.SettingsObj.app.station.stationId,
                settings.SettingsObj.app.station.ipAddress,
                settings.SettingsObj.app.rdp.userName,
-               settings.SettingsObj.app.rdp.password
+               settings.SettingsObj.app.rdp.password,
+               active
             ));
 
-            if (entity.data == null){
-                Globals.Logger.error("Unable to initialize station");
-                throw new Exception("Unable to initialize station");
-            }
-
-            Globals.STATION = entity;
+            Globals.STATION = stationEntity;
+            Globals.ClientTunnel.OnRequestReceivedInTunnelEvent += onRequest;
         }
- 
+
+        private void onRequest(object sender, TCPTunnel.module.client.events.TCPClientMessageReceivedEvent e)
+        {
+            this._stationController.Watch(e.Request);
+        }
     }
 }

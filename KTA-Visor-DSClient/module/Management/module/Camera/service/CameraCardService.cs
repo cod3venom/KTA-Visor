@@ -39,12 +39,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
 
             Globals.ALLOW_FS_MOUNTING = false;
 
-            Globals.Relay.turnOffAll(1);
-            Thread.Sleep(2500);
-            Globals.Relay.turnOnAll(1200);
-            this._falconProtocol.Connect();
-            int[] usb_totalnum = new int[] { camera.Index };
-            this._falconProtocol.Blink(usb_totalnum);
+            this._falconProtocol.SetAPIMode(cameraEntity.data?.driveName.ToString());
+            this._falconProtocol.Blink(this._falconProtocol.GetTotalConnectedDevices);
 
             Globals.ALLOW_FS_MOUNTING = true;
         }

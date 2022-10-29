@@ -15,8 +15,6 @@ namespace Falcon_Protocol.wrapper
     public class SDK : ModulesManager
     {
 
-        private static int[] usb_totalnum = new int[1];
-
         private byte[] getPwd()
         {
             return Encoding.ASCII.GetBytes("000000");
@@ -138,34 +136,26 @@ namespace Falcon_Protocol.wrapper
             return info;
         }
 
-        public List<int> GetTotalConnectedDevices()
+        public int GetTotalConnectedDevices
         {
-            List<int> devices = new List<int>();
-            byte[] idcode = new byte[6];
-            int[] iret = new int[1];
-            FalconProtocolInteropService.Init_Device_UsbTotal(idcode, iret, SDK.usb_totalnum);
-
-            int usb_index = SDK.usb_totalnum[0];
-            for(int i = 0; i <= usb_index; i++)
+            get
             {
-                devices.Add(i);
-            }
+                byte[] idcode = new byte[6];
+                int[] iret = new int[1];
+                int[] usb_totalnum = new int[1];
+                FalconProtocolInteropService.Init_Device_UsbTotal(idcode, iret, usb_totalnum);
 
-            return devices;
+                return usb_totalnum[0];
+            }
         }
 
-        public void Blink(int[] usb_totalnum, int interval = 1000)
+        public void Blink(int index)
         {
-            
             int[] iret = new int[1];
             byte[] cmd_params = new byte[1];
-            int[] bat = new int[1];
-          
-
-
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < usb_totalnum[0]; j++)
+                for (int j = 0; j < index; j++)
                 {
                     if (i % 2 == 0)
                     {
@@ -181,12 +171,9 @@ namespace Falcon_Protocol.wrapper
                         cmd_params[0] = 0;
                         FalconProtocolInteropService.Eylog_Customized_Command((char)S_DEV_CMD_CUSTOMIZED.CUSTOMIZED_CMD_GREEN_LED_CTRL, cmd_params, iret, j);
                     }
-                    FalconProtocolInteropService.ReadDeviceBatteryDumpEnergy_ByIndex(bat, this.getPwd(), iret, j);
-
                 }
 
-                Console.WriteLine("Battery :" + bat[0].ToString());
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
         }
 
@@ -223,6 +210,7 @@ namespace Falcon_Protocol.wrapper
             FalconProtocolInteropService.ConnectStorageDevice(drive_letter[0], filehandle);
             FalconProtocolInteropService.PassWordCheck(filehandle[0], this.getPwd(), iret);
             FalconProtocolInteropService.SetBWC_MSC_Return(filehandle[0], iret);
+            Thread.Sleep(3000);
         }
 
         private bool calcIRet(int[] iRet)
