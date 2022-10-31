@@ -55,7 +55,7 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.form
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            using (Brush b = new SolidBrush(Color.DarkCyan)){
+             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222"))){
                 int borderWidth = 5;
                 e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
             }

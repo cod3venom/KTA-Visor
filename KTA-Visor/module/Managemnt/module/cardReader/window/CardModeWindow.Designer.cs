@@ -74,10 +74,14 @@
             // 
             // cardIdtxt
             // 
+            this.cardIdtxt.BackColor = System.Drawing.Color.White;
+            this.cardIdtxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cardIdtxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(180)))), ((int)(((byte)(243)))));
             this.cardIdtxt.Location = new System.Drawing.Point(17, 21);
             this.cardIdtxt.Name = "cardIdtxt";
-            this.cardIdtxt.Size = new System.Drawing.Size(194, 22);
+            this.cardIdtxt.Size = new System.Drawing.Size(194, 15);
             this.cardIdtxt.TabIndex = 1;
+            this.cardIdtxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cardIdtxt.UseSystemPasswordChar = true;
             // 
             // pictureBox1

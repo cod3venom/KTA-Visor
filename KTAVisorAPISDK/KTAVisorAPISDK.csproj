@@ -75,11 +75,9 @@
     <Compile Include="module\camera\entity\CameraTransferredFilesReportEntity.cs" />
     <Compile Include="module\camera\repository\CameraCardRepository.cs" />
     <Compile Include="module\camera\repository\CameraInitRepository.cs" />
-    <Compile Include="module\camera\repository\CameraSyncRepository.cs" />
     <Compile Include="module\camera\repository\CameraSettingsRepository.cs" />
     <Compile Include="module\camera\repository\CameraTransferredFilesReportRepository.cs" />
     <Compile Include="module\camera\service\CameraInitService.cs" />
-    <Compile Include="module\camera\service\CameraSyncService.cs" />
     <Compile Include="module\camera\service\CameraTransferredFilesReportService.cs" />
     <Compile Include="module\camera\service\CameraCardService.cs" />
     <Compile Include="module\camera\service\CameraSettingsService.cs" />
@@ -95,6 +93,7 @@
     <Compile Include="module\logger\repository\LoggerRepository.cs" />
     <Compile Include="module\logger\service\LoggerService.cs" />
     <Compile Include="module\user\abstraction\UserDataAbstraction.cs" />
+    <Compile Include="module\user\dto\request\CreateUserRequestTObject.cs" />
     <Compile Include="module\user\dto\request\EditUserRequestTObject.cs" />
     <Compile Include="module\user\dto\request\UserPasswordRecoveryChangePasswordRequestTObject.cs" />
     <Compile Include="module\user\dto\request\VerifyUserPasswordRecoveryCodeRequestTObject.cs" />
@@ -106,8 +105,12 @@
     <Compile Include="module\user\dto\response\UserForgotPasswordResponseTObject.cs" />
     <Compile Include="module\user\repository\UserPasswordRecoveryRepository.cs" />
     <Compile Include="module\user\repository\UserRepository.cs" />
-    <Compile Include="module\user\service\UserPasswordRecoveryService.cs" />
+    <Compile Include="module\user\repository\UsersRepository.cs" />
+    <Compile Include="module\user\repository\MyUserRepository.cs" />
     <Compile Include="module\user\service\UserService.cs" />
+    <Compile Include="module\user\service\UsersService.cs" />
+    <Compile Include="module\user\service\UserPasswordRecoveryService.cs" />
+    <Compile Include="module\user\service\MyUserService.cs" />
     <Compile Include="SDK.cs" />
     <Compile Include="kernel\module\HttpClientHelper\events\HttpUnauthorizedInterceptorEvent.cs" />
     <Compile Include="kernel\module\HttpClientHelper\HttpClientHelper.cs" />
@@ -115,13 +118,13 @@
     <Compile Include="kernel\sharedKernel\helper\DTOHelper\util\DTOHelperStruct.cs" />
     <Compile Include="kernel\sharedKernel\helper\LocalStorage\LocalStorage.cs" />
     <Compile Include="kernel\sharedKernel\util\HttpClientUtil.cs" />
-    <Compile Include="module\auth\command\SaveSessionCommand.cs" />
-    <Compile Include="module\auth\dto\request\SignInRequestTObject.cs" />
-    <Compile Include="module\auth\dto\request\SignUpRequestTObject.cs" />
-    <Compile Include="module\auth\entity\SignInEntity.cs" />
-    <Compile Include="module\auth\entity\SignUpEntity.cs" />
-    <Compile Include="module\auth\repository\AuthRepository.cs" />
-    <Compile Include="module\auth\service\AuthService.cs" />
+    <Compile Include="module\user\command\SaveSessionCommand.cs" />
+    <Compile Include="module\user\dto\request\SignInRequestTObject.cs" />
+    <Compile Include="module\user\dto\request\SignUpRequestTObject.cs" />
+    <Compile Include="module\user\entity\SignInEntity.cs" />
+    <Compile Include="module\user\entity\SignUpEntity.cs" />
+    <Compile Include="module\user\repository\UserAuthRepository.cs" />
+    <Compile Include="module\user\service\UserAuthService.cs" />
     <Compile Include="module\camera\dto\request\CreateCameraRequestTObject.cs" />
     <Compile Include="module\camera\dto\request\EditCameraRequestTObject .cs" />
     <Compile Include="module\camera\entity\CameraEntity.cs" />
@@ -155,7 +158,6 @@
     <Folder Include="module\fileManager\command\" />
     <Folder Include="module\officer\command\" />
     <Folder Include="module\station\command\" />
-    <Folder Include="module\user\command\" />
     <Folder Include="Shared\Component\" />
     <Folder Include="Shared\interfaces\" />
   </ItemGroup>

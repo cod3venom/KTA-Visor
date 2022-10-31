@@ -153,7 +153,7 @@ namespace Falcon_Protocol.wrapper
         {
             int[] iret = new int[1];
             byte[] cmd_params = new byte[1];
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 40; i++)
             {
                 for (int j = 0; j < index; j++)
                 {
@@ -210,7 +210,7 @@ namespace Falcon_Protocol.wrapper
             FalconProtocolInteropService.ConnectStorageDevice(drive_letter[0], filehandle);
             FalconProtocolInteropService.PassWordCheck(filehandle[0], this.getPwd(), iret);
             FalconProtocolInteropService.SetBWC_MSC_Return(filehandle[0], iret);
-            Thread.Sleep(3000);
+            Thread.Sleep(2500);
         }
 
         private bool calcIRet(int[] iRet)

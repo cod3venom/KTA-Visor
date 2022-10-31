@@ -20,18 +20,36 @@ namespace KTAVisorAPISDK.module.user.service
             this.userRepository = new UserRepository();
         }
 
-        public async Task<UserEntity> me()
+        public async Task<UserEntity> findUserById(int id)
         {
-            HttpResponseMessage result = await this.userRepository.me();
+            HttpResponseMessage result = await this.userRepository.findUserById(id);
             string responseBody = await result.Content.ReadAsStringAsync();
             UserEntity user = JsonConvert.DeserializeObject<UserEntity>(responseBody);
 
             return user;
         }
 
-        public async Task<UserEntity> edit(EditUserRequestTObject request)
+        public async Task<UserEntity> create(CreateUserRequestTObject request)
         {
-            HttpResponseMessage result = await this.userRepository.edit(request);
+            HttpResponseMessage result = await this.userRepository.create(request);
+            string responseBody = await result.Content.ReadAsStringAsync();
+            UserEntity user = JsonConvert.DeserializeObject<UserEntity>(responseBody);
+
+            return user;
+        }
+
+        public async Task<UserEntity> edit(int id, EditUserRequestTObject request)
+        {
+            HttpResponseMessage result = await this.userRepository.edit(id, request);
+            string responseBody = await result.Content.ReadAsStringAsync();
+            UserEntity user = JsonConvert.DeserializeObject<UserEntity>(responseBody);
+
+            return user;
+        }
+
+        public async Task<dynamic> delete(int id)
+        {
+            HttpResponseMessage result = await this.userRepository.delete(id);
             string responseBody = await result.Content.ReadAsStringAsync();
             UserEntity user = JsonConvert.DeserializeObject<UserEntity>(responseBody);
 

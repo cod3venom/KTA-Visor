@@ -74,7 +74,13 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             }
 
             string settingsContent = JsonConvert.SerializeObject(settings);
-            File.WriteAllText(this.settingsFilePath, settingsContent);
+            FileStream fs = File.Open(this.settingsFilePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+            using (StreamWriter writer = new StreamWriter(fs))
+            {
+                writer.WriteLine(settingsContent);
+                writer.Close();
+                fs.Close();
+            }
         }
     }
 }

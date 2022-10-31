@@ -40,7 +40,7 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.ipTxt.Text = this.settings.SettingsObj?.app?.management?.serverIp;
             this.portTxt.Text = this.settings.SettingsObj?.app?.management?.serverPort.ToString();
             this.autoReconnectChck.Checked = this.settings.SettingsObj.app.management.autoReconnect;
-            this.storageLocationTxt.Text = this.settings.SettingsObj?.app?.fileSystem?.filesPath;
+            this.storageLocationTxt.Text = this.settings.SettingsObj?.app?.fileSystem?.recordingsPath;
             this.autoCopyChk.Checked = this.settings.SettingsObj.app.fileSystem.autoCopy;
             this.usbRelayPort.Text = this.settings.SettingsObj?.app?.usbRelay?.COMport;
             this.apiTxt.Text = this.settings.SettingsObj?.app?.backend?.api;
@@ -62,7 +62,10 @@ namespace KTA_Visor_DSClient.module.Management.view
             });
 
             this.storageLocationTxt.TextChanged += (delegate (object sender, EventArgs e) {
-                this.settings.SettingsObj.app.fileSystem.filesPath = this.storageLocationTxt.Text;
+                this.settings.SettingsObj.app.fileSystem.recordingsPath = this.storageLocationTxt.Text;
+            });
+            this.reportsDirTxt.TextChanged += (delegate (object sender, EventArgs e) {
+                this.settings.SettingsObj.app.fileSystem.reportsPath = this.reportsDirTxt.Text;
             });
             this.autoCopyChk.CheckedChanged += (delegate (object sender, EventArgs e) {
                 this.settings.SettingsObj.app.fileSystem.autoCopy = this.autoCopyChk.Checked;

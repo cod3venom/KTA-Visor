@@ -1,5 +1,6 @@
 ﻿using KTA_Visor.module.Managemnt.events;
 using KTA_Visor.module.Managemnt.interfaces;
+using KTA_Visor.module.Managemnt.module.fileManager;
 using KTA_Visor.module.Managemnt.module.station;
 using KTA_Visor.module.Shared.Global;
 using System;
@@ -22,20 +23,35 @@ namespace KTA_Visor.module.Managemnt.uiHandler
 
         public void Handle()
         {
-            this.initializeUI();
+            this.hookEvents();
         }
 
-       private void initializeUI()
+        private void hookEvents()
+        {
+            this.managementForm.SideBar.OnStationsClick += displayStationAsDefaultView;
+            this.managementForm.SideBar.OnRecordingsClick += displayRecordingsAsDefaultView;
+        }
+
+        private void displayStationAsDefaultView(object sender, EventArgs e)
+        {
+            this.displayModule((StationModule)this.managementForm.Modules.Get(StationModule.ModuleName));
+        }
+
+        private void displayRecordingsAsDefaultView(object sender, EventArgs e)
+        {
+            this.displayModule((StationModule)this.managementForm.Modules.Get(FileManagerModule.ModuleName));
+        }
+
+        private void displayModule(Control moduleView)
        {
             Thread uiThread = new Thread((ThreadStart)delegate
             {
                 this.managementForm.Invoke((MethodInvoker)delegate
                 {
-                    StationModule station = (StationModule)this.managementForm.Modules.Get(StationModule.ModuleName);
-                    station.Dock = DockStyle.Fill;
+                    
+                    moduleView.Dock = DockStyle.Fill;
                     this.managementForm.ClientsManagerModule.Dock = DockStyle.Fill;
-
-                    this.managementForm.Content.Controls.Add(station);
+                    this.managementForm.Content.Controls.Add(moduleView);
                     this.managementForm.ClientsManagerPanel.Controls.Add(this.managementForm.ClientsManagerModule);
                 });
             });

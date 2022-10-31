@@ -1,21 +1,11 @@
 ﻿using KTA_Visor_DSClient.install.settings;
-using KTA_Visor_DSClient.kernel.helper;
-using KTA_Visor_DSClient.kernel.sharedKernel.ThreadPool;
 using KTA_Visor_DSClient.module.Management.module.Camera.interfaces;
-using KTA_Visor_DSClient.module.Management.module.Camera.reports.TransferedFiles;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
 using KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem.events;
 using KTA_Visor_DSClient.module.Shared.Globals;
-using KTAVisorAPISDK.module.fileManager.dto.request;
-using KTAVisorAPISDK.module.fileManager.service;
 using System;
-using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using TCPTunnel.kernel.extensions.router.dto;
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
@@ -56,6 +46,14 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
 
         private void onCopyingFilesProgressChanged(object sender, OnTransferProgressChanged e)
         {
+            dynamic response = new ExpandoObject();
+            response.fileName = e.CurrentFile.FullName;
+            response.progress = e.Progress;
+            Globals.ClientTunnel.Emit(new Request(
+                "response://camera/files/transfer/progress",
+                 response
+            ));
+
            this._logger.info(string.Format("COPYING: {0} => PROGRESS => {1}%", e.CurrentFile.FullName, e.Progress));     
         }
 

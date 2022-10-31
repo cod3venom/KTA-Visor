@@ -40,6 +40,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             Globals.ALLOW_FS_MOUNTING = false;
 
             this._falconProtocol.SetAPIMode(cameraEntity.data?.driveName.ToString());
+            Thread.Sleep(1500);
             this._falconProtocol.Blink(this._falconProtocol.GetTotalConnectedDevices);
 
             Globals.ALLOW_FS_MOUNTING = true;

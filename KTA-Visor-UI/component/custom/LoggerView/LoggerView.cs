@@ -42,17 +42,8 @@ namespace KTA_Visor_UI.component.custom.LoggerView
             {
                 this.richTextBox = new RichTextBox();
             }
-
-            if (color == null)
-            {
-                color = Color.Black;
-            }
-            richTextBox.SelectionStart = richTextBox.TextLength;
-            richTextBox.SelectionLength = 0;
-
-            richTextBox.SelectionColor = color;
+            
             richTextBox.AppendText(message + Environment.NewLine);
-            richTextBox.SelectionColor = richTextBox.ForeColor;
             this.richTextBox.ScrollToCaret();
         }
 

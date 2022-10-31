@@ -178,8 +178,6 @@
     <Compile Include="module\Management\module\Camera\events\CameraDisconnectedEvent.cs" />
     <Compile Include="module\Management\module\Camera\factory\USBCameraDeviceFactory.cs" />
     <Compile Include="module\Management\module\Camera\handler\CameraBackendInit.cs" />
-    <Compile Include="module\Management\module\Camera\observer\CamerasAutoSyncObserver.cs" />
-    <Compile Include="module\Management\module\Camera\reports\TransferedFiles\TransferedFilesReport.cs" />
     <Compile Include="module\Management\module\Camera\transfer\AbstractResource.cs" />
     <Compile Include="module\Management\module\Camera\transfer\abstractResources\filesystem\events\OnTransferProgressChanged.cs" />
     <Compile Include="module\Management\module\Camera\transfer\abstractResources\filesystem\FileSystem.cs" />
@@ -339,11 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="module\Management\module\Camera\reports\TransferedFiles\TransferedFilesTemplate.html">
-      <CustomToolNamespace>KTA_Visor_DSClient.module.Management.module.Camera.reports.TransferedFiles.TransferedFilesTemplate.html</CustomToolNamespace>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="module\Management\module\Camera\transfer\abstractResources\reporter\template\TransferedFilesTemplate.html">

@@ -78,16 +78,6 @@ namespace KTAVisorAPISDK.module.camera.service
             return cameras;
         }
 
-        public async Task<CameraEntity> create(CreateCameraRequestTObject request)
-        {
-            HttpResponseMessage result = await this.cameraRepository.create(request);
-            string responseBody = await result.Content.ReadAsStringAsync();
-            CameraEntity camera = JsonConvert.DeserializeObject<CameraEntity>(responseBody);
-
-            return camera;
-        }
-
-
         public async Task<CameraEntity> edit(int id, EditCameraRequestTObject request)
         {
             HttpResponseMessage result = await this.cameraRepository.edit(id, request);

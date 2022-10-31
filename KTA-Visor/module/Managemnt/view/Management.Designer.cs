@@ -48,22 +48,20 @@ namespace KTA_Visor.module.Management.view
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutUsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.sidebarPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.footerPanel = new System.Windows.Forms.Panel();
+            this.tunnelIndicator = new KTA_Visor_UI.component.basic.StatusIndicator.StatusIndicator();
             this.clientsManagerPanel = new System.Windows.Forms.Panel();
             this.loggerPanel = new System.Windows.Forms.Panel();
+            this.loggerView = new KTA_Visor_UI.component.custom.LoggerView.LoggerView();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
-            this.loggerView = new KTA_Visor_UI.component.custom.LoggerView.LoggerView();
-            this.tunnelIndicator = new KTA_Visor_UI.component.basic.StatusIndicator.StatusIndicator();
-            this.sideBar = new KTA_Visor_UI.component.custom.User.UserProfile.UserProfileCard();
             this.topBarPanel.SuspendLayout();
             this.tunnelMenuStrip.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.footerPanel.SuspendLayout();
             this.loggerPanel.SuspendLayout();
             this.SuspendLayout();
@@ -214,16 +212,15 @@ namespace KTA_Visor.module.Management.view
             this.aboutUsMenuItem.Size = new System.Drawing.Size(140, 26);
             this.aboutUsMenuItem.Text = "O nas";
             // 
-            // panel1
+            // sidebarPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.panel1.Controls.Add(this.sideBar);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(25, 52);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(424, 908);
-            this.panel1.TabIndex = 1;
+            this.sidebarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.sidebarPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sidebarPanel.Location = new System.Drawing.Point(25, 52);
+            this.sidebarPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.sidebarPanel.Name = "sidebarPanel";
+            this.sidebarPanel.Size = new System.Drawing.Size(424, 908);
+            this.sidebarPanel.TabIndex = 1;
             // 
             // panel2
             // 
@@ -254,6 +251,18 @@ namespace KTA_Visor.module.Management.view
             this.footerPanel.Size = new System.Drawing.Size(948, 35);
             this.footerPanel.TabIndex = 3;
             // 
+            // tunnelIndicator
+            // 
+            this.tunnelIndicator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
+            this.tunnelIndicator.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
+            this.tunnelIndicator.Icon = ((System.Drawing.Image)(resources.GetObject("tunnelIndicator.Icon")));
+            this.tunnelIndicator.Label = "Status";
+            this.tunnelIndicator.Location = new System.Drawing.Point(4, 7);
+            this.tunnelIndicator.Margin = new System.Windows.Forms.Padding(2);
+            this.tunnelIndicator.Name = "tunnelIndicator";
+            this.tunnelIndicator.Size = new System.Drawing.Size(228, 19);
+            this.tunnelIndicator.TabIndex = 1;
+            // 
             // clientsManagerPanel
             // 
             this.clientsManagerPanel.Dock = System.Windows.Forms.DockStyle.Right;
@@ -272,6 +281,16 @@ namespace KTA_Visor.module.Management.view
             this.loggerPanel.Name = "loggerPanel";
             this.loggerPanel.Size = new System.Drawing.Size(936, 244);
             this.loggerPanel.TabIndex = 5;
+            // 
+            // loggerView
+            // 
+            this.loggerView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loggerView.Location = new System.Drawing.Point(0, 0);
+            this.loggerView.Margin = new System.Windows.Forms.Padding(2);
+            this.loggerView.Name = "loggerView";
+            this.loggerView.ParentPanel = null;
+            this.loggerView.Size = new System.Drawing.Size(936, 244);
+            this.loggerView.TabIndex = 0;
             // 
             // panel10
             // 
@@ -303,44 +322,14 @@ namespace KTA_Visor.module.Management.view
             // contentPanel
             // 
             this.contentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.contentPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("contentPanel.BackgroundImage")));
+            this.contentPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contentPanel.Location = new System.Drawing.Point(463, 52);
             this.contentPanel.Margin = new System.Windows.Forms.Padding(2);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(936, 601);
             this.contentPanel.TabIndex = 10;
-            // 
-            // loggerView
-            // 
-            this.loggerView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.loggerView.Location = new System.Drawing.Point(0, 0);
-            this.loggerView.Margin = new System.Windows.Forms.Padding(2);
-            this.loggerView.Name = "loggerView";
-            this.loggerView.ParentPanel = null;
-            this.loggerView.Size = new System.Drawing.Size(936, 244);
-            this.loggerView.TabIndex = 0;
-            // 
-            // tunnelIndicator
-            // 
-            this.tunnelIndicator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
-            this.tunnelIndicator.Icon = ((System.Drawing.Image)(resources.GetObject("tunnelIndicator.Icon")));
-            this.tunnelIndicator.Label = "Status";
-            this.tunnelIndicator.Location = new System.Drawing.Point(4, 7);
-            this.tunnelIndicator.Margin = new System.Windows.Forms.Padding(2);
-            this.tunnelIndicator.Name = "tunnelIndicator";
-            this.tunnelIndicator.Size = new System.Drawing.Size(228, 19);
-            this.tunnelIndicator.TabIndex = 1;
-            // 
-            // sideBar
-            // 
-            this.sideBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sideBar.FirstAndLastName = "Imię i Nazwisko";
-            this.sideBar.Location = new System.Drawing.Point(0, 0);
-            this.sideBar.Margin = new System.Windows.Forms.Padding(5);
-            this.sideBar.Name = "sideBar";
-            this.sideBar.Size = new System.Drawing.Size(424, 908);
-            this.sideBar.TabIndex = 8;
-            this.sideBar.Version = "1.2.3.v.5";
             // 
             // Management
             // 
@@ -355,7 +344,7 @@ namespace KTA_Visor.module.Management.view
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.footerPanel);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.sidebarPanel);
             this.Controls.Add(this.clientsManagerPanel);
             this.Controls.Add(this.panel2);
             this.DisplayHeader = false;
@@ -368,13 +357,12 @@ namespace KTA_Visor.module.Management.view
             this.Padding = new System.Windows.Forms.Padding(25, 38, 25, 25);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Style = MetroFramework.MetroColorStyle.Black;
-            this.Text = "StationsView";
+            this.Text = "KTA-Visor";
             this.Load += new System.EventHandler(this.StationsView_Load);
             this.topBarPanel.ResumeLayout(false);
             this.topBarPanel.PerformLayout();
             this.tunnelMenuStrip.ResumeLayout(false);
             this.tunnelMenuStrip.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.footerPanel.ResumeLayout(false);
             this.loggerPanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -384,7 +372,7 @@ namespace KTA_Visor.module.Management.view
         #endregion
 
         private System.Windows.Forms.Panel topBarPanel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel sidebarPanel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel footerPanel;
@@ -405,7 +393,6 @@ namespace KTA_Visor.module.Management.view
         public System.Windows.Forms.ToolStripMenuItem pomocToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem versionMenuItem;
         public System.Windows.Forms.ToolStripMenuItem aboutUsMenuItem;
-        private KTA_Visor_UI.component.custom.User.UserProfile.UserProfileCard sideBar;
         public System.Windows.Forms.ToolStripMenuItem kontoToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem profileMenuItem;
         public System.Windows.Forms.ToolStripMenuItem securityMenuItem;

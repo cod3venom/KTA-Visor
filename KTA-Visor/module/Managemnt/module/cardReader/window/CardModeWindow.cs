@@ -18,19 +18,16 @@ namespace KTA_Visor.module.Managemnt.module.cardReader.window
         public static string ModuleName = "CardModeWindow";
 
         private readonly CardController _cardController;
-        private readonly CardModeAuthChecker _cardModeAuthCheckerForm;
-        private bool _isAuthenticated = true;
         public CardModeWindow()
         {
             InitializeComponent();
             this._cardController = new CardController();
-            this._cardModeAuthCheckerForm = new CardModeAuthChecker();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            using (Brush b = new SolidBrush(Color.DarkCyan))
+             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222")))
             {
                 int borderWidth = 5;
                 e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
@@ -46,23 +43,10 @@ namespace KTA_Visor.module.Managemnt.module.cardReader.window
 
         private void hookEvents()
         {
-            this._cardModeAuthCheckerForm.OnWrongPasswordProvided += onAuthFailed;
-            this._cardModeAuthCheckerForm.OnPassworCheckerPassed += onAuthenticatedSuccessfully;
             this.cardIdtxt.Focus();
             this.cardIdtxt.KeyDown += onCardScanningStarted;
         }
 
-        private void onAuthFailed(object sender, form.passwordCheckerForm.events.OnWrongPasswordProvidedEvent e)
-        {
-            MetroMessageBox.Show(this, "Wprowadziłeś nie poprawne hasło");
-            this._cardModeAuthCheckerForm.Close();
-            this.Close();
-        }
-
-        private void onAuthenticatedSuccessfully(object sender, form.passwordCheckerForm.events.OnPassworCheckerPassedEvent e)
-        {
-            this._isAuthenticated = true;
-        }
 
         private void onCardScanningStarted(object sender, KeyEventArgs e)
         {
@@ -74,11 +58,6 @@ namespace KTA_Visor.module.Managemnt.module.cardReader.window
 
         private void onCardInputDetected()
         {
-            if (!this._isAuthenticated)
-            {
-                MetroMessageBox.Show(this, "Nie jesteś zautoryzowany do odpowiedniego poziomu, skontaktuj się z Administratorem");
-                return;
-            }
             if (!this.isValidInput(this.cardIdtxt.Text)){
                 return;
             }

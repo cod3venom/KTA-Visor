@@ -33,7 +33,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
 
             string path = string.Format(
                 "{0}\\report_{1}_{2}.html",
-                this._settings?.SettingsObj?.app?.fileSystem?.filesPath,
+                this._settings?.SettingsObj?.app?.fileSystem?.reportsPath,
                 DateTime.Now.ToString("yyyy-M-dd_h_m_s"),
                 camera.BadgeId
             );

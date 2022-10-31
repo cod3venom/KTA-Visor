@@ -429,11 +429,12 @@
             // 
             this.footerPanel.BackColor = System.Drawing.SystemColors.ControlDark;
             this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.footerPanel.Location = new System.Drawing.Point(0, 712);
+            this.footerPanel.Location = new System.Drawing.Point(0, 714);
             this.footerPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.footerPanel.Name = "footerPanel";
-            this.footerPanel.Size = new System.Drawing.Size(1247, 12);
+            this.footerPanel.Size = new System.Drawing.Size(1247, 10);
             this.footerPanel.TabIndex = 4;
+            this.footerPanel.Visible = false;
             // 
             // Table
             // 

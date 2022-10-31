@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse();
+            this.components = new System.ComponentModel.Container();
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.releaseNameLbl = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -71,6 +72,8 @@
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.bunifuSeparator2 = new Bunifu.Framework.UI.BunifuSeparator();
             this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
+            this.reportsDirTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -93,9 +96,10 @@
             this.panel1.Controls.Add(this.releaseNameLbl);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 36);
+            this.panel1.Location = new System.Drawing.Point(0, 44);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(864, 82);
+            this.panel1.Size = new System.Drawing.Size(1152, 101);
             this.panel1.TabIndex = 2;
             // 
             // releaseNameLbl
@@ -103,10 +107,9 @@
             this.releaseNameLbl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.releaseNameLbl.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
             this.releaseNameLbl.ForeColor = System.Drawing.Color.Black;
-            this.releaseNameLbl.Location = new System.Drawing.Point(0, 62);
-            this.releaseNameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.releaseNameLbl.Location = new System.Drawing.Point(0, 76);
             this.releaseNameLbl.Name = "releaseNameLbl";
-            this.releaseNameLbl.Size = new System.Drawing.Size(864, 20);
+            this.releaseNameLbl.Size = new System.Drawing.Size(1152, 25);
             this.releaseNameLbl.TabIndex = 24;
             this.releaseNameLbl.Text = "Release Name";
             this.releaseNameLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -117,9 +120,8 @@
             this.label7.Font = new System.Drawing.Font("Inter ExtraBold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
             this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(864, 82);
+            this.label7.Size = new System.Drawing.Size(1152, 101);
             this.label7.TabIndex = 23;
             this.label7.Text = "DSClient Menedżer ustawień";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -128,9 +130,10 @@
             // 
             this.panel2.Controls.Add(this.footer1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 460);
+            this.panel2.Location = new System.Drawing.Point(0, 736);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(864, 39);
+            this.panel2.Size = new System.Drawing.Size(1152, 48);
             this.panel2.TabIndex = 3;
             // 
             // footer1
@@ -139,9 +142,9 @@
             this.footer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.footer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.footer1.Location = new System.Drawing.Point(0, 0);
-            this.footer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.footer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.footer1.Name = "footer1";
-            this.footer1.Size = new System.Drawing.Size(864, 39);
+            this.footer1.Size = new System.Drawing.Size(1152, 48);
             this.footer1.TabIndex = 0;
             // 
             // panel3
@@ -149,9 +152,10 @@
             this.panel3.Controls.Add(this.tableLayoutPanel1);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 118);
+            this.panel3.Location = new System.Drawing.Point(0, 145);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(864, 342);
+            this.panel3.Size = new System.Drawing.Size(1152, 591);
             this.panel3.TabIndex = 4;
             // 
             // tableLayoutPanel1
@@ -169,46 +173,48 @@
             this.tableLayoutPanel1.Controls.Add(this.panel10, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(864, 297);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.30675F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.69325F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 207F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1152, 536);
             this.tableLayoutPanel1.TabIndex = 36;
             // 
             // panel8
             // 
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel8.Location = new System.Drawing.Point(434, 209);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2);
+            this.panel8.Location = new System.Drawing.Point(580, 329);
+            this.panel8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(427, 85);
+            this.panel8.Size = new System.Drawing.Size(568, 204);
             this.panel8.TabIndex = 5;
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.reportsDirTxt);
+            this.panel7.Controls.Add(this.label10);
             this.panel7.Controls.Add(this.storageLocationTxt);
             this.panel7.Controls.Add(this.label4);
             this.panel7.Controls.Add(this.label3);
             this.panel7.Controls.Add(this.autoCopyChk);
             this.panel7.Controls.Add(this.label5);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(3, 209);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2);
+            this.panel7.Location = new System.Drawing.Point(4, 329);
+            this.panel7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(426, 85);
+            this.panel7.Size = new System.Drawing.Size(569, 204);
             this.panel7.TabIndex = 4;
             // 
             // storageLocationTxt
             // 
             this.storageLocationTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.storageLocationTxt.Location = new System.Drawing.Point(93, 30);
-            this.storageLocationTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.storageLocationTxt.Location = new System.Drawing.Point(147, 39);
+            this.storageLocationTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.storageLocationTxt.Name = "storageLocationTxt";
-            this.storageLocationTxt.Size = new System.Drawing.Size(186, 20);
+            this.storageLocationTxt.Size = new System.Drawing.Size(247, 22);
             this.storageLocationTxt.TabIndex = 27;
             // 
             // label4
@@ -218,10 +224,9 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Inter", 7.8F);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(28, 32);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(64, 43);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 14);
+            this.label4.Size = new System.Drawing.Size(56, 16);
             this.label4.TabIndex = 5;
             this.label4.Text = "Storage";
             // 
@@ -230,20 +235,19 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(16, 10);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(21, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 10);
+            this.label3.Size = new System.Drawing.Size(71, 12);
             this.label3.TabIndex = 18;
             this.label3.Text = "File System";
             // 
             // autoCopyChk
             // 
             this.autoCopyChk.AutoSize = true;
-            this.autoCopyChk.Location = new System.Drawing.Point(93, 57);
-            this.autoCopyChk.Margin = new System.Windows.Forms.Padding(2);
+            this.autoCopyChk.Location = new System.Drawing.Point(333, 113);
+            this.autoCopyChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.autoCopyChk.Name = "autoCopyChk";
-            this.autoCopyChk.Size = new System.Drawing.Size(15, 14);
+            this.autoCopyChk.Size = new System.Drawing.Size(18, 17);
             this.autoCopyChk.TabIndex = 26;
             this.autoCopyChk.UseVisualStyleBackColor = true;
             // 
@@ -252,12 +256,11 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(15, 58);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(144, 112);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 14);
+            this.label5.Size = new System.Drawing.Size(172, 16);
             this.label5.TabIndex = 25;
-            this.label5.Text = "Auto Copy";
+            this.label5.Text = "Automatyczne kopiowanie";
             // 
             // panel6
             // 
@@ -266,10 +269,10 @@
             this.panel6.Controls.Add(this.apiTxt);
             this.panel6.Controls.Add(this.backendLbl);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(434, 106);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2);
+            this.panel6.Location = new System.Drawing.Point(580, 167);
+            this.panel6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(427, 98);
+            this.panel6.Size = new System.Drawing.Size(568, 157);
             this.panel6.TabIndex = 3;
             // 
             // apiLbl
@@ -277,20 +280,19 @@
             this.apiLbl.AutoSize = true;
             this.apiLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apiLbl.ForeColor = System.Drawing.Color.Black;
-            this.apiLbl.Location = new System.Drawing.Point(73, 35);
-            this.apiLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.apiLbl.Location = new System.Drawing.Point(97, 43);
             this.apiLbl.Name = "apiLbl";
-            this.apiLbl.Size = new System.Drawing.Size(24, 14);
+            this.apiLbl.Size = new System.Drawing.Size(27, 16);
             this.apiLbl.TabIndex = 32;
             this.apiLbl.Text = "API";
             // 
             // apiTxt
             // 
             this.apiTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.apiTxt.Location = new System.Drawing.Point(104, 33);
-            this.apiTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.apiTxt.Location = new System.Drawing.Point(139, 41);
+            this.apiTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.apiTxt.Name = "apiTxt";
-            this.apiTxt.Size = new System.Drawing.Size(166, 20);
+            this.apiTxt.Size = new System.Drawing.Size(220, 22);
             this.apiTxt.TabIndex = 33;
             // 
             // backendLbl
@@ -298,12 +300,11 @@
             this.backendLbl.AutoSize = true;
             this.backendLbl.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
             this.backendLbl.ForeColor = System.Drawing.Color.Black;
-            this.backendLbl.Location = new System.Drawing.Point(18, 7);
-            this.backendLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.backendLbl.Location = new System.Drawing.Point(24, 9);
             this.backendLbl.Name = "backendLbl";
-            this.backendLbl.Size = new System.Drawing.Size(46, 10);
+            this.backendLbl.Size = new System.Drawing.Size(80, 12);
             this.backendLbl.TabIndex = 31;
-            this.backendLbl.Text = "Backend";
+            this.backendLbl.Text = "Baza danych";
             // 
             // panel5
             // 
@@ -315,10 +316,10 @@
             this.panel5.Controls.Add(this.label1);
             this.panel5.Controls.Add(this.autoReconnectChck);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 106);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2);
+            this.panel5.Location = new System.Drawing.Point(4, 167);
+            this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(426, 98);
+            this.panel5.Size = new System.Drawing.Size(569, 157);
             this.panel5.TabIndex = 2;
             // 
             // ipLbl
@@ -326,20 +327,19 @@
             this.ipLbl.AutoSize = true;
             this.ipLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ipLbl.ForeColor = System.Drawing.Color.Black;
-            this.ipLbl.Location = new System.Drawing.Point(35, 33);
-            this.ipLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ipLbl.Location = new System.Drawing.Point(47, 41);
             this.ipLbl.Name = "ipLbl";
-            this.ipLbl.Size = new System.Drawing.Size(53, 14);
+            this.ipLbl.Size = new System.Drawing.Size(74, 16);
             this.ipLbl.TabIndex = 11;
-            this.ipLbl.Text = "Server IP";
+            this.ipLbl.Text = "IP Serwera";
             // 
             // ipTxt
             // 
             this.ipTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.ipTxt.Location = new System.Drawing.Point(93, 31);
-            this.ipTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.ipTxt.Location = new System.Drawing.Point(124, 38);
+            this.ipTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ipTxt.Name = "ipTxt";
-            this.ipTxt.Size = new System.Drawing.Size(186, 20);
+            this.ipTxt.Size = new System.Drawing.Size(247, 22);
             this.ipTxt.TabIndex = 10;
             // 
             // label2
@@ -347,20 +347,19 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(16, 7);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(21, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 10);
+            this.label2.Size = new System.Drawing.Size(97, 12);
             this.label2.TabIndex = 12;
             this.label2.Text = "Manager Server";
             // 
             // portTxt
             // 
             this.portTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.portTxt.Location = new System.Drawing.Point(93, 57);
-            this.portTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.portTxt.Location = new System.Drawing.Point(124, 70);
+            this.portTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.portTxt.Name = "portTxt";
-            this.portTxt.Size = new System.Drawing.Size(186, 20);
+            this.portTxt.Size = new System.Drawing.Size(247, 22);
             this.portTxt.TabIndex = 13;
             // 
             // portLbl
@@ -368,32 +367,30 @@
             this.portLbl.AutoSize = true;
             this.portLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.portLbl.ForeColor = System.Drawing.Color.Black;
-            this.portLbl.Location = new System.Drawing.Point(24, 57);
-            this.portLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.portLbl.Location = new System.Drawing.Point(32, 70);
             this.portLbl.Name = "portLbl";
-            this.portLbl.Size = new System.Drawing.Size(65, 14);
+            this.portLbl.Size = new System.Drawing.Size(88, 16);
             this.portLbl.TabIndex = 14;
-            this.portLbl.Text = "Server Port";
+            this.portLbl.Text = "Port serwera";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(4, 79);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(120, 105);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 14);
+            this.label1.Size = new System.Drawing.Size(168, 16);
             this.label1.TabIndex = 15;
-            this.label1.Text = "Auto reconnect";
+            this.label1.Text = "Automatyczne połączenie";
             // 
             // autoReconnectChck
             // 
             this.autoReconnectChck.AutoSize = true;
-            this.autoReconnectChck.Location = new System.Drawing.Point(93, 80);
-            this.autoReconnectChck.Margin = new System.Windows.Forms.Padding(2);
+            this.autoReconnectChck.Location = new System.Drawing.Point(353, 104);
+            this.autoReconnectChck.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.autoReconnectChck.Name = "autoReconnectChck";
-            this.autoReconnectChck.Size = new System.Drawing.Size(15, 14);
+            this.autoReconnectChck.Size = new System.Drawing.Size(18, 17);
             this.autoReconnectChck.TabIndex = 16;
             this.autoReconnectChck.UseVisualStyleBackColor = true;
             // 
@@ -403,10 +400,10 @@
             this.panel9.Controls.Add(this.label9);
             this.panel9.Controls.Add(this.usbRelayPort);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(434, 3);
-            this.panel9.Margin = new System.Windows.Forms.Padding(2);
+            this.panel9.Location = new System.Drawing.Point(580, 3);
+            this.panel9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(427, 98);
+            this.panel9.Size = new System.Drawing.Size(568, 159);
             this.panel9.TabIndex = 0;
             // 
             // label8
@@ -414,32 +411,30 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(18, 16);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Location = new System.Drawing.Point(24, 20);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(54, 10);
+            this.label8.Size = new System.Drawing.Size(101, 12);
             this.label8.TabIndex = 30;
-            this.label8.Text = "USB Relay";
+            this.label8.Text = "Rozdzielacz USB";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(39, 46);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Location = new System.Drawing.Point(52, 57);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 14);
+            this.label9.Size = new System.Drawing.Size(68, 16);
             this.label9.TabIndex = 29;
             this.label9.Text = "COM Port";
             // 
             // usbRelayPort
             // 
             this.usbRelayPort.BorderColor = System.Drawing.Color.SeaGreen;
-            this.usbRelayPort.Location = new System.Drawing.Point(104, 43);
-            this.usbRelayPort.Margin = new System.Windows.Forms.Padding(2);
+            this.usbRelayPort.Location = new System.Drawing.Point(139, 53);
+            this.usbRelayPort.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.usbRelayPort.Name = "usbRelayPort";
-            this.usbRelayPort.Size = new System.Drawing.Size(166, 20);
+            this.usbRelayPort.Size = new System.Drawing.Size(220, 22);
             this.usbRelayPort.TabIndex = 31;
             // 
             // panel10
@@ -452,10 +447,10 @@
             this.panel10.Controls.Add(this.stationIpTxt);
             this.panel10.Controls.Add(this.stationIPLbl);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(3, 3);
-            this.panel10.Margin = new System.Windows.Forms.Padding(2);
+            this.panel10.Location = new System.Drawing.Point(4, 3);
+            this.panel10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(426, 98);
+            this.panel10.Size = new System.Drawing.Size(569, 159);
             this.panel10.TabIndex = 1;
             // 
             // sstationGenBtn
@@ -463,20 +458,20 @@
             this.sstationGenBtn.BackColor = System.Drawing.Color.Transparent;
             this.sstationGenBtn.BackgroundImage = global::KTA_Visor_DSClient.Properties.Resources.magicWand;
             this.sstationGenBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.sstationGenBtn.Location = new System.Drawing.Point(283, 42);
-            this.sstationGenBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.sstationGenBtn.Location = new System.Drawing.Point(377, 52);
+            this.sstationGenBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.sstationGenBtn.Name = "sstationGenBtn";
-            this.sstationGenBtn.Size = new System.Drawing.Size(24, 20);
+            this.sstationGenBtn.Size = new System.Drawing.Size(32, 25);
             this.sstationGenBtn.TabIndex = 32;
             this.sstationGenBtn.UseVisualStyleBackColor = false;
             // 
             // stationIdTxt
             // 
             this.stationIdTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.stationIdTxt.Location = new System.Drawing.Point(93, 42);
-            this.stationIdTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.stationIdTxt.Location = new System.Drawing.Point(124, 52);
+            this.stationIdTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stationIdTxt.Name = "stationIdTxt";
-            this.stationIdTxt.Size = new System.Drawing.Size(186, 20);
+            this.stationIdTxt.Size = new System.Drawing.Size(247, 22);
             this.stationIdTxt.TabIndex = 20;
             // 
             // serialNumberLbl
@@ -484,32 +479,30 @@
             this.serialNumberLbl.AutoSize = true;
             this.serialNumberLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.serialNumberLbl.ForeColor = System.Drawing.Color.Black;
-            this.serialNumberLbl.Location = new System.Drawing.Point(32, 47);
-            this.serialNumberLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.serialNumberLbl.Location = new System.Drawing.Point(43, 58);
             this.serialNumberLbl.Name = "serialNumberLbl";
-            this.serialNumberLbl.Size = new System.Drawing.Size(58, 14);
+            this.serialNumberLbl.Size = new System.Drawing.Size(56, 16);
             this.serialNumberLbl.TabIndex = 21;
-            this.serialNumberLbl.Text = "Station ID";
+            this.serialNumberLbl.Text = "ID Stacji";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Inter Medium", 6F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(16, 16);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(21, 20);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 10);
+            this.label6.Size = new System.Drawing.Size(72, 12);
             this.label6.TabIndex = 22;
             this.label6.Text = "Information";
             // 
             // stationIpTxt
             // 
             this.stationIpTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.stationIpTxt.Location = new System.Drawing.Point(93, 68);
-            this.stationIpTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.stationIpTxt.Location = new System.Drawing.Point(124, 84);
+            this.stationIpTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stationIpTxt.Name = "stationIpTxt";
-            this.stationIpTxt.Size = new System.Drawing.Size(186, 20);
+            this.stationIpTxt.Size = new System.Drawing.Size(247, 22);
             this.stationIpTxt.TabIndex = 23;
             // 
             // stationIPLbl
@@ -517,12 +510,11 @@
             this.stationIPLbl.AutoSize = true;
             this.stationIPLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stationIPLbl.ForeColor = System.Drawing.Color.Black;
-            this.stationIPLbl.Location = new System.Drawing.Point(33, 73);
-            this.stationIPLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.stationIPLbl.Location = new System.Drawing.Point(44, 90);
             this.stationIPLbl.Name = "stationIPLbl";
-            this.stationIPLbl.Size = new System.Drawing.Size(57, 14);
+            this.stationIPLbl.Size = new System.Drawing.Size(55, 16);
             this.stationIPLbl.TabIndex = 24;
-            this.stationIPLbl.Text = "Station IP";
+            this.stationIPLbl.Text = "IP Stacji";
             // 
             // panel4
             // 
@@ -531,19 +523,20 @@
             this.panel4.Controls.Add(this.bunifuSeparator1);
             this.panel4.Controls.Add(this.bunifuSeparator2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 297);
+            this.panel4.Location = new System.Drawing.Point(0, 536);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(864, 45);
+            this.panel4.Size = new System.Drawing.Size(1152, 55);
             this.panel4.TabIndex = 3;
             // 
             // saveBtn
             // 
             this.saveBtn.Active = false;
             this.saveBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.saveBtn.Location = new System.Drawing.Point(755, 11);
-            this.saveBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.saveBtn.Location = new System.Drawing.Point(1007, 14);
+            this.saveBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(109, 23);
+            this.saveBtn.Size = new System.Drawing.Size(145, 27);
             this.saveBtn.TabIndex = 1;
             this.saveBtn.Title = "Save";
             // 
@@ -554,8 +547,9 @@
             this.bunifuSeparator1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             this.bunifuSeparator1.LineThickness = 1;
             this.bunifuSeparator1.Location = new System.Drawing.Point(0, 0);
+            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
-            this.bunifuSeparator1.Size = new System.Drawing.Size(864, 11);
+            this.bunifuSeparator1.Size = new System.Drawing.Size(1152, 14);
             this.bunifuSeparator1.TabIndex = 2;
             this.bunifuSeparator1.Transparency = 255;
             this.bunifuSeparator1.Vertical = false;
@@ -566,9 +560,10 @@
             this.bunifuSeparator2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bunifuSeparator2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             this.bunifuSeparator2.LineThickness = 1;
-            this.bunifuSeparator2.Location = new System.Drawing.Point(0, 34);
+            this.bunifuSeparator2.Location = new System.Drawing.Point(0, 41);
+            this.bunifuSeparator2.Margin = new System.Windows.Forms.Padding(5);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
-            this.bunifuSeparator2.Size = new System.Drawing.Size(864, 11);
+            this.bunifuSeparator2.Size = new System.Drawing.Size(1152, 14);
             this.bunifuSeparator2.TabIndex = 3;
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
@@ -581,26 +576,49 @@
             this.topBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.topBar.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.topBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.topBar.Description = "Window";
+            this.topBar.Description = "Ustawienia";
             this.topBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBar.Location = new System.Drawing.Point(0, 0);
-            this.topBar.Margin = new System.Windows.Forms.Padding(2);
+            this.topBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.topBar.Name = "topBar";
             this.topBar.Parent = null;
-            this.topBar.Size = new System.Drawing.Size(864, 36);
+            this.topBar.Size = new System.Drawing.Size(1152, 44);
             this.topBar.TabIndex = 1;
             this.topBar.Title = "KTA-VISOR-DSCLIENT";
             // 
+            // reportsDirTxt
+            // 
+            this.reportsDirTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.reportsDirTxt.Location = new System.Drawing.Point(147, 79);
+            this.reportsDirTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.reportsDirTxt.Name = "reportsDirTxt";
+            this.reportsDirTxt.Size = new System.Drawing.Size(247, 22);
+            this.reportsDirTxt.TabIndex = 29;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Inter", 7.8F);
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(6, 82);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(114, 16);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Katalog raportów";
+            // 
             // SettingsManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 499);
+            this.ClientSize = new System.Drawing.Size(1152, 784);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.topBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SettingsManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SettingsEntryPoint";
@@ -632,7 +650,6 @@
         private System.Windows.Forms.Panel panel2;
         private KTA_Visor_UI.component.custom.Footer.Footer footer1;
         private System.Windows.Forms.Panel panel1;
-        private KTA_Visor_UI.component.basic.topbar.TopBar topBar;
         private System.Windows.Forms.Panel panel4;
         private KTA_Visor_UI.component.basic.button.PrimaryButton saveBtn;
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator1;
@@ -670,5 +687,8 @@
         private System.Windows.Forms.Label apiLbl;
         private WindowsFormsControlLibrary1.BunifuCustomTextbox apiTxt;
         private System.Windows.Forms.Label backendLbl;
+        private KTA_Visor_UI.component.basic.topbar.TopBar topBar;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox reportsDirTxt;
+        private System.Windows.Forms.Label label10;
     }
 }

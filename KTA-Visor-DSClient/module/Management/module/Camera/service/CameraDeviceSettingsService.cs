@@ -35,6 +35,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             this._selectedCameraDevice = Globals.CAMERAS_LIST.GetByDrive(cameraEntity?.driveName);
             this.configureLocalIdentificators();
             this._falconProtocol.SetAPIMode(cameraEntity?.driveName.ToString());
+            Thread.Sleep(1500);
             this.configureIdentificators();
             this.configureTweaks();
 

@@ -9,6 +9,6 @@ namespace KTAVisorAPISDK.module.user.consts
     public class UserRole
     {
         public const string ROLE_ADMIN = "ROLE_ADMIN";
-        public const string ROLE_STATION = "ROLE_STATION";
+        public const string ROLE_USER = "ROLE_USER";
     }
 }

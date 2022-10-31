@@ -62,10 +62,22 @@ namespace KTA_Visor_UI.component.basic.table
                 }
             });
 
+            this.addBtn.Click += (delegate (object sender, EventArgs e) {
+                this.OnAddButton?.Invoke(this, EventArgs.Empty);
+            });
+
+            this.editBtn.Click += (delegate (object sender, EventArgs e) {
+                this.OnEditButton?.Invoke(this, EventArgs.Empty);
+            });
+
+            this.deleteBtn.Click += (delegate (object sender, EventArgs e) {
+                this.OnDeleteButton?.Invoke(this, EventArgs.Empty);
+            });
 
             this.refreshBtn.Click += (delegate (object sender, EventArgs e){
                 this.OnRefreshData?.Invoke(this, EventArgs.Empty);
             });
+
         }
         public bool AllowAdd
         {

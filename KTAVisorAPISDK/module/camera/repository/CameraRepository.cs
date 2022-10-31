@@ -43,12 +43,6 @@ namespace KTAVisorAPISDK.module.camera.repository
             return await HttpClientUtil.httpClient.GET(string.Format("/api/hidden/cameras/station/{0}", stationId));
         }
 
-        public async Task<HttpResponseMessage> create(CreateCameraRequestTObject request)
-        {
-            string payload = JsonConvert.SerializeObject(request);
-            return await HttpClientUtil.httpClient.POST("/api/hidden/cameras", payload);
-        }
-
         public async Task<HttpResponseMessage> edit(int id, EditCameraRequestTObject request)
         {
             string payload = JsonConvert.SerializeObject(request);

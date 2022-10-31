@@ -12,7 +12,8 @@
       "COMport": ""
     },
     "fileSystem": {
-      "filesPath": "",
+      "recordingsPath": "",
+      "reportsPath": "",
       "autoCopy": true
     },
     "management": {

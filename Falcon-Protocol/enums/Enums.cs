@@ -17,23 +17,8 @@ namespace Falcon_Protocol.enums
             Resolution1280x720P30,
             Resolution848x480P30,
             Resolution1920x1080P20,
-            Resolution1280X720P25,
-            Resolution1280X720P20,
-            Resolution848X480XP20,
-        }
-        
-
-        public static List<VideoResolutions> Resolutions 
-        {
-           get
-            {
-               return new List<VideoResolutions>()
-               {
-                  VideoResolutions.Resolution1920x1080P30,
-                  VideoResolutions.Resolution1280x720P30,
-                  VideoResolutions.Resolution1280X720P25
-               };
-            }
+            Resolution1280x720P20,
+            Resolution848x480P20,
         }
 
         public enum Qualitys

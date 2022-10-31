@@ -248,12 +248,6 @@
     <Compile Include="component\custom\Security\FileEncryption\FileEncryptionWithPasswordWindow.Designer.cs">
       <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="component\custom\User\UserProfile\UserProfileCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="component\custom\User\UserProfile\UserProfileCard.Designer.cs">
-      <DependentUpon>UserProfileCard.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -343,9 +337,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\Security\FileEncryption\FileEncryptionWithPasswordWindow.resx">
       <DependentUpon>FileEncryptionWithPasswordWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="component\custom\User\UserProfile\UserProfileCard.resx">
-      <DependentUpon>UserProfileCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

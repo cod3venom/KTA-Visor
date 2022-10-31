@@ -2,20 +2,13 @@
 using KTA_Visor.kernel.generator;
 using KTA_Visor.kernel.sharedKernel.interfaces;
 using KTA_Visor.module.Managemnt.module.camera.form.Settings.handlers;
-using KTA_Visor.module.Shared.Global;
-using KTA_Visor_UI.component.custom.MessageWindow;
-using KTAVisorAPISDK.module.camera.dto.reques;
-using KTAVisorAPISDK.module.camera.dto.request;
 using KTAVisorAPISDK.module.camera.entity;
-using KTAVisorAPISDK.module.camera.service;
 using KTAVisorAPISDK.module.station.entity;
-using MetroFramework;
 using MetroFramework.Forms;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
-using TCPTunnel.kernel.types;
 using static Falcon_Protocol.enums.Enums;
 
 namespace KTA_Visor.module.Managemnt.module.camera.form.settings
@@ -38,7 +31,22 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
             this.station = station;
         }
 
-        public int Resolution { get; set; }
+        public int Resolution
+        {
+            get
+            {
+                if (this.resolutionFirstChk.Checked)
+                {
+                    return (int)Enums.VideoResolutions.Resolution1920x1080P30;
+                }
+                else if (this.resolutionSecondChk.Checked)
+                {
+                    return (int)Enums.VideoResolutions.Resolution1280x720P30;
+                }
+
+                return (int)Enums.VideoResolutions.Resolution1280x720P20;
+            }
+        }
         public int Quality { get; set; }
         public int Codec { get; set; }
         public int TimeZone { get; set; }
@@ -108,7 +116,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         {
             base.OnPaint(e);
 
-            using (Brush b = new SolidBrush(Color.DarkCyan))
+             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222")))
             {
                 int borderWidth = 5;
                 e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
@@ -131,19 +139,36 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
             this.DateAndTime = DateTime.Now.ToString();
             this.aes256chk.Checked = true;
 
-            this.recordingResolutionCombo.DataSource = Enums.Resolutions;
             this.recordingQualityCombo.DataSource = Enums.Qualities;
             this.recordingCodecFormatCombo.DataSource = Enum.GetValues(typeof(CodecFormats));
 
             this.PreRecording = this.camera.settings.preRecording;
             this.GPS = this.camera.settings.gps == 1;
             this.WIFI = this.camera.settings.wifi == 1;
+
+            switch(this.camera.settings.resolution)
+            {
+                case (int)Enums.VideoResolutions.Resolution1920x1080P30:
+                    this.resolutionFirstChk.Checked = true;
+                    break;
+
+                case (int)Enums.VideoResolutions.Resolution1280x720P30:
+                    this.resolutionSecondChk.Checked = true;
+                    break;
+
+                case (int)Enums.VideoResolutions.Resolution1280x720P20:
+                    this.resolutionThirdChk.Checked = true;
+                    break;
+            }
         }
 
         private void hookEvents()
         {
             this.genDeviceId.Click += onGenerateDeviceId;
-            this.recordingResolutionCombo.SelectionChangeCommitted += onRecordingResolutionChanged;
+            this.resolutionFirstChk.CheckedChanged += onCheckedFirstResolution;
+            this.resolutionSecondChk.CheckedChanged += onCheckedSecondResolution;
+            this.resolutionThirdChk.CheckedChanged += onCheckedThirdResolution;
+
             this.recordingQualityCombo.SelectionChangeCommitted += onRecordingQualityChanged;
             this.recordingCodecFormatCombo.SelectionChangeCommitted += onCodecChanged;
             this.saveBtn.Click += onSaveBtnClicked;
@@ -153,15 +178,23 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         {
             this.CameraId = RandomData.RandomString(this.MIN_ID_LENGTH);
         }
- 
-        private void onRecordingResolutionChanged(object sender, EventArgs e)
-        {
-            string selectedValue = this.recordingResolutionCombo.SelectedValue.ToString();
-            if (selectedValue == "Resolution1280X720P25"){
-                selectedValue = "Resolution1280X720P20";
-            }
 
-            this.camera.settings.resolution = (int)(VideoResolutions)Enum.Parse(typeof(VideoResolutions), selectedValue);
+        private void onCheckedFirstResolution(object sender, EventArgs e)
+        {
+            this.resolutionSecondChk.Checked = false;
+            this.resolutionThirdChk.Checked = false;
+        }
+
+        private void onCheckedSecondResolution(object sender, EventArgs e)
+        {
+            this.resolutionFirstChk.Checked = false;
+            this.resolutionThirdChk.Checked = false;
+        }
+
+        private void onCheckedThirdResolution(object sender, EventArgs e)
+        {
+            this.resolutionFirstChk.Checked = false;
+            this.resolutionSecondChk.Checked = false;
         }
 
         private void onRecordingQualityChanged(object sender, EventArgs e)

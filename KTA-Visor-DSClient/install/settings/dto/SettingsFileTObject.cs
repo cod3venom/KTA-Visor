@@ -39,7 +39,8 @@ namespace KTA_Visor_DSClient.install.settings.dto
 
     public class FileSystem
     {
-        public string filesPath { get; set; }
+        public string recordingsPath { get; set; }
+        public string reportsPath { get; set; }
         public bool autoCopy { get; set; }
     }
 

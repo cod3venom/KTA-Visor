@@ -116,13 +116,24 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
                     fileStream.Write(bytes, 0, bytesRead);
                     this._totalCopiedSize += bytesRead;
 
-                    this.OnTransferProgressChanged?.Invoke(this, new OnTransferProgressChanged(
-                        file,
-                        this._totalFilesSize,
-                        this._totalCopiedSize
-                    ));
+                    Thread progressThr = new Thread((ThreadStart) => {
+                        this.OnTransferProgressChanged?.Invoke(this, new OnTransferProgressChanged(
+                            file,
+                            this._totalFilesSize,
+                            this._totalCopiedSize
+                        ));
+
+                        Thread.Sleep(1000);
+                    });
+                    progressThr.IsBackground = true;
+                    progressThr.Start();
                 }
 
+                file = new FileInfo(destinationFile.FullName);
+                if (file.Exists)
+                {
+                    File.SetAttributes(file.FullName, FileAttributes.Hidden);
+                }
                 this._totalCopiedSize = 0;
             }
         }

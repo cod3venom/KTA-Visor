@@ -28,7 +28,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.observer
             this._cameraBackendSyncHandler = new CameraBackendInit();
             this._cameraFilesTransferingHandler = new FilesTransferManager(
                 this._settings,
-                this._settings.SettingsObj?.app?.fileSystem?.filesPath,
+                this._settings.SettingsObj?.app?.fileSystem?.recordingsPath,
                 logger
             );
         }

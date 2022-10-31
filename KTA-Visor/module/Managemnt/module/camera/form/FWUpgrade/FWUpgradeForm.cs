@@ -33,7 +33,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.FWUpgrade
         {
             base.OnPaint(e);
 
-            using (Brush b = new SolidBrush(Color.DarkCyan))
+             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222")))
             {
                 int borderWidth = 5;
                 e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);

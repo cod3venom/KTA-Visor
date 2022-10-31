@@ -11,6 +11,7 @@ using KTA_Visor.module.Managemnt.module.station.handlers;
 using MetroFramework;
 using KTA_Visor_UI.component.basic.table.enums;
 using TCPTunnel.kernel.types;
+using KTA_Visor.module.Managemnt.module.camera.view.cameraFileTransfersView;
 
 namespace KTA_Visor.module.Managemnt.module.station.view
 {
@@ -25,16 +26,16 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             new ColumnTObject(5, "UTWORZONO")
         };
 
-        private readonly StationController stationController;
-        
         public StationView()
         {
             InitializeComponent();
-            this.stationController = new StationController(this);
+            this.StationController = new StationController(this);
+
             this.StationsUIHandler = new StationsUIHandler(this);
             this.StationContextMenuUIHandler = new StationContextMenuUIHandler(this, this.stationContextMenu);
+            
+            this.CamerasUIHandler = new CamerasUIHandler(this);
             this.CamerasFlowBoardContextMenuUIHandler = new CamerasFlowPanelContextMenuUIHandler(this, this.camerasFlowPanelContextMenu);
-            this.CamerasUIHandler= new CamerasUIHandler(this);
 
             this.table.AllowAdd = false;
             this.table.AllowEdit = false;
@@ -43,12 +44,9 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.tabControl.SelectedIndex = 0;
         }
 
-        public Table Table { get { return this.table; } }
-        public Control CamerasBoard { get { return this.camerasFlowPanel; } }
-
         public void Watch(Request request)
         {
-            this.stationController.Watch(request);
+            this.StationController.Watch(request);
         }
 
         private async void StationViewPanel_Load(object sender, EventArgs e)
@@ -106,6 +104,11 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         public StationContextMenuUIHandler StationContextMenuUIHandler { get; set; }
         public CamerasFlowPanelContextMenuUIHandler CamerasFlowBoardContextMenuUIHandler { get; set; }
         public CamerasUIHandler CamerasUIHandler{ get; set; }
+ 
+        public Table Table { get { return this.table; } }
+        public Control CamerasBoard { get { return this.camerasFlowPanel; } }
+
+        public StationController StationController { get; set; }
         
         public string StationId
         {

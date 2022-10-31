@@ -17,17 +17,17 @@ namespace KTA_Visor.module.Managemnt.sub_window
 {
     public partial class UserProfileWindow : MetroForm
     {
-        private readonly UserService userService;
+        private readonly MyUserService myUserService;
         public UserProfileWindow()
         {
             InitializeComponent();
-            this.userService = new UserService();
+            this.myUserService = new MyUserService();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            using (Brush b = new SolidBrush(Color.DarkCyan)){
+             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222"))){
                 int borderWidth = 5;
                 e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
             }
@@ -59,13 +59,13 @@ namespace KTA_Visor.module.Managemnt.sub_window
 
         private async void onSave(object sender, EventArgs e)
         {
-           UserEntity user = await this.userService.edit(new EditUserRequestTObject
+           UserEntity user = await this.myUserService.edit(new EditUserRequestTObject
             {
                 firstName = this.nameTxt.Text,
                 lastName = this.lastNameTxt.Text,
                 email = this.emailTxt.Text,
                 password = this.passwordTxt.Text,
-                repeatedPassword = this.repeatPasswordTxt.Text
+                //TODO/TOCHECKrepeatedPassword = this.repeatPasswordTxt.Text
             });
 
             if (user.data == null)
@@ -84,7 +84,7 @@ namespace KTA_Visor.module.Managemnt.sub_window
 
         private async Task<UserEntity.User> fetchUser()
         {
-            UserEntity user = await this.userService.me();
+            UserEntity user = await this.myUserService.me();
             if (user.data == null)
             {
                 MetroMessageBox.Show(this,

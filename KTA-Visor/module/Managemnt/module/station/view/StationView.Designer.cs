@@ -35,10 +35,13 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.tabControl = new MetroFramework.Controls.MetroTabControl();
             this.tabPage = new System.Windows.Forms.TabPage();
             this.camerasFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.fileTransfersTab = new MetroFramework.Controls.MetroTabPage();
+            this.camerasFlowPanelContextMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.refreshCamerasFlowPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyczysśćToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.stationContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.table = new KTA_Visor_UI.component.basic.table.Table();
             this.powerSupplyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetPowerSupplyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tunnelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,22 +49,17 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.remoteDesktopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectRemoteDesktopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteStationMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.table = new KTA_Visor_UI.component.basic.table.Table();
-            this.camerasFlowPanelContextMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
-            this.refreshCamerasFlowPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wyczysśćToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPage.SuspendLayout();
+            this.camerasFlowPanelContextMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.stationContextMenu.SuspendLayout();
-            this.camerasFlowPanelContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
             this.tabControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl.Controls.Add(this.tabPage);
-            this.tabControl.Controls.Add(this.fileTransfersTab);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.FontSize = MetroFramework.MetroTabControlSize.Small;
             this.tabControl.Location = new System.Drawing.Point(0, 32);
@@ -97,19 +95,26 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.camerasFlowPanel.Size = new System.Drawing.Size(942, 287);
             this.camerasFlowPanel.TabIndex = 0;
             // 
-            // fileTransfersTab
+            // camerasFlowPanelContextMenu
             // 
-            this.fileTransfersTab.HorizontalScrollbarBarColor = true;
-            this.fileTransfersTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.fileTransfersTab.HorizontalScrollbarSize = 10;
-            this.fileTransfersTab.Location = new System.Drawing.Point(4, 37);
-            this.fileTransfersTab.Name = "fileTransfersTab";
-            this.fileTransfersTab.Size = new System.Drawing.Size(950, 295);
-            this.fileTransfersTab.TabIndex = 1;
-            this.fileTransfersTab.Text = "Transfer danych";
-            this.fileTransfersTab.VerticalScrollbarBarColor = true;
-            this.fileTransfersTab.VerticalScrollbarHighlightOnWheel = false;
-            this.fileTransfersTab.VerticalScrollbarSize = 10;
+            this.camerasFlowPanelContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.camerasFlowPanelContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshCamerasFlowPanelMenuItem,
+            this.wyczysśćToolStripMenuItem});
+            this.camerasFlowPanelContextMenu.Name = "camerasFlowPanelContextMenu";
+            this.camerasFlowPanelContextMenu.Size = new System.Drawing.Size(140, 52);
+            // 
+            // refreshCamerasFlowPanelMenuItem
+            // 
+            this.refreshCamerasFlowPanelMenuItem.Name = "refreshCamerasFlowPanelMenuItem";
+            this.refreshCamerasFlowPanelMenuItem.Size = new System.Drawing.Size(139, 24);
+            this.refreshCamerasFlowPanelMenuItem.Text = "Odśwież";
+            // 
+            // wyczysśćToolStripMenuItem
+            // 
+            this.wyczysśćToolStripMenuItem.Name = "wyczysśćToolStripMenuItem";
+            this.wyczysśćToolStripMenuItem.Size = new System.Drawing.Size(139, 24);
+            this.wyczysśćToolStripMenuItem.Text = "Wyczysść";
             // 
             // panel1
             // 
@@ -146,6 +151,20 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.deleteStationMenuItem});
             this.stationContextMenu.Name = "metroContextMenu1";
             this.stationContextMenu.Size = new System.Drawing.Size(171, 108);
+            // 
+            // table
+            // 
+            this.table.AllowAdd = true;
+            this.table.AllowDelete = true;
+            this.table.AllowEdit = true;
+            this.table.AllowProgressBar = true;
+            this.table.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.table.Location = new System.Drawing.Point(0, 0);
+            this.table.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.table.Name = "table";
+            this.table.Size = new System.Drawing.Size(958, 741);
+            this.table.TabIndex = 4;
+            this.table.Title = "title";
             // 
             // powerSupplyMenuItem
             // 
@@ -202,41 +221,6 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.deleteStationMenuItem.Size = new System.Drawing.Size(170, 26);
             this.deleteStationMenuItem.Text = "Usuń";
             // 
-            // table
-            // 
-            this.table.AllowAdd = true;
-            this.table.AllowDelete = true;
-            this.table.AllowEdit = true;
-            this.table.AllowProgressBar = true;
-            this.table.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.table.Location = new System.Drawing.Point(0, 0);
-            this.table.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.table.Name = "table";
-            this.table.Size = new System.Drawing.Size(958, 741);
-            this.table.TabIndex = 4;
-            this.table.Title = "title";
-            // 
-            // camerasFlowPanelContextMenu
-            // 
-            this.camerasFlowPanelContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.camerasFlowPanelContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refreshCamerasFlowPanelMenuItem,
-            this.wyczysśćToolStripMenuItem});
-            this.camerasFlowPanelContextMenu.Name = "camerasFlowPanelContextMenu";
-            this.camerasFlowPanelContextMenu.Size = new System.Drawing.Size(140, 52);
-            // 
-            // refreshCamerasFlowPanelMenuItem
-            // 
-            this.refreshCamerasFlowPanelMenuItem.Name = "refreshCamerasFlowPanelMenuItem";
-            this.refreshCamerasFlowPanelMenuItem.Size = new System.Drawing.Size(139, 24);
-            this.refreshCamerasFlowPanelMenuItem.Text = "Odśwież";
-            // 
-            // wyczysśćToolStripMenuItem
-            // 
-            this.wyczysśćToolStripMenuItem.Name = "wyczysśćToolStripMenuItem";
-            this.wyczysśćToolStripMenuItem.Size = new System.Drawing.Size(139, 24);
-            this.wyczysśćToolStripMenuItem.Text = "Wyczysść";
-            // 
             // StationView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -249,9 +233,9 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.Load += new System.EventHandler(this.StationViewPanel_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage.ResumeLayout(false);
+            this.camerasFlowPanelContextMenu.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.stationContextMenu.ResumeLayout(false);
-            this.camerasFlowPanelContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -271,7 +255,6 @@ namespace KTA_Visor.module.Managemnt.module.station.view
         public ToolStripMenuItem resetTunnelMenuItem;
         public ToolStripMenuItem connectRemoteDesktopMenuItem;
         public ToolStripMenuItem deleteStationMenuItem;
-        private MetroFramework.Controls.MetroTabPage fileTransfersTab;
         private MetroFramework.Controls.MetroContextMenu camerasFlowPanelContextMenu;
         private ToolStripMenuItem wyczysśćToolStripMenuItem;
         public ToolStripMenuItem refreshCamerasFlowPanelMenuItem;
