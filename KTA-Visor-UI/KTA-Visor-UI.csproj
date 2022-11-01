@@ -193,6 +193,12 @@
     <Compile Include="component\custom\ClientsList\sub-components\Client\ClientItem.Designer.cs">
       <DependentUpon>ClientItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\custom\DriveMonitoring\DriveMonitoring.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="component\custom\DriveMonitoring\DriveMonitoring.Designer.cs">
+      <DependentUpon>DriveMonitoring.cs</DependentUpon>
+    </Compile>
     <Compile Include="component\custom\FIleExplorer\FileExplorer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -315,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\ClientsList\sub-components\Client\ClientItem.resx">
       <DependentUpon>ClientItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="component\custom\DriveMonitoring\DriveMonitoring.resx">
+      <DependentUpon>DriveMonitoring.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="component\custom\FIleExplorer\FileExplorer.resx">
       <DependentUpon>FileExplorer.cs</DependentUpon>

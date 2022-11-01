@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TCPTunnel.kernel.extensions.router.dto;
 
 namespace KTA_Visor.module.Managemnt.uiHandler
@@ -28,6 +29,8 @@ namespace KTA_Visor.module.Managemnt.uiHandler
         {
             this.managementForm.ClientsManagerModule.Title = "Połączenia";
             this.managementForm.ClientsManagerModule.TotalConnectionsText = "Wszystkie połączenia: ";
+            this.managementForm.ClientsManagerModule.Dock = DockStyle.Fill;
+            this.managementForm.ClientsManagerPanel.Controls.Add(this.managementForm.ClientsManagerModule);
         }
         private void hookEvents()
         {

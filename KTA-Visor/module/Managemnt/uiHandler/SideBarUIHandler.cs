@@ -27,6 +27,7 @@ namespace KTA_Visor.module.Managemnt.uiHandler
         {
             this.renderUserProfileData();
             this.hookEvents();
+            this.initializeUI();
         }
 
         private void hookEvents()
@@ -40,6 +41,10 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             this.managementForm.SideBar.OnLogOutclick += onLogoutClick;
         }
 
+        private void initializeUI()
+        {
+            this.managementForm.SideBar.DriveMonitoring.Start(this.managementForm.Settings.SettingsObj.app.fileSystem.storageDriveLetter);
+        }
         private void renderUserProfileData()
         {
             this.managementForm.SideBar.FirstAndLastName = String.Format("{0} {1}",

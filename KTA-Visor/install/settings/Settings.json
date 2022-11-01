@@ -19,6 +19,7 @@
     "fileSystem": {
       "recordingsPath": "",
       "reportsPath": "",
+      "storageDriveLetter":  "",
       "autoCopy": true
     },
     "cardMode": {

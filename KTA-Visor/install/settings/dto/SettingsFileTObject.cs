@@ -44,7 +44,7 @@ namespace KTA_Visor.install.settings.dto
         {
             public string recordingsPath { get; set; }
             public string reportsPath { get; set; }
-
+            public string storageDriveLetter { get; set; }
             public bool autoCopy { get; set; }
         }
 

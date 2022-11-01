@@ -1,4 +1,5 @@
 ﻿using Bunifu.Framework.UI;
+using KTA_Visor_UI.component.custom.DriveMonitoring;
 using KTAVisorAPISDK.module.user.consts;
 using System;
 using System.Collections.Generic;
@@ -153,5 +154,8 @@ namespace KTA_Visor.module.Managemnt.module.users.component.UserSidebarCard
                 this.statusPicBox.Image = Properties.Resources.green_circle;
             }
         }
+
+
+        public DriveMonitoring DriveMonitoring { get { return this.driveMonitoring; } }
     }
 }
