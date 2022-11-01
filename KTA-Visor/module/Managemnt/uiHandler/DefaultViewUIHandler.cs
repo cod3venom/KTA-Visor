@@ -39,11 +39,11 @@ namespace KTA_Visor.module.Managemnt.uiHandler
 
         private void displayRecordingsAsDefaultView(object sender, EventArgs e)
         {
-            this.displayModule((StationModule)this.managementForm.Modules.Get(FileManagerModule.ModuleName));
+            this.displayModule((FileManagerModule)this.managementForm.Modules.Get(FileManagerModule.ModuleName));
         }
 
         private void displayModule(Control moduleView)
-       {
+        {
             Thread uiThread = new Thread((ThreadStart)delegate
             {
                 this.managementForm.Invoke((MethodInvoker)delegate

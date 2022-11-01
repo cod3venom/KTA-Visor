@@ -75,16 +75,19 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
             }
             this._stationView.Table.Invoke((MethodInvoker)delegate
             {
-                this._stationView.Table.DataGridView.Rows.Clear();
+                this._stationView.Table.DataTable.Rows.Clear();
             });
         }
 
         private void addToTable(StationEntity.Station station)
         {
+            if (!this._stationView.IsHandleCreated){
+                return;
+            }
             this._stationView.Table.Invoke((MethodInvoker)delegate
             {
                 bool active = Globals.Server.Clients.Find((TCPClientTObject stationClient) => stationClient.IpAddress == station.stationIp) != null;
-                this._stationView.Table.DataGridView.Rows.Add(
+                this._stationView.Table.Row.Add(
                    station?.stationId,
                    station.stationIp,
                    station.stationIp,

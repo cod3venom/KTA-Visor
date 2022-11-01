@@ -1,4 +1,5 @@
-﻿using KTA_Visor_DSClient.kernel.helper;
+﻿using KTA_Visor_DSClient.install.settings;
+using KTA_Visor_DSClient.kernel.helper;
 using KTA_Visor_DSClient.kernel.sharedKernel.ThreadPool;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
 using KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem.events;
@@ -24,15 +25,15 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
         private USBCameraDevice _cameraDevice;
         private readonly FileManagerService _fileManagerService;
 
-        private readonly string _destination;
+        private readonly Settings _settings;
         private readonly KTALogger.Logger _logger;
 
         private long _totalFilesSize = 0;
         private long _totalCopiedSize = 0;
 
-        public FileSystem(string destination, KTALogger.Logger logger)
+        public FileSystem(Settings settings, KTALogger.Logger logger)
         {
-            this._destination = destination;
+            this._settings = settings;
             this._logger = logger;
             this._fileManagerService = new FileManagerService();
         }
@@ -41,9 +42,9 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
         {
             this._cameraDevice = cameraDevice;
 
-            if (!Directory.Exists(this._destination)){
-                throw new Exception("Network drive location does not exists");
-            }
+            //if (Directory.EnumerateDirectories(this._destination).Count == 0){
+            //    throw new Exception("Network drive location does not exists");
+            //}
 
             Globals.IS_ALL_COPYING_PROCESS_ARE_END = false;
             this._totalFilesSize = this._cameraDevice.Files.Sum(file => Convert.ToInt32(file.Length));
@@ -63,7 +64,11 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
             {
                 try
                 {
-                    FileInfo destinationFile = new FileInfo(String.Format("{0}\\{1}", this._destination, file.Name));
+                    FileInfo destinationFile = new FileInfo(String.Format(
+                        "{0}\\{1}",
+                        this._settings.SettingsObj?.app?.fileSystem?.recordingsPath,
+                        file.Name
+                    ));
 
                     if (!File.Exists(destinationFile.FullName))
                     {
@@ -157,19 +162,16 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
             ));
         }
 
-        /// <summary>
-        /// Current method checks if there is enought
-        /// space on disk to copy file
-        /// </summary>
-        /// <param name="ex"></param>
-        /// <returns></returns>
-        private bool isDiskFull(Exception ex)
+        
+        protected bool IsNetworkDriveExists()
         {
-            const int ERROR_HANDLE_DISK_FULL = 0x27;
-            const int ERROR_DISK_FULL = 0x70;
-
-            int win32ErrorCode = Marshal.GetHRForException(ex) & 0xFFFF;
-            return win32ErrorCode == ERROR_HANDLE_DISK_FULL || win32ErrorCode == ERROR_DISK_FULL;
+            string root = Directory.GetDirectoryRoot(this._settings.SettingsObj?.app?.fileSystem?.recordingsPath);
+            DriveInfo drive = new DriveInfo(root);
+            if (drive.DriveType == DriveType.Network)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

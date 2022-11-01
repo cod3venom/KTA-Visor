@@ -81,7 +81,12 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
         public string DriveName
         {
             get { return this.driveNameLbl.Text; }
-            set { this.driveNameLbl.Text = value.ToString(); }
+            set 
+            {
+                value = value.ToString().Replace(":", "").ToString();
+                value = value.ToString().Replace("\\", "").ToString();
+                this.driveNameLbl.Text = value; 
+            }
         }
 
         private void handleStatus()

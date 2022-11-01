@@ -31,35 +31,35 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CameraItem));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.idTxt = new MetroFramework.Controls.MetroTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.statusIcon = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.markerLbl = new System.Windows.Forms.Label();
+            this.markerTitleLbl = new System.Windows.Forms.Label();
             this.driveNameLbl = new System.Windows.Forms.Label();
-            this.driveTitleLbl = new System.Windows.Forms.Label();
+            this.driveTitleIndexLbl = new System.Windows.Forms.Label();
             this.settingsBtn = new MetroFramework.Controls.MetroButton();
             this.badgeIdLbl = new System.Windows.Forms.Label();
             this.cameraIdLbl = new System.Windows.Forms.Label();
             this.cameraIdTextLbl = new System.Windows.Forms.Label();
             this.badgeIdTextLbl = new System.Windows.Forms.Label();
             this.cameraItemMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.targetDriveDevicePathDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.nasStorageFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.oprogramowanieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.upgradeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.statusIcon = new System.Windows.Forms.PictureBox();
-            this.markerLbl = new System.Windows.Forms.Label();
-            this.markerTitleLbl = new System.Windows.Forms.Label();
             this.ustawieniaFabryczneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuńToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.targetDriveDevicePathDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.nasStorageFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).BeginInit();
             this.panel3.SuspendLayout();
             this.cameraItemMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -71,6 +71,20 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(248, 83);
             this.panel2.TabIndex = 4;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(88, 9);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(65, 70);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 1;
+            this.pictureBox3.TabStop = false;
             // 
             // panel1
             // 
@@ -126,12 +140,23 @@
             this.panel4.Size = new System.Drawing.Size(49, 33);
             this.panel4.TabIndex = 2;
             // 
+            // statusIcon
+            // 
+            this.statusIcon.Image = global::KTA_Visor.Properties.Resources.green_circle;
+            this.statusIcon.Location = new System.Drawing.Point(12, 4);
+            this.statusIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.statusIcon.Name = "statusIcon";
+            this.statusIcon.Size = new System.Drawing.Size(28, 21);
+            this.statusIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.statusIcon.TabIndex = 1;
+            this.statusIcon.TabStop = false;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.markerLbl);
             this.panel3.Controls.Add(this.markerTitleLbl);
             this.panel3.Controls.Add(this.driveNameLbl);
-            this.panel3.Controls.Add(this.driveTitleLbl);
+            this.panel3.Controls.Add(this.driveTitleIndexLbl);
             this.panel3.Controls.Add(this.settingsBtn);
             this.panel3.Controls.Add(this.badgeIdLbl);
             this.panel3.Controls.Add(this.cameraIdLbl);
@@ -144,6 +169,28 @@
             this.panel3.Size = new System.Drawing.Size(248, 161);
             this.panel3.TabIndex = 5;
             // 
+            // markerLbl
+            // 
+            this.markerLbl.AutoSize = true;
+            this.markerLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.markerLbl.Location = new System.Drawing.Point(92, 106);
+            this.markerLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.markerLbl.Name = "markerLbl";
+            this.markerLbl.Size = new System.Drawing.Size(15, 17);
+            this.markerLbl.TabIndex = 17;
+            this.markerLbl.Text = "-";
+            // 
+            // markerTitleLbl
+            // 
+            this.markerTitleLbl.AutoSize = true;
+            this.markerTitleLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.markerTitleLbl.Location = new System.Drawing.Point(28, 106);
+            this.markerTitleLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.markerTitleLbl.Name = "markerTitleLbl";
+            this.markerTitleLbl.Size = new System.Drawing.Size(58, 17);
+            this.markerTitleLbl.TabIndex = 16;
+            this.markerTitleLbl.Text = "Marker:";
+            // 
             // driveNameLbl
             // 
             this.driveNameLbl.AutoSize = true;
@@ -155,16 +202,16 @@
             this.driveNameLbl.TabIndex = 15;
             this.driveNameLbl.Text = "-";
             // 
-            // driveTitleLbl
+            // driveTitleIndexLbl
             // 
-            this.driveTitleLbl.AutoSize = true;
-            this.driveTitleLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.driveTitleLbl.Location = new System.Drawing.Point(29, 80);
-            this.driveTitleLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.driveTitleLbl.Name = "driveTitleLbl";
-            this.driveTitleLbl.Size = new System.Drawing.Size(61, 17);
-            this.driveTitleLbl.TabIndex = 14;
-            this.driveTitleLbl.Text = "Nośnik: ";
+            this.driveTitleIndexLbl.AutoSize = true;
+            this.driveTitleIndexLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.driveTitleIndexLbl.Location = new System.Drawing.Point(29, 80);
+            this.driveTitleIndexLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.driveTitleIndexLbl.Name = "driveTitleIndexLbl";
+            this.driveTitleIndexLbl.Size = new System.Drawing.Size(60, 17);
+            this.driveTitleIndexLbl.TabIndex = 14;
+            this.driveTitleIndexLbl.Text = "Indeks: ";
             // 
             // settingsBtn
             // 
@@ -234,18 +281,13 @@
             this.cameraItemMenuStrip.Name = "cameraItemMenuStrip";
             this.cameraItemMenuStrip.Size = new System.Drawing.Size(224, 82);
             // 
-            // nasStorageFileDialog
-            // 
-            this.nasStorageFileDialog.FileName = "Wybierz pliki które chcesz skopiować";
-            this.nasStorageFileDialog.Multiselect = true;
-            // 
             // oprogramowanieToolStripMenuItem
             // 
             this.oprogramowanieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.upgradeMenuItem});
             this.oprogramowanieToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("oprogramowanieToolStripMenuItem.Image")));
             this.oprogramowanieToolStripMenuItem.Name = "oprogramowanieToolStripMenuItem";
-            this.oprogramowanieToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            this.oprogramowanieToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.oprogramowanieToolStripMenuItem.Text = "Oprogramowanie";
             // 
             // upgradeMenuItem
@@ -254,53 +296,6 @@
             this.upgradeMenuItem.Name = "upgradeMenuItem";
             this.upgradeMenuItem.Size = new System.Drawing.Size(172, 26);
             this.upgradeMenuItem.Text = "Aktualizacja";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(88, 9);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(65, 70);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 1;
-            this.pictureBox3.TabStop = false;
-            // 
-            // statusIcon
-            // 
-            this.statusIcon.Image = global::KTA_Visor.Properties.Resources.green_circle;
-            this.statusIcon.Location = new System.Drawing.Point(12, 4);
-            this.statusIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.statusIcon.Name = "statusIcon";
-            this.statusIcon.Size = new System.Drawing.Size(28, 21);
-            this.statusIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.statusIcon.TabIndex = 1;
-            this.statusIcon.TabStop = false;
-            // 
-            // markerLbl
-            // 
-            this.markerLbl.AutoSize = true;
-            this.markerLbl.Font = new System.Drawing.Font("Inter SemiBold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.markerLbl.Location = new System.Drawing.Point(92, 106);
-            this.markerLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.markerLbl.Name = "markerLbl";
-            this.markerLbl.Size = new System.Drawing.Size(15, 17);
-            this.markerLbl.TabIndex = 17;
-            this.markerLbl.Text = "-";
-            // 
-            // markerTitleLbl
-            // 
-            this.markerTitleLbl.AutoSize = true;
-            this.markerTitleLbl.Font = new System.Drawing.Font("Inter", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.markerTitleLbl.Location = new System.Drawing.Point(28, 106);
-            this.markerTitleLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.markerTitleLbl.Name = "markerTitleLbl";
-            this.markerTitleLbl.Size = new System.Drawing.Size(58, 17);
-            this.markerTitleLbl.TabIndex = 16;
-            this.markerTitleLbl.Text = "Marker:";
             // 
             // ustawieniaFabryczneToolStripMenuItem
             // 
@@ -313,6 +308,11 @@
             this.usuńToolStripMenuItem.Name = "usuńToolStripMenuItem";
             this.usuńToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.usuńToolStripMenuItem.Text = "Usuń";
+            // 
+            // nasStorageFileDialog
+            // 
+            this.nasStorageFileDialog.FileName = "Wybierz pliki które chcesz skopiować";
+            this.nasStorageFileDialog.Multiselect = true;
             // 
             // CameraItem
             // 
@@ -328,13 +328,13 @@
             this.Size = new System.Drawing.Size(248, 277);
             this.Load += new System.EventHandler(this.CameraItem_Load);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.cameraItemMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statusIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -358,7 +358,7 @@
         private System.Windows.Forms.ToolStripMenuItem oprogramowanieToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem upgradeMenuItem;
         private System.Windows.Forms.Label driveNameLbl;
-        private System.Windows.Forms.Label driveTitleLbl;
+        private System.Windows.Forms.Label driveTitleIndexLbl;
         private MetroFramework.Controls.MetroTextBox idTxt;
         private System.Windows.Forms.Label markerLbl;
         private System.Windows.Forms.Label markerTitleLbl;

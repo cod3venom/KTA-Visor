@@ -12,6 +12,8 @@ using KTA_Visor_UI.component.basic.table;
 using KTA_Visor.module.Managemnt.module.fileManager.handlers;
 using System.Collections.Generic;
 using KTA_Visor.module.Managemnt.module.fileManager.interfaces;
+using KTAVisorAPISDK.module.user.abstraction;
+using KTA_Visor_UI.component.basic.table.enums;
 
 namespace KTA_Visor.module.Managemnt.module.fileManager.view
 {
@@ -30,60 +32,140 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
         };
 
         private readonly List<IFileManagerUIHandler> _uiHandlers;
+        private readonly FileManagerUIHandler _fileManagerUIHandler;
+        private readonly FileManagerTableUIHandler _fileManagerTableUIHandler;
+        private readonly FileManagerZipHandler _fileManagerZipHandler;
         public FileManagerView()
         {
             InitializeComponent();
+        }
+
+        public FileManagerView(UserDataAbstraction user)
+        {
+            InitializeComponent();
+            
+            this.User = user;
+            this._fileManagerUIHandler = new FileManagerUIHandler(this);
+            this._fileManagerTableUIHandler = new FileManagerTableUIHandler(this);
+            this._fileManagerZipHandler = new FileManagerZipHandler(this);
+
             this._uiHandlers = new List<IFileManagerUIHandler>(){
-                new FileManagerUIHandler(this),
-                new FileManagerZipHandler(this),
+                this._fileManagerUIHandler,
+                this._fileManagerTableUIHandler,
+                this._fileManagerZipHandler,
             };
            
         }
 
-        private void FileHistoryViewPanel_Load(object sender, EventArgs e)
+
+        private void FileManagerView_Load(object sender, EventArgs e)
         {
-            this.table.Column.addMultiple(this.Columns);
+            this.table.Columns = this.Columns;
+            this.hookEvents();
             this._uiHandlers.ForEach((IFileManagerUIHandler handler) => {
                 handler.Handle();
             });
         }
 
-        protected override void OnParentChanged(EventArgs e)
+        private void hookEvents()
         {
-            base.OnParentChanged(e);
+            this.Table.OnEditButton += onEditFileRecord;
+            this.Table.OnDeleteButton += onDeleteFileRecord;
+            this.Table.DataGridView.CellDoubleClick += onCellDoubleClick;
+            this.Table.DataGridView.SelectionChanged += onRowSelectionChanged;
+            this.Table.OnRefreshData += onRefeshData;
+        }
+ 
+        private void onEditFileRecord(object sender, EventArgs e)
+        {
+            this._fileManagerUIHandler.Edit(this.ID);
         }
 
+        private void onDeleteFileRecord(object sender, EventArgs e)
+        {
+            if (this.table.IsMultipleRecordsAreSelected)
+            {
+                this._fileManagerUIHandler.Delete(this.IDS);
+            } else
+            {
+                this._fileManagerUIHandler.Delete(this.ID);
+            }
+        }
+
+
+        private void onCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this._fileManagerUIHandler.Edit(this.ID);
+        }
+
+        private void onRefeshData(object sender, EventArgs e)
+        {
+            this._fileManagerUIHandler.Load();
+        }
+
+
+        private void onRowSelectionChanged(object sender, EventArgs e)
+        {
+            if (this.table.IsMultipleRecordsAreSelected) {
+                this.table.AllowEdit = false;
+            } 
+            else {
+                this.table.AllowEdit = true;
+            }
+        }
+
+        public void Watch(Request request)
+        {
+        }
+
+        public UserDataAbstraction User { get; private set; }
+        public Table Table
+        {
+            get { return this.table; }
+        }
+        public ContextMenuStrip RecordMenu
+        {
+            get { return this.contextMenu; }
+        }
+        public ToolStripMenuItem CopyToUSB
+        {
+            get { return this.copyFilesToUSBMenuItem; }
+        }
         public List<string> SelectedFiles
         {
-
             get
             {
                 List<string> files = new List<string>();
 
-                foreach(DataGridViewRow row in this.table.DataGridView.SelectedRows)
+                foreach (DataGridViewRow row in this.table.DataGridView.SelectedRows)
                 {
+                    if (!files.Contains("LOKALIZACJA")){
+                        continue;
+                    }
+
                     files.Add(row.Cells["LOKALIZACJA"].Value.ToString());
                 }
                 return files;
             }
         }
-        public Table Table
+
+        public string ID
         {
-            get { return this.table; }
+            get { return this.Table.Row.SelectedRow.Cells["ID"].Value.ToString(); }
         }
 
-        public ContextMenuStrip RecordMenu
+        public List<string> IDS
         {
-            get { return this.contextMenu; }
+            get 
+            {
+                List<string> ids = new List<string>();
+                foreach(DataGridViewRow row in this.table.DataGridView.SelectedRows)
+                {
+                    ids.Add(row.Cells["ID"].Value.ToString());
+                }
+                return ids;
+            }
         }
 
-        public ToolStripMenuItem CopyToUSB
-        {
-            get { return this.copyFilesToUSBMenuItem; }
-        }
-         
-        public void Watch(Request request)
-        {
-        }
     }
 }

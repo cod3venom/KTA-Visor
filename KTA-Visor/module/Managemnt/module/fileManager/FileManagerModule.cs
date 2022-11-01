@@ -1,5 +1,6 @@
 ﻿using KTA_Visor.kernel.sharedKernel.interfaces;
 using KTA_Visor.module.Managemnt.module.fileManager.view;
+using KTAVisorAPISDK.module.user.abstraction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace KTA_Visor.module.Managemnt.module.fileManager
     {
         public static string ModuleName = "FileManager";
 
+        public FileManagerModule(UserDataAbstraction user):base(user)
+        {
+
+        }
         public string GetModuleName()
         {
             return FileManagerModule.ModuleName;

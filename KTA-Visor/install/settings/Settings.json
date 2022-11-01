@@ -17,7 +17,8 @@
       ]
     },
     "fileSystem": {
-      "filesPath": "",
+      "recordingsPath": "",
+      "reportsPath": "",
       "autoCopy": true
     },
     "cardMode": {

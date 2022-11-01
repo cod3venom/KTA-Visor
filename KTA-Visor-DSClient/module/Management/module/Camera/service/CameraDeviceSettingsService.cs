@@ -42,6 +42,36 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             Globals.ALLOW_FS_MOUNTING = true;
         }
 
+        private void configureLocalIdentificators()
+        {
+            this._selectedCameraDevice.Settings.ID = this._cameraEntity.id;
+            this._selectedCameraDevice.Settings.CustomId = this._cameraEntity.cameraCustomId;
+            this._selectedCameraDevice.Settings.BadgeId = this._cameraEntity.badgeId;
+            this._selectedCameraDevice.Settings.CardId = this._cameraEntity.cardId;
+
+            this._selectedCameraDevice.SaveSettings();
+        }
+
+        private MENU_CONFIG configureTweaks()
+        {
+            this._falconProtocol.Connect();
+            MENU_CONFIG menuStruct = this._falconProtocol.GetMenuConfig();
+            menuStruct.video_res = Convert.ToByte(this._cameraEntity.settings.resolution);
+            menuStruct.video_quality = Convert.ToByte(this._cameraEntity.settings.quality);
+            menuStruct.video_format = Convert.ToByte(this._cameraEntity.settings.codecFormat);
+            menuStruct.time_zone = Convert.ToByte(this._cameraEntity.settings.timeZone);
+            menuStruct.wifi = Convert.ToByte(this._cameraEntity.settings.wifi);
+            menuStruct.aes_crypto = Convert.ToByte(this._cameraEntity.settings.aesEncryption);
+            menuStruct.gps = Convert.ToByte(this._cameraEntity.settings.gps);
+            menuStruct.wifi = Convert.ToByte(this._cameraEntity.settings.wifi);
+            menuStruct.vibrate = Convert.ToByte(this._cameraEntity.settings.silentMode);
+            menuStruct.pre_record = Convert.ToByte(this._cameraEntity.settings.preRecording);
+            menuStruct.loop_record = Convert.ToByte(this._cameraEntity.settings.loopRecording);
+
+            menuStruct = this._falconProtocol.SetMenuConfig(menuStruct);
+            this._falconProtocol.Disconnect();
+            return menuStruct;
+        }
 
         private ZFY_INFO configureIdentificators()
         {
@@ -58,35 +88,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.service
             this._falconProtocol.Disconnect();
 
             return zfyInfo;
-        }
-
-        private MENU_CONFIG configureTweaks()
-        {
-            this._falconProtocol.Connect();
-            MENU_CONFIG menuStruct = this._falconProtocol.GetMenuConfig();
-            menuStruct.video_res = Convert.ToByte(this._cameraEntity.settings.resolution);
-            menuStruct.video_quality = Convert.ToByte(this._cameraEntity.settings.quality);
-            menuStruct.video_format = Convert.ToByte(this._cameraEntity.settings.codecFormat);
-            menuStruct.time_zone = Convert.ToByte(this._cameraEntity.settings.timeZone);
-            menuStruct.wifi = Convert.ToByte(this._cameraEntity.settings.wifi);
-            menuStruct.aes_crypto = Convert.ToByte(this._cameraEntity.settings.aesEncryption);
-            menuStruct.gps = Convert.ToByte(this._cameraEntity.settings.gps);
-            menuStruct.wifi = Convert.ToByte(this._cameraEntity.settings.wifi);
-            menuStruct.vibrate = Convert.ToByte(this._cameraEntity.settings.silentMode);
-
-            menuStruct = this._falconProtocol.SetMenuConfig(menuStruct);
-            this._falconProtocol.Disconnect();
-            return menuStruct;
-        }
-
-        private void configureLocalIdentificators()
-        {
-            this._selectedCameraDevice.Settings.ID = this._cameraEntity.id;
-            this._selectedCameraDevice.Settings.CustomId = this._cameraEntity.cameraCustomId;
-            this._selectedCameraDevice.Settings.BadgeId = this._cameraEntity.badgeId;
-            this._selectedCameraDevice.Settings.CardId = this._cameraEntity.cardId;
-
-            this._selectedCameraDevice.SaveSettings();
         }
     }
 }

@@ -96,6 +96,7 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view.form
         {
             if (!this._canEdit){
                 this._basedOnPermissionControls.ForEach((Control control) => control.Enabled = false);
+                this.fileDestPathTxt.isPassword = true;
             }
         }
 

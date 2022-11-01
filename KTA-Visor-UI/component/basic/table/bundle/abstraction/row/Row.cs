@@ -95,7 +95,8 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.row
                 new Thread((ThreadStart) =>
                 {
                     this.table.Invoke((MethodInvoker)delegate {
-                        this.table.DataGridView.Rows.Add(values);
+                        this.table.DataTable.Rows.Add(values);
+                        //this.table.DataGridView.Rows.Add(values);
                     });
                 }).Start();
             }

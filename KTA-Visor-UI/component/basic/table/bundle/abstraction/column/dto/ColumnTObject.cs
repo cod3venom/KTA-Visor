@@ -11,11 +11,12 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto
     public class ColumnTObject : DataGridViewColumn
     {
         
-        public ColumnTObject(int id, string name, ColumnType type = ColumnType.TEXT, bool readOnly = true, int width = -1)
+        public ColumnTObject(int id, string name, ColumnType type = ColumnType.TEXT, bool visible = true,  bool readOnly = true, int width = -1)
         {
             this.ID = id;
             this.Name = name;
             this.Type = type;
+            this.Visible = visible;
             this.ReadOnly = readOnly;
             this.Width = width;
         }
@@ -23,6 +24,7 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto
         public int ID { get; set; }
         public string Name { get; set; }
         public ColumnType Type { get; set; }
+        public bool Visible { get; set; }
         public bool ReadOnly { get; set; }
         public int Width{ get; set; }
 

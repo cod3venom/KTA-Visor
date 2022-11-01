@@ -24,6 +24,7 @@ namespace KTAVisorAPISDK.module.camera.entity
             public int wifi { get; set; }
             public int gps { get; set; }
             public int silentMode { get; set; }
+            public int loopRecording { get; set; }
             public int aesEncryption { get; set; }
             public string id { get; set; }
             public string updatedAt { get; set; }

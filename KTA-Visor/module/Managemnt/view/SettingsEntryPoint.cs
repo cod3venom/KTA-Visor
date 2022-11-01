@@ -57,13 +57,13 @@ namespace KTA_Visor.module.Managemnt.view
 
 
             this.fileSystemPathTxt.TextChanged += (delegate (object sender, EventArgs e) {
-                this.settings.SettingsObj.app.fileSystem.filesPath = this.fileSystemPathTxt.Text;
+                this.settings.SettingsObj.app.fileSystem.recordingsPath = this.fileSystemPathTxt.Text;
             });
 
             this.fileSystemPathTxt.Click += (delegate (object sender, EventArgs e) {
                 folderBrowserDialog1.ShowDialog();
                 this.fileSystemPathTxt.Text = folderBrowserDialog1.SelectedPath;
-                this.settings.SettingsObj.app.fileSystem.filesPath = folderBrowserDialog1.SelectedPath;
+                this.settings.SettingsObj.app.fileSystem.recordingsPath = folderBrowserDialog1.SelectedPath;
             });
             this.saveBtn.Click += onSave;
         }
@@ -76,7 +76,7 @@ namespace KTA_Visor.module.Managemnt.view
             this.tunnelModeCombo.Items.AddRange(this.settings.SettingsObj.app.tunnel.modes);
             this.tunnelModeCombo.SelectedIndex = 0;
 
-            this.fileSystemPathTxt.Text = this.settings.SettingsObj.app.fileSystem.filesPath;
+            this.fileSystemPathTxt.Text = this.settings.SettingsObj.app.fileSystem.recordingsPath;
             this.apiTxt.Text = this.settings.SettingsObj.app.api.url;
         }
 

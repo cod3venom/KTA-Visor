@@ -14,15 +14,13 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer
     {
         public event EventHandler<Exception> OnTransferingExceptionOccured;
 
-        private string _destination;
         private KTALogger.Logger _logger;
 
-        public FilesTransferManager(Settings settings, string destination, KTALogger.Logger logger)
+        public FilesTransferManager(Settings settings, KTALogger.Logger logger)
         {
-            this._destination = destination;
             this._logger = logger;
 
-            this._fileSystem = new abstractResources.filesystem.FileSystem(this._destination, this._logger);
+            this._fileSystem = new abstractResources.filesystem.FileSystem(settings, this._logger);
             this._reporter = new abstractResources.reporter.Reporter(settings);
             this.hookEvents();
         }

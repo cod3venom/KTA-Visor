@@ -109,6 +109,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.Settings.handlers
                    this._form.GPS ? 1:0,
                    this._form.WIFI ? 1 : 0,
                    this._form.SilentMode ? 1 : 0,
+                   this._form.LoopRecording ? 1 : 0,
                    this._form.AES ? 1 : 0
            ));
 

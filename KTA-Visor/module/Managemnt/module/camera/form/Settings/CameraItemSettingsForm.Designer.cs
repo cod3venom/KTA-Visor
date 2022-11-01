@@ -56,7 +56,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.loopRecordingChk = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.resolutionThirdChk = new System.Windows.Forms.CheckBox();
+            this.resolutionFourthChk = new System.Windows.Forms.CheckBox();
             this.resolutionSecondChk = new System.Windows.Forms.CheckBox();
             this.resolutionFirstChk = new System.Windows.Forms.CheckBox();
             this.silentModeChk = new System.Windows.Forms.CheckBox();
@@ -69,6 +69,7 @@
             this.recordingQualityCombo = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.idTxt = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.resolutionThirdChk = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -319,7 +320,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(23, 155);
+            this.label3.Location = new System.Drawing.Point(23, 216);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(123, 19);
             this.label3.TabIndex = 37;
@@ -330,7 +331,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(23, 206);
+            this.label4.Location = new System.Drawing.Point(23, 267);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 19);
             this.label4.TabIndex = 39;
@@ -339,7 +340,7 @@
             // recordingCodecFormatCombo
             // 
             this.recordingCodecFormatCombo.FormattingEnabled = true;
-            this.recordingCodecFormatCombo.Location = new System.Drawing.Point(231, 201);
+            this.recordingCodecFormatCombo.Location = new System.Drawing.Point(231, 262);
             this.recordingCodecFormatCombo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.recordingCodecFormatCombo.Name = "recordingCodecFormatCombo";
             this.recordingCodecFormatCombo.Size = new System.Drawing.Size(228, 24);
@@ -348,7 +349,7 @@
             // preRecordingChk
             // 
             this.preRecordingChk.AutoSize = true;
-            this.preRecordingChk.Location = new System.Drawing.Point(231, 258);
+            this.preRecordingChk.Location = new System.Drawing.Point(231, 319);
             this.preRecordingChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.preRecordingChk.Name = "preRecordingChk";
             this.preRecordingChk.Size = new System.Drawing.Size(18, 17);
@@ -358,7 +359,7 @@
             // gpsChk
             // 
             this.gpsChk.AutoSize = true;
-            this.gpsChk.Location = new System.Drawing.Point(231, 301);
+            this.gpsChk.Location = new System.Drawing.Point(231, 362);
             this.gpsChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gpsChk.Name = "gpsChk";
             this.gpsChk.Size = new System.Drawing.Size(18, 17);
@@ -368,7 +369,7 @@
             // wifiChk
             // 
             this.wifiChk.AutoSize = true;
-            this.wifiChk.Location = new System.Drawing.Point(231, 341);
+            this.wifiChk.Location = new System.Drawing.Point(231, 402);
             this.wifiChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.wifiChk.Name = "wifiChk";
             this.wifiChk.Size = new System.Drawing.Size(18, 17);
@@ -378,9 +379,10 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.resolutionThirdChk);
             this.panel3.Controls.Add(this.loopRecordingChk);
             this.panel3.Controls.Add(this.label7);
-            this.panel3.Controls.Add(this.resolutionThirdChk);
+            this.panel3.Controls.Add(this.resolutionFourthChk);
             this.panel3.Controls.Add(this.resolutionSecondChk);
             this.panel3.Controls.Add(this.resolutionFirstChk);
             this.panel3.Controls.Add(this.silentModeChk);
@@ -409,8 +411,9 @@
             // loopRecordingChk
             // 
             this.loopRecordingChk.AutoSize = true;
-            this.loopRecordingChk.Enabled = false;
-            this.loopRecordingChk.Location = new System.Drawing.Point(231, 460);
+            this.loopRecordingChk.Checked = true;
+            this.loopRecordingChk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.loopRecordingChk.Location = new System.Drawing.Point(231, 521);
             this.loopRecordingChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.loopRecordingChk.Name = "loopRecordingChk";
             this.loopRecordingChk.Size = new System.Drawing.Size(18, 17);
@@ -421,27 +424,27 @@
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(24, 459);
+            this.label7.Location = new System.Drawing.Point(24, 520);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(162, 17);
+            this.label7.Size = new System.Drawing.Size(162, 26);
             this.label7.TabIndex = 67;
             this.label7.Text = "Nagrywanie w pętli";
             // 
-            // resolutionThirdChk
+            // resolutionFourthChk
             // 
-            this.resolutionThirdChk.AutoSize = true;
-            this.resolutionThirdChk.Location = new System.Drawing.Point(411, 115);
-            this.resolutionThirdChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.resolutionThirdChk.Name = "resolutionThirdChk";
-            this.resolutionThirdChk.Size = new System.Drawing.Size(109, 20);
-            this.resolutionThirdChk.TabIndex = 66;
-            this.resolutionThirdChk.Text = "1280X720P25";
-            this.resolutionThirdChk.UseVisualStyleBackColor = true;
+            this.resolutionFourthChk.AutoSize = true;
+            this.resolutionFourthChk.Location = new System.Drawing.Point(366, 115);
+            this.resolutionFourthChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.resolutionFourthChk.Name = "resolutionFourthChk";
+            this.resolutionFourthChk.Size = new System.Drawing.Size(109, 20);
+            this.resolutionFourthChk.TabIndex = 66;
+            this.resolutionFourthChk.Text = "1280X720P25";
+            this.resolutionFourthChk.UseVisualStyleBackColor = true;
             // 
             // resolutionSecondChk
             // 
             this.resolutionSecondChk.AutoSize = true;
-            this.resolutionSecondChk.Location = new System.Drawing.Point(231, 115);
+            this.resolutionSecondChk.Location = new System.Drawing.Point(366, 85);
             this.resolutionSecondChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.resolutionSecondChk.Name = "resolutionSecondChk";
             this.resolutionSecondChk.Size = new System.Drawing.Size(107, 20);
@@ -452,7 +455,7 @@
             // resolutionFirstChk
             // 
             this.resolutionFirstChk.AutoSize = true;
-            this.resolutionFirstChk.Location = new System.Drawing.Point(39, 115);
+            this.resolutionFirstChk.Location = new System.Drawing.Point(230, 85);
             this.resolutionFirstChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.resolutionFirstChk.Name = "resolutionFirstChk";
             this.resolutionFirstChk.Size = new System.Drawing.Size(114, 20);
@@ -463,7 +466,7 @@
             // silentModeChk
             // 
             this.silentModeChk.AutoSize = true;
-            this.silentModeChk.Location = new System.Drawing.Point(232, 379);
+            this.silentModeChk.Location = new System.Drawing.Point(232, 440);
             this.silentModeChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.silentModeChk.Name = "silentModeChk";
             this.silentModeChk.Size = new System.Drawing.Size(18, 17);
@@ -475,7 +478,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(24, 377);
+            this.label6.Location = new System.Drawing.Point(24, 438);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 19);
             this.label6.TabIndex = 62;
@@ -487,7 +490,7 @@
             this.aes256chk.Checked = true;
             this.aes256chk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.aes256chk.Enabled = false;
-            this.aes256chk.Location = new System.Drawing.Point(230, 420);
+            this.aes256chk.Location = new System.Drawing.Point(230, 481);
             this.aes256chk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.aes256chk.Name = "aes256chk";
             this.aes256chk.Size = new System.Drawing.Size(18, 17);
@@ -498,7 +501,7 @@
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(23, 419);
+            this.label5.Location = new System.Drawing.Point(23, 480);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(84, 17);
             this.label5.TabIndex = 60;
@@ -509,7 +512,7 @@
             this.wifiLbl.AutoSize = true;
             this.wifiLbl.BackColor = System.Drawing.Color.Transparent;
             this.wifiLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.wifiLbl.Location = new System.Drawing.Point(23, 339);
+            this.wifiLbl.Location = new System.Drawing.Point(23, 400);
             this.wifiLbl.Name = "wifiLbl";
             this.wifiLbl.Size = new System.Drawing.Size(40, 19);
             this.wifiLbl.TabIndex = 56;
@@ -520,7 +523,7 @@
             this.gpsLbl.AutoSize = true;
             this.gpsLbl.BackColor = System.Drawing.Color.Transparent;
             this.gpsLbl.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpsLbl.Location = new System.Drawing.Point(23, 300);
+            this.gpsLbl.Location = new System.Drawing.Point(23, 361);
             this.gpsLbl.Name = "gpsLbl";
             this.gpsLbl.Size = new System.Drawing.Size(40, 19);
             this.gpsLbl.TabIndex = 54;
@@ -531,7 +534,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(23, 257);
+            this.label10.Location = new System.Drawing.Point(23, 318);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(158, 19);
             this.label10.TabIndex = 52;
@@ -540,7 +543,7 @@
             // recordingQualityCombo
             // 
             this.recordingQualityCombo.FormattingEnabled = true;
-            this.recordingQualityCombo.Location = new System.Drawing.Point(231, 155);
+            this.recordingQualityCombo.Location = new System.Drawing.Point(231, 216);
             this.recordingQualityCombo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.recordingQualityCombo.Name = "recordingQualityCombo";
             this.recordingQualityCombo.Size = new System.Drawing.Size(228, 24);
@@ -580,6 +583,17 @@
             this.idTxt.Size = new System.Drawing.Size(33, 25);
             this.idTxt.TabIndex = 42;
             this.idTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // resolutionThirdChk
+            // 
+            this.resolutionThirdChk.AutoSize = true;
+            this.resolutionThirdChk.Location = new System.Drawing.Point(230, 115);
+            this.resolutionThirdChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.resolutionThirdChk.Name = "resolutionThirdChk";
+            this.resolutionThirdChk.Size = new System.Drawing.Size(114, 20);
+            this.resolutionThirdChk.TabIndex = 69;
+            this.resolutionThirdChk.Text = "1920x1080P25";
+            this.resolutionThirdChk.UseVisualStyleBackColor = true;
             // 
             // CameraItemSettingsForm
             // 
@@ -641,7 +655,7 @@
         private System.Windows.Forms.CheckBox resolutionFirstChk;
         private System.Windows.Forms.ComboBox recordingQualityCombo;
         private System.Windows.Forms.CheckBox resolutionSecondChk;
-        private System.Windows.Forms.CheckBox resolutionThirdChk;
+        private System.Windows.Forms.CheckBox resolutionFourthChk;
         private System.Windows.Forms.CheckBox loopRecordingChk;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -649,5 +663,6 @@
         private System.Windows.Forms.Label wifiLbl;
         private System.Windows.Forms.Label gpsLbl;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox resolutionThirdChk;
     }
 }

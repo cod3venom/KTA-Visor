@@ -1,4 +1,5 @@
-﻿using KTA_Visor_UI.component.basic.table.bundle;
+﻿using Bunifu.Framework.UI;
+using KTA_Visor_UI.component.basic.table.bundle;
 using KTA_Visor_UI.component.basic.table.bundle.abstraction.column.dto;
 using MetroFramework.Controls;
 using System;
@@ -23,6 +24,8 @@ namespace KTA_Visor_UI.component.basic.table
 
         public bool AllowProgressBar { get; set; }
 
+        private ColumnTObject[] _columns;
+
         [DllImport("user32.dll")]
         static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, Int32 wParam, Int32 lParam);
         private const Int32 CB_SETITEMHEIGHT = 0x153;
@@ -35,14 +38,17 @@ namespace KTA_Visor_UI.component.basic.table
             this.Column = new bundle.abstraction.column.Column(this);
             this.Row = new bundle.abstraction.row.Row(this);
             this.AllowProgressBar = true;
+            this.DataTable = new DataTable();
         }
 
         private void Table_Load(object sender, EventArgs e)
         {
             this.dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            SetComboBoxHeight(columnFilterByCombobx.Handle, 25);
+            this.DataGridView.DataSource = this.DataTable;
+
+            SetComboBoxHeight(columnSortByCombobx.Handle, 25);
             SetComboBoxHeight(columnCombobx.Handle, 25);
-            columnFilterByCombobx.Refresh();
+            columnSortByCombobx.Refresh();
             columnCombobx.Refresh();
             this.hookEvents();
         }
@@ -82,32 +88,19 @@ namespace KTA_Visor_UI.component.basic.table
         public bool AllowAdd
         {
             get { return this.addBtn.Enabled; }
-            set
-            {
-                this.addBtn.Enabled = value;
-                //  this.addPanel.Visible = value;
-            }
+            set { this.addBtn.Enabled = value; }
         }
 
         public bool AllowEdit
         {
             get { return this.editBtn.Enabled; }
-            set
-            {
-                this.editBtn.Enabled = value;
-                //this.editPanel.Visible = value;
-
-            }
+            set { this.editBtn.Enabled = value; }
         }
 
         public bool AllowDelete
         {
             get { return this.deleteBtn.Enabled; }
-            set
-            {
-                this.deleteBtn.Enabled = value;
-                //this.deletePanel.Visible = value;
-            }
+            set { this.deleteBtn.Enabled = value; }
         }
 
         public Bunifu.Framework.UI.BunifuCustomDataGrid DataGridView
@@ -138,9 +131,17 @@ namespace KTA_Visor_UI.component.basic.table
         {
             set
             {
+                if (value == null)
+                {
+                    return;
+                }
+
+                this._columns = value;
                 this.Column.addMultiple(value); ;
             }
+            get { return this._columns; }
         }
+
         public MetroComboBox ColumnCombobx
         {
             get { return this.columnCombobx; }
@@ -149,8 +150,42 @@ namespace KTA_Visor_UI.component.basic.table
 
         public MetroComboBox ColumnSortByCombobx
         {
-            get { return this.columnFilterByCombobx; }
-            set { this.columnFilterByCombobx = value; }
+            get { return this.columnSortByCombobx; }
+            set { this.columnSortByCombobx = value; }
+        }
+
+        public MetroComboBox ColumnFilterByCombobox
+        {
+            get { return this.columnFilterByCombobox; }
+            set { this.columnFilterByCombobox = value; }
+        }
+
+        public MetroComboBox ColumnFilterOperatorByCombobx
+        {
+            get { return this.operatorCombobox; }
+            set { this.operatorCombobox = value; }
+        }
+
+        public BunifuMaterialTextbox FilterKeywordTextBox
+        {
+            get { return this.filterKeywordTxt; }
+            set { this.filterKeywordTxt = value; }
+        }
+
+        public MetroButton FilterButton { get { return this.filterBtn; } }
+
+        public DataTable DataTable { get; set; }
+
+        public bool IsMultipleRecordsAreSelected
+        {
+            get
+            {
+                if (this.DataGridView.SelectedRows.Count == 0 || this.DataGridView.SelectedRows.Count == 1)
+                {
+                    return false;
+                }
+                return true;
+            }
         }
     }
 }

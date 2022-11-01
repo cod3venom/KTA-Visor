@@ -151,7 +151,7 @@ namespace KTA_Visor.module.Managemnt.module.users.handler
             }
             this._usersView.Table.Invoke((MethodInvoker)delegate
             {
-                this._usersView.Table.DataGridView.Rows.Clear();
+                this._usersView.Table.DataTable.Rows.Clear();
             });
         }
 
@@ -159,7 +159,7 @@ namespace KTA_Visor.module.Managemnt.module.users.handler
         {
             this._usersView.Table.Invoke((MethodInvoker)delegate
             {
-                this._usersView.Table.DataGridView.Rows.Add(
+                this._usersView.Table.Row.Add(
                     user.id,
                     user.firstName,
                     user.lastName,

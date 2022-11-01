@@ -21,7 +21,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             new ColumnTObject(0, "IDENTYFIKATOR STACJI"),
             new ColumnTObject(1, "IP ADRES"),
             new ColumnTObject(2, "IP Klienta"),
-            new ColumnTObject(3, "AKTYWNY", ColumnType.IMAGE, true, 50),
+            new ColumnTObject(3, "AKTYWNY", ColumnType.IMAGE, true, true, 25),
             new ColumnTObject(4, "ZMODYFIKOWANO"),
             new ColumnTObject(5, "UTWORZONO")
         };
@@ -40,7 +40,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             this.table.AllowAdd = false;
             this.table.AllowEdit = false;
             this.table.AllowDelete = false;
-            this.table.Column.addMultiple(this.Columns);
+            this.table.Columns = this.Columns;
             this.tabControl.SelectedIndex = 0;
         }
 

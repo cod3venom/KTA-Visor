@@ -352,6 +352,7 @@
     <Compile Include="install\settings\Settings.cs" />
     <Compile Include="kernel\generate\RandomData.cs" />
     <Compile Include="kernel\helper\EmbededFileHelper.cs" />
+    <Compile Include="kernel\helper\FileHelper.cs" />
     <Compile Include="kernel\module\HttpClientHelper\events\HttpUnauthorizedInterceptorEvent.cs" />
     <Compile Include="kernel\module\HttpClientHelper\HttpClientHelper.cs" />
     <Compile Include="kernel\module\HttpClientHelper\interfaces\IHttpClient.cs" />
@@ -373,6 +374,7 @@
     <Compile Include="module\Managemnt\events\OnClientDisconnected.cs" />
     <Compile Include="module\Managemnt\events\OnClientConnected.cs" />
     <Compile Include="module\Managemnt\interfaces\IUIHandlerInterface.cs" />
+    <Compile Include="module\Managemnt\module\fileManager\handlers\FileManagerTableUIHandler.cs" />
     <Compile Include="module\Managemnt\module\users\components\UserInfoBoard\events\OnSaveUserFromBoardEvent.cs" />
     <Compile Include="module\Managemnt\module\users\components\UserInfoBoard\UserInfoBoard.cs">
       <SubType>UserControl</SubType>

@@ -65,7 +65,7 @@ namespace KTA_Visor.module.Managemnt.module.users.view
         private void initialize()
         {
             this.userInfoTab.BringToFront();
-            this.table.Column.addMultiple(this.Columns);
+            this.table.Columns = this.Columns;
             this._usersUIHandler.Load();
         }
 

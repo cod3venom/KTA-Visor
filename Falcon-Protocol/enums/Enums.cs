@@ -23,8 +23,8 @@ namespace Falcon_Protocol.enums
 
         public enum Qualitys
         {
-           	Super_Fine,
-		    Fine,
+            Super_Fine,
+		    Fine, 
 		    Normal
         }
 

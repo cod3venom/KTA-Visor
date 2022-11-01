@@ -43,10 +43,15 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
                 {
                     return (int)Enums.VideoResolutions.Resolution1280x720P30;
                 }
+                else if (this.resolutionThirdChk.Checked)
+                {
+                    return (int)Enums.VideoResolutions.Resolution1920x1080P20;
+                }
 
                 return (int)Enums.VideoResolutions.Resolution1280x720P20;
             }
         }
+
         public int Quality { get; set; }
         public int Codec { get; set; }
         public int TimeZone { get; set; }
@@ -105,28 +110,27 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
             set { this.silentModeChk.Checked = value; }
             get { return this.silentModeChk.Checked; }
         }
+        public bool LoopRecording
+        {
+            set { this.loopRecordingChk.Checked = value; }
+            get { return this.loopRecordingChk.Checked; }
+        }
         public bool AES
         {
             set { this.aes256chk.Checked = value; }
             get { return this.aes256chk.Checked; }
         }
 
-      
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-
-             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222")))
-            {
-                int borderWidth = 5;
-                e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
-            }
-        }
-
         private void CameraItemForm_Load(object sender, EventArgs e)
         {
+            this.assignDefaultValues();
             this.renderValues();
             this.hookEvents();
+        }
+
+        private void assignDefaultValues()
+        {
+            this.Quality = (int)Enums.Qualitys.Normal;
         }
 
         private void renderValues()
@@ -140,11 +144,15 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
             this.aes256chk.Checked = true;
 
             this.recordingQualityCombo.DataSource = Enums.Qualities;
+            this.recordingQualityCombo.SelectedIndex = 0;
+           
             this.recordingCodecFormatCombo.DataSource = Enum.GetValues(typeof(CodecFormats));
 
             this.PreRecording = this.camera.settings.preRecording;
             this.GPS = this.camera.settings.gps == 1;
             this.WIFI = this.camera.settings.wifi == 1;
+            this.SilentMode = this.camera.settings.silentMode == 1;
+            this.LoopRecording = this.camera.settings.loopRecording == 1;
 
             switch(this.camera.settings.resolution)
             {
@@ -156,8 +164,11 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
                     this.resolutionSecondChk.Checked = true;
                     break;
 
-                case (int)Enums.VideoResolutions.Resolution1280x720P20:
+                case (int)Enums.VideoResolutions.Resolution1920x1080P20:
                     this.resolutionThirdChk.Checked = true;
+                    break;
+                case (int)Enums.VideoResolutions.Resolution1280x720P20:
+                    this.resolutionFourthChk.Checked = true;
                     break;
             }
         }
@@ -168,12 +179,14 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
             this.resolutionFirstChk.CheckedChanged += onCheckedFirstResolution;
             this.resolutionSecondChk.CheckedChanged += onCheckedSecondResolution;
             this.resolutionThirdChk.CheckedChanged += onCheckedThirdResolution;
+            this.resolutionFourthChk.CheckedChanged += onCheckedFourthResolution;
 
             this.recordingQualityCombo.SelectionChangeCommitted += onRecordingQualityChanged;
             this.recordingCodecFormatCombo.SelectionChangeCommitted += onCodecChanged;
             this.saveBtn.Click += onSaveBtnClicked;
         }
 
+       
         private void onGenerateDeviceId(object sender, EventArgs e)
         {
             this.CameraId = RandomData.RandomString(this.MIN_ID_LENGTH);
@@ -183,31 +196,40 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
         {
             this.resolutionSecondChk.Checked = false;
             this.resolutionThirdChk.Checked = false;
+            this.resolutionFourthChk.Checked = false;
         }
 
         private void onCheckedSecondResolution(object sender, EventArgs e)
         {
             this.resolutionFirstChk.Checked = false;
             this.resolutionThirdChk.Checked = false;
+            this.resolutionFourthChk.Checked = false;
         }
 
         private void onCheckedThirdResolution(object sender, EventArgs e)
         {
             this.resolutionFirstChk.Checked = false;
             this.resolutionSecondChk.Checked = false;
+            this.resolutionFourthChk.Checked = false;
+        }
+
+        private void onCheckedFourthResolution(object sender, EventArgs e)
+        {
+            this.resolutionFirstChk.Checked = false;
+            this.resolutionSecondChk.Checked = false;
+            this.resolutionThirdChk.Checked = false;
         }
 
         private void onRecordingQualityChanged(object sender, EventArgs e)
         {
-            string selectedValue = this.recordingQualityCombo.SelectedValue.ToString();
+            int quality = (int)Enums.Qualitys.Normal; ;
 
-            if (selectedValue == "Najwyższa"){
-                selectedValue = "Normal";
+            if (this.Resolution == (int)VideoResolutions.Resolution1280x720P20){
+                quality = (int)Enums.Qualitys.Fine;
             }
 
-            this.Quality = (int)(Qualitys)Enum.Parse(typeof(Qualitys), selectedValue);
+            this.Quality = quality;
         }
-
 
         private void onCodecChanged(object sender, EventArgs e)
         {
@@ -217,6 +239,9 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
 
         private void onSaveBtnClicked(object sender, EventArgs e)
         {
+            // Calibrate quality if user didnt clicked
+            this.onRecordingQualityChanged(sender, e);
+
             this.settingsHandler.Save();
         }
 

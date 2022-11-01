@@ -13,47 +13,49 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.filter
 {
     public class Sorter
     {
-        private readonly Table table;
+        private readonly Table _table;
         private readonly List<string> FilterOptions = new List<string>
         {
             "Rosnąco",
             "Malejąco",
         };
-        private ColumnTObject[] columns;
         private int SelectedColumnIndex = 0;
         private int SelectedFilterOptionIndex = 0;
 
         public Sorter(Table table)
         {
-            this.table = table;
+            this._table = table;
         }
 
-        public void InitColumns(ColumnTObject[] columns)
+        public void Handle()
         {
-            this.columns = columns;
+            this.initColumns();
+        }
+        private void initColumns()
+        {
 
-            foreach (ColumnTObject column in this.columns)
+            foreach (ColumnTObject column in this._table.Columns)
             {
-                this.table.ColumnCombobx.Items.Add(column.Name);
+                this._table.ColumnCombobx.Items.Add(column.Name);
             }
 
             this.FilterOptions.ForEach(column => {
 
-                this.table.ColumnSortByCombobx.Items.Add(column);
+                this._table.ColumnSortByCombobx.Items.Add(column);
             });
 
-            this.table.ColumnCombobx.SelectedIndex = 0;
-            this.table.ColumnSortByCombobx.SelectedIndex = 0;
+            this._table.ColumnCombobx.SelectedIndex = 0;
+            this._table.ColumnSortByCombobx.SelectedIndex = 0;
 
              
-            this.table.ColumnCombobx.SelectedIndexChanged += (delegate (object sender, EventArgs e)
+            this._table.ColumnCombobx.SelectedIndexChanged += (delegate (object sender, EventArgs e)
             {
-                this.SelectedColumnIndex = this.table.ColumnCombobx.SelectedIndex;
+                this.SelectedColumnIndex = this._table.ColumnCombobx.SelectedIndex;
             });
 
-            this.table.ColumnSortByCombobx.SelectedIndexChanged += (delegate (object sender, EventArgs e)
+            this._table.ColumnSortByCombobx.SelectedIndexChanged += (delegate (object sender, EventArgs e)
             {
-                this.SelectedFilterOptionIndex = this.table.ColumnSortByCombobx.SelectedIndex;
+                this.SelectedFilterOptionIndex = this._table.ColumnSortByCombobx.SelectedIndex;
                 this.onStartSorting();
             });
         }
@@ -66,21 +68,21 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.filter
                 return;
             }
 
-            if (this.table.ColumnCombobx.SelectedValue == null || this.table.ColumnSortByCombobx.SelectedValue == null){
+            if (this._table.ColumnCombobx.SelectedValue == null || this._table.ColumnSortByCombobx.SelectedValue == null){
                 return;
             }
 
-            string columnName = this.table.ColumnCombobx.SelectedValue.ToString();
-            string filterOption = this.table.ColumnSortByCombobx.SelectedValue.ToString();
+            string columnName = this._table.ColumnCombobx.SelectedValue.ToString();
+            string filterOption = this._table.ColumnSortByCombobx.SelectedValue.ToString();
 
             switch (filterOption)
             {
                 case "Rosnąco":
-                    SortByAscending.Execute(this.table, columnName);
+                    SortByAscending.Execute(this._table, columnName);
                     break;
 
                 case "Malejąco":
-                    SortByDescending.Execute(this.table, columnName);
+                    SortByDescending.Execute(this._table, columnName);
                     break;
             }
         }

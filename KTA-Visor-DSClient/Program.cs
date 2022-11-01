@@ -66,8 +66,7 @@ namespace KTA_Visor_DSClient
 
         private static void HandleException(Exception exception)
         {
-            Globals.Logger.error("Global exception handler", exception);
-            new StationInitializer(new install.settings.Settings()).init(false);
+            Globals.Logger.error("Global exception handler", exception.ToString());
 
 #if DEBUG
             Console.WriteLine(exception.ToString());

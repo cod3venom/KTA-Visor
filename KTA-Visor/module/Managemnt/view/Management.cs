@@ -38,7 +38,7 @@ namespace KTA_Visor.module.Management.view
 
             this.StationModule = new StationModule();
             this.UsersModule = new UsersModule();
-            this.FileManagerModule = new FileManagerModule();
+            this.FileManagerModule = new FileManagerModule(user);
             this.LogsModule = new LogsModule();
             this.CardReaderModule = new CardReaderModule();
             this.Modules = new ModulesManager()
@@ -55,23 +55,13 @@ namespace KTA_Visor.module.Management.view
             this.Bounds = Screen.FromHandle(this.Handle).WorkingArea;
 
             this.UIHandlers = new List<IUIHandlerInterface>() { 
-                new DefaultViewUIHandler(this),
                 new TopBarMenuUIHandler(this),
                 new SideBarUIHandler(this),
                 new ClientListUIHandler(this),
                 new LogsUIHandler(this),
-                new RequestsFlowUIHandler(this)
+                new RequestsFlowUIHandler(this),
+                new DefaultViewUIHandler(this),
             };
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222")))
-            {
-                int borderWidth = 5; 
-                e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
-            }
         }
 
         private async void StationsView_Load(object sender, EventArgs e)
