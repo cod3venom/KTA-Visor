@@ -52,7 +52,21 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
             }
         }
 
-        public int Quality { get; set; }
+        public int Quality 
+        {
+            get
+            {
+                int quality = (int)Enums.Qualitys.Normal;
+
+                if (this.Resolution == (int)VideoResolutions.Resolution1280x720P20)
+                {
+                    quality = (int)Enums.Qualitys.Fine;
+                }
+
+                return quality;
+            }
+        }
+
         public int Codec { get; set; }
         public int TimeZone { get; set; }
 
@@ -123,14 +137,8 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
 
         private void CameraItemForm_Load(object sender, EventArgs e)
         {
-            this.assignDefaultValues();
             this.renderValues();
             this.hookEvents();
-        }
-
-        private void assignDefaultValues()
-        {
-            this.Quality = (int)Enums.Qualitys.Normal;
         }
 
         private void renderValues()
@@ -181,7 +189,6 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
             this.resolutionThirdChk.CheckedChanged += onCheckedThirdResolution;
             this.resolutionFourthChk.CheckedChanged += onCheckedFourthResolution;
 
-            this.recordingQualityCombo.SelectionChangeCommitted += onRecordingQualityChanged;
             this.recordingCodecFormatCombo.SelectionChangeCommitted += onCodecChanged;
             this.saveBtn.Click += onSaveBtnClicked;
         }
@@ -219,17 +226,7 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
             this.resolutionSecondChk.Checked = false;
             this.resolutionThirdChk.Checked = false;
         }
-
-        private void onRecordingQualityChanged(object sender, EventArgs e)
-        {
-            int quality = (int)Enums.Qualitys.Normal; ;
-
-            if (this.Resolution == (int)VideoResolutions.Resolution1280x720P20){
-                quality = (int)Enums.Qualitys.Fine;
-            }
-
-            this.Quality = quality;
-        }
+ 
 
         private void onCodecChanged(object sender, EventArgs e)
         {
@@ -239,9 +236,6 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.settings
 
         private void onSaveBtnClicked(object sender, EventArgs e)
         {
-            // Calibrate quality if user didnt clicked
-            this.onRecordingQualityChanged(sender, e);
-
             this.settingsHandler.Save();
         }
 

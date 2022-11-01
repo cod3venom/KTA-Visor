@@ -47,7 +47,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
             //}
 
             Globals.IS_ALL_COPYING_PROCESS_ARE_END = false;
-            this._totalFilesSize = this._cameraDevice.Files.Sum(file => Convert.ToInt32(file.Length));
+            this._totalFilesSize = this._cameraDevice.Files.Sum(file => (int)file.Length);
 
             this.CopyFilesWithParalels(this._cameraDevice.Files);
             Globals.IS_ALL_COPYING_PROCESS_ARE_END = true;
