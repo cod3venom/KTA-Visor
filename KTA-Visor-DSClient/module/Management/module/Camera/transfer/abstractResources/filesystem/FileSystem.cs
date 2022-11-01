@@ -23,13 +23,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
         public event EventHandler<OnFilesTransferingFinishedEvent> OnCopyingFinished;
 
         private USBCameraDevice _cameraDevice;
-        private readonly FileManagerService _fileManagerService;
-
+        private readonly FileManagerService _fileManagerService
         private readonly Settings _settings;
         private readonly KTALogger.Logger _logger;
-
-        private long _totalFilesSize = 0;
-        private long _totalCopiedSize = 0;
+ 
 
         public FileSystem(Settings settings, KTALogger.Logger logger)
         {
@@ -41,21 +38,13 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
         public void MoveFilesToStorage(USBCameraDevice cameraDevice)
         {
             this._cameraDevice = cameraDevice;
-
-            //if (Directory.EnumerateDirectories(this._destination).Count == 0){
-            //    throw new Exception("Network drive location does not exists");
-            //}
-
             Globals.IS_ALL_COPYING_PROCESS_ARE_END = false;
-            this._totalFilesSize = this._cameraDevice.Files.Sum(file => Convert.ToInt32(file.Length));
-
             this.CopyFilesWithParalels(this._cameraDevice.Files);
             Globals.IS_ALL_COPYING_PROCESS_ARE_END = true;
         }
 
         private void CopyFilesWithParalels(List<FileInfo> files)
         {
-
             List<FileInfo> copiedFiles = new List<FileInfo>();
             List<FileInfo> duplicateFiles = new List<FileInfo>();
             List<FileInfo> failedFiles = new List<FileInfo>();
@@ -93,7 +82,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
                     Globals.IS_ALL_COPYING_PROCESS_ARE_END = true;
                 }
             }
-             
 
             this.OnCopyingFinished?.Invoke(this, new OnFilesTransferingFinishedEvent(
                 this._cameraDevice,
@@ -119,19 +107,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
                 while ((bytesRead = fs.Read(bytes, 0, bufferSize)) > 0)
                 {
                     fileStream.Write(bytes, 0, bytesRead);
-                    this._totalCopiedSize += bytesRead;
-
-                    Thread progressThr = new Thread((ThreadStart) => {
-                        this.OnTransferProgressChanged?.Invoke(this, new OnTransferProgressChanged(
-                            file,
-                            this._totalFilesSize,
-                            this._totalCopiedSize
-                        ));
-
-                        Thread.Sleep(1000);
-                    });
-                    progressThr.IsBackground = true;
-                    progressThr.Start();
                 }
 
                 file = new FileInfo(destinationFile.FullName);
@@ -139,7 +114,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
                 {
                     File.SetAttributes(file.FullName, FileAttributes.Hidden);
                 }
-                this._totalCopiedSize = 0;
             }
         }
 
@@ -160,18 +134,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
                 destFile.Length,
                 FileChecksum.checkMD5(destFile.FullName)
             ));
-        }
-
-        
-        protected bool IsNetworkDriveExists()
-        {
-            string root = Directory.GetDirectoryRoot(this._settings.SettingsObj?.app?.fileSystem?.recordingsPath);
-            DriveInfo drive = new DriveInfo(root);
-            if (drive.DriveType == DriveType.Network)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
