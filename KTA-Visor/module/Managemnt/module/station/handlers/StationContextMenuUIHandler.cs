@@ -75,6 +75,7 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
 
             client.Send(request);
         }
+
         private void onHandleRowContextMenuOnRightMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right){

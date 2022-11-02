@@ -45,7 +45,10 @@ namespace TCPTunnel.kernel.extensions.router
                 message = message.Replace("\n", "");
 
                 this.currentRequest = JsonConvert.DeserializeObject<Request>(message);
-                this.currentRequest.Client = client;
+                if (this.currentRequest != null)
+                {
+                    this.currentRequest.Client = client;
+                }
                 
                 return this.currentRequest;
             }

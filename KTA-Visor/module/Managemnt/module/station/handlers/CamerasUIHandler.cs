@@ -38,17 +38,25 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
         {
             Thread loadingThread = new Thread(async () =>
             {
-                this.currentStation = await this.getStationByCustomId(stationCustomId);
-                List<CameraEntity.Camera> stationCameras = await this.getCamerasBystationCustomId(stationCustomId);
+                try
+                {
+                    this.currentStation = await this.getStationByCustomId(stationCustomId);
+                    List<CameraEntity.Camera> stationCameras = await this.getCamerasBystationCustomId(stationCustomId);
 
-                this.clearBoard();
+                    this.clearBoard();
 
-                ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 10 };
-                Parallel.ForEach(stationCameras, options, camera => {
-                    if (camera.active){
-                        this.addToBoard(camera);
-                    }
-                });
+                    ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 10 };
+                    Parallel.ForEach(stationCameras, options, camera => {
+                        if (camera.active)
+                        {
+                            this.addToBoard(camera);
+                        }
+                    });
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             });
 
             loadingThread.IsBackground = true;

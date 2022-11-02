@@ -51,6 +51,8 @@
             this.apiLbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.firmwaresDirTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.label4 = new System.Windows.Forms.Label();
             this.reportsFolderTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.reportsFolderLbl = new System.Windows.Forms.Label();
             this.storageDriveLetterTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
@@ -64,8 +66,8 @@
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.bunifuSeparator2 = new Bunifu.Framework.UI.BunifuSeparator();
             this.footer1 = new KTA_Visor_UI.component.custom.Footer.Footer();
-            this.firmwaresDirTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.maxFileLivingDays = new System.Windows.Forms.NumericUpDown();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -74,6 +76,7 @@
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maxFileLivingDays)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -146,8 +149,8 @@
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.87864F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.12136F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.48617F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.51383F));
             this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel5, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel6, 1, 0);
@@ -156,8 +159,8 @@
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.7594F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.2406F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1194, 533);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -174,7 +177,7 @@
             this.panel4.Location = new System.Drawing.Point(5, 5);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(586, 257);
+            this.panel4.Size = new System.Drawing.Size(474, 276);
             this.panel4.TabIndex = 0;
             // 
             // tunnelModeCombo
@@ -254,10 +257,10 @@
             this.panel5.Controls.Add(this.apiLbl);
             this.panel5.Controls.Add(this.label6);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(5, 271);
+            this.panel5.Location = new System.Drawing.Point(5, 290);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(586, 257);
+            this.panel5.Size = new System.Drawing.Size(474, 238);
             this.panel5.TabIndex = 1;
             // 
             // apiTxt
@@ -293,6 +296,8 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.maxFileLivingDays);
+            this.panel6.Controls.Add(this.label5);
             this.panel6.Controls.Add(this.firmwaresDirTxt);
             this.panel6.Controls.Add(this.label4);
             this.panel6.Controls.Add(this.reportsFolderTxt);
@@ -303,16 +308,36 @@
             this.panel6.Controls.Add(this.recordingsFolderlbl);
             this.panel6.Controls.Add(this.label1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(600, 5);
+            this.panel6.Location = new System.Drawing.Point(488, 5);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(589, 257);
+            this.panel6.Size = new System.Drawing.Size(701, 276);
             this.panel6.TabIndex = 2;
+            // 
+            // firmwaresDirTxt
+            // 
+            this.firmwaresDirTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.firmwaresDirTxt.Location = new System.Drawing.Point(201, 141);
+            this.firmwaresDirTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.firmwaresDirTxt.Name = "firmwaresDirTxt";
+            this.firmwaresDirTxt.Size = new System.Drawing.Size(247, 22);
+            this.firmwaresDirTxt.TabIndex = 46;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(59, 141);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(126, 16);
+            this.label4.TabIndex = 47;
+            this.label4.Text = "Katalog Aktualizacji";
             // 
             // reportsFolderTxt
             // 
             this.reportsFolderTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.reportsFolderTxt.Location = new System.Drawing.Point(172, 103);
+            this.reportsFolderTxt.Location = new System.Drawing.Point(201, 101);
             this.reportsFolderTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.reportsFolderTxt.Name = "reportsFolderTxt";
             this.reportsFolderTxt.Size = new System.Drawing.Size(247, 22);
@@ -323,7 +348,7 @@
             this.reportsFolderLbl.AutoSize = true;
             this.reportsFolderLbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reportsFolderLbl.ForeColor = System.Drawing.Color.Black;
-            this.reportsFolderLbl.Location = new System.Drawing.Point(38, 104);
+            this.reportsFolderLbl.Location = new System.Drawing.Point(67, 102);
             this.reportsFolderLbl.Name = "reportsFolderLbl";
             this.reportsFolderLbl.Size = new System.Drawing.Size(118, 16);
             this.reportsFolderLbl.TabIndex = 45;
@@ -332,7 +357,7 @@
             // storageDriveLetterTxt
             // 
             this.storageDriveLetterTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.storageDriveLetterTxt.Location = new System.Drawing.Point(172, 182);
+            this.storageDriveLetterTxt.Location = new System.Drawing.Point(201, 180);
             this.storageDriveLetterTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.storageDriveLetterTxt.Name = "storageDriveLetterTxt";
             this.storageDriveLetterTxt.Size = new System.Drawing.Size(247, 22);
@@ -343,7 +368,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(119, 185);
+            this.label3.Location = new System.Drawing.Point(148, 183);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 16);
             this.label3.TabIndex = 43;
@@ -352,7 +377,7 @@
             // recordingsFolderTxt
             // 
             this.recordingsFolderTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.recordingsFolderTxt.Location = new System.Drawing.Point(172, 70);
+            this.recordingsFolderTxt.Location = new System.Drawing.Point(201, 68);
             this.recordingsFolderTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.recordingsFolderTxt.Name = "recordingsFolderTxt";
             this.recordingsFolderTxt.Size = new System.Drawing.Size(247, 22);
@@ -363,7 +388,7 @@
             this.recordingsFolderlbl.AutoSize = true;
             this.recordingsFolderlbl.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recordingsFolderlbl.ForeColor = System.Drawing.Color.Black;
-            this.recordingsFolderlbl.Location = new System.Drawing.Point(53, 70);
+            this.recordingsFolderlbl.Location = new System.Drawing.Point(82, 68);
             this.recordingsFolderlbl.Name = "recordingsFolderlbl";
             this.recordingsFolderlbl.Size = new System.Drawing.Size(103, 16);
             this.recordingsFolderlbl.TabIndex = 41;
@@ -443,25 +468,33 @@
             this.footer1.Size = new System.Drawing.Size(1194, 48);
             this.footer1.TabIndex = 0;
             // 
-            // firmwaresDirTxt
+            // label5
             // 
-            this.firmwaresDirTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.firmwaresDirTxt.Location = new System.Drawing.Point(172, 143);
-            this.firmwaresDirTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.firmwaresDirTxt.Name = "firmwaresDirTxt";
-            this.firmwaresDirTxt.Size = new System.Drawing.Size(247, 22);
-            this.firmwaresDirTxt.TabIndex = 46;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(10, 217);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(175, 16);
+            this.label5.TabIndex = 49;
+            this.label5.Text = "Czas przechowiwania (dni)";
             // 
-            // label4
+            // maxFileLivingDays
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(30, 143);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(126, 16);
-            this.label4.TabIndex = 47;
-            this.label4.Text = "Katalog Aktualizacji";
+            this.maxFileLivingDays.Location = new System.Drawing.Point(201, 215);
+            this.maxFileLivingDays.Minimum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.maxFileLivingDays.Name = "maxFileLivingDays";
+            this.maxFileLivingDays.Size = new System.Drawing.Size(247, 22);
+            this.maxFileLivingDays.TabIndex = 50;
+            this.maxFileLivingDays.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             // 
             // SettingsEntryPoint
             // 
@@ -492,6 +525,7 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.maxFileLivingDays)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -534,5 +568,7 @@
         private System.Windows.Forms.Label reportsFolderLbl;
         private WindowsFormsControlLibrary1.BunifuCustomTextbox firmwaresDirTxt;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown maxFileLivingDays;
     }
 }

@@ -47,6 +47,7 @@ namespace KTA_Visor.install.settings.dto
             public string firmwaresPath { get; set; }
             public string storageDriveLetter { get; set; }
             public bool autoCopy { get; set; }
+            public int maxFileLivingDays { get; set; }
         }
 
         public class CardMode

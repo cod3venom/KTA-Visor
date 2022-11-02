@@ -17,9 +17,11 @@ namespace KTA_Visor_DSClient.module.Management.bootloader.handlers
         public static string HandlerName = "TunnelInitHandler";
         private readonly KTALogger.Logger _logger;
         private readonly ClientTunnel _clientTunnel;
-        public TunnelInitHandler(Settings settings, KTALogger.Logger logger)
+        private readonly Bootloader _bootloader;
+        public TunnelInitHandler(Bootloader bootloader, Settings settings, KTALogger.Logger logger)
         {
             this._logger = logger;
+            this._bootloader = bootloader;
             this._clientTunnel = new ClientTunnel(settings);
         }
 

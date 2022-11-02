@@ -81,6 +81,10 @@ namespace KTA_Visor.module.Managemnt.view
             this.storageDriveLetterTxt.TextChanged += (delegate (object sender, EventArgs e) {
                 this.settings.SettingsObj.app.fileSystem.storageDriveLetter = this.storageDriveLetterTxt.Text;
             });
+            this.maxFileLivingDays.ValueChanged += (delegate (object sender, EventArgs e) {
+                this.settings.SettingsObj.app.fileSystem.maxFileLivingDays = Int32.Parse(this.maxFileLivingDays.Text);
+            });
+
             this.saveBtn.Click += onSave;
         }
 
@@ -93,6 +97,15 @@ namespace KTA_Visor.module.Managemnt.view
             this.tunnelModeCombo.SelectedIndex = 0;
 
             this.recordingsFolderTxt.Text = this.settings.SettingsObj.app.fileSystem.recordingsPath;
+            this.reportsFolderTxt.Text = this.settings.SettingsObj.app.fileSystem.reportsPath;
+            this.firmwaresDirTxt.Text = this.settings.SettingsObj.app.fileSystem.firmwaresPath;
+            this.storageDriveLetterTxt.Text = this.settings.SettingsObj.app.fileSystem.storageDriveLetter;
+            if (this.settings.SettingsObj.app.fileSystem.maxFileLivingDays < this.maxFileLivingDays.Maximum)
+            {
+                this.settings.SettingsObj.app.fileSystem.maxFileLivingDays = (int)this.maxFileLivingDays.Maximum;
+            }
+
+            this.maxFileLivingDays.Value = this.settings.SettingsObj.app.fileSystem.maxFileLivingDays;
             this.apiTxt.Text = this.settings.SettingsObj.app.api.url;
         }
 

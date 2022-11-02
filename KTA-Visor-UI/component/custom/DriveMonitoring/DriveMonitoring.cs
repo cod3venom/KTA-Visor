@@ -41,8 +41,12 @@ namespace KTA_Visor_UI.component.custom.DriveMonitoring
 
             Thread workerThread = new Thread((ThreadStart)delegate
             {
-                while(true)
+                while(!this._backgroundWorker.IsBusy)
                 {
+                    if (this._backgroundWorker.IsBusy){
+                        break;
+                    }
+
                     this._backgroundWorker.RunWorkerAsync();
                     Thread.Sleep(1000);
                 }

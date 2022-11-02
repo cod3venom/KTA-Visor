@@ -72,9 +72,17 @@ namespace KTA_Visor_UI.component.basic.table.bundle.abstraction.search
 
         private void hideAllRows()
         {
-            foreach (DataGridViewRow row in this.table.DataGridView.Rows){
-                if (!row.Visible) continue;
-                row.Visible = false; 
+            try
+            {
+                foreach (DataGridViewRow row in this.table.DataGridView.Rows)
+                {
+                    if (!row.Visible) continue;
+                    row.Visible = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
     }

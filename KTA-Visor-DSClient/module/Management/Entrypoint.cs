@@ -37,7 +37,5 @@ namespace KTA_Visor_DSClient.module.Management
 
             this._bootLoader.Load();
         }
-
-   
     }
 }

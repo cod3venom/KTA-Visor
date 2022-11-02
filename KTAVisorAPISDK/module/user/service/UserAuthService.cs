@@ -61,7 +61,7 @@ namespace KTAVisorAPISDK.module.user.service
                 throw new Exception("Nie udało się zarejestrować, spróbuj póżniej lub skontaktuj się z Administratorem");
             }
 
-            SaveSessionCommand.Execute(signUp.data.token);
+            SaveSessionCommand.Execute(signUp.data.jwt);
 
             return signUp;
         }

@@ -126,7 +126,7 @@
             this.DoubleBuffered = false;
             this.Name = "CardModeWindow";
             this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
-            this.Style = MetroFramework.MetroColorStyle.Silver;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "CardModeWindow";
             this.Load += new System.EventHandler(this.CardModeWindow_Load);
             this.panel1.ResumeLayout(false);

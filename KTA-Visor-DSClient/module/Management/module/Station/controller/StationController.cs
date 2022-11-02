@@ -67,25 +67,14 @@ namespace KTA_Visor_DSClient.module.Management.module.Station.controller
             }
             if (Globals.STATION?.data == null)
             {
-                Application.Restart();
+                Program.Restart();
                 return;
             }
 
-            dynamic result = await this._stationService.findByCustomId(Globals.STATION.data?.stationId);
-            if (result == null)
-            {
-                Application.Restart();
-                return;
-            }
-
-            if (result?.removed != true)
-            {
-                Application.Restart();
-                return;
-            }
-
+            this._stationService.delete(Globals.STATION.data?.stationId);
+            
             Globals.ClientTunnel.Disconnect();
-            Application.Exit();
+            Program.Restart();
         }
     }
 }

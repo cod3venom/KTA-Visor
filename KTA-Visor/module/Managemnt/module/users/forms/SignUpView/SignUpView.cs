@@ -44,20 +44,23 @@ namespace KTA_Visor.module.Managemnt.module.users.forms.SignUpView
         {
            try
             {
-               SignUpEntity user = await this.authService.signUp(new SignUpRequestTObject(
+               SignUpEntity signUpEntity = await this.authService.signUp(new SignUpRequestTObject(
                    this.firstNameTxt.Text,
                    this.lastNameText.Text,
                    this.emailTxt.Text,
                    this.passwordTxt.Text
                ));
 
-                if (user == null)
+                if (signUpEntity == null || signUpEntity?.data == null)
                 {
                     new AlertWindow("Nie udało się zarejestrować, sprawdż poprawnośc danych lub skontaktuj się z Administratorem");
                     return;
                 }
                 this.Hide();
-                new Management.view.Management(user).Show();
+     
+                Form form = new Management.view.Management(signUpEntity);
+                form.FormClosing += onClose;
+                form.ShowDialog();
             }
             catch(Exception ex)
             {

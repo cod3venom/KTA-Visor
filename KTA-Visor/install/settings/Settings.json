@@ -21,7 +21,8 @@
       "reportsPath": "",
       "firmwaresPath":  "",
       "storageDriveLetter": "",
-      "autoCopy": true
+      "autoCopy": true,
+      "maxFileLivingDays":  "30"
     },
     "cardMode": {
       "password": "admin123"

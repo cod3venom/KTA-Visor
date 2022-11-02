@@ -23,26 +23,24 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
         {
             this._stationView = stationView;
             this._stationService = new StationService();
-            this.hookEvents();
         }
 
-        private void hookEvents()
+        private async Task<List<StationEntity.Station>> AllStations()
         {
-            Globals.Server.OnClientConnected += onStationConnected;
+            StationEntity station = await this._stationService.all();
+            if (station.datas == null)
+            {
+                return new List<StationEntity.Station>();
+            }
+
+            return station.datas;
         }
- 
 
-        private void onStationConnected(object sender, events.OnClientConnected e)
-        {
-            this.Load();
-        }
-
-
-        public void Load()
+        public void LoadStations()
         {
             Thread loadingThread = new Thread(async () =>
             {
-                List<StationEntity.Station> stations = await this.allStations();
+                List<StationEntity.Station> stations = await this.AllStations();
                 
                 this.cleanTable();
 
@@ -52,20 +50,15 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
                     this.addToTable(station);
                 });
 
-                this._stationView.CamerasUIHandler.Load(this.StationId);
+                this._stationView.CamerasUIHandler.Load(this._stationView.StationId);
             });
             loadingThread.IsBackground = true;
             loadingThread.Start();
         }
-
-        private async Task<List<StationEntity.Station>> allStations()
+ 
+        public void RemoveByValue(string value)
         {
-            StationEntity station = await this._stationService.all();
-            if (station.datas == null){
-                return new List<StationEntity.Station>();
-            }
-      
-            return station.datas;
+            this._stationView.Table.Row.Remove(value);
         }
 
         private void cleanTable()
@@ -96,20 +89,6 @@ namespace KTA_Visor.module.Managemnt.module.station.handlers
                    station.createdAt
                );
             });
-        }
-
-        public string StationId
-        {
-            get
-            {
-                if (this._stationView.Table.DataGridView.SelectedRows.Count == 0)
-                    return "";
-
-                if (this._stationView.Table.DataGridView.SelectedRows[0].Cells[0]?.Value == null)
-                    return "";
-
-                return this._stationView.Table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
-            }
         }
     }
 }

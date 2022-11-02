@@ -187,6 +187,8 @@
     <Compile Include="component\custom\ClientsList\ClientsList.Designer.cs">
       <DependentUpon>ClientsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="component\custom\ClientsList\events\OnClientDisconnected.cs" />
+    <Compile Include="component\custom\ClientsList\events\OnClientConnected.cs" />
     <Compile Include="component\custom\ClientsList\sub-components\Client\ClientItem.cs">
       <SubType>UserControl</SubType>
     </Compile>

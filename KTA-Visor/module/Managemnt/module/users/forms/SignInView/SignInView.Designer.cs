@@ -76,7 +76,7 @@ namespace KTA_Visor.module.Managemnt.module.users.forms.SignInView
             // 
             this.signInBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.signInBtn.Location = new System.Drawing.Point(76, 282);
-            this.signInBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.signInBtn.Margin = new System.Windows.Forms.Padding(4);
             this.signInBtn.Name = "signInBtn";
             this.signInBtn.Size = new System.Drawing.Size(299, 28);
             this.signInBtn.TabIndex = 24;
@@ -90,10 +90,10 @@ namespace KTA_Visor.module.Managemnt.module.users.forms.SignInView
             // 
             // 
             this.passwordTxt.CustomButton.Image = null;
-            this.passwordTxt.CustomButton.Location = new System.Drawing.Point(369, 2);
-            this.passwordTxt.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.passwordTxt.CustomButton.Location = new System.Drawing.Point(277, 2);
+            this.passwordTxt.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.passwordTxt.CustomButton.Name = "";
-            this.passwordTxt.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.passwordTxt.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.passwordTxt.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.passwordTxt.CustomButton.TabIndex = 1;
             this.passwordTxt.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -102,7 +102,7 @@ namespace KTA_Visor.module.Managemnt.module.users.forms.SignInView
             this.passwordTxt.Lines = new string[] {
         "admin123"};
             this.passwordTxt.Location = new System.Drawing.Point(72, 214);
-            this.passwordTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.passwordTxt.Margin = new System.Windows.Forms.Padding(4);
             this.passwordTxt.MaxLength = 32767;
             this.passwordTxt.Name = "passwordTxt";
             this.passwordTxt.PasswordChar = '●';
@@ -126,10 +126,10 @@ namespace KTA_Visor.module.Managemnt.module.users.forms.SignInView
             // 
             // 
             this.emailTxt.CustomButton.Image = null;
-            this.emailTxt.CustomButton.Location = new System.Drawing.Point(369, 2);
-            this.emailTxt.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.emailTxt.CustomButton.Location = new System.Drawing.Point(277, 2);
+            this.emailTxt.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.emailTxt.CustomButton.Name = "";
-            this.emailTxt.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.emailTxt.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.emailTxt.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.emailTxt.CustomButton.TabIndex = 1;
             this.emailTxt.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -138,7 +138,7 @@ namespace KTA_Visor.module.Managemnt.module.users.forms.SignInView
             this.emailTxt.Lines = new string[] {
         "levan@skillsforge.pl"};
             this.emailTxt.Location = new System.Drawing.Point(72, 143);
-            this.emailTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.emailTxt.Margin = new System.Windows.Forms.Padding(4);
             this.emailTxt.MaxLength = 32767;
             this.emailTxt.Name = "emailTxt";
             this.emailTxt.PasswordChar = '\0';
@@ -201,7 +201,6 @@ namespace KTA_Visor.module.Managemnt.module.users.forms.SignInView
             this.signUpLink.Size = new System.Drawing.Size(111, 19);
             this.signUpLink.TabIndex = 19;
             this.signUpLink.Text = "Zarejestruj się";
-            this.signUpLink.Visible = false;
             // 
             // questionLbl
             // 
@@ -214,7 +213,6 @@ namespace KTA_Visor.module.Managemnt.module.users.forms.SignInView
             this.questionLbl.Size = new System.Drawing.Size(163, 19);
             this.questionLbl.TabIndex = 18;
             this.questionLbl.Text = "Nie posiadasz  konta?";
-            this.questionLbl.Visible = false;
             // 
             // passwordLbl
             // 

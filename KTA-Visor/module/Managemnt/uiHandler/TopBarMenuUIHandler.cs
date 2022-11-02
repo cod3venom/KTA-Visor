@@ -32,11 +32,12 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             this.managementForm.startTunnelServerMenuItem.Click += onStartTunnelServerMenuItemClick;
             this.managementForm.stopTunnelServerMenuItem.Click += onStopTunnelServerMenuItemClick;
             this.managementForm.restartTunnelServerMenuItem.Click += onRestartTunnelServerMenuItemClick;
+            this.managementForm.profileMenuItem.Click += onProfileClick;
             this.managementForm.cardModeMenuItem.Click += onCardModeClick;
             this.managementForm.versionMenuItem.Click += onVersionMenuItemClick;
         }
+ 
 
-      
         private void initializeUI()
         {
             if (this.managementForm.User.data.roles[0] == UserRole.ROLE_USER)
@@ -74,6 +75,11 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             Globals.Server.Restart();
         }
 
+
+        private void onProfileClick(object sender, EventArgs e)
+        {
+            new UserProfileWindow().ShowDialog();
+        }
 
         private void onCardModeClick(object sender, EventArgs e)
         {

@@ -93,7 +93,6 @@ namespace KTA_Visor.module.Managemnt.uiHandler
         {
             this.displayPanel(this.managementForm.Modules.Get(FileManagerModule.ModuleName));
         }
-
  
         private void onLogsClick(object sender, EventArgs e)
         {
@@ -108,7 +107,6 @@ namespace KTA_Visor.module.Managemnt.uiHandler
         {
             new SettingsEntryPoint().ShowDialog();
         }
-
 
         private void onLogoutClick(object sender, EventArgs e)
         {

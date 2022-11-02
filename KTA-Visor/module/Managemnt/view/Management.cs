@@ -36,7 +36,7 @@ namespace KTA_Visor.module.Management.view
             this.Settings = new Settings();
             this.ClientsManagerModule = new ClientsManagerModule();
 
-            this.StationModule = new StationModule();
+            this.StationModule = new StationModule(this);
             this.UsersModule = new UsersModule();
             this.FileManagerModule = new FileManagerModule(user);
             this.LogsModule = new LogsModule();

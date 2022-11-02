@@ -1,4 +1,5 @@
-﻿using KTA_Visor_UI.component.custom.ClientsList.sub_components.Client;
+﻿using KTA_Visor_UI.component.custom.ClientsList.events;
+using KTA_Visor_UI.component.custom.ClientsList.sub_components.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace KTA_Visor_UI.component.custom.ClientsList
 {
     public partial class ClientsList : UserControl
     {
+        public event EventHandler<OnClientConnected> OnClientConnected;
+        public event EventHandler<OnClientDisconnected> OnClientDisconnected;
         private List<ClientItem> clients;
         public ClientsList()
         {
@@ -81,8 +84,9 @@ namespace KTA_Visor_UI.component.custom.ClientsList
                 }
 
                 this.clients.Add(item);
-
+                this.OnClientConnected?.Invoke(this, new events.OnClientConnected(client));
                 this.updateUI();
+                Application.DoEvents();
             });
         }
 
@@ -92,6 +96,7 @@ namespace KTA_Visor_UI.component.custom.ClientsList
             {
                 ClientItem item = this.clients.Find((ClientItem _item) => _item.Client == client);
                 this.clients.Remove(item);
+                this.OnClientDisconnected?.Invoke(this, new events.OnClientDisconnected(client));
                 this.updateUI();
             });
 

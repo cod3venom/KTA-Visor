@@ -175,6 +175,7 @@
     <Compile Include="module\Management\bootloader\handlers\PowerSupplyInitHandler.cs" />
     <Compile Include="module\Management\bootloader\handlers\AutoStartHandler.cs" />
     <Compile Include="module\Management\bootloader\handlers\BackendInitHandler.cs" />
+    <Compile Include="module\Management\bootloader\handlers\WindowsDLLsHandler.cs" />
     <Compile Include="module\Management\bootloader\interfaces\IBootLoaderHandler.cs" />
     <Compile Include="module\Management\EntryPoint.cs" />
     <Compile Include="module\Management\module\Camera\CameraDeviceWatcher.cs" />
@@ -353,6 +354,28 @@
     <EmbeddedResource Include="module\Management\module\Camera\transfer\abstractResources\reporter\template\component\Row.html">
       <CustomToolNamespace>KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.reporter.template.component.Row.html</CustomToolNamespace>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dll\BodyWornCamera_protocol.dll" />
+    <AdditionalFiles Include="dll\h22_4g_pc.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="dll\msc_con.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="dll\ucrtbased.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CustomToolNamespace>KTA_Visor_DSClient.dll.ucrtbased.dll</CustomToolNamespace>
+    </AdditionalFiles>
+    <Content Include="dll\usb_relay_device.dll" />
+    <AdditionalFiles Include="dll\vcruntime140.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CustomToolNamespace>KTA_Visor_DSClient.dll.vcruntime140.dll</CustomToolNamespace>
+    </AdditionalFiles>
+    <AdditionalFiles Include="dll\vcruntime140d.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CustomToolNamespace>KTA_Visor_DSClient.dll.vcruntime140d.dll</CustomToolNamespace>
+    </AdditionalFiles>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

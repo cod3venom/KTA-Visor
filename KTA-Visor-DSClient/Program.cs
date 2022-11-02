@@ -74,8 +74,14 @@ namespace KTA_Visor_DSClient
 #endif
 
 #if !DEBUG
-            Application.Restart();
+            Program.Restart();
 #endif
+        }
+
+        public static void Restart()
+        {
+            System.Diagnostics.Process.Start(Application.ExecutablePath);
+            Environment.Exit(0);
         }
 
     }

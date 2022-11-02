@@ -25,17 +25,26 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
         {
             this._settings = settings;
             this._logger = logger;
+
+            this.WindowsDLLsHandler = new WindowsDLLsHandler(this._logger);
+            this.AutoStartHandler = new AutoStartHandler(this._logger);
+            this.BackendInitHandler = new BackendInitHandler(this._settings);
+            this.PowerSupplyInitHandler = new PowerSupplyInitHandler(this._settings, this._logger);
+            this.StationInitHandler = new StationInitHandler(this._settings);
+            this.TunnelInitHandler = new TunnelInitHandler(this, this._settings, this._logger);
+            this.CamerasWatcherInitHandler = new CamerasWatcherInitHandler(this._settings, this._logger);
+
             this._handlers = new List<IBootLoaderHandler>()
             {
-                new AutoStartHandler(this._logger),
-                new BackendInitHandler(this._settings),
-                new PowerSupplyInitHandler(this._settings, this._logger),
-                new TunnelInitHandler(this._settings, this._logger),
-                new StationInitHandler(this._settings),
-                new CamerasWatcherInitHandler(this._settings, this._logger),
+                this.WindowsDLLsHandler,
+                this.AutoStartHandler,
+                this.BackendInitHandler,
+                this.PowerSupplyInitHandler,
+                this.StationInitHandler,
+                this.TunnelInitHandler,
+                this.CamerasWatcherInitHandler,
             };
         }
-
 
         public void Load()
         {
@@ -51,20 +60,26 @@ namespace KTA_Visor_DSClient.module.Management.bootloader
 
                 this._logger.info(String.Format("Initialized : {0}", handler.GetName()));
             });
-
         }
-
  
         private void keepAlive()
         {
             Thread lifeThread = new Thread((ThreadStart)delegate {
                 while (true)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(10);
                 }
             });
             lifeThread.IsBackground = true;
             lifeThread.Start();
         }
+
+        public WindowsDLLsHandler WindowsDLLsHandler { get; set; }
+        public AutoStartHandler AutoStartHandler { get; set; }
+        public BackendInitHandler BackendInitHandler { get; set; }
+        public PowerSupplyInitHandler PowerSupplyInitHandler { get; set; }
+        public StationInitHandler StationInitHandler { get; set; }
+        public TunnelInitHandler TunnelInitHandler { get; set; }
+        public CamerasWatcherInitHandler CamerasWatcherInitHandler { get; set; }
     }
 }

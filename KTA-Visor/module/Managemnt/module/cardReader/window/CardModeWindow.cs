@@ -23,30 +23,19 @@ namespace KTA_Visor.module.Managemnt.module.cardReader.window
             InitializeComponent();
             this._cardController = new CardController();
         }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222")))
-            {
-                int borderWidth = 5;
-                e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
-            }
-        }
-
+ 
         private void CardModeWindow_Load(object sender, EventArgs e)
         {
 
             this.hookEvents();
-           // this._cardModeAuthCheckerForm.ShowDialog();
         }
 
         private void hookEvents()
         {
             this.cardIdtxt.Focus();
             this.cardIdtxt.KeyDown += onCardScanningStarted;
+            this.closeBtn.Click += onClose;
         }
-
 
         private void onCardScanningStarted(object sender, KeyEventArgs e)
         {
@@ -74,6 +63,10 @@ namespace KTA_Visor.module.Managemnt.module.cardReader.window
             this.cardIdtxt.Focus();
         }
 
+        private void onClose(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
         private bool isValidInput(string input)
         {

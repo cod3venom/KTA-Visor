@@ -12,6 +12,10 @@ namespace KTA_Visor.module.Managemnt.module.station
     {
         public static string ModuleName = "Station";
 
+        public StationModule(Management.view.Management management): base(management)
+        {
+
+        }
         public string GetModuleName()
         {
             return StationModule.ModuleName;

@@ -113,6 +113,7 @@
             // settingsSmallBtn
             // 
             this.settingsSmallBtn.BackColor = System.Drawing.Color.Transparent;
+            this.settingsSmallBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.settingsSmallBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsSmallBtn.Image")));
             this.settingsSmallBtn.ImageActive = null;
             this.settingsSmallBtn.Location = new System.Drawing.Point(208, 144);
@@ -127,6 +128,7 @@
             // notificationBtn
             // 
             this.notificationBtn.BackColor = System.Drawing.Color.Transparent;
+            this.notificationBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.notificationBtn.Image = ((System.Drawing.Image)(resources.GetObject("notificationBtn.Image")));
             this.notificationBtn.ImageActive = null;
             this.notificationBtn.Location = new System.Drawing.Point(152, 144);
@@ -141,6 +143,7 @@
             // reportsBtn
             // 
             this.reportsBtn.BackColor = System.Drawing.Color.Transparent;
+            this.reportsBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.reportsBtn.Image = ((System.Drawing.Image)(resources.GetObject("reportsBtn.Image")));
             this.reportsBtn.ImageActive = null;
             this.reportsBtn.Location = new System.Drawing.Point(98, 144);

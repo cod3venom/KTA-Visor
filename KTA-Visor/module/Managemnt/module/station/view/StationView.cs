@@ -12,6 +12,8 @@ using MetroFramework;
 using KTA_Visor_UI.component.basic.table.enums;
 using TCPTunnel.kernel.types;
 using KTA_Visor.module.Managemnt.module.camera.view.cameraFileTransfersView;
+using KTA_Visor_DSClient.kernel.sharedKernel.ThreadPool;
+using KTA_Visor_UI.component.custom.ClientsList.events;
 
 namespace KTA_Visor.module.Managemnt.module.station.view
 {
@@ -26,9 +28,11 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             new ColumnTObject(5, "UTWORZONO")
         };
 
-        public StationView()
+        private readonly Management.view.Management _management;
+        public StationView(Management.view.Management management)
         {
             InitializeComponent();
+            this._management = management;
             this.StationController = new StationController(this);
 
             this.StationsUIHandler = new StationsUIHandler(this);
@@ -58,27 +62,34 @@ namespace KTA_Visor.module.Managemnt.module.station.view
  
         private void hookEvents()
         {
+            this._management.ClientsManagerModule.OnClientConnected += onClientConnected;
+            this._management.ClientsManagerModule.OnClientDisconnected += onClientDisconnected;
             this.table.DataGridView.CellDoubleClick += onCellDoubleClick;
             this.table.OnRefreshData += onRefreshTableData;
         }
- 
+
+        private void onClientConnected(object sender, OnClientConnected e)
+        {
+            ThreadPoolManager.Run(this.StationsUIHandler.LoadStations, true);
+            ThreadPoolManager.Run(() => this.CamerasUIHandler.Load(this.StationId), true);
+        }
+
+        private void onClientDisconnected(object sender, OnClientDisconnected e)
+        {
+            this.StationsUIHandler.RemoveByValue(e.IpAddress);
+        }
 
         private void initialize()
         {
             this.StationContextMenuUIHandler.Handle();
             this.CamerasFlowBoardContextMenuUIHandler.Handle();
-            this.StationsUIHandler.Load();
+            this.StationsUIHandler.LoadStations();
         }
-
 
         private void onRefreshTableData(object sender, EventArgs e)
         {
-            this.StationsUIHandler.Load();
-        }
-
-        private void fetchStationCameras()
-        {
-            this.CamerasUIHandler.Load(this.StationId);
+            ThreadPoolManager.Run(this.StationsUIHandler.LoadStations, true);
+            ThreadPoolManager.Run(() => this.CamerasUIHandler.Load(this.StationId), true);
         }
 
         private void onCellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -88,8 +99,7 @@ namespace KTA_Visor.module.Managemnt.module.station.view
                 MetroMessageBox.Show(this, "Wybrana stacja jest nie aktywna", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-            this.fetchStationCameras();
+            ThreadPoolManager.Run(() => this.CamerasUIHandler.Load(this.StationId), true);
         }
 
         private bool IsSelectedStationActive
@@ -115,10 +125,18 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             get
             {
                 if (this.table.DataGridView.SelectedRows.Count == 0)
+                {
                     return "";
+                }
+                if (this.table.DataGridView.SelectedRows[0].Cells.Count == 0)
+                {
+                    return "";
+                }
 
                 if (this.table.DataGridView.SelectedRows[0].Cells[0]?.Value == null)
+                {
                     return "";
+                }
 
                 return this.table.DataGridView.SelectedRows[0].Cells[0]?.Value.ToString();
             }
@@ -128,10 +146,18 @@ namespace KTA_Visor.module.Managemnt.module.station.view
             get
             {
                 if (this.table.DataGridView.SelectedRows.Count == 0)
+                {
                     return "";
+                }
+                if (this.table.DataGridView.SelectedRows[0].Cells.Count == 0)
+                {
+                    return "";
+                }
 
                 if (this.table.DataGridView.SelectedRows[0].Cells[1]?.Value == null)
+                {
                     return "";
+                }
 
                 return this.table.DataGridView.SelectedRows[0].Cells[1]?.Value.ToString();
             }
