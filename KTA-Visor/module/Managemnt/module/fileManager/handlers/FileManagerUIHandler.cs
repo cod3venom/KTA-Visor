@@ -88,16 +88,26 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers
 
         public void Delete(List<string> ids)
         {
-            ids.ForEach((id) => this.Delete(id));
+            DialogResult result = MessageBox.Show(this._fileManager, "Czy na pewno chcesz skasować wybrane pozycje?", "Nagrania", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+            ids.ForEach((id) => this.Delete(id, false));
         }
 
-        public void Delete(string id)
+        public void Delete(string id, bool withAlert = true)
         {
             ThreadPoolManager.Run(this._fileManager, ((Action) delegate {
-                DialogResult result = MessageBox.Show(this._fileManager, "Czy na pewno chcesz skasować wybraną pozycje?", "Nagrania", MessageBoxButtons.YesNo);
-                if (result == DialogResult.No){
-                    return;
+                if (withAlert)
+                {
+                    DialogResult result = MessageBox.Show(this._fileManager, "Czy na pewno chcesz skasować wybraną pozycje?", "Nagrania", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
                 }
+
                 _ = this._fileManagerService.delete(id);
                 this.Load();
             }));

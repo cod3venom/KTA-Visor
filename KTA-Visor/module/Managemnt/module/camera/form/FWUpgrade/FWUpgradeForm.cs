@@ -1,4 +1,6 @@
-﻿using KTA_Visor.module.Shared.Global;
+﻿using KTA_Visor.kernel.sharedKernel.interfaces;
+using KTA_Visor.module.Managemnt.events;
+using KTA_Visor.module.Shared.Global;
 using KTAVisorAPISDK.module.camera.entity;
 using KTAVisorAPISDK.module.station.entity;
 using KTAVisorAPISDK.module.station.service;
@@ -9,6 +11,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,23 +25,14 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.FWUpgrade
     public partial class FWUpgradeForm : MetroForm
     {
         private readonly CameraEntity.Camera _camera;
+        private readonly install.settings.Settings _settings;
         private readonly StationService stationService;
         public FWUpgradeForm(CameraEntity.Camera camera)
         {
             InitializeComponent();
             this._camera = camera;
+            this._settings = new install.settings.Settings();
             this.stationService = new StationService();
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-
-             using (Brush b = new SolidBrush(ColorTranslator.FromHtml("#222222")))
-            {
-                int borderWidth = 5;
-                e.Graphics.FillRectangle(b, 0, 0, Width, borderWidth);
-            }
         }
 
         private void FWUpgradeForm_Load(object sender, EventArgs e)
@@ -49,7 +44,9 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.FWUpgrade
         private void hookEvents()
         {
             this.chooseImageBtn.Click += onChooseImageClick;
+            Globals.Server.OnMessageReceivedFromClient += onRequestReceived;
         }
+ 
 
         private void renderData()
         {
@@ -61,12 +58,14 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.FWUpgrade
         {
             this.openFileDialog1.ShowDialog();
 
-            string file = this.openFileDialog1.FileName;
+            FileInfo firmware = new FileInfo(this.openFileDialog1.FileName);
+            string destPath = string.Format("{0}\\{1}", this._settings.SettingsObj.app.fileSystem.firmwaresPath, firmware.Name);
+            firmware.CopyTo(destPath, true);
 
-            MessageBox.Show(file);
+            this.upgrade(new FileInfo(destPath));
         }
 
-        private async void upgrade()
+        private async void upgrade(FileInfo firmware)
         {
 
             StationEntity station = await this.stationService.findByCustomId(this._camera.stationId);
@@ -78,9 +77,50 @@ namespace KTA_Visor.module.Managemnt.module.camera.form.FWUpgrade
                 return;
             }
 
+            dynamic payload = new ExpandoObject();
+            payload.firmware = firmware;
+            payload.camera = this._camera;
+
             client.Send(new Request(
-                "command://cameras/firmware/upgrade"    
+                "command://cameras/firmware/upgrade",
+                payload
             ));
+
+            this.Close();
         }
+
+
+
+        private void onRequestReceived(object sender, OnMessageReceivedFromClient e)
+        {
+            switch (e.Request?.Endpoint)
+            {
+                case "command://cameras/firmware/upgrade/started":
+                    this.onSuccessfullyStartedFWUpgradingProcedureNotification(e.Request);
+                    break;
+                case "command://cameras/firmware/upgrade/failed":
+                    this.oFailedToStartFWUpgradingProcedureNotification(e.Request);
+                    break;
+            }
+        }
+        
+        private void onSuccessfullyStartedFWUpgradingProcedureNotification(Request request)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                MessageBox.Show(this, "Proces Aktualizacji systemu kamery zostało rozpoczęte, proszę poczekać chwile.");
+                this.Close();
+            });
+        }
+
+        private void oFailedToStartFWUpgradingProcedureNotification(Request request)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                MessageBox.Show(this, "Nie udało się rozpocząc Proces Aktualizacji systemu kamery.");
+                this.Close();
+            });
+        }
+
     }
 }

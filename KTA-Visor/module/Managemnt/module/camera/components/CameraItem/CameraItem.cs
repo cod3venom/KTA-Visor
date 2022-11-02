@@ -13,7 +13,6 @@ namespace KTA_Visor.module.Managemnt.module.Camera.component.CameraItem
     {
         public event EventHandler<OnOpenCameraItemEvent> OnOpenCameraItem;
         public event EventHandler<OnCloseCameraItemFormEvent> OnCloseCameraItemForm;
-        public event EventHandler<OnCloseCameraItemFormEvent> OnCopyToUSBClicked;
         public event EventHandler<OnCloseCameraItemFormEvent> OnCopyToDVDClicked;
 
 

@@ -19,6 +19,8 @@
     "fileSystem": {
       "recordingsPath": "",
       "reportsPath": "",
+      "firmwaresPath":  "",
+      "storageDriveLetter": "",
       "autoCopy": true
     },
     "cardMode": {

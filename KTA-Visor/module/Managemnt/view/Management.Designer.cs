@@ -39,15 +39,10 @@ namespace KTA_Visor.module.Management.view
             this.restartTunnelServerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kontoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.securityMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cardModeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ustawieniaFabryczneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutUsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sidebarPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -108,29 +103,27 @@ namespace KTA_Visor.module.Management.view
             // 
             this.startTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startTunnelServerMenuItem.Image")));
             this.startTunnelServerMenuItem.Name = "startTunnelServerMenuItem";
-            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.startTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
             this.startTunnelServerMenuItem.Text = "Uruchom";
             // 
             // stopTunnelServerMenuItem
             // 
             this.stopTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopTunnelServerMenuItem.Image")));
             this.stopTunnelServerMenuItem.Name = "stopTunnelServerMenuItem";
-            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.stopTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
             this.stopTunnelServerMenuItem.Text = "Zatrzymaj";
             // 
             // restartTunnelServerMenuItem
             // 
             this.restartTunnelServerMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restartTunnelServerMenuItem.Image")));
             this.restartTunnelServerMenuItem.Name = "restartTunnelServerMenuItem";
-            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.restartTunnelServerMenuItem.Size = new System.Drawing.Size(224, 26);
             this.restartTunnelServerMenuItem.Text = "Zresetuj";
             // 
             // kontoToolStripMenuItem
             // 
             this.kontoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.profileMenuItem,
-            this.securityMenuItem,
-            this.logoutMenuItem});
+            this.profileMenuItem});
             this.kontoToolStripMenuItem.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kontoToolStripMenuItem.Name = "kontoToolStripMenuItem";
             this.kontoToolStripMenuItem.Size = new System.Drawing.Size(64, 31);
@@ -140,30 +133,13 @@ namespace KTA_Visor.module.Management.view
             // 
             this.profileMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("profileMenuItem.Image")));
             this.profileMenuItem.Name = "profileMenuItem";
-            this.profileMenuItem.Size = new System.Drawing.Size(209, 26);
+            this.profileMenuItem.Size = new System.Drawing.Size(224, 26);
             this.profileMenuItem.Text = "Profil";
-            // 
-            // securityMenuItem
-            // 
-            this.securityMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("securityMenuItem.Image")));
-            this.securityMenuItem.Name = "securityMenuItem";
-            this.securityMenuItem.Size = new System.Drawing.Size(209, 26);
-            this.securityMenuItem.Text = "Bezpieczeństwo";
-            // 
-            // logoutMenuItem
-            // 
-            this.logoutMenuItem.BackColor = System.Drawing.Color.Red;
-            this.logoutMenuItem.ForeColor = System.Drawing.Color.White;
-            this.logoutMenuItem.Name = "logoutMenuItem";
-            this.logoutMenuItem.Size = new System.Drawing.Size(209, 26);
-            this.logoutMenuItem.Text = "Wyloguj się";
             // 
             // systemToolStripMenuItem1
             // 
             this.systemToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cardModeMenuItem,
-            this.logsMenuItem,
-            this.ustawieniaFabryczneToolStripMenuItem});
+            this.cardModeMenuItem});
             this.systemToolStripMenuItem1.Font = new System.Drawing.Font("Inter", 9F);
             this.systemToolStripMenuItem1.Name = "systemToolStripMenuItem1";
             this.systemToolStripMenuItem1.Size = new System.Drawing.Size(76, 31);
@@ -173,28 +149,13 @@ namespace KTA_Visor.module.Management.view
             // 
             this.cardModeMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cardModeMenuItem.Image")));
             this.cardModeMenuItem.Name = "cardModeMenuItem";
-            this.cardModeMenuItem.Size = new System.Drawing.Size(248, 26);
+            this.cardModeMenuItem.Size = new System.Drawing.Size(224, 26);
             this.cardModeMenuItem.Text = "Tryb Karty";
-            // 
-            // logsMenuItem
-            // 
-            this.logsMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("logsMenuItem.Image")));
-            this.logsMenuItem.Name = "logsMenuItem";
-            this.logsMenuItem.Size = new System.Drawing.Size(248, 26);
-            this.logsMenuItem.Text = "Logi";
-            // 
-            // ustawieniaFabryczneToolStripMenuItem
-            // 
-            this.ustawieniaFabryczneToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ustawieniaFabryczneToolStripMenuItem.Image")));
-            this.ustawieniaFabryczneToolStripMenuItem.Name = "ustawieniaFabryczneToolStripMenuItem";
-            this.ustawieniaFabryczneToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
-            this.ustawieniaFabryczneToolStripMenuItem.Text = "Ustawienia Fabryczne";
             // 
             // pomocToolStripMenuItem
             // 
             this.pomocToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.versionMenuItem,
-            this.aboutUsMenuItem});
+            this.versionMenuItem});
             this.pomocToolStripMenuItem.Font = new System.Drawing.Font("Inter", 9F);
             this.pomocToolStripMenuItem.Name = "pomocToolStripMenuItem";
             this.pomocToolStripMenuItem.Size = new System.Drawing.Size(72, 31);
@@ -203,14 +164,8 @@ namespace KTA_Visor.module.Management.view
             // versionMenuItem
             // 
             this.versionMenuItem.Name = "versionMenuItem";
-            this.versionMenuItem.Size = new System.Drawing.Size(140, 26);
+            this.versionMenuItem.Size = new System.Drawing.Size(224, 26);
             this.versionMenuItem.Text = "Wersja";
-            // 
-            // aboutUsMenuItem
-            // 
-            this.aboutUsMenuItem.Name = "aboutUsMenuItem";
-            this.aboutUsMenuItem.Size = new System.Drawing.Size(140, 26);
-            this.aboutUsMenuItem.Text = "O nas";
             // 
             // sidebarPanel
             // 
@@ -389,15 +344,10 @@ namespace KTA_Visor.module.Management.view
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel contentPanel;
         public System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem1;
-        public System.Windows.Forms.ToolStripMenuItem logsMenuItem;
         public System.Windows.Forms.ToolStripMenuItem pomocToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem versionMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem aboutUsMenuItem;
         public System.Windows.Forms.ToolStripMenuItem kontoToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem profileMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem securityMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem logoutMenuItem;
-        public ToolStripMenuItem ustawieniaFabryczneToolStripMenuItem;
         public ToolStripMenuItem tunnelToolStripMenuItem;
         public ToolStripMenuItem cardModeMenuItem;
     }

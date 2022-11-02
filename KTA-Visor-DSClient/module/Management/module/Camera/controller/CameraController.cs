@@ -5,8 +5,10 @@ using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.camera.entity;
 using KTAVisorAPISDK.module.camera.service;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -19,12 +21,14 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
     {
         private readonly CameraService _cameraService;
         private readonly CameraDeviceSettingsService _cameraDeviceSettingsService;
+        private readonly CameraFirmwareService _cameraFirmwareService;
         private readonly service.CameraCardService _cameraPowerService;
 
         public CameraController()
         {
             this._cameraService = new CameraService();
             this._cameraDeviceSettingsService = new CameraDeviceSettingsService();
+            this._cameraFirmwareService = new CameraFirmwareService();
             this._cameraPowerService = new service.CameraCardService();
         }
 
@@ -38,6 +42,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
 
                 case "command://cameras/card/blink":
                     this.onBlinkCamera(request);
+                    break;
+
+                case "command://cameras/firmware/upgrade":
+                    this.upgradeFirmware(request);
                     break;
             }
         }
@@ -57,6 +65,16 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.controller
             string json = JsonConvert.SerializeObject(request.Body).ToString();
             CameraEntity cameraEntityFromTunnel = JsonConvert.DeserializeObject<CameraEntity>(json);
             this._cameraPowerService.Blink(cameraEntityFromTunnel);
+        }
+
+        private void upgradeFirmware(Request request)
+        {
+            JObject cameraJobject = (JObject)request.Body?.camera;
+            JObject firmwareJobject = (JObject)request.Body?.firmware;
+            CameraEntity.Camera camera = cameraJobject.ToObject<CameraEntity.Camera>();
+            FileInfo firmware = firmwareJobject.ToObject<FileInfo>();
+
+            this._cameraFirmwareService.Upgrade(camera, firmware);
         }
     }
 }

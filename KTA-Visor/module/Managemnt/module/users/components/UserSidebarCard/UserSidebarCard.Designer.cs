@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserSidebarCard));
             this.firstAndLastNameLbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.settingsSmallBtn = new Bunifu.Framework.UI.BunifuImageButton();
+            this.notificationBtn = new Bunifu.Framework.UI.BunifuImageButton();
+            this.reportsBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.statusPicBox = new System.Windows.Forms.PictureBox();
             this.versionLbl = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -41,28 +44,41 @@
             this.settingsBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.driveMonitoring = new KTA_Visor_UI.component.custom.DriveMonitoring.DriveMonitoring();
+            this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.bunifuSeparator4 = new Bunifu.Framework.UI.BunifuSeparator();
             this.label5 = new System.Windows.Forms.Label();
             this.usersBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.profileBtn = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.logsBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuSeparator5 = new Bunifu.Framework.UI.BunifuSeparator();
             this.label6 = new System.Windows.Forms.Label();
             this.stationBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.recordingsBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsSmallBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reportsBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // firstAndLastNameLbl
@@ -81,15 +97,60 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.settingsSmallBtn);
+            this.panel1.Controls.Add(this.notificationBtn);
+            this.panel1.Controls.Add(this.reportsBtn);
             this.panel1.Controls.Add(this.statusPicBox);
             this.panel1.Controls.Add(this.versionLbl);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(29, 16);
+            this.panel1.Location = new System.Drawing.Point(16, 14);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(343, 182);
+            this.panel1.Size = new System.Drawing.Size(340, 182);
             this.panel1.TabIndex = 3;
+            // 
+            // settingsSmallBtn
+            // 
+            this.settingsSmallBtn.BackColor = System.Drawing.Color.Transparent;
+            this.settingsSmallBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsSmallBtn.Image")));
+            this.settingsSmallBtn.ImageActive = null;
+            this.settingsSmallBtn.Location = new System.Drawing.Point(208, 144);
+            this.settingsSmallBtn.Name = "settingsSmallBtn";
+            this.settingsSmallBtn.Size = new System.Drawing.Size(37, 30);
+            this.settingsSmallBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.settingsSmallBtn.TabIndex = 8;
+            this.settingsSmallBtn.TabStop = false;
+            this.settingsSmallBtn.Zoom = 3;
+            this.settingsSmallBtn.Click += new System.EventHandler(this.settingsSmallBtn_Click);
+            // 
+            // notificationBtn
+            // 
+            this.notificationBtn.BackColor = System.Drawing.Color.Transparent;
+            this.notificationBtn.Image = ((System.Drawing.Image)(resources.GetObject("notificationBtn.Image")));
+            this.notificationBtn.ImageActive = null;
+            this.notificationBtn.Location = new System.Drawing.Point(152, 144);
+            this.notificationBtn.Name = "notificationBtn";
+            this.notificationBtn.Size = new System.Drawing.Size(37, 30);
+            this.notificationBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.notificationBtn.TabIndex = 7;
+            this.notificationBtn.TabStop = false;
+            this.notificationBtn.Zoom = 3;
+            this.notificationBtn.Click += new System.EventHandler(this.notificationBtn_Click);
+            // 
+            // reportsBtn
+            // 
+            this.reportsBtn.BackColor = System.Drawing.Color.Transparent;
+            this.reportsBtn.Image = ((System.Drawing.Image)(resources.GetObject("reportsBtn.Image")));
+            this.reportsBtn.ImageActive = null;
+            this.reportsBtn.Location = new System.Drawing.Point(98, 144);
+            this.reportsBtn.Name = "reportsBtn";
+            this.reportsBtn.Size = new System.Drawing.Size(37, 30);
+            this.reportsBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.reportsBtn.TabIndex = 6;
+            this.reportsBtn.TabStop = false;
+            this.reportsBtn.Zoom = 3;
+            this.reportsBtn.Click += new System.EventHandler(this.reportsBtn_Click);
             // 
             // statusPicBox
             // 
@@ -110,7 +171,7 @@
             this.versionLbl.Location = new System.Drawing.Point(0, 163);
             this.versionLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.versionLbl.Name = "versionLbl";
-            this.versionLbl.Size = new System.Drawing.Size(341, 17);
+            this.versionLbl.Size = new System.Drawing.Size(338, 17);
             this.versionLbl.TabIndex = 5;
             this.versionLbl.Text = "1.2.3.v.5";
             this.versionLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -145,7 +206,7 @@
             this.panel3.Controls.Add(this.logoutBtn);
             this.panel3.Controls.Add(this.settingsBtn);
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Location = new System.Drawing.Point(29, 688);
+            this.panel3.Location = new System.Drawing.Point(13, 481);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(343, 165);
@@ -253,19 +314,77 @@
             // panel4
             // 
             this.panel4.AutoScroll = true;
-            this.panel4.Controls.Add(this.panel5);
+            this.panel4.Controls.Add(this.panel10);
+            this.panel4.Controls.Add(this.panel12);
+            this.panel4.Controls.Add(this.panel11);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel8);
             this.panel4.Controls.Add(this.panel7);
-            this.panel4.Controls.Add(this.panel6);
-            this.panel4.Controls.Add(this.panel1);
-            this.panel4.Controls.Add(this.panel3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(396, 1255);
+            this.panel4.Size = new System.Drawing.Size(405, 1255);
             this.panel4.TabIndex = 5;
+            // 
+            // panel10
+            // 
+            this.panel10.AutoScroll = true;
+            this.panel10.Controls.Add(this.panel13);
+            this.panel10.Controls.Add(this.panel5);
+            this.panel10.Controls.Add(this.panel6);
+            this.panel10.Controls.Add(this.panel3);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(13, 222);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(375, 1003);
+            this.panel10.TabIndex = 13;
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel13.Controls.Add(this.driveMonitoring);
+            this.panel13.Controls.Add(this.bunifuSeparator1);
+            this.panel13.Controls.Add(this.label1);
+            this.panel13.Location = new System.Drawing.Point(13, 654);
+            this.panel13.Margin = new System.Windows.Forms.Padding(4);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(343, 143);
+            this.panel13.TabIndex = 10;
+            // 
+            // driveMonitoring
+            // 
+            this.driveMonitoring.AllowMonitoring = false;
+            this.driveMonitoring.BackColor = System.Drawing.Color.White;
+            this.driveMonitoring.Location = new System.Drawing.Point(10, 56);
+            this.driveMonitoring.Name = "driveMonitoring";
+            this.driveMonitoring.Size = new System.Drawing.Size(320, 72);
+            this.driveMonitoring.TabIndex = 10;
+            // 
+            // bunifuSeparator1
+            // 
+            this.bunifuSeparator1.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuSeparator1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
+            this.bunifuSeparator1.LineThickness = 1;
+            this.bunifuSeparator1.Location = new System.Drawing.Point(11, 32);
+            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator1.Name = "bunifuSeparator1";
+            this.bunifuSeparator1.Size = new System.Drawing.Size(320, 16);
+            this.bunifuSeparator1.TabIndex = 9;
+            this.bunifuSeparator1.Transparency = 255;
+            this.bunifuSeparator1.Vertical = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Inter Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(7, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(140, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Monitoring Dysku";
             // 
             // panel5
             // 
@@ -275,10 +394,10 @@
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.usersBtn);
             this.panel5.Controls.Add(this.profileBtn);
-            this.panel5.Location = new System.Drawing.Point(29, 206);
+            this.panel5.Location = new System.Drawing.Point(15, 22);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(343, 178);
+            this.panel5.Size = new System.Drawing.Size(341, 178);
             this.panel5.TabIndex = 5;
             // 
             // bunifuSeparator4
@@ -371,40 +490,13 @@
             this.profileBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
             this.profileBtn.OnHoverTextColor = System.Drawing.Color.White;
             this.profileBtn.selected = false;
-            this.profileBtn.Size = new System.Drawing.Size(320, 52);
+            this.profileBtn.Size = new System.Drawing.Size(318, 52);
             this.profileBtn.TabIndex = 6;
             this.profileBtn.Text = "Konto";
             this.profileBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.profileBtn.Textcolor = System.Drawing.Color.Black;
             this.profileBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
-            // 
-            // panel9
-            // 
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(27, 1204);
-            this.panel9.Margin = new System.Windows.Forms.Padding(4);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(345, 30);
-            this.panel9.TabIndex = 11;
-            // 
-            // panel8
-            // 
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(372, 0);
-            this.panel8.Margin = new System.Windows.Forms.Padding(4);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(28, 1234);
-            this.panel8.TabIndex = 10;
-            // 
-            // panel7
-            // 
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(27, 1234);
-            this.panel7.TabIndex = 9;
             // 
             // panel6
             // 
@@ -415,7 +507,7 @@
             this.panel6.Controls.Add(this.label6);
             this.panel6.Controls.Add(this.stationBtn);
             this.panel6.Controls.Add(this.recordingsBtn);
-            this.panel6.Location = new System.Drawing.Point(29, 410);
+            this.panel6.Location = new System.Drawing.Point(13, 220);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(343, 244);
@@ -556,6 +648,50 @@
             this.recordingsBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recordingsBtn.Click += new System.EventHandler(this.recordingsBtn_Click);
             // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.panel1);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel12.Location = new System.Drawing.Point(13, 13);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(375, 209);
+            this.panel12.TabIndex = 15;
+            // 
+            // panel11
+            // 
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(13, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(375, 13);
+            this.panel11.TabIndex = 14;
+            // 
+            // panel9
+            // 
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel9.Location = new System.Drawing.Point(13, 1225);
+            this.panel9.Margin = new System.Windows.Forms.Padding(4);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(375, 30);
+            this.panel9.TabIndex = 11;
+            // 
+            // panel8
+            // 
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel8.Location = new System.Drawing.Point(388, 0);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(17, 1255);
+            this.panel8.TabIndex = 10;
+            // 
+            // panel7
+            // 
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Margin = new System.Windows.Forms.Padding(4);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(13, 1255);
+            this.panel7.TabIndex = 9;
+            // 
             // UserSidebarCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -563,19 +699,26 @@
             this.Controls.Add(this.panel4);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UserSidebarCard";
-            this.Size = new System.Drawing.Size(396, 1255);
+            this.Size = new System.Drawing.Size(405, 1255);
             this.Load += new System.EventHandler(this.UserProfileCard_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.settingsSmallBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reportsBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel12.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -608,5 +751,15 @@
         private Bunifu.Framework.UI.BunifuFlatButton logsBtn;
         private System.Windows.Forms.Label versionLbl;
         private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
+        private Bunifu.Framework.UI.BunifuImageButton settingsSmallBtn;
+        private Bunifu.Framework.UI.BunifuImageButton notificationBtn;
+        private Bunifu.Framework.UI.BunifuImageButton reportsBtn;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel panel13;
+        private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator1;
+        private System.Windows.Forms.Label label1;
+        private KTA_Visor_UI.component.custom.DriveMonitoring.DriveMonitoring driveMonitoring;
     }
 }

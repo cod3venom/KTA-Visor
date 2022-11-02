@@ -26,7 +26,7 @@ namespace KTA_Visor_DSClient.module.Management.bootloader.handlers
 
         public void Handle()
         {
-            this.writeToRegistry();
+            //this.writeToRegistry();
         }
 
 

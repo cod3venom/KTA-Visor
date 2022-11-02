@@ -49,7 +49,6 @@
             this.cameraItemMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.oprogramowanieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.upgradeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ustawieniaFabryczneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuńToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.targetDriveDevicePathDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.nasStorageFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -276,10 +275,9 @@
             this.cameraItemMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cameraItemMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.oprogramowanieToolStripMenuItem,
-            this.ustawieniaFabryczneToolStripMenuItem,
             this.usuńToolStripMenuItem});
             this.cameraItemMenuStrip.Name = "cameraItemMenuStrip";
-            this.cameraItemMenuStrip.Size = new System.Drawing.Size(224, 82);
+            this.cameraItemMenuStrip.Size = new System.Drawing.Size(200, 56);
             // 
             // oprogramowanieToolStripMenuItem
             // 
@@ -287,7 +285,7 @@
             this.upgradeMenuItem});
             this.oprogramowanieToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("oprogramowanieToolStripMenuItem.Image")));
             this.oprogramowanieToolStripMenuItem.Name = "oprogramowanieToolStripMenuItem";
-            this.oprogramowanieToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.oprogramowanieToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             this.oprogramowanieToolStripMenuItem.Text = "Oprogramowanie";
             // 
             // upgradeMenuItem
@@ -297,16 +295,11 @@
             this.upgradeMenuItem.Size = new System.Drawing.Size(172, 26);
             this.upgradeMenuItem.Text = "Aktualizacja";
             // 
-            // ustawieniaFabryczneToolStripMenuItem
-            // 
-            this.ustawieniaFabryczneToolStripMenuItem.Name = "ustawieniaFabryczneToolStripMenuItem";
-            this.ustawieniaFabryczneToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
-            this.ustawieniaFabryczneToolStripMenuItem.Text = "Ustawienia Fabryczne";
-            // 
             // usuńToolStripMenuItem
             // 
+            this.usuńToolStripMenuItem.Image = global::KTA_Visor.Properties.Resources.red_circle;
             this.usuńToolStripMenuItem.Name = "usuńToolStripMenuItem";
-            this.usuńToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.usuńToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             this.usuńToolStripMenuItem.Text = "Usuń";
             // 
             // nasStorageFileDialog
@@ -362,7 +355,6 @@
         private MetroFramework.Controls.MetroTextBox idTxt;
         private System.Windows.Forms.Label markerLbl;
         private System.Windows.Forms.Label markerTitleLbl;
-        private System.Windows.Forms.ToolStripMenuItem ustawieniaFabryczneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuńToolStripMenuItem;
     }
 }

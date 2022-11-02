@@ -87,7 +87,7 @@
             this.Font = new System.Drawing.Font("Inter", 8.25F);
             this.Name = "ZipperForm";
             this.Padding = new System.Windows.Forms.Padding(18, 30, 18, 18);
-            this.Style = MetroFramework.MetroColorStyle.Lime;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Load += new System.EventHandler(this.FilesCopyingForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

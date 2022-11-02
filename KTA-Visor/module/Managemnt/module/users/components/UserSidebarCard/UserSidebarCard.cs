@@ -1,4 +1,5 @@
 ﻿using Bunifu.Framework.UI;
+using KTA_Visor_UI.component.custom.DriveMonitoring;
 using KTAVisorAPISDK.module.user.consts;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace KTA_Visor.module.Managemnt.module.users.component.UserSidebarCard
         private readonly List<BunifuFlatButton> _adminButtons;
         private readonly List<BunifuFlatButton> _userButton;
 
+        public event EventHandler<EventArgs> OnReportsClick;
+        public event EventHandler<EventArgs> OnNotificationClick;
         public event EventHandler<EventArgs> OnStationsClick;
         public event EventHandler<EventArgs> OnRecordingsClick;
         public event EventHandler<EventArgs> OnLogsClick;
@@ -152,6 +155,24 @@ namespace KTA_Visor.module.Managemnt.module.users.component.UserSidebarCard
             {
                 this.statusPicBox.Image = Properties.Resources.green_circle;
             }
+        }
+
+
+        public DriveMonitoring DriveMonitoring { get { return this.driveMonitoring; } }
+
+        private void reportsBtn_Click(object sender, EventArgs e)
+        {
+            this.OnReportsClick?.Invoke(this, e);
+        }
+
+        private void notificationBtn_Click(object sender, EventArgs e)
+        {
+            this.OnNotificationClick?.Invoke(this, e);
+        }
+
+        private void settingsSmallBtn_Click(object sender, EventArgs e)
+        {
+            this.OnSettingsClick?.Invoke(sender, e);
         }
     }
 }

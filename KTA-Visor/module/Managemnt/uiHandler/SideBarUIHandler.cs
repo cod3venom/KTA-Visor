@@ -7,6 +7,8 @@ using KTA_Visor.module.Managemnt.sub_window;
 using KTA_Visor.module.Managemnt.view;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,10 +29,13 @@ namespace KTA_Visor.module.Managemnt.uiHandler
         {
             this.renderUserProfileData();
             this.hookEvents();
+            this.initializeUI();
         }
 
         private void hookEvents()
         {
+            this.managementForm.SideBar.OnReportsClick += onReportsClick;
+            this.managementForm.SideBar.OnNotificationClick += onNotificationsClick;
             this.managementForm.SideBar.OnProfileClick += onProfileClick;
             this.managementForm.SideBar.OnUsersClick += onUsersClick;
             this.managementForm.SideBar.OnStationsClick += onStationsClick;
@@ -40,6 +45,27 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             this.managementForm.SideBar.OnLogOutclick += onLogoutClick;
         }
 
+       
+        private void onReportsClick(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(this.managementForm.Settings.SettingsObj.app.fileSystem?.reportsPath))
+            {
+                MessageBox.Show("Masaz 0 raportów");
+                return;
+            }
+
+            Process.Start(this.managementForm.Settings.SettingsObj.app.fileSystem?.reportsPath);
+        }
+
+        private void onNotificationsClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Masaz 0 Powiadomień");
+        }
+
+        private void initializeUI()
+        {
+            this.managementForm.SideBar.DriveMonitoring.Start(this.managementForm.Settings.SettingsObj.app.fileSystem.storageDriveLetter);
+        }
         private void renderUserProfileData()
         {
             this.managementForm.SideBar.FirstAndLastName = String.Format("{0} {1}",
@@ -71,7 +97,11 @@ namespace KTA_Visor.module.Managemnt.uiHandler
  
         private void onLogsClick(object sender, EventArgs e)
         {
-            this.managementForm.Modules.Get(LogsModule.ModuleName).ShowDialog();
+            if (!this.managementForm.LogsModule.IsHandleCreated || this.managementForm.LogsModule.IsDisposed)
+            {
+                this.managementForm.LogsModule = new LogsModule();
+            }
+            this.managementForm.LogsModule.ShowDialog();
         }
 
         private void onSettingsClick(object sender, EventArgs e)

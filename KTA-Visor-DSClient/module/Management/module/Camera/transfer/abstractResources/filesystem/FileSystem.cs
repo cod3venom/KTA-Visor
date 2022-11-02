@@ -1,19 +1,16 @@
 ﻿using KTA_Visor_DSClient.install.settings;
 using KTA_Visor_DSClient.kernel.helper;
-using KTA_Visor_DSClient.kernel.sharedKernel.ThreadPool;
 using KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDeviceService.types.device;
+using KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem.command;
 using KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem.events;
+using KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem.helper;
 using KTA_Visor_DSClient.module.Shared.Globals;
 using KTAVisorAPISDK.module.fileManager.dto.request;
 using KTAVisorAPISDK.module.fileManager.service;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractResources.filesystem
 {
@@ -23,7 +20,8 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
         public event EventHandler<OnFilesTransferingFinishedEvent> OnCopyingFinished;
 
         private USBCameraDevice _cameraDevice;
-        private readonly FileManagerService _fileManagerService
+        private readonly FileManagerService _fileManagerService;
+        private readonly RecordingsSegregator _recordingsSegregator;
         private readonly Settings _settings;
         private readonly KTALogger.Logger _logger;
  
@@ -33,6 +31,7 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
             this._settings = settings;
             this._logger = logger;
             this._fileManagerService = new FileManagerService();
+            this._recordingsSegregator = new RecordingsSegregator();
         }
 
         public void MoveFilesToStorage(USBCameraDevice cameraDevice)
@@ -61,13 +60,13 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
 
                     if (!File.Exists(destinationFile.FullName))
                     {
-                        this.copyFile(file, destinationFile);
+                        CopyFilesCommand.Execute(file, destinationFile);
 
                         if (File.Exists(destinationFile.FullName))
                         {
                             copiedFiles.Add(file);
                             this.addTransferedFileToBackend(file, destinationFile);
-                            //file.Delete();
+                            file.Delete();
                         }
                     }
                     else
@@ -81,6 +80,10 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
                     failedFiles.Add(file);
                     Globals.IS_ALL_COPYING_PROCESS_ARE_END = true;
                 }
+                finally
+                {
+                    //this.segergateRecordings();
+                }
             }
 
             this.OnCopyingFinished?.Invoke(this, new OnFilesTransferingFinishedEvent(
@@ -93,30 +96,13 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.transfer.abstractRe
         }
 
 
-        private void copyFile(FileInfo file, FileInfo destinationFile)
+        
+        private void segergateRecordings()
         {
-            int bufferSize = 1024 * 1024;
-
-            using (FileStream fileStream = new FileStream(destinationFile.FullName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
-            {
-                FileStream fs = new FileStream(file.FullName, FileMode.Open, FileAccess.ReadWrite);
-                fileStream.SetLength(fs.Length);
-                int bytesRead = -1;
-                byte[] bytes = new byte[bufferSize];
-
-                while ((bytesRead = fs.Read(bytes, 0, bufferSize)) > 0)
-                {
-                    fileStream.Write(bytes, 0, bytesRead);
-                }
-
-                file = new FileInfo(destinationFile.FullName);
-                if (file.Exists)
-                {
-                    File.SetAttributes(file.FullName, FileAttributes.Hidden);
-                }
-            }
+            this._recordingsSegregator.Segregate(this._cameraDevice.Gallery);
         }
 
+       
         /// <summary>
         /// 
         /// </summary>

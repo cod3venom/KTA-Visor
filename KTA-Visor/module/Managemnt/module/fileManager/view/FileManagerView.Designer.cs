@@ -80,20 +80,20 @@
             // 
             this.panel1.Controls.Add(this.reportsBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 853);
+            this.panel1.Location = new System.Drawing.Point(0, 830);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1075, 23);
+            this.panel1.Size = new System.Drawing.Size(1075, 46);
             this.panel1.TabIndex = 1;
             // 
             // reportsBtn
             // 
-            this.reportsBtn.Location = new System.Drawing.Point(2, 3);
+            this.reportsBtn.Location = new System.Drawing.Point(3, 10);
             this.reportsBtn.Name = "reportsBtn";
-            this.reportsBtn.Size = new System.Drawing.Size(112, 20);
+            this.reportsBtn.Size = new System.Drawing.Size(112, 24);
             this.reportsBtn.Style = MetroFramework.MetroColorStyle.White;
             this.reportsBtn.TabIndex = 0;
             this.reportsBtn.Text = "Raporty";
-            this.reportsBtn.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.reportsBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.reportsBtn.UseSelectable = true;
             // 
             // panel2
@@ -102,7 +102,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1075, 853);
+            this.panel2.Size = new System.Drawing.Size(1075, 830);
             this.panel2.TabIndex = 2;
             // 
             // table
@@ -112,11 +112,12 @@
             this.table.AllowEdit = true;
             this.table.AllowProgressBar = true;
             this.table.Columns = null;
+            this.table.ContextMenuStrip = this.contextMenu;
             this.table.Dock = System.Windows.Forms.DockStyle.Fill;
             this.table.Location = new System.Drawing.Point(0, 0);
             this.table.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.table.Name = "table";
-            this.table.Size = new System.Drawing.Size(1075, 853);
+            this.table.Size = new System.Drawing.Size(1075, 830);
             this.table.TabIndex = 0;
             this.table.Title = "Tabela";
             // 

@@ -104,6 +104,11 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.handlers.form.Zipper
 
                 new Thread(() => zip.Save(this._destinationFilePath)).Start();
                 this.Invoke((MethodInvoker)delegate {
+                    int counter = this._filesToZip.Count;
+                    if (counter == 0)
+                    {
+                        counter = 1;
+                    }
                     this.metroProgressBar.Value = (100 * (int)this._progressIterator) / this._filesToZip.Count;
                 });
             }

@@ -67,6 +67,9 @@ namespace KTA_Visor_DSClient.module.Management.view
             this.reportsDirTxt.TextChanged += (delegate (object sender, EventArgs e) {
                 this.settings.SettingsObj.app.fileSystem.reportsPath = this.reportsDirTxt.Text;
             });
+            this.firmawresDirPath.TextChanged += (delegate (object sender, EventArgs e) {
+                this.settings.SettingsObj.app.fileSystem.firmwaresPath = this.firmawresDirPath.Text;
+            });
             this.autoCopyChk.CheckedChanged += (delegate (object sender, EventArgs e) {
                 this.settings.SettingsObj.app.fileSystem.autoCopy = this.autoCopyChk.Checked;
             });

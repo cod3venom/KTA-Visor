@@ -14,6 +14,10 @@ using System.Collections.Generic;
 using KTA_Visor.module.Managemnt.module.fileManager.interfaces;
 using KTAVisorAPISDK.module.user.abstraction;
 using KTA_Visor_UI.component.basic.table.enums;
+using KTAVisorAPISDK.module.user.consts;
+using System.IO;
+using KTA_Visor.install.settings;
+using System.Diagnostics;
 
 namespace KTA_Visor.module.Managemnt.module.fileManager.view
 {
@@ -35,15 +39,18 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
         private readonly FileManagerUIHandler _fileManagerUIHandler;
         private readonly FileManagerTableUIHandler _fileManagerTableUIHandler;
         private readonly FileManagerZipHandler _fileManagerZipHandler;
+        private readonly Settings _settings;
         public FileManagerView()
         {
             InitializeComponent();
+            this._settings = new Settings();
         }
 
         public FileManagerView(UserDataAbstraction user)
         {
             InitializeComponent();
-            
+            this._settings = new Settings();
+
             this.User = user;
             this._fileManagerUIHandler = new FileManagerUIHandler(this);
             this._fileManagerTableUIHandler = new FileManagerTableUIHandler(this);
@@ -54,7 +61,6 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
                 this._fileManagerTableUIHandler,
                 this._fileManagerZipHandler,
             };
-           
         }
 
 
@@ -62,6 +68,7 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
         {
             this.table.Columns = this.Columns;
             this.hookEvents();
+            this.initializeUI();
             this._uiHandlers.ForEach((IFileManagerUIHandler handler) => {
                 handler.Handle();
             });
@@ -74,8 +81,17 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
             this.Table.DataGridView.CellDoubleClick += onCellDoubleClick;
             this.Table.DataGridView.SelectionChanged += onRowSelectionChanged;
             this.Table.OnRefreshData += onRefeshData;
+            this.reportsBtn.Click += onShowReportsFolder;
         }
  
+        private void initializeUI()
+        {
+            if (this.User.data.roles[0] == UserRole.ROLE_USER)
+            {
+                this.reportsBtn.Enabled = false;
+            }
+        }
+
         private void onEditFileRecord(object sender, EventArgs e)
         {
             this._fileManagerUIHandler.Edit(this.ID);
@@ -114,6 +130,20 @@ namespace KTA_Visor.module.Managemnt.module.fileManager.view
             }
         }
 
+
+        private void onShowReportsFolder(object sender, EventArgs e)
+        {
+            if (this.User.data.roles[0] == UserRole.ROLE_ADMIN)
+            {
+                if (!Directory.Exists(this._settings.SettingsObj.app.fileSystem.reportsPath))
+                {
+                    MessageBox.Show("Nie ustawiono sciezki do raportów");
+                    return;
+                }
+
+                Process.Start(this._settings.SettingsObj.app.fileSystem.reportsPath);
+            }
+        }
         public void Watch(Request request)
         {
         }

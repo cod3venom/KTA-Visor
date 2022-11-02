@@ -4,6 +4,7 @@ using KTA_Visor.module.Managemnt.interfaces;
 using KTA_Visor.module.Managemnt.module.cardReader;
 using KTA_Visor.module.Managemnt.sub_window;
 using KTA_Visor.module.Shared.Global;
+using KTAVisorAPISDK.module.user.consts;
 using System;
 
 
@@ -20,6 +21,7 @@ namespace KTA_Visor.module.Managemnt.uiHandler
         public void Handle()
         {
             this.hookEvents();
+            this.initializeUI();
         }
 
         private void hookEvents()
@@ -32,10 +34,20 @@ namespace KTA_Visor.module.Managemnt.uiHandler
             this.managementForm.restartTunnelServerMenuItem.Click += onRestartTunnelServerMenuItemClick;
             this.managementForm.cardModeMenuItem.Click += onCardModeClick;
             this.managementForm.versionMenuItem.Click += onVersionMenuItemClick;
-            this.managementForm.aboutUsMenuItem.Click += onAboutUsMenuItemClick;
         }
 
       
+        private void initializeUI()
+        {
+            if (this.managementForm.User.data.roles[0] == UserRole.ROLE_USER)
+            {
+                this.managementForm.startTunnelServerMenuItem.Enabled = false;
+                this.managementForm.stopTunnelServerMenuItem.Enabled = false;
+                this.managementForm.restartTunnelServerMenuItem.Enabled = false;
+                this.managementForm.cardModeMenuItem.Enabled = false;
+                this.managementForm.versionMenuItem.Enabled = false;
+            }
+        }
 
         private void onServerStarted(object sender, OnServerStartedEvent e)
         {

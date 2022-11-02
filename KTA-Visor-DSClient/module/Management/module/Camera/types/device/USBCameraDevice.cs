@@ -46,6 +46,14 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
         }
         public int RelayPort { get; set; }
         public bool Active { get; set; }
+        
+        public DirectoryInfo Gallery
+        {
+            get
+            {
+                return new DirectoryInfo(string.Format("{0}DCIM\\100MEDIA", this.Drive.Name));
+            }
+        }
         public List<FileInfo> Files
         {
             get
@@ -57,9 +65,6 @@ namespace KTA_Visor_DSClient.module.Management.module.Camera.Resource.CameraDevi
             }
         }
          
-        public void Blink(int interval = 10)
-        {
-
-        }
+        
     }
 }

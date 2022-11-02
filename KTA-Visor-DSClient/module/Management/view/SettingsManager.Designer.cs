@@ -39,6 +39,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.reportsDirTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.label10 = new System.Windows.Forms.Label();
             this.storageLocationTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -72,8 +74,8 @@
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.bunifuSeparator2 = new Bunifu.Framework.UI.BunifuSeparator();
             this.topBar = new KTA_Visor_UI.component.basic.topbar.TopBar();
-            this.reportsDirTxt = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.firmawresDirPath = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -194,6 +196,8 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.firmawresDirPath);
+            this.panel7.Controls.Add(this.label11);
             this.panel7.Controls.Add(this.reportsDirTxt);
             this.panel7.Controls.Add(this.label10);
             this.panel7.Controls.Add(this.storageLocationTxt);
@@ -207,6 +211,28 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(569, 204);
             this.panel7.TabIndex = 4;
+            // 
+            // reportsDirTxt
+            // 
+            this.reportsDirTxt.BorderColor = System.Drawing.Color.SeaGreen;
+            this.reportsDirTxt.Location = new System.Drawing.Point(147, 79);
+            this.reportsDirTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.reportsDirTxt.Name = "reportsDirTxt";
+            this.reportsDirTxt.Size = new System.Drawing.Size(247, 22);
+            this.reportsDirTxt.TabIndex = 29;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Inter", 7.8F);
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(6, 82);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(114, 16);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Katalog raportów";
             // 
             // storageLocationTxt
             // 
@@ -237,14 +263,14 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(21, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 12);
+            this.label3.Size = new System.Drawing.Size(87, 12);
             this.label3.TabIndex = 18;
-            this.label3.Text = "File System";
+            this.label3.Text = "System plików";
             // 
             // autoCopyChk
             // 
             this.autoCopyChk.AutoSize = true;
-            this.autoCopyChk.Location = new System.Drawing.Point(333, 113);
+            this.autoCopyChk.Location = new System.Drawing.Point(333, 158);
             this.autoCopyChk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.autoCopyChk.Name = "autoCopyChk";
             this.autoCopyChk.Size = new System.Drawing.Size(18, 17);
@@ -256,7 +282,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(144, 112);
+            this.label5.Location = new System.Drawing.Point(144, 157);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(172, 16);
             this.label5.TabIndex = 25;
@@ -349,9 +375,9 @@
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(21, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 12);
+            this.label2.Size = new System.Drawing.Size(126, 12);
             this.label2.TabIndex = 12;
-            this.label2.Text = "Manager Server";
+            this.label2.Text = "Zarządzanie tunelem";
             // 
             // portTxt
             // 
@@ -492,9 +518,9 @@
             this.label6.ForeColor = System.Drawing.Color.Black;
             this.label6.Location = new System.Drawing.Point(21, 20);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 12);
+            this.label6.Size = new System.Drawing.Size(67, 12);
             this.label6.TabIndex = 22;
-            this.label6.Text = "Information";
+            this.label6.Text = "Informacja";
             // 
             // stationIpTxt
             // 
@@ -586,27 +612,27 @@
             this.topBar.TabIndex = 1;
             this.topBar.Title = "KTA-VISOR-DSCLIENT";
             // 
-            // reportsDirTxt
+            // firmawresDirPath
             // 
-            this.reportsDirTxt.BorderColor = System.Drawing.Color.SeaGreen;
-            this.reportsDirTxt.Location = new System.Drawing.Point(147, 79);
-            this.reportsDirTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.reportsDirTxt.Name = "reportsDirTxt";
-            this.reportsDirTxt.Size = new System.Drawing.Size(247, 22);
-            this.reportsDirTxt.TabIndex = 29;
+            this.firmawresDirPath.BorderColor = System.Drawing.Color.SeaGreen;
+            this.firmawresDirPath.Location = new System.Drawing.Point(147, 120);
+            this.firmawresDirPath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.firmawresDirPath.Name = "firmawresDirPath";
+            this.firmawresDirPath.Size = new System.Drawing.Size(247, 22);
+            this.firmawresDirPath.TabIndex = 31;
             // 
-            // label10
+            // label11
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Inter", 7.8F);
-            this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(6, 82);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(114, 16);
-            this.label10.TabIndex = 28;
-            this.label10.Text = "Katalog raportów";
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Inter", 7.8F);
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(6, 123);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(124, 16);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Katalog aktualizacji";
             // 
             // SettingsManager
             // 
@@ -690,5 +716,7 @@
         private KTA_Visor_UI.component.basic.topbar.TopBar topBar;
         private WindowsFormsControlLibrary1.BunifuCustomTextbox reportsDirTxt;
         private System.Windows.Forms.Label label10;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox firmawresDirPath;
+        private System.Windows.Forms.Label label11;
     }
 }
